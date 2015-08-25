@@ -19,7 +19,7 @@ NL_TARGET_LIB(gameshare ${PRIV_H} ${SRC} ${SRC_STATIC_TABLE} ${SRC_PROTO_MSG} ${
 INCLUDE_DIRECTORIES(${NEL_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${PROTOBUF_INCLUDE_DIR})
 
 TARGET_LINK_LIBRARIES(gameshare nelmisc nelnet)
-NL_DEFAULT_PROPS(gameshare "MT, Library: Game Share")
+NL_DEFAULT_PROPS(gameshare "Base, Library: Game Share")
 NL_ADD_RUNTIME_FLAGS(gameshare)
 NL_ADD_LIB_SUFFIX(gameshare)
 

@@ -16,7 +16,7 @@ TARGET_LINK_LIBRARIES(	frontend_service
 						gameshare
 						servershare)
 
-NL_DEFAULT_PROPS(frontend_service "MT, Services: Frontend Service (FES)")
+NL_DEFAULT_PROPS(frontend_service "Base, Services: Frontend Service (FES)")
 NL_ADD_RUNTIME_FLAGS(frontend_service)
 
 #ADD_DEFINITIONS(${LIBXML2_DEFINITIONS})

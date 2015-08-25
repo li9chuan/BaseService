@@ -28,7 +28,7 @@ TARGET_LINK_LIBRARIES(  player_logic_service
 						servershare
 						eva_adminmodules)
 
-NL_DEFAULT_PROPS(player_logic_service "MT, Services: Player Logic Service (PLS)")
+NL_DEFAULT_PROPS(player_logic_service "Base, Services: Player Logic Service (PLS)")
 NL_ADD_RUNTIME_FLAGS(player_logic_service)
 
 #ADD_DEFINITIONS(${LIBXML2_DEFINITIONS})

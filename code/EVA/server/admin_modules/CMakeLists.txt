@@ -5,7 +5,7 @@ NL_TARGET_LIB(eva_adminmodules ${SRC})
 INCLUDE_DIRECTORIES(${LIBXML2_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 
 TARGET_LINK_LIBRARIES(eva_adminmodules nelmisc nelnet)
-NL_DEFAULT_PROPS(eva_adminmodules "MT, Library: Service Admin Modules")
+NL_DEFAULT_PROPS(eva_adminmodules "Base, Library: Service Admin Modules")
 NL_ADD_RUNTIME_FLAGS(eva_adminmodules)
 NL_ADD_LIB_SUFFIX(eva_adminmodules)
 

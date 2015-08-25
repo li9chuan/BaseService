@@ -25,7 +25,7 @@ TARGET_LINK_LIBRARIES(  servershare
 						${MYSQL_LIBRARIES}
 						${PROTOBUF_LIBRARIES})
 
-NL_DEFAULT_PROPS(servershare "MT, Library: Service Shared")
+NL_DEFAULT_PROPS(servershare "Base, Library: Service Shared")
 NL_ADD_RUNTIME_FLAGS(servershare)
 NL_ADD_LIB_SUFFIX(servershare)
 

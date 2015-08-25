@@ -22,7 +22,7 @@ TARGET_LINK_LIBRARIES(login_service
 						servershare
 						eva_adminmodules)
 
-NL_DEFAULT_PROPS(login_service "MT, Services: Login Service (LS)")
+NL_DEFAULT_PROPS(login_service "Base, Services: Login Service (LS)")
 NL_ADD_RUNTIME_FLAGS(login_service)
 
 ADD_DEFINITIONS(${LIBXML2_DEFINITIONS})

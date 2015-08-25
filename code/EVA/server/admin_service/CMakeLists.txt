@@ -11,7 +11,7 @@ TARGET_LINK_LIBRARIES(  admin_service
 						nelmisc 
 						nelnet)
 
-NL_DEFAULT_PROPS(admin_service "MT, Services: Admin Service (AS)")
+NL_DEFAULT_PROPS(admin_service "Base, Services: Admin Service (AS)")
 NL_ADD_RUNTIME_FLAGS(admin_service)
 
 ADD_DEFINITIONS(${LIBXML2_DEFINITIONS})

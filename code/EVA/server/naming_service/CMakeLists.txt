@@ -10,7 +10,7 @@ TARGET_LINK_LIBRARIES(	naming_service
 						nelmisc
 						nelnet)
 
-NL_DEFAULT_PROPS(naming_service "MT, Services: Naming Service (NS)")
+NL_DEFAULT_PROPS(naming_service "Base, Services: Naming Service (NS)")
 NL_ADD_RUNTIME_FLAGS(naming_service)
 
 ADD_DEFINITIONS(${LIBXML2_DEFINITIONS})
