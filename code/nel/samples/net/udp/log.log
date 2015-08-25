@@ -1,0 +1,306 @@
+
+Log Starting [2014/10/08 17:55:07]
+2014/10/08 17:55:07 INF 1c5c nl_sample_udpserver.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2014/10/08 17:55:07 INF 1c5c nl_sample_udpserver.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2014/10/08 17:55:07 INF 1c5c nl_sample_udpserver.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2014/10/08 17:55:07 INF 1c5c BS service.cpp 254 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'D:/MT/trunk/code/nel/samples/net/udp/"./nl_sample_udp/"/'
+2014/10/08 17:55:07 INF 1c5c BS service.cpp 254 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'D:/MT/trunk/code/nel/samples/net/udp/'
+2014/10/08 17:55:07 ERR 1c5c BS service.cpp 627 NLNET::IService::main : SERVICE: Neither the config file 'D:/MT/trunk/code/nel/samples/net/udp/"./nl_sample_udp/"/bench_service.cfg' nor the default one can be found, can't launch the service
+
+-------------------------------
+Log with no filter:
+-------------------------------
+
+Log Starting [2014/10/08 17:55:07]
+2014/10/08 17:55:07 nl_sample_udpserver.exe INF  1c5c command.cpp 149 : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2014/10/08 17:55:07 nl_sample_udpserver.exe INF  1c5c module_manager.cpp 228 : Adding module 'LocalGateway' factory
+2014/10/08 17:55:07 nl_sample_udpserver.exe INF  1c5c module_manager.cpp 228 : Adding module 'StandardGateway' factory
+2014/10/08 17:55:07 BS INF  1c5c service.cpp 254 : SERVICE: 'ConfigDirectory' changed to 'D:/MT/trunk/code/nel/samples/net/udp/"./nl_sample_udp/"/'
+2014/10/08 17:55:07 BS INF  1c5c service.cpp 254 : SERVICE: 'LogDirectory' changed to 'D:/MT/trunk/code/nel/samples/net/udp/'
+2014/10/08 17:55:07 BS ERR  1c5c service.cpp 627 : SERVICE: Neither the config file 'D:/MT/trunk/code/nel/samples/net/udp/"./nl_sample_udp/"/bench_service.cfg' nor the default one can be found, can't launch the service
+-------------------------------
+
+
+Log Starting [2014/10/08 17:55:25]
+2014/10/08 17:55:25 INF 88c4 nl_sample_udpserver.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2014/10/08 17:55:25 INF 88c4 nl_sample_udpserver.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2014/10/08 17:55:25 INF 88c4 nl_sample_udpserver.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2014/10/08 17:55:25 INF 88c4 BS service.cpp 254 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'D:/MT/trunk/code/nel/samples/net/udp/"./nl_sample_udp/"/'
+2014/10/08 17:55:25 INF 88c4 BS service.cpp 254 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'D:/MT/trunk/code/nel/samples/net/udp/'
+
+Log Starting [2014/10/08 17:56:37]
+2014/10/08 17:56:37 INF 6c88 nl_sample_udpserver.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2014/10/08 17:56:37 INF 6c88 nl_sample_udpserver.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2014/10/08 17:56:37 INF 6c88 nl_sample_udpserver.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2014/10/08 17:56:37 INF 6c88 BS service.cpp 254 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'D:/MT/trunk/code/nel/samples/net/udp/"./nl_sample_udp/"/'
+2014/10/08 17:56:37 INF 6c88 BS service.cpp 254 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'D:/MT/trunk/code/nel/samples/net/udp/'
+
+Log Starting [2014/10/08 17:57:04]
+2014/10/08 17:57:04 INF 4c3c nl_sample_udpserver.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2014/10/08 17:57:04 INF 4c3c nl_sample_udpserver.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2014/10/08 17:57:04 INF 4c3c nl_sample_udpserver.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2014/10/08 17:57:04 INF 4c3c BS service.cpp 254 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'D:/MT/trunk/code/nel/samples/net/udp/"./nl_sample_udp/"/'
+2014/10/08 17:57:04 INF 4c3c BS service.cpp 254 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'D:/MT/trunk/code/nel/samples/net/udp/'
+
+Log Starting [2014/10/08 18:01:09]
+2014/10/08 18:01:09 INF 7948 nl_sample_udpserver.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2014/10/08 18:01:09 INF 7948 nl_sample_udpserver.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2014/10/08 18:01:09 INF 7948 nl_sample_udpserver.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2014/10/08 18:01:09 INF 7948 BS service.cpp 254 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'D:/MT/trunk/code/nel/samples/net/udp/"./nl_sample_udp/."/'
+2014/10/08 18:01:09 INF 7948 BS service.cpp 254 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'D:/MT/trunk/code/nel/samples/net/udp/'
+
+Log Starting [2014/10/08 18:24:55]
+2014/10/08 18:24:55 INF 4298 nl_sample_udpserver.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2014/10/08 18:24:55 INF 4298 nl_sample_udpserver.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2014/10/08 18:24:55 INF 4298 nl_sample_udpserver.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2014/10/08 18:24:55 INF 4298 BS service.cpp 254 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'D:/MT/trunk/code/nel/samples/net/udp/'
+2014/10/08 18:24:55 INF 4298 BS service.cpp 254 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'D:/MT/trunk/code/nel/samples/net/udp/'
+2014/10/08 18:24:55 DBG 4298 BS config_file.cpp 397 NLMISC::CConfigFile::reparse : CF: Adding config file 'D:/MT/trunk/code/nel/samples/net/udp/bench_service.cfg' in the config file
+2014/10/08 18:24:55 WRN 78a0 BS stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2014/10/08 18:24:55 INF 4298 BS system_info.cpp 891 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3193 MHz
+2014/10/08 18:24:55 INF 4298 BS service.cpp 847 NLNET::IService::main : SERVICE: Starting Service 'BS' using NeL (Sep 29 2014 17:35:05) compiled Oct  8 2014 18:24:49
+2014/10/08 18:24:55 INF 4298 BS service.cpp 848 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit (Build 7600) (6.1 7600)
+2014/10/08 18:24:55 INF 4298 0xcc/BS service.cpp 926 NLNET::IService::main : SERVICE: Host: 0xcc
+2014/10/08 18:24:55 INF 4298 0xcc/BS command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2014/10/08 18:24:55 INF 4298 0xcc/BS-0 bench_service.cpp 645 CBenchService::init : Starting external UDP socket on port 45455
+2014/10/08 18:24:55 INF 4298 0xcc/BS-0 bench_service.cpp 659 CBenchService::init : Starting external TCP socket on port 45456
+2014/10/08 18:24:55 INF 4298 0xcc/BS-0 service.cpp 1232 NLNET::IService::main : SERVICE: Service initialized, executing StartCommands
+2014/10/08 18:24:55 INF 4298 0xcc/BS-0 service.cpp 1278 NLNET::IService::main : SERVICE: Service ready
+2014/10/08 18:24:55 DBG 4298 0xcc/BS-0 win_displayer.cpp 350 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to 'BS bench_service : Nel Service Console (compiled Sep 29 2014 17:34:57 in NL_DEBUG mode)'
+2014/10/08 18:24:55 DBG 2028 0xcc/BS-0 win_displayer.cpp 350 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* BS bench_service: Nel Service Console (compiled Sep 29 2014 17:34:57 in NL_DEBUG mode)'
+
+Log Starting [2014/10/08 18:26:00]
+
+Nevrax UDP benchmark client
+
+Press <CTRL-C> to exit
+2014/10/08 18:26:00 INF 5b2c nl_sample_udpclient.exe path.cpp 962 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+Try to connect to localhost:45456
+2014/10/08 18:26:43 INF 4298 0xcc/BS-0 bench_service.cpp 205 cbInit : Added client TCP SRV 00000000003C7C80 (socket 556), session 3c7c80
+Waiting the server answer...
+2014/10/08 18:27:56 INF 4298 0xcc/BS-0 bench_service.cpp 546 handleReceivedPong : TCP-UDP linked TCP is SRV 00000000003C7C80 (socket 556), UDP is :55395 (127.0.0.1)
+Bench is starting..
+2014/10/08 18:28:23 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 15 NbPong 0 MeanPongTime <Undef> NbDuplicated 0 
+NbPing 15 NbPong 0 MeanPongTime <Undef> NbDuplicated 0 
+2014/10/08 18:28:25 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:28:28 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:28:30 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:28:32 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:28:34 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:28:36 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:28:38 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:28:40 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:28:42 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:28:44 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:28:46 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:28:48 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:28:50 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:28:52 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:28:54 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:28:57 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:28:59 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:29:01 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 11 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 11 NbDuplicated 0 
+2014/10/08 18:29:03 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:29:05 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:29:07 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 12 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 12 NbDuplicated 0 
+2014/10/08 18:29:09 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:29:11 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:29:13 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:29:15 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:29:17 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:29:19 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+2014/10/08 18:29:21 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:29:23 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 10 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 10 NbDuplicated 0 
+2014/10/08 18:29:26 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:29:28 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 11 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 11 NbDuplicated 0 
+2014/10/08 18:29:30 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:29:32 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:29:34 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:29:36 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 9 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 9 NbDuplicated 0 
+2014/10/08 18:29:38 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:29:40 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:29:42 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:29:44 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 10 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 10 NbDuplicated 0 
+2014/10/08 18:29:46 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:29:48 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:29:51 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+2014/10/08 18:29:53 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+2014/10/08 18:29:55 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 13 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 13 NbDuplicated 0 
+2014/10/08 18:29:57 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:29:59 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:30:01 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+2014/10/08 18:30:02 INF 4298 0xcc/BS-0 bench_service.cpp 364 CClient::updateFullStat : Full Summary: NbPing 1000 NbPong 986 NbLost 14 (1.400000pc) NbDuplicated 0 (0.000000pc) MeanPongTime 14 
+Full Summary: NbPing 1000 NbPong 986 NbLost 14 (1.400000pc) NbDuplicated 0 (0.000000pc) MeanPongTime 14 
+2014/10/08 18:30:03 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 18 MeanPongTime 14 NbDuplicated 0 
+NbPing 20 NbPong 18 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:30:05 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+2014/10/08 18:30:07 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+2014/10/08 18:30:09 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:30:11 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:30:13 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 11 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 11 NbDuplicated 0 
+2014/10/08 18:30:16 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 11 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 11 NbDuplicated 0 
+2014/10/08 18:30:18 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:30:20 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+2014/10/08 18:30:22 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:30:24 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:30:26 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:30:28 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 11 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 11 NbDuplicated 0 
+2014/10/08 18:30:30 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 11 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 11 NbDuplicated 0 
+2014/10/08 18:30:32 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 10 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 10 NbDuplicated 0 
+2014/10/08 18:30:34 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 10 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 10 NbDuplicated 0 
+2014/10/08 18:30:36 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:30:38 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:30:40 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+2014/10/08 18:30:42 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:30:44 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:30:46 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:30:49 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+2014/10/08 18:30:51 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:30:53 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:30:55 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:30:57 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+2014/10/08 18:30:59 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:31:01 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:03 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:05 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+2014/10/08 18:31:07 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:31:09 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:11 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:14 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:16 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:31:18 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+2014/10/08 18:31:20 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:22 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 10 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 10 NbDuplicated 0 
+2014/10/08 18:31:24 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:26 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 11 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 11 NbDuplicated 0 
+2014/10/08 18:31:28 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:30 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:32 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:31:34 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+2014/10/08 18:31:36 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:38 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:41 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:42 INF 4298 0xcc/BS-0 bench_service.cpp 364 CClient::updateFullStat : Full Summary: NbPing 1000 NbPong 1000 NbLost 0 (0.000000pc) NbDuplicated 0 (0.000000pc) MeanPongTime 13 
+Full Summary: NbPing 1000 NbPong 1000 NbLost 0 (0.000000pc) NbDuplicated 0 (0.000000pc) MeanPongTime 13 
+2014/10/08 18:31:43 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 19 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 19 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:45 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 12 NbDuplicated 0 
+2014/10/08 18:31:47 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:49 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+2014/10/08 18:31:51 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:53 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:55 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:31:57 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+2014/10/08 18:31:59 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 11 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 11 NbDuplicated 0 
+2014/10/08 18:32:01 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 13 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 13 NbDuplicated 0 
+2014/10/08 18:32:03 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 14 NbDuplicated 0 
+2014/10/08 18:32:06 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 13 NbDuplicated 0 
+2014/10/08 18:32:08 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+NbPing 21 NbPong 21 MeanPongTime 15 NbDuplicated 0 
+2014/10/08 18:32:10 INF 4298 0xcc/BS-0 bench_service.cpp 461 CClient::updateStat : NbPing 20 NbPong 20 MeanPongTime 12 NbDuplicated 0 
+NbPing 20 NbPong 20 MeanPongTime 12 NbDuplicated 0 

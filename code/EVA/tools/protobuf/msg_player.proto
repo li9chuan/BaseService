@@ -1,0 +1,16 @@
+import "define_pro.proto";
+import "define_attrib.proto";
+
+///////////////		玩家基本信息
+
+message MsgPlayerInfo 
+{
+  optional string    name                  = 1;
+  optional TGender   sex                   = 2;
+  optional uint32    level                 = 3;
+  optional uint32    exp                   = 4;
+  optional uint32    pve_dup_id            = 5;
+  optional sint64    money                 = 6;
+}
+
+

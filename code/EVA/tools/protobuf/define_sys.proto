@@ -1,0 +1,21 @@
+///  UDP øÿ÷∆Œª
+enum TUdpControlFlag
+{
+	PROTO_CMD                       = 1;
+	PROTO_NEED_ACK                  = 128;
+};
+
+///  UDP √¸¡ÓID
+enum TUdpControlCmd
+{
+	PROTO_CMD_ACK                       = 1;
+	PROTO_CMD_HEARTBEAT                 = 2;
+};
+
+message MsgSession
+{
+  optional fixed64      session    = 1;
+  optional fixed32      check      = 2;
+  optional uint32       index      = 3;
+}
+

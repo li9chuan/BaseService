@@ -1,0 +1,23 @@
+$#include "lua_function.h"
+
+void LoadMission(const char* szFileName);
+void RegMissionID( int mission_id );
+void RegMissionEvent( int mission_id, int event_id );
+bool MissionAccept(unsigned long long pid, int mission_id);
+bool MissionComplete(unsigned long long pid, int mission_id);
+int  GetLogoutTime( unsigned long long int pid );
+int  GetMissionCompleteCount( unsigned long long pid, int mission_id );
+int  GetMissionCompleteTime( unsigned long long pid, int mission_id );
+bool SetMissionCompleteCount( unsigned long long pid, int mission_id, int mission_count );
+bool SetMissionState( unsigned long long pid, int mission_id, int mission_state );
+bool AddMissionTracker( unsigned long long pid, int mission_id );
+bool AddMissionTemp( unsigned long long pid, int mission_id );
+void AddMoney( unsigned long long pid, int money );
+void AddHero( unsigned long long pid, int template_id );
+void AddItem( unsigned long long pid, int template_id, int num=1 );
+void AddGuard( unsigned long long pid , int template_id , int num = 1);
+void DelGuard( unsigned long long pid , int template_id , int num = 1 );
+void UpdateGuardLevel( unsigned long long pid , int template_id , int level = 1 );
+void AddRMB( unsigned long long pid ,int rmb );
+void AddCastle( unsigned long long pid , int castle_id );
+

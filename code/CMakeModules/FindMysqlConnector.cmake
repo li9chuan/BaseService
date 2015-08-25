@@ -1,0 +1,111 @@
+# - Find MySQL
+# Find the MySQL includes and client library
+# This module defines
+#  MYSQL_INCLUDE_DIR, where to find mysql.h
+#  MYSQL_LIBRARIES, the libraries needed to use MySQL.
+#  MYSQL_FOUND, If false, do not try to use MySQL.
+#
+# Copyright (c) 2006, Jaroslaw Staniek, <js@iidea.pl>
+#
+# Redistribution and use is allowed according to the terms of the BSD license.
+# For details see the accompanying COPYING-CMAKE-SCRIPTS file.
+
+IF(MYSQLCONNECTOR_INCLUDE_DIR AND MYSQLCONNECTOR_LIBRARIES)
+   SET(MYSQLCONNECTOR_FOUND TRUE)
+
+ELSE(MYSQLCONNECTOR_INCLUDE_DIR AND MYSQLCONNECTOR_LIBRARIES)
+
+  FIND_PATH(MYSQLCONNECTOR_INCLUDE_DIR mysql_connection.h
+      PATH_SUFFIXES mysqlconnector
+      /usr/include/mysqlcppconn-static)
+
+# mysqlcppconn-static.lib
+  IF(WIN32 AND MSVC)
+    FIND_LIBRARY(MYSQLCONNECTOR_STATIC_LIBRARY_RELEASE NAMES mysqlcppconn-static
+      PATHS
+      $ENV{ProgramFiles}/MySQL/*/lib/opt
+      $ENV{SystemDrive}/MySQL/*/lib/opt)
+
+    FIND_LIBRARY(MYSQLCONNECTOR_STATIC_LIBRARY_DEBUG NAMES mysqlcppconn-static
+      PATHS
+      $ENV{ProgramFiles}/MySQL/*/lib/opt
+      $ENV{SystemDrive}/MySQL/*/lib/opt)
+  ELSE(WIN32 AND MSVC)
+    FIND_LIBRARY(MYSQLCONNECTOR_STATIC_LIBRARY_RELEASE NAMES mysqlcppconn-static
+      PATHS
+      /usr/lib
+      /usr/local/lib
+      /usr/lib/mysql
+      /usr/local/lib/mysql
+      /opt/local/lib/mysql5/mysql
+      )
+
+    FIND_LIBRARY(MYSQLCONNECTOR_STATIC_LIBRARY_DEBUG NAMES mysqlcppconn-static
+      PATHS
+      /usr/lib
+      /usr/local/lib
+      /usr/lib/mysql
+      /usr/local/lib/mysql
+      /opt/local/lib/mysql5/mysql
+      )
+  ENDIF(WIN32 AND MSVC)
+  
+# mysqlcppconn.lib
+  IF(WIN32 AND MSVC)
+    FIND_LIBRARY(MYSQLCONNECTOR_LIBRARY_RELEASE NAMES "mysqlcppconn.lib"
+      PATHS
+      $ENV{ProgramFiles}/MySQL/*/lib/opt
+      $ENV{SystemDrive}/MySQL/*/lib/opt)
+
+    FIND_LIBRARY(MYSQLCONNECTOR_LIBRARY_DEBUG NAMES "mysqlcppconn.lib"
+      PATHS
+      $ENV{ProgramFiles}/MySQL/*/lib/opt
+      $ENV{SystemDrive}/MySQL/*/lib/opt)
+  ELSE(WIN32 AND MSVC)
+    FIND_LIBRARY(MYSQLCONNECTOR_LIBRARY_RELEASE NAMES "mysqlcppconn.lib"
+      PATHS
+      /usr/lib
+      /usr/local/lib
+      /usr/lib/mysql
+      /usr/local/lib/mysql
+      /opt/local/lib/mysql5/mysql
+      )
+
+    FIND_LIBRARY(MYSQLCONNECTOR_LIBRARY_DEBUG NAMES "mysqlcppconn.lib"
+      PATHS
+      /usr/lib
+      /usr/local/lib
+      /usr/lib/mysql
+      /usr/local/lib/mysql
+      /opt/local/lib/mysql5/mysql
+      )
+  ENDIF(WIN32 AND MSVC)
+  
+  IF(MYSQLCONNECTOR_INCLUDE_DIR)
+    IF(MYSQLCONNECTOR_STATIC_LIBRARY_RELEASE AND MYSQLCONNECTOR_LIBRARY_RELEASE)
+      SET(MYSQLCONNECTOR_LIBRARIES optimized ${MYSQLCONNECTOR_STATIC_LIBRARY_RELEASE} ${MYSQLCONNECTOR_LIBRARY_RELEASE})
+      IF(MYSQLCONNECTOR_STATIC_LIBRARY_DEBUG AND MYSQLCONNECTOR_LIBRARY_DEBUG)
+        SET(MYSQLCONNECTOR_LIBRARIES ${MYSQLCONNECTOR_LIBRARIES} debug ${MYSQLCONNECTOR_STATIC_LIBRARY_DEBUG} ${MYSQLCONNECTOR_LIBRARY_DEBUG})
+      ENDIF(MYSQLCONNECTOR_STATIC_LIBRARY_DEBUG AND MYSQLCONNECTOR_LIBRARY_DEBUG)
+      FIND_PACKAGE(OpenSSL)
+      IF(OPENSSL_FOUND)
+        SET(MYSQLCONNECTOR_LIBRARIES ${MYSQLCONNECTOR_LIBRARIES} ${OPENSSL_LIBRARIES})
+      ENDIF(OPENSSL_FOUND)
+    ENDIF(MYSQLCONNECTOR_STATIC_LIBRARY_RELEASE AND MYSQLCONNECTOR_LIBRARY_RELEASE)
+  ENDIF(MYSQLCONNECTOR_INCLUDE_DIR)
+  
+  IF(MYSQLCONNECTOR_INCLUDE_DIR AND MYSQLCONNECTOR_LIBRARIES)
+	SET(MYSQLCONNECTOR_INCLUDE_DIR ${MYSQLCONNECTOR_INCLUDE_DIR})
+    SET(MYSQL_FOUND TRUE)
+    MESSAGE(STATUS "Found MySQL Connector: ${MYSQLCONNECTOR_INCLUDE_DIR}, ${MYSQLCONNECTOR_LIBRARIES}")
+  ELSE(MYSQLCONNECTOR_INCLUDE_DIR AND MYSQLCONNECTOR_LIBRARIES)
+    SET(MYSQL_FOUND FALSE)
+    MESSAGE(STATUS "MySQL not found.")
+  ENDIF(MYSQLCONNECTOR_INCLUDE_DIR AND MYSQLCONNECTOR_LIBRARIES)
+
+  MARK_AS_ADVANCED(MYSQLCONNECTOR_STATIC_LIBRARY_RELEASE MYSQLCONNECTOR_STATIC_LIBRARY_DEBUG MYSQLCONNECTOR_LIBRARY_RELEASE MYSQLCONNECTOR_LIBRARY_DEBUG)
+
+ENDIF(MYSQLCONNECTOR_INCLUDE_DIR AND MYSQLCONNECTOR_LIBRARIES)
+
+
+

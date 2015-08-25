@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ -z "${MT_PATH+xxx}" ]; 
+then 
+	echo "ERROR: The variable MT_PATH must be set! (e.g. /home/username/mt/code/mt)";
+	exit 1;
+fi
+cd $MT_PATH/server
+/bin/sh $MT_PATH/tools/scripts/linux/mt_domain_screen_wrapper.sh $*

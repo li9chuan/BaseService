@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<game_config>
+
+  <!--各种公式-->
+  <formula>
+
+	<rmb2money			     value="$a*200"/>											<!--rmb转换到钱          $a=rmb   			      return=增加金币数	-->
+	<rmb2soul			     value="$a*200"/>											<!--rmb转换到魂          $a=rmb   			      return=增加魂		-->
+
+	<money2rmb			     value="ceil($a/200)"/>                                    	<!--金币转换到rmb        $a=金币   			      return=转换符石数	-->
+	<soul2rmb			     value="ceil($a/200)"/>
+
+  </formula>
+
+  <grow_time>
+		<leaf	quality="2001028"    time="3600"/>
+		<leaf	quality="2001029"    time="7200"/>
+  </grow_time>
+
+</game_config>
+

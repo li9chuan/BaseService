@@ -1,0 +1,125 @@
+$#include "lua_base_function.h"
+$#include <game_share/define_pro.pb.h>
+
+int  GetCurrentDay1970( unsigned int time );
+void LoadLuaFile(const char* szFileName);
+void RegScriptEvent( const char* script_scope, int event_id );
+
+enum TLuaEvent
+{
+	EventInvalid			     = 0,  		// 无效事件
+    EventHeroUp	                 = 1,  		// 角色升级	 
+    EventPlayerUp	             = 2,  		// 玩家升级	 
+    EventGuardUp                 = 3,  		// 守卫升级次数     
+    EventHeroSkillUp             = 4,  		// 角色技能升级
+	EventHeroQualityUp           = 5,  		// 角色品质升级
+	EventEquipQualityUp          = 6,  		// 装备强化品质次数
+	EventHeroEquipQuality        = 7,  		// 角色的所有装备品质
+	EventGemLevel                = 8,  		// 宝石强化等级
+	EventGemNum                  = 9,  		// 宝石激活数量
+	EventGetHero                 = 10, 		// 收集角色
+	EventGetHeroByQuality        = 11, 		// 按品质分类收集角色
+	EventGetGuard                = 12, 		// 收集守卫
+	EventGetGuardByQuality       = 13, 		// 按品质分类收集守卫
+	EventGetGuardByLevel         = 14, 		// 按等级分类收集守卫
+	EventGetGuardByRace          = 15, 		// 按种族分类收集守卫
+	EventPassDup                 = 16, 		// 通关关卡
+	EventPassDupByDiff           = 17, 		// 按难度分类通关关卡
+	EventPassDupByType           = 18, 		// 按大关分类通关关卡
+	EventEnd3V3	                 = 19,		// 3v3结束
+	EventEndPVP	                 = 20,		// pvp结束
+	EventAttackMap               = 21, 		// 攻打指定地图
+	EventJoinFight               = 22, 		// 参加打架王
+	EventKillMonster             = 23, 		// 杀死指定怪物个数
+	EventKillPlayer              = 24, 		// 杀死玩家个数
+	EventOpenGiftBox             = 25, 		// 累计开启宝箱
+	EventGetItem				 = 26, 		// 获得物品数量
+	EventGetDebrisByQuality      = 27, 		// 按种族分类收集守卫碎片数量
+	EventGetMap                  = 28, 		// 收集指定地图
+	EventTotalMoney              = 29, 		// 累计获得金钱
+	EventPVPTotalScore           = 30, 		// 天坑积分累计
+	EventTotalPay                = 31, 		// 充值累计
+	EventPayCount                = 32, 		// 充值次数
+	EventAchievementScore        = 33, 		// 成就积分
+	EventArenaHighRank           = 34, 		// 竞技场最高排名
+	EventFightingCapacity        = 35, 		// 战斗力
+	EventDrink                   = 36, 		// 请喝酒	 
+    EventInviteFight             = 37, 		// 邀请好友战斗
+	EventAddFriend		         = 38, 		// 添加好友
+	EventUsedItem                = 39, 		// 使用指定物品次数
+	EventCostMoney               = 40, 		// 累计消费金钱
+	EventSetGuard                = 41, 		// 布置守卫
+	EventJoinSociety             = 42, 		// 加入公会
+	EventLoadingCount            = 43, 		// 连续登录天数	
+	EventComplateTime            = 44, 		// 完成时间
+	                                 ,
+                                     ,
+	/// Mission                      ,
+	Event_Mission_Accept		= 200,
+	Event_Mission_Update        = 201,
+	Event_Mission_Complete      = 202,					// Param1:MissionID	Param2:Player PID
+                                     ,
+	Event_Battle_Victory        = 301,
+	Event_Battle_Fail           = 302,
+                                     ,
+	//Action                         ,
+	Event_Action_Login			= 400,		//
+                                     ,
+	Event_Player_Scene_Exit     = 500,  	//玩家退出场景
+	Event_Player_Scene_Enter    = 501,     	//玩家进入场景
+	
+	TriggerType_Max             = 1000,
+};
+enum TErrorType
+{
+  INVALID_TYPE = 0,
+  ACCOUNT_LOGGED = 1,
+  SERVER_FULL = 2,
+  SERVER_NOT_OPEN = 3,
+  TEXT_SUCESS = 4,
+  TEXT_FAIL = 5,
+  PWD_ERROR = 6,
+  PLAYER_ONLINE_TO_FES = 7,
+  PLAYER_EXISTS = 8,
+  MISSION_ACCEPT_SUCESS = 9,
+  MISSION_ACCEPT_FAIL = 10,
+  MISSION_COMPLATE_SUCESS = 11,
+  MISSION_COMPLATE_FAIL = 12,
+  MISSION_NO_FIND = 13,
+  BATTLE_FAIL = 14,
+  BATTLE_VICTORY = 15,
+  UP_BUILD_SUCESS = 16,
+  UP_BUILD_FAIL = 17,
+  ACCOUNT_ERROR = 18,
+  NOT_FOUND_ACCOUNT = 19,
+  NOT_FOUND_PLAYER = 20,
+  QUERY_FAILED = 21,
+  NO_ACCOUNT = 22,
+  SUCESS = 23,
+  NO_AUTH_TYPE = 24,
+  ERROR_ITEM_CONTAINER = 25,
+  ERROR_GUARD_CONTAINER = 26,
+  PVE_BATTLE_NOT_END = 27,
+  NOT_ENOUGH_VITALITY = 28,
+  ACHIEVEMENT_AWARD = 29,
+  MISSION_AWARD = 30,
+  LIMITUSE_FAILED = 31,
+  CASTLEPVPDATA = 32,
+  CONFIG_NOT_FOUND = 33,
+  ARENAPVPDATA = 34,
+  NOT_ENOUGH_ITEM = 35,
+  NOT_ENOUGH_MONEY = 36,
+  NOT_ENOUGH_RMB = 37,
+  NOT_FOUND_HERO = 38,
+  NOT_FOUND_HERO_SKILL = 39,
+};
+
+enum TMissionState
+{
+	MISSION_STATE_INIT   = 1,
+	MISSION_STATE_ACCEPT = 2,
+	MISSION_STATE_DONE   = 3,
+	MISSION_STATE_NORMAL = 4,
+	MISSION_STATE_REWARD = 5,
+	MISSION_STATE_CLOSE  = 6,
+};

@@ -1,0 +1,422 @@
+import "define_pro.proto";
+import "define_attrib.proto";
+
+message MsgVLP
+{
+  optional string       username     = 1;
+  optional string       password     = 2;
+  optional fixed32      version      = 3;
+  optional TAuthType    auth_type    = 4;
+}
+
+message MsgLogin
+{
+  optional string       token        = 1;
+  optional fixed32      version      = 2;
+}
+
+message MsgCreatePlayer
+{
+  optional string       name         = 1;
+}
+
+message MsgLoadPlayer
+{
+  optional uint32       player_idx   = 1;
+}
+
+message MsgDBID
+{
+	optional fixed64    dbid         = 1;
+}
+
+message MsgID32
+{
+	optional uint32    id         = 1;
+}
+
+///   通用资源消息结构
+message MsgSource
+{
+	optional uint64   money = 1;
+	optional uint64   soul  = 2;
+	optional uint64   rmb   = 3;
+}
+
+message MsgGuardGetOut
+{
+	optional uint64   money = 1;
+	optional uint64   soul  = 2;
+}
+
+message MsgGetAreanReward
+{
+	optional uint64   money = 1;
+	optional uint64   rmb  = 2;
+}
+
+message MsgDefenseUP
+{
+	optional uint32    defnense_type         = 1;
+	optional uint64    curr_money            = 2;
+	optional uint64    curr_soul             = 3;
+	optional bool      use_rmb               = 4;
+}
+
+message MsgShopBuy
+{
+  optional uint32        item_template_id     = 1;
+  optional uint32        shop_id              = 2;
+  optional uint32        shop_tab             = 3;
+}
+
+message MsgShopSell
+{
+  optional uint32        item_id     = 1;
+  optional uint32        item_num    = 2;
+}
+
+message MsgMetaUp
+{
+  optional fixed64                      hero_id       = 1;
+  optional ATTRIB_TYPE.TAttribType      equip_pos     = 2;
+  optional ATTRIB_TYPE.TAttribType      meta_pos      = 3;
+}
+
+message MsgEquipUp
+{
+  optional fixed64                      hero_id       = 1;
+  optional ATTRIB_TYPE.TAttribType      equip_pos     = 2;
+}
+
+message MsgHeroUp
+{
+  optional fixed64                      hero_id           = 1;
+  optional uint32                       hero_template_id  = 2;
+}
+
+message MsgMissionReward
+{
+  optional uint32                       mission_id  = 1;
+}
+
+message MsgUseExp
+{
+	optional fixed64                 item_id           = 1;
+	optional uint32                  item_count        = 2;
+	repeated MsgHeroExpUp            hero_expup_info   = 3;
+}
+
+message MsgHeroExpUp
+{
+	optional fixed64                 hero_id           = 1;
+	optional fixed64                 item_id           = 2;
+	optional uint32                  item_count        = 3;
+}
+message MsgUseItem
+{
+	optional fixed64                 item_id           = 1;
+	optional uint32                  item_count        = 2;
+	optional uint32                  use_count         = 3;
+}
+
+message MsgSellItem
+{
+	optional fixed64                 item_id           = 1;
+	optional uint32                  item_count        = 2;
+	optional uint32                  sell_count        = 3;
+}
+
+message MsgCActivateGuard
+{
+    optional uint32                  guard_id          = 1;
+}
+
+message MsgCUpdateGuardLevel
+{
+	optional uint32 				guard_id           = 1;
+	optional uint32                 guard_level        = 2;
+}
+
+message MsgRequestRandomShop
+{
+	optional uint32                refresh_state        = 1;
+}
+
+message MsgRandomShopBuy
+{
+	optional fixed64				item_id             =1;
+	optional uint32                 item_num            =2;
+	optional uint32                 grid_index          =3;
+	optional uint32                 buy_num             =4;
+}
+
+message MsgBattleStart
+{
+	repeated fixed64				hero_ids             =1;
+	optional fixed64                friend_id            =2;
+	optional fixed64                friend_hero_id       =3;
+	optional uint32                 dup_id               =4;
+	optional uint32					attack_count		 =5;
+}
+
+message MsgBattleEnd
+{
+	repeated sint32                 sprite_idx 	         =1;		//	杀了哪些怪
+	repeated bool					hero_ids             =2;
+	optional uint32                 use_time             =3;        //  使用时间0为在最佳时间内1为超过最佳时间但未超过总时间2为超过总时间
+}
+
+message MsgRaids
+{
+	optional uint32                 dup_id               =1;		//	副本ID
+	optional uint32                 num                  =2;		//	扫荡次数
+	optional uint32                 client_raids_num     =3;		//  客户端的扫荡次数
+	optional uint32 				attack_count		 =4;		//  已经攻打次数; 				
+}
+
+message MsgAchieveReward
+{
+	optional uint32				    achievement_id       =1;		
+}
+
+message MsgCaseleBeatBack
+{
+	optional fixed64 			   role_id				= 1;
+}
+
+message MsgCEnterCastlePvP
+{
+	optional fixed64				role_id              = 1;
+	optional TPVPState				state                = 2;
+}
+
+message MsgCLeaveCastlePvP
+{
+	optional TPVPState             state                 = 1;
+	repeated uint32				   kill_zone			 = 2;
+}
+
+message MsgCEnterArenaPvP
+{
+	optional fixed64              role_id               = 1;
+	optional TPVPState            state                 = 2;
+	optional fixed64			  leader_id             = 3;
+	optional fixed64              member_id1            = 4;
+	optional fixed64			  member_id2            = 5;
+}
+message MsgCLeaveArenaPvP
+{
+	optional bool    bIsWin                            = 1;
+	optional fixed64 kill_leader                       = 2;
+	optional fixed64 kill_member1                      = 3;
+	optional fixed64 kill_member2                      = 4;
+}
+
+message MsgSaveFightHero
+{
+	optional fixed64 leader_id                         = 1;
+	optional fixed64 member_id1                        = 2;
+	optional fixed64 member_id2                        = 3;
+	optional bool    robot							   = 4;
+}
+
+message MsgHeroSkillUp
+{
+	optional fixed64              hero_id               = 1;
+	optional uint32				  skill_id              = 2;
+}
+
+message MsgSendMail
+{
+	optional fixed64               receive_pid         = 1;
+	optional string                content             = 2;
+}
+
+message MsgMailID
+{
+    optional fixed64               mail_id         = 1;
+}
+
+message MsgOnePageMailBaseData
+{
+    optional uint32                page            = 1;
+}
+
+message MsgMailsData
+{
+    repeated MsgMailID             mail_id_list    = 1;
+}
+
+// 请求好友列表;
+message MsgRequestFriendList
+{
+	optional uint32               friend_size       = 1;
+}
+
+// 请求黑名单列表;
+message MsgRequestBlackList
+{
+	optional uint32               black_size         = 1;
+}
+
+// 请求详细信息;
+message MsgRequestRoleDetails
+{
+	optional uint32   friend_type = 1;
+	optional fixed64  friend_id   = 2;	
+}
+
+// 请求出战好友列表;
+message MsgRequestFightFriend
+{
+	optional uint32  fight_size = 1;
+}
+
+// 请求全部添加好友;
+message MsgAllAddFriend
+{
+	repeated uint64  friend_id = 1;
+}
+
+// 请求抽卡
+message MsgRandomCard
+{
+	optional bool 			  card_free  = 1;
+	optional TRandomCardType  card_type  = 2;
+}
+
+message MsgCastleBoss
+{
+	optional uint32 boss_id = 1;
+	optional string grid    = 2;
+}
+
+message MsgCastleMonster
+{
+	optional uint32 monster_id = 1;
+	optional string grid       = 2;
+}
+
+//  保存布城信息;
+message MsgSaveCastle
+{
+	optional fixed64          zone_id      = 1;
+	optional TCastleState     state        = 2;
+	repeated MsgCastleBoss    boss_list    = 3;
+	repeated MsgCastleMonster monster_list = 4;
+	optional string           trap_list    = 5;
+}
+//  保存布城信息;
+message MsgSaveCastleCont
+{
+	repeated MsgSaveCastle castle_info = 1;	
+}
+
+// 请求布城详细信息;
+message MsgRequestCastleInfo
+{
+	optional uint32  castle_id     = 1;
+}
+
+// 保存城堡基地;
+message MsgSaveCastleID
+{
+	optional uint32 castle_id 	   = 1;
+}
+
+message MsgCommand
+{
+   optional string  command     = 1;
+   repeated uint64  param       = 2;
+}
+message MsgChangeName
+{
+	optional string name  =  1;
+}
+message MsgChangeleader
+{
+	optional fixed64 hero_id = 1;
+}
+
+message MsgChat
+{
+	optional string    text = 1;
+	optional uint64   pid  = 2;
+	optional string    name = 3;
+}
+
+message MsgFightPower
+{
+	optional uint64   hero_id     = 1;
+	optional uint32   fight_power = 2;
+}
+
+message MsgHeroPowerList
+{
+	repeated MsgFightPower hero_power = 1;
+}
+
+message MsgBuyGrimoire
+{
+	optional uint32  template_id   = 1;
+	optional uint32  frimoire_type = 2;
+}
+
+message MsgPvEEnter
+{
+	optional uint32  zone_id  		 = 1;
+	optional uint32  dup_id    		 = 2;
+	repeated uint32  hero_list 		 = 3;
+	optional fixed64 friend_role_id	 = 4;
+	optional fixed64 friend_hero_id  = 5;
+}
+
+message MsgPvELeave
+{
+	optional uint32 use_time        = 1; //  使用时间0为在最佳时间内1为超过最佳时间但未超过总时间2为超过总时间
+}
+
+message MsgPvPAttack
+{
+	optional uint32   zone_id = 1;
+	optional fixed64  role_id = 2;
+}
+
+message MsgPvPEnter
+{
+	optional uint32  zone_id        = 1;
+	optional fixed64 role_id 		= 2;
+	repeated uint32  hero_list 		= 3;
+    repeated uint32  buff_list      = 4;
+}
+
+message MsgPvPLeave
+{
+	optional uint32  zone_id    = 1;
+	optional fixed64 role_id	= 2;
+	optional bool    win        = 3;
+}
+
+message MsgBuyHeroVitality
+{
+	optional fixed64 hero_id     = 1;
+	optional bool    all_recover = 2;
+}
+
+message MsgGrowItem
+{
+	optional fixed64 item_id     = 1;
+	optional uint32  item_num    = 2;
+	optional uint32  grow_idx    = 3;
+}
+
+message MsgCollectItem
+{
+	optional fixed64 item_id     = 1;
+	optional uint32  grow_idx    = 2;
+}
+
+
+
+

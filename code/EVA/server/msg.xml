@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<client_messages_description>
+<!--
+                客户端消息转发     li9chuan@qq.com   2014
+				
+				name         消息名字 (key)
+				sendto       需要转发到的服务器，可填多个  sendto="PLS EGS PDS"
+				format       转发消息结构 :
+											PID : 使用服务器的playerid填充。
+											UID : 使用userid填充。
+											PLS : 使用玩家所在player_logic_service的TServiceId填充。
+											proto消息：填写名字自动识别。
+											基础数据类型：f(float) d(double) b(bool) s(string) s8 s16 s32 s64 u8 u16 u32 u64
+										
+				protocol     客户端可以使用的网络协议(UDP TCP)，如果不填写，默认使用UDP协议收发。
+				description  描述，可打印log。  不需要调试log可在最后写xml注释。
+-->
+
+  <leaf name="SCS"                    sendto="PLS"   protocol="UDP"        format="PID"                       description="SyncChecksum" />
+  <leaf name="SPLY"                   sendto="PLS"   protocol="UDP"        format="PID"                       description="请求刷新PlayerInfo" />
+
+  <leaf name="GC"                     sendto="PLS"   protocol="UDP"        format="PID MsgChat"               description="世界喊话"/>  
+
+</client_messages_description>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

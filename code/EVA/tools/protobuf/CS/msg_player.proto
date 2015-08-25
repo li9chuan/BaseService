@@ -1,0 +1,201 @@
+import "define_pro.proto";
+import "define_attrib.proto";
+
+///////////////		玩家基本信息
+
+message MsgPlayerInfo 
+{
+  optional string    name                  = 1;
+  optional TGender   sex                   = 2;
+  optional uint32    level                 = 3;
+  optional uint32    exp                   = 4;
+  optional uint32    pve_dup_id            = 5;
+  optional sint64    money                 = 6;
+  optional sint64    rmb                   = 7;
+  optional sint64    soul                  = 8;
+  optional sint32    eol_score             = 9;
+  optional uint32    vitality              = 10;
+  optional fixed32   vitality_base_time    = 11;
+  optional sint32    pvp_score             = 12;
+  optional sint32    vip_score             = 13;
+  optional uint32    castle_id             = 14;
+  optional uint64	 pid				   = 15;
+  optional uint32    checkin_7day_count    = 16;
+  optional uint32    reward_7day_flag      = 17;
+  optional uint32    checkin_month_count   = 18;
+  optional uint32    reward_month_flag     = 19;
+  optional uint32    teaching_schedule     = 20;
+  optional fixed64   help_hero_leader      = 21;
+  optional sint32    raids_count	       = 22;
+}
+
+message MsgPlayerExt
+{
+	optional uint32   up_defense 	= 1;
+	optional uint32   up_time	    = 2;
+	optional bytes    defense_tools	= 3;
+	repeated uint32   grow          = 4;
+	repeated uint32   gtime         = 5;
+	optional uint64   flag_bit      = 6;
+}
+
+message MsgDupCount
+{
+	optional uint32  dup_id = 1;
+	optional uint32	 dup_count = 2;
+}
+
+message MsgDupInfo
+{
+	optional bytes    	 dup_star            = 1;
+	repeated MsgDupCount dup_count			 = 2;
+}
+
+message MsgPlayerList
+{
+  repeated MsgPlayerInfo player_info = 1;
+}
+
+////////////////   物品
+
+message MsgItemParam
+{
+  required ATTRIB_TYPE.TAttribType       type     = 1;		// 属性类型
+  optional sint64                        value    = 2;
+}
+
+message MsgItem
+{
+  optional fixed64       item_id          = 1;
+  optional uint32        template_id      = 2;
+  optional uint32        num              = 3;
+  optional uint32        con_type         = 4;
+  repeated MsgItemParam  ItemParam        = 5;
+}
+
+message MsgItemCont
+{
+  repeated MsgItem msg_item = 1;
+}
+
+///////////////		英雄
+
+message MsgHero
+{
+  optional fixed64       hero_id          = 1;
+  optional uint32        template_id      = 2;
+  optional uint32        level            = 3;
+  optional uint32        exp              = 4;
+  optional uint32        equip_head       = 5;
+  optional uint32        equip_weapon     = 6;
+  optional uint32        equip_body       = 7;
+  optional uint32        equip_hand       = 8;
+  optional uint32        equip_foot       = 9;
+  optional uint32        equip_jewelry    = 10;
+  optional uint32        stuff_head       = 11;
+  optional uint32        stuff_weapon     = 12;
+  optional uint32        stuff_body       = 13;
+  optional uint32        stuff_hand       = 14;
+  optional uint32        stuff_foot       = 15;
+  optional uint32        stuff_jewelry    = 16;
+  repeated uint32        skill_id         = 17;
+  optional uint32 		 vitality		  = 18;
+  optional uint32 		 vitality_time    = 19;  
+}
+
+message MsgHeroCont
+{
+  repeated MsgHero msg_hero = 1;
+}
+
+////////////////		任务
+
+message MsgMission
+{
+  optional uint32         mission_id     = 1;
+  optional TMissionState  state          = 2;
+  optional uint64         target1        = 3;
+  optional uint64         target2        = 4;
+}
+
+message MsgMissionCont
+{
+  repeated MsgMission msg_mission = 1;
+}
+
+message MsgMissionRewardRes	//	任务奖励
+{
+  optional uint32        mission_id         = 1;
+  optional uint32        exp                = 2;
+  optional uint64        money              = 3;
+  optional uint64        rmb                = 4;
+  optional uint32        vitality           = 5;
+  optional uint64        soul		        = 6;
+  optional uint32        guard_templateid   = 7;
+  repeated MsgHero       msg_hero           = 8;
+  repeated MsgItem       msg_item           = 9;
+}
+message MsgMissionID
+{
+  optional uint32        mission_id    = 1; 
+}
+
+message MsgGuard
+{
+  optional int32 template_id = 1;
+  optional int32 level       = 2;
+  optional int32 guard_num   = 3;
+}
+
+message MsgGuardCont
+{
+    repeated MsgGuard msg_guard = 1;
+}
+
+////////////////		成就
+
+message MsgAchievement
+{
+  optional uint32         achieve_id     = 1;
+  optional TMissionState  state          = 2;
+  optional uint64         target1        = 3;
+  optional uint64         target2        = 4;
+}
+
+message MsgGrimoire
+{
+	optional int32    template_id = 1;
+	optional uint32   end_time	  = 2;
+}
+
+message MsgGrimoireCont
+{
+	repeated MsgGrimoire grimoire_list = 1;
+}
+
+message MsgTechnology
+{
+	optional bytes 		technology   	= 1;
+	optional uint32		reset_count		= 2;
+}
+
+message MsgAchievementCont
+{
+  repeated MsgAchievement msg_achievement = 1;
+}
+
+message MsgLimitUse
+{
+  optional uint32         template_id     = 1;
+  optional uint32         use_time        = 2;
+}
+
+message MsgLimitUseCont
+{
+  repeated MsgLimitUse msg_limituse = 1;
+} 
+
+message MsgComplateAch
+{
+	optional bytes    achieve_id   = 1;
+}

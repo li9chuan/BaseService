@@ -1,0 +1,649 @@
+import "define_pro.proto";
+import "define_attrib.proto";
+import "msg_player.proto";
+
+message MsgSetSession
+{
+  optional fixed32      seed         = 1;
+  optional fixed64      session      = 2;
+}
+
+message MsgError
+{
+  optional TErrorType   error_type   = 1;
+}
+
+message MsgSyncDataCheckSum
+{
+  optional fixed32      item_canuse           = 1;
+  optional fixed32      item_stuff            = 2;
+  optional fixed32      item_guard_card       = 3;
+  optional fixed32      item_use_limit        = 4;
+  optional fixed32      dup_info              = 5;
+  optional fixed32      achievement           = 6;
+  optional fixed32      mission               = 7;
+  optional fixed32      guard                 = 8;
+  optional fixed32      hero                  = 9;
+  optional fixed32      castle                = 10;
+  optional fixed32      complate_achievement  = 11;
+  optional fixed32 		grimoire              = 12;
+  optional fixed32 		technology            = 13;
+}
+
+message MsgUpdateMeta
+{
+	optional fixed64                     hero_id       = 1;
+	optional ATTRIB_TYPE.TAttribType     equip_pos     = 2;
+	optional uint32                      meta_flag     = 3;		//	材料串
+	repeated MsgItem                     item_info     = 4;
+}
+
+message MsgUpdateEquip
+{
+	optional fixed64                     hero_id            = 1;
+	optional ATTRIB_TYPE.TAttribType     equip_pos          = 2;
+	optional uint32                      equip_tmplate_id   = 3;
+	optional uint32                      meta_flag          = 4;
+}
+
+message MsgUpdateHero
+{
+	optional fixed64                     hero_id            = 1;
+	optional uint32                      hero_template_id   = 2;
+	optional uint64                      money              = 3;
+	repeated MsgItem                     item_info          = 4;
+}
+
+message MsgHeroSkillUpRes
+{
+	optional fixed64                     hero_id            = 1;
+	optional uint32                      new_skill_id       = 2;
+	optional uint64                      money              = 3;
+	repeated MsgItem                     item_info          = 4;
+}
+
+message MsgUseExpUpdate
+{
+    repeated MsgHeroExp                  hero_info          = 1;
+	repeated MsgHeroVitality             hero_vitality_info = 2;
+    repeated MsgItem                     item_info          = 3;
+	
+}
+message MsgHeroExp
+{
+	optional fixed64                     hero_id            = 1;
+	optional uint32                      hero_level         = 2;
+	optional uint32                      hero_exp           = 3;
+}
+
+message MsgHeroVitality
+{
+	optional fixed64                     hero_id          = 1;
+	optional uint32                      hero_vitality    = 2;
+}
+
+message MsgUseItemUpdate
+{
+    optional uint64                      money         = 1;
+    repeated MsgItem                     item_info     = 2;
+//	repeated MsgItem                     item_add      = 3;
+}
+
+message MsgSellItemUpdate
+{
+    optional uint64                      money         = 1;
+    repeated MsgItem                     item_info     = 2;
+}
+
+message MsgSActivateGuard
+{	
+	optional uint32  guard_Id = 1;
+	optional uint32  state    = 2;
+	optional sint64  soul     = 3;
+}
+
+message MsgSUpdateGuardLevel
+{
+	optional uint32  guard_Id    = 1;
+	optional uint32  guard_level = 2;
+	optional uint32  state    	 = 3;
+	optional sint64  soul        = 4;
+}
+
+message MsgBuyItemResult
+{
+    optional uint32 state          = 1;
+	optional uint32 surplus_num    = 2;
+	optional uint32 grid_index     = 3;
+	repeated MsgItem item_info     = 4;
+}
+
+message MsgRandomShop
+{
+	optional uint32 grid_index   =1;
+	optional uint32 template_id  =2;
+	optional uint32 template_num =3;
+	optional uint32 config_id    =4;
+}
+
+message MsgRandomShopCont
+{
+	optional uint32        refresh_state     = 1;
+	optional uint32        next_refresh_time = 2;
+	optional uint32        refresh_money     = 3;
+	repeated MsgRandomShop msg_random_shop   = 4;
+}
+
+message MsgArenaMatching
+{
+	optional fixed64   role_id  	= 1;
+	optional string    name         = 2;
+	optional uint32    ranking  	= 3;
+	optional uint32    fight_power 	= 4;
+	optional uint32    role_head    = 5;
+	optional uint32    role_level   = 6;
+	repeated uint32    fight_list   = 7;
+}
+
+message MsgArenaPvPListCout
+{
+	optional uint32   ranking   		 = 1;
+	optional uint32   count     		 = 2;
+	repeated fixed64  hero_list 		 = 3;
+	repeated MsgArenaMatching arena_list = 4;
+	optional uint32   cd_time            = 5;
+}
+
+message MsgSEnterArenaPvP
+{
+	repeated MsgHero            hero_data     = 4;
+}
+
+message MsgSLeaveArenaPvP
+{
+	optional uint32            state         = 1;
+	optional uint32            ranking       = 2;
+}
+
+message MsgCastleMatching
+{
+	optional string   name  		= 1;
+	optional fixed64  role_id 		= 2;
+	optional fixed32  fight_power	= 3;
+	optional uint32   role_head     = 4;
+}
+
+message MsgCastlePvPListCout
+{
+	optional uint32 fight_count  = 1;
+	optional uint32 self_score   = 2;
+	repeated MsgCastleMatching	 castle_list = 4;
+}
+
+message MsgCastleMathingDetail
+{
+	optional fixed64 role_id        = 1;
+	repeated uint32  boss_id        = 2;
+	optional uint32  target_score   = 3;
+	optional fixed64 target_money   = 4;
+	optional fixed64 target_soul    = 5;
+	optional uint32  self_score     = 6;
+	optional fixed64 self_soul		= 7; 
+	optional fixed64 self_money     = 8;
+	optional uint32  max_edit_zone  = 9;
+	optional bool    is_frist     	= 10;
+}
+
+message MsgCastlePvPMonster
+{
+	optional uint32 monster_id 					= 1;
+	optional uint32 level 						= 2;
+	optional float  x						 	= 3;
+	optional float  z							= 4;
+}
+
+message MsgCastlePvPBoss
+{
+	optional uint32 zone_id 					= 1;
+	optional uint32 boss_id 				 	= 2;
+	optional uint32 level 						= 3;
+	optional float  x							= 4;
+	optional float  z							= 5;	
+	repeated MsgCastlePvPMonster pvp_monster    = 6;
+	repeated uint32 grimoire_list				= 7;
+}
+
+message MsgSEnterCastlePvP
+{
+	optional uint32      		 castle_id        = 1;
+	optional uint32 			 castle_state 	  = 2;
+    repeated MsgCastlePvPBoss  	 castle_boss_data = 3;
+}
+
+
+message MsgSLeaveCastlePvP
+{
+	optional bool               isWin             = 1;
+	optional sint32 			award_pvp_score   = 2;
+	optional sint32             award_pvp_money   = 3;
+	optional sint32             award_pvp_soul	  = 4; 
+}
+
+message MsgArenaFightLog
+{
+	optional string 		   name				  = 1;
+	optional bool 			   isWin			  = 2;
+	optional sint32 		   ranking 			  = 3;
+	optional sint32            role_head		  = 4;
+}
+
+message MsgCastleFightLog
+{
+	optional fixed64            role_id          = 1;
+	optional string             name 			 = 2;
+	optional bool 				isWin			 = 3;
+	optional fixed32			money 			 = 4;
+	optional fixed32		    score            = 5;
+	optional fixed32            soul             = 6;
+	optional fixed32            size             = 7;
+	optional sint32 			role_head		 = 8;
+}
+
+message MsgPvPFightLog
+{
+	repeated MsgArenaFightLog   arena_fight_list  = 1;
+	repeated MsgCastleFightLog  castle_fight_list = 2;
+}
+
+message DupDropItem
+{
+	optional uint32        template_id     = 1;			//  物品模板ID
+	optional uint32        num             = 2;			//  掉落数量
+}
+
+message DupDrop
+{
+	optional sint32        sprite_idx      = 1;			//	杀了哪些怪
+	repeated DupDropItem   drop_items      = 2;         //  掉落物品
+}
+
+message MsgBattleStartRes
+{
+	optional uint32        friend_hero_pro     = 1;
+	optional MsgHero       friend_hero         = 2;
+	repeated DupDrop       drops               = 3;
+	optional MsgPlayerInfo player_info         = 4;		// 仅包含体力数据
+}
+
+message MsgBattleEndRes
+{
+	optional uint32        star                 = 1;       //    副本评星
+	optional sint64        money                = 2;       //    当前金币
+	optional sint64        soul                 = 3;       //    当前魂值
+	repeated MsgItem       items                = 4;       //    刷新物品
+	repeated MsgHero       heros                = 5;       //    刷新英雄 - 只包含英雄等级经验，不包含身上装备
+	optional sint32        raids_num            = 6;       //    扫荡次数
+	optional uint32        vitality             = 7;       //    当前体力
+	optional fixed32       vitality_base_time   = 8;
+	optional uint32        level                = 9;
+    optional uint32        exp                  = 10;
+}
+
+message MsgAchieveRewardRes
+{
+  optional uint32        achieveid          = 1;
+  optional uint64        money              = 2;
+  optional uint64        rmb                = 3;
+  optional uint64        soul		        = 4;
+  optional uint32        vitality           = 5;
+  optional uint32        guard_templateid   = 6;
+  repeated MsgHero       msg_hero           = 7;
+  repeated MsgItem       msg_item           = 8;
+}
+
+message MsgAchCopmlate
+{
+	optional uint32 achieveid		= 1;
+}
+
+message MsgDefenseUpdateDataRes
+{
+	optional uint32      state             = 1;
+}
+
+message MsgMailBaseData
+{
+	optional fixed64 mail_id         = 1;
+	optional TMailType mail_type     = 2;
+	optional uint32 send_time        = 3;
+	optional string title            = 4;
+}
+
+message MsgMailBaseDataCont
+{
+    optional uint32 mail_total_count  = 1;
+    repeated MsgMailBaseData msg_mail = 2;
+}
+
+message MsgMailAwardItem
+{
+    optional uint32 item_template_id = 1;
+	optional uint32 num = 2;
+}
+message MsgMailDetail
+{
+	optional uint64 mail_id                   = 1;
+	optional uint64 send_pid                  = 2;
+	optional TMailType mail_type              = 3;
+	optional string content                   = 4;
+	optional uint32 money                     = 5;
+	optional uint32 rmb                       = 6;
+	repeated MsgMailAwardItem msg_award_item  = 7;
+}
+
+message MsgMailAward
+{
+	optional uint64   mail_id          = 1;
+    optional uint32   money            = 2;
+    optional uint32   rmb              = 3;
+    repeated MsgItem  msg_item         = 4;
+    repeated MsgHero  msg_hero         = 5;
+	repeated MsgGuard msg_guard        = 6;
+}
+
+
+message MsgMailData
+{
+	optional uint64    mail_id        		 = 1;
+	optional uint64    send_pid       		 = 2;
+	optional TMailType mail_type      		 = 3;
+	optional string    title          		 = 4;
+	optional string    content        		 = 5;
+	optional uint32    send_time      		 = 6;
+	optional uint32    money          		 = 7;
+	optional uint32    rmb                   = 8;
+	repeated MsgMailAwardItem award_items    = 9;
+}
+
+message MsgMailDataCont
+{
+    repeated MsgMailData data_list = 1;
+}
+
+
+// 好友详细信息;
+message MsgFriendData
+{
+	optional fixed64 roleid             = 1;
+	optional string  name 				= 2;
+	optional uint32  level 			    = 3;
+	optional uint32  offline_time       = 4;
+	optional uint32  size               = 5;
+	optional uint32  head_portrait		= 6;
+	optional bool    flag 				= 7;
+}
+
+// 好友基础信息;
+message MsgBaseFriendData
+{
+	optional fixed64 roleid             = 1;
+	optional uint32  level              = 2;
+	optional uint32  offline_time        = 3;
+	optional uint32  size               = 4;
+	optional uint32  head_portrait		= 5;
+}
+
+// 好友列表
+message MsgFriendList
+{
+	repeated MsgFriendData friend_list  = 1;
+}
+// 黑名单列表
+message MsgBlackList
+{
+	repeated MsgFriendData black_list  = 1;
+}
+
+// 好友基础列表;
+message MsgBaseFriendList
+{
+	repeated MsgBaseFriendData friend_list = 1;
+}
+
+// 黑名单基础列表;
+message MsgBaseBlackList
+{
+	repeated MsgBaseFriendData black_list = 1;
+}
+
+// 好友出战列表;添加好友
+message MsgFriendFight
+{
+	optional string   role_name     = 1;
+	optional fixed64  role_id       = 2;
+	optional uint32   role_level    = 3;
+	optional fixed64  hero_id       = 4;
+	optional uint32   hero_template = 5;
+	optional uint32   fight_count   = 6;
+}
+
+message MsgFriendFightList
+{
+	optional uint32          friend_size = 1;
+	repeated MsgFriendFight  fight_list  =  2;
+}
+
+// 角色详细信息;
+message MsgFriendDetails
+{
+	optional uint32   friend_type = 1;
+	optional fixed64  friend_id   = 2;
+	optional uint32   pvp_score   = 3;
+	optional uint32   pvp_ranking = 4;
+	optional uint32   friend_relation = 5;
+	optional string   name		      = 6;
+	optional uint32   level           = 7;
+	optional uint32   head_portrait   = 8;
+}
+
+// 卡片奖励;
+message MsgCardAward
+{
+	optional bool 			  card_free   = 1;
+	optional TRandomCardType  type        = 2;
+	repeated MsgItem          item_info   = 3;
+	repeated MsgHero          hero_info   = 4;
+	repeated uint32           change_id   = 5;
+}
+
+// 抽卡免费次数时间;
+message MsgCardFreeData
+{
+	optional uint32          money_card_count = 1;
+	optional uint32 		 money_card_time  = 2;
+	optional uint32 		 rmb_card_count   = 3;
+	optional uint32          rmb_card_time    = 4;
+}
+
+message MsgReward
+{
+  optional sint64        money              = 1;
+  optional sint64        rmb                = 2;
+  optional sint64        soul               = 3;
+  repeated MsgHero       heros              = 4;
+  repeated MsgItem       items              = 5;
+}
+
+
+// 请求布城全部基础信息;
+message MsgCastleBaseData
+{
+	optional uint32 	map_id  		  = 1;
+	optional uint32     guard_layout_num  = 2;
+	optional uint32 	trap_layout_num   = 3;
+	optional uint32     zone_num		  = 4;
+}
+
+message MsgCastleBaseCont
+{
+	repeated MsgCastleBaseData map_list  = 1;
+}
+
+// 排行数据;
+message MsgRankingInfo
+{
+	optional string          name       = 1;
+	optional uint32          score      = 2;
+	optional uint32          ranking    = 3;
+	optional uint32          size       = 4;
+	optional uint32 		 role_head  = 5;
+	optional fixed64		 roleid     = 6;
+	optional uint32          level 		= 7;
+}
+
+// 排行数据列表;
+message MsgRankingList
+{
+	repeated MsgRankingInfo RankingList = 1;
+}
+
+// 打开玩家界面同步竞技场排行;
+message MsgSyncAreanRank
+{
+	optional uint32          ranking    = 1;
+	optional uint32          pvp_score  = 2;
+}
+
+message MsgVIPBuyCount
+{
+	optional uint32         refresh_time   = 1;
+	optional uint32 		vitality_count = 2;
+	optional uint32         raids_count	   = 3;
+	optional uint32			arena_count	   = 4;
+	optional uint32			castle_count   = 5;
+	optional uint32 		friend_count   = 6;
+}
+
+message MsgGuardOut
+{
+	optional uint32 		refresh_time = 1;
+	optional fixed64        money        = 2;
+	optional fixed64        soul         = 3;
+}
+
+message MsgArenaReward
+{
+	optional fixed64		money        =1;
+	optional fixed64		rmb			 =2;
+}
+
+message MsgRoleMatching
+{
+	optional uint32		zone_id = 1;
+	optional fixed64	role_id = 2;
+	optional string     name    = 3;
+	optional uint32     level   = 4;
+	optional uint32     head   = 5;
+}
+
+message MsgNpcMatching
+{
+	optional uint32      zone_id   = 1;
+	optional uint32      dup_id    = 2;
+	optional uint32      dup_level = 3;
+	optional uint32      dup_type  = 4;
+}
+
+message MsgMatchingList
+{
+	repeated MsgRoleMatching RoleList = 1;
+	repeated MsgNpcMatching	 NpcList  = 2;
+}
+
+message MsgPvEEnterRes
+{
+	optional MsgHero	friend_fight = 1;
+}
+
+message MsgPvELeaveRes
+{
+	repeated MsgItem  item  = 1;
+	repeated MsgHero  hero  = 2;
+	optional uint32   level = 3;
+	optional uint32   exp   = 4;
+	optional uint64   money = 5;
+	optional uint64   soul  = 6;
+	optional uint32   guard = 7;
+}
+
+message MsgBossData
+{
+	optional uint32 		zone_id = 1;
+	optional uint32 		id      = 2;
+	optional string 		grid    = 3;
+	optional uint32 		level   = 4; 
+	repeated MsgMonsterData monster = 5;
+	optional string 		trap    = 6;
+}
+
+message MsgMonsterData
+{
+	optional uint32 id    = 1;
+	optional string grid  = 2;
+	optional uint32 level = 3;
+}
+
+message MsgPvPAttackRes
+{
+	optional uint64  money     = 1;
+	optional uint64  soul      = 2;
+	optional uint32  score     = 3;
+	optional uint32  castle_id = 4;
+	repeated MsgBossData boss  = 5;
+	optional bytes   technology   = 6;
+	optional bytes   defensetools = 7;
+}
+
+message MsgPvPEnterRes
+{
+
+}
+
+message MsgPvPLeaveRes
+{
+	repeated MsgItem item     = 1;
+	repeated MsgHero hero     = 2;
+	optional uint32  level    = 3;
+	optional uint32  exp      = 4;
+	optional uint32  score    = 5;
+	optional uint64  money    = 6;
+	optional uint64  soul  	  = 7;
+	optional uint64  addmoney = 8;
+	optional uint64  addsoul  = 9;
+	optional MsgItem robitem  = 10;
+}
+
+message MsgGrowItemRes
+{
+    optional uint32        grow_idx      = 1;
+    optional MsgPlayerExt  player_ext    = 2;
+}
+message MsgCollectItemRes
+{
+    optional uint32  grow_idx   = 1;
+    repeated MsgItem msg_item   = 2;
+}
+
+message MsgGrowItemDone
+{
+    optional uint32        grow_idx = 1;
+    optional uint64        rmb      = 2;
+}
+
+message MsgDefenseRMBDoneRes
+{
+    optional bytes    defense_tools	= 1;
+    optional uint64   money         = 2;
+    optional uint64   rmb           = 3;
+}
+

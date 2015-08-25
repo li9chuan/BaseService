@@ -1,0 +1,179 @@
+
+Log Starting [2012/12/08 11:03:34]
+2012/12/08 11:03:34 INF  c24 nl_sample_georges.exe path.cpp 936 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath("../share/nel/nl_sample_georges/", not recursive, not alternative): '"../share/nel/nl_sample_georges/"' is not a directory, I'll call addSearchFile()
+2012/12/08 11:03:34 WRN  c24 nl_sample_georges.exe path.cpp 1077 NLMISC::CFileContainer::addSearchFile : PATH: CPath::addSearchFile("../share/nel/nl_sample_georges/", 0, ''): '"../share/nel/nl_sample_georges/"' is not found, skip it (current dir is 'D:/ext/server-0/trunk/server/code/nel/samples/georges'
+2012/12/08 11:04:44 WRN  c24 nl_sample_georges.exe form.cpp 55 NLGEORGES::warning : NeL::Georges (CFormElm::getInternalNodeByName) on node (.) in form (default.sample_config) : Getting the node (.Foobar) : Struct does not contain element named (Foobar).
+2012/12/08 11:04:44 WRN  c24 nl_sample_georges.exe form.cpp 55 NLGEORGES::warning : NeL::Georges (CFormElmStruct::getValueByName) on node () in form (default.sample_config) : Can't find the node (.Foobar).
+2012/12/08 11:04:56 INF  c24 nl_sample_georges.exe main.cpp 180 main : Test Value 1: 1
+2012/12/08 11:04:56 INF  c24 nl_sample_georges.exe main.cpp 181 main : Test Value 2: 2
+2012/12/08 11:04:57 INF  c24 nl_sample_georges.exe main.cpp 182 main : Foo Retrieval was: false
+2012/12/08 11:04:58 INF  c24 nl_sample_georges.exe main.cpp 189 main : Retrieved Position Data (x,y,z): 1, 1, 2
+2012/12/08 11:05:00 INF  c24 nl_sample_georges.exe main.cpp 195 main : TestArray retrieval returned: true
+2012/12/08 11:05:02 INF  c24 nl_sample_georges.exe main.cpp 210 main : Found TestArray atom: Array Val 1
+2012/12/08 11:05:03 INF  c24 nl_sample_georges.exe main.cpp 210 main : Found TestArray atom: Array Val 2
+2012/12/08 11:05:18 INF  c24 nl_sample_georges.exe main.cpp 223 main : Retrieving CoolFilesInfo returned: true
+2012/12/08 11:05:18 INF  c24 nl_sample_georges.exe main.cpp 244 main : Retrieved struct 0: |Tiger Eats Man In One Bite| - Tiger Attack at 55 (9)
+2012/12/08 11:05:18 INF  c24 nl_sample_georges.exe main.cpp 244 main : Retrieved struct 1: |Tiny Car Jumps Bridge Over River| - Crazy Car Jump at 40 (5)
+2012/12/08 11:05:18 INF  c24 nl_sample_georges.exe main.cpp 244 main : Retrieved struct 2: |Nevrax Presents Cool Open Source Contributors Awards| - Nevrax Gives Awards at 1 (1)
+2012/12/08 11:05:18 INF  c24 nl_sample_georges.exe main.cpp 258 main : Bool Backet 1: true, Bool Bracket 2: false
+2012/12/08 11:05:18 INF  c24 nl_sample_georges.exe main.cpp 267 main : Retrieved .CoolFilesInfo[2].Ranking using bracket and dot notation: 1
+2012/12/08 11:05:18 INF  c24 nl_sample_georges.exe main.cpp 268 main : Retrieved .CoolFilesInfo[1].ShortName using bracket and dot notation: Crazy Car Jump
+2012/12/08 11:05:21 INF  c24 nl_sample_georges.exe main.cpp 286 main : Updated WriteVal, it already existed in the form.
+2012/12/08 11:06:04 INF  c24 nl_sample_georges.exe main.cpp 293 main : Saved sample config file.
+2012/12/08 11:06:22 INF  c24 nl_sample_georges.exe main.cpp 310 main : Begin loading packed sheets.
+2012/12/08 11:07:27 WRN  c24 nl_sample_georges.exe file.cpp 265 NLMISC::CIFile::open : Failed to open file 'sample_configs.packed_sheets', error 2 : No such file or directory
+2012/12/08 11:07:28 INF  c24 nl_sample_georges.exe load_form.h 878 loadForm : loadForm(): Loading packed file 'sample_configs.packed_sheets'
+2012/12/08 11:07:32 INF  c24 nl_sample_georges.exe common.cpp 567 NLMISC::Exception::Exception : Exception will be launched: Read error in file 'sample_configs.packed_sheets' (End of file?)
+2012/12/08 11:07:42 INF  c24 nl_sample_georges.exe load_form.h 943 loadForm : loadForm(): Exception during reading the packed file, I'll reconstruct it (Read error in file 'sample_configs.packed_sheets' (End of file?))
+2012/12/08 11:08:57 INF  c24 nl_sample_georges.exe main.cpp 312 main : Number of sheets loaded: 0
+2012/12/08 11:10:17 INF  c24 nl_sample_georges.exe main.cpp 315 main : Load packed sheets using CSheetId and the sheet_id.bin
+2012/12/08 11:10:20 INF  c24 nl_sample_georges.exe sheet_id.cpp 195 NLMISC::CSheetId::loadSheetId : SHEETID: Removed 2 files on 2 from CSheetId because these files don't exist
+2012/12/08 11:10:20 DBG  c24 nl_sample_georges.exe sheet_id.cpp 274 NLMISC::CSheetId::loadSheetId : Finished loading sheet_id.bin: 0 entries read
+2012/12/08 11:10:20 WRN  c24 nl_sample_georges.exe file.cpp 265 NLMISC::CIFile::open : Failed to open file 'sample_configs_sheets.packed_sheets', error 2 : No such file or directory
+2012/12/08 11:10:20 INF  c24 nl_sample_georges.exe common.cpp 573 NLMISC::Exception::Exception : Exception will be launched: can't open PackedSheet sample_configs_sheets.packed_sheets
+2012/12/08 11:10:20 INF  c24 nl_sample_georges.exe load_form.h 219 loadForm : loadForm(): Exception during reading the packed file, I'll reconstruct it (can't open PackedSheet sample_configs_sheets.packed_sheets)
+2012/12/08 11:10:21 INF  c24 nl_sample_georges.exe main.cpp 317 main : Number of sheets loaded with CSheetId's: 0
+
+Log Starting [2012/12/08 11:20:24]
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe path.cpp 936 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath("../share/nel/nl_sample_georges/", not recursive, not alternative): '"../share/nel/nl_sample_georges/"' is not a directory, I'll call addSearchFile()
+2012/12/08 11:20:24 WRN 1320 nl_sample_georges.exe path.cpp 1077 NLMISC::CFileContainer::addSearchFile : PATH: CPath::addSearchFile("../share/nel/nl_sample_georges/", 0, ''): '"../share/nel/nl_sample_georges/"' is not found, skip it (current dir is 'D:/ext/server-0/trunk/server/code/nel/samples/georges'
+2012/12/08 11:20:24 WRN 1320 nl_sample_georges.exe form.cpp 55 NLGEORGES::warning : NeL::Georges (CFormElm::getInternalNodeByName) on node (.) in form (default.sample_config) : Getting the node (.Foobar) : Struct does not contain element named (Foobar).
+2012/12/08 11:20:24 WRN 1320 nl_sample_georges.exe form.cpp 55 NLGEORGES::warning : NeL::Georges (CFormElmStruct::getValueByName) on node () in form (default.sample_config) : Can't find the node (.Foobar).
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 180 main : Test Value 1: 1
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 181 main : Test Value 2: 2
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 182 main : Foo Retrieval was: false
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 189 main : Retrieved Position Data (x,y,z): 1, 1, 2
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 195 main : TestArray retrieval returned: true
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 210 main : Found TestArray atom: Array Val 1
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 210 main : Found TestArray atom: Array Val 2
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 223 main : Retrieving CoolFilesInfo returned: true
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 244 main : Retrieved struct 0: |Tiger Eats Man In One Bite| - Tiger Attack at 55 (9)
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 244 main : Retrieved struct 1: |Tiny Car Jumps Bridge Over River| - Crazy Car Jump at 40 (5)
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 244 main : Retrieved struct 2: |Nevrax Presents Cool Open Source Contributors Awards| - Nevrax Gives Awards at 1 (1)
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 258 main : Bool Backet 1: true, Bool Bracket 2: false
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 267 main : Retrieved .CoolFilesInfo[2].Ranking using bracket and dot notation: 1
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 268 main : Retrieved .CoolFilesInfo[1].ShortName using bracket and dot notation: Crazy Car Jump
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 286 main : Updated WriteVal, it already existed in the form.
+2012/12/08 11:20:24 INF 1320 nl_sample_georges.exe main.cpp 293 main : Saved sample config file.
+2012/12/08 11:20:25 INF 1320 nl_sample_georges.exe main.cpp 310 main : Begin loading packed sheets.
+2012/12/08 11:20:26 WRN 1320 nl_sample_georges.exe file.cpp 265 NLMISC::CIFile::open : Failed to open file 'sample_configs.packed_sheets', error 2 : No such file or directory
+2012/12/08 11:20:26 INF 1320 nl_sample_georges.exe load_form.h 878 loadForm : loadForm(): Loading packed file 'sample_configs.packed_sheets'
+2012/12/08 11:20:26 INF 1320 nl_sample_georges.exe common.cpp 567 NLMISC::Exception::Exception : Exception will be launched: Read error in file 'sample_configs.packed_sheets' (End of file?)
+2012/12/08 11:20:26 INF 1320 nl_sample_georges.exe load_form.h 943 loadForm : loadForm(): Exception during reading the packed file, I'll reconstruct it (Read error in file 'sample_configs.packed_sheets' (End of file?))
+2012/12/08 11:20:26 INF 1320 nl_sample_georges.exe main.cpp 312 main : Number of sheets loaded: 0
+2012/12/08 11:22:18 INF 1320 nl_sample_georges.exe main.cpp 315 main : Load packed sheets using CSheetId and the sheet_id.bin
+2012/12/08 11:23:26 INF 1320 nl_sample_georges.exe sheet_id.cpp 195 NLMISC::CSheetId::loadSheetId : SHEETID: Removed 2 files on 2 from CSheetId because these files don't exist
+2012/12/08 11:23:26 DBG 1320 nl_sample_georges.exe sheet_id.cpp 274 NLMISC::CSheetId::loadSheetId : Finished loading sheet_id.bin: 0 entries read
+2012/12/08 11:23:31 INF 1320 nl_sample_georges.exe common.cpp 567 NLMISC::Exception::Exception : Exception will be launched: In Stream: sample_configs_sheets.packed_sheets: Invalid data format
+
+Log Starting [2012/12/08 13:32:04]
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe path.cpp 936 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath("../share/nel/nl_sample_georges/", not recursive, not alternative): '"../share/nel/nl_sample_georges/"' is not a directory, I'll call addSearchFile()
+2012/12/08 13:32:04 WRN 1028 nl_sample_georges.exe path.cpp 1077 NLMISC::CFileContainer::addSearchFile : PATH: CPath::addSearchFile("../share/nel/nl_sample_georges/", 0, ''): '"../share/nel/nl_sample_georges/"' is not found, skip it (current dir is 'D:/ext/server-0/trunk/server/code/nel/samples/georges'
+2012/12/08 13:32:04 WRN 1028 nl_sample_georges.exe form.cpp 55 NLGEORGES::warning : NeL::Georges (CFormElm::getInternalNodeByName) on node (.) in form (default.sample_config) : Getting the node (.Foobar) : Struct does not contain element named (Foobar).
+2012/12/08 13:32:04 WRN 1028 nl_sample_georges.exe form.cpp 55 NLGEORGES::warning : NeL::Georges (CFormElmStruct::getValueByName) on node () in form (default.sample_config) : Can't find the node (.Foobar).
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 180 main : Test Value 1: 1
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 181 main : Test Value 2: 2
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 182 main : Foo Retrieval was: false
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 189 main : Retrieved Position Data (x,y,z): 1, 1, 2
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 195 main : TestArray retrieval returned: true
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 210 main : Found TestArray atom: Array Val 1
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 210 main : Found TestArray atom: Array Val 2
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 223 main : Retrieving CoolFilesInfo returned: true
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 244 main : Retrieved struct 0: |Tiger Eats Man In One Bite| - Tiger Attack at 55 (9)
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 244 main : Retrieved struct 1: |Tiny Car Jumps Bridge Over River| - Crazy Car Jump at 40 (5)
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 244 main : Retrieved struct 2: |Nevrax Presents Cool Open Source Contributors Awards| - Nevrax Gives Awards at 1 (1)
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 258 main : Bool Backet 1: true, Bool Bracket 2: false
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 267 main : Retrieved .CoolFilesInfo[2].Ranking using bracket and dot notation: 1
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 268 main : Retrieved .CoolFilesInfo[1].ShortName using bracket and dot notation: Crazy Car Jump
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 286 main : Updated WriteVal, it already existed in the form.
+2012/12/08 13:32:04 INF 1028 nl_sample_georges.exe main.cpp 293 main : Saved sample config file.
+2012/12/08 13:32:06 INF 1028 nl_sample_georges.exe main.cpp 310 main : Begin loading packed sheets.
+2012/12/08 13:32:06 INF 1028 nl_sample_georges.exe load_form.h 878 loadForm : loadForm(): Loading packed file 'sample_configs.packed_sheets'
+2012/12/08 13:32:06 INF 1028 nl_sample_georges.exe common.cpp 567 NLMISC::Exception::Exception : Exception will be launched: Read error in file 'sample_configs.packed_sheets' (End of file?)
+2012/12/08 13:32:06 INF 1028 nl_sample_georges.exe load_form.h 943 loadForm : loadForm(): Exception during reading the packed file, I'll reconstruct it (Read error in file 'sample_configs.packed_sheets' (End of file?))
+2012/12/08 13:32:06 DBG 1028 nl_sample_georges.exe load_form.h 968 loadForm : Can't find dependent file  !
+2012/12/08 13:32:06 DBG 1028 nl_sample_georges.exe load_form.h 968 loadForm : Can't find dependent file yp !
+2012/12/08 13:32:06 DBG 1028 nl_sample_georges.exe load_form.h 968 loadForm : Can't find dependent file  !
+2012/12/08 13:32:06 DBG 1028 nl_sample_georges.exe load_form.h 968 loadForm : Can't find dependent file  !
+2012/12/08 13:32:06 DBG 1028 nl_sample_georges.exe load_form.h 968 loadForm : Can't find dependent file  !
+2012/12/08 13:32:06 DBG 1028 nl_sample_georges.exe load_form.h 968 loadForm : Can't find dependent file  !
+2012/12/08 13:32:07 INF 1028 nl_sample_georges.exe main.cpp 312 main : Number of sheets loaded: 0
+2012/12/08 13:33:13 INF 1028 nl_sample_georges.exe main.cpp 315 main : Load packed sheets using CSheetId and the sheet_id.bin
+2012/12/08 13:33:13 INF 1028 nl_sample_georges.exe sheet_id.cpp 195 NLMISC::CSheetId::loadSheetId : SHEETID: Removed 2 files on 2 from CSheetId because these files don't exist
+2012/12/08 13:33:13 DBG 1028 nl_sample_georges.exe sheet_id.cpp 274 NLMISC::CSheetId::loadSheetId : Finished loading sheet_id.bin: 0 entries read
+2012/12/08 13:33:13 WRN 1028 nl_sample_georges.exe file.cpp 265 NLMISC::CIFile::open : Failed to open file 'sample_configs_sheets.packed_sheets', error 2 : No such file or directory
+2012/12/08 13:33:13 INF 1028 nl_sample_georges.exe common.cpp 573 NLMISC::Exception::Exception : Exception will be launched: can't open PackedSheet sample_configs_sheets.packed_sheets
+2012/12/08 13:33:13 INF 1028 nl_sample_georges.exe load_form.h 219 loadForm : loadForm(): Exception during reading the packed file, I'll reconstruct it (can't open PackedSheet sample_configs_sheets.packed_sheets)
+2012/12/08 13:33:14 INF 1028 nl_sample_georges.exe main.cpp 317 main : Number of sheets loaded with CSheetId's: 0
+
+Log Starting [2012/12/08 13:33:32]
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe path.cpp 936 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath("../share/nel/nl_sample_georges/", not recursive, not alternative): '"../share/nel/nl_sample_georges/"' is not a directory, I'll call addSearchFile()
+2012/12/08 13:33:32 WRN   74 nl_sample_georges.exe path.cpp 1077 NLMISC::CFileContainer::addSearchFile : PATH: CPath::addSearchFile("../share/nel/nl_sample_georges/", 0, ''): '"../share/nel/nl_sample_georges/"' is not found, skip it (current dir is 'D:/ext/server-0/trunk/server/code/nel/samples/georges'
+2012/12/08 13:33:32 WRN   74 nl_sample_georges.exe form.cpp 55 NLGEORGES::warning : NeL::Georges (CFormElm::getInternalNodeByName) on node (.) in form (default.sample_config) : Getting the node (.Foobar) : Struct does not contain element named (Foobar).
+2012/12/08 13:33:32 WRN   74 nl_sample_georges.exe form.cpp 55 NLGEORGES::warning : NeL::Georges (CFormElmStruct::getValueByName) on node () in form (default.sample_config) : Can't find the node (.Foobar).
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 180 main : Test Value 1: 1
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 181 main : Test Value 2: 2
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 182 main : Foo Retrieval was: false
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 189 main : Retrieved Position Data (x,y,z): 1, 1, 2
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 195 main : TestArray retrieval returned: true
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 210 main : Found TestArray atom: Array Val 1
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 210 main : Found TestArray atom: Array Val 2
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 223 main : Retrieving CoolFilesInfo returned: true
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 244 main : Retrieved struct 0: |Tiger Eats Man In One Bite| - Tiger Attack at 55 (9)
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 244 main : Retrieved struct 1: |Tiny Car Jumps Bridge Over River| - Crazy Car Jump at 40 (5)
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 244 main : Retrieved struct 2: |Nevrax Presents Cool Open Source Contributors Awards| - Nevrax Gives Awards at 1 (1)
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 258 main : Bool Backet 1: true, Bool Bracket 2: false
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 267 main : Retrieved .CoolFilesInfo[2].Ranking using bracket and dot notation: 1
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 268 main : Retrieved .CoolFilesInfo[1].ShortName using bracket and dot notation: Crazy Car Jump
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 286 main : Updated WriteVal, it already existed in the form.
+2012/12/08 13:33:32 INF   74 nl_sample_georges.exe main.cpp 293 main : Saved sample config file.
+2012/12/08 13:33:33 INF   74 nl_sample_georges.exe main.cpp 310 main : Begin loading packed sheets.
+2012/12/08 13:33:33 WRN   74 nl_sample_georges.exe file.cpp 265 NLMISC::CIFile::open : Failed to open file 'sample_configs.packed_sheets', error 2 : No such file or directory
+2012/12/08 13:33:33 INF   74 nl_sample_georges.exe load_form.h 878 loadForm : loadForm(): Loading packed file 'sample_configs.packed_sheets'
+2012/12/08 13:33:33 INF   74 nl_sample_georges.exe common.cpp 567 NLMISC::Exception::Exception : Exception will be launched: Read error in file 'sample_configs.packed_sheets' (End of file?)
+2012/12/08 13:33:33 INF   74 nl_sample_georges.exe load_form.h 943 loadForm : loadForm(): Exception during reading the packed file, I'll reconstruct it (Read error in file 'sample_configs.packed_sheets' (End of file?))
+2012/12/08 13:33:33 INF   74 nl_sample_georges.exe main.cpp 312 main : Number of sheets loaded: 0
+2012/12/08 13:33:35 INF   74 nl_sample_georges.exe main.cpp 315 main : Load packed sheets using CSheetId and the sheet_id.bin
+2012/12/08 13:33:36 INF   74 nl_sample_georges.exe sheet_id.cpp 195 NLMISC::CSheetId::loadSheetId : SHEETID: Removed 2 files on 2 from CSheetId because these files don't exist
+2012/12/08 13:33:36 DBG   74 nl_sample_georges.exe sheet_id.cpp 274 NLMISC::CSheetId::loadSheetId : Finished loading sheet_id.bin: 0 entries read
+2012/12/08 13:33:36 INF   74 nl_sample_georges.exe common.cpp 567 NLMISC::Exception::Exception : Exception will be launched: stream does not contain at least 256 bytes for check
+2012/12/08 13:33:36 INF   74 nl_sample_georges.exe load_form.h 219 loadForm : loadForm(): Exception during reading the packed file, I'll reconstruct it (stream does not contain at least 256 bytes for check)
+2012/12/08 13:33:36 DBG   74 nl_sample_georges.exe load_form.h 244 loadForm : Can't find dependent file  !
+2012/12/08 13:33:36 DBG   74 nl_sample_georges.exe load_form.h 244 loadForm : Can't find dependent file yp !
+2012/12/08 13:33:36 DBG   74 nl_sample_georges.exe load_form.h 244 loadForm : Can't find dependent file  !
+2012/12/08 13:33:36 DBG   74 nl_sample_georges.exe load_form.h 244 loadForm : Can't find dependent file  !
+2012/12/08 13:33:36 DBG   74 nl_sample_georges.exe load_form.h 244 loadForm : Can't find dependent file  !
+2012/12/08 13:33:36 DBG   74 nl_sample_georges.exe load_form.h 244 loadForm : Can't find dependent file  !
+2012/12/08 13:33:36 INF   74 nl_sample_georges.exe main.cpp 317 main : Number of sheets loaded with CSheetId's: 0
+
+Log Starting [2012/12/08 13:34:04]
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe path.cpp 936 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath("../share/nel/nl_sample_georges/", not recursive, not alternative): '"../share/nel/nl_sample_georges/"' is not a directory, I'll call addSearchFile()
+2012/12/08 13:34:04 WRN  c18 nl_sample_georges.exe path.cpp 1077 NLMISC::CFileContainer::addSearchFile : PATH: CPath::addSearchFile("../share/nel/nl_sample_georges/", 0, ''): '"../share/nel/nl_sample_georges/"' is not found, skip it (current dir is 'D:/ext/server-0/trunk/server/code/nel/samples/georges'
+2012/12/08 13:34:04 WRN  c18 nl_sample_georges.exe form.cpp 55 NLGEORGES::warning : NeL::Georges (CFormElm::getInternalNodeByName) on node (.) in form (default.sample_config) : Getting the node (.Foobar) : Struct does not contain element named (Foobar).
+2012/12/08 13:34:04 WRN  c18 nl_sample_georges.exe form.cpp 55 NLGEORGES::warning : NeL::Georges (CFormElmStruct::getValueByName) on node () in form (default.sample_config) : Can't find the node (.Foobar).
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 180 main : Test Value 1: 1
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 181 main : Test Value 2: 2
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 182 main : Foo Retrieval was: false
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 189 main : Retrieved Position Data (x,y,z): 1, 1, 2
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 195 main : TestArray retrieval returned: true
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 210 main : Found TestArray atom: Array Val 1
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 210 main : Found TestArray atom: Array Val 2
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 223 main : Retrieving CoolFilesInfo returned: true
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 244 main : Retrieved struct 0: |Tiger Eats Man In One Bite| - Tiger Attack at 55 (9)
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 244 main : Retrieved struct 1: |Tiny Car Jumps Bridge Over River| - Crazy Car Jump at 40 (5)
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 244 main : Retrieved struct 2: |Nevrax Presents Cool Open Source Contributors Awards| - Nevrax Gives Awards at 1 (1)
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 258 main : Bool Backet 1: true, Bool Bracket 2: false
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 267 main : Retrieved .CoolFilesInfo[2].Ranking using bracket and dot notation: 1
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 268 main : Retrieved .CoolFilesInfo[1].ShortName using bracket and dot notation: Crazy Car Jump
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 286 main : Updated WriteVal, it already existed in the form.
+2012/12/08 13:34:04 INF  c18 nl_sample_georges.exe main.cpp 293 main : Saved sample config file.
+2012/12/08 13:34:05 INF  c18 nl_sample_georges.exe main.cpp 310 main : Begin loading packed sheets.
+2012/12/08 13:34:05 WRN  c18 nl_sample_georges.exe file.cpp 265 NLMISC::CIFile::open : Failed to open file 'sample_configs.packed_sheets', error 2 : No such file or directory
+2012/12/08 13:34:05 INF  c18 nl_sample_georges.exe load_form.h 878 loadForm : loadForm(): Loading packed file 'sample_configs.packed_sheets'
+2012/12/08 13:34:05 INF  c18 nl_sample_georges.exe common.cpp 567 NLMISC::Exception::Exception : Exception will be launched: Read error in file 'sample_configs.packed_sheets' (End of file?)
+2012/12/08 13:34:05 INF  c18 nl_sample_georges.exe load_form.h 943 loadForm : loadForm(): Exception during reading the packed file, I'll reconstruct it (Read error in file 'sample_configs.packed_sheets' (End of file?))
+2012/12/08 13:34:06 INF  c18 nl_sample_georges.exe main.cpp 312 main : Number of sheets loaded: 0
+2012/12/08 13:34:06 INF  c18 nl_sample_georges.exe main.cpp 315 main : Load packed sheets using CSheetId and the sheet_id.bin
+2012/12/08 13:34:27 INF  c18 nl_sample_georges.exe sheet_id.cpp 195 NLMISC::CSheetId::loadSheetId : SHEETID: Removed 2 files on 2 from CSheetId because these files don't exist
+2012/12/08 13:34:27 DBG  c18 nl_sample_georges.exe sheet_id.cpp 274 NLMISC::CSheetId::loadSheetId : Finished loading sheet_id.bin: 0 entries read
+2012/12/08 13:35:05 INF  c18 nl_sample_georges.exe common.cpp 567 NLMISC::Exception::Exception : Exception will be launched: stream does not contain at least 256 bytes for check

@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<FORM Revision="$Revision$" State="modified">
+  <STRUCT>
+    <STRUCT Name="item">
+      <ATOM Name="id" Value="1003"/>
+      <ATOM Name="family" Value="SOLDIER"/>
+    </STRUCT>
+    <ARRAY Name="attrib">
+      <STRUCT>
+        <ATOM Name="type" Value="POWER"/>
+        <ATOM Name="value" Value="500"/>
+        <ATOM Name="save" Value="1"/>
+      </STRUCT>
+      <STRUCT>
+        <ATOM Name="type" Value="POWER_MAX"/>
+        <ATOM Name="value" Value="1000"/>
+      </STRUCT>
+    </ARRAY>
+  </STRUCT>
+  <STRUCT>
+    <STRUCT Name="item">
+      <ATOM Name="id" Value="1003"/>
+      <ATOM Name="family" Value="SOLDIER"/>
+    </STRUCT>
+    <ARRAY Name="attrib">
+      <STRUCT>
+        <ATOM Name="type" Value="POWER"/>
+        <ATOM Name="value" Value="500"/>
+        <ATOM Name="save" Value="1"/>
+      </STRUCT>
+      <STRUCT>
+        <ATOM Name="type" Value="POWER_MAX"/>
+        <ATOM Name="value" Value="1000"/>
+      </STRUCT>
+    </ARRAY>
+  </STRUCT>
+  <STRUCT>
+    <STRUCT Name="item">
+      <ATOM Name="id" Value="1003"/>
+      <ATOM Name="family" Value="SOLDIER"/>
+    </STRUCT>
+    <ARRAY Name="attrib">
+      <STRUCT>
+        <ATOM Name="type" Value="POWER"/>
+        <ATOM Name="value" Value="500"/>
+        <ATOM Name="save" Value="1"/>
+      </STRUCT>
+      <STRUCT>
+        <ATOM Name="type" Value="POWER_MAX"/>
+        <ATOM Name="value" Value="1000"/>
+      </STRUCT>
+    </ARRAY>
+  </STRUCT>
+  <STRUCT>
+    <STRUCT Name="item">
+      <ATOM Name="id" Value="1003"/>
+      <ATOM Name="family" Value="SOLDIER"/>
+    </STRUCT>
+    <ARRAY Name="attrib">
+      <STRUCT>
+        <ATOM Name="type" Value="POWER"/>
+        <ATOM Name="value" Value="500"/>
+        <ATOM Name="save" Value="1"/>
+      </STRUCT>
+      <STRUCT>
+        <ATOM Name="type" Value="POWER_MAX"/>
+        <ATOM Name="value" Value="1000"/>
+      </STRUCT>
+    </ARRAY>
+  </STRUCT>
+  <STRUCT>
+    <STRUCT Name="item">
+      <ATOM Name="id" Value="1003"/>
+      <ATOM Name="family" Value="SOLDIER"/>
+    </STRUCT>
+    <ARRAY Name="attrib">
+      <STRUCT>
+        <ATOM Name="type" Value="POWER"/>
+        <ATOM Name="value" Value="500"/>
+        <ATOM Name="save" Value="1"/>
+      </STRUCT>
+      <STRUCT>
+        <ATOM Name="type" Value="POWER_MAX"/>
+        <ATOM Name="value" Value="1000"/>
+      </STRUCT>
+    </ARRAY>
+  </STRUCT>
+  <LOG>Tue Sep 24 21:00:57 2013 (new) .attrib[0].save = 1
+Tue Sep 24 21:00:57 2013 (new) .attrib[0].type = POWER
+Tue Sep 24 21:00:57 2013 (new) .attrib[0].value = 500
+Tue Sep 24 21:00:57 2013 (new) .attrib[1].type = POWER_MAX
+Tue Sep 24 21:00:57 2013 (new) .attrib[1].value = 1000
+Tue Sep 24 21:00:57 2013 (new) .item.family = SOLDIER
+Tue Sep 24 21:00:57 2013 (new) .item.id = 1003
+Tue Sep 24 21:00:57 2013 (new) formName Resized = 2
+Wed Sep 25 11:32:42 2013 (new) .attrib[0].type = POWER
+Wed Sep 25 11:32:42 2013 (new) .attrib[0].value = 500
+Wed Sep 25 11:32:42 2013 (new) .item.family = SOLDIER
+Wed Sep 25 11:32:42 2013 (new) .item.id = 1004
+Wed Sep 25 11:32:42 2013 (new) formName Resized = 1
+Wed Sep 25 11:34:14 2013 (new) .item.id = 3
+Wed Sep 25 11:39:10 2013 (new) .item.id = 2</LOG>
+</FORM>

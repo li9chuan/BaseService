@@ -1,0 +1,203 @@
+
+Log Starting [2015/03/31 11:15:55]
+2015/03/31 11:15:55 INF 2acc tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:15:55 DBG 2acc tools_test.exe test_misc.cpp 270 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:15:55 DBG 2acc tools_test.exe test_misc.cpp 277 functionCall : Function call: 99
+
+Log Starting [2015/03/31 11:16:58]
+2015/03/31 11:16:58 INF 1df8 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:16:58 DBG 1df8 tools_test.exe test_misc.cpp 270 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:16:58 DBG 1df8 tools_test.exe test_misc.cpp 277 functionCall : Function call: 99
+
+Log Starting [2015/03/31 11:17:28]
+2015/03/31 11:17:28 INF 2a28 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:17:28 DBG 2a28 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:17:28 DBG 2a28 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:17:28 WRN 2a28 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:17:28
+
+Log Starting [2015/03/31 11:17:55]
+2015/03/31 11:17:55 INF 2fe8 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:17:55 DBG 2fe8 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:17:55 DBG 2fe8 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:18:12 WRN 2fe8 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:18:01
+
+Log Starting [2015/03/31 11:18:45]
+2015/03/31 11:18:45 INF 2fa8 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:18:45 DBG 2fa8 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:18:45 DBG 2fa8 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+
+Log Starting [2015/03/31 11:19:04]
+2015/03/31 11:19:04 INF 175c tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:19:04 DBG 175c tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:19:04 DBG 175c tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:19:13 WRN 175c tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:19:11
+
+Log Starting [2015/03/31 11:19:39]
+2015/03/31 11:19:39 INF 2c88 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:19:39 DBG 2c88 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:19:39 DBG 2c88 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:19:46 WRN 2c88 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:19:43
+
+Log Starting [2015/03/31 11:20:58]
+2015/03/31 11:20:58 INF 1d10 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:20:58 DBG 1d10 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:20:58 DBG 1d10 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:21:01 WRN 1d10 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:21:01
+
+Log Starting [2015/03/31 11:21:34]
+2015/03/31 11:21:34 INF 1674 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:21:34 DBG 1674 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:21:34 DBG 1674 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:21:38 WRN 1674 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:21:38
+
+Log Starting [2015/03/31 11:22:07]
+2015/03/31 11:22:07 INF 2f0c tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:22:07 DBG 2f0c tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:22:07 DBG 2f0c tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:22:16 WRN 2f0c tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:22:14
+
+Log Starting [2015/03/31 11:22:27]
+2015/03/31 11:22:27 INF 1f04 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:22:27 DBG 1f04 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:22:27 DBG 1f04 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:22:37 WRN 1f04 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:22:37
+
+Log Starting [2015/03/31 11:22:45]
+2015/03/31 11:22:45 INF  d34 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:22:45 DBG  d34 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:22:45 DBG  d34 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:22:51 WRN  d34 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:22:50
+
+Log Starting [2015/03/31 11:23:58]
+2015/03/31 11:23:58 INF 10c0 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:23:58 DBG 10c0 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:23:58 DBG 10c0 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:24:14 WRN 10c0 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:24:11
+
+Log Starting [2015/03/31 11:24:25]
+2015/03/31 11:24:25 INF 2d5c tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:24:25 DBG 2d5c tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:24:25 DBG 2d5c tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:24:31 WRN 2d5c tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:24:29
+
+Log Starting [2015/03/31 11:26:08]
+2015/03/31 11:26:08 INF 1194 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:26:08 DBG 1194 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:26:08 DBG 1194 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:26:14 WRN 1194 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:26:11
+
+Log Starting [2015/03/31 11:26:34]
+2015/03/31 11:26:34 INF 2af4 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:26:34 DBG 2af4 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:26:34 DBG 2af4 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:26:35 WRN 2af4 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:26:35
+2015/03/31 11:26:35 AST 2af4 tools_test.exe smart_ptr_inline.h 41 NLMISC::CRefCount::~CRefCount : "crefs==0" 
+-------------------------------
+
+Log with no filter:
+-------------------------------
+
+Log Starting [2015/03/31 11:26:34]
+2015/03/31 11:26:34 tools_test.exe INF  2af4 path.cpp 1021 : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:26:34 tools_test.exe DBG  2af4 test_misc.cpp 269 : Method call: 100, 42
+2015/03/31 11:26:34 tools_test.exe DBG  2af4 test_misc.cpp 276 : Function call: 99
+2015/03/31 11:26:35 tools_test.exe WRN  2af4 timer.h 398 : Set Timer Fail .  2015/03/31 11:26:35
+2015/03/31 11:26:35 tools_test.exe AST  2af4 smart_ptr_inline.h 41 : "crefs==0" 
+-------------------------------
+
+Log Starting [2015/03/31 11:28:06]
+2015/03/31 11:28:06 INF 1fdc tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:28:06 DBG 1fdc tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:28:06 DBG 1fdc tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:28:07 WRN 1fdc tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:28:07
+
+Log Starting [2015/03/31 11:28:35]
+2015/03/31 11:28:35 INF 2f14 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:28:35 DBG 2f14 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:28:35 DBG 2f14 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:28:36 WRN 2f14 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:28:36
+
+Log Starting [2015/03/31 11:29:08]
+2015/03/31 11:29:08 INF 21b8 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:29:08 DBG 21b8 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:29:08 DBG 21b8 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:29:09 WRN 21b8 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:29:09
+
+Log Starting [2015/03/31 11:29:15]
+2015/03/31 11:29:15 INF 29b0 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:29:15 DBG 29b0 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:29:15 DBG 29b0 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:29:16 WRN 29b0 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:29:16
+
+Log Starting [2015/03/31 11:30:58]
+2015/03/31 11:30:58 INF  8e8 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:30:58 DBG  8e8 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:30:58 DBG  8e8 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+
+Log Starting [2015/03/31 11:31:20]
+2015/03/31 11:31:20 INF 1df8 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:31:20 DBG 1df8 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:31:20 DBG 1df8 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:31:20 WRN 1df8 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:31:20
+
+Log Starting [2015/03/31 11:33:26]
+2015/03/31 11:33:26 INF  bb4 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:33:26 DBG  bb4 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:33:26 DBG  bb4 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:33:27 WRN  bb4 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:33:27
+
+Log Starting [2015/03/31 11:37:18]
+2015/03/31 11:37:18 INF  678 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:37:18 DBG  678 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:37:18 DBG  678 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:37:18 WRN  678 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:37:18
+
+Log Starting [2015/03/31 11:37:33]
+2015/03/31 11:37:33 INF 297c tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:37:33 DBG 297c tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:37:33 DBG 297c tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:37:34 WRN 297c tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:37:34
+2015/03/31 11:37:34 AST 297c tools_test.exe smart_ptr_inline.h 41 NLMISC::CRefCount::~CRefCount : "crefs==0" 
+-------------------------------
+
+Log with no filter:
+-------------------------------
+
+Log Starting [2015/03/31 11:37:33]
+2015/03/31 11:37:33 tools_test.exe INF  297c path.cpp 1021 : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:37:33 tools_test.exe DBG  297c test_misc.cpp 269 : Method call: 100, 42
+2015/03/31 11:37:33 tools_test.exe DBG  297c test_misc.cpp 276 : Function call: 99
+2015/03/31 11:37:34 tools_test.exe WRN  297c timer.h 398 : Set Timer Fail .  2015/03/31 11:37:34
+2015/03/31 11:37:34 tools_test.exe AST  297c smart_ptr_inline.h 41 : "crefs==0" 
+-------------------------------
+
+Log Starting [2015/03/31 11:37:57]
+2015/03/31 11:37:57 INF 2c98 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:37:57 DBG 2c98 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:37:57 DBG 2c98 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:37:57 WRN 2c98 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:37:57
+2015/03/31 11:37:57 AST 2c98 tools_test.exe smart_ptr_inline.h 41 NLMISC::CRefCount::~CRefCount : "crefs==0" 
+-------------------------------
+
+Log with no filter:
+-------------------------------
+
+Log Starting [2015/03/31 11:37:57]
+2015/03/31 11:37:57 tools_test.exe INF  2c98 path.cpp 1021 : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:37:57 tools_test.exe DBG  2c98 test_misc.cpp 269 : Method call: 100, 42
+2015/03/31 11:37:57 tools_test.exe DBG  2c98 test_misc.cpp 276 : Function call: 99
+2015/03/31 11:37:57 tools_test.exe WRN  2c98 timer.h 398 : Set Timer Fail .  2015/03/31 11:37:57
+2015/03/31 11:37:57 tools_test.exe AST  2c98 smart_ptr_inline.h 41 : "crefs==0" 
+-------------------------------
+
+Log Starting [2015/03/31 11:40:19]
+2015/03/31 11:40:19 INF 2ec0 tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:40:19 DBG 2ec0 tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:40:19 DBG 2ec0 tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:40:20 WRN 2ec0 tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:40:20
+
+Log Starting [2015/03/31 11:41:38]
+2015/03/31 11:41:38 INF 124c tools_test.exe path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(., 0, 1): adding the path './'
+2015/03/31 11:41:38 DBG 124c tools_test.exe test_misc.cpp 269 CTestClass::helloWorld : Method call: 100, 42
+2015/03/31 11:41:38 DBG 124c tools_test.exe test_misc.cpp 276 functionCall : Function call: 99
+2015/03/31 11:41:39 WRN 124c tools_test.exe timer.h 398 CTimer::setTime : Set Timer Fail .  2015/03/31 11:41:39

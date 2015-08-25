@@ -1,0 +1,19 @@
+package ATTRIB_TYPE;
+
+enum TAttribType
+{
+	INVALID_VAL                       = -1;
+	INVALID                           =	0;
+
+	ID	=	2001001	;
+	LEVEL_UP_EXP_INT	=	2001002	;
+	NAME_STRING	=	2001003	;
+	LIFE_INT	=	2001004	;
+	LIFE_CURR_INT	=	2001005	;
+
+};
+
+
+
+
+

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<FORM Revision="$Revision$" State="modified">
+  <STRUCT>
+    <ATOM Name="weight" Value="100"/>
+    <ATOM Name="height" Value="100"/>
+    <ARRAY Name="build_pos">
+      <STRUCT>
+        <ATOM Name="x" Value="10"/>
+        <ATOM Name="y" Value="10"/>
+      </STRUCT>
+      <STRUCT>
+        <ATOM Name="x" Value="20"/>
+        <ATOM Name="y" Value="20"/>
+      </STRUCT>
+    </ARRAY>
+  </STRUCT>
+  <STRUCT/>
+  <STRUCT/>
+  <STRUCT/>
+  <STRUCT/>
+  <LOG></LOG>
+</FORM>
