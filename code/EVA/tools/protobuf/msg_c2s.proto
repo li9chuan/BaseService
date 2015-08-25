@@ -35,5 +35,10 @@ message MsgID32
 	optional uint32    id         = 1;
 }
 
-
+message MsgChat
+{
+	optional string    text = 1;
+	optional uint64    pid  = 2;
+	optional string    name = 3;
+}
 

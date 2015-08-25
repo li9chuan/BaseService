@@ -1,6 +1,6 @@
 /*
 ** Lua binding: base
-** Generated automatically by tolua++-1.0.92 on 05/12/15 17:37:46.
+** Generated automatically by tolua++-1.0.92 on 08/25/15 15:39:49.
 */
 
 #ifndef __cplusplus
@@ -131,6 +131,7 @@ TOLUA_API int tolua_base_open (lua_State* tolua_S)
   tolua_constant(tolua_S,"PWD_ERROR",PWD_ERROR);
   tolua_constant(tolua_S,"PLAYER_ONLINE_TO_FES",PLAYER_ONLINE_TO_FES);
   tolua_constant(tolua_S,"PLAYER_EXISTS",PLAYER_EXISTS);
+  tolua_constant(tolua_S,"PLAYER_RELOAD",PLAYER_RELOAD);
   tolua_constant(tolua_S,"SUCESS",SUCESS);
   tolua_constant(tolua_S,"NO_AUTH_TYPE",NO_AUTH_TYPE);
   tolua_constant(tolua_S,"CONFIG_NOT_FOUND",CONFIG_NOT_FOUND);

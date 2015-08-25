@@ -32,7 +32,8 @@ void protobuf_AssignDesc_msg_5fplayer_2eproto() {
       "msg_player.proto");
   GOOGLE_CHECK(file != NULL);
   MsgPlayerInfo_descriptor_ = file->message_type(0);
-  static const int MsgPlayerInfo_offsets_[6] = {
+  static const int MsgPlayerInfo_offsets_[7] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MsgPlayerInfo, pid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MsgPlayerInfo, name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MsgPlayerInfo, sex_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MsgPlayerInfo, level_),
@@ -84,10 +85,10 @@ void protobuf_AddDesc_msg_5fplayer_2eproto() {
   ::ATTRIB_TYPE::protobuf_AddDesc_define_5fattrib_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\020msg_player.proto\032\020define_pro.proto\032\023de"
-    "fine_attrib.proto\"s\n\rMsgPlayerInfo\022\014\n\004na"
-    "me\030\001 \001(\t\022\025\n\003sex\030\002 \001(\0162\010.TGender\022\r\n\005level"
-    "\030\003 \001(\r\022\013\n\003exp\030\004 \001(\r\022\022\n\npve_dup_id\030\005 \001(\r\022"
-    "\r\n\005money\030\006 \001(\022", 174);
+    "fine_attrib.proto\"\200\001\n\rMsgPlayerInfo\022\013\n\003p"
+    "id\030\001 \001(\004\022\014\n\004name\030\002 \001(\t\022\025\n\003sex\030\003 \001(\0162\010.TG"
+    "ender\022\r\n\005level\030\004 \001(\r\022\013\n\003exp\030\005 \001(\r\022\022\n\npve"
+    "_dup_id\030\006 \001(\r\022\r\n\005money\030\007 \001(\022", 188);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "msg_player.proto", &protobuf_RegisterTypes);
   MsgPlayerInfo::default_instance_ = new MsgPlayerInfo();
@@ -105,6 +106,7 @@ struct StaticDescriptorInitializer_msg_5fplayer_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int MsgPlayerInfo::kPidFieldNumber;
 const int MsgPlayerInfo::kNameFieldNumber;
 const int MsgPlayerInfo::kSexFieldNumber;
 const int MsgPlayerInfo::kLevelFieldNumber;
@@ -132,6 +134,7 @@ MsgPlayerInfo::MsgPlayerInfo(const MsgPlayerInfo& from)
 void MsgPlayerInfo::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
+  pid_ = GOOGLE_ULONGLONG(0);
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   sex_ = 1;
   level_ = 0u;
@@ -186,8 +189,9 @@ void MsgPlayerInfo::Clear() {
     ::memset(&first, 0, n);                                \
   } while (0)
 
-  if (_has_bits_[0 / 32] & 63) {
+  if (_has_bits_[0 / 32] & 127) {
     ZR_(level_, money_);
+    pid_ = GOOGLE_ULONGLONG(0);
     if (has_name()) {
       if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
         name_->clear();
@@ -213,9 +217,24 @@ bool MsgPlayerInfo::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string name = 1;
+      // optional uint64 pid = 1;
       case 1: {
-        if (tag == 10) {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &pid_)));
+          set_has_pid();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_name;
+        break;
+      }
+
+      // optional string name = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_name:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_name()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -225,13 +244,13 @@ bool MsgPlayerInfo::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_sex;
+        if (input->ExpectTag(24)) goto parse_sex;
         break;
       }
 
-      // optional .TGender sex = 2;
-      case 2: {
-        if (tag == 16) {
+      // optional .TGender sex = 3;
+      case 3: {
+        if (tag == 24) {
          parse_sex:
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
@@ -240,18 +259,18 @@ bool MsgPlayerInfo::MergePartialFromCodedStream(
           if (::TGender_IsValid(value)) {
             set_sex(static_cast< ::TGender >(value));
           } else {
-            mutable_unknown_fields()->AddVarint(2, value);
+            mutable_unknown_fields()->AddVarint(3, value);
           }
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(24)) goto parse_level;
+        if (input->ExpectTag(32)) goto parse_level;
         break;
       }
 
-      // optional uint32 level = 3;
-      case 3: {
-        if (tag == 24) {
+      // optional uint32 level = 4;
+      case 4: {
+        if (tag == 32) {
          parse_level:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
@@ -260,13 +279,13 @@ bool MsgPlayerInfo::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(32)) goto parse_exp;
+        if (input->ExpectTag(40)) goto parse_exp;
         break;
       }
 
-      // optional uint32 exp = 4;
-      case 4: {
-        if (tag == 32) {
+      // optional uint32 exp = 5;
+      case 5: {
+        if (tag == 40) {
          parse_exp:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
@@ -275,13 +294,13 @@ bool MsgPlayerInfo::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(40)) goto parse_pve_dup_id;
+        if (input->ExpectTag(48)) goto parse_pve_dup_id;
         break;
       }
 
-      // optional uint32 pve_dup_id = 5;
-      case 5: {
-        if (tag == 40) {
+      // optional uint32 pve_dup_id = 6;
+      case 6: {
+        if (tag == 48) {
          parse_pve_dup_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
@@ -290,13 +309,13 @@ bool MsgPlayerInfo::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(48)) goto parse_money;
+        if (input->ExpectTag(56)) goto parse_money;
         break;
       }
 
-      // optional sint64 money = 6;
-      case 6: {
-        if (tag == 48) {
+      // optional sint64 money = 7;
+      case 7: {
+        if (tag == 56) {
          parse_money:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_SINT64>(
@@ -334,40 +353,45 @@ failure:
 void MsgPlayerInfo::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:MsgPlayerInfo)
-  // optional string name = 1;
+  // optional uint64 pid = 1;
+  if (has_pid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->pid(), output);
+  }
+
+  // optional string name = 2;
   if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->name().data(), this->name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->name(), output);
+      2, this->name(), output);
   }
 
-  // optional .TGender sex = 2;
+  // optional .TGender sex = 3;
   if (has_sex()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      2, this->sex(), output);
+      3, this->sex(), output);
   }
 
-  // optional uint32 level = 3;
+  // optional uint32 level = 4;
   if (has_level()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->level(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->level(), output);
   }
 
-  // optional uint32 exp = 4;
+  // optional uint32 exp = 5;
   if (has_exp()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->exp(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(5, this->exp(), output);
   }
 
-  // optional uint32 pve_dup_id = 5;
+  // optional uint32 pve_dup_id = 6;
   if (has_pve_dup_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(5, this->pve_dup_id(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(6, this->pve_dup_id(), output);
   }
 
-  // optional sint64 money = 6;
+  // optional sint64 money = 7;
   if (has_money()) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt64(6, this->money(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteSInt64(7, this->money(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -380,7 +404,12 @@ void MsgPlayerInfo::SerializeWithCachedSizes(
 ::google::protobuf::uint8* MsgPlayerInfo::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:MsgPlayerInfo)
-  // optional string name = 1;
+  // optional uint64 pid = 1;
+  if (has_pid()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->pid(), target);
+  }
+
+  // optional string name = 2;
   if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->name().data(), this->name().length(),
@@ -388,33 +417,33 @@ void MsgPlayerInfo::SerializeWithCachedSizes(
       "name");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->name(), target);
+        2, this->name(), target);
   }
 
-  // optional .TGender sex = 2;
+  // optional .TGender sex = 3;
   if (has_sex()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      2, this->sex(), target);
+      3, this->sex(), target);
   }
 
-  // optional uint32 level = 3;
+  // optional uint32 level = 4;
   if (has_level()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->level(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(4, this->level(), target);
   }
 
-  // optional uint32 exp = 4;
+  // optional uint32 exp = 5;
   if (has_exp()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(4, this->exp(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(5, this->exp(), target);
   }
 
-  // optional uint32 pve_dup_id = 5;
+  // optional uint32 pve_dup_id = 6;
   if (has_pve_dup_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(5, this->pve_dup_id(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(6, this->pve_dup_id(), target);
   }
 
-  // optional sint64 money = 6;
+  // optional sint64 money = 7;
   if (has_money()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt64ToArray(6, this->money(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteSInt64ToArray(7, this->money(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -429,41 +458,48 @@ int MsgPlayerInfo::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional string name = 1;
+    // optional uint64 pid = 1;
+    if (has_pid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt64Size(
+          this->pid());
+    }
+
+    // optional string name = 2;
     if (has_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->name());
     }
 
-    // optional .TGender sex = 2;
+    // optional .TGender sex = 3;
     if (has_sex()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->sex());
     }
 
-    // optional uint32 level = 3;
+    // optional uint32 level = 4;
     if (has_level()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt32Size(
           this->level());
     }
 
-    // optional uint32 exp = 4;
+    // optional uint32 exp = 5;
     if (has_exp()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt32Size(
           this->exp());
     }
 
-    // optional uint32 pve_dup_id = 5;
+    // optional uint32 pve_dup_id = 6;
     if (has_pve_dup_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt32Size(
           this->pve_dup_id());
     }
 
-    // optional sint64 money = 6;
+    // optional sint64 money = 7;
     if (has_money()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::SInt64Size(
@@ -497,6 +533,9 @@ void MsgPlayerInfo::MergeFrom(const ::google::protobuf::Message& from) {
 void MsgPlayerInfo::MergeFrom(const MsgPlayerInfo& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_pid()) {
+      set_pid(from.pid());
+    }
     if (from.has_name()) {
       set_name(from.name());
     }
@@ -538,6 +577,7 @@ bool MsgPlayerInfo::IsInitialized() const {
 
 void MsgPlayerInfo::Swap(MsgPlayerInfo* other) {
   if (other != this) {
+    std::swap(pid_, other->pid_);
     std::swap(name_, other->name_);
     std::swap(sex_, other->sex_);
     std::swap(level_, other->level_);

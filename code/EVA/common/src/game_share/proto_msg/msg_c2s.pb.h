@@ -39,6 +39,7 @@ class MsgCreatePlayer;
 class MsgLoadPlayer;
 class MsgDBID;
 class MsgID32;
+class MsgChat;
 
 // ===================================================================
 
@@ -574,6 +575,115 @@ class MsgID32 : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static MsgID32* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class MsgChat : public ::google::protobuf::Message {
+ public:
+  MsgChat();
+  virtual ~MsgChat();
+
+  MsgChat(const MsgChat& from);
+
+  inline MsgChat& operator=(const MsgChat& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MsgChat& default_instance();
+
+  void Swap(MsgChat* other);
+
+  // implements Message ----------------------------------------------
+
+  MsgChat* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MsgChat& from);
+  void MergeFrom(const MsgChat& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string text = 1;
+  inline bool has_text() const;
+  inline void clear_text();
+  static const int kTextFieldNumber = 1;
+  inline const ::std::string& text() const;
+  inline void set_text(const ::std::string& value);
+  inline void set_text(const char* value);
+  inline void set_text(const char* value, size_t size);
+  inline ::std::string* mutable_text();
+  inline ::std::string* release_text();
+  inline void set_allocated_text(::std::string* text);
+
+  // optional uint64 pid = 2;
+  inline bool has_pid() const;
+  inline void clear_pid();
+  static const int kPidFieldNumber = 2;
+  inline ::google::protobuf::uint64 pid() const;
+  inline void set_pid(::google::protobuf::uint64 value);
+
+  // optional string name = 3;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 3;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const char* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  inline void set_allocated_name(::std::string* name);
+
+  // @@protoc_insertion_point(class_scope:MsgChat)
+ private:
+  inline void set_has_text();
+  inline void clear_has_text();
+  inline void set_has_pid();
+  inline void clear_has_pid();
+  inline void set_has_name();
+  inline void clear_has_name();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* text_;
+  ::google::protobuf::uint64 pid_;
+  ::std::string* name_;
+  friend void  protobuf_AddDesc_msg_5fc2s_2eproto();
+  friend void protobuf_AssignDesc_msg_5fc2s_2eproto();
+  friend void protobuf_ShutdownFile_msg_5fc2s_2eproto();
+
+  void InitAsDefaultInstance();
+  static MsgChat* default_instance_;
+};
 // ===================================================================
 
 
@@ -1048,6 +1158,186 @@ inline void MsgID32::set_id(::google::protobuf::uint32 value) {
   set_has_id();
   id_ = value;
   // @@protoc_insertion_point(field_set:MsgID32.id)
+}
+
+// -------------------------------------------------------------------
+
+// MsgChat
+
+// optional string text = 1;
+inline bool MsgChat::has_text() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void MsgChat::set_has_text() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void MsgChat::clear_has_text() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void MsgChat::clear_text() {
+  if (text_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    text_->clear();
+  }
+  clear_has_text();
+}
+inline const ::std::string& MsgChat::text() const {
+  // @@protoc_insertion_point(field_get:MsgChat.text)
+  return *text_;
+}
+inline void MsgChat::set_text(const ::std::string& value) {
+  set_has_text();
+  if (text_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    text_ = new ::std::string;
+  }
+  text_->assign(value);
+  // @@protoc_insertion_point(field_set:MsgChat.text)
+}
+inline void MsgChat::set_text(const char* value) {
+  set_has_text();
+  if (text_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    text_ = new ::std::string;
+  }
+  text_->assign(value);
+  // @@protoc_insertion_point(field_set_char:MsgChat.text)
+}
+inline void MsgChat::set_text(const char* value, size_t size) {
+  set_has_text();
+  if (text_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    text_ = new ::std::string;
+  }
+  text_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:MsgChat.text)
+}
+inline ::std::string* MsgChat::mutable_text() {
+  set_has_text();
+  if (text_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    text_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:MsgChat.text)
+  return text_;
+}
+inline ::std::string* MsgChat::release_text() {
+  clear_has_text();
+  if (text_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = text_;
+    text_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void MsgChat::set_allocated_text(::std::string* text) {
+  if (text_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete text_;
+  }
+  if (text) {
+    set_has_text();
+    text_ = text;
+  } else {
+    clear_has_text();
+    text_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:MsgChat.text)
+}
+
+// optional uint64 pid = 2;
+inline bool MsgChat::has_pid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MsgChat::set_has_pid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MsgChat::clear_has_pid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void MsgChat::clear_pid() {
+  pid_ = GOOGLE_ULONGLONG(0);
+  clear_has_pid();
+}
+inline ::google::protobuf::uint64 MsgChat::pid() const {
+  // @@protoc_insertion_point(field_get:MsgChat.pid)
+  return pid_;
+}
+inline void MsgChat::set_pid(::google::protobuf::uint64 value) {
+  set_has_pid();
+  pid_ = value;
+  // @@protoc_insertion_point(field_set:MsgChat.pid)
+}
+
+// optional string name = 3;
+inline bool MsgChat::has_name() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void MsgChat::set_has_name() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void MsgChat::clear_has_name() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void MsgChat::clear_name() {
+  if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    name_->clear();
+  }
+  clear_has_name();
+}
+inline const ::std::string& MsgChat::name() const {
+  // @@protoc_insertion_point(field_get:MsgChat.name)
+  return *name_;
+}
+inline void MsgChat::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+  // @@protoc_insertion_point(field_set:MsgChat.name)
+}
+inline void MsgChat::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+  // @@protoc_insertion_point(field_set_char:MsgChat.name)
+}
+inline void MsgChat::set_name(const char* value, size_t size) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:MsgChat.name)
+}
+inline ::std::string* MsgChat::mutable_name() {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    name_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:MsgChat.name)
+  return name_;
+}
+inline ::std::string* MsgChat::release_name() {
+  clear_has_name();
+  if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void MsgChat::set_allocated_name(::std::string* name) {
+  if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete name_;
+  }
+  if (name) {
+    set_has_name();
+    name_ = name;
+  } else {
+    clear_has_name();
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:MsgChat.name)
 }
 
 

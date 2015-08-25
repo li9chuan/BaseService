@@ -90,10 +90,17 @@ class MsgPlayerInfo : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional string name = 1;
+  // optional uint64 pid = 1;
+  inline bool has_pid() const;
+  inline void clear_pid();
+  static const int kPidFieldNumber = 1;
+  inline ::google::protobuf::uint64 pid() const;
+  inline void set_pid(::google::protobuf::uint64 value);
+
+  // optional string name = 2;
   inline bool has_name() const;
   inline void clear_name();
-  static const int kNameFieldNumber = 1;
+  static const int kNameFieldNumber = 2;
   inline const ::std::string& name() const;
   inline void set_name(const ::std::string& value);
   inline void set_name(const char* value);
@@ -102,43 +109,45 @@ class MsgPlayerInfo : public ::google::protobuf::Message {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
-  // optional .TGender sex = 2;
+  // optional .TGender sex = 3;
   inline bool has_sex() const;
   inline void clear_sex();
-  static const int kSexFieldNumber = 2;
+  static const int kSexFieldNumber = 3;
   inline ::TGender sex() const;
   inline void set_sex(::TGender value);
 
-  // optional uint32 level = 3;
+  // optional uint32 level = 4;
   inline bool has_level() const;
   inline void clear_level();
-  static const int kLevelFieldNumber = 3;
+  static const int kLevelFieldNumber = 4;
   inline ::google::protobuf::uint32 level() const;
   inline void set_level(::google::protobuf::uint32 value);
 
-  // optional uint32 exp = 4;
+  // optional uint32 exp = 5;
   inline bool has_exp() const;
   inline void clear_exp();
-  static const int kExpFieldNumber = 4;
+  static const int kExpFieldNumber = 5;
   inline ::google::protobuf::uint32 exp() const;
   inline void set_exp(::google::protobuf::uint32 value);
 
-  // optional uint32 pve_dup_id = 5;
+  // optional uint32 pve_dup_id = 6;
   inline bool has_pve_dup_id() const;
   inline void clear_pve_dup_id();
-  static const int kPveDupIdFieldNumber = 5;
+  static const int kPveDupIdFieldNumber = 6;
   inline ::google::protobuf::uint32 pve_dup_id() const;
   inline void set_pve_dup_id(::google::protobuf::uint32 value);
 
-  // optional sint64 money = 6;
+  // optional sint64 money = 7;
   inline bool has_money() const;
   inline void clear_money();
-  static const int kMoneyFieldNumber = 6;
+  static const int kMoneyFieldNumber = 7;
   inline ::google::protobuf::int64 money() const;
   inline void set_money(::google::protobuf::int64 value);
 
   // @@protoc_insertion_point(class_scope:MsgPlayerInfo)
  private:
+  inline void set_has_pid();
+  inline void clear_has_pid();
   inline void set_has_name();
   inline void clear_has_name();
   inline void set_has_sex();
@@ -156,6 +165,7 @@ class MsgPlayerInfo : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
+  ::google::protobuf::uint64 pid_;
   ::std::string* name_;
   int sex_;
   ::google::protobuf::uint32 level_;
@@ -176,15 +186,39 @@ class MsgPlayerInfo : public ::google::protobuf::Message {
 
 // MsgPlayerInfo
 
-// optional string name = 1;
-inline bool MsgPlayerInfo::has_name() const {
+// optional uint64 pid = 1;
+inline bool MsgPlayerInfo::has_pid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void MsgPlayerInfo::set_has_name() {
+inline void MsgPlayerInfo::set_has_pid() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void MsgPlayerInfo::clear_has_name() {
+inline void MsgPlayerInfo::clear_has_pid() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void MsgPlayerInfo::clear_pid() {
+  pid_ = GOOGLE_ULONGLONG(0);
+  clear_has_pid();
+}
+inline ::google::protobuf::uint64 MsgPlayerInfo::pid() const {
+  // @@protoc_insertion_point(field_get:MsgPlayerInfo.pid)
+  return pid_;
+}
+inline void MsgPlayerInfo::set_pid(::google::protobuf::uint64 value) {
+  set_has_pid();
+  pid_ = value;
+  // @@protoc_insertion_point(field_set:MsgPlayerInfo.pid)
+}
+
+// optional string name = 2;
+inline bool MsgPlayerInfo::has_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MsgPlayerInfo::set_has_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MsgPlayerInfo::clear_has_name() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void MsgPlayerInfo::clear_name() {
   if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -252,15 +286,15 @@ inline void MsgPlayerInfo::set_allocated_name(::std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:MsgPlayerInfo.name)
 }
 
-// optional .TGender sex = 2;
+// optional .TGender sex = 3;
 inline bool MsgPlayerInfo::has_sex() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void MsgPlayerInfo::set_has_sex() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void MsgPlayerInfo::clear_has_sex() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void MsgPlayerInfo::clear_sex() {
   sex_ = 1;
@@ -277,15 +311,15 @@ inline void MsgPlayerInfo::set_sex(::TGender value) {
   // @@protoc_insertion_point(field_set:MsgPlayerInfo.sex)
 }
 
-// optional uint32 level = 3;
+// optional uint32 level = 4;
 inline bool MsgPlayerInfo::has_level() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void MsgPlayerInfo::set_has_level() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void MsgPlayerInfo::clear_has_level() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void MsgPlayerInfo::clear_level() {
   level_ = 0u;
@@ -301,15 +335,15 @@ inline void MsgPlayerInfo::set_level(::google::protobuf::uint32 value) {
   // @@protoc_insertion_point(field_set:MsgPlayerInfo.level)
 }
 
-// optional uint32 exp = 4;
+// optional uint32 exp = 5;
 inline bool MsgPlayerInfo::has_exp() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void MsgPlayerInfo::set_has_exp() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void MsgPlayerInfo::clear_has_exp() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void MsgPlayerInfo::clear_exp() {
   exp_ = 0u;
@@ -325,15 +359,15 @@ inline void MsgPlayerInfo::set_exp(::google::protobuf::uint32 value) {
   // @@protoc_insertion_point(field_set:MsgPlayerInfo.exp)
 }
 
-// optional uint32 pve_dup_id = 5;
+// optional uint32 pve_dup_id = 6;
 inline bool MsgPlayerInfo::has_pve_dup_id() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void MsgPlayerInfo::set_has_pve_dup_id() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000020u;
 }
 inline void MsgPlayerInfo::clear_has_pve_dup_id() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void MsgPlayerInfo::clear_pve_dup_id() {
   pve_dup_id_ = 0u;
@@ -349,15 +383,15 @@ inline void MsgPlayerInfo::set_pve_dup_id(::google::protobuf::uint32 value) {
   // @@protoc_insertion_point(field_set:MsgPlayerInfo.pve_dup_id)
 }
 
-// optional sint64 money = 6;
+// optional sint64 money = 7;
 inline bool MsgPlayerInfo::has_money() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
 inline void MsgPlayerInfo::set_has_money() {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000040u;
 }
 inline void MsgPlayerInfo::clear_has_money() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void MsgPlayerInfo::clear_money() {
   money_ = GOOGLE_LONGLONG(0);

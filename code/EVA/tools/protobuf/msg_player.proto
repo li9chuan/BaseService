@@ -5,12 +5,13 @@ import "define_attrib.proto";
 
 message MsgPlayerInfo 
 {
-  optional string    name                  = 1;
-  optional TGender   sex                   = 2;
-  optional uint32    level                 = 3;
-  optional uint32    exp                   = 4;
-  optional uint32    pve_dup_id            = 5;
-  optional sint64    money                 = 6;
+  optional uint64    pid                   = 1;
+  optional string    name                  = 2;
+  optional TGender   sex                   = 3;
+  optional uint32    level                 = 4;
+  optional uint32    exp                   = 5;
+  optional uint32    pve_dup_id            = 6;
+  optional sint64    money                 = 7;
 }
 
 
