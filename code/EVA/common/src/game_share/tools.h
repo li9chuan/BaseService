@@ -28,16 +28,6 @@ inline uint16 GetSID( DEF::RPC_SESSION session )
     return session & 0x7f;
 }
 
-enum TTimeOperaion
-{
-    NEXT_YEAR,
-    NEXT_MON,
-    NEXT_DAY,
-    NEXT_WEEK,
-    NEXT_HOUR,
-    ADD_HOUR,
-};
-
 struct BaseTime
 {
     uint32     start_time;
@@ -60,6 +50,16 @@ struct BaseTime
 
 };
 
+enum TTimeOperaion
+{
+    NEXT_YEAR,
+    NEXT_MON,
+    NEXT_DAY,
+    NEXT_WEEK,
+    NEXT_HOUR,
+    ADD_HOUR,
+};
+
 struct TimeOPT
 {
     TTimeOperaion    opt_type;
@@ -75,11 +75,6 @@ const sint32 MINUTE_SECONDS = 60;
 const sint32 HOUR_SECONDS   = MINUTE_SECONDS * 60;
 const sint32 DAY_SECONDS    = HOUR_SECONDS * 24;
 const sint32 WEEK_SECONDS   = DAY_SECONDS * 7;
-
-inline uint32 GetDay( uint32 time_seconds )
-{
-    return ( time_seconds + HOUR_SECONDS * 8 ) / DAY_SECONDS;
-}
 
 //struct ADD_DAY : public TimeOPT
 //{
