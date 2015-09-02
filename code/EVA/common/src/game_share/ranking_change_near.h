@@ -111,6 +111,17 @@ public:
 		return false;
 	}
 
+    struct SPlayerInfo
+    {
+        DEF::SCORE      nScore;
+        DEF::PID        nID;
+    };
+
+    std::vector<SPlayerInfo>& GetRankingInfo()
+    {
+        return _vctScore;
+    }
+
 private:
 
 	/**
@@ -231,19 +242,14 @@ private:
 
     struct HashPIDRnk
     {
-        DEF::PID  pid;
-        DEF::RANKING   ranking;
+        DEF::PID        pid;
+        DEF::RANKING    ranking;
+
         HashPIDRnk():pid(0)
         { }
     };
 
-    struct SPlayerInfo
-    {
-        DEF::SCORE       nScore;
-        DEF::PID    nID;
 
-//        HashPIDRnk  pRnk;
-    };
 
     std::vector<SPlayerInfo>            _vctScore;
 

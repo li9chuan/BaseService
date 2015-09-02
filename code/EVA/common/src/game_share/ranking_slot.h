@@ -81,6 +81,8 @@ public:
                     _MapRanking.erase(itrnk);
                 }
             }
+
+			itscr->second = score;
         }
         else
         {
@@ -104,7 +106,7 @@ public:
             Rnk.PIDs.insert(pid);
 
             std::pair<TMapRanking::iterator,bool> ret =  _MapRanking.insert( std::make_pair( score, Rnk ) );
-
+			
             if ( ret.first != _MapRanking.begin() )
             {
                 TMapRanking::iterator it_cur = ret.first;
@@ -199,11 +201,6 @@ public:
 		return rnk;
 	}
 
-    std::vector<DEF::PID>&  GetTopRanking()
-    {
-        return _TopRnkPIDs;
-    }
-
     void UpdateRanking( )
     {
         uint32 curr_seconds = NLMISC::CTime::getSecondsSince1970();
@@ -225,6 +222,64 @@ public:
         }
 
         return it->second;
+    }
+
+    uint32 GetMaxRow()
+    {
+        return GetTopRanking().size();
+    }
+
+    uint32 GetPage( const DEF::PID nID, const uint32 nPageRow )
+    {
+        uint32 page = 0;
+        DEF::RANKING ranking = GetRanking( nID );
+        if ( ranking != 0 && nPageRow != 0 )
+        {
+            page = ranking / nPageRow;
+            if ( ranking % nPageRow != 0 )
+            {
+                ++page;
+            }
+        }
+        return page;
+    }
+
+    /// 获得分页
+    bool GetPage( const uint32 nPage, const uint32 nPageRow, std::vector<DEF::PID>& vct )
+    {
+        vct.clear();
+        if ( nPage == 0 )	{	return false;	}
+
+        uint32 pageStartIdx = (nPage-1)*nPageRow+1;
+        uint32 pageEndIdx   = pageStartIdx + nPageRow;
+
+        if ( pageEndIdx > GetMaxRow() )
+        {
+            pageEndIdx = GetMaxRow();
+        }
+
+        if ( pageEndIdx >= pageStartIdx )
+        {
+            uint32 count = pageEndIdx-pageStartIdx;
+
+            if ( count > 50 )
+            {
+                return false;
+            }
+
+            for ( pageStartIdx; pageStartIdx<pageEndIdx; ++pageStartIdx )
+            {
+                vct.push_back(_TopRnkPIDs[pageStartIdx]);
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    std::vector<DEF::PID>&  GetTopRanking()
+    {
+        return _TopRnkPIDs;
     }
 
 private:
