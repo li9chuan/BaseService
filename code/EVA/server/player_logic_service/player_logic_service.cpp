@@ -44,16 +44,14 @@ void displayInfo ()
 
 NLNET::TUnifiedCallbackItem PLSCallbackArray[] =
 {
-    { "ONLINE",                     cbPlayerOnline          },
-    { "OFFLINE",                    cbPlayerOffline         },
-    { "LOGOUT",                     cbPlayerLogout          },
-
-
     ///   msg.xml
     { "SCS",                        cbSyncChecksum          },     // 客户端请求数据校验和
     { "SPLY",                       cbSyncPlayerInfo        },
     { "GC",                         cbGlobleChat            },
 
+
+    ///     
+    { "LOGOUT",                     cbPlayerLogout          },
 };
 
 class CPlayerLogicService : public NLNET::IService

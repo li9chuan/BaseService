@@ -69,7 +69,6 @@ void PLS::CPlayerMgr::removePlayer( DEF::PID id )
 	TPLAYER_MAP::iterator iter = _PlayerMap.find(id);
 	if( iter != _PlayerMap.end() )
 	{
-        iter->second->getPlayerHelper().UpdateLastOnlineTime();
 		free(iter->second);
 		_PlayerMap.erase(iter);
         VAR_PLAYER_NUM = getPlayerNum();

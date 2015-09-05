@@ -30,10 +30,6 @@ void CRecvLogin::SendPlayerInfo( NLNET::CMessage& msg , TServiceId from  )
 
         /// 通知客户端玩家基础信息;
 		SenderLogin.SendPlayerInfo( msg.session(), pPlayer );
-		///// 登陆 计算成就积分;
-		//pPlayer->getAchievementHelper().AchievementScore();
-        /// 更新最后一次上线时间
-        pPlayer->getPlayerHelper().UpdateLastOnlineTime();
 	}
 	else
 	{

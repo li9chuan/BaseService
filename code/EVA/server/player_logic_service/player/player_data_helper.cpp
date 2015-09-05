@@ -85,10 +85,4 @@ const DB_RECORD::CRecordPlayer& PLS::CPlayerDataHelper::getRecordPlayer()
 	return _RecordPlayer;
 }
 
-void PLS::CPlayerDataHelper::UpdateLastOnlineTime()
-{
-    _RecordPlayer.last_online_time = CTime::getSecondsSince1970();
-    SavePlayerToDB(true);
-}
-
 

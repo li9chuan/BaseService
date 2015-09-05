@@ -10,8 +10,6 @@ void cbFESDisconnection  (const std::string &serviceName, NLNET::TServiceId  sid
 
 void cbPlayerLogout  (NLNET::CMessage &msgin, const std::string &serviceName, NLNET::TServiceId  sid);
 
-void cbPlayerOnline(NLNET::CMessage &msgin, const std::string &serviceName, NLNET::TServiceId sid);
-void cbPlayerOffline(NLNET::CMessage &msgin, const std::string &serviceName, NLNET::TServiceId sid);
 
 #endif
 

@@ -71,7 +71,7 @@ CClient* CClientMgr::updateClientSession( DEF::UID uid, DEF::CLIENT_SESSION clie
     else
     {
         _ClientMap.erase( uid );
-        safe_delete(pClient);
+        SAFE_DELETE(pClient);
     }
 
     nldebug("SessionMapSize: %d   ClientMapSize: %d", (sint32)_ClientSessionMap.size(), (sint32)_ClientMap.size() );

@@ -99,13 +99,13 @@ void db_threads::post_sub_msg( DBMsgData* data , _proc_msg func )
 
         if ( !m_main_threads_.push_event( _msg ) )
         {
-            safe_delete( data );
-            safe_delete( _msg );
+            SAFE_DELETE( data );
+            SAFE_DELETE( _msg );
         }
     }
     else
     {
-        safe_delete( data );
+        SAFE_DELETE( data );
     }
 }
 
@@ -120,13 +120,13 @@ void db_threads::post_main_msg( DBMsgData* data , _proc_msg func )
 
         if ( !m_sub_threads_.push_event( _msg ) )
         {
-            safe_delete( data );
-            safe_delete( _msg );
+            SAFE_DELETE( data );
+            SAFE_DELETE( _msg );
         }
     }
     else
     {
-        safe_delete( data );
+        SAFE_DELETE( data );
     }
 }
 

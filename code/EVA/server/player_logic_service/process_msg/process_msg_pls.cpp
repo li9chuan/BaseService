@@ -30,23 +30,3 @@ void cbPlayerLogout( NLNET::CMessage &msgin, const std::string &serviceName, NLN
     PlayerMgr.removePlayer(pid);
 }
 
-void cbPlayerOnline( NLNET::CMessage &msgin, const std::string &serviceName, NLNET::TServiceId sid )
-{
-    DEF::UID uid;
-    DEF::PID pid;
-
-    msgin.serial( uid );
-    msgin.serial( pid );
-
-    CPlayer* pPlayer = PlayerMgr.findPlayer(pid);
-    if ( pPlayer!=NULL )
-    {
-        /// 更新最后一次上线时间
-        pPlayer->getPlayerHelper().UpdateLastOnlineTime();
-    }
-}
-
-void cbPlayerOffline( NLNET::CMessage &msgin, const std::string &serviceName, NLNET::TServiceId sid )
-{
-
-}

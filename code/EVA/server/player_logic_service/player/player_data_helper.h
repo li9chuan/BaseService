@@ -55,16 +55,11 @@ namespace PLS
 		//     仅存盘，不写数据到cache
 		void                SavePlayerToDB( bool save=true );
 
-        void                UpdateLastOnlineTime();
-
 		void                getMsgPlayerInfo( MsgPlayerInfo& player_info )  { _RecordPlayer.getMsgPlayerInfo(player_info); }
         void                getMsgBase( MsgPlayerInfo& player_info )  { _RecordPlayer.getMsgBase(player_info); }
 
 		friend class CPlayer;		//	for init m_Player
 	private:
-
-        ///                 根据天数重置计数
-        void                ResetCount();
 
         void                addTotalRMB( DEF::RMB add_rmb );
 

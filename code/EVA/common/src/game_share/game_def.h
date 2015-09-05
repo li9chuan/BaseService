@@ -1,5 +1,5 @@
-﻿#ifndef GAME_DEF_H
-#define GAME_DEF_H
+﻿#ifndef GAME_SHARD_GAME_DEF_H
+#define GAME_SHARD_GAME_DEF_H
 
 #include <nel/misc/types_nl.h>
 #include "define_sys.pb.h"
@@ -62,11 +62,9 @@ inline bool IsTCPSession( RPC_SESSION rpc_session ) {  return rpc_session&RPC_SE
 			return m_##name;\
 		}\
 
-// safe delete;
-#define safe_delete( ptr ) do{ if( NULL != ptr ){ delete ptr ; ptr = NULL; } } while(0)
-// safe delete array;
-#define safe_delete_array( ptr ) do{ if( NULL != ptr ){ delete[] ptr; ptr = NULL; } } while(0)
-// safe db struct;
+#define SAFE_DELETE( ptr ) do{ if( NULL != ptr ){ delete ptr ; ptr = NULL; } } while(0)
+#define SAFE_DELETE_ARRAY( ptr ) do{ if( NULL != ptr ){ delete[] ptr; ptr = NULL; } } while(0)
+
 #define GET_DBMSG(structname) \
     if( !data ) \
     return; \
@@ -90,4 +88,5 @@ if( NULL == pStmt ){ return; }
 
 
 }
-#endif
+
+#endif      //  GAME_SHARD_GAME_DEF_H

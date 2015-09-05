@@ -12,6 +12,7 @@ ADD_SUBDIRECTORY(naming_service)
 ADD_SUBDIRECTORY(frontend_service)
 ADD_SUBDIRECTORY(login_service)
 ADD_SUBDIRECTORY(player_logic_service)
+ADD_SUBDIRECTORY(persistant_data_service)
 ADD_SUBDIRECTORY(admin_service)
 
 #INSTALL(FILES common.cfg DESTINATION ~/service COMPONENT services)

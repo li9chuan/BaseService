@@ -9,8 +9,5 @@ void DB_RECORD::CRecordPlayer::reset()
     sex                 = MALE;
     level               = 1;
     exp                 = 0;
-    pve_dup_id          = 0;
     money               = 0;
-
-    last_online_time = NLMISC::CTime::getSecondsSince1970();
 }

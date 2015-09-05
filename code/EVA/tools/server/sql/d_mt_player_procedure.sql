@@ -3,22 +3,13 @@
 drop procedure if exists _t_mt_add_player;
 
 /* t_playerinfo */
-drop procedure if exists _t_mt_query_playernum;
 drop procedure if exists _t_mt_pagination_playerinfo;
-drop procedure if exists _t_mt_query_playerinfo;
 
 drop procedure if exists _t_mt_insert_playerinfo;
 drop procedure if exists _t_mt_update_playerinfo;
 drop procedure if exists _t_mt_delete_playerinfo;
 
 drop procedure if exists _t_mt_query_pid_max;
-
-
-
-create procedure _t_mt_query_playernum()
-begin
-	select count(*) from t_playerinfo;
-end;
 
 
 create procedure _t_mt_pagination_playerinfo(
@@ -35,23 +26,6 @@ begin
 		   where f_player_id>a_greater_id
 		   order by f_player_id asc limit 1500;
 end;
-
-
-create procedure _t_mt_query_playerinfo(
-   in af_player_id bigint(20) unsigned )
-begin
-	select f_player_id,
-	       f_account_id,
-		   f_nickname,
-		   f_level,
-		   f_sex,
-		   f_exp,
-		   f_money
-		   from t_playerinfo
-		   where 
-		   f_player_id = af_player_id;
-end;
-
 
 create procedure _t_mt_insert_playerinfo(
 	in af_player_id bigint(20) unsigned,
@@ -82,7 +56,6 @@ begin
 				af_money);		
 
 end;
-
 
 create procedure _t_mt_update_playerinfo(
 	in af_player_id bigint(20) unsigned ,

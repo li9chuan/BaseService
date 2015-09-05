@@ -66,7 +66,7 @@ bool ForwardingMsg( FES::CClient* pClient, DEF::RPC_SESSION rpc_session, NLNET::
                         isSave = true;
                         //nldebug("%s", pMessage->DebugString().c_str());
 
-                        safe_delete(pMessage);
+                        SAFE_DELETE(pMessage);
                     }
                     break;
                 }
@@ -104,7 +104,7 @@ bool ForwardingMsg( FES::CClient* pClient, DEF::RPC_SESSION rpc_session, NLNET::
     }
     catch (NLMISC::Exception &)
     {
-        safe_delete(pMessage);
+        SAFE_DELETE(pMessage);
         return false;
     }
 

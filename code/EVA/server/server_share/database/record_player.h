@@ -15,9 +15,8 @@ namespace DB_RECORD {
 		uint8               sex;
         uint16              level;
 		uint32				exp;
-        uint32              pve_dup_id;
 		DEF::MONEY          money;
-        uint32              last_online_time;
+
 
 		CRecordPlayer()  { reset(); }
 		virtual ~CRecordPlayer() { reset(); }
@@ -32,7 +31,6 @@ namespace DB_RECORD {
 			s.serial( sex );
             s.serial( level );
 			s.serial( exp );
-            s.serial( pve_dup_id );
 			s.serial( money );
         }
 
@@ -57,7 +55,6 @@ namespace DB_RECORD {
         {
             return (    level       != record_player.level  ||
                         exp         != record_player.exp    ||
-                        pve_dup_id  != record_player.pve_dup_id ||
                         money       != record_player.money  );
         }  
 	};
