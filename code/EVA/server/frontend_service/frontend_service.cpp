@@ -57,7 +57,6 @@ NLNET::TUnifiedCallbackItem CallbackArray[] =
     { "ADD_MSG_BUF",                cbAddMsgBuffer                },	//	to client   from EGS && PLS
     
     { "GC",                         cbGlobleChat                  },
-    { "PLAYER_ONLINE",              cbPlayerOnline                },
     { "SYNC_CLIENT_SESSION",        cbSyncClientSession           },
     { "SyncUserPLS",                cbSyncUserLogicServer         },
     { "LOAD_SUCESS",                cbSetUserPID                  },

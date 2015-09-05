@@ -26,17 +26,6 @@ namespace FES
 
     // ***************************************************************************
     /// 客户端离线检查
-    class ClientOfflineTimerEvent : public CTimerEvent
-    {
-        NL_INSTANCE_COUNTER_DECL(ClientOfflineTimerEvent);
-    public:
-
-        ClientOfflineTimerEvent(CClient *pClient)   { m_Client = pClient; }
-        void timerCallback(CTimer *owner);
-
-    private:
-        CClient*    m_Client;
-    };
 
     class ClientLogoutTimerEvent : public CTimerEvent
     {

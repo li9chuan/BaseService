@@ -10,7 +10,6 @@ namespace FES
 	using namespace NLMISC;
 
 	NL_INSTANCE_COUNTER_IMPL(CMsgTimeoutTimerEvent);
-    NL_INSTANCE_COUNTER_IMPL(ClientOfflineTimerEvent);
     NL_INSTANCE_COUNTER_IMPL(ClientLogoutTimerEvent);
 
 	CMsgTimeoutTimerEvent::CMsgTimeoutTimerEvent():call_count(0)
@@ -42,13 +41,16 @@ namespace FES
         switch (call_count)
         {
         case 1:
-            owner->setRemaining( 700, this, 7 );
+            owner->setRemaining( 60, this );
             break;
         case 2:
-            owner->setRemaining( 1000, this, 7 );
+            owner->setRemaining( 60, this );
             break;
         case 3:
-            owner->setRemaining( 1300, this, 7 );
+            owner->setRemaining( 80, this );
+            break;
+        case 4:
+            owner->setRemaining( 80, this );
             break;
         default:
             delete owner;
@@ -56,29 +58,18 @@ namespace FES
         }
 	}
 
-    void ClientOfflineTimerEvent::timerCallback( CTimer *owner )
-    {
-        TTime _time = LocalTime.GetCurrTime() - m_Client->last_recv_msg;
-
-        if ( _time >= ClientMgr.GetClientOfflineTime() )
-        {
-            m_Client->Offline();
-            return;
-        }
-
-        owner->setRemaining( ClientMgr.GetClientOfflineTimeCheck(), this, 0xf );
-    }
-
-
     void ClientLogoutTimerEvent::timerCallback( CTimer *owner )
     {
         TTime _time = LocalTime.GetCurrTime() - m_Client->last_recv_msg;
 
         if ( _time >= ClientMgr.GetClientLogoutTime() )
         {
-            NLNET::CMessage  msgout("LOGOUT");
-            msgout.serial(m_Client->uid);
-            Network->send("EGS",msgout);
+            if ( m_Client->conPLS!=NLNET::TServiceId::InvalidId )
+            {
+                NLNET::CMessage  msgout("LOGOUT");
+                msgout.serial(m_Client->uid);
+                Network->send(m_Client->conPLS, msgout);
+            }
 
             return;
         }

@@ -14,18 +14,17 @@
 
 
 FES::CClient::CClient( DEF::UID _uid ) : uid(_uid),pid(0),
-    conPLS(NLNET::TServiceId::InvalidId), client_session(0), last_recv_msg(0),
-    state(ONLINE)
+    conPLS(NLNET::TServiceId::InvalidId), client_session(0), last_recv_msg(0)
 {
     last_recv_msg = LocalTime.GetCurrTime();
-    m_OfflineTimer.setRemaining( ClientMgr.GetClientOfflineTimeCheck(), new ClientOfflineTimerEvent(this) );
-    //m_LogoutTimer.setRemaining( ClientMgr.GetClientLogoutTimeCheck(), new ClientLogoutTimerEvent(this) );
+    //m_OfflineTimer.setRemaining( ClientMgr.GetClientOfflineTimeCheck(), new ClientOfflineTimerEvent(this) );
+    m_LogoutTimer.setRemaining( ClientMgr.GetClientLogoutTimeCheck(), new ClientLogoutTimerEvent(this) );
 }    
 
 FES::CClient::~CClient()
 {
-    m_OfflineTimer.reset();
-    //m_LogoutTimer.reset();
+    //m_OfflineTimer.reset();
+    m_LogoutTimer.reset();
     clearMsgBuffer();
 }
 
@@ -88,37 +87,6 @@ void FES::CClient::clearMsgBuffer()
         delete m_MsgBuffer.front();
         m_MsgBuffer.pop();
     }
-}
-
-void FES::CClient::Online()
-{
-    if ( state!=ONLINE )
-    {
-        state = ONLINE;
-        m_OfflineTimer.setRemaining( ClientMgr.GetClientOfflineTimeCheck(), new ClientOfflineTimerEvent(this) );
-    }
-
-    if ( conPLS != NLNET::TServiceId::InvalidId )
-    {
-        NLNET::CMessage msg("ONLINE");
-        msg.serial(uid);
-        msg.serial(pid);
-        msg.serial(conPLS);
-        Network->send( conPLS , msg );
-        Network->send("EGS",msg);
-    }
-
-    UpdateSyncTime();
-}
-
-void FES::CClient::Offline()
-{
-    state = OFFLINE;
-
-    NLNET::CMessage  msgout("OFFLINE");
-    msgout.serial(uid);
-    msgout.serial(pid);
-    Network->send("EGS",msgout);
 }
 
 void FES::CClient::UpdateSyncTime( void )

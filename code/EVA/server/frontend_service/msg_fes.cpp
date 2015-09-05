@@ -67,18 +67,6 @@ void cbCleanUpClient( NLNET::CMessage& msgin, const std::string &serviceName, NL
     ClientMgr.removeClient(uid);
 }
 
-void cbPlayerOnline( NLNET::CMessage& msgin, const std::string &serviceName, NLNET::TServiceId serviceId )
-{
-    DEF::UID uid=0;
-    msgin.serial(uid);
-
-    CClient* pClient = ClientMgr.findClient(uid);
-
-    if ( pClient!=NULL )
-    {
-        pClient->Online();
-    }
-}
 
 
 

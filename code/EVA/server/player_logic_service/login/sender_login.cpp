@@ -34,12 +34,5 @@ void PLS::CSenderLogin::SendPlayerInfo( DEF::RPC_SESSION session, CPlayer* pPlay
     msg_out.serial(&player_info);
 
     SendToClient( session, msg_out );
-
-    //pPlayer->getPlayerHelper().SendToClientPlayerInfo(session);
-
-    CMessage msgonline("PLAYER_ONLINE");
-    DEF::UID uid = pPlayer->getUID();
-    msgonline.serial(uid);
-    Network->send( pPlayer->getConFES(), msgonline );
 }
 

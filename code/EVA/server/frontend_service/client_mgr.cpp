@@ -62,7 +62,6 @@ CClient* CClientMgr::updateClientSession( DEF::UID uid, DEF::CLIENT_SESSION clie
         //pClient->last_send_msg  = LocalTime.GetCurrTime();
 	    pClient->clearMsgBuffer();
         pClient->SetSeed(seed);
-        pClient->Online();
 
         CMessage  msg_out("CleanUpClient");
         msg_out.serial(uid);
@@ -103,11 +102,6 @@ CClient* CClientMgr::findClientBySession( DEF::CLIENT_SESSION client_session )
 	}
 	else
 	{
-        if ( iter->second->state!=CClient::ONLINE )
-        {
-            iter->second->Online();
-        }
-
 		iter->second->last_recv_msg = LocalTime.GetCurrTime();
 		return iter->second;
 	}

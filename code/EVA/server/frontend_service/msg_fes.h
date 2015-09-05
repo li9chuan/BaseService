@@ -12,7 +12,6 @@ void cbEGSDisconnection (const std::string &serviceName, NLNET::TServiceId  sid,
 //void cbErr ( NLNET::CMessage& msgin, const std::string &serviceName, NLNET::TServiceId serviceId );
 void cbSetUserPID ( NLNET::CMessage& msgin, const std::string &serviceName, NLNET::TServiceId serviceId );
 void cbCleanUpClient ( NLNET::CMessage& msgin, const std::string &serviceName, NLNET::TServiceId serviceId );
-void cbPlayerOnline ( NLNET::CMessage& msgin, const std::string &serviceName, NLNET::TServiceId serviceId );
 
 
 

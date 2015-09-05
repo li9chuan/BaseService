@@ -17,12 +17,6 @@ class CClient
 {
 public:
 
-    enum TClientState
-    {
-        ONLINE,
-        OFFLINE,
-    };
-
 	CClient( DEF::UID _uid );
 
 	~CClient();
@@ -39,9 +33,6 @@ public:
 
     void    SetSeed( sint32 seed )  {   m_MsgCheck.SetSeed(seed);   }
 
-    void    Online();
-    void    Offline();
-
     void    UpdateSyncTime( void );
 
 	DEF::UID                uid;
@@ -53,12 +44,9 @@ public:
 	NLMISC::TTime           last_recv_msg;      ///	最后一次收到消息的时间
     //NLMISC::TTime           last_send_msg;      ///	最后一次发消息的时间
 
-    TClientState            state;
-
 private:
 
-    CTimer                  m_OfflineTimer;
-    //CTimer                  m_LogoutTimer;
+    CTimer                  m_LogoutTimer;
 
     CMsgCheck               m_MsgCheck;
 	TMsgBuffer              m_MsgBuffer;

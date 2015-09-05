@@ -196,11 +196,6 @@ bool CSessionMgr::sendudp( CClient* pClient, NLNET::CMessage& msgout, bool need_
 {
     if ( pClient!=NULL )
     {
-        if ( pClient->state != CClient::ONLINE )
-        {
-            return false;
-        }
-
         if ( pClient->addr_from.isValid() )
         {
             if ( need_ack )
