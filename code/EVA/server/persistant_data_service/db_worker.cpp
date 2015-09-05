@@ -4,7 +4,7 @@ bool init_alone_value_worker( nl::sql_worker* _worker )
 {
     if ( NULL != _worker )
     {
-        _worker->add_stmt( stmt_query_player_maxid   , "CALL _t_mt_query_player_maxid()" );
+        _worker->add_stmt( stmt_query_player_maxid   , "CALL _t_mt_query_pid_max()" );
         return true;
     }
 

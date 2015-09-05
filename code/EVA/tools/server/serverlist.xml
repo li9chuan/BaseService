@@ -2,20 +2,10 @@
 
 <root>
 
-<check   url="http://42.62.75.242/www/login/login.php"/>
+<check   url="http://127.0.0.1/www/login/login.php"/>
 
 <serverlist>
-	<server name="外网服务器" version="20140813">
-		<fes_list>
-			<fes host="42.62.75.242" port="9703"/>
-		</fes_list>
-	</server>
-	<server name="外网服务器(机器人)" version="20140813">
-		<fes_list>
-			<fes host="42.62.75.242" port="9703"/>
-		</fes_list>
-	</server>
-	<server name="本地服务器" version="20140813">
+	<server name="本地服务器" version="20150101">
 		<fes_list>
 			<fes host="127.0.0.1" port="9703"/>
 		</fes_list>

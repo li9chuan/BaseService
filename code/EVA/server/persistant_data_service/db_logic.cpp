@@ -39,14 +39,14 @@ bool    CDBLogic::putData( NLNET::CMessage &msgin )
     return send_msgout;
 }
 
-extern NLMISC::CVariable<uint32>	VAR_PRELOAD_PLAYERS_FPS;
+NLMISC::CVariable<uint32>	VAR_LOAD_PLAYERS_FPS("pds", "LoadPlayersFPS", "memo", 1000, 0, true);
 
 void CDBLogic::PreLoadNextPlayerInfo( NLNET::TServiceId sid, DEF::PID pid )
 {
     DB_RECORD::CDBLogicPlayer* pPlayer = DBMgr.find_player_pid(pid);
     uint32 load_count = 0;
 
-    while ( pPlayer!=NULL && load_count < VAR_PRELOAD_PLAYERS_FPS.get()  )
+    while ( pPlayer!=NULL && load_count < VAR_LOAD_PLAYERS_FPS.get()  )
     {
         ++load_count;
 

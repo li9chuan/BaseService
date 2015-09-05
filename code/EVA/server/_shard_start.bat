@@ -15,6 +15,10 @@ rem  ras
 rem start %MODE%\admin_service --fulladminname=admin_service --shortadminname=AS --writepid
 rem ping -n 2 127.0.0.1 > NUL 2>&1
 
+rem  login
+start %MODE%\login_service --nolog
+ping -n 2 127.0.0.1 > NUL 2>&1
+
 rem  ns
 start %MODE%\naming_service --nolog
 ping -n 2 127.0.0.1 > NUL 2>&1
@@ -25,5 +29,8 @@ ping -n 2 127.0.0.1 > NUL 2>&1
 
 rem  fes
 start %MODE%\frontend_service --nolog
+ping -n 2 127.0.0.1 > NUL 2>&1
 
-
+rem  pds
+start %MODE%\persistant_data_service --nolog
+ping -n 2 127.0.0.1 > NUL 2>&1

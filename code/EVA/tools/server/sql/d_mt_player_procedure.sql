@@ -74,6 +74,18 @@ begin
     where  f_player_id = af_player_id;
 end;
 
+drop procedure if exists _t_mt_pre_treatment;
+create procedure _t_mt_pre_treatment()
+begin
+
+end;
+
+drop procedure if exists _t_mt_after_treatment;
+create procedure _t_mt_after_treatment()
+begin
+
+end;
+
 
 --  6位服务器ID 36位ID  10位区ID
 create procedure _t_mt_query_pid_max()

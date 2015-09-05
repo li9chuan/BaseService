@@ -37,10 +37,6 @@ void cbUDPLogin( NLNET::CMessage& msgin, NLNET::CInetAddress& AddrFrom, MsgSessi
             return;
         }
     }
-    else
-    {
-        nldebug( "cbUDPLogin" );
-    }
 }
 
 
