@@ -143,7 +143,7 @@ void CFrontEndService::init()
 
     //////////////////////////////////////////////////////////////////////////
 
-    const uint32 UDPPort = _inetPort +1;
+    const uint32 UDPPort = _inetPort;
     _ReceiveSub.init( UDPPort, UDPPort, MaxUDPPacketSize);
 
     AcceptClients = true;
