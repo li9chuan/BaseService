@@ -17,10 +17,10 @@ public:
 
 	bool        register_event( std::string script_scope, DEF::EVENT_ID script_event );
 	bool        on_event( DEF::EVENT_ID script_event, LuaParams lua_in );
-    LuaParams   run( std::string script_scope, std::string script_name, LuaParams lua_in, uint outnum );
+    LuaParams   run( std::string script_scope, std::string script_name, LuaParams lua_in, uint outnum=0 );
 
-    bool			LoadScrpit(const char* szName);
-    lua_State *		GetLuaState();
+    bool        LoadScrpit(const char* szName);
+    lua_State*  GetLuaState();
 
 private:
 

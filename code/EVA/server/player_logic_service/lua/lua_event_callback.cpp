@@ -25,7 +25,7 @@ void CLuaEventCallback::RegisterMoniterEvent()
 
 void CLuaEventCallback::CallbackLogin( CPlayer* pPlayer )
 {
-    ScriptMgr.on_event( EventLogin, LuaParams(pPlayer->getPID()) );
+    ScriptMgr.run( "event_cb_base", "Login", LuaParams( pPlayer->getPID() ) );
 }
 
 
