@@ -31,17 +31,17 @@ using namespace DB_RECORD;
         if ( pResult==NULL || pResult->count()==0 ) { break; }\
         while ( pResult->next() )
 
-#define END_RESULT( __func_name, __load_pid )\
+#define END_RESULT()\
         if ( page_load_count>=100000 ){\
             page_time = NLMISC::CTime::getLocalTime() - page_time;\
-            nlinfo(#__func_name" load count: %d   page_time:%d  query time:%d", page_load_count, page_time, query_time);\
+            nlinfo("%s load count: %d   page_time:%d  query time:%d", __FUNCTION__, page_load_count, page_time, query_time);\
             page_load_count = 0;\
             page_time = NLMISC::CTime::getLocalTime();\
         }\
-        (load_pid==__load_pid) ? (++load_pid) : (load_pid=__load_pid);\
+        (load_pid==pPlayer->RecordPlayer.pid) ? (++load_pid) : (load_pid=pPlayer->RecordPlayer.pid);\
     }\
     pResult->release();\
-    nlinfo(#__func_name" use seconds: %d  count:%d", NLMISC::CTime::getSecondsSince1970()-start_time, rec_load_count);
+    nlinfo("%s use seconds: %d  count:%d", __FUNCTION__, NLMISC::CTime::getSecondsSince1970()-start_time, rec_load_count);
 
 #define FOUND_PLAYER(__find_pid)\
     if ( pPlayer!=NULL ) { \
@@ -80,7 +80,7 @@ void pageload_playerinfo()
             ++page_load_count;
         }
     }
-    END_RESULT(pageload_playerinfo, pPlayer->RecordPlayer.pid)
+    END_RESULT()
 }
 
 

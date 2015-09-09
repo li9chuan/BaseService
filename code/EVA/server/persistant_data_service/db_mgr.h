@@ -19,18 +19,18 @@ public:
     void  init( uint32 rgdid );
 
     /// 创建角色;
-    DB_RECORD::CDBLogicPlayer* create_player( DEF::UID uid , std::string _name );
+    DB_RECORD::CDBLogicPlayer* create_player( DEF::UID, std::string _name );
     /// 查找角色 UID;
-    DB_RECORD::CDBLogicPlayer* find_player_uid( DEF::UID uid , uint8 _index );
+    DB_RECORD::CDBLogicPlayer* find_player_uid( DEF::UID, uint8 _index );
 
     /// 使用uid和索引查询玩家的pid， 没找到返回0
     DEF::PID   find_pid( DEF::UID _accid , uint8 _index );
 
     /// 查找角色 PID;
-    DB_RECORD::CDBLogicPlayer* find_player_pid( DEF::PID _roleid );
+    DB_RECORD::CDBLogicPlayer* find_player_pid( DEF::PID );
 
     DB_RECORD::CDBLogicPlayer* get_first_player();
-    DB_RECORD::CDBLogicPlayer* get_next_player( DEF::PID pid );
+    DB_RECORD::CDBLogicPlayer* get_next_player( DEF::PID );
 
 
     /// 角色数量;
@@ -44,9 +44,9 @@ public:
     /// 保存角色详细信息;
     void save_player_detail( DB_RECORD::CDBLogicPlayer* _player_detail, bool copy_data=true );
     /// 保存角色列表数据;
-    void save_playerlist( DEF::UID _accid , DEF::PID _roleid );
+    void save_playerlist( DEF::UID, DEF::PID _roleid );
     /// 删除角色列表;
-    void clear_playerlist( DEF::UID _accid );
+    void clear_playerlist( DEF::UID );
 
     /// 更新函数;
     void db_frame_move( void );
