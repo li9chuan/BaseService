@@ -1,4 +1,4 @@
-FILE(GLOB SRC *.cpp *.h)
+FILE(GLOB SRC *.c *.cpp *.h)
 FILE(GLOB SRC_PROTO_MSG  msg_proto/*.h msg_proto/*.cc)
 FILE(GLOB SRC_STRUCT_MSG msg_struct/*.h msg_struct/*.cpp)
 FILE(GLOB SRC_DataBase   database/*.h database/*.cpp)
@@ -14,14 +14,14 @@ SOURCE_GROUP("db_threads" FILES ${SRC_DBThreads})
 NL_TARGET_LIB(servershare ${SRC} ${SRC_PROTO_MSG} ${SRC_STRUCT_MSG} ${SRC_DataBase} ${SRC_DBEngine} ${SRC_DBThreads})
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/server/src/server_share )
-INCLUDE_DIRECTORIES(${LIBXML2_INCLUDE_DIR} ${MYSQL_INCLUDE_DIR} ${LUA_INCLUDE_DIR} ${TOLUA_INCLUDE_DIR} ${PROTOBUF_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${LIBXML2_INCLUDE_DIR} ${MYSQL_INCLUDE_DIR} ${LUA_INCLUDE_DIR} ${PROTOBUF_INCLUDE_DIR} ${PBC_INCLUDE_DIR})
 
 TARGET_LINK_LIBRARIES(  servershare
 						nelmisc
 						nelnet
 						gameshare
 						${LUA_LIBRARIES}
-						${TOLUA_LIBRARIES}
+						${PBC_LIBRARY}
 						${MYSQL_LIBRARIES}
 						${PROTOBUF_LIBRARIES})
 

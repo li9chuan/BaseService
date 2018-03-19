@@ -1,13 +1,18 @@
 #include "lua_engine.h"
 #include "lua_param.h"
+#include <nel/misc/displayer.h>
+#include "pbc.h"
 
 extern   "C"   
 {   
 #include   "lua.h"   
-//#include   "lualib.h"   
+#include   "lualib.h"   
 #include   "lauxlib.h"   
-//#include   "lstate.h"   
+#include   "lstate.h"   
 }
+
+extern int  luaopen_protobuf_c (lua_State* tolua_S);
+//#include "pbc-lua.h"
 
 static int Lua_print(lua_State *L)
 {
@@ -24,10 +29,10 @@ static int Lua_print(lua_State *L)
 		s = lua_tostring(L, -1);  //将返回值从栈中读出
 		if (s == NULL)
 			return luaL_error(L, "`tostring' must return a string to `print'");
-
-		//nlinfo("%s",s);
-		LuaLoger().displayNL("%s",s);
 		lua_pop(L, 1);  //弹出返回值
+
+        nldebug("%s",s);
+        LuaLoger().displayNL("%s",s);
 	}
 	return 0;
 }
@@ -164,14 +169,23 @@ bool CLuaEngine::CreateLuaState()
 	if(m_pLuaState!=NULL)
 		return true;
 	
-	m_pLuaState = lua_open();	/// 创建一个Lua状态机的实例	
+	m_pLuaState = luaL_newstate();	/// 创建一个Lua状态机的实例	
 	if(m_pLuaState==NULL)
 	{
 		LuaLoger().displayNL("Lua State Create Fail.");
 		return false;
 	}
 
-	luaL_openlibs(m_pLuaState);           /// 加载Lua的基本库
+
+    luaL_openlibs(m_pLuaState);                     /// 加载Lua的基本库
+        
+    
+    //luaopen_protobuf_c(m_pLuaState);
+    luaL_requiref(m_pLuaState, "protobuf.c", luaopen_protobuf_c, 0);
+
+    lua_register( m_pLuaState,"print",Lua_print );  /// 注册常用函数
+
+
 	//tolua_auto_lua_callback_open(m_pLuaState);
 	
 	//if( !lua_checkstack(m_pLuaState, stacksize) )     //增加Lua的堆栈大小，防止因为堆栈过小而死机
@@ -184,7 +198,7 @@ bool CLuaEngine::CreateLuaState()
 //	lua_sethook( m_pLuaState, Lua_Trace, LUA_MASKLINE , 0);
 //#endif
 
-	lua_register( m_pLuaState,"print",Lua_print );  /// 注册常用函数
+	
 	//lua_register( m_pLuaState,"note",Lua_Note);
 	
 	return true;

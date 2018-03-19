@@ -172,7 +172,10 @@ void CMessage::assignFromSubMessage( const CMessage& msgin )
 	}
 }
 
-
+struct EMsgNameIsNull : public NLMISC::EStream
+{
+    EMsgNameIsNull() : EStream( "Msg name is null." ) {}
+};
 /*
  * Sets the message type as a string and put it in the buffer if we are in writing mode
  */
@@ -181,7 +184,12 @@ void CMessage::setType (const std::string &name, TMessageType type)
 	// check if we already do a setType ()
 	nlassert (!_TypeSet);
 	// don't accept empty string
-	nlassert (!name.empty ());
+	//nlassert (!name.empty ());
+
+    if ( name.empty() )
+    {
+        throw EMsgNameIsNull();
+    }
 
 	_Name = name;
 	_Type = type;
@@ -371,10 +379,16 @@ std::string CMessage::getName () const
 	}
 	else
 	{
-		nlassert (_TypeSet);
+        //throw EMsgNameIsNull();
+		//nlassert (_TypeSet);
 		return _Name;
 	}
 }
+
+struct EMsgTypeIsNull : public NLMISC::EStream
+{
+    EMsgTypeIsNull() : EStream( "Msg type is null." ) {}
+};
 
 CMessage::TMessageType CMessage::getType() const
 {
@@ -396,7 +410,8 @@ CMessage::TMessageType CMessage::getType() const
 	}
 	else
 	{
-		nlassert (_TypeSet);
+        //throw EMsgTypeIsNull();
+		//nlassert (_TypeSet);
 		return _Type;
 	}
 }

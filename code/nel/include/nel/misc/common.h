@@ -325,7 +325,7 @@ std::string stringFromVector( const std::vector<uint8>& v, bool limited = true )
 sint64 atoiInt64 (const char *ident, sint64 base = 10);
 
 /// Convert an sint64 into a string (same as itoa() function but for 64 bits intergers)
-void itoaInt64 (sint64 number, char *str, sint64 base = 10);
+char* itoaInt64 (sint64 number, char *str, sint64 base = 10);
 
 
 /// Convert a number in bytes into a string that is easily readable by an human, for example 105123 -> "102kb"

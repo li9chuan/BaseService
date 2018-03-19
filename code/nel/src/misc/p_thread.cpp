@@ -20,6 +20,7 @@
 #ifdef NL_OS_UNIX
 
 #include "nel/misc/p_thread.h"
+#include "nel/misc/debug.h"
 
 #include <sched.h>
 #include <pwd.h>

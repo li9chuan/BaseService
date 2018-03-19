@@ -825,7 +825,6 @@ case 5:
 				if (cf_CurrentFile != NULL)
 					free(cf_CurrentFile);
 				// store the filename
-
 				cf_CurrentFile = (char*)malloc(1024);
 				strcpy(cf_CurrentFile, yyvsp[-1].Val.String);
 				//cf_CurrentFile = strdup(yyvsp[-1].Val.String);

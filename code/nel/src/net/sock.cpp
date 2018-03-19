@@ -360,12 +360,12 @@ void CSock::connect( const CInetAddress& addr )
 	}
 
 #ifndef NL_OS_WINDOWS
-	// Set Reuse Address On (does not work on Win98 and is useless on Win2000)
-	int value = true;
-	if ( setsockopt( _Sock, SOL_SOCKET, SO_REUSEADDR, &value, sizeof(value) ) == SOCKET_ERROR )
-	{
-		throw ESocket( "ReuseAddr failed" );
-	}
+    // Set Reuse Address On (does not work on Win98 and is useless on Win2000)
+    int value = true;
+    if ( setsockopt( _Sock, SOL_SOCKET, SO_REUSEADDR, &value, sizeof(value) ) == SOCKET_ERROR )
+    {
+        throw ESocket( "ReuseAddr failed" );
+    }
 #endif
 
 	// Connection (when _Sock is a datagram socket, connect establishes a default destination address)
@@ -404,21 +404,21 @@ void CSock::connect( const CInetAddress& addr )
  */
 bool CSock::dataAvailable()
 {
-	fd_set fdset;
-	FD_ZERO( &fdset );
-	FD_SET( _Sock, &fdset );
-	timeval tv;
-	tv.tv_sec = _TimeoutS;
-	tv.tv_usec = _TimeoutUs;
+    fd_set fdset;
+    FD_ZERO( &fdset );
+    FD_SET( _Sock, &fdset );
+    timeval tv;
+    tv.tv_sec = _TimeoutS;
+    tv.tv_usec = _TimeoutUs;
 
-	// Test for message received.
-	int res = select( _Sock+1, &fdset, NULL, NULL, &tv );
-	switch ( res  )
-	{
-		case  0 : return false;
-		case -1 : throw ESocket( "CSock::dataAvailable(): select failed" );
-		default : return true;
-	}
+    // Test for message received.
+    int res = select( _Sock+1, &fdset, NULL, NULL, &tv );
+    switch ( res  )
+    {
+    case  0 : return false;
+    case -1 : throw ESocket( "CSock::dataAvailable(): select failed" );
+    default : return true;
+    }
 }
 
 
@@ -509,7 +509,7 @@ CSock::TSockResult CSock::receive( uint8 *buffer, uint32& len, bool throw_except
 		}
 
 		_MaxReceiveTime = max( (uint32)(CTime::ticksToSecond(CTime::getPerformanceTime()-before)*1000.0f), _MaxReceiveTime );
-		switch ( len )
+		switch ( (sint)len )
 		{
 			// Graceful disconnection
 			case 0 :
@@ -551,7 +551,7 @@ CSock::TSockResult CSock::receive( uint8 *buffer, uint32& len, bool throw_except
 	{
 		// Receive incoming message, waiting until a complete message has arrived
 		uint total = 0;
-		uint brecvd;
+		sint brecvd;
 
 		while ( total < len )
 		{

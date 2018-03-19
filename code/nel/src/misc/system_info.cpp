@@ -50,7 +50,7 @@ namespace NLMISC {
 
 #ifdef NL_OS_FREEBSD
 #define PROC_BASE_PATH "/usr/compat/linux/proc"
-#elif NL_OS_UNIX
+#elif defined(NL_OS_UNIX)
 #define PROC_BASE_PATH "/proc"
 #endif
 
@@ -63,7 +63,7 @@ namespace NLMISC {
 		int fd = open(PROC_BASE_PATH"/cpuinfo", O_RDONLY);
 		if (fd == -1)
 		{
-			nlwarning ("SI: Can't open "PROC_BASE_PATH"/cpuinfo: %s", strerror (errno));
+			nlwarning ("SI: Can't open " PROC_BASE_PATH "/cpuinfo: %s", strerror (errno));
 			return "";
 		}
 		else
@@ -91,7 +91,7 @@ namespace NLMISC {
 			if (!value.empty())
 				return trim(value);
 		}
-		nlwarning ("SI: Can't find the colname '%s' in "PROC_BASE_PATH"/cpuinfo", colname.c_str());
+		nlwarning ("SI: Can't find the colname '%s' in " PROC_BASE_PATH "/cpuinfo", colname.c_str());
 		return "";
 	}
 
@@ -104,7 +104,7 @@ namespace NLMISC {
 		int fd = open(PROC_BASE_PATH"/meminfo", O_RDONLY);
 		if (fd == -1)
 		{
-			nlwarning ("SI: Can't open "PROC_BASE_PATH"/meminfo: %s", strerror (errno));
+			nlwarning ("SI: Can't open " PROC_BASE_PATH "/meminfo: %s", strerror (errno));
 			return 0;
 		}
 		else
@@ -129,7 +129,7 @@ namespace NLMISC {
 				}
 			}
 		}
-		nlwarning ("SI: Can't find the colname '%s' in "PROC_BASE_PATH"/meminfo", colname.c_str());
+		nlwarning ("SI: Can't find the colname '%s' in " PROC_BASE_PATH "/meminfo", colname.c_str());
 		return 0;
 	}
 #endif // NL_OS_UNIX
@@ -711,7 +711,7 @@ string CSystemInfo::getOS()
 	int fd = open(PROC_BASE_PATH"/version", O_RDONLY);
 	if (fd == -1)
 	{
-		nlwarning ("SI: Can't get OS from "PROC_BASE_PATH"/version: %s", strerror (errno));
+		nlwarning ("SI: Can't get OS from " PROC_BASE_PATH "/version: %s", strerror (errno));
 	}
 	else
 	{
@@ -1239,7 +1239,7 @@ uint64 CSystemInfo::getAllocatedSystemMemory ()
 	int fd = open(PROC_BASE_PATH"/self/stat", O_RDONLY);
 	if (fd == -1)
 	{
-		nlwarning ("HA: Can't get OS from "PROC_BASE_PATH"/self/stat: %s", strerror (errno));
+		nlwarning ("HA: Can't get OS from " PROC_BASE_PATH "/self/stat: %s", strerror (errno));
 	}
 	else
 	{

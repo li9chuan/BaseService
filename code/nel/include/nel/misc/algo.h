@@ -225,6 +225,24 @@ inline void setFlags(T &dest, U mask, bool on)
 	}
 }
 
+//DoubleRound(1.234,2) = 1.23
+//DoubleRound(1.234,0) = 1.0
+//DoubleRound(123.4,-1) = 120.0
+inline double DoubleRound(double dVal, short iPlaces)
+{
+    double dRetval;
+    double dMod = 0.0000001;
+
+    if (dVal<0.0) dMod=-0.0000001;
+
+    dRetval=dVal;
+    dRetval+=(5.0/pow(10.0,iPlaces+1.0));
+    dRetval*=pow(10.0,iPlaces);
+    dRetval=floor(dRetval+dMod);
+    dRetval/=pow(10.0,iPlaces);
+
+    return (dRetval);
+}
 
 } // NLMISC
 

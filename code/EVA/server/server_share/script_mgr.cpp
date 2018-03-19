@@ -4,10 +4,6 @@
 #include <server_share/server_def.h>
 #include <string>
 
-
-
-extern int  tolua_base_open (lua_State* tolua_S);
-
 using namespace std;
 using namespace DEF;
 using namespace NLMISC;
@@ -40,7 +36,7 @@ NLMISC_COMMAND (loadlua, "reload lua file.", "")
     return true;
 }
 
-void CScriptMgr::init( TOLUA_OPEN pToluaOpen )
+void CScriptMgr::init( LUA_OPEN pLuaOpen )
 {
 	m_EventReg.resize(SCRIPT_EVENT_MAX);
 
@@ -50,11 +46,9 @@ void CScriptMgr::init( TOLUA_OPEN pToluaOpen )
 
     nlassert( m_LuaEngine.Init(lua_log) );
 
-    tolua_base_open(m_LuaEngine.GetLuaState());
-
-    if ( pToluaOpen!=NULL )
+    if ( pLuaOpen!=NULL )
     {
-        pToluaOpen( m_LuaEngine.GetLuaState() );
+        pLuaOpen( m_LuaEngine.GetLuaState() );
     }
 
     nlassert(ICommand::execute ("loadlua", *InfoLog));

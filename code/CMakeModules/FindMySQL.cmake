@@ -34,7 +34,7 @@ ELSE()
       $ENV{ProgramFiles}/MySQL/*/lib/opt
       $ENV{SystemDrive}/MySQL/*/lib/opt)
   ELSE()
-    FIND_LIBRARY(MYSQL_LIBRARY_RELEASE NAMES mysqlclient
+    FIND_LIBRARY(MYSQL_LIBRARY_RELEASE NAMES libmysqlclient mysqlclient
       PATHS
       /usr/lib
       /usr/local/lib

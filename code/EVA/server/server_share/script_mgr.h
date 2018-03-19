@@ -6,13 +6,13 @@
 #include <set>
 #include "lua_engine.h"
 
-typedef int (*TOLUA_OPEN)(lua_State* tolua_S);
+typedef int (*LUA_OPEN)(lua_State* tolua_S);
 
 class CScriptMgr : public NLMISC::CSingleton<CScriptMgr>
 {
 public:
 
-	void        init( TOLUA_OPEN pToluaOpen=NULL );
+	void        init( LUA_OPEN pToluaOpen=NULL );
     void		release();
 
 	bool        register_event( std::string script_scope, DEF::EVENT_ID script_event );
@@ -37,6 +37,7 @@ private:
 };
 
 #define  ScriptMgr  CScriptMgr::instance()
+#define  ScriptRun  ScriptMgr.run
 
 #endif
 

@@ -546,7 +546,7 @@ inline CSString::CSString(const char *s)
 
 inline CSString::CSString(const std::string &s)
 {
-	*(std::string *)this=s;
+    assign( s.c_str(), s.size() );
 }
 
 inline CSString::CSString(char c)
@@ -767,7 +767,7 @@ inline CSString& CSString::operator=(const char *s)
 
 inline CSString& CSString::operator=(const std::string &s)
 {
-	*(std::string *)this=s;
+    assign( s.c_str(), s.size() );
 	return *this;
 }
 

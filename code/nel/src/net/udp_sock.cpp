@@ -86,6 +86,12 @@ void CUdpSock::bind( const CInetAddress& addr )
 	{
 		throw ESocket( "ReuseAddr failed" );
 	}
+
+    struct timeval timeout={0,10000};
+    setsockopt(_Sock,SOL_SOCKET,SO_SNDTIMEO,&timeout,sizeof(timeout));
+#else
+    int timeout = 10;
+    setsockopt(_Sock,SOL_SOCKET,SO_SNDTIMEO,(char*)&timeout,sizeof(timeout));
 #endif
 
 	_LocalAddr = addr;

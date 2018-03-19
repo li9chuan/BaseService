@@ -65,15 +65,17 @@ public:
 	/// This is empty when all callback are authorized.
 	std::string				AuthorizedCallback;
 
-protected:
+public:
 
 	friend class CBufClient;
 	friend class CBufServer;
+    friend class CBufServerWebsocket;
 	friend class CClientReceiveTask;
 	friend class CServerReceiveTask;
 
 	friend class CCallbackClient;
 	friend class CCallbackServer;
+    friend class CCallbackServerWebSocket;
 	friend class CCallbackNetBase;
 
 	/** Constructor
@@ -269,7 +271,7 @@ private:
  */
 class CNonBlockingBufSock : public CBufSock
 {
-protected:
+public:
 
 	friend class CBufClient;
 	friend class CClientReceiveTask;
@@ -307,6 +309,29 @@ protected:
 	 */
 	const std::vector<uint8>	receivedBuffer() const { nlnettrace( "CServerBufSock::receivedBuffer" ); return _ReceiveBuffer; }
 
+    uint32                      appendToBuffer( const uint8* buffer, uint32 len )
+    {
+        _ReceiveBuffer.insert(_ReceiveBuffer.end(), buffer, buffer+len);
+        return _ReceiveBuffer.size();
+    }
+
+    uint8*                      getBuffer( uint32 offset=0 )  {  return &*_ReceiveBuffer.begin()+offset;  }
+
+
+    uint32                      leftShiftBuffer( uint32 shift_bits )
+    {
+        if( shift_bits >= _ReceiveBuffer.size() )
+        {
+            _ReceiveBuffer.clear();
+        }
+        else
+        {
+            _ReceiveBuffer.assign( _ReceiveBuffer.begin()+shift_bits, _ReceiveBuffer.end() );
+        }
+
+        return _ReceiveBuffer.size();
+    }
+
 	// Buffer for nonblocking receives
 	std::vector<uint8>			_ReceiveBuffer;
 
@@ -336,9 +361,11 @@ class CBufServer;
  */
 class CServerBufSock : public CNonBlockingBufSock
 {
-protected:
+//protected:
+public:
 
 	friend class CBufServer;
+    friend class CBufServerWebsocket;
 	friend class CListenTask;
 	friend class CServerReceiveTask;
 
@@ -356,7 +383,7 @@ protected:
 	/** Pushes a connection message into bnb's receive queue, if it has not already been done
 	 * (returns true in this case).
 	 */
-	bool						advertiseConnection( CBufServer *bnb )
+	bool						advertiseConnection( CBufNetBase *bnb )
 	{
 		return advertiseSystemEvent( (CBufNetBase*)bnb, this, _KnowConnected, false, CBufNetBase::Connection );
 	}

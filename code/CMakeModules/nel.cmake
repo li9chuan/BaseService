@@ -301,11 +301,13 @@ MACRO(NL_SETUP_NEL_DEFAULT_OPTIONS)
   OPTION(WITH_NEL_TOOLS           "Build NeL Tools"                               OFF)
   OPTION(WITH_NEL_SAMPLES         "Build NeL Samples"                             OFF)
   OPTION(WITH_NEL_TESTS           "Build NeL Unit Tests"                          OFF)
+  
   #OPTION(WITH_LUA51               "Build EVA using Lua 5.1"                        ON )
   #OPTION(WITH_LUA52               "Build EVA using Lua 5.2"                        OFF)
   
   OPTION(WITH_SSE2                "With SSE2"                                     ON )
   OPTION(WITH_SSE3                "With SSE3"                                     ON )
+  
   
   IF(NOT MSVC)
     OPTION(WITH_GCC_FPMATH_BOTH   "With GCC -mfpmath=both"                        OFF)
@@ -322,8 +324,10 @@ MACRO(NL_SETUP_NELNS_DEFAULT_OPTIONS)
   ###
   # Optional support
   ###
+  
+  OPTION(WITH_ROBOT               "Build Robot"                                    OFF)
 
- ENDMACRO(NL_SETUP_NELNS_DEFAULT_OPTIONS)
+ENDMACRO(NL_SETUP_NELNS_DEFAULT_OPTIONS)
 
 MACRO(ADD_PLATFORM_FLAGS _FLAGS)
   SET(PLATFORM_CFLAGS "${PLATFORM_CFLAGS} ${_FLAGS}")
@@ -567,8 +571,8 @@ MACRO(NL_SETUP_BUILD)
 
     SET(NL_DEBUG_CFLAGS "/Zi /MDd /RTC1 /D_DEBUG ${DEBUG_CFLAGS} ${NL_DEBUG_CFLAGS}")
     SET(NL_RELEASE_CFLAGS "/MD /DNDEBUG ${RELEASE_CFLAGS} ${NL_RELEASE_CFLAGS}")
-    SET(NL_DEBUG_LINKFLAGS "/DEBUG /OPT:NOREF /OPT:NOICF /NODEFAULTLIB:LIBCMTD.lib;LIBCMT.lib ${MSVC_INCREMENTAL_YES_FLAG} ${NL_DEBUG_LINKFLAGS}")
-    SET(NL_RELEASE_LINKFLAGS "/OPT:REF /OPT:ICF /INCREMENTAL:NO /NODEFAULTLIB:LIBCMTD.lib;LIBCMT.lib ${NL_RELEASE_LINKFLAGS}")
+    SET(NL_DEBUG_LINKFLAGS "/DEBUG /OPT:NOREF /OPT:NOICF /NODEFAULTLIB:LIBCMTD.lib /NODEFAULTLIB:LIBCMT.lib ${MSVC_INCREMENTAL_YES_FLAG} ${NL_DEBUG_LINKFLAGS}")
+    SET(NL_RELEASE_LINKFLAGS "/OPT:REF /OPT:ICF /INCREMENTAL:NO /NODEFAULTLIB:LIBCMTD.lib /NODEFAULTLIB:LIBCMT.lib ${NL_RELEASE_LINKFLAGS}")
 
     IF(WITH_WARNINGS)
       SET(DEBUG_CFLAGS "/W4 ${DEBUG_CFLAGS}")
@@ -581,6 +585,7 @@ MACRO(NL_SETUP_BUILD)
 
       IF(CLANG)
         ADD_PLATFORM_FLAGS("-nobuiltininc")
+		ADD_PLATFORM_FLAGS("-std=gnu++11")
       ENDIF(CLANG)
     ENDIF(WIN32)
 
@@ -802,7 +807,8 @@ MACRO(NL_SETUP_BUILD)
     IF(WITH_WARNINGS)
       ADD_PLATFORM_FLAGS("-Wall -W -Wpointer-arith -Wsign-compare -Wno-deprecated-declarations -Wno-multichar -Wno-unused")
       IF(CLANG)
-        ADD_PLATFORM_FLAGS("-std=gnu99")
+        #ADD_PLATFORM_FLAGS("-std=gnu99")
+		ADD_PLATFORM_FLAGS("-std=gnu++11 -Wreserved-user-defined-literal")
       ELSE(CLANG)
         ADD_PLATFORM_FLAGS("-ansi")
       ENDIF(CLANG)
@@ -1090,12 +1096,13 @@ MACRO(SETUP_EXTERNAL)
 
   IF(MSVC)
     FIND_PACKAGE(MSVC REQUIRED)
-    #FIND_PACKAGE(WindowsSDK REQUIRED)
-	IF(MSVC11)
-	  INCLUDE_DIRECTORIES(";$(IncludePath)")
-	ELSE(MSVC11)
-	  FIND_PACKAGE(WindowsSDK REQUIRED)
-	ENDIF(MSVC11)
+	#INCLUDE_DIRECTORIES(";$(IncludePath)")
+    FIND_PACKAGE(WindowsSDK REQUIRED)
+	#IF(MSVC11)
+	#  INCLUDE_DIRECTORIES(";$(IncludePath)")
+	#ELSE(MSVC11)
+	#  FIND_PACKAGE(WindowsSDK REQUIRED)
+	#ENDIF(MSVC11)
     
   ENDIF(MSVC)
 ENDMACRO(SETUP_EXTERNAL)

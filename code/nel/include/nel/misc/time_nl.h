@@ -30,7 +30,7 @@ namespace NLMISC
 
 /// New time types
 typedef double TGameTime;		// Time according to the game (used for determining day, night...) (double in seconds)
-typedef uint32 TGameCycle;		// Integer game cycle count from the game (in game ticks)
+typedef sint64 TGameCycle;		// Integer game cycle count from the game (in game ticks)
 typedef double TLocalTime;		// Time according to the machine's local clock (double in seconds)
 typedef sint64 TCPUCycle;		// Integer cycle count from the CPU (for profiling in cpu ticks)
 

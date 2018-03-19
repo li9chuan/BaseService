@@ -221,7 +221,7 @@ bool CLibrary::loadLibrary(const std::string &libName, bool addNelDecoration, bo
 	else
 	{
 		// check for 'pure' NeL library
-		void *entryPoint = getSymbolAddress(NL_MACRO_TO_STR(NLMISC_PURE_LIB_ENTRY_POINT));
+		void *entryPoint = getSymbolAddress( NL_MACRO_TO_STR(NLMISC_PURE_LIB_ENTRY_POINT) );
 		if (entryPoint != NULL)
 		{
 			// rebuild the interface pointer

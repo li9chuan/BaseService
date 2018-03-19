@@ -21,10 +21,11 @@ FIND_PATH(TOLUA_INCLUDE_DIR tolua++.h
   /opt/csw/include
   /opt/include
   /usr/local/include/lua51
+  /mingw/include
 )
 
-SET(LIBRARY_NAME_RELEASE tolua++5.1 libtolua++.a libtolua++5.1.a)
-SET(LIBRARY_NAME_DEBUG tolua++5.1 libtolua++.a libtolua++5.1.a)
+SET(LIBRARY_NAME_RELEASE tolua++5.1 libtolua++.a libtolua++5.1.a libtolua++.so)
+SET(LIBRARY_NAME_DEBUG tolua++5.1 libtolua++.a libtolua++5.1.a libtolua++.so)
 
 FIND_LIBRARY(TOLUA_LIBRARY_RELEASE
   NAMES ${LIBRARY_NAME_RELEASE}
@@ -32,6 +33,7 @@ FIND_LIBRARY(TOLUA_LIBRARY_RELEASE
   $ENV{TOLUA_DIR}/lib
   /usr/local/lib
   /usr/lib
+  /usr/lib64
   /usr/local/X11R6/lib
   /usr/X11R6/lib
   /sw/lib
@@ -40,6 +42,7 @@ FIND_LIBRARY(TOLUA_LIBRARY_RELEASE
   /opt/lib
   /usr/freeware/lib64
   /usr/local/lib/lua51
+  /mingw/lib
 )
 
 FIND_LIBRARY(TOLUA_LIBRARY_DEBUG
@@ -56,6 +59,7 @@ FIND_LIBRARY(TOLUA_LIBRARY_DEBUG
   /opt/lib
   /usr/freeware/lib64
   /usr/local/lib/lua51
+  /mingw/lib
 )
 
 IF(TOLUA_INCLUDE_DIR)
@@ -80,7 +84,7 @@ IF(TOLUA_FOUND)
   ENDIF(NOT TOLUA_FIND_QUIETLY)
 ELSE(TOLUA_FOUND)
   IF(NOT TOLUA_FIND_QUIETLY)
-    MESSAGE(STATUS "Warning: Unable to find ToLua!")
+    MESSAGE(STATUS "Warning: Unable to find ToLua! INCLUDE: ${TOLUA_INCLUDE_DIR}  LIB:${TOLUA_LIBRARIES}  ")
   ENDIF(NOT TOLUA_FIND_QUIETLY)
 ENDIF(TOLUA_FOUND)
 

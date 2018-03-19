@@ -134,8 +134,8 @@ void nlSleep( uint32 ms )
 	{
 		res = nanosleep( &ts, &ts ); // resolution: 10 ms (with common scheduling policy)
 	}
-    while ( res > 0 );
-	//while ( (res != 0) && (errno==EINTR) );
+    while ( (res != 0) && (errno==EINTR) );
+    //while ( res > 0 );
 #endif
 }
 
@@ -274,7 +274,7 @@ end:
 	return number;
 }
 
-void itoaInt64 (sint64 number, char *str, sint64 base)
+char* itoaInt64 (sint64 number, char *str, sint64 base)
 {
 	str[0] = '\0';
 	char b[256];
@@ -282,7 +282,7 @@ void itoaInt64 (sint64 number, char *str, sint64 base)
 	{
 		str[0] = '0';
 		str[1] = '\0';
-		return;
+		return str;
 	}
 	memset(b,'\0',255);
 	memset(b,'0',64);
@@ -313,6 +313,8 @@ void itoaInt64 (sint64 number, char *str, sint64 base)
 		}
 		x /= base;
 	}
+
+    return str;
 }
 
 uint raiseToNextPowerOf2(uint v)
@@ -373,7 +375,7 @@ string bytesToHumanReadable (uint64 bytes)
 		div++;
 		res = newres;
 	}
-	return toString ("%"NL_I64"u%s", res, divTable[div]);
+	return toString ("%" NL_I64 "u%s", res, divTable[div]);
 }
 
 uint32 humanReadableToBytes (const string &str)

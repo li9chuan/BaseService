@@ -167,7 +167,8 @@ public:
 	/// The value that will be used if setMaxSentBlockSize() is not called (or called with a negative argument)
 	static uint32 DefaultMaxSentBlockSize;
 
-protected:
+//protected:
+public:
 
 	friend class NLNET::CBufSock;
 

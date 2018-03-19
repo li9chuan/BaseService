@@ -299,7 +299,7 @@
  * Used to display a int64 in a platform independent way with printf like functions.
  \code
  sint64 myint64 = SINT64_CONSTANT(0x123456781234);
- printf("This is a 64 bits int: %"NL_I64"u", myint64);
+ printf("This is a 64 bits int: %" NL_I64 "u", myint64);
  \endcode
  */
 

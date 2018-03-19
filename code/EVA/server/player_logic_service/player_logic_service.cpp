@@ -18,8 +18,6 @@
 #include "lua/lua_event_callback.h"
 #include <nel/net/naming_client.h>
 
-extern int  tolua_pls_open (lua_State* tolua_S);
-
 using namespace NLMISC;
 using namespace NLNET;
 using namespace std;
@@ -74,7 +72,7 @@ public:
         ///////////////////////////////
 
         TimerManager->init();
-        ScriptMgr.init( tolua_pls_open );
+        ScriptMgr.init();
 
         ICommand::execute ("loadconfig", *InfoLog);
     }

@@ -16,6 +16,7 @@
 
 #include "stdmisc.h"
 
+#include "nel/misc/algo.h"
 #include "nel/misc/i_xml.h"
 #include "nel/misc/sstring.h"
 
@@ -1147,7 +1148,8 @@ double CIXml::getFloatProperty(xmlNodePtr node, const char *property, float defa
 	if (b==false)
 		return defaultValue;
 
-	return s.strip().atof();
+    //sint64 tmp = (s.strip().atof() + 0.000005) * 10000;
+	return DoubleRound(s.strip().atof(), 6);
 }
 
 // ***************************************************************************
