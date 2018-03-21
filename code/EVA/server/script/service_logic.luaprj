@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<Project Name="service_logic.luaprj" Cmd="" Arg="" Dir="" Toggle="false" >
+    <LuaFile RelativePath=".\Init.lua" />
+    <LuaFile RelativePath=".\Main.lua" />
+    <Filter Name="FrameWork" Toggle="false" >
+        <LuaFile RelativePath=".\Framework\Class.lua" />
+        <LuaFile RelativePath=".\Framework\functions.lua" />
+        <LuaFile RelativePath=".\Framework\List.lua" />
+        <LuaFile RelativePath=".\Framework\Map.lua" />
+        <LuaFile RelativePath=".\Framework\MiddleClass.lua" />
+        <LuaFile RelativePath=".\Framework\Queue.lua" />
+        <LuaFile RelativePath=".\Framework\Stack.lua" />
+        <LuaFile RelativePath=".\Framework\StateFul.lua" />
+        <Filter Name="Event" Toggle="false" >
+            <LuaFile RelativePath=".\Framework\Event\EventController.lua" />
+            <LuaFile RelativePath=".\Framework\Event\EventRegister.lua" />
+            <LuaFile RelativePath=".\Framework\Event\EventType.lua" />
+        </Filter>
+        <Filter Name="Net" Toggle="false" >
+            <LuaFile RelativePath=".\Framework\Net\NetWorkHandler.lua" />
+            <LuaFile RelativePath=".\Framework\Net\CallbackService.lua" />
+        </Filter>
+        <Filter Name="ProtoBuffer" Toggle="false" >
+            <LuaFile RelativePath=".\Framework\ProtoBuffer\protobuf.lua" />
+            <LuaFile RelativePath=".\Framework\ProtoBuffer\test.lua" />
+        </Filter>
+    </Filter>
+    <Filter Name="PLS" Toggle="true" >
+        <LuaFile RelativePath=".\PLS\LuaTestMsg.lua" />
+    </Filter>
+</Project>

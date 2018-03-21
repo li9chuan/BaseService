@@ -1,5 +1,5 @@
-#include <server_share/lua_engine.h>
-#include <server_share/script_mgr.h>
+#include <server_share/lua/lua_engine.h>
+#include <server_share/lua/script_mgr.h>
 #include <server_share/server_def.h>
 #include <server_share/database/db_logic_chunk.h>
 #include <nel/misc/path.h>

@@ -1,6 +1,8 @@
 ﻿#ifndef SERVICE_SHARD_LUA_BASE_FUNCTION_H
 #define SERVICE_SHARD_LUA_BASE_FUNCTION_H
 
+struct lua_State;
+
 /**
 *   @brief 获取从1970-1-1到输入参数的天数。
 *   @param time 输入时间，0表示从1970-1-1到现在。
@@ -22,5 +24,7 @@ void LoadLuaFile(const char* szFileName);
 */
 void RegScriptEvent( const char* script_scope, int event_id );
 
+int LuaAddSearchPath( lua_State *L );
+int LuaPrint( lua_State *L );
 
 #endif

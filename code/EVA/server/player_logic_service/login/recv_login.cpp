@@ -1,7 +1,7 @@
 #include "recv_login.h"
 #include "sender_login.h"
 #include <server_share/server_def.h>
-#include <server_share/script_mgr.h>
+#include <server_share/lua/script_mgr.h>
 #include <player_logic_service/player/player_mgr.h>
 #include "../event_trigger.h"
 

@@ -4,8 +4,8 @@
 
 #include <nel/misc/window_displayer.h>
 #include <server_share/server_def.h>
-#include <server_share/lua_engine.h>
-#include <server_share/script_mgr.h>
+#include <server_share/lua/lua_engine.h>
+#include <server_share/lua/script_mgr.h>
 #include <server_share/i18n_def.h>
 #include <game_share/static_table/static_table_mgr.h>
 #include <game_share/singleton_registry.h>
@@ -85,13 +85,14 @@ public:
         PlayerMgr.update(curr_ticks);
         TimerManager->tickUpdate();
 
+        ScriptMgr.update();
         return true;
     }
 
     void release ()
     {
-        ScriptMgr.release();
 		TimerManager->release();
+        ScriptMgr.release();
     }
 
 };

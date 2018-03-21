@@ -11,6 +11,7 @@ TARGET_LINK_LIBRARIES(	frontend_service
 						eva_adminmodules
 						${LIBXML2_LIBRARIES}
 						${PROTOBUF_LIBRARIES}
+						${LIBEVENT_LIBRARY}
 						nelmisc
 						nelnet
 						gameshare

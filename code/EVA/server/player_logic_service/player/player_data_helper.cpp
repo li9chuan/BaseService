@@ -5,7 +5,7 @@
 #include <game_share/static_table/static_table_mgr.h>
 #include <game_share/eval_expression.h>
 #include <server_share/server_def.h>
-#include <server_share/script_mgr.h>
+#include <server_share/lua/script_mgr.h>
 
 using namespace DB_RECORD;
 using namespace NLMISC;

@@ -21,6 +21,7 @@ TARGET_LINK_LIBRARIES(persistant_data_service
 						gameshare
 						${LIBXML2_LIBRARIES}
 						${PROTOBUF_LIBRARIES}
+						${LIBEVENT_LIBRARY}
 						nelmisc
 						nelnet)
 

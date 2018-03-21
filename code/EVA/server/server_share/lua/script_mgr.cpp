@@ -1,8 +1,9 @@
 #include "script_mgr.h"
 #include <nel/misc/debug.h>
-#include <server_share/lua_engine.h>
 #include <server_share/server_def.h>
 #include <string>
+#include "lua_engine.h"
+#include "server_share/bin_luabind/Public.hpp"
 
 using namespace std;
 using namespace DEF;
@@ -51,7 +52,16 @@ void CScriptMgr::init( LUA_OPEN pLuaOpen )
         pLuaOpen( m_LuaEngine.GetLuaState() );
     }
 
+    ///  导出C++接口
+    Export();
+
     nlassert(ICommand::execute ("loadlua", *InfoLog));
+
+    m_LuaEngine.RunLuaFunction( "Main", "Init" );
+
+
+    //m_LuaEngine.GetScriptHandle()->CallFunc<const char*, std::string>("NetWorkHandler.OnMessage", "11111", str);
+    //m_LuaEngine.GetScriptHandle()->ExecString("NetWorkHandler.OnMessage(1,1)");
 }
 
 bool CScriptMgr::register_event( string script_scope, DEF::EVENT_ID script_event )
@@ -76,8 +86,7 @@ bool CScriptMgr::on_event( DEF::EVENT_ID script_event, LuaParams lua_in )
 
 		for ( uint i=0; i<m_EventReg[script_event].size(); ++i )
 		{
-			res = m_LuaEngine.RunLuaFunction( "OnEvent", m_EventReg[script_event][i].c_str(), NULL, 
-                                                         lua_params.GetParams(), lua_params.Count() );
+			res = m_LuaEngine.RunLuaFunction( "OnEvent", m_EventReg[script_event][i].c_str(), NULL, &lua_params );
 		}
 	}
 
@@ -92,8 +101,7 @@ LuaParams CScriptMgr::run( std::string script_scope, std::string script_name, Lu
     lua_out.resize(outnum);
 
     bool run_ret = m_LuaEngine.RunLuaFunction( script_name.c_str(), script_scope.c_str(), NULL, 
-                                                lua_in.GetParams(), lua_in.Count(),
-                                                lua_out.GetParams(), lua_out.Count() );
+                                                &lua_in, lua_out.GetParams(), lua_out.Count() );
 
     //nlassert( run_ret );
 
@@ -112,12 +120,30 @@ lua_State * CScriptMgr::GetLuaState()
 
 void CScriptMgr::release()
 {
+    m_LuaEngine.RunLuaFunction( "Main", "Release" );
     m_LuaEngine.Release();
 }
 
 bool CScriptMgr::LoadScrpit( const char* szName )
 {
     return m_LuaEngine.LoadLuaFile(szName);
+}
+
+void CScriptMgr::update()
+{
+    m_LuaEngine.RunLuaFunction( "Main", "Update" );
+}
+
+void CScriptMgr::Export()
+{
+    m_LuaEngine.ExportModule("Utility");
+    m_LuaEngine.ExportModule("ServerNet");
+    
+    
+
+
+    m_LuaEngine.ExportClass("WebSocketNetwork");
+    
 }
 
 

@@ -3,7 +3,7 @@
 #include "../player/player_mgr.h"
 #include <define_attrib.pb.h>
 #include <game_share/static_table/static_table_mgr.h>
-#include <server_share/script_mgr.h>
+#include <server_share/lua/script_mgr.h>
 
 namespace PLS
 {

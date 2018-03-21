@@ -22,6 +22,7 @@ TARGET_LINK_LIBRARIES(  player_logic_service
 						${LUA_LIBRARIES}
 						${PROTOBUF_LIBRARIES}
 						${PBC_LIBRARY}
+						${LIBEVENT_LIBRARY}
 						nelmisc
 						nelnet
 						gameshare

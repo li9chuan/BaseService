@@ -5,7 +5,7 @@
 #include <game_share/tools.h>
 
 #include <player_logic_service/lua/lua_event.h>
-#include <server_share/script_mgr.h>
+#include <server_share/lua/script_mgr.h>
 #include "data_sync.h"
 
 using namespace NLNET;
