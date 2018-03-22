@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <Project Name="service_logic.luaprj" Cmd="" Arg="" Dir="" Toggle="false" >
-    <LuaFile RelativePath=".\Init.lua" />
-    <LuaFile RelativePath=".\Main.lua" />
     <Filter Name="FrameWork" Toggle="false" >
         <LuaFile RelativePath=".\Framework\Class.lua" />
         <LuaFile RelativePath=".\Framework\functions.lua" />
@@ -25,8 +23,13 @@
             <LuaFile RelativePath=".\Framework\ProtoBuffer\protobuf.lua" />
             <LuaFile RelativePath=".\Framework\ProtoBuffer\test.lua" />
         </Filter>
+        <LuaFile RelativePath=".\Framework\InitFramework.lua" />
     </Filter>
-    <Filter Name="PLS" Toggle="true" >
-        <LuaFile RelativePath=".\PLS\LuaTestMsg.lua" />
+    <Filter Name="_PLS" Toggle="false" >
+        <LuaFile RelativePath=".\_PLS\LuaTestMsg.lua" />
+        <LuaFile RelativePath=".\_PLS\_Main.lua" />
+    </Filter>
+    <Filter Name="_FES" Toggle="false" >
+        <LuaFile RelativePath=".\_FES\_Main.lua" />
     </Filter>
 </Project>

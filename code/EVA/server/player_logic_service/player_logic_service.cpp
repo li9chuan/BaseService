@@ -6,6 +6,7 @@
 #include <server_share/server_def.h>
 #include <server_share/lua/lua_engine.h>
 #include <server_share/lua/script_mgr.h>
+#include <server_share/lua/lua_network.h>
 #include <server_share/i18n_def.h>
 #include <game_share/static_table/static_table_mgr.h>
 #include <game_share/singleton_registry.h>
@@ -17,6 +18,7 @@
 #include "player/player_timer_event.h"
 #include "lua/lua_event_callback.h"
 #include <nel/net/naming_client.h>
+
 
 using namespace NLMISC;
 using namespace NLNET;
@@ -65,6 +67,8 @@ public:
         ///////////////////////////////    注册监听事件
         CLuaEventCallback::getInstance().RegisterMoniterEvent();
 
+        
+
 
         ///////////////////////////////
         CI18N::load( Config.getVar("Language").asString() );
@@ -73,6 +77,7 @@ public:
 
         TimerManager->init();
         ScriptMgr.init();
+        LuaNetworkMgr.Init();
 
         ICommand::execute ("loadconfig", *InfoLog);
     }
@@ -86,6 +91,7 @@ public:
         TimerManager->tickUpdate();
 
         ScriptMgr.update();
+        LuaNetworkMgr.Update();
         return true;
     }
 
@@ -93,6 +99,7 @@ public:
     {
 		TimerManager->release();
         ScriptMgr.release();
+        LuaNetworkMgr.Release();
     }
 
 };

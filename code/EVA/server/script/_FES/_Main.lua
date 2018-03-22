@@ -2,46 +2,18 @@
 -- 加载常用模块
 --=========================================================
 
-BasePath = Utility.GetBasePath() .. "/script/";
-package.path = BasePath .. "?.lua;" .. BasePath .. "Framework/?.lua;";
-package.path = package.path .. BasePath .. "Framework/Event/?.lua;";
-package.path = package.path .. BasePath .. "Framework/Net/?.lua;";
+local BasePath = Utility.GetBasePath() .. "/script/";
+package.path = BasePath .. "_FES/?.lua;" .. BasePath .. "Framework/?.lua;";
 
-require("Init")
+require("InitFramework")
 
 OnInit();
-
-LuaTestMsg = require("PLS/LuaTestMsg")
-
-lua_test = LuaTestMsg:new();
-
 
 -- 主入口函数。从这里开始lua逻辑
 function Init()
 	
 	
-	msg_session = {  
-		check = 13,  
-		session = 4611686020574871551,  
-		index = 21
-	}
 
-	code = protobuf.encode("MsgSession", msg_session)
-	Utility.TestPB(code, string.len(code))
-	
---	AddSearchPath( "?.lua" );
---	AddSearchPath( "Framework/?.lua" );
-	
-
-	
---	msg = { "LTst", "neirong" }
---	ServerNet.Send( "PLS", msg );
-	
-	
-	local web_sock = bin_types.WebSocketNetwork.newInstance();
-	web_sock:hello();
-
-	
 end
 
 -- 游戏循环

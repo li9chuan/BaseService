@@ -1,0 +1,316 @@
+
+Log Starting [2018/03/22 14:29:28]
+2018/03/22 14:29:28 WRN 9b68 FES stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:29:29 INF 99dc FES system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:29:29 INF 99dc FES service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:29:29 INF 99dc FES service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:29:29 INF 99dc FES service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:29:29 INF 99dc FES service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'FES' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:05
+2018/03/22 14:29:29 INF 99dc FES service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:29:29 DBG 9bec FES win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* FES frontend_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51118)
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service FES-66 ':51118 (192.168.4.71)'
+2018/03/22 14:29:29 DBG 99dc 192.168.4.71/FES naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid FES-66 at zwkj-PC:51118 (192.168.4.71)
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== T2C
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== U2C
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADD_MSG_BUF
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SYNC_CLIENT_SESSION
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SyncUserPLS
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOAD_SUCESS
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CleanUpClient
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES-66 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/_FES/, 1, 0): adding the path './script/_FES/'
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES-66 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES-66 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES-66 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES-66 : Executing command : 'loadlua'
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES-66 : Load Script...
+2018/03/22 14:29:29 WRN 99dc 192.168.4.71/FES-66 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (main.lua) not found (Main.lua)
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES-66 common.cpp 618 NLMISC::Exception::Exception : Exception will be launched: Path not found for Main.lua
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES-66 : Command 'loadlua' thrown an exception :
+2018/03/22 14:29:29 INF 99dc 192.168.4.71/FES-66 : Path not found for Main.lua
+2018/03/22 14:29:29 AST 99dc 192.168.4.71/FES-66 script_mgr.cpp 31 CScriptMgr::init : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log with no filter:
+-------------------------------
+2018/03/22 14:29:28 FES INF  99dc service.cpp 248 : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:29:28 FES INF  99dc service.cpp 690 : SERVICE: Setting alias name to: 'fes_0'
+2018/03/22 14:29:28 FES WRN  9b68 stdin_monitor_thread.cpp 84 : fgets failed
+2018/03/22 14:29:29 FES INF  99dc system_info.cpp 915 : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:29:29 FES INF  99dc service.cpp 524 : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:29:29 FES INF  99dc service.cpp 524 : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:29:29 FES INF  99dc service.cpp 524 : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:29:29 FES INF  99dc service.cpp 862 : SERVICE: Starting Service 'FES' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:05
+2018/03/22 14:29:29 FES INF  99dc service.cpp 863 : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:29:29 FES DBG  9bec win_displayer.cpp 355 : SERVICE: Set title bar to '*INIT* FES frontend_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc service.cpp 941 : SERVICE: Host: 192.168.4.71
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc command.cpp 149 : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:29:29 192.168.4.71/FES DBG  99dc sock.cpp 354 : LNETL0: Socket 476 connecting to 127.0.0.1:49901 (127.0.0.1)...
+2018/03/22 14:29:29 192.168.4.71/FES DBG  99dc sock.cpp 389 : LNETL0: Socket 476 connected to 127.0.0.1:49901 (127.0.0.1) (local :1216 (127.0.0.1))
+2018/03/22 14:29:29 192.168.4.71/FES DBG  9b88 buf_sock.cpp 471 : LNETL1: CLT 000000000045C030 (socket 476) received buffer (14 bytes): [?????????QP???]
+2018/03/22 14:29:29 192.168.4.71/FES DBG  99dc callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (QP)
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc naming_client.cpp 432 : NC: Received the answer of the query port (51118)
+2018/03/22 14:29:29 192.168.4.71/FES DBG  99dc listen_sock.cpp 92 : LNETL0: Binding listen socket to any address, port 51118
+2018/03/22 14:29:29 192.168.4.71/FES DBG  99dc listen_sock.cpp 81 : LNETL0: Socket 516 listen socket is at 192.168.4.71:51118 (192.168.4.71)
+2018/03/22 14:29:29 192.168.4.71/FES DBG  94a0 buf_server.cpp 763 : LNETL1: Waiting incoming connection...
+2018/03/22 14:29:29 192.168.4.71/FES DBG  9b88 buf_sock.cpp 471 : LNETL1: CLT 000000000045C030 (socket 476) received buffer (47 bytes): [?????????RG?B???????FESB????????????G??????????]
+2018/03/22 14:29:29 192.168.4.71/FES DBG  99dc callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (RG)
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc naming_client.cpp 137 : NC: Registration Broadcast of the service FES-66 ':51118 (192.168.4.71)'
+2018/03/22 14:29:29 192.168.4.71/FES DBG  99dc unified_network.cpp 74 : HNETL5: + naming FES-66 ':51118 (192.168.4.71)'
+2018/03/22 14:29:29 192.168.4.71/FES DBG  99dc naming_client.cpp 372 : NC: Registered service with sid FES-66 at zwkj-PC:51118 (192.168.4.71)
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc unified_network.cpp 635 : HNETL5: Server 'FES' added, registered and listen to port 51118
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc unified_network.cpp 1471 : addCallbackArray =================== INFO
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc unified_network.cpp 1471 : addCallbackArray =================== GET_VIEW
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc unified_network.cpp 1471 : addCallbackArray =================== STOPS
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc unified_network.cpp 1471 : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc unified_network.cpp 1471 : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc unified_network.cpp 1471 : addCallbackArray =================== R_SH_ID
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc unified_network.cpp 1471 : addCallbackArray =================== T2C
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc unified_network.cpp 1471 : addCallbackArray =================== U2C
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc unified_network.cpp 1471 : addCallbackArray =================== ADD_MSG_BUF
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc unified_network.cpp 1471 : addCallbackArray =================== GC
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc unified_network.cpp 1471 : addCallbackArray =================== SYNC_CLIENT_SESSION
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc unified_network.cpp 1471 : addCallbackArray =================== SyncUserPLS
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc unified_network.cpp 1471 : addCallbackArray =================== LOAD_SUCESS
+2018/03/22 14:29:29 192.168.4.71/FES INF  99dc unified_network.cpp 1471 : addCallbackArray =================== CleanUpClient
+2018/03/22 14:29:29 192.168.4.71/FES-66 INF  99dc path.cpp 1021 : PATH: CPath::addSearchPath(./script/_FES/, 1, 0): adding the path './script/_FES/'
+2018/03/22 14:29:29 192.168.4.71/FES-66 INF  99dc path.cpp 1021 : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:29:29 192.168.4.71/FES-66 INF  99dc unified_network.cpp 1471 : addCallbackArray =================== CT_LRC
+2018/03/22 14:29:29 192.168.4.71/FES-66 INF  99dc unified_network.cpp 1471 : addCallbackArray =================== CT_MSG
+2018/03/22 14:29:29 192.168.4.71/FES-66 INF  99dc : Executing command : 'loadlua'
+2018/03/22 14:29:29 192.168.4.71/FES-66 INF  99dc : Load Script...
+2018/03/22 14:29:29 192.168.4.71/FES-66 WRN  99dc path.cpp 579 : PATH: File (main.lua) not found (Main.lua)
+2018/03/22 14:29:29 192.168.4.71/FES-66 INF  99dc common.cpp 618 : Exception will be launched: Path not found for Main.lua
+2018/03/22 14:29:29 192.168.4.71/FES-66 INF  99dc : Command 'loadlua' thrown an exception :
+2018/03/22 14:29:29 192.168.4.71/FES-66 INF  99dc : Path not found for Main.lua
+2018/03/22 14:29:29 192.168.4.71/FES-66 AST  99dc script_mgr.cpp 31 : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log Starting [2018/03/22 14:30:01]
+2018/03/22 14:30:01 WRN 98a4 FES stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:30:02 INF 9af0 FES system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:30:02 INF 9af0 FES service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:30:02 INF 9af0 FES service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:30:02 INF 9af0 FES service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:30:02 INF 9af0 FES service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'FES' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:05
+2018/03/22 14:30:02 INF 9af0 FES service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:30:02 DBG 85e0 192.168.4.71/FES win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* FES frontend_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51119)
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service FES-66 ':51119 (192.168.4.71)'
+2018/03/22 14:30:02 DBG 9af0 192.168.4.71/FES naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid FES-66 at zwkj-PC:51119 (192.168.4.71)
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== T2C
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== U2C
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADD_MSG_BUF
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SYNC_CLIENT_SESSION
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SyncUserPLS
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOAD_SUCESS
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CleanUpClient
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES-66 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/_FES/, 1, 0): adding the path './script/_FES/'
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES-66 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES-66 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES-66 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES-66 : Executing command : 'loadlua'
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES-66 : Load Script...
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES-66 : Loading ./script/_FES/_Main.lua.
+2018/03/22 14:30:02 DBG 9af0 192.168.4.71/FES-66 lua_engine.cpp 179 CLuaEngine::LoadLuaFile : load ./script/_FES/_Main.lua file error, cause ./script/_FES/_Main.lua:12: module 'PLS/LuaTestMsg' not found:
+	no field package.preload['PLS/LuaTestMsg']
+	no file 'E:/BaseService/code/EVA/server/script/_PLS/PLS/LuaTestMsg.lua'
+	no file 'E:/BaseService/co
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES-66 : Load Script Fail.  ./script/_FES/_Main.lua
+2018/03/22 14:30:02 INF 9af0 192.168.4.71/FES-66 : Bad command usage, try 'help loadlua'
+2018/03/22 14:30:02 AST 9af0 192.168.4.71/FES-66 script_mgr.cpp 31 CScriptMgr::init : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log with no filter:
+-------------------------------
+2018/03/22 14:30:01 FES INF  9af0 service.cpp 248 : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:30:01 FES INF  9af0 service.cpp 690 : SERVICE: Setting alias name to: 'fes_0'
+2018/03/22 14:30:01 FES WRN  98a4 stdin_monitor_thread.cpp 84 : fgets failed
+2018/03/22 14:30:02 FES INF  9af0 system_info.cpp 915 : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:30:02 FES INF  9af0 service.cpp 524 : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:30:02 FES INF  9af0 service.cpp 524 : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:30:02 FES INF  9af0 service.cpp 524 : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:30:02 FES INF  9af0 service.cpp 862 : SERVICE: Starting Service 'FES' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:05
+2018/03/22 14:30:02 FES INF  9af0 service.cpp 863 : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 service.cpp 941 : SERVICE: Host: 192.168.4.71
+2018/03/22 14:30:02 192.168.4.71/FES DBG  85e0 win_displayer.cpp 355 : SERVICE: Set title bar to '*INIT* FES frontend_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 command.cpp 149 : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:30:02 192.168.4.71/FES DBG  9af0 sock.cpp 354 : LNETL0: Socket 476 connecting to 127.0.0.1:49901 (127.0.0.1)...
+2018/03/22 14:30:02 192.168.4.71/FES DBG  9af0 sock.cpp 389 : LNETL0: Socket 476 connected to 127.0.0.1:49901 (127.0.0.1) (local :1230 (127.0.0.1))
+2018/03/22 14:30:02 192.168.4.71/FES DBG  9ac4 buf_sock.cpp 471 : LNETL1: CLT 000000000018BE30 (socket 476) received buffer (14 bytes): [?????????QP???]
+2018/03/22 14:30:02 192.168.4.71/FES DBG  9af0 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (QP)
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 naming_client.cpp 432 : NC: Received the answer of the query port (51119)
+2018/03/22 14:30:02 192.168.4.71/FES DBG  9af0 listen_sock.cpp 92 : LNETL0: Binding listen socket to any address, port 51119
+2018/03/22 14:30:02 192.168.4.71/FES DBG  9af0 listen_sock.cpp 81 : LNETL0: Socket 516 listen socket is at 192.168.4.71:51119 (192.168.4.71)
+2018/03/22 14:30:02 192.168.4.71/FES DBG  99d4 buf_server.cpp 763 : LNETL1: Waiting incoming connection...
+2018/03/22 14:30:02 192.168.4.71/FES DBG  9ac4 buf_sock.cpp 471 : LNETL1: CLT 000000000018BE30 (socket 476) received buffer (47 bytes): [?????????RG?B???????FESB????????????G??????????]
+2018/03/22 14:30:02 192.168.4.71/FES DBG  9af0 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (RG)
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 naming_client.cpp 137 : NC: Registration Broadcast of the service FES-66 ':51119 (192.168.4.71)'
+2018/03/22 14:30:02 192.168.4.71/FES DBG  9af0 unified_network.cpp 74 : HNETL5: + naming FES-66 ':51119 (192.168.4.71)'
+2018/03/22 14:30:02 192.168.4.71/FES DBG  9af0 naming_client.cpp 372 : NC: Registered service with sid FES-66 at zwkj-PC:51119 (192.168.4.71)
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 unified_network.cpp 635 : HNETL5: Server 'FES' added, registered and listen to port 51119
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== INFO
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== GET_VIEW
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== STOPS
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== R_SH_ID
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== T2C
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== U2C
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== ADD_MSG_BUF
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== GC
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== SYNC_CLIENT_SESSION
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== SyncUserPLS
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== LOAD_SUCESS
+2018/03/22 14:30:02 192.168.4.71/FES INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== CleanUpClient
+2018/03/22 14:30:02 192.168.4.71/FES-66 INF  9af0 path.cpp 1021 : PATH: CPath::addSearchPath(./script/_FES/, 1, 0): adding the path './script/_FES/'
+2018/03/22 14:30:02 192.168.4.71/FES-66 INF  9af0 path.cpp 1021 : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:30:02 192.168.4.71/FES-66 INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== CT_LRC
+2018/03/22 14:30:02 192.168.4.71/FES-66 INF  9af0 unified_network.cpp 1471 : addCallbackArray =================== CT_MSG
+2018/03/22 14:30:02 192.168.4.71/FES-66 INF  9af0 : Executing command : 'loadlua'
+2018/03/22 14:30:02 192.168.4.71/FES-66 INF  9af0 : Load Script...
+2018/03/22 14:30:02 192.168.4.71/FES-66 INF  9af0 : Loading ./script/_FES/_Main.lua.
+2018/03/22 14:30:02 192.168.4.71/FES-66 DBG  9af0 lua_engine.cpp 179 : load ./script/_FES/_Main.lua file error, cause ./script/_FES/_Main.lua:12: module 'PLS/LuaTestMsg' not found:
+	no field package.preload['PLS/LuaTestMsg']
+	no file 'E:/BaseService/code/EVA/server/script/_PLS/PLS/LuaTestMsg.lua'
+	no file 'E:/BaseService/co
+2018/03/22 14:30:02 192.168.4.71/FES-66 INF  9af0 : Load Script Fail.  ./script/_FES/_Main.lua
+2018/03/22 14:30:02 192.168.4.71/FES-66 INF  9af0 : Bad command usage, try 'help loadlua'
+2018/03/22 14:30:02 192.168.4.71/FES-66 AST  9af0 script_mgr.cpp 31 : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log Starting [2018/03/22 14:31:12]
+2018/03/22 14:31:12 WRN 9330 FES stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:31:12 INF 8cd4 FES system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:31:12 INF 8cd4 FES service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:31:12 INF 8cd4 FES service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:31:12 INF 8cd4 FES service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:31:12 INF 8cd4 FES service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'FES' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:05
+2018/03/22 14:31:12 INF 8cd4 FES service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:31:12 DBG 9ac8 192.168.4.71/FES win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* FES frontend_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51120)
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service FES-66 ':51120 (192.168.4.71)'
+2018/03/22 14:31:12 DBG 8cd4 192.168.4.71/FES naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid FES-66 at zwkj-PC:51120 (192.168.4.71)
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== T2C
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== U2C
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADD_MSG_BUF
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SYNC_CLIENT_SESSION
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SyncUserPLS
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOAD_SUCESS
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CleanUpClient
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES-66 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/_FES/, 1, 0): adding the path './script/_FES/'
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES-66 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES-66 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES-66 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES-66 : Executing command : 'loadlua'
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES-66 : Load Script...
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES-66 : Loading ./script/_FES/_Main.lua.
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES-66 : Load Script Sucess.
+2018/03/22 14:31:12 INF 8cd4 192.168.4.71/FES-66 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== _L
+2018/03/22 14:31:13 WRN 8cd4 192.168.4.71/FES-66 unified_network.cpp 875 NLNET::CUnifiedNetwork::addService : HNETL5: can't connect to LS (sid 256) now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline)) '127.0.0.1:49999 (127.0.0.1)'
+2018/03/22 14:31:13 INF 8cd4 192.168.4.71/FES-66 fe_receive_sub.cpp 60 CFeReceiveSub::init : FERECV: Starting external datagram socket
+2018/03/22 14:31:13 INF 8cd4 192.168.4.71/FES-66 fe_receive_task.cpp 114 CFEReceiveTask::CFEReceiveTask : Binding all network interfaces on port 9703 (9703 asked)
+2018/03/22 14:31:13 INF 8cd4 192.168.4.71/FES-66 service.cpp 1232 NLNET::IService::main : SERVICE: Service initialized, executing StartCommands
+2018/03/22 14:31:13 INF 8cd4 192.168.4.71/FES-66 service.cpp 1278 NLNET::IService::main : SERVICE: Service ready
+2018/03/22 14:31:13 DBG 8cd4 192.168.4.71/FES-66 win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to 'FES frontend_service : Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:31:16 INF 8cd4 192.168.4.71/FES-66 naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service PLS-1 ':51121 (192.168.4.71)'
+2018/03/22 14:31:23 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:31:34 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:31:45 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:31:56 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:32:07 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:32:18 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:32:29 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:32:37 8cd4 192.168.4.71/FES-66 : Executing command : 'lua 'msg = { "LTst", "neirong" };ServerNet.Send( "PLS", msg );''
+2018/03/22 14:32:37 8cd4 192.168.4.71/FES-66 : Bad command usage, try 'help lua'
+2018/03/22 14:32:37 8cd4 192.168.4.71/FES-66 : Command 'ServerNet.Send(' : can't found object named 'ServerNet'
+2018/03/22 14:32:37 8cd4 192.168.4.71/FES-66 : Command ''' not found, try 'help'
+2018/03/22 14:32:40 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:32:51 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:33:02 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:33:13 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:33:22 8cd4 192.168.4.71/FES-66 : Executing command : 'lua "msg = { 'LTst', 'neirong' };ServerNet.Send( 'PLS', msg );"'
+2018/03/22 14:33:50 WRN 8cd4 192.168.4.71/FES-66 unified_network.cpp 1381 NLNET::CUnifiedNetwork::send : HNETL5: Can't send _L to the service '52428' because not in _IdCnx
+2018/03/22 14:33:51 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:34:02 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:34:13 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:34:24 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:34:33 8cd4 192.168.4.71/FES-66 : Executing command : 'lua "msg = { 'LTst', 'neirong' };ServerNet.Broadcast( 'PLS', msg );"'
+2018/03/22 14:34:37 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:34:48 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:34:59 WRN 55a0 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+
+Log Starting [2018/03/22 14:35:40]
+2018/03/22 14:35:40 WRN 9624 FES stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:35:40 INF 8f70 FES system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:35:40 INF 8f70 FES service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:35:40 INF 8f70 FES service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:35:40 INF 8f70 FES service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:35:40 INF 8f70 FES service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'FES' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:05
+2018/03/22 14:35:40 INF 8f70 FES service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:35:40 DBG 9a60 FES win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* FES frontend_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51123)
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service PLS-1 ':51122 (192.168.4.71)'
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service FES-66 ':51123 (192.168.4.71)'
+2018/03/22 14:35:40 DBG 8f70 192.168.4.71/FES naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid FES-66 at zwkj-PC:51123 (192.168.4.71)
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== T2C
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== U2C
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADD_MSG_BUF
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SYNC_CLIENT_SESSION
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SyncUserPLS
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOAD_SUCESS
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CleanUpClient
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES-66 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/_FES/, 1, 0): adding the path './script/_FES/'
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES-66 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES-66 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES-66 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES-66 : Executing command : 'loadlua'
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES-66 : Load Script...
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES-66 : Loading ./script/_FES/_Main.lua.
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES-66 : Load Script Sucess.
+2018/03/22 14:35:40 INF 8f70 192.168.4.71/FES-66 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== _L
+2018/03/22 14:35:41 WRN 8f70 192.168.4.71/FES-66 unified_network.cpp 875 NLNET::CUnifiedNetwork::addService : HNETL5: can't connect to LS (sid 256) now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline)) '127.0.0.1:49999 (127.0.0.1)'
+2018/03/22 14:35:41 INF 8f70 192.168.4.71/FES-66 fe_receive_sub.cpp 60 CFeReceiveSub::init : FERECV: Starting external datagram socket
+2018/03/22 14:35:41 INF 8f70 192.168.4.71/FES-66 fe_receive_task.cpp 114 CFEReceiveTask::CFEReceiveTask : Binding all network interfaces on port 9703 (9703 asked)
+2018/03/22 14:35:41 INF 8f70 192.168.4.71/FES-66 service.cpp 1232 NLNET::IService::main : SERVICE: Service initialized, executing StartCommands
+2018/03/22 14:35:41 INF 8f70 192.168.4.71/FES-66 service.cpp 1278 NLNET::IService::main : SERVICE: Service ready
+2018/03/22 14:35:41 DBG 8f70 192.168.4.71/FES-66 win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to 'FES frontend_service : Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:35:51 WRN 7bc8 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))
+2018/03/22 14:35:52 8f70 192.168.4.71/FES-66 : Executing command : 'lua "msg = { 'LTst', 'neirong' };ServerNet.Broadcast( 'PLS', msg );"'
+2018/03/22 14:36:05 WRN 7bc8 192.168.4.71/FES-66 unified_network.cpp 494 NLNET::CAliveCheck::run : HNETL5: can't connect to LS-256 now (Socket error: Connection to 127.0.0.1:49999 (127.0.0.1) failed (10061: Connection refused, the server may be offline))

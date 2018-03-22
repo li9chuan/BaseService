@@ -10,33 +10,6 @@ using namespace DEF;
 using namespace NLMISC;
 using namespace NLNET;
 
-NLMISC_COMMAND (loadlua, "reload lua file.", "")
-{
-    if(args.size() != 0) return false;
-
-    log.displayNL ("Load Script...");
-
-    CConfigFile::CVar* pVar = NULL;
-
-    if ((pVar = Config.getVarPtr("LuaScript")) != NULL)
-    {
-        for (uint i = 0; i < pVar->size(); ++i)
-        {
-            string script_full_path = CPath::lookup( pVar->asString(i) );
-            log.displayNL ("Loading %s.", script_full_path.c_str());
-
-            if ( !ScriptMgr.LoadScrpit(script_full_path.c_str()) )
-            {
-                log.displayNL ("Load Script Fail.  %s", script_full_path.c_str());
-                return false;
-            }
-        }
-    }
-
-    log.displayNL ("Load Script Sucess.");
-    return true;
-}
-
 void CScriptMgr::init( LUA_OPEN pLuaOpen )
 {
 	m_EventReg.resize(SCRIPT_EVENT_MAX);
@@ -57,7 +30,7 @@ void CScriptMgr::init( LUA_OPEN pLuaOpen )
 
     nlassert(ICommand::execute ("loadlua", *InfoLog));
 
-    m_LuaEngine.RunLuaFunction( "Main", "Init" );
+    m_LuaEngine.RunLuaFunction( "_Main", "Init" );
 
 
     //m_LuaEngine.GetScriptHandle()->CallFunc<const char*, std::string>("NetWorkHandler.OnMessage", "11111", str);
@@ -146,4 +119,46 @@ void CScriptMgr::Export()
     
 }
 
+void CScriptMgr::ExecString( std::string exec_str )
+{
+    m_LuaEngine.GetScriptHandle()->ExecString( exec_str.c_str() );
+}
+
+
+
+
+
+NLMISC_COMMAND (lua, "run lua string.", "lua")
+{
+    if(args.size() != 1) return false;
+    ScriptMgr.ExecString( args[0] );
+    return true;
+}
+
+NLMISC_COMMAND (loadlua, "reload lua script.", "lua")
+{
+    if(args.size() != 0) return false;
+
+    log.displayNL ("Load Script...");
+
+    CConfigFile::CVar* pVar = NULL;
+
+    if ((pVar = Config.getVarPtr("LuaScript")) != NULL)
+    {
+        for (uint i = 0; i < pVar->size(); ++i)
+        {
+            string script_full_path = CPath::lookup( pVar->asString(i) );
+            log.displayNL ("Loading %s.", script_full_path.c_str());
+
+            if ( !ScriptMgr.LoadScrpit(script_full_path.c_str()) )
+            {
+                log.displayNL ("Load Script Fail.  %s", script_full_path.c_str());
+                return false;
+            }
+        }
+    }
+
+    log.displayNL ("Load Script Sucess.");
+    return true;
+}
 

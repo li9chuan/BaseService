@@ -8,13 +8,18 @@ function LuaTestMsg:ctor( Data )
 	self:Init();
 end
 
-function LuaTestMsg:LuaTestCB( proto_buf )
+function LuaTestMsg:LuaTestCB( msg_from, proto_buf )
 
 	local msg_session = protobuf.decode("MsgSession" , proto_buf)
 	
 	print(msg_session.check);
 	print(msg_session.session);
 	print(msg_session.index);
+	
+	code = protobuf.encode("MsgSession", msg_session)
+	
+	msg = { "LTst", "neirong" };
+	ServerNet.Send( msg_from, msg );
 	
 end
 

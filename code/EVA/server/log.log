@@ -2055,3 +2055,292 @@ Log Starting [2018/03/21 20:33:46]
 2018/03/21 20:33:46 INF 8f78 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
 2018/03/21 20:33:46 INF 8f78 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
 2018/03/21 20:33:46 INF 8f78 PLS service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'lgc_0'
+
+Log Starting [2018/03/22 11:45:04]
+2018/03/22 11:45:04 INF 2554 player_logic_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 11:45:04 INF 2554 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 11:45:04 INF 2554 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 11:45:04 INF 2554 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 11:45:04 INF 2554 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 11:45:04 INF 2554 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 11:45:04 INF 2554 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 11:45:04 INF 2554 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 11:45:04 DBG 2554 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/player_logic_service.cfg' in the config file
+2018/03/22 11:45:04 INF 2554 PLS config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/player_logic_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 11:45:04 DBG 2554 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 11:45:04 INF 2554 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 11:45:04 INF 2554 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 11:45:04 INF 2554 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 11:45:04 INF 2554 PLS service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'lgc_0'
+
+Log Starting [2018/03/22 14:11:50]
+2018/03/22 14:11:50 INF 87a8 player_logic_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:11:50 INF 87a8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:11:50 INF 87a8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:11:50 INF 87a8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:11:50 INF 87a8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:11:50 INF 87a8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:11:50 INF 87a8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:11:50 INF 87a8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:11:50 DBG 87a8 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/player_logic_service.cfg' in the config file
+2018/03/22 14:11:50 INF 87a8 PLS config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/player_logic_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:11:50 DBG 87a8 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:11:50 INF 87a8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:11:50 INF 87a8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:11:50 INF 87a8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:11:50 INF 87a8 PLS service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'lgc_0'
+
+Log Starting [2018/03/22 14:12:44]
+2018/03/22 14:12:44 INF 90a8 player_logic_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:12:44 INF 90a8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:12:44 INF 90a8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:12:44 INF 90a8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:12:44 INF 90a8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:12:44 INF 90a8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:12:44 INF 90a8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:12:44 INF 90a8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:12:44 DBG 90a8 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/player_logic_service.cfg' in the config file
+2018/03/22 14:12:44 INF 90a8 PLS config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/player_logic_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:12:44 DBG 90a8 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:12:44 INF 90a8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:12:44 INF 90a8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:12:44 INF 90a8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:12:44 INF 90a8 PLS service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'lgc_0'
+
+Log Starting [2018/03/22 14:13:09]
+2018/03/22 14:13:09 INF 9784 player_logic_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:13:09 INF 9784 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:13:09 INF 9784 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:13:09 INF 9784 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:13:09 INF 9784 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:13:09 INF 9784 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:13:09 INF 9784 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:13:09 INF 9784 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:13:09 DBG 9784 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/player_logic_service.cfg' in the config file
+2018/03/22 14:13:09 INF 9784 PLS config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/player_logic_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:13:09 DBG 9784 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:13:09 INF 9784 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:13:09 INF 9784 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:13:09 INF 9784 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:13:09 INF 9784 PLS service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'lgc_0'
+
+Log Starting [2018/03/22 14:13:56]
+2018/03/22 14:13:56 INF 97ec player_logic_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:13:56 INF 97ec player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:13:56 INF 97ec player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:13:56 INF 97ec player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:13:56 INF 97ec player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:13:56 INF 97ec player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:13:56 INF 97ec PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:13:56 INF 97ec PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:13:56 DBG 97ec PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/player_logic_service.cfg' in the config file
+2018/03/22 14:13:56 INF 97ec PLS config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/player_logic_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:13:56 DBG 97ec PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:13:56 INF 97ec PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:13:56 INF 97ec PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:13:56 INF 97ec PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:13:56 INF 97ec PLS service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'lgc_0'
+
+Log Starting [2018/03/22 14:14:16]
+2018/03/22 14:14:16 INF 9a20 player_logic_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:14:16 INF 9a20 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:14:16 INF 9a20 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:14:16 INF 9a20 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:14:16 INF 9a20 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:14:16 INF 9a20 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:14:16 INF 9a20 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:14:16 INF 9a20 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:14:16 DBG 9a20 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/player_logic_service.cfg' in the config file
+2018/03/22 14:14:16 INF 9a20 PLS config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/player_logic_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:14:16 DBG 9a20 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:14:16 INF 9a20 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:14:16 INF 9a20 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:14:16 INF 9a20 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:14:16 INF 9a20 PLS service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'lgc_0'
+
+Log Starting [2018/03/22 14:17:43]
+2018/03/22 14:17:43 INF 87a8 player_logic_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:17:43 INF 87a8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:17:43 INF 87a8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:17:43 INF 87a8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:17:43 INF 87a8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:17:43 INF 87a8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:17:43 INF 87a8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:17:43 INF 87a8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:17:43 DBG 87a8 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/player_logic_service.cfg' in the config file
+2018/03/22 14:17:43 INF 87a8 PLS config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/player_logic_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:17:43 DBG 87a8 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:17:43 INF 87a8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:17:43 INF 87a8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:17:43 INF 87a8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:17:43 INF 87a8 PLS service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'lgc_0'
+
+Log Starting [2018/03/22 14:20:11]
+2018/03/22 14:20:11 INF 65e4 player_logic_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:20:11 INF 65e4 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:20:11 INF 65e4 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:20:11 INF 65e4 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:20:11 INF 65e4 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:20:11 INF 65e4 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:20:11 INF 65e4 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:20:11 INF 65e4 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:20:11 DBG 65e4 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/player_logic_service.cfg' in the config file
+2018/03/22 14:20:11 INF 65e4 PLS config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/player_logic_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:20:11 DBG 65e4 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:20:11 INF 65e4 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:20:11 INF 65e4 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:20:11 INF 65e4 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:20:11 INF 65e4 PLS service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'lgc_0'
+
+Log Starting [2018/03/22 14:21:36]
+2018/03/22 14:21:36 INF 9560 player_logic_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:21:36 INF 9560 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:21:36 INF 9560 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:21:36 INF 9560 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:21:36 INF 9560 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:21:36 INF 9560 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:21:36 INF 9560 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:21:36 INF 9560 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:21:36 DBG 9560 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/player_logic_service.cfg' in the config file
+2018/03/22 14:21:36 INF 9560 PLS config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/player_logic_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:21:36 DBG 9560 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:21:36 INF 9560 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:21:36 INF 9560 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:21:36 INF 9560 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:21:36 INF 9560 PLS service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'lgc_0'
+
+Log Starting [2018/03/22 14:22:35]
+2018/03/22 14:22:35 INF 95e4 player_logic_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:22:35 INF 95e4 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:22:35 INF 95e4 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:22:35 INF 95e4 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:22:35 INF 95e4 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:22:35 INF 95e4 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:22:35 INF 95e4 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:22:35 INF 95e4 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:22:35 DBG 95e4 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/player_logic_service.cfg' in the config file
+2018/03/22 14:22:35 INF 95e4 PLS config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/player_logic_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:22:35 DBG 95e4 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:22:35 INF 95e4 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:22:35 INF 95e4 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:22:35 INF 95e4 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:22:35 INF 95e4 PLS service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'lgc_0'
+
+Log Starting [2018/03/22 14:28:26]
+2018/03/22 14:28:26 INF 9468 player_logic_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:28:26 INF 9468 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:28:26 INF 9468 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:28:26 INF 9468 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:28:26 INF 9468 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:28:26 INF 9468 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:28:26 INF 9468 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:28:26 INF 9468 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:28:26 DBG 9468 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/player_logic_service.cfg' in the config file
+2018/03/22 14:28:26 INF 9468 PLS config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/player_logic_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:28:26 DBG 9468 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:28:26 INF 9468 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:28:26 INF 9468 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:28:26 INF 9468 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:28:26 INF 9468 PLS service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'lgc_0'
+
+Log Starting [2018/03/22 14:29:28]
+2018/03/22 14:29:28 INF 99dc frontend_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:29:28 INF 99dc frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:29:28 INF 99dc frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:29:28 INF 99dc frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:29:28 INF 99dc frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:29:28 INF 99dc frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:29:28 INF 99dc FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:29:28 INF 99dc FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:29:28 DBG 99dc FES config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/frontend_service.cfg' in the config file
+2018/03/22 14:29:28 INF 99dc FES config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/frontend_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:29:28 DBG 99dc FES config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:29:28 INF 99dc FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:29:28 INF 99dc FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:29:28 INF 99dc FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:29:28 INF 99dc FES service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'fes_0'
+
+Log Starting [2018/03/22 14:30:01]
+2018/03/22 14:30:01 INF 9af0 frontend_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:30:01 INF 9af0 frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:30:01 INF 9af0 frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:30:01 INF 9af0 frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:30:01 INF 9af0 frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:30:01 INF 9af0 frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:30:01 INF 9af0 FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:30:01 INF 9af0 FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:30:01 DBG 9af0 FES config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/frontend_service.cfg' in the config file
+2018/03/22 14:30:01 INF 9af0 FES config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/frontend_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:30:01 DBG 9af0 FES config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:30:01 INF 9af0 FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:30:01 INF 9af0 FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:30:01 INF 9af0 FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:30:01 INF 9af0 FES service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'fes_0'
+
+Log Starting [2018/03/22 14:31:12]
+2018/03/22 14:31:12 INF 8cd4 frontend_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:31:12 INF 8cd4 frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:31:12 INF 8cd4 frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:31:12 INF 8cd4 frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:31:12 INF 8cd4 frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:31:12 INF 8cd4 frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:31:12 INF 8cd4 FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:31:12 INF 8cd4 FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:31:12 DBG 8cd4 FES config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/frontend_service.cfg' in the config file
+2018/03/22 14:31:12 INF 8cd4 FES config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/frontend_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:31:12 DBG 8cd4 FES config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:31:12 INF 8cd4 FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:31:12 INF 8cd4 FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:31:12 INF 8cd4 FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:31:12 INF 8cd4 FES service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'fes_0'
+
+Log Starting [2018/03/22 14:31:15]
+2018/03/22 14:31:15 INF 93b8 player_logic_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:31:15 INF 93b8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:31:15 INF 93b8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:31:15 INF 93b8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:31:15 INF 93b8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:31:15 INF 93b8 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:31:15 INF 93b8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:31:15 INF 93b8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:31:15 DBG 93b8 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/player_logic_service.cfg' in the config file
+2018/03/22 14:31:15 INF 93b8 PLS config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/player_logic_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:31:15 DBG 93b8 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:31:15 INF 93b8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:31:15 INF 93b8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:31:15 INF 93b8 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:31:15 INF 93b8 PLS service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'lgc_0'
+
+Log Starting [2018/03/22 14:35:35]
+2018/03/22 14:35:35 INF 95e4 player_logic_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:35:35 INF 95e4 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:35:35 INF 95e4 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:35:35 INF 95e4 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:35:35 INF 95e4 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:35:35 INF 95e4 player_logic_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:35:35 INF 95e4 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:35:35 INF 95e4 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:35:35 DBG 95e4 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/player_logic_service.cfg' in the config file
+2018/03/22 14:35:35 INF 95e4 PLS config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/player_logic_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:35:35 DBG 95e4 PLS config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:35:35 INF 95e4 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:35:35 INF 95e4 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:35:35 INF 95e4 PLS service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:35:35 INF 95e4 PLS service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'lgc_0'
+
+Log Starting [2018/03/22 14:35:39]
+2018/03/22 14:35:39 INF 8f70 frontend_service.exe command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CModuleManager'
+2018/03/22 14:35:39 INF 8f70 frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorService' factory
+2018/03/22 14:35:39 INF 8f70 frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminExecutorServiceClient' factory
+2018/03/22 14:35:39 INF 8f70 frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'AdminService' factory
+2018/03/22 14:35:39 INF 8f70 frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'LocalGateway' factory
+2018/03/22 14:35:39 INF 8f70 frontend_service.exe module_manager.cpp 228 NLNET::CModuleManager::addModuleFactoryRegistry : Adding module 'StandardGateway' factory
+2018/03/22 14:35:39 INF 8f70 FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'ConfigDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:35:39 INF 8f70 FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:35:39 DBG 8f70 FES config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/frontend_service.cfg' in the config file
+2018/03/22 14:35:39 INF 8f70 FES config_file.cpp 476 NLMISC::CConfigFile::reparse : CF: RootConfigFilename variable found in the 'E:/BaseService/code/EVA/server/frontend_service.cfg' config file, parse the root config file 'E:/BaseService/code/EVA/server/common.cfg'
+2018/03/22 14:35:39 DBG 8f70 FES config_file.cpp 401 NLMISC::CConfigFile::reparse : CF: Adding config file 'E:/BaseService/code/EVA/server/common.cfg' in the config file
+2018/03/22 14:35:39 INF 8f70 FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:35:39 INF 8f70 FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:35:39 INF 8f70 FES service.cpp 248 NLNET::cbDirectoryChanged : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:35:39 INF 8f70 FES service.cpp 690 NLNET::IService::main : SERVICE: Setting alias name to: 'fes_0'

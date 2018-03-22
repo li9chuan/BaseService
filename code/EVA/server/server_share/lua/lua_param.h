@@ -5,12 +5,7 @@
 #include <nel/misc/log.h>
 #include <string>
 
-extern   "C"   
-{   
-#include   <lua.h> 
-#include   <lualib.h>   
-#include   <lauxlib.h>
-}
+#include <lua.hpp>
 
 class LuaParam
 {
@@ -71,7 +66,7 @@ class LuaParams
 public:
     enum TParamsDefine
     {
-        MAX_PARAMS = 2,
+        MAX_PARAMS = 3,
     };
 
     LuaParams():m_Count(0){}
@@ -97,13 +92,13 @@ public:
         m_Params[1].SetString( param2.c_str(), param2.size() );
     }
 
-    //LuaParams( lua_Number param1, lua_Number param2, lua_Number param3 ):
-    //    m_Count(3)
-    //{
-    //    m_Params[0].SetInt(param1);
-    //    m_Params[1].SetInt(param2);
-    //    m_Params[2].SetInt(param3);
-    //}
+    LuaParams( lua_Integer param1, std::string& param2, std::string& param3 ):
+        m_Count(3)
+    {
+        m_Params[0].SetInt(param1);
+        m_Params[1].SetString( param2.c_str(), param2.size() );
+        m_Params[2].SetString( param3.c_str(), param3.size() );
+    }
 
     //LuaParams( lua_Number param1, lua_Number param2, lua_Number param3 , lua_Number param4 ):
     //m_Count(4)

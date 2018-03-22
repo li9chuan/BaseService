@@ -1621,3 +1621,1055 @@ Log Starting [2018/03/21 20:33:46]
 2018/03/21 20:33:47 INF 8f78 192.168.4.71/PLS-1 service.cpp 1232 NLNET::IService::main : SERVICE: Service initialized, executing StartCommands
 2018/03/21 20:33:47 INF 8f78 192.168.4.71/PLS-1 service.cpp 1278 NLNET::IService::main : SERVICE: Service ready
 2018/03/21 20:33:47 DBG 8f78 192.168.4.71/PLS-1 win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to 'PLS player_logic_service : Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+
+Log Starting [2018/03/22 11:45:04]
+2018/03/22 11:45:04 WRN 99c8 PLS stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 11:45:05 INF 2554 PLS system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 11:45:05 INF 2554 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 11:45:05 INF 2554 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 11:45:05 INF 2554 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 11:45:05 INF 2554 PLS service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 11:45:05 INF 2554 PLS service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 11:45:05 DBG 17fc 192.168.4.71/PLS win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51107)
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service PLS-1 ':51107 (192.168.4.71)'
+2018/03/22 11:45:05 DBG 2554 192.168.4.71/PLS naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid PLS-1 at zwkj-PC:51107 (192.168.4.71)
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SCS
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SPLY
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOGOUT
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/, 1, 0): adding the path './script/'
+2018/03/22 11:45:05 WRN 2554 192.168.4.71/PLS-1 path.cpp 1532 NLMISC::CFileContainer::insertFileInMap : PATH: CPath::insertFileInMap(InitFramework.lua, ./script/InitFramework.lua, 0, lua): already inserted from './script/Framework/', skip it
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script.pls/, 1, 0): adding the path './script.pls/'
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 11:45:05 WRN 2554 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 11:45:05 WRN 2554 192.168.4.71/PLS-1 i18n.cpp 140 NLMISC::CI18N::loadFileIntoMap : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS-1 : Executing command : 'loadlua'
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS-1 : Load Script...
+2018/03/22 11:45:05 WRN 2554 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (main.lua) not found (Main.lua)
+2018/03/22 11:45:05 INF 2554 192.168.4.71/PLS-1 common.cpp 618 NLMISC::Exception::Exception : Exception will be launched: Path not found for Main.lua
+2018/03/22 11:45:06 INF 2554 192.168.4.71/PLS-1 : Command 'loadlua' thrown an exception :
+2018/03/22 11:45:06 INF 2554 192.168.4.71/PLS-1 : Path not found for Main.lua
+2018/03/22 11:45:06 AST 2554 192.168.4.71/PLS-1 script_mgr.cpp 58 CScriptMgr::init : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log with no filter:
+-------------------------------
+2018/03/22 11:45:04 PLS INF  2554 service.cpp 248 : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 11:45:04 PLS INF  2554 service.cpp 690 : SERVICE: Setting alias name to: 'lgc_0'
+2018/03/22 11:45:04 PLS WRN  99c8 stdin_monitor_thread.cpp 84 : fgets failed
+2018/03/22 11:45:05 PLS INF  2554 system_info.cpp 915 : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 11:45:05 PLS INF  2554 service.cpp 524 : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 11:45:05 PLS INF  2554 service.cpp 524 : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 11:45:05 PLS INF  2554 service.cpp 524 : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 11:45:05 PLS INF  2554 service.cpp 862 : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 11:45:05 PLS INF  2554 service.cpp 863 : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 11:45:05 192.168.4.71/PLS INF  2554 service.cpp 941 : SERVICE: Host: 192.168.4.71
+2018/03/22 11:45:05 192.168.4.71/PLS INF  2554 command.cpp 149 : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 11:45:05 192.168.4.71/PLS DBG  2554 sock.cpp 354 : LNETL0: Socket 460 connecting to 127.0.0.1:49901 (127.0.0.1)...
+2018/03/22 11:45:05 192.168.4.71/PLS DBG  2554 sock.cpp 389 : LNETL0: Socket 460 connected to 127.0.0.1:49901 (127.0.0.1) (local :63597 (127.0.0.1))
+2018/03/22 11:45:05 192.168.4.71/PLS DBG  17fc win_displayer.cpp 355 : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 11:45:05 192.168.4.71/PLS DBG  8eb8 buf_sock.cpp 471 : LNETL1: CLT 000000000031AA20 (socket 460) received buffer (14 bytes): [?????????QP???]
+2018/03/22 11:45:05 192.168.4.71/PLS DBG  2554 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (QP)
+2018/03/22 11:45:05 192.168.4.71/PLS INF  2554 naming_client.cpp 432 : NC: Received the answer of the query port (51107)
+2018/03/22 11:45:05 192.168.4.71/PLS DBG  2554 listen_sock.cpp 92 : LNETL0: Binding listen socket to any address, port 51107
+2018/03/22 11:45:05 192.168.4.71/PLS DBG  2554 listen_sock.cpp 81 : LNETL0: Socket 516 listen socket is at 192.168.4.71:51107 (192.168.4.71)
+2018/03/22 11:45:05 192.168.4.71/PLS DBG  196c buf_server.cpp 763 : LNETL1: Waiting incoming connection...
+2018/03/22 11:45:05 192.168.4.71/PLS DBG  8eb8 buf_sock.cpp 471 : LNETL1: CLT 000000000031AA20 (socket 460) received buffer (47 bytes): [?????????RG?????????PLS?????????????G??????????]
+2018/03/22 11:45:05 192.168.4.71/PLS DBG  2554 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (RG)
+2018/03/22 11:45:05 192.168.4.71/PLS INF  2554 naming_client.cpp 137 : NC: Registration Broadcast of the service PLS-1 ':51107 (192.168.4.71)'
+2018/03/22 11:45:05 192.168.4.71/PLS DBG  2554 unified_network.cpp 74 : HNETL5: + naming PLS-1 ':51107 (192.168.4.71)'
+2018/03/22 11:45:05 192.168.4.71/PLS DBG  2554 naming_client.cpp 372 : NC: Registered service with sid PLS-1 at zwkj-PC:51107 (192.168.4.71)
+2018/03/22 11:45:05 192.168.4.71/PLS INF  2554 unified_network.cpp 635 : HNETL5: Server 'PLS' added, registered and listen to port 51107
+2018/03/22 11:45:05 192.168.4.71/PLS INF  2554 unified_network.cpp 1471 : addCallbackArray =================== INFO
+2018/03/22 11:45:05 192.168.4.71/PLS INF  2554 unified_network.cpp 1471 : addCallbackArray =================== GET_VIEW
+2018/03/22 11:45:05 192.168.4.71/PLS INF  2554 unified_network.cpp 1471 : addCallbackArray =================== STOPS
+2018/03/22 11:45:05 192.168.4.71/PLS INF  2554 unified_network.cpp 1471 : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 11:45:05 192.168.4.71/PLS INF  2554 unified_network.cpp 1471 : addCallbackArray =================== ADMIN_PING
+2018/03/22 11:45:05 192.168.4.71/PLS INF  2554 unified_network.cpp 1471 : addCallbackArray =================== R_SH_ID
+2018/03/22 11:45:05 192.168.4.71/PLS INF  2554 unified_network.cpp 1471 : addCallbackArray =================== SCS
+2018/03/22 11:45:05 192.168.4.71/PLS INF  2554 unified_network.cpp 1471 : addCallbackArray =================== SPLY
+2018/03/22 11:45:05 192.168.4.71/PLS INF  2554 unified_network.cpp 1471 : addCallbackArray =================== GC
+2018/03/22 11:45:05 192.168.4.71/PLS INF  2554 unified_network.cpp 1471 : addCallbackArray =================== LOGOUT
+2018/03/22 11:45:05 192.168.4.71/PLS-1 INF  2554 path.cpp 1021 : PATH: CPath::addSearchPath(./script/, 1, 0): adding the path './script/'
+2018/03/22 11:45:05 192.168.4.71/PLS-1 WRN  2554 path.cpp 1532 : PATH: CPath::insertFileInMap(InitFramework.lua, ./script/InitFramework.lua, 0, lua): already inserted from './script/Framework/', skip it
+2018/03/22 11:45:05 192.168.4.71/PLS-1 INF  2554 path.cpp 1021 : PATH: CPath::addSearchPath(./script.pls/, 1, 0): adding the path './script.pls/'
+2018/03/22 11:45:05 192.168.4.71/PLS-1 INF  2554 path.cpp 1021 : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 11:45:05 192.168.4.71/PLS-1 INF  2554 unified_network.cpp 1471 : addCallbackArray =================== CT_LRC
+2018/03/22 11:45:05 192.168.4.71/PLS-1 INF  2554 unified_network.cpp 1471 : addCallbackArray =================== CT_MSG
+2018/03/22 11:45:05 192.168.4.71/PLS-1 WRN  2554 path.cpp 579 : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 11:45:05 192.168.4.71/PLS-1 WRN  2554 i18n.cpp 140 : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 11:45:05 192.168.4.71/PLS-1 INF  2554 : Executing command : 'loadlua'
+2018/03/22 11:45:05 192.168.4.71/PLS-1 INF  2554 : Load Script...
+2018/03/22 11:45:05 192.168.4.71/PLS-1 WRN  2554 path.cpp 579 : PATH: File (main.lua) not found (Main.lua)
+2018/03/22 11:45:05 192.168.4.71/PLS-1 INF  2554 common.cpp 618 : Exception will be launched: Path not found for Main.lua
+2018/03/22 11:45:06 192.168.4.71/PLS-1 INF  2554 : Command 'loadlua' thrown an exception :
+2018/03/22 11:45:06 192.168.4.71/PLS-1 INF  2554 : Path not found for Main.lua
+2018/03/22 11:45:06 192.168.4.71/PLS-1 AST  2554 script_mgr.cpp 58 : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log Starting [2018/03/22 14:11:50]
+2018/03/22 14:11:50 WRN 8c2c PLS stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:11:51 INF 87a8 PLS system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:11:51 INF 87a8 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:11:51 INF 87a8 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:11:51 INF 87a8 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:11:51 INF 87a8 PLS service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:11:51 INF 87a8 PLS service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:11:51 DBG 9b24 192.168.4.71/PLS win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51108)
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service PLS-1 ':51108 (192.168.4.71)'
+2018/03/22 14:11:51 DBG 87a8 192.168.4.71/PLS naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid PLS-1 at zwkj-PC:51108 (192.168.4.71)
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SCS
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SPLY
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOGOUT
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS-1 path.cpp 999 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/PLS/, recursive, not alternative): './script/PLS/' is not a directory, I'll call addSearchFile()
+2018/03/22 14:11:51 WRN 87a8 192.168.4.71/PLS-1 path.cpp 1146 NLMISC::CFileContainer::addSearchFile : PATH: CPath::addSearchFile(./script/PLS/, 0, ''): './script/PLS/' is not found, skip it (current dir is 'E:/BaseService/code/EVA/server'
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:11:51 WRN 87a8 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:11:51 WRN 87a8 192.168.4.71/PLS-1 i18n.cpp 140 NLMISC::CI18N::loadFileIntoMap : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS-1 : Executing command : 'loadlua'
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS-1 : Load Script...
+2018/03/22 14:11:51 WRN 87a8 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (_main.lua) not found (_Main.lua)
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS-1 common.cpp 618 NLMISC::Exception::Exception : Exception will be launched: Path not found for _Main.lua
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS-1 : Command 'loadlua' thrown an exception :
+2018/03/22 14:11:51 INF 87a8 192.168.4.71/PLS-1 : Path not found for _Main.lua
+2018/03/22 14:11:51 AST 87a8 192.168.4.71/PLS-1 script_mgr.cpp 58 CScriptMgr::init : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log with no filter:
+-------------------------------
+2018/03/22 14:11:50 PLS INF  87a8 service.cpp 248 : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:11:50 PLS INF  87a8 service.cpp 248 : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:11:50 PLS INF  87a8 service.cpp 690 : SERVICE: Setting alias name to: 'lgc_0'
+2018/03/22 14:11:50 PLS WRN  8c2c stdin_monitor_thread.cpp 84 : fgets failed
+2018/03/22 14:11:51 PLS INF  87a8 system_info.cpp 915 : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:11:51 PLS INF  87a8 service.cpp 524 : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:11:51 PLS INF  87a8 service.cpp 524 : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:11:51 PLS INF  87a8 service.cpp 524 : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:11:51 PLS INF  87a8 service.cpp 862 : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:11:51 PLS INF  87a8 service.cpp 863 : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:11:51 192.168.4.71/PLS INF  87a8 service.cpp 941 : SERVICE: Host: 192.168.4.71
+2018/03/22 14:11:51 192.168.4.71/PLS DBG  9b24 win_displayer.cpp 355 : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:11:51 192.168.4.71/PLS INF  87a8 command.cpp 149 : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:11:51 192.168.4.71/PLS DBG  87a8 sock.cpp 354 : LNETL0: Socket 464 connecting to 127.0.0.1:49901 (127.0.0.1)...
+2018/03/22 14:11:51 192.168.4.71/PLS DBG  87a8 sock.cpp 389 : LNETL0: Socket 464 connected to 127.0.0.1:49901 (127.0.0.1) (local :65453 (127.0.0.1))
+2018/03/22 14:11:51 192.168.4.71/PLS DBG  8cec buf_sock.cpp 471 : LNETL1: CLT 00000000002433C0 (socket 464) received buffer (14 bytes): [?????????QP???]
+2018/03/22 14:11:51 192.168.4.71/PLS DBG  87a8 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (QP)
+2018/03/22 14:11:51 192.168.4.71/PLS INF  87a8 naming_client.cpp 432 : NC: Received the answer of the query port (51108)
+2018/03/22 14:11:51 192.168.4.71/PLS DBG  87a8 listen_sock.cpp 92 : LNETL0: Binding listen socket to any address, port 51108
+2018/03/22 14:11:51 192.168.4.71/PLS DBG  87a8 listen_sock.cpp 81 : LNETL0: Socket 508 listen socket is at 192.168.4.71:51108 (192.168.4.71)
+2018/03/22 14:11:51 192.168.4.71/PLS DBG  9bac buf_server.cpp 763 : LNETL1: Waiting incoming connection...
+2018/03/22 14:11:51 192.168.4.71/PLS DBG  8cec buf_sock.cpp 471 : LNETL1: CLT 00000000002433C0 (socket 464) received buffer (47 bytes): [?????????RG?????????PLS?????????????G??????????]
+2018/03/22 14:11:51 192.168.4.71/PLS DBG  87a8 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (RG)
+2018/03/22 14:11:51 192.168.4.71/PLS INF  87a8 naming_client.cpp 137 : NC: Registration Broadcast of the service PLS-1 ':51108 (192.168.4.71)'
+2018/03/22 14:11:51 192.168.4.71/PLS DBG  87a8 unified_network.cpp 74 : HNETL5: + naming PLS-1 ':51108 (192.168.4.71)'
+2018/03/22 14:11:51 192.168.4.71/PLS DBG  87a8 naming_client.cpp 372 : NC: Registered service with sid PLS-1 at zwkj-PC:51108 (192.168.4.71)
+2018/03/22 14:11:51 192.168.4.71/PLS INF  87a8 unified_network.cpp 635 : HNETL5: Server 'PLS' added, registered and listen to port 51108
+2018/03/22 14:11:51 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== INFO
+2018/03/22 14:11:51 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== GET_VIEW
+2018/03/22 14:11:51 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== STOPS
+2018/03/22 14:11:51 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:11:51 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:11:51 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== R_SH_ID
+2018/03/22 14:11:51 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== SCS
+2018/03/22 14:11:51 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== SPLY
+2018/03/22 14:11:51 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== GC
+2018/03/22 14:11:51 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== LOGOUT
+2018/03/22 14:11:51 192.168.4.71/PLS-1 INF  87a8 path.cpp 999 : PATH: CPath::addSearchPath(./script/PLS/, recursive, not alternative): './script/PLS/' is not a directory, I'll call addSearchFile()
+2018/03/22 14:11:51 192.168.4.71/PLS-1 WRN  87a8 path.cpp 1146 : PATH: CPath::addSearchFile(./script/PLS/, 0, ''): './script/PLS/' is not found, skip it (current dir is 'E:/BaseService/code/EVA/server'
+2018/03/22 14:11:51 192.168.4.71/PLS-1 INF  87a8 path.cpp 1021 : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:11:51 192.168.4.71/PLS-1 INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== CT_LRC
+2018/03/22 14:11:51 192.168.4.71/PLS-1 INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== CT_MSG
+2018/03/22 14:11:51 192.168.4.71/PLS-1 WRN  87a8 path.cpp 579 : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:11:51 192.168.4.71/PLS-1 WRN  87a8 i18n.cpp 140 : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:11:51 192.168.4.71/PLS-1 INF  87a8 : Executing command : 'loadlua'
+2018/03/22 14:11:51 192.168.4.71/PLS-1 INF  87a8 : Load Script...
+2018/03/22 14:11:51 192.168.4.71/PLS-1 WRN  87a8 path.cpp 579 : PATH: File (_main.lua) not found (_Main.lua)
+2018/03/22 14:11:51 192.168.4.71/PLS-1 INF  87a8 common.cpp 618 : Exception will be launched: Path not found for _Main.lua
+2018/03/22 14:11:51 192.168.4.71/PLS-1 INF  87a8 : Command 'loadlua' thrown an exception :
+2018/03/22 14:11:51 192.168.4.71/PLS-1 INF  87a8 : Path not found for _Main.lua
+2018/03/22 14:11:51 192.168.4.71/PLS-1 AST  87a8 script_mgr.cpp 58 : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log Starting [2018/03/22 14:12:44]
+2018/03/22 14:12:44 WRN 9ba4 PLS stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:12:45 INF 90a8 PLS system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:12:45 INF 90a8 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:12:45 INF 90a8 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:12:45 INF 90a8 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:12:45 INF 90a8 PLS service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:12:45 INF 90a8 PLS service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:12:45 DBG 1380 192.168.4.71/PLS win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51109)
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service PLS-1 ':51109 (192.168.4.71)'
+2018/03/22 14:12:45 DBG 90a8 192.168.4.71/PLS naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid PLS-1 at zwkj-PC:51109 (192.168.4.71)
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SCS
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SPLY
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOGOUT
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:12:45 WRN 90a8 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:12:45 WRN 90a8 192.168.4.71/PLS-1 i18n.cpp 140 NLMISC::CI18N::loadFileIntoMap : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS-1 : Executing command : 'loadlua'
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS-1 : Load Script...
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS-1 : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:12:45 DBG 90a8 192.168.4.71/PLS-1 lua_engine.cpp 179 CLuaEngine::LoadLuaFile : load ./script/_PLS/_Main.lua file error, cause ...rvice/code/EVA/server/script/Framework/InitFramework.lua:19: module 'Framework/Class' not found:
+	no field package.preload['Framework/Class']
+	no file 'E:/BaseService/code/EVA/server/script/_PLS/Framework
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS-1 : Load Script Fail.  ./script/_PLS/_Main.lua
+2018/03/22 14:12:45 INF 90a8 192.168.4.71/PLS-1 : Bad command usage, try 'help loadlua'
+2018/03/22 14:12:45 AST 90a8 192.168.4.71/PLS-1 script_mgr.cpp 58 CScriptMgr::init : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log with no filter:
+-------------------------------
+2018/03/22 14:12:44 PLS INF  90a8 service.cpp 248 : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:12:44 PLS INF  90a8 service.cpp 248 : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:12:44 PLS INF  90a8 service.cpp 248 : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:12:44 PLS INF  90a8 service.cpp 690 : SERVICE: Setting alias name to: 'lgc_0'
+2018/03/22 14:12:44 PLS WRN  9ba4 stdin_monitor_thread.cpp 84 : fgets failed
+2018/03/22 14:12:45 PLS INF  90a8 system_info.cpp 915 : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:12:45 PLS INF  90a8 service.cpp 524 : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:12:45 PLS INF  90a8 service.cpp 524 : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:12:45 PLS INF  90a8 service.cpp 524 : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:12:45 PLS INF  90a8 service.cpp 862 : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:12:45 PLS INF  90a8 service.cpp 863 : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:12:45 192.168.4.71/PLS INF  90a8 service.cpp 941 : SERVICE: Host: 192.168.4.71
+2018/03/22 14:12:45 192.168.4.71/PLS DBG  1380 win_displayer.cpp 355 : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:12:45 192.168.4.71/PLS INF  90a8 command.cpp 149 : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:12:45 192.168.4.71/PLS DBG  90a8 sock.cpp 354 : LNETL0: Socket 464 connecting to 127.0.0.1:49901 (127.0.0.1)...
+2018/03/22 14:12:45 192.168.4.71/PLS DBG  90a8 sock.cpp 389 : LNETL0: Socket 464 connected to 127.0.0.1:49901 (127.0.0.1) (local :65468 (127.0.0.1))
+2018/03/22 14:12:45 192.168.4.71/PLS DBG  95f0 buf_sock.cpp 471 : LNETL1: CLT 00000000002A3390 (socket 464) received buffer (14 bytes): [?????????QP???]
+2018/03/22 14:12:45 192.168.4.71/PLS DBG  90a8 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (QP)
+2018/03/22 14:12:45 192.168.4.71/PLS INF  90a8 naming_client.cpp 432 : NC: Received the answer of the query port (51109)
+2018/03/22 14:12:45 192.168.4.71/PLS DBG  90a8 listen_sock.cpp 92 : LNETL0: Binding listen socket to any address, port 51109
+2018/03/22 14:12:45 192.168.4.71/PLS DBG  90a8 listen_sock.cpp 81 : LNETL0: Socket 512 listen socket is at 192.168.4.71:51109 (192.168.4.71)
+2018/03/22 14:12:45 192.168.4.71/PLS DBG  997c buf_server.cpp 763 : LNETL1: Waiting incoming connection...
+2018/03/22 14:12:45 192.168.4.71/PLS DBG  95f0 buf_sock.cpp 471 : LNETL1: CLT 00000000002A3390 (socket 464) received buffer (47 bytes): [?????????RG?????????PLS?????????????G??????????]
+2018/03/22 14:12:45 192.168.4.71/PLS DBG  90a8 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (RG)
+2018/03/22 14:12:45 192.168.4.71/PLS INF  90a8 naming_client.cpp 137 : NC: Registration Broadcast of the service PLS-1 ':51109 (192.168.4.71)'
+2018/03/22 14:12:45 192.168.4.71/PLS DBG  90a8 unified_network.cpp 74 : HNETL5: + naming PLS-1 ':51109 (192.168.4.71)'
+2018/03/22 14:12:45 192.168.4.71/PLS DBG  90a8 naming_client.cpp 372 : NC: Registered service with sid PLS-1 at zwkj-PC:51109 (192.168.4.71)
+2018/03/22 14:12:45 192.168.4.71/PLS INF  90a8 unified_network.cpp 635 : HNETL5: Server 'PLS' added, registered and listen to port 51109
+2018/03/22 14:12:45 192.168.4.71/PLS INF  90a8 unified_network.cpp 1471 : addCallbackArray =================== INFO
+2018/03/22 14:12:45 192.168.4.71/PLS INF  90a8 unified_network.cpp 1471 : addCallbackArray =================== GET_VIEW
+2018/03/22 14:12:45 192.168.4.71/PLS INF  90a8 unified_network.cpp 1471 : addCallbackArray =================== STOPS
+2018/03/22 14:12:45 192.168.4.71/PLS INF  90a8 unified_network.cpp 1471 : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:12:45 192.168.4.71/PLS INF  90a8 unified_network.cpp 1471 : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:12:45 192.168.4.71/PLS INF  90a8 unified_network.cpp 1471 : addCallbackArray =================== R_SH_ID
+2018/03/22 14:12:45 192.168.4.71/PLS INF  90a8 unified_network.cpp 1471 : addCallbackArray =================== SCS
+2018/03/22 14:12:45 192.168.4.71/PLS INF  90a8 unified_network.cpp 1471 : addCallbackArray =================== SPLY
+2018/03/22 14:12:45 192.168.4.71/PLS INF  90a8 unified_network.cpp 1471 : addCallbackArray =================== GC
+2018/03/22 14:12:45 192.168.4.71/PLS INF  90a8 unified_network.cpp 1471 : addCallbackArray =================== LOGOUT
+2018/03/22 14:12:45 192.168.4.71/PLS-1 INF  90a8 path.cpp 1021 : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:12:45 192.168.4.71/PLS-1 INF  90a8 path.cpp 1021 : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:12:45 192.168.4.71/PLS-1 INF  90a8 unified_network.cpp 1471 : addCallbackArray =================== CT_LRC
+2018/03/22 14:12:45 192.168.4.71/PLS-1 INF  90a8 unified_network.cpp 1471 : addCallbackArray =================== CT_MSG
+2018/03/22 14:12:45 192.168.4.71/PLS-1 WRN  90a8 path.cpp 579 : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:12:45 192.168.4.71/PLS-1 WRN  90a8 i18n.cpp 140 : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:12:45 192.168.4.71/PLS-1 INF  90a8 : Executing command : 'loadlua'
+2018/03/22 14:12:45 192.168.4.71/PLS-1 INF  90a8 : Load Script...
+2018/03/22 14:12:45 192.168.4.71/PLS-1 INF  90a8 : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:12:45 192.168.4.71/PLS-1 DBG  90a8 lua_engine.cpp 179 : load ./script/_PLS/_Main.lua file error, cause ...rvice/code/EVA/server/script/Framework/InitFramework.lua:19: module 'Framework/Class' not found:
+	no field package.preload['Framework/Class']
+	no file 'E:/BaseService/code/EVA/server/script/_PLS/Framework
+2018/03/22 14:12:45 192.168.4.71/PLS-1 INF  90a8 : Load Script Fail.  ./script/_PLS/_Main.lua
+2018/03/22 14:12:45 192.168.4.71/PLS-1 INF  90a8 : Bad command usage, try 'help loadlua'
+2018/03/22 14:12:45 192.168.4.71/PLS-1 AST  90a8 script_mgr.cpp 58 : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log Starting [2018/03/22 14:13:09]
+2018/03/22 14:13:09 WRN 9534 PLS stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:13:10 INF 9784 PLS system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:13:10 INF 9784 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:13:10 INF 9784 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:13:10 INF 9784 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:13:10 INF 9784 PLS service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:13:10 INF 9784 PLS service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:13:10 DBG 1908 192.168.4.71/PLS win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51110)
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service PLS-1 ':51110 (192.168.4.71)'
+2018/03/22 14:13:10 DBG 9784 192.168.4.71/PLS naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid PLS-1 at zwkj-PC:51110 (192.168.4.71)
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SCS
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SPLY
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOGOUT
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:13:10 WRN 9784 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:13:10 WRN 9784 192.168.4.71/PLS-1 i18n.cpp 140 NLMISC::CI18N::loadFileIntoMap : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS-1 : Executing command : 'loadlua'
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS-1 : Load Script...
+2018/03/22 14:13:10 WRN 9784 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (main.lua) not found (Main.lua)
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS-1 common.cpp 618 NLMISC::Exception::Exception : Exception will be launched: Path not found for Main.lua
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS-1 : Command 'loadlua' thrown an exception :
+2018/03/22 14:13:10 INF 9784 192.168.4.71/PLS-1 : Path not found for Main.lua
+2018/03/22 14:13:10 AST 9784 192.168.4.71/PLS-1 script_mgr.cpp 58 CScriptMgr::init : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log with no filter:
+-------------------------------
+2018/03/22 14:13:09 PLS INF  9784 service.cpp 248 : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:13:09 PLS INF  9784 service.cpp 248 : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:13:09 PLS INF  9784 service.cpp 248 : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:13:09 PLS INF  9784 service.cpp 690 : SERVICE: Setting alias name to: 'lgc_0'
+2018/03/22 14:13:09 PLS WRN  9534 stdin_monitor_thread.cpp 84 : fgets failed
+2018/03/22 14:13:10 PLS INF  9784 system_info.cpp 915 : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:13:10 PLS INF  9784 service.cpp 524 : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:13:10 PLS INF  9784 service.cpp 524 : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:13:10 PLS INF  9784 service.cpp 524 : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:13:10 PLS INF  9784 service.cpp 862 : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:13:10 PLS INF  9784 service.cpp 863 : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:13:10 192.168.4.71/PLS INF  9784 service.cpp 941 : SERVICE: Host: 192.168.4.71
+2018/03/22 14:13:10 192.168.4.71/PLS INF  9784 command.cpp 149 : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:13:10 192.168.4.71/PLS DBG  1908 win_displayer.cpp 355 : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:13:10 192.168.4.71/PLS DBG  9784 sock.cpp 354 : LNETL0: Socket 464 connecting to 127.0.0.1:49901 (127.0.0.1)...
+2018/03/22 14:13:10 192.168.4.71/PLS DBG  9784 sock.cpp 389 : LNETL0: Socket 464 connected to 127.0.0.1:49901 (127.0.0.1) (local :65477 (127.0.0.1))
+2018/03/22 14:13:10 192.168.4.71/PLS DBG  37b8 buf_sock.cpp 471 : LNETL1: CLT 00000000003B1F70 (socket 464) received buffer (14 bytes): [?????????QP???]
+2018/03/22 14:13:10 192.168.4.71/PLS DBG  9784 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (QP)
+2018/03/22 14:13:10 192.168.4.71/PLS INF  9784 naming_client.cpp 432 : NC: Received the answer of the query port (51110)
+2018/03/22 14:13:10 192.168.4.71/PLS DBG  9784 listen_sock.cpp 92 : LNETL0: Binding listen socket to any address, port 51110
+2018/03/22 14:13:10 192.168.4.71/PLS DBG  9784 listen_sock.cpp 81 : LNETL0: Socket 516 listen socket is at 192.168.4.71:51110 (192.168.4.71)
+2018/03/22 14:13:10 192.168.4.71/PLS DBG  99c4 buf_server.cpp 763 : LNETL1: Waiting incoming connection...
+2018/03/22 14:13:10 192.168.4.71/PLS DBG  37b8 buf_sock.cpp 471 : LNETL1: CLT 00000000003B1F70 (socket 464) received buffer (47 bytes): [?????????RG?????????PLS?????????????G??????????]
+2018/03/22 14:13:10 192.168.4.71/PLS DBG  9784 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (RG)
+2018/03/22 14:13:10 192.168.4.71/PLS INF  9784 naming_client.cpp 137 : NC: Registration Broadcast of the service PLS-1 ':51110 (192.168.4.71)'
+2018/03/22 14:13:10 192.168.4.71/PLS DBG  9784 unified_network.cpp 74 : HNETL5: + naming PLS-1 ':51110 (192.168.4.71)'
+2018/03/22 14:13:10 192.168.4.71/PLS DBG  9784 naming_client.cpp 372 : NC: Registered service with sid PLS-1 at zwkj-PC:51110 (192.168.4.71)
+2018/03/22 14:13:10 192.168.4.71/PLS INF  9784 unified_network.cpp 635 : HNETL5: Server 'PLS' added, registered and listen to port 51110
+2018/03/22 14:13:10 192.168.4.71/PLS INF  9784 unified_network.cpp 1471 : addCallbackArray =================== INFO
+2018/03/22 14:13:10 192.168.4.71/PLS INF  9784 unified_network.cpp 1471 : addCallbackArray =================== GET_VIEW
+2018/03/22 14:13:10 192.168.4.71/PLS INF  9784 unified_network.cpp 1471 : addCallbackArray =================== STOPS
+2018/03/22 14:13:10 192.168.4.71/PLS INF  9784 unified_network.cpp 1471 : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:13:10 192.168.4.71/PLS INF  9784 unified_network.cpp 1471 : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:13:10 192.168.4.71/PLS INF  9784 unified_network.cpp 1471 : addCallbackArray =================== R_SH_ID
+2018/03/22 14:13:10 192.168.4.71/PLS INF  9784 unified_network.cpp 1471 : addCallbackArray =================== SCS
+2018/03/22 14:13:10 192.168.4.71/PLS INF  9784 unified_network.cpp 1471 : addCallbackArray =================== SPLY
+2018/03/22 14:13:10 192.168.4.71/PLS INF  9784 unified_network.cpp 1471 : addCallbackArray =================== GC
+2018/03/22 14:13:10 192.168.4.71/PLS INF  9784 unified_network.cpp 1471 : addCallbackArray =================== LOGOUT
+2018/03/22 14:13:10 192.168.4.71/PLS-1 INF  9784 path.cpp 1021 : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:13:10 192.168.4.71/PLS-1 INF  9784 path.cpp 1021 : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:13:10 192.168.4.71/PLS-1 INF  9784 unified_network.cpp 1471 : addCallbackArray =================== CT_LRC
+2018/03/22 14:13:10 192.168.4.71/PLS-1 INF  9784 unified_network.cpp 1471 : addCallbackArray =================== CT_MSG
+2018/03/22 14:13:10 192.168.4.71/PLS-1 WRN  9784 path.cpp 579 : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:13:10 192.168.4.71/PLS-1 WRN  9784 i18n.cpp 140 : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:13:10 192.168.4.71/PLS-1 INF  9784 : Executing command : 'loadlua'
+2018/03/22 14:13:10 192.168.4.71/PLS-1 INF  9784 : Load Script...
+2018/03/22 14:13:10 192.168.4.71/PLS-1 WRN  9784 path.cpp 579 : PATH: File (main.lua) not found (Main.lua)
+2018/03/22 14:13:10 192.168.4.71/PLS-1 INF  9784 common.cpp 618 : Exception will be launched: Path not found for Main.lua
+2018/03/22 14:13:10 192.168.4.71/PLS-1 INF  9784 : Command 'loadlua' thrown an exception :
+2018/03/22 14:13:10 192.168.4.71/PLS-1 INF  9784 : Path not found for Main.lua
+2018/03/22 14:13:10 192.168.4.71/PLS-1 AST  9784 script_mgr.cpp 58 : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log Starting [2018/03/22 14:13:56]
+2018/03/22 14:13:56 WRN 9078 PLS stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:13:56 INF 97ec PLS system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:13:56 INF 97ec PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:13:56 INF 97ec PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:13:56 INF 97ec PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:13:56 INF 97ec PLS service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:13:56 INF 97ec PLS service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:13:56 DBG 5bec PLS win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51111)
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service PLS-1 ':51111 (192.168.4.71)'
+2018/03/22 14:13:56 DBG 97ec 192.168.4.71/PLS naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid PLS-1 at zwkj-PC:51111 (192.168.4.71)
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SCS
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SPLY
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOGOUT
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:13:56 WRN 97ec 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:13:56 WRN 97ec 192.168.4.71/PLS-1 i18n.cpp 140 NLMISC::CI18N::loadFileIntoMap : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS-1 : Executing command : 'loadlua'
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS-1 : Load Script...
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS-1 : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:13:56 DBG 97ec 192.168.4.71/PLS-1 lua_engine.cpp 179 CLuaEngine::LoadLuaFile : load ./script/_PLS/_Main.lua file error, cause ...rvice/code/EVA/server/script/Framework/InitFramework.lua:19: module 'Framework/Class' not found:
+	no field package.preload['Framework/Class']
+	no file 'E:/BaseService/code/EVA/server/script/_PLS/Framework
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS-1 : Load Script Fail.  ./script/_PLS/_Main.lua
+2018/03/22 14:13:56 INF 97ec 192.168.4.71/PLS-1 : Bad command usage, try 'help loadlua'
+2018/03/22 14:13:56 AST 97ec 192.168.4.71/PLS-1 script_mgr.cpp 58 CScriptMgr::init : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log with no filter:
+-------------------------------
+2018/03/22 14:13:56 PLS INF  97ec service.cpp 248 : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:13:56 PLS INF  97ec service.cpp 248 : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:13:56 PLS INF  97ec service.cpp 248 : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:13:56 PLS INF  97ec service.cpp 690 : SERVICE: Setting alias name to: 'lgc_0'
+2018/03/22 14:13:56 PLS WRN  9078 stdin_monitor_thread.cpp 84 : fgets failed
+2018/03/22 14:13:56 PLS INF  97ec system_info.cpp 915 : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:13:56 PLS INF  97ec service.cpp 524 : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:13:56 PLS INF  97ec service.cpp 524 : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:13:56 PLS INF  97ec service.cpp 524 : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:13:56 PLS INF  97ec service.cpp 862 : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:13:56 PLS INF  97ec service.cpp 863 : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:13:56 PLS DBG  5bec win_displayer.cpp 355 : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:13:56 192.168.4.71/PLS INF  97ec service.cpp 941 : SERVICE: Host: 192.168.4.71
+2018/03/22 14:13:56 192.168.4.71/PLS INF  97ec command.cpp 149 : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:13:56 192.168.4.71/PLS DBG  97ec sock.cpp 354 : LNETL0: Socket 500 connecting to 127.0.0.1:49901 (127.0.0.1)...
+2018/03/22 14:13:56 192.168.4.71/PLS DBG  97ec sock.cpp 389 : LNETL0: Socket 500 connected to 127.0.0.1:49901 (127.0.0.1) (local :65484 (127.0.0.1))
+2018/03/22 14:13:56 192.168.4.71/PLS DBG  9a08 buf_sock.cpp 471 : LNETL1: CLT 00000000002E46A0 (socket 500) received buffer (14 bytes): [?????????QP???]
+2018/03/22 14:13:56 192.168.4.71/PLS DBG  97ec callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (QP)
+2018/03/22 14:13:56 192.168.4.71/PLS INF  97ec naming_client.cpp 432 : NC: Received the answer of the query port (51111)
+2018/03/22 14:13:56 192.168.4.71/PLS DBG  97ec listen_sock.cpp 92 : LNETL0: Binding listen socket to any address, port 51111
+2018/03/22 14:13:56 192.168.4.71/PLS DBG  97ec listen_sock.cpp 81 : LNETL0: Socket 512 listen socket is at 192.168.4.71:51111 (192.168.4.71)
+2018/03/22 14:13:56 192.168.4.71/PLS DBG  99d4 buf_server.cpp 763 : LNETL1: Waiting incoming connection...
+2018/03/22 14:13:56 192.168.4.71/PLS DBG  9a08 buf_sock.cpp 471 : LNETL1: CLT 00000000002E46A0 (socket 500) received buffer (47 bytes): [?????????RG?????????PLS?????????????G??????????]
+2018/03/22 14:13:56 192.168.4.71/PLS DBG  97ec callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (RG)
+2018/03/22 14:13:56 192.168.4.71/PLS INF  97ec naming_client.cpp 137 : NC: Registration Broadcast of the service PLS-1 ':51111 (192.168.4.71)'
+2018/03/22 14:13:56 192.168.4.71/PLS DBG  97ec unified_network.cpp 74 : HNETL5: + naming PLS-1 ':51111 (192.168.4.71)'
+2018/03/22 14:13:56 192.168.4.71/PLS DBG  97ec naming_client.cpp 372 : NC: Registered service with sid PLS-1 at zwkj-PC:51111 (192.168.4.71)
+2018/03/22 14:13:56 192.168.4.71/PLS INF  97ec unified_network.cpp 635 : HNETL5: Server 'PLS' added, registered and listen to port 51111
+2018/03/22 14:13:56 192.168.4.71/PLS INF  97ec unified_network.cpp 1471 : addCallbackArray =================== INFO
+2018/03/22 14:13:56 192.168.4.71/PLS INF  97ec unified_network.cpp 1471 : addCallbackArray =================== GET_VIEW
+2018/03/22 14:13:56 192.168.4.71/PLS INF  97ec unified_network.cpp 1471 : addCallbackArray =================== STOPS
+2018/03/22 14:13:56 192.168.4.71/PLS INF  97ec unified_network.cpp 1471 : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:13:56 192.168.4.71/PLS INF  97ec unified_network.cpp 1471 : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:13:56 192.168.4.71/PLS INF  97ec unified_network.cpp 1471 : addCallbackArray =================== R_SH_ID
+2018/03/22 14:13:56 192.168.4.71/PLS INF  97ec unified_network.cpp 1471 : addCallbackArray =================== SCS
+2018/03/22 14:13:56 192.168.4.71/PLS INF  97ec unified_network.cpp 1471 : addCallbackArray =================== SPLY
+2018/03/22 14:13:56 192.168.4.71/PLS INF  97ec unified_network.cpp 1471 : addCallbackArray =================== GC
+2018/03/22 14:13:56 192.168.4.71/PLS INF  97ec unified_network.cpp 1471 : addCallbackArray =================== LOGOUT
+2018/03/22 14:13:56 192.168.4.71/PLS-1 INF  97ec path.cpp 1021 : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:13:56 192.168.4.71/PLS-1 INF  97ec path.cpp 1021 : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:13:56 192.168.4.71/PLS-1 INF  97ec unified_network.cpp 1471 : addCallbackArray =================== CT_LRC
+2018/03/22 14:13:56 192.168.4.71/PLS-1 INF  97ec unified_network.cpp 1471 : addCallbackArray =================== CT_MSG
+2018/03/22 14:13:56 192.168.4.71/PLS-1 WRN  97ec path.cpp 579 : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:13:56 192.168.4.71/PLS-1 WRN  97ec i18n.cpp 140 : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:13:56 192.168.4.71/PLS-1 INF  97ec : Executing command : 'loadlua'
+2018/03/22 14:13:56 192.168.4.71/PLS-1 INF  97ec : Load Script...
+2018/03/22 14:13:56 192.168.4.71/PLS-1 INF  97ec : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:13:56 192.168.4.71/PLS-1 DBG  97ec lua_engine.cpp 179 : load ./script/_PLS/_Main.lua file error, cause ...rvice/code/EVA/server/script/Framework/InitFramework.lua:19: module 'Framework/Class' not found:
+	no field package.preload['Framework/Class']
+	no file 'E:/BaseService/code/EVA/server/script/_PLS/Framework
+2018/03/22 14:13:56 192.168.4.71/PLS-1 INF  97ec : Load Script Fail.  ./script/_PLS/_Main.lua
+2018/03/22 14:13:56 192.168.4.71/PLS-1 INF  97ec : Bad command usage, try 'help loadlua'
+2018/03/22 14:13:56 192.168.4.71/PLS-1 AST  97ec script_mgr.cpp 58 : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log Starting [2018/03/22 14:14:16]
+2018/03/22 14:14:16 WRN 8d28 PLS stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:14:17 INF 9a20 PLS system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:14:17 INF 9a20 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:14:17 INF 9a20 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:14:17 INF 9a20 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:14:17 INF 9a20 PLS service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:14:17 INF 9a20 PLS service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:14:17 DBG 9b8c 192.168.4.71/PLS win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51112)
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service PLS-1 ':51112 (192.168.4.71)'
+2018/03/22 14:14:17 DBG 9a20 192.168.4.71/PLS naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid PLS-1 at zwkj-PC:51112 (192.168.4.71)
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SCS
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SPLY
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOGOUT
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:14:17 WRN 9a20 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:14:17 WRN 9a20 192.168.4.71/PLS-1 i18n.cpp 140 NLMISC::CI18N::loadFileIntoMap : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS-1 : Executing command : 'loadlua'
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS-1 : Load Script...
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS-1 : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:14:17 DBG 9a20 192.168.4.71/PLS-1 lua_engine.cpp 179 CLuaEngine::LoadLuaFile : load ./script/_PLS/_Main.lua file error, cause ...rvice/code/EVA/server/script/Framework/InitFramework.lua:19: module 'Framework/Class' not found:
+	no field package.preload['Framework/Class']
+	no file 'E:/BaseService/code/EVA/server/script/_PLS/Framework
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS-1 : Load Script Fail.  ./script/_PLS/_Main.lua
+2018/03/22 14:14:17 INF 9a20 192.168.4.71/PLS-1 : Bad command usage, try 'help loadlua'
+2018/03/22 14:14:17 AST 9a20 192.168.4.71/PLS-1 script_mgr.cpp 58 CScriptMgr::init : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log with no filter:
+-------------------------------
+2018/03/22 14:14:16 PLS INF  9a20 service.cpp 248 : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:14:16 PLS INF  9a20 service.cpp 248 : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:14:16 PLS INF  9a20 service.cpp 248 : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:14:16 PLS INF  9a20 service.cpp 690 : SERVICE: Setting alias name to: 'lgc_0'
+2018/03/22 14:14:16 PLS WRN  8d28 stdin_monitor_thread.cpp 84 : fgets failed
+2018/03/22 14:14:17 PLS INF  9a20 system_info.cpp 915 : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:14:17 PLS INF  9a20 service.cpp 524 : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:14:17 PLS INF  9a20 service.cpp 524 : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:14:17 PLS INF  9a20 service.cpp 524 : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:14:17 PLS INF  9a20 service.cpp 862 : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:14:17 PLS INF  9a20 service.cpp 863 : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:14:17 192.168.4.71/PLS INF  9a20 service.cpp 941 : SERVICE: Host: 192.168.4.71
+2018/03/22 14:14:17 192.168.4.71/PLS INF  9a20 command.cpp 149 : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:14:17 192.168.4.71/PLS DBG  9b8c win_displayer.cpp 355 : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:14:17 192.168.4.71/PLS DBG  9a20 sock.cpp 354 : LNETL0: Socket 464 connecting to 127.0.0.1:49901 (127.0.0.1)...
+2018/03/22 14:14:17 192.168.4.71/PLS DBG  9a20 sock.cpp 389 : LNETL0: Socket 464 connected to 127.0.0.1:49901 (127.0.0.1) (local :65490 (127.0.0.1))
+2018/03/22 14:14:17 192.168.4.71/PLS DBG  1308 buf_sock.cpp 471 : LNETL1: CLT 0000000000462BF0 (socket 464) received buffer (14 bytes): [?????????QP???]
+2018/03/22 14:14:17 192.168.4.71/PLS DBG  9a20 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (QP)
+2018/03/22 14:14:17 192.168.4.71/PLS INF  9a20 naming_client.cpp 432 : NC: Received the answer of the query port (51112)
+2018/03/22 14:14:17 192.168.4.71/PLS DBG  9a20 listen_sock.cpp 92 : LNETL0: Binding listen socket to any address, port 51112
+2018/03/22 14:14:17 192.168.4.71/PLS DBG  9a20 listen_sock.cpp 81 : LNETL0: Socket 508 listen socket is at 192.168.4.71:51112 (192.168.4.71)
+2018/03/22 14:14:17 192.168.4.71/PLS DBG  9bf0 buf_server.cpp 763 : LNETL1: Waiting incoming connection...
+2018/03/22 14:14:17 192.168.4.71/PLS DBG  1308 buf_sock.cpp 471 : LNETL1: CLT 0000000000462BF0 (socket 464) received buffer (47 bytes): [?????????RG?????????PLS?????????????G??????????]
+2018/03/22 14:14:17 192.168.4.71/PLS DBG  9a20 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (RG)
+2018/03/22 14:14:17 192.168.4.71/PLS INF  9a20 naming_client.cpp 137 : NC: Registration Broadcast of the service PLS-1 ':51112 (192.168.4.71)'
+2018/03/22 14:14:17 192.168.4.71/PLS DBG  9a20 unified_network.cpp 74 : HNETL5: + naming PLS-1 ':51112 (192.168.4.71)'
+2018/03/22 14:14:17 192.168.4.71/PLS DBG  9a20 naming_client.cpp 372 : NC: Registered service with sid PLS-1 at zwkj-PC:51112 (192.168.4.71)
+2018/03/22 14:14:17 192.168.4.71/PLS INF  9a20 unified_network.cpp 635 : HNETL5: Server 'PLS' added, registered and listen to port 51112
+2018/03/22 14:14:17 192.168.4.71/PLS INF  9a20 unified_network.cpp 1471 : addCallbackArray =================== INFO
+2018/03/22 14:14:17 192.168.4.71/PLS INF  9a20 unified_network.cpp 1471 : addCallbackArray =================== GET_VIEW
+2018/03/22 14:14:17 192.168.4.71/PLS INF  9a20 unified_network.cpp 1471 : addCallbackArray =================== STOPS
+2018/03/22 14:14:17 192.168.4.71/PLS INF  9a20 unified_network.cpp 1471 : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:14:17 192.168.4.71/PLS INF  9a20 unified_network.cpp 1471 : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:14:17 192.168.4.71/PLS INF  9a20 unified_network.cpp 1471 : addCallbackArray =================== R_SH_ID
+2018/03/22 14:14:17 192.168.4.71/PLS INF  9a20 unified_network.cpp 1471 : addCallbackArray =================== SCS
+2018/03/22 14:14:17 192.168.4.71/PLS INF  9a20 unified_network.cpp 1471 : addCallbackArray =================== SPLY
+2018/03/22 14:14:17 192.168.4.71/PLS INF  9a20 unified_network.cpp 1471 : addCallbackArray =================== GC
+2018/03/22 14:14:17 192.168.4.71/PLS INF  9a20 unified_network.cpp 1471 : addCallbackArray =================== LOGOUT
+2018/03/22 14:14:17 192.168.4.71/PLS-1 INF  9a20 path.cpp 1021 : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:14:17 192.168.4.71/PLS-1 INF  9a20 path.cpp 1021 : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:14:17 192.168.4.71/PLS-1 INF  9a20 unified_network.cpp 1471 : addCallbackArray =================== CT_LRC
+2018/03/22 14:14:17 192.168.4.71/PLS-1 INF  9a20 unified_network.cpp 1471 : addCallbackArray =================== CT_MSG
+2018/03/22 14:14:17 192.168.4.71/PLS-1 WRN  9a20 path.cpp 579 : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:14:17 192.168.4.71/PLS-1 WRN  9a20 i18n.cpp 140 : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:14:17 192.168.4.71/PLS-1 INF  9a20 : Executing command : 'loadlua'
+2018/03/22 14:14:17 192.168.4.71/PLS-1 INF  9a20 : Load Script...
+2018/03/22 14:14:17 192.168.4.71/PLS-1 INF  9a20 : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:14:17 192.168.4.71/PLS-1 DBG  9a20 lua_engine.cpp 179 : load ./script/_PLS/_Main.lua file error, cause ...rvice/code/EVA/server/script/Framework/InitFramework.lua:19: module 'Framework/Class' not found:
+	no field package.preload['Framework/Class']
+	no file 'E:/BaseService/code/EVA/server/script/_PLS/Framework
+2018/03/22 14:14:17 192.168.4.71/PLS-1 INF  9a20 : Load Script Fail.  ./script/_PLS/_Main.lua
+2018/03/22 14:14:17 192.168.4.71/PLS-1 INF  9a20 : Bad command usage, try 'help loadlua'
+2018/03/22 14:14:17 192.168.4.71/PLS-1 AST  9a20 script_mgr.cpp 58 : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log Starting [2018/03/22 14:17:43]
+2018/03/22 14:17:43 WRN 94a4 PLS stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:17:44 INF 87a8 PLS system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:17:44 INF 87a8 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:17:44 INF 87a8 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:17:44 INF 87a8 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:17:44 INF 87a8 PLS service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:17:44 INF 87a8 PLS service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:17:44 DBG 960c 192.168.4.71/PLS win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51113)
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service PLS-1 ':51113 (192.168.4.71)'
+2018/03/22 14:17:44 DBG 87a8 192.168.4.71/PLS naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid PLS-1 at zwkj-PC:51113 (192.168.4.71)
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SCS
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SPLY
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOGOUT
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:17:44 WRN 87a8 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:17:44 WRN 87a8 192.168.4.71/PLS-1 i18n.cpp 140 NLMISC::CI18N::loadFileIntoMap : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS-1 : Executing command : 'loadlua'
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS-1 : Load Script...
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS-1 : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:17:44 DBG 87a8 192.168.4.71/PLS-1 lua_engine.cpp 179 CLuaEngine::LoadLuaFile : load ./script/_PLS/_Main.lua file error, cause ...rvice/code/EVA/server/script/Framework/InitFramework.lua:20: module 'Framework/Class' not found:
+	no field package.preload['Framework/Class']
+	no file 'E:/BaseService/code/EVA/server/script/_PLS/Framework
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS-1 : Load Script Fail.  ./script/_PLS/_Main.lua
+2018/03/22 14:17:44 INF 87a8 192.168.4.71/PLS-1 : Bad command usage, try 'help loadlua'
+2018/03/22 14:17:44 AST 87a8 192.168.4.71/PLS-1 script_mgr.cpp 58 CScriptMgr::init : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log with no filter:
+-------------------------------
+2018/03/22 14:17:43 PLS INF  87a8 service.cpp 248 : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:17:43 PLS INF  87a8 service.cpp 248 : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:17:43 PLS INF  87a8 service.cpp 248 : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:17:43 PLS INF  87a8 service.cpp 690 : SERVICE: Setting alias name to: 'lgc_0'
+2018/03/22 14:17:43 PLS WRN  94a4 stdin_monitor_thread.cpp 84 : fgets failed
+2018/03/22 14:17:44 PLS INF  87a8 system_info.cpp 915 : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:17:44 PLS INF  87a8 service.cpp 524 : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:17:44 PLS INF  87a8 service.cpp 524 : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:17:44 PLS INF  87a8 service.cpp 524 : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:17:44 PLS INF  87a8 service.cpp 862 : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:17:44 PLS INF  87a8 service.cpp 863 : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:17:44 192.168.4.71/PLS INF  87a8 service.cpp 941 : SERVICE: Host: 192.168.4.71
+2018/03/22 14:17:44 192.168.4.71/PLS INF  87a8 command.cpp 149 : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:17:44 192.168.4.71/PLS DBG  960c win_displayer.cpp 355 : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:17:44 192.168.4.71/PLS DBG  87a8 sock.cpp 354 : LNETL0: Socket 464 connecting to 127.0.0.1:49901 (127.0.0.1)...
+2018/03/22 14:17:44 192.168.4.71/PLS DBG  87a8 sock.cpp 389 : LNETL0: Socket 464 connected to 127.0.0.1:49901 (127.0.0.1) (local :1049 (127.0.0.1))
+2018/03/22 14:17:44 192.168.4.71/PLS DBG  9268 buf_sock.cpp 471 : LNETL1: CLT 0000000000132670 (socket 464) received buffer (14 bytes): [?????????QP???]
+2018/03/22 14:17:44 192.168.4.71/PLS DBG  87a8 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (QP)
+2018/03/22 14:17:44 192.168.4.71/PLS INF  87a8 naming_client.cpp 432 : NC: Received the answer of the query port (51113)
+2018/03/22 14:17:44 192.168.4.71/PLS DBG  87a8 listen_sock.cpp 92 : LNETL0: Binding listen socket to any address, port 51113
+2018/03/22 14:17:44 192.168.4.71/PLS DBG  87a8 listen_sock.cpp 81 : LNETL0: Socket 512 listen socket is at 192.168.4.71:51113 (192.168.4.71)
+2018/03/22 14:17:44 192.168.4.71/PLS DBG  9a70 buf_server.cpp 763 : LNETL1: Waiting incoming connection...
+2018/03/22 14:17:44 192.168.4.71/PLS DBG  9268 buf_sock.cpp 471 : LNETL1: CLT 0000000000132670 (socket 464) received buffer (47 bytes): [?????????RG?????????PLS?????????????G??????????]
+2018/03/22 14:17:44 192.168.4.71/PLS DBG  87a8 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (RG)
+2018/03/22 14:17:44 192.168.4.71/PLS INF  87a8 naming_client.cpp 137 : NC: Registration Broadcast of the service PLS-1 ':51113 (192.168.4.71)'
+2018/03/22 14:17:44 192.168.4.71/PLS DBG  87a8 unified_network.cpp 74 : HNETL5: + naming PLS-1 ':51113 (192.168.4.71)'
+2018/03/22 14:17:44 192.168.4.71/PLS DBG  87a8 naming_client.cpp 372 : NC: Registered service with sid PLS-1 at zwkj-PC:51113 (192.168.4.71)
+2018/03/22 14:17:44 192.168.4.71/PLS INF  87a8 unified_network.cpp 635 : HNETL5: Server 'PLS' added, registered and listen to port 51113
+2018/03/22 14:17:44 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== INFO
+2018/03/22 14:17:44 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== GET_VIEW
+2018/03/22 14:17:44 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== STOPS
+2018/03/22 14:17:44 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:17:44 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:17:44 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== R_SH_ID
+2018/03/22 14:17:44 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== SCS
+2018/03/22 14:17:44 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== SPLY
+2018/03/22 14:17:44 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== GC
+2018/03/22 14:17:44 192.168.4.71/PLS INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== LOGOUT
+2018/03/22 14:17:44 192.168.4.71/PLS-1 INF  87a8 path.cpp 1021 : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:17:44 192.168.4.71/PLS-1 INF  87a8 path.cpp 1021 : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:17:44 192.168.4.71/PLS-1 INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== CT_LRC
+2018/03/22 14:17:44 192.168.4.71/PLS-1 INF  87a8 unified_network.cpp 1471 : addCallbackArray =================== CT_MSG
+2018/03/22 14:17:44 192.168.4.71/PLS-1 WRN  87a8 path.cpp 579 : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:17:44 192.168.4.71/PLS-1 WRN  87a8 i18n.cpp 140 : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:17:44 192.168.4.71/PLS-1 INF  87a8 : Executing command : 'loadlua'
+2018/03/22 14:17:44 192.168.4.71/PLS-1 INF  87a8 : Load Script...
+2018/03/22 14:17:44 192.168.4.71/PLS-1 INF  87a8 : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:17:44 192.168.4.71/PLS-1 DBG  87a8 lua_engine.cpp 179 : load ./script/_PLS/_Main.lua file error, cause ...rvice/code/EVA/server/script/Framework/InitFramework.lua:20: module 'Framework/Class' not found:
+	no field package.preload['Framework/Class']
+	no file 'E:/BaseService/code/EVA/server/script/_PLS/Framework
+2018/03/22 14:17:44 192.168.4.71/PLS-1 INF  87a8 : Load Script Fail.  ./script/_PLS/_Main.lua
+2018/03/22 14:17:44 192.168.4.71/PLS-1 INF  87a8 : Bad command usage, try 'help loadlua'
+2018/03/22 14:17:44 192.168.4.71/PLS-1 AST  87a8 script_mgr.cpp 58 : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log Starting [2018/03/22 14:20:11]
+2018/03/22 14:20:11 WRN 94f4 PLS stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:20:12 INF 65e4 PLS system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:20:12 INF 65e4 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:20:12 INF 65e4 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:20:12 INF 65e4 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:20:12 INF 65e4 PLS service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:20:12 INF 65e4 PLS service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:20:12 DBG 9990 192.168.4.71/PLS win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51114)
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service PLS-1 ':51114 (192.168.4.71)'
+2018/03/22 14:20:12 DBG 65e4 192.168.4.71/PLS naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid PLS-1 at zwkj-PC:51114 (192.168.4.71)
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SCS
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SPLY
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOGOUT
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:20:12 WRN 65e4 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:20:12 WRN 65e4 192.168.4.71/PLS-1 i18n.cpp 140 NLMISC::CI18N::loadFileIntoMap : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS-1 : Executing command : 'loadlua'
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS-1 : Load Script...
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS-1 : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:20:12 DBG 65e4 192.168.4.71/PLS-1 lua_engine.cpp 179 CLuaEngine::LoadLuaFile : load ./script/_PLS/_Main.lua file error, cause ./script/_PLS/_Main.lua:13: module 'PLS/LuaTestMsg' not found:
+	no field package.preload['PLS/LuaTestMsg']
+	no file 'E:/BaseService/code/EVA/server/script/_PLS/PLS/LuaTestMsg.lua'
+	no file 'E:/BaseService/co
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS-1 : Load Script Fail.  ./script/_PLS/_Main.lua
+2018/03/22 14:20:12 INF 65e4 192.168.4.71/PLS-1 : Bad command usage, try 'help loadlua'
+2018/03/22 14:20:12 AST 65e4 192.168.4.71/PLS-1 script_mgr.cpp 58 CScriptMgr::init : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log with no filter:
+-------------------------------
+2018/03/22 14:20:11 PLS INF  65e4 service.cpp 248 : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:20:11 PLS INF  65e4 service.cpp 248 : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:20:11 PLS INF  65e4 service.cpp 248 : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:20:11 PLS INF  65e4 service.cpp 690 : SERVICE: Setting alias name to: 'lgc_0'
+2018/03/22 14:20:11 PLS WRN  94f4 stdin_monitor_thread.cpp 84 : fgets failed
+2018/03/22 14:20:12 PLS INF  65e4 system_info.cpp 915 : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:20:12 PLS INF  65e4 service.cpp 524 : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:20:12 PLS INF  65e4 service.cpp 524 : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:20:12 PLS INF  65e4 service.cpp 524 : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:20:12 PLS INF  65e4 service.cpp 862 : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:20:12 PLS INF  65e4 service.cpp 863 : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:20:12 192.168.4.71/PLS INF  65e4 service.cpp 941 : SERVICE: Host: 192.168.4.71
+2018/03/22 14:20:12 192.168.4.71/PLS DBG  9990 win_displayer.cpp 355 : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:20:12 192.168.4.71/PLS INF  65e4 command.cpp 149 : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:20:12 192.168.4.71/PLS DBG  65e4 sock.cpp 354 : LNETL0: Socket 464 connecting to 127.0.0.1:49901 (127.0.0.1)...
+2018/03/22 14:20:12 192.168.4.71/PLS DBG  65e4 sock.cpp 389 : LNETL0: Socket 464 connected to 127.0.0.1:49901 (127.0.0.1) (local :1087 (127.0.0.1))
+2018/03/22 14:20:12 192.168.4.71/PLS DBG   b30 buf_sock.cpp 471 : LNETL1: CLT 00000000004627B0 (socket 464) received buffer (14 bytes): [?????????QP???]
+2018/03/22 14:20:12 192.168.4.71/PLS DBG  65e4 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (QP)
+2018/03/22 14:20:12 192.168.4.71/PLS INF  65e4 naming_client.cpp 432 : NC: Received the answer of the query port (51114)
+2018/03/22 14:20:12 192.168.4.71/PLS DBG  65e4 listen_sock.cpp 92 : LNETL0: Binding listen socket to any address, port 51114
+2018/03/22 14:20:12 192.168.4.71/PLS DBG  65e4 listen_sock.cpp 81 : LNETL0: Socket 512 listen socket is at 192.168.4.71:51114 (192.168.4.71)
+2018/03/22 14:20:12 192.168.4.71/PLS DBG  9594 buf_server.cpp 763 : LNETL1: Waiting incoming connection...
+2018/03/22 14:20:12 192.168.4.71/PLS DBG   b30 buf_sock.cpp 471 : LNETL1: CLT 00000000004627B0 (socket 464) received buffer (47 bytes): [?????????RG?????????PLS?????????????G??????????]
+2018/03/22 14:20:12 192.168.4.71/PLS DBG  65e4 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (RG)
+2018/03/22 14:20:12 192.168.4.71/PLS INF  65e4 naming_client.cpp 137 : NC: Registration Broadcast of the service PLS-1 ':51114 (192.168.4.71)'
+2018/03/22 14:20:12 192.168.4.71/PLS DBG  65e4 unified_network.cpp 74 : HNETL5: + naming PLS-1 ':51114 (192.168.4.71)'
+2018/03/22 14:20:12 192.168.4.71/PLS DBG  65e4 naming_client.cpp 372 : NC: Registered service with sid PLS-1 at zwkj-PC:51114 (192.168.4.71)
+2018/03/22 14:20:12 192.168.4.71/PLS INF  65e4 unified_network.cpp 635 : HNETL5: Server 'PLS' added, registered and listen to port 51114
+2018/03/22 14:20:12 192.168.4.71/PLS INF  65e4 unified_network.cpp 1471 : addCallbackArray =================== INFO
+2018/03/22 14:20:12 192.168.4.71/PLS INF  65e4 unified_network.cpp 1471 : addCallbackArray =================== GET_VIEW
+2018/03/22 14:20:12 192.168.4.71/PLS INF  65e4 unified_network.cpp 1471 : addCallbackArray =================== STOPS
+2018/03/22 14:20:12 192.168.4.71/PLS INF  65e4 unified_network.cpp 1471 : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:20:12 192.168.4.71/PLS INF  65e4 unified_network.cpp 1471 : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:20:12 192.168.4.71/PLS INF  65e4 unified_network.cpp 1471 : addCallbackArray =================== R_SH_ID
+2018/03/22 14:20:12 192.168.4.71/PLS INF  65e4 unified_network.cpp 1471 : addCallbackArray =================== SCS
+2018/03/22 14:20:12 192.168.4.71/PLS INF  65e4 unified_network.cpp 1471 : addCallbackArray =================== SPLY
+2018/03/22 14:20:12 192.168.4.71/PLS INF  65e4 unified_network.cpp 1471 : addCallbackArray =================== GC
+2018/03/22 14:20:12 192.168.4.71/PLS INF  65e4 unified_network.cpp 1471 : addCallbackArray =================== LOGOUT
+2018/03/22 14:20:12 192.168.4.71/PLS-1 INF  65e4 path.cpp 1021 : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:20:12 192.168.4.71/PLS-1 INF  65e4 path.cpp 1021 : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:20:12 192.168.4.71/PLS-1 INF  65e4 unified_network.cpp 1471 : addCallbackArray =================== CT_LRC
+2018/03/22 14:20:12 192.168.4.71/PLS-1 INF  65e4 unified_network.cpp 1471 : addCallbackArray =================== CT_MSG
+2018/03/22 14:20:12 192.168.4.71/PLS-1 WRN  65e4 path.cpp 579 : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:20:12 192.168.4.71/PLS-1 WRN  65e4 i18n.cpp 140 : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:20:12 192.168.4.71/PLS-1 INF  65e4 : Executing command : 'loadlua'
+2018/03/22 14:20:12 192.168.4.71/PLS-1 INF  65e4 : Load Script...
+2018/03/22 14:20:12 192.168.4.71/PLS-1 INF  65e4 : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:20:12 192.168.4.71/PLS-1 DBG  65e4 lua_engine.cpp 179 : load ./script/_PLS/_Main.lua file error, cause ./script/_PLS/_Main.lua:13: module 'PLS/LuaTestMsg' not found:
+	no field package.preload['PLS/LuaTestMsg']
+	no file 'E:/BaseService/code/EVA/server/script/_PLS/PLS/LuaTestMsg.lua'
+	no file 'E:/BaseService/co
+2018/03/22 14:20:12 192.168.4.71/PLS-1 INF  65e4 : Load Script Fail.  ./script/_PLS/_Main.lua
+2018/03/22 14:20:12 192.168.4.71/PLS-1 INF  65e4 : Bad command usage, try 'help loadlua'
+2018/03/22 14:20:12 192.168.4.71/PLS-1 AST  65e4 script_mgr.cpp 58 : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log Starting [2018/03/22 14:21:36]
+2018/03/22 14:21:36 WRN 9444 PLS stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:21:36 INF 9560 PLS system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:21:36 INF 9560 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:21:36 INF 9560 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:21:36 INF 9560 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:21:36 INF 9560 PLS service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:21:36 INF 9560 PLS service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:21:36 DBG 5508 PLS win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:21:36 INF 9560 192.168.4.71/PLS service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:21:36 INF 9560 192.168.4.71/PLS command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:21:36 INF 9560 192.168.4.71/PLS naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51115)
+2018/03/22 14:21:36 INF 9560 192.168.4.71/PLS naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service PLS-1 ':51115 (192.168.4.71)'
+2018/03/22 14:21:36 DBG 9560 192.168.4.71/PLS naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid PLS-1 at zwkj-PC:51115 (192.168.4.71)
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SCS
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SPLY
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOGOUT
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:21:37 WRN 9560 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:21:37 WRN 9560 192.168.4.71/PLS-1 i18n.cpp 140 NLMISC::CI18N::loadFileIntoMap : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS-1 : Executing command : 'loadlua'
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS-1 : Load Script...
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS-1 : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:21:37 DBG 9560 192.168.4.71/PLS-1 lua_engine.cpp 179 CLuaEngine::LoadLuaFile : load ./script/_PLS/_Main.lua file error, cause ./script/_PLS/_Main.lua:13: module '_PLS/LuaTestMsg' not found:
+	no field package.preload['_PLS/LuaTestMsg']
+	no file 'E:/BaseService/code/EVA/server/script/_PLS/_PLS/LuaTestMsg.lua'
+	no file 'E:/BaseService
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS-1 : Load Script Fail.  ./script/_PLS/_Main.lua
+2018/03/22 14:21:37 INF 9560 192.168.4.71/PLS-1 : Bad command usage, try 'help loadlua'
+2018/03/22 14:21:37 AST 9560 192.168.4.71/PLS-1 script_mgr.cpp 58 CScriptMgr::init : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log with no filter:
+-------------------------------
+2018/03/22 14:21:36 PLS INF  9560 service.cpp 248 : SERVICE: 'LogDirectory' changed to 'E:/BaseService/code/EVA/server/./log/'
+2018/03/22 14:21:36 PLS INF  9560 service.cpp 248 : SERVICE: 'SaveFilesDirectory' changed to 'E:/BaseService/code/EVA/server/'
+2018/03/22 14:21:36 PLS INF  9560 service.cpp 248 : SERVICE: 'WriteFilesDirectory' changed to 'E:/BaseService/code/EVA/server/data_shard/'
+2018/03/22 14:21:36 PLS INF  9560 service.cpp 690 : SERVICE: Setting alias name to: 'lgc_0'
+2018/03/22 14:21:36 PLS WRN  9444 stdin_monitor_thread.cpp 84 : fgets failed
+2018/03/22 14:21:36 PLS INF  9560 system_info.cpp 915 : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:21:36 PLS INF  9560 service.cpp 524 : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:21:36 PLS INF  9560 service.cpp 524 : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:21:36 PLS INF  9560 service.cpp 524 : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:21:36 PLS INF  9560 service.cpp 862 : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:21:36 PLS INF  9560 service.cpp 863 : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:21:36 PLS DBG  5508 win_displayer.cpp 355 : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:21:36 192.168.4.71/PLS INF  9560 service.cpp 941 : SERVICE: Host: 192.168.4.71
+2018/03/22 14:21:36 192.168.4.71/PLS INF  9560 command.cpp 149 : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:21:36 192.168.4.71/PLS DBG  9560 sock.cpp 354 : LNETL0: Socket 484 connecting to 127.0.0.1:49901 (127.0.0.1)...
+2018/03/22 14:21:36 192.168.4.71/PLS DBG  9560 sock.cpp 389 : LNETL0: Socket 484 connected to 127.0.0.1:49901 (127.0.0.1) (local :1105 (127.0.0.1))
+2018/03/22 14:21:36 192.168.4.71/PLS DBG  83dc buf_sock.cpp 471 : LNETL1: CLT 00000000002F74E0 (socket 484) received buffer (14 bytes): [?????????QP???]
+2018/03/22 14:21:36 192.168.4.71/PLS DBG  9560 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (QP)
+2018/03/22 14:21:36 192.168.4.71/PLS INF  9560 naming_client.cpp 432 : NC: Received the answer of the query port (51115)
+2018/03/22 14:21:36 192.168.4.71/PLS DBG  9560 listen_sock.cpp 92 : LNETL0: Binding listen socket to any address, port 51115
+2018/03/22 14:21:36 192.168.4.71/PLS DBG  9560 listen_sock.cpp 81 : LNETL0: Socket 512 listen socket is at 192.168.4.71:51115 (192.168.4.71)
+2018/03/22 14:21:36 192.168.4.71/PLS DBG  9b20 buf_server.cpp 763 : LNETL1: Waiting incoming connection...
+2018/03/22 14:21:36 192.168.4.71/PLS DBG  83dc buf_sock.cpp 471 : LNETL1: CLT 00000000002F74E0 (socket 484) received buffer (47 bytes): [?????????RG?????????PLS?????????????G??????????]
+2018/03/22 14:21:36 192.168.4.71/PLS DBG  9560 callback_net_base.cpp 209 : LNETL3NB_CB: Calling callback (RG)
+2018/03/22 14:21:36 192.168.4.71/PLS INF  9560 naming_client.cpp 137 : NC: Registration Broadcast of the service PLS-1 ':51115 (192.168.4.71)'
+2018/03/22 14:21:36 192.168.4.71/PLS DBG  9560 unified_network.cpp 74 : HNETL5: + naming PLS-1 ':51115 (192.168.4.71)'
+2018/03/22 14:21:36 192.168.4.71/PLS DBG  9560 naming_client.cpp 372 : NC: Registered service with sid PLS-1 at zwkj-PC:51115 (192.168.4.71)
+2018/03/22 14:21:36 192.168.4.71/PLS INF  9560 unified_network.cpp 635 : HNETL5: Server 'PLS' added, registered and listen to port 51115
+2018/03/22 14:21:37 192.168.4.71/PLS INF  9560 unified_network.cpp 1471 : addCallbackArray =================== INFO
+2018/03/22 14:21:37 192.168.4.71/PLS INF  9560 unified_network.cpp 1471 : addCallbackArray =================== GET_VIEW
+2018/03/22 14:21:37 192.168.4.71/PLS INF  9560 unified_network.cpp 1471 : addCallbackArray =================== STOPS
+2018/03/22 14:21:37 192.168.4.71/PLS INF  9560 unified_network.cpp 1471 : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:21:37 192.168.4.71/PLS INF  9560 unified_network.cpp 1471 : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:21:37 192.168.4.71/PLS INF  9560 unified_network.cpp 1471 : addCallbackArray =================== R_SH_ID
+2018/03/22 14:21:37 192.168.4.71/PLS INF  9560 unified_network.cpp 1471 : addCallbackArray =================== SCS
+2018/03/22 14:21:37 192.168.4.71/PLS INF  9560 unified_network.cpp 1471 : addCallbackArray =================== SPLY
+2018/03/22 14:21:37 192.168.4.71/PLS INF  9560 unified_network.cpp 1471 : addCallbackArray =================== GC
+2018/03/22 14:21:37 192.168.4.71/PLS INF  9560 unified_network.cpp 1471 : addCallbackArray =================== LOGOUT
+2018/03/22 14:21:37 192.168.4.71/PLS-1 INF  9560 path.cpp 1021 : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:21:37 192.168.4.71/PLS-1 INF  9560 path.cpp 1021 : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:21:37 192.168.4.71/PLS-1 INF  9560 unified_network.cpp 1471 : addCallbackArray =================== CT_LRC
+2018/03/22 14:21:37 192.168.4.71/PLS-1 INF  9560 unified_network.cpp 1471 : addCallbackArray =================== CT_MSG
+2018/03/22 14:21:37 192.168.4.71/PLS-1 WRN  9560 path.cpp 579 : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:21:37 192.168.4.71/PLS-1 WRN  9560 i18n.cpp 140 : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:21:37 192.168.4.71/PLS-1 INF  9560 : Executing command : 'loadlua'
+2018/03/22 14:21:37 192.168.4.71/PLS-1 INF  9560 : Load Script...
+2018/03/22 14:21:37 192.168.4.71/PLS-1 INF  9560 : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:21:37 192.168.4.71/PLS-1 DBG  9560 lua_engine.cpp 179 : load ./script/_PLS/_Main.lua file error, cause ./script/_PLS/_Main.lua:13: module '_PLS/LuaTestMsg' not found:
+	no field package.preload['_PLS/LuaTestMsg']
+	no file 'E:/BaseService/code/EVA/server/script/_PLS/_PLS/LuaTestMsg.lua'
+	no file 'E:/BaseService
+2018/03/22 14:21:37 192.168.4.71/PLS-1 INF  9560 : Load Script Fail.  ./script/_PLS/_Main.lua
+2018/03/22 14:21:37 192.168.4.71/PLS-1 INF  9560 : Bad command usage, try 'help loadlua'
+2018/03/22 14:21:37 192.168.4.71/PLS-1 AST  9560 script_mgr.cpp 58 : "ICommand::execute ("loadlua", *InfoLog)" 
+-------------------------------
+
+Log Starting [2018/03/22 14:22:35]
+2018/03/22 14:22:35 WRN 96b0 PLS stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:22:35 INF 95e4 PLS system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:22:35 INF 95e4 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:22:35 INF 95e4 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:22:35 INF 95e4 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:22:35 INF 95e4 PLS service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:22:35 INF 95e4 PLS service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:22:35 INF 95e4 192.168.4.71/PLS service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:22:35 DBG 33c4 192.168.4.71/PLS win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:22:35 INF 95e4 192.168.4.71/PLS command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51116)
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service PLS-1 ':51116 (192.168.4.71)'
+2018/03/22 14:22:36 DBG 95e4 192.168.4.71/PLS naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid PLS-1 at zwkj-PC:51116 (192.168.4.71)
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SCS
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SPLY
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOGOUT
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:22:36 WRN 95e4 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:22:36 WRN 95e4 192.168.4.71/PLS-1 i18n.cpp 140 NLMISC::CI18N::loadFileIntoMap : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS-1 : Executing command : 'loadlua'
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS-1 : Load Script...
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS-1 : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS-1 : Load Script Sucess.
+2018/03/22 14:22:36 DBG 95e4 192.168.4.71/PLS-1 lua_base_function.cpp 127 LuaPrint : 13
+2018/03/22 14:22:36 DBG 95e4 192.168.4.71/PLS-1 lua_base_function.cpp 127 LuaPrint : 4611686020574871551
+2018/03/22 14:22:36 DBG 95e4 192.168.4.71/PLS-1 lua_base_function.cpp 127 LuaPrint : 21
+2018/03/22 14:22:36 DBG 95e4 192.168.4.71/PLS-1 lua_network.cpp 34 CLuaWebSocketNetwork::Hello : CLuaWebSocketNetwork::Hello
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== _L
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS-1 : Executing command : 'loadconfig'
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS-1 : PLS Load config files...
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS-1 : PLS Load config done.
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS-1 service.cpp 1232 NLNET::IService::main : SERVICE: Service initialized, executing StartCommands
+2018/03/22 14:22:36 INF 95e4 192.168.4.71/PLS-1 service.cpp 1278 NLNET::IService::main : SERVICE: Service ready
+2018/03/22 14:22:36 DBG 95e4 192.168.4.71/PLS-1 win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to 'PLS player_logic_service : Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+
+Log Starting [2018/03/22 14:28:26]
+2018/03/22 14:28:26 WRN 8f10 PLS stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:28:26 INF 9468 PLS system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:28:26 INF 9468 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:28:26 INF 9468 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:28:26 INF 9468 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:28:26 INF 9468 PLS service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:28:26 INF 9468 PLS service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:28:26 DBG 7bc8 192.168.4.71/PLS win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51117)
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service PLS-1 ':51117 (192.168.4.71)'
+2018/03/22 14:28:26 DBG 9468 192.168.4.71/PLS naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid PLS-1 at zwkj-PC:51117 (192.168.4.71)
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SCS
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SPLY
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOGOUT
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:28:26 INF 9468 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:28:26 WRN 9468 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:28:26 WRN 9468 192.168.4.71/PLS-1 i18n.cpp 140 NLMISC::CI18N::loadFileIntoMap : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:28:27 INF 9468 192.168.4.71/PLS-1 : Executing command : 'loadlua'
+2018/03/22 14:28:27 INF 9468 192.168.4.71/PLS-1 : Load Script...
+2018/03/22 14:28:27 INF 9468 192.168.4.71/PLS-1 : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:28:27 INF 9468 192.168.4.71/PLS-1 : Load Script Sucess.
+2018/03/22 14:28:27 INF 9468 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== _L
+2018/03/22 14:28:27 INF 9468 192.168.4.71/PLS-1 : Executing command : 'loadconfig'
+2018/03/22 14:28:27 INF 9468 192.168.4.71/PLS-1 : PLS Load config files...
+2018/03/22 14:28:27 INF 9468 192.168.4.71/PLS-1 : PLS Load config done.
+2018/03/22 14:28:27 INF 9468 192.168.4.71/PLS-1 service.cpp 1232 NLNET::IService::main : SERVICE: Service initialized, executing StartCommands
+2018/03/22 14:28:27 INF 9468 192.168.4.71/PLS-1 service.cpp 1278 NLNET::IService::main : SERVICE: Service ready
+2018/03/22 14:28:27 DBG 9468 192.168.4.71/PLS-1 win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to 'PLS player_logic_service : Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+
+Log Starting [2018/03/22 14:31:15]
+2018/03/22 14:31:15 WRN 98c0 PLS stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:31:16 INF 93b8 PLS system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:31:16 INF 93b8 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:31:16 INF 93b8 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:31:16 INF 93b8 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:31:16 INF 93b8 PLS service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:31:16 INF 93b8 PLS service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:31:16 DBG 3248 PLS win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51121)
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service FES-66 ':51120 (192.168.4.71)'
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service PLS-1 ':51121 (192.168.4.71)'
+2018/03/22 14:31:16 DBG 93b8 192.168.4.71/PLS naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid PLS-1 at zwkj-PC:51121 (192.168.4.71)
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SCS
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SPLY
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOGOUT
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:31:16 WRN 93b8 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:31:16 WRN 93b8 192.168.4.71/PLS-1 i18n.cpp 140 NLMISC::CI18N::loadFileIntoMap : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS-1 : Executing command : 'loadlua'
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS-1 : Load Script...
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS-1 : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS-1 : Load Script Sucess.
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== _L
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS-1 : Executing command : 'loadconfig'
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS-1 : PLS Load config files...
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS-1 : PLS Load config done.
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS-1 service.cpp 1232 NLNET::IService::main : SERVICE: Service initialized, executing StartCommands
+2018/03/22 14:31:16 INF 93b8 192.168.4.71/PLS-1 service.cpp 1278 NLNET::IService::main : SERVICE: Service ready
+2018/03/22 14:31:16 DBG 93b8 192.168.4.71/PLS-1 win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to 'PLS player_logic_service : Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:34:36 WRN 93b8 192.168.4.71/PLS-1 unified_network.cpp 357 NLNET::uncbMsgProcessing : HNETL5: Can't find callback 'L' called by service 66
+
+Log Starting [2018/03/22 14:35:35]
+2018/03/22 14:35:35 WRN 91ec PLS stdin_monitor_thread.cpp 84 NLNET::CStdinMonitorThread::run : fgets failed
+2018/03/22 14:35:36 INF 95e4 PLS system_info.cpp 915 NLMISC::CSystemInfo::getProcessorFrequency : SI: CSystemInfo: Processor frequency is 3000 MHz
+2018/03/22 14:35:36 INF 95e4 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersDebug from config file
+2018/03/22 14:35:36 INF 95e4 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersInfo from config file
+2018/03/22 14:35:36 INF 95e4 PLS service.cpp 524 NLNET::cbLogFilter : SERVICE: Updating NegFiltersWarning from config file
+2018/03/22 14:35:36 INF 95e4 PLS service.cpp 862 NLNET::IService::main : SERVICE: Starting Service 'PLS' using NeL (Mar 20 2018 17:32:49) compiled Mar 22 2018 11:35:07
+2018/03/22 14:35:36 INF 95e4 PLS service.cpp 863 NLNET::IService::main : SERVICE: On OS: Microsoft Windows 7 Ultimate Edition 64-bit Service Pack 1 (Build 7601) (6.1 7601)
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS service.cpp 941 NLNET::IService::main : SERVICE: Host: 192.168.4.71
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS command.cpp 149 NLMISC::CCommandRegistry::registerNamedCommandHandler : CCommandRegistry : adding commands handler for class 'CUnifiedNetwork'
+2018/03/22 14:35:36 DBG 8c70 192.168.4.71/PLS win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to '*INIT* PLS player_logic_service: Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS naming_client.cpp 432 NLNET::CNamingClient::queryServicePort : NC: Received the answer of the query port (51122)
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service PLS-1 ':51122 (192.168.4.71)'
+2018/03/22 14:35:36 DBG 95e4 192.168.4.71/PLS naming_client.cpp 372 NLNET::CNamingClient::registerServiceWithSId : NC: Registered service with sid PLS-1 at zwkj-PC:51122 (192.168.4.71)
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== INFO
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GET_VIEW
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== STOPS
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== EXEC_COMMAND
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== ADMIN_PING
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== R_SH_ID
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SCS
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== SPLY
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== GC
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== LOGOUT
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./script/_PLS/, 1, 0): adding the path './script/_PLS/'
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS-1 path.cpp 1021 NLMISC::CFileContainer::addSearchPath : PATH: CPath::addSearchPath(./static_table/, 1, 0): adding the path './static_table/'
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_LRC
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== CT_MSG
+2018/03/22 14:35:36 WRN 95e4 192.168.4.71/PLS-1 path.cpp 579 NLMISC::CFileContainer::lookup : PATH: File (cn.uxt) not found (cn.uxt)
+2018/03/22 14:35:36 WRN 95e4 192.168.4.71/PLS-1 i18n.cpp 140 NLMISC::CI18N::loadFileIntoMap : I18N: In file cn.uxt, missing LanguageName translation (should be first in file)
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS-1 : Executing command : 'loadlua'
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS-1 : Load Script...
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS-1 : Loading ./script/_PLS/_Main.lua.
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS-1 : Load Script Sucess.
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS-1 unified_network.cpp 1471 NLNET::CUnifiedNetwork::addCallbackArray : addCallbackArray =================== _L
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS-1 : Executing command : 'loadconfig'
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS-1 : PLS Load config files...
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS-1 : PLS Load config done.
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS-1 service.cpp 1232 NLNET::IService::main : SERVICE: Service initialized, executing StartCommands
+2018/03/22 14:35:36 INF 95e4 192.168.4.71/PLS-1 service.cpp 1278 NLNET::IService::main : SERVICE: Service ready
+2018/03/22 14:35:36 DBG 95e4 192.168.4.71/PLS-1 win_displayer.cpp 355 NLMISC::CWinDisplayer::setTitleBar : SERVICE: Set title bar to 'PLS player_logic_service : Nel Service Console (compiled Mar 20 2018 17:32:34 in NL_DEBUG mode)'
+2018/03/22 14:35:40 INF 95e4 192.168.4.71/PLS-1 naming_client.cpp 137 NLNET::cbRegisterBroadcast : NC: Registration Broadcast of the service FES-66 ':51123 (192.168.4.71)'

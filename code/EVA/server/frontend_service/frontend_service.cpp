@@ -7,6 +7,8 @@
 #include <game_share/tools.h>
 #include <server_share/server_def.h>
 #include <server_share/client_msg_desc.h>
+#include <server_share/lua/script_mgr.h>
+#include <server_share/lua/lua_network.h>
 #include <nel/misc/window_displayer.h>
 #include <nel/net/naming_client.h>
 
@@ -96,8 +98,13 @@ void CFrontEndService::init()
 
     ///////////////////////////////////////////////////
 
+
+
     MsgDesc.LoadMsgXml();
     TimerManager->init();
+
+    ScriptMgr.init();
+    LuaNetworkMgr.Init();
 
     //////////////////////////////////////////////////
     // TCP 相关
@@ -170,6 +177,9 @@ bool CFrontEndService::update()
     SessionMgr.update( _CurrTicks );
     UDPSender.update();
 
+    ScriptMgr.update();
+    LuaNetworkMgr.Update();
+
     return true;
 }
 
@@ -178,6 +188,10 @@ void CFrontEndService::release()
 //    delete m_Clients; m_Clients = NULL;
     _ReceiveSub.release();
     TimerManager->release();
+
+    ScriptMgr.release();
+    LuaNetworkMgr.Release();
+
     google::protobuf::ShutdownProtobufLibrary();
 }
 

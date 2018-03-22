@@ -20,6 +20,9 @@ public:
 	bool            on_event( DEF::EVENT_ID script_event, LuaParams lua_in );
     LuaParams       run( std::string script_scope, std::string script_name, LuaParams lua_in, uint outnum=0 );
 
+    void            ExecString( std::string );
+
+
     bool            LoadScrpit(const char* szName);
     lua_State*      GetLuaState();
 

@@ -33,14 +33,14 @@ function EventController:RegisterEvent(messageType, callback)
     self._MessageQue[messageType][index+1] = callback
 end
 
-function EventController:TriggerEvent( msg_type, proto_buf )
+function EventController:TriggerEvent( msg_from, msg_type, proto_buf )
 
     if self._MessageQue[msg_type] == nil then
         return
     end
     for i,v in pairs(self._MessageQue[msg_type]) do
 		if (v ~= nil)then
-			v(proto_buf)
+			v(msg_from, proto_buf)
 		else
 		end
     end

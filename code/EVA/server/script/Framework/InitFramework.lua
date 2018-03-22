@@ -2,6 +2,11 @@
 -- 初始化
 --=========================================================
 
+local BasePath = Utility.GetBasePath() .. "/script/";
+package.path = package.path .. BasePath .. "Framework/?.lua;";
+package.path = package.path .. BasePath .. "Framework/Event/?.lua;";
+package.path = package.path .. BasePath .. "Framework/Net/?.lua;";
+
 protobuf = require "protobuf"
 
 addr = io.open( BasePath.."DataTable\\proto_msg.pb", "rb")
@@ -12,9 +17,9 @@ protobuf.decode("google.protobuf.FileDescriptorSet", buffer)
 
 
 -- 工具库
-require("Framework/Class")
+require("Class")
 --require("Framework/Stack")
-require("Framework/functions")
+require("functions")
 --require ("bit")
 
 require("NetWorkHandler")
