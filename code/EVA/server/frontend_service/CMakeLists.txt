@@ -1,9 +1,6 @@
 FILE(GLOB SRC *.cpp *.h)
-FILE(GLOB SRC_UDP                   udp/*.h udp/*.cpp)
 
-SOURCE_GROUP("UDP"   FILES ${SRC_UDP})
-
-ADD_EXECUTABLE(frontend_service WIN32 ${SRC} ${SRC_UDP})
+ADD_EXECUTABLE(frontend_service WIN32 ${SRC})
 
 INCLUDE_DIRECTORIES(${LIBXML2_INCLUDE_DIR} ${LUA_INCLUDE_DIR} ${PBC_INCLUDE_DIR})
 

@@ -1,3 +1,0 @@
-$#include "lua_base_function.h"
-$#include <game_share/define_pro.pb.h>
-

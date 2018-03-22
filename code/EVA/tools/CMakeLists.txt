@@ -1,6 +1,4 @@
-ADD_SUBDIRECTORY(luafun_gen)
 ADD_SUBDIRECTORY(tools_test)
-ADD_SUBDIRECTORY(service_daemon)
 
 IF(WIN32)
 #ADD_SUBDIRECTORY(robot)

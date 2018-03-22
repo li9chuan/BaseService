@@ -1,4 +1,0 @@
-cp  ../../server/player_logic_service/lua_function.h lua_function.h
-/usr/local/bin/lua51/tolua -n lua_function -o ../../server/player_logic_service/auto_lua_callback.cpp  ./export_lua.pkg
-rm lua_function.h
-
