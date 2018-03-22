@@ -7,11 +7,17 @@ package.path = BasePath .. "_FES/?.lua;" .. BasePath .. "Framework/?.lua;";
 
 require("InitFramework")
 
-OnInit();
+
+
+web_sock = bin_types.WebSocketNetwork.newInstance("名字", 9999);
+
+
+ReciveClientMsg = require("ReciveClientMsg")
+lua_test = ReciveClientMsg:new();
+
 
 -- 主入口函数。从这里开始lua逻辑
 function Init()
-	
 	
 
 end

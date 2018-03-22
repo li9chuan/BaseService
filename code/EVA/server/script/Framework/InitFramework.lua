@@ -79,3 +79,5 @@ function OnInit()
 	OnCommonInit();		-- 通用模块
 --	OnLoginInit();		-- 登录模块
 end
+
+OnInit();

@@ -243,21 +243,18 @@ void socket_read_cb(bufferevent *bev, void *args)
 
                     if( msg_buff.size() >= 2 )
                     {
-                        //uint8 msg_type_len = (uint8)msg_buff[0];
+                        uint8 msg_type_len = (uint8)msg_buff[0];
 
 
-                        //if( msg_type_len <= msg_buff.size()-1 )
+                        if( msg_type_len<127 && msg_type_len <= msg_buff.size()-1 )
                         {
+                            CSString msg_type = msg_buff.substr( 1, msg_type_len );
+                            CMessage msg( "_LC" );
+                            msg.serial(  msg_type );
 
-                            //CSString msg_type = msg_buff.substr( 1, msg_type_len );
-                            //CMessage msg(  msg_type );
-                            CMessage msg("TestWebsock");
-
-                            //if( msg_buff.size()-msg_type_len-1 > 0 )
-                            if( msg_buff.size() > 0 )
+                            if( msg_buff.size()-msg_type_len-1 > 0 )
                             {
-                                //msg.serialBufferWithSize( (uint8*)&*msg_buff.begin(), msg_buff.size()-msg_type_len-1);
-                                msg.serialBufferWithSize( (uint8*)&*msg_buff.begin(), msg_buff.size());
+                                msg.serialBufferWithSize( (uint8*)&*msg_buff.begin()+msg_type_len+1, msg_buff.size()-msg_type_len-1);
                             }
 
                             uint8 event_type    = CBufNetBase::User;
@@ -267,6 +264,8 @@ void socket_read_cb(bufferevent *bev, void *args)
 
                             pEventArgs->pServer->pushMessageIntoReceiveQueue( msg.buffer(), msg.length() );
                         }
+                    //else
+
                     }
 
                     nlinfo( "WebSocketRecive: %s", msg_buff.c_str() );

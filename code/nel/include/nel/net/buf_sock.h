@@ -326,7 +326,16 @@ public:
         }
         else
         {
-            _ReceiveBuffer.assign( _ReceiveBuffer.begin()+shift_bits, _ReceiveBuffer.end() );
+            //_ReceiveBuffer.assign( _ReceiveBuffer.begin()+shift_bits, _ReceiveBuffer.end() );
+
+            uint new_idx = 0;
+            for ( uint i=shift_bits; i<_ReceiveBuffer.size(); ++i )
+            {
+                _ReceiveBuffer[new_idx] = _ReceiveBuffer[i];
+                ++new_idx;
+            }
+
+            _ReceiveBuffer.resize(new_idx);
         }
 
         return _ReceiveBuffer.size();

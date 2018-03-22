@@ -8,10 +8,8 @@ package.path = BasePath .. "_PLS/?.lua;" .. BasePath .. "Framework/?.lua;";
 
 require("InitFramework")
 
-OnInit();
 
 LuaTestMsg = require("LuaTestMsg")
-
 lua_test = LuaTestMsg:new();
 
 

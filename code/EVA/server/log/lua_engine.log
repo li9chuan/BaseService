@@ -1,3 +1,0 @@
-
-Log Starting [2018/03/20 11:42:33]
-2018/03/20 11:42:33 6ff4 192.168.4.71/PLS-1 : call function(Main) fail, cause ./script/Main.lua:19: attempt to concatenate a function value (local 'ph')

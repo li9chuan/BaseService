@@ -7,23 +7,41 @@
 using namespace NLMISC;
 using namespace NLNET;
 
-void cbLuaMsg ( NLNET::CMessage& msgin, const std::string &serviceName, NLNET::TServiceId serviceId )
+void cbLuaServiceMsg ( NLNET::CMessage& msgin, const std::string &serviceName, NLNET::TServiceId serviceId )
 {
     uint64          msg_from = serviceId.get();
     std::string     msg_type;
-    std::string     msg_body;
+    std::string     msg_buff;
 
-    msgin.serial(msg_from);
     msgin.serial(msg_type);
-    msgin.serial(msg_body);
+    msgin.serial(msg_buff);
 
-    LuaParams lua_params( msg_from, msg_type, msg_body );  
+    LuaParams lua_params( msg_from, msg_type, msg_buff );  
     ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params);
 }
 
+
+void cbLuaClientMsg (CMessage &msgin, TSockId from, CCallbackNetBase &netbase)
+{
+    uint64          msg_from = (uint64)from;
+    std::string     msg_type;
+    std::string     msg_buff;
+
+    msgin.serial(msg_type);
+    msgin.serial(msg_buff);
+
+    LuaParams lua_params( msg_from, msg_type, msg_buff );  
+    ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params);
+}
+
+const TCallbackItem LuaClientCallbackArray[] =
+{
+    { "_LC",                         cbLuaClientMsg          },
+};
+
 NLNET::TUnifiedCallbackItem LuaCallbackArray[] =
 {
-    { "_L",                        cbLuaMsg              },
+    { "_LS",                         cbLuaServiceMsg         },
 };
 
 class CLuaWebSocketNetwork
@@ -44,19 +62,24 @@ public:
     CLuaWebSocketNetwork( std::string name, uint16 port )
     {
         m_NetName = name;
-        CCallbackServerWebSocket* pCallbackServerHandle = new CCallbackServerWebSocket();
-        pCallbackServerHandle->init (port);
-
+        m_CallbackServerHandle = new CCallbackServerWebSocket();
+        m_CallbackServerHandle->addCallbackArray(LuaClientCallbackArray, sizeof(LuaClientCallbackArray)/sizeof(LuaClientCallbackArray[0]));
+        m_CallbackServerHandle->init (port);
+        
+        LuaNetworkMgr.RegisterNetModule( name, this );
     }
 
     ~CLuaWebSocketNetwork()
     {
-        //delete m_CallbackServerHandle; 
+        delete m_CallbackServerHandle; 
     }
 
     void Update()
     {
-        m_CallbackServerHandle->update();
+        if( m_CallbackServerHandle->connected() )
+        {
+            m_CallbackServerHandle->update();
+        }
     }
 
     void Say(const std::string& msg)
@@ -85,7 +108,7 @@ void CLuaNetworkMgr::RegisterNetModule( std::string name, CLuaWebSocketNetwork* 
 {
     TNetHandle::iterator iter = m_LuaWebSocketNetworkHandle.find(name);
 
-    if ( iter != m_LuaWebSocketNetworkHandle.end() )
+    if ( iter == m_LuaWebSocketNetworkHandle.end() )
     {
         m_LuaWebSocketNetworkHandle.insert( make_pair(name,pNet) ); 
     }
@@ -159,19 +182,23 @@ namespace bin
     ///   
     BEGIN_SCRIPT_MODULE(ServerNet)
 
-    DEFINE_MODULE_FUNCTION(Broadcast, void, (std::string service_name, CScriptTable& tb_msg))
+    DEFINE_MODULE_FUNCTION(Broadcast, void, (const char* proto_buf, CScriptTable& tb_msg))
     {
         if( tb_msg.IsReferd() )
         {
-            std::string  msg_name;
-            std::string  msg_body;
+            std::string     service_name;
+            std::string     msg_type;
+            int             buf_len;
 
-            tb_msg.Get(1, msg_name);
-            tb_msg.Get(2, msg_body);
+            tb_msg.Get(1, service_name);
+            tb_msg.Get(2, msg_type);
+            tb_msg.Get(3, buf_len);
 
-            CMessage msg_out("_L");
-            msg_out.serial(msg_name);
-            msg_out.serial(msg_body);
+            std::string      pb_str(proto_buf,buf_len);
+
+            CMessage msg_out("_LS");
+            msg_out.serial(msg_type);
+            msg_out.serial(pb_str);
 
             Network->send( service_name, msg_out );
         }
@@ -179,19 +206,23 @@ namespace bin
         return 1;
     }
 
-    DEFINE_MODULE_FUNCTION(Send, void, (int sid, CScriptTable& tb_msg))
+    DEFINE_MODULE_FUNCTION(Send, void, (const char* proto_buf, CScriptTable& tb_msg))
     {
         if( tb_msg.IsReferd() )
         {
-            std::string  msg_name;
-            std::string  msg_body;
+            int             sid;
+            std::string     msg_type;
+            int             buf_len;
 
-            tb_msg.Get(1, msg_name);
-            tb_msg.Get(2, msg_body);
+            tb_msg.Get(1, sid);
+            tb_msg.Get(2, msg_type);
+            tb_msg.Get(3, buf_len);
 
-            CMessage msg_out("_L");
-            msg_out.serial(msg_name);
-            msg_out.serial(msg_body);
+            std::string     pb_str(proto_buf,buf_len);
+
+            CMessage msg_out("_LS");
+            msg_out.serial(msg_type);
+            msg_out.serial(pb_str);
 
             Network->send( (NLNET::TServiceId)sid, msg_out );
         }

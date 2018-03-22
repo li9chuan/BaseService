@@ -31,5 +31,6 @@
     </Filter>
     <Filter Name="_FES" Toggle="false" >
         <LuaFile RelativePath=".\_FES\_Main.lua" />
+        <LuaFile RelativePath=".\_FES\ReciveClientMsg.lua" />
     </Filter>
 </Project>

@@ -16,17 +16,17 @@ function LuaTestMsg:LuaTestCB( msg_from, proto_buf )
 	print(msg_session.session);
 	print(msg_session.index);
 	
-	code = protobuf.encode("MsgSession", msg_session)
+--[[	code = protobuf.encode("MsgSession", msg_session)
 	
 	msg = { "LTst", "neirong" };
-	ServerNet.Send( msg_from, msg );
+	ServerNet.Send( msg_from, msg );--]]
 	
 end
 
 function LuaTestMsg:Init()
 	
 	self._EventRegister = EventRegister.new();
-	self._EventRegister:RegisterEvent( "LuaTestCB",  self, self.LuaTestCB );
+	self._EventRegister:RegisterEvent( "LTst",  self, self.LuaTestCB );
 end
 
 --ÊÍ·Åº¯Êý
