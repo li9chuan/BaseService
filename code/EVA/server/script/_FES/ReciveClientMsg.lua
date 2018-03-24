@@ -8,7 +8,7 @@ function ReciveClientMsg:ctor( Data )
 	self:Init();
 end
 
-function ReciveClientMsg:LuaTestCB( msg_from, proto_buf )
+function ReciveClientMsg:LuaTestCB( sock_id, proto_buf )
 
 	local msg_session = protobuf.decode("MsgSession" , proto_buf)
 	
@@ -19,8 +19,8 @@ function ReciveClientMsg:LuaTestCB( msg_from, proto_buf )
 	code = protobuf.encode("MsgSession", msg_session)
 	len  = string.len(code);
 	
-	msg = { "PLS", "LTst", len };
-	ServerNet.Broadcast( code, msg );
+	msg = { sock_id, "LTst", len };
+	web_sock:Send( code, msg );
 	
 end
 

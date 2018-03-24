@@ -21,7 +21,7 @@ void cbLuaServiceMsg ( NLNET::CMessage& msgin, const std::string &serviceName, N
 }
 
 
-void cbLuaClientMsg (CMessage &msgin, TSockId from, CCallbackNetBase &netbase)
+void cbLuaClientMsg ( CMessage &msgin, TSockId from, CCallbackNetBase &netbase)
 {
     uint64          msg_from = (uint64)from;
     std::string     msg_type;
@@ -31,7 +31,7 @@ void cbLuaClientMsg (CMessage &msgin, TSockId from, CCallbackNetBase &netbase)
     msgin.serial(msg_buff);
 
     LuaParams lua_params( msg_from, msg_type, msg_buff );  
-    ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params);
+    ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params );
 }
 
 const TCallbackItem LuaClientCallbackArray[] =
@@ -80,6 +80,20 @@ public:
         {
             m_CallbackServerHandle->update();
         }
+    }
+
+    void Send( TSockId sock_id, std::string& msg_type, std::string& proto_str )
+    {
+        CMemStream mem_out;
+
+        //uint32 buff_len = proto_str.size() + msg_type.size() + 1 + 4;
+        //mem_out.serial(buff_len);
+        uint8 msg_type_len = msg_type.size();
+        mem_out.serial(msg_type_len);
+        mem_out.serialBuffer( (uint8*)msg_type.c_str(), msg_type_len );
+        mem_out.serialBuffer( (uint8*)proto_str.c_str(), proto_str.size() );
+
+        m_CallbackServerHandle->send_buffer( mem_out, sock_id );
     }
 
     void Say(const std::string& msg)
@@ -151,86 +165,108 @@ void CLuaNetworkMgr::Release()
 namespace bin
 {
     BEGIN_SCRIPT_CLASS( WebSocketNetwork, CLuaWebSocketNetwork )
+
         DEFINE_CLASS_FUNCTION(hello, void, ())
-    {
-        obj->Hello();
-        return 1;
-    }
+        {
+            obj->Hello();
+            return 1;
+        }
 
-    DEFINE_CLASS_FUNCTION(say, void, (const std::string& message))
-    {
-        obj->Say(message);
-        return 1;
-    }
+        DEFINE_CLASS_FUNCTION( Send, void, (const char* proto_buf, CScriptTable& tb_msg))
+        {
+            if( tb_msg.IsReferd() )
+            {
+                lua_Integer     sock_id;
+                std::string     msg_type;
+                int             buf_len;
 
-    DEFINE_CLASS_FUNCTION(want , std::string, ())
-    {
-        r = obj->Want();
-        return 1;
-    }
+                tb_msg.Get(1, sock_id);
+                tb_msg.Get(2, msg_type);
+                tb_msg.Get(3, buf_len);
 
-    DEFINE_STATIC_FUNCTION(newInstance, CLuaWebSocketNetwork*, (std::string name, int port))
-    {
-        r = new CLuaWebSocketNetwork(name, port);
-        r->GetScriptObject().SetDelByScr(true);
+                std::string     pb_str(proto_buf,buf_len);
+                obj->Send( (TSockId)sock_id, msg_type, pb_str );
+            }
 
-        return 1;
-    }
+            return 1;
+        }
+
+        DEFINE_CLASS_FUNCTION(say, void, (const std::string& message))
+        {
+            obj->Say(message);
+            return 1;
+        }
+
+        DEFINE_CLASS_FUNCTION(want , std::string, ())
+        {
+            r = obj->Want();
+            return 1;
+        }
+
+        DEFINE_STATIC_FUNCTION(newInstance, CLuaWebSocketNetwork*, (std::string name, int port))
+        {
+            r = new CLuaWebSocketNetwork(name, port);
+            r->GetScriptObject().SetDelByScr(true);
+
+            return 1;
+        }
     END_SCRIPT_CLASS()
 
 
     ///   
     BEGIN_SCRIPT_MODULE(ServerNet)
 
-    DEFINE_MODULE_FUNCTION(Broadcast, void, (const char* proto_buf, CScriptTable& tb_msg))
-    {
-        if( tb_msg.IsReferd() )
+        DEFINE_MODULE_FUNCTION(Broadcast, void, (const char* proto_buf, CScriptTable& tb_msg))
         {
-            std::string     service_name;
-            std::string     msg_type;
-            int             buf_len;
+            if( tb_msg.IsReferd() )
+            {
+                std::string     service_name;
+                std::string     msg_type;
+                int             buf_len;
 
-            tb_msg.Get(1, service_name);
-            tb_msg.Get(2, msg_type);
-            tb_msg.Get(3, buf_len);
+                tb_msg.Get(1, service_name);
+                tb_msg.Get(2, msg_type);
+                tb_msg.Get(3, buf_len);
 
-            std::string      pb_str(proto_buf,buf_len);
+                std::string      pb_str(proto_buf,buf_len);
 
-            CMessage msg_out("_LS");
-            msg_out.serial(msg_type);
-            msg_out.serial(pb_str);
+                CMessage msg_out("_LS");
+                msg_out.serial(msg_type);
+                msg_out.serial(pb_str);
 
-            Network->send( service_name, msg_out );
+                Network->send( service_name, msg_out );
+            }
+
+            return 1;
         }
 
-        return 1;
-    }
-
-    DEFINE_MODULE_FUNCTION(Send, void, (const char* proto_buf, CScriptTable& tb_msg))
-    {
-        if( tb_msg.IsReferd() )
+        DEFINE_MODULE_FUNCTION(Send, void, (const char* proto_buf, CScriptTable& tb_msg))
         {
-            int             sid;
-            std::string     msg_type;
-            int             buf_len;
+            if( tb_msg.IsReferd() )
+            {
+                int             sid;
+                std::string     msg_type;
+                int             buf_len;
 
-            tb_msg.Get(1, sid);
-            tb_msg.Get(2, msg_type);
-            tb_msg.Get(3, buf_len);
+                tb_msg.Get(1, sid);
+                tb_msg.Get(2, msg_type);
+                tb_msg.Get(3, buf_len);
 
-            std::string     pb_str(proto_buf,buf_len);
+                std::string     pb_str(proto_buf,buf_len);
 
-            CMessage msg_out("_LS");
-            msg_out.serial(msg_type);
-            msg_out.serial(pb_str);
+                CMessage msg_out("_LS");
+                msg_out.serial(msg_type);
+                msg_out.serial(pb_str);
 
-            Network->send( (NLNET::TServiceId)sid, msg_out );
+                Network->send( (NLNET::TServiceId)sid, msg_out );
+            }
+
+            return 1;
         }
-
-        return 1;
-    }
 
     END_SCRIPT_MODULE()
+
+
 }
 
 

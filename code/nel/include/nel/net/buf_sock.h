@@ -26,6 +26,7 @@
 
 
 //#include <deque>
+struct  bufferevent;
 
 namespace NLNET {
 
@@ -33,9 +34,10 @@ namespace NLNET {
 #define nlnettrace(__msg) //LNETL1_DEBUG("LNETL1: %s",__msg);
 
 
-class CTcpSock;
-class CServerReceiveTask;
-class CBufNetBase;
+class   CTcpSock;
+class   CServerReceiveTask;
+class   CBufNetBase;
+
 
 
 /**
@@ -198,29 +200,18 @@ public:
 		return false;
 	}
 
-	/*bool pushBuffer( const std::vector<uint8>& buffer )
+	bool SendToLibEvent( const std::vector<uint8>& buffer )
 	{
 		nlassert (this != InvalidSockId);	// invalid bufsock
 //		LNETL1_DEBUG( "LNETL1: Pushing buffer to %s", asString().c_str() );
 
-		static uint32 biggerBufferSize = 64000;
-		if (buffer.size() > biggerBufferSize)
-		{
-			biggerBufferSize = buffer.size();
-			nlwarning ("LNETL1: new record! bigger network message pushed (sent) is %u bytes", biggerBufferSize);
-		}
 
-		if ( Sock->connected() )
-		{
-			// Push into host's send queue
-			SendFifo.push( buffer );
+        if( connectedState() )
+        {
+        }
 
-			// Update sending
-			bool res = update ();
-			return res; // not checking the result as in CBufServer::update()
-		}
 		return false;
-	}*/
+	}
 
 
 	/// Connects to the specified addr; set connectedstate to true if no connection advertising is needed
@@ -244,6 +235,10 @@ public:
 	// Prevents from pushing a connection/disconnection event twice
 	bool				_KnowConnected;
 
+    bufferevent*        m_BEVHandle;
+    CBufNetBase*        m_BufNetHandle;
+    bool                m_Handshake;
+
 private:
 
 #ifdef NL_DEBUG
@@ -262,6 +257,8 @@ private:
 
 	// Connected state (from the user's point of view, i.e. changed when the connection/disconnection event is at the front of the receive queue)
 	bool				_ConnectedState;
+
+    
 };
 
 

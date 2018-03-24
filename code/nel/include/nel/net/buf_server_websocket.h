@@ -98,7 +98,7 @@ public:
 	/** Send a message to the specified host, or to all hosts if hostid is InvalidSockId
 	 */
 	//void	send( const std::vector<uint8>& buffer, TSockId hostid );
-	void	send( const NLMISC::CMemStream& buffer, TSockId hostid );
+	void	send_buffer( const NLMISC::CMemStream& buffer, TSockId hostid );
 
 	/** Checks if there is some data to receive. Returns false if the receive queue is empty.
 	 * This is where the connection/disconnection callbacks can be called.
@@ -206,14 +206,14 @@ protected:
 		}
 	}*/
 
-	void pushBufferToHost( const NLMISC::CMemStream& buffer, TSockId hostid )
-	{
-		nlassert( hostid != InvalidSockId );
-		//if ( hostid->pushBuffer( buffer ) )
-		//{
-		//	_BytesPushedOut += buffer.length() + sizeof(TBlockSize); // statistics
-		//}
-	}
+	//void pushBufferToHost( const NLMISC::CMemStream& buffer, TSockId hostid )
+	//{
+	//	nlassert( hostid != InvalidSockId );
+	//	if ( hostid->pushBuffer( buffer ) )
+	//	{
+	//		_BytesPushedOut += buffer.length() + sizeof(TBlockSize); // statistics
+	//	}
+	//}
 
 	/// Returns the connection callback
 	TNetCallback		connectionCallback() const { return _ConnectionCallback; }

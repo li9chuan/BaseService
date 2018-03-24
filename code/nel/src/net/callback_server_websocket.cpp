@@ -83,45 +83,44 @@ CCallbackServerWebSocket::CCallbackServerWebSocket( TRecordingState rec, const s
  * Recorded : YES
  * Replayed : MAYBE
  */
-void CCallbackServerWebSocket::send (const CMessage &buffer, TSockId hostid, bool /* log */)
-{
-	nlassert (connected ());
-	nlassert (buffer.length() != 0);
-	nlassert (buffer.typeIsSet());
-
-	if (hostid == InvalidSockId)
-	{
-		// broadcast
-		sint nb = nbConnections ();
-		_BytesSent += buffer.length () * nb;
-	}
-	else
-	{
-		_BytesSent += buffer.length ();
-	}
-
-//	if (log)
-	{
-//		LNETL3_DEBUG ("LNETL3S: Server: send(%s, %s)", buffer.toString().c_str(), hostid->asString().c_str());
-	}
-
-#ifdef USE_MESSAGE_RECORDER
-	if ( _MR_RecordingState != Replay )
-	{
-#endif
-
-		// Send
-		CBufServerWebsocket::send (buffer, hostid);
-
-#ifdef USE_MESSAGE_RECORDER
-		if ( _MR_RecordingState == Record )
-		{
-			// Record sent message
-			_MR_Recorder.recordNext( _MR_UpdateCounter, Sending, hostid, const_cast<CMessage&>(buffer) );
-		}
-	}
-#endif
-}
+//void CCallbackServerWebSocket::send (const CMessage &buffer, TSockId hostid, bool /* log */)
+//{
+//	nlassert (connected ());
+//	nlassert (buffer.length() != 0);
+//
+//	if (hostid == InvalidSockId)
+//	{
+//		// broadcast
+//		sint nb = nbConnections ();
+//		_BytesSent += buffer.length () * nb;
+//	}
+//	else
+//	{
+//		_BytesSent += buffer.length ();
+//	}
+//
+////	if (log)
+//	{
+////		LNETL3_DEBUG ("LNETL3S: Server: send(%s, %s)", buffer.toString().c_str(), hostid->asString().c_str());
+//	}
+//
+//#ifdef USE_MESSAGE_RECORDER
+//	if ( _MR_RecordingState != Replay )
+//	{
+//#endif
+//
+//		// Send
+//		CBufServerWebsocket::send (buffer, hostid);
+//
+//#ifdef USE_MESSAGE_RECORDER
+//		if ( _MR_RecordingState == Record )
+//		{
+//			// Record sent message
+//			_MR_Recorder.recordNext( _MR_UpdateCounter, Sending, hostid, const_cast<CMessage&>(buffer) );
+//		}
+//	}
+//#endif
+//}
 
 
 /*

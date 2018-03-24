@@ -56,7 +56,10 @@ CBufSock::CBufSock( CTcpSock *sock ) :
 	_TriggerSize( -1 ),
 	_RTSBIndex( 0 ),
 	_AppId( 0 ),
-	_ConnectedState( false )
+	_ConnectedState( false ),
+    m_BEVHandle(NULL),
+    m_BufNetHandle(NULL),
+    m_Handshake(false)
 {
 	nlnettrace( "CBufSock::CBufSock" ); // don't define a global object
 

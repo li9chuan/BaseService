@@ -40,7 +40,7 @@ public:
 	CCallbackServerWebSocket( TRecordingState rec=Off, const std::string& recfilename="", bool recordall=true, bool initPipeForDataAvailable=true );
 
 	/// Sends a message to the specified host
-	void	send (const CMessage &buffer, TSockId hostid, bool log = true);
+	void	send (const CMessage &buffer, TSockId hostid, bool log = true) { nlstop; };
 
 	/// Force to send all data pending in the send queue. See comment in CCallbackNetBase.
 	bool	flush (TSockId destid, uint *nbBytesRemaining=NULL) { nlassert( destid != InvalidSockId ); return false; /*CBufServer::flush(destid, nbBytesRemaining);*/ }
@@ -86,7 +86,7 @@ public:
 private:
 
 	/// This function is public in the base class and put it private here because user cannot use it in layer 2
-	void			send (const NLMISC::CMemStream &/* buffer */, TSockId /* hostid */) { nlstop; }
+	//void			send (const NLMISC::CMemStream &/* buffer */, TSockId /* hostid */) { nlstop; }
 
 	bool			dataAvailable ();
 	virtual bool	getDataAvailableFlagV() const { return dataAvailableFlag(); }
