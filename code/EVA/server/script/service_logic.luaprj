@@ -1,36 +1,34 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <Project Name="service_logic.luaprj" Cmd="" Arg="" Dir="" Toggle="false" >
-    <Filter RelativePath="." Toggle="false" >
-        <LuaFile RelativePath=".\Framework\Class.lua" />
-        <LuaFile RelativePath=".\Framework\functions.lua" />
-        <LuaFile RelativePath=".\Framework\List.lua" />
-        <LuaFile RelativePath=".\Framework\Map.lua" />
-        <LuaFile RelativePath=".\Framework\MiddleClass.lua" />
-        <LuaFile RelativePath=".\Framework\Queue.lua" />
-        <LuaFile RelativePath=".\Framework\Stack.lua" />
-        <LuaFile RelativePath=".\Framework\StateFul.lua" />
-        <Filter RelativePath="." Toggle="false" >
-            <LuaFile RelativePath=".\Framework\Event\EventController.lua" />
-            <LuaFile RelativePath=".\Framework\Event\EventRegister.lua" />
-            <LuaFile RelativePath=".\Framework\Event\EventType.lua" />
+    <Filter RelativePath=".\Framework" Toggle="false" >
+        <LuaFile RelativePath=".\Class.lua" />
+        <LuaFile RelativePath=".\functions.lua" />
+        <LuaFile RelativePath=".\List.lua" />
+        <LuaFile RelativePath=".\Map.lua" />
+        <LuaFile RelativePath=".\MiddleClass.lua" />
+        <LuaFile RelativePath=".\Queue.lua" />
+        <LuaFile RelativePath=".\Stack.lua" />
+        <LuaFile RelativePath=".\StateFul.lua" />
+        <Filter RelativePath=".\Event" Toggle="false" >
+            <LuaFile RelativePath=".\EventController.lua" />
+            <LuaFile RelativePath=".\EventRegister.lua" />
+            <LuaFile RelativePath=".\EventType.lua" />
         </Filter>
-        <Filter RelativePath="." Toggle="false" >
-            <LuaFile RelativePath=".\Framework\Net\NetWorkHandler.lua" />
-            <LuaFile RelativePath=".\Framework\Net\CallbackService.lua" />
+        <Filter RelativePath=".\Net" Toggle="false" >
+            <LuaFile RelativePath=".\NetWorkHandler.lua" />
+            <LuaFile RelativePath=".\CallbackService.lua" />
+            <LuaFile RelativePath=".\protobuf.lua" />
+            <LuaFile RelativePath=".\test.lua" />
         </Filter>
-        <Filter RelativePath="." Toggle="false" >
-            <LuaFile RelativePath=".\Framework\ProtoBuffer\protobuf.lua" />
-            <LuaFile RelativePath=".\Framework\ProtoBuffer\test.lua" />
-        </Filter>
-        <LuaFile RelativePath=".\Framework\InitFramework.lua" />
+        <LuaFile RelativePath=".\InitFramework.lua" />
     </Filter>
-    <Filter RelativePath="." Toggle="false" >
-        <LuaFile RelativePath=".\_PLS\LuaTestMsg.lua" />
-        <LuaFile RelativePath=".\_PLS\_Main.lua" />
+    <Filter RelativePath=".\_PLS" Toggle="false" >
+        <LuaFile RelativePath=".\LuaTestMsg.lua" />
+        <LuaFile RelativePath=".\_Main.lua" />
     </Filter>
-    <Filter RelativePath="." Toggle="false" >
-        <LuaFile RelativePath=".\_FES\_Main.lua" />
-        <LuaFile RelativePath=".\_FES\ReciveClientMsg.lua" />
+    <Filter RelativePath=".\_FES" Toggle="false" >
+        <LuaFile RelativePath=".\_Main.lua" />
+        <LuaFile RelativePath=".\ReciveClientMsg.lua" />
     </Filter>
 </Project>
