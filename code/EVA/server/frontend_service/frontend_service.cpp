@@ -14,6 +14,7 @@
 
 #include "frontend_service.h"
 #include <game_share/timer.h>
+#include <server_share/lua/lua_thread.h>
 
 #ifdef NL_OS_WINDOWS
 #include <Windows.h>
@@ -45,8 +46,11 @@ void CFrontEndService::init()
     ///////////////////////////////////////////////////
 
     TimerManager->init();
+    LuaThreadMgr.Init();
     ScriptMgr.init();
     LuaNetworkMgr.Init();
+    
+    
 
     //////////////////////////////////////////////////
     // TCP 相关
@@ -84,6 +88,7 @@ bool CFrontEndService::update()
     TimerManager->tickUpdate();
     ScriptMgr.update();
     LuaNetworkMgr.Update();
+    LuaThreadMgr.Update();
 
     return true;
 }
@@ -93,6 +98,7 @@ void CFrontEndService::release()
     TimerManager->release();
     ScriptMgr.release();
     LuaNetworkMgr.Release();
+    LuaThreadMgr.Release();
 
     google::protobuf::ShutdownProtobufLibrary();
 }

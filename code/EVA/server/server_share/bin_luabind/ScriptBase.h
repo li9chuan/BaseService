@@ -12,7 +12,7 @@ namespace bin
 	static const char* SCRIPT_REFS		= "__bin_refs";
 	static const char* SCRIPT_TYPES		= "__bin_types";
 
-	extern void LOG_MESSAGE(const char* pszFmt, ...);
+	//extern void LOG_MESSAGE(const char* pszFmt, ...);
 
 	class INonCopyable 
 	{

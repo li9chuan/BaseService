@@ -25,7 +25,7 @@ public:
 
     bool            LoadScrpit(const char* szName);
     lua_State*      GetLuaState();
-
+    CLuaEngine&     GetLuaEngine()  { return m_LuaEngine; }
     
 
 

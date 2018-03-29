@@ -11,4 +11,9 @@
 #include <iostream>
 #include <string>
 
+#include <nel/misc/debug.h>
+
+#define     LOG_MESSAGE     nldebug
+
+
 #endif

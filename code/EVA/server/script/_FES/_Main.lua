@@ -8,13 +8,26 @@ package.path = BasePath .. "_FES/?.lua;" .. BasePath .. "Framework/?.lua;";
 require("InitFramework")
 
 
+print(" =========FES Main Start============ ");
 
-web_sock = bin_types.WebSocketNetwork.newInstance("名字", 9999);
+web_sock = bin_types.WebSocketNetwork.NewInstance("名字", 9999);
 
 
 ReciveClientMsg = require("ReciveClientMsg")
 lua_test = ReciveClientMsg:new();
 
+
+DBProc = require("DBProc");
+db_proc = DBProc:new();
+--db_proc:LuaTest();
+
+
+
+
+
+
+
+--[[
 
 -- 主入口函数。从这里开始lua逻辑
 function Init()
@@ -30,10 +43,6 @@ end
 function Release()
 
 end
-
---[[
-
-
 
 
 --bash_path = "E:\\BaseService\\code\\EVA\\server\\script\\";

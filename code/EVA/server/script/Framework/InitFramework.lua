@@ -9,7 +9,7 @@ package.path = package.path .. BasePath .. "Framework/Net/?.lua;";
 
 protobuf = require "protobuf"
 
-addr = io.open( BasePath.."DataTable\\proto_msg.pb", "rb")
+addr = io.open( BasePath.."DataTable/proto_msg.pb", "rb")
 buffer = addr:read "*a"  
 addr:close()  
 protobuf.register(buffer) 

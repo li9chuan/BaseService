@@ -14,7 +14,8 @@ public:
 	virtual ~CLuaEngine(void);
 
 public:
-	bool			            Init(std::string logpath);
+	bool			            Init(std::string logpath="");
+
 	void			            Release();
 	lua_State *		            GetLuaState();
     bin::CScriptHandle*         GetScriptHandle()   { return m_ScriptHandle; }

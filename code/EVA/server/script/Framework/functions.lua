@@ -25,6 +25,26 @@ function checktable(value)
     return value
 end
 
+function PostSub( thread_name, event_type, pb_name, pb_data, from )
+	
+	code = protobuf.encode(pb_name, pb_data)
+	len  = string.len(code);
+	
+	msg = { thread_name, from, event_type, len };
+	LuaThread.PostSub(code, msg);
+
+end
+
+function PostMain( thread_name, event_type, pb_name, pb_data, from )
+	
+	code = protobuf.encode(pb_name, pb_data)
+	len  = string.len(code);
+	
+	msg = { thread_name, from, event_type, len };
+	LuaThread.PostMain(code, msg);
+
+end
+
 -- start --
 
 --------------------------------

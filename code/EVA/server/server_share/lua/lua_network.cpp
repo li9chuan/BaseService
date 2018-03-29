@@ -49,16 +49,6 @@ class CLuaWebSocketNetwork
     DECLARE_SCRIPT_CLASS();
 public:
 
-    void Hello()
-    {
-        nldebug("CLuaWebSocketNetwork::Hello");
-
-
-        //ScriptMgr.on_event()    
-        //NetWorkHandler.OnMessage( data )
-
-    }
-
     CLuaWebSocketNetwork( std::string name, uint16 port )
     {
         m_NetName = name;
@@ -96,16 +86,6 @@ public:
         m_CallbackServerHandle->send_buffer( mem_out, sock_id );
     }
 
-    void Say(const std::string& msg)
-    {
-        printf(msg.c_str());
-    }
-
-    std::string Want()
-    {
-        return "World";
-    }
-
 private:
 
     std::string                         m_NetName;
@@ -124,7 +104,7 @@ void CLuaNetworkMgr::RegisterNetModule( std::string name, CLuaWebSocketNetwork* 
 
     if ( iter == m_LuaWebSocketNetworkHandle.end() )
     {
-        m_LuaWebSocketNetworkHandle.insert( make_pair(name,pNet) ); 
+        m_LuaWebSocketNetworkHandle.insert( make_pair(name, pNet) ); 
     }
     else
     {
@@ -166,12 +146,6 @@ namespace bin
 {
     BEGIN_SCRIPT_CLASS( WebSocketNetwork, CLuaWebSocketNetwork )
 
-        DEFINE_CLASS_FUNCTION(hello, void, ())
-        {
-            obj->Hello();
-            return 1;
-        }
-
         DEFINE_CLASS_FUNCTION( Send, void, (const char* proto_buf, CScriptTable& tb_msg))
         {
             if( tb_msg.IsReferd() )
@@ -191,25 +165,14 @@ namespace bin
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION(say, void, (const std::string& message))
-        {
-            obj->Say(message);
-            return 1;
-        }
-
-        DEFINE_CLASS_FUNCTION(want , std::string, ())
-        {
-            r = obj->Want();
-            return 1;
-        }
-
-        DEFINE_STATIC_FUNCTION(newInstance, CLuaWebSocketNetwork*, (std::string name, int port))
+        DEFINE_STATIC_FUNCTION(NewInstance, CLuaWebSocketNetwork*, (std::string name, int port))
         {
             r = new CLuaWebSocketNetwork(name, port);
             r->GetScriptObject().SetDelByScr(true);
 
             return 1;
         }
+
     END_SCRIPT_CLASS()
 
 

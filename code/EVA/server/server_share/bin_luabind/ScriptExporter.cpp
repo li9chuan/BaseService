@@ -12,30 +12,30 @@
 
 namespace bin
 {
-	void LOG_MESSAGE(const char* pszFmt, ...)
-	{
-		static char s_szBuffer[1024] = {0};
-
-		va_list ls;
-		va_start(ls, pszFmt);
-
-		_vsnprintf(s_szBuffer, 1024, pszFmt, ls);
-
-		va_end(ls);
-
-		static std::ofstream ofstr;
-		if(!ofstr.is_open())
-		{
-			ofstr.open("bin_script.log");
-		}
-
-		ofstr<< s_szBuffer<< std::endl;
-#if defined _DEBUG
-		// To Console
-		std::cout<< s_szBuffer<< std::endl;
-#endif
-
-	}
+//	void LOG_MESSAGE(const char* pszFmt, ...)
+//	{
+//		static char s_szBuffer[1024] = {0};
+//
+//		va_list ls;
+//		va_start(ls, pszFmt);
+//
+//		_vsnprintf(s_szBuffer, 1024, pszFmt, ls);
+//
+//		va_end(ls);
+//
+//		static std::ofstream ofstr;
+//		if(!ofstr.is_open())
+//		{
+//			ofstr.open("bin_script.log");
+//		}
+//
+//		ofstr<< s_szBuffer<< std::endl;
+//#if defined _DEBUG
+//		// To Console
+//		std::cout<< s_szBuffer<< std::endl;
+//#endif
+//
+//	}
 
 	int CScriptExporterManager::ExportClass(const char* pszName, lua_State* pL, const char* pszNameSpace /*= NULL*/)
 	{

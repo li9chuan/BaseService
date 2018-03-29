@@ -30,5 +30,8 @@
     <Filter RelativePath=".\_FES" Toggle="false" >
         <LuaFile RelativePath=".\_Main.lua" />
         <LuaFile RelativePath=".\ReciveClientMsg.lua" />
+        <LuaFile RelativePath=".\DBSubProc.lua" />
+        <LuaFile RelativePath=".\DBSubStart.lua" />
+        <LuaFile RelativePath=".\DBProc.lua" />
     </Filter>
 </Project>
