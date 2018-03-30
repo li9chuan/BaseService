@@ -6,6 +6,7 @@
 #include "lua_engine.h"
 #include "script_mgr.h"
 #include "static_table/static_table_mgr.h"
+#include <nel/misc/md5.h>
 
 #include "server_share/bin_luabind/Public.hpp"
 
@@ -75,32 +76,17 @@ int LuaAddSearchPath( lua_State *L )
  {
      BEGIN_SCRIPT_MODULE(Utility)
  
-     DEFINE_MODULE_FUNCTION(TestPB, void, (const char* buff, int len))
-     {
-         MsgSession  msg_session;
-         msg_session.ParseFromArray(buff,len);
-
-         std::string  msg_name = "LuaTestCB";
-         std::string  msg_buff = "ddd111dd";
-         msg_session.SerializeToString(&msg_buff);
-
-
-
-
-
-         LuaParams lua_params( msg_name, msg_buff );  
-         ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params);
-
-         //m_LuaEngine.RunLuaFunction( "OnMessage", "NetWorkHandler", NULL, &lua_params );
-
-
-         return 1;
-     }
-
      DEFINE_MODULE_FUNCTION(GetBasePath, std::string, (void))
      {
          //nldebug("Calling func5 with (%s, %lld)\n", path.c_str(), a1);
          r = NLMISC::CPath::getCurrentPath();
+         return 1;
+     }
+
+     DEFINE_MODULE_FUNCTION(MD5, std::string, (const char* buff, int len))
+     {
+         CHashKeyMD5 hash_key = getMD5( (const uint8*)buff, len );
+         r = hash_key.toString();
          return 1;
      }
  

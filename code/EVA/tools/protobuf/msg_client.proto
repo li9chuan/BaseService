@@ -1,0 +1,29 @@
+syntax = "proto2";
+package PB_MSG;
+
+import "define_pro.proto";
+import "define_attrib.proto";
+
+
+message MsgLogin
+{
+  optional string       version      = 1;
+  optional string       authType     = 2;
+  optional string       appid        = 3;
+  optional string       user         = 4;
+  optional string       key          = 5;
+  optional string       token        = 6;
+  optional string       timestamp    = 7;
+  optional uint64       uid          = 8;
+  
+  
+}
+
+
+message MsgSession
+{
+  optional fixed64      session    = 1;
+  optional fixed32      check      = 2;
+  optional uint32       index      = 3;
+}
+

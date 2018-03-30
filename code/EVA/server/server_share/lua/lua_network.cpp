@@ -20,7 +20,6 @@ void cbLuaServiceMsg ( NLNET::CMessage& msgin, const std::string &serviceName, N
     ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params);
 }
 
-
 void cbLuaClientMsg ( CMessage &msgin, TSockId from, CCallbackNetBase &netbase)
 {
     uint64          msg_from = (uint64)from;
@@ -44,6 +43,9 @@ NLNET::TUnifiedCallbackItem LuaCallbackArray[] =
     { "_LS",                         cbLuaServiceMsg         },
 };
 
+static void cbWSConnect( TSockId from, void *arg );
+static void cbWSDisConnect( TSockId from, void *arg );
+
 class CLuaWebSocketNetwork
 {
     DECLARE_SCRIPT_CLASS();
@@ -54,6 +56,10 @@ public:
         m_NetName = name;
         m_CallbackServerHandle = new CCallbackServerWebSocket();
         m_CallbackServerHandle->addCallbackArray(LuaClientCallbackArray, sizeof(LuaClientCallbackArray)/sizeof(LuaClientCallbackArray[0]));
+
+        m_CallbackServerHandle->setConnectionCallback( cbWSConnect, this );
+        m_CallbackServerHandle->setDisconnectionCallback( cbWSDisConnect, this );
+
         m_CallbackServerHandle->init (port);
         
         LuaNetworkMgr.RegisterNetModule( name, this );
@@ -61,6 +67,7 @@ public:
 
     ~CLuaWebSocketNetwork()
     {
+        LuaNetworkMgr.RemoveNetModule(m_NetName);
         delete m_CallbackServerHandle; 
     }
 
@@ -86,6 +93,7 @@ public:
         m_CallbackServerHandle->send_buffer( mem_out, sock_id );
     }
 
+    std::string         GetName()   { return m_NetName; }
 private:
 
     std::string                         m_NetName;
@@ -110,6 +118,11 @@ void CLuaNetworkMgr::RegisterNetModule( std::string name, CLuaWebSocketNetwork* 
     {
         nlstop;
     }
+}
+
+void CLuaNetworkMgr::RemoveNetModule( std::string name )
+{
+    m_LuaWebSocketNetworkHandle.erase(name);
 }
 
 void CLuaNetworkMgr::Update()
@@ -138,9 +151,51 @@ void CLuaNetworkMgr::Release()
     m_LuaWebSocketNetworkHandle.clear();
 }
 
+static void cbWSConnect( TSockId from, void *arg )
+{
+    CLuaWebSocketNetwork* pLuaNetwork = (CLuaWebSocketNetwork*)arg;
+
+    std::string lua_event = pLuaNetwork->GetName();
+    lua_event.append("Connection");
+
+    uint64          msg_from = (uint64)from;
+    std::string     msg_buff;
 
 
+    LuaParams lua_params( msg_from, lua_event, msg_buff );  
+    ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params );
+}
 
+static void cbWSDisConnect( TSockId from, void *arg )
+{
+    CLuaWebSocketNetwork* pLuaNetwork = (CLuaWebSocketNetwork*)arg;
+
+    std::string lua_event = pLuaNetwork->GetName();
+    lua_event.append("DisConnection");
+
+    uint64          msg_from = (uint64)from;
+    std::string     msg_buff;
+
+
+    LuaParams lua_params( msg_from, lua_event, msg_buff );  
+    ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params );
+}
+
+void cbConnection( const std::string &serviceName, NLNET::TServiceId sid, void *arg )
+{
+    std::string lua_event = serviceName;
+    lua_event.append("Connection");
+    LuaParams lua_params( (uint64)sid.get(), lua_event, serviceName );  
+    ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params );
+}
+
+void cbDisconnection( const std::string &serviceName, NLNET::TServiceId sid, void *arg )
+{
+    std::string lua_event = serviceName;
+    lua_event.append("DisConnection");
+    LuaParams lua_params( (uint64)sid.get(), lua_event, serviceName );  
+    ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params );
+}
 
 namespace bin
 {
@@ -226,6 +281,20 @@ namespace bin
 
             return 1;
         }
+
+        DEFINE_MODULE_FUNCTION(SetConnectionCallback, void, (std::string service_name))
+        {
+            CUnifiedNetwork::getInstance()->setServiceUpCallback(service_name, cbConnection);
+            return 1;
+        }
+
+        DEFINE_MODULE_FUNCTION(SetDisConnectionCallback, void, (std::string service_name))
+        {
+            CUnifiedNetwork::getInstance()->setServiceDownCallback(service_name, cbDisconnection);
+            return 1;
+        }
+
+
 
     END_SCRIPT_MODULE()
 

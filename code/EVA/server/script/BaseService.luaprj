@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="service_logic.luaprj" Cmd="" Arg="" Dir="" Toggle="false" >
+<Project Name="BaseService.luaprj" Cmd="" Arg="" Dir="" Toggle="false" >
     <Filter RelativePath=".\Framework" Toggle="false" >
         <LuaFile RelativePath=".\Class.lua" />
         <LuaFile RelativePath=".\functions.lua" />
@@ -20,18 +20,29 @@
             <LuaFile RelativePath=".\CallbackService.lua" />
             <LuaFile RelativePath=".\protobuf.lua" />
             <LuaFile RelativePath=".\test.lua" />
+            <LuaFile RelativePath=".\CallbackClient.lua" />
+            <LuaFile RelativePath=".\ServiceMgr.lua" />
         </Filter>
         <LuaFile RelativePath=".\InitFramework.lua" />
     </Filter>
-    <Filter RelativePath=".\_PLS" Toggle="false" >
-        <LuaFile RelativePath=".\LuaTestMsg.lua" />
-        <LuaFile RelativePath=".\_Main.lua" />
-    </Filter>
     <Filter RelativePath=".\_FES" Toggle="false" >
         <LuaFile RelativePath=".\_Main.lua" />
-        <LuaFile RelativePath=".\ReciveClientMsg.lua" />
         <LuaFile RelativePath=".\DBSubProc.lua" />
         <LuaFile RelativePath=".\DBSubStart.lua" />
         <LuaFile RelativePath=".\DBProc.lua" />
+        <LuaFile RelativePath=".\ClientMgr.lua" />
+        <Filter RelativePath=".\Msg" Toggle="false" >
+            <LuaFile RelativePath=".\MsgLogin.lua" />
+        </Filter>
+    </Filter>
+    <Filter RelativePath=".\_PLS" Toggle="false" >
+        <LuaFile RelativePath=".\_Main.lua" />
+        <Filter RelativePath=".\Msg" Toggle="false" >
+            <LuaFile RelativePath=".\MsgLogin.lua" />
+        </Filter>
+        <Filter RelativePath=".\Player" Toggle="false" >
+            <LuaFile RelativePath=".\PlayerDataHelper.lua" />
+            <LuaFile RelativePath=".\PlayerHelper.lua" />
+        </Filter>
     </Filter>
 </Project>

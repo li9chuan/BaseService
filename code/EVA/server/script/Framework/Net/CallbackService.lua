@@ -1,44 +1,53 @@
 local CallbackService = class("CallbackService")
 
--- 初始化函数
-function CallbackService:Init()
-	self._Connect      = 0;
+function CallbackService:ctor()
+	self._EventRegister = EventRegister.new();
+	
+	self._EventRegister:RegisterEvent( "FESConnection",         self, self.Connection );
+	self._EventRegister:RegisterEvent( "FESDisConnection",      self, self.DisConnection );
+    self._EventRegister:RegisterEvent( "PLSConnection",         self, self.Connection );
+	self._EventRegister:RegisterEvent( "PLSDisConnection",      self, self.DisConnection );
+    
+    -- 注册其它服务器启动的回调
+    ServerNet.SetConnectionCallback("FES");
+    ServerNet.SetDisConnectionCallback("FES");
+    
+    ServerNet.SetConnectionCallback("PLS");
+    ServerNet.SetDisConnectionCallback("PLS");
+    
 end
 
--- 监听端口
-function CallbackService:Listen( Host , Port )
+function CallbackService:Send( service_id, msg_type, proto_type, proto_msg )
 
+	code = protobuf.encode(proto_type, proto_msg)
+	len  = string.len(code);
+	
+	msg = { service_id, msg_type, len };
+	ServerNet.Send( code, msg );
 
 end
 
+function CallbackService:Broadcast( service_name, msg_type, proto_type, proto_msg )
 
--- 发送网路消息
-function CallbackService:SendMessage( Name , ProtoBuffer )
-	-- 检查网络连接 --
-	if self._Connect ~= 1 then
-		return;
-	end
+	code = protobuf.encode(proto_type, proto_msg)
+	len  = string.len(code);
 	
---[[
+	msg = { service_name, msg_type, len };
+	ServerNet.Send( code, msg );
 
-	-- 填充发送缓存区 --
-	local NetMessage Message = LuaFramework.NetMessage.New();
-	Message:WriteName( Name );
-	Message:WriteBytes( Session:SerializeToString() );
-	if Buffer ~= nil then
-	Message:WriteBytes( Buffer );
-	else
-	Message:WriteInt32( 0 );
-	end
-	
-	local Res = NetWorkHelper:SendMessage( Message );
-	if Res == 0 then
-	self._BufferIndex = self._BufferIndex + 1;
-	else
-	self:ForceConnectServer();
-	end
-	
-	]]
+end
+
+function CallbackService:Connection( service_id, service_name )
+	print("CallbackService:Connection:"..service_name.." sid:"..service_id);
+end
+
+function CallbackService:DisConnection( service_id, service_name )
+	print("CallbackService:DisConnection"..service_name.." sid:"..service_id);
+end
+
+--	释放函数
+function CallbackService:OnRelease()
+    self._EventRegister:UnRegisterAllEvent();
 end
 
 return CallbackService

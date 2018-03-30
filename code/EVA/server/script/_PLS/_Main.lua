@@ -8,45 +8,12 @@ package.path = BasePath .. "_PLS/?.lua;" .. BasePath .. "Framework/?.lua;";
 
 require("InitFramework")
 
-
-LuaTestMsg = require("LuaTestMsg")
-lua_test = LuaTestMsg:new();
+PlayerLogicService = CallbackService:new();
 
 
--- 主入口函数。从这里开始lua逻辑
-function Init()
-	
-	
---[[	msg_session = {  
-		check = 13,  
-		session = 4611686020574871551,  
-		index = 21
-	}
-	
-	
 
-	code = protobuf.encode("MsgSession", msg_session)
-	Utility.TestPB(code, string.len(code))--]]
-	
-	
---	msg = { "LTst", "neirong" };ServerNet.Broadcast( "PLS", msg );
---	ServerNet.Send( "PLS", msg );
---   "msg = { 'LTst', 'neirong' };ServerNet.Broadcast( 'PLS', msg );"
-	
---	local web_sock = bin_types.WebSocketNetwork.newInstance();
---	web_sock:hello();
 
-	
-end
 
--- 游戏循环
-function Update()
-
-end
-
-function Release()
-
-end
 
 --[[
 

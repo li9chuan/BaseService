@@ -115,36 +115,6 @@ void CScriptMgr::Export()
     m_LuaEngine.ExportModule("LuaThread");
     m_LuaEngine.ExportModule("ServerNet");
     m_LuaEngine.ExportClass("WebSocketNetwork");
-    
-    
-
-    
-    /////  向Lua注册工作线程
-    //CConfigFile::CVar* pVar = NULL;
-
-    //if ((pVar = Config.getVarPtr("LuaWorkThread")) != NULL)
-    //{
-    //    for (uint i = 0; i < pVar->size(); ++i)
-    //    {
-    //        NLMISC::CSString start_file = pVar->asString(i);
-    //        CVectorSString  res;
-    //        start_file.splitBySeparator( ' ', res );
-
-    //        if( res.size()!=2 ) { nlwarning( "%s, config format error.", start_file.c_str() ); continue; }
-
-    //        NLMISC::CSString thread_name = res[0];
-    //        CLuaThread* pThread = LuaThreadMgr.GetLuaThread(thread_name);
-
-    //        if ( pThread!=NULL )
-    //        {
-    //            m_LuaEngine.GetScriptHandle()->Set( thread_name.c_str(), pThread );
-    //        }
-    //        else
-    //        {
-    //            nlwarning( "%s, no have thread.", thread_name.c_str() );
-    //        }
-    //    }
-    //}
 }
 
 void CScriptMgr::ExecString( std::string exec_str )

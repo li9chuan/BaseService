@@ -70,8 +70,8 @@ CCallbackServerWebSocket::CCallbackServerWebSocket( TRecordingState rec, const s
 	nlassertex( rec==Off, ("LNETL3S: The message recorder is disabled at compilation time ; switch the recording state Off") );
 #endif
 
-	CCallbackServerWebSocket::setDisconnectionCallback (_NewDisconnectionCallback, this);
-	CCallbackServerWebSocket::setConnectionCallback (cbsWebSktNewConnection, this);
+	CBufServerWebsocket::setDisconnectionCallback (_NewDisconnectionCallback, this);
+	CBufServerWebsocket::setConnectionCallback (cbsWebSktNewConnection, this);
 
 	_IsAServer = true;
 	_DefaultCallback = NULL;

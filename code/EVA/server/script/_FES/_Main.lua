@@ -10,11 +10,16 @@ require("InitFramework")
 
 print(" =========FES Main Start============ ");
 
-web_sock = bin_types.WebSocketNetwork.NewInstance("名字", 9999);
+
+FrontEndService = CallbackService:new();
 
 
-ReciveClientMsg = require("ReciveClientMsg")
-lua_test = ReciveClientMsg:new();
+ClientService = CallbackClient:new();
+ClientService:Listen( "ClientService", 9999 );
+
+
+MsgLogin = require("Msg/MsgLogin")
+lua_test = MsgLogin:new();
 
 
 DBProc = require("DBProc");

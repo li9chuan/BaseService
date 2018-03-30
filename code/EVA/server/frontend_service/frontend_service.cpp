@@ -65,13 +65,11 @@ void CFrontEndService::init()
 
     /////////////////////////////////////////////////
 
-
     //CUnifiedNetwork::getInstance()->setServiceUpCallback("LS", cbLSConnection);
     //CUnifiedNetwork::getInstance()->setServiceDownCallback(LogicService, cbPLSDisconnection);
     //CUnifiedNetwork::getInstance()->setServiceDownCallback(EntitiesServer, cbEGSDisconnection);
 
     //////////////////////////////////////////////////////////////////////////
-
 
     AcceptClients = true;
 }

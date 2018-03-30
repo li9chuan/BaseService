@@ -25,6 +25,10 @@ function checktable(value)
     return value
 end
 
+function md5(value)
+    return Utility.MD5( value, string.len(value) );
+end
+
 function PostSub( thread_name, event_type, pb_name, pb_data, from )
 	
 	code = protobuf.encode(pb_name, pb_data)
@@ -44,6 +48,9 @@ function PostMain( thread_name, event_type, pb_name, pb_data, from )
 	LuaThread.PostMain(code, msg);
 
 end
+
+
+
 
 -- start --
 

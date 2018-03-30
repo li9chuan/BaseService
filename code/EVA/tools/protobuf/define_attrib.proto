@@ -1,9 +1,9 @@
-package ATTRIB_TYPE;
+syntax = "proto2";
+package PB_DEF;
 
 enum TAttribType
 {
-	INVALID_VAL                       = -1;
-	INVALID                           =	0;
+	INVALID_ATTRIB                           =	0;
 
 	ID	=	2001001	;
 	LEVEL_UP_EXP_INT	=	2001002	;

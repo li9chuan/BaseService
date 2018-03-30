@@ -1,3 +1,6 @@
+syntax = "proto2";
+package PB_DEF;
+
 enum TEvent
 {
 	EventInvalid			     = 0;  		// 无效事件
@@ -38,18 +41,10 @@ enum TErrorType
 	
 };
 
-enum TAuthType
-{
-	AUTH_TYPE_MY  = 1;
-	AUTH_TYPE_BBS = 2;
-	AUTH_TYPE_360 = 3;
-};
-
-
 enum TGender
 {
-	MALE    = 1;	//	男性
-	FEMALE  = 2;	//	女性
+	MALE          = 0;	//	男性
+	FEMALE        = 1;	//	女性
 };
 
 

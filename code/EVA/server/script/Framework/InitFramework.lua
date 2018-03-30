@@ -60,10 +60,11 @@ LuaManager					= LuaHelper.GetLuaManger();
 --LSModule					= require("SDK/LService/LSModule")
 --WebModule					= require("SDK/Web/WebModule")
 --HttpClient					= require("Common/Net/HttpClient")
-EventController				= require("Event/EventController")
---ServerManager				= require("Net/ServerManager")
-EventRegister				= require("Event/EventRegister")
-
+EventController             = require("Event/EventController")
+--ServerManager             = require("Net/ServerManager")
+EventRegister               = require("Event/EventRegister")
+CallbackClient              = require("Net/CallbackClient");
+CallbackService             = require("Net/CallbackService");
 
 
 -- 通用模块

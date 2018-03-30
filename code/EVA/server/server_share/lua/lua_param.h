@@ -72,27 +72,27 @@ public:
     LuaParams():m_Count(0){}
     ~LuaParams(){}
 
-    LuaParams( lua_Number param1 ):
+    LuaParams( const lua_Number param1 ):
         m_Count(1)
     {
         m_Params[0].SetInt(param1);
     }
 
-    LuaParams( lua_Number param1, lua_Number param2 ):
+    LuaParams( const lua_Number param1, const lua_Number param2 ):
         m_Count(2)
     {
         m_Params[0].SetInt(param1);
         m_Params[1].SetInt(param2);
     }
 
-    LuaParams( std::string& param1, std::string& param2 ):
+    LuaParams( const std::string& param1, const std::string& param2 ):
         m_Count(2)
     {
         m_Params[0].SetString( param1.c_str(), param1.size() );
         m_Params[1].SetString( param2.c_str(), param2.size() );
     }
 
-    LuaParams( lua_Integer param1, std::string& param2, std::string& param3 ):
+    LuaParams( const lua_Integer param1, const std::string& param2, const std::string& param3 ):
         m_Count(3)
     {
         m_Params[0].SetInt(param1);

@@ -12,6 +12,7 @@ public:
     void Init();
 
     void RegisterNetModule( std::string name, CLuaWebSocketNetwork* pNet );
+    void RemoveNetModule( std::string name );
 
 
     void Update();
