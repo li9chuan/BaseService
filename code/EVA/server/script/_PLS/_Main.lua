@@ -10,6 +10,8 @@ require("InitFramework")
 
 PlayerLogicService = CallbackService:new();
 
+PlayerDataHalper = require("Player/PlayerDataHalper");
+
 
 MsgLogin = require("Msg/MsgLogin")
 msg_login = MsgLogin:new();

@@ -19,9 +19,10 @@
             <LuaFile RelativePath=".\NetWorkHandler.lua" />
             <LuaFile RelativePath=".\CallbackService.lua" />
             <LuaFile RelativePath=".\protobuf.lua" />
-            <LuaFile RelativePath=".\test.lua" />
             <LuaFile RelativePath=".\CallbackClient.lua" />
             <LuaFile RelativePath=".\ServiceMgr.lua" />
+            <LuaFile RelativePath=".\ServiceInfo.lua" />
+            <LuaFile RelativePath=".\ServiceGameInfo.lua" />
         </Filter>
         <LuaFile RelativePath=".\InitFramework.lua" />
     </Filter>
@@ -44,6 +45,7 @@
         <Filter RelativePath=".\Player" Toggle="false" >
             <LuaFile RelativePath=".\PlayerDataHelper.lua" />
             <LuaFile RelativePath=".\PlayerHelper.lua" />
+            <LuaFile RelativePath=".\PlayerMgr.lua" />
         </Filter>
     </Filter>
 </Project>

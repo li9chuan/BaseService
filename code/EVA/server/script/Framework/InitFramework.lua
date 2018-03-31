@@ -22,10 +22,12 @@ require("Class")
 require("functions")
 --require ("bit")
 
-require("NetWorkHandler")
+require("Net/NetWorkHandler")
+require("Net/ServiceMgr")
 
 
-
+ServiceGameInfo             = require("Net/ServiceGameInfo");
+ServiceInfo                 = require("Net/ServiceInfo");
 
 --List 	= require("Common/List")
 --Queue   = require("Common/Queue")
@@ -67,9 +69,11 @@ CallbackClient              = require("Net/CallbackClient");
 CallbackService             = require("Net/CallbackService");
 
 
+
 -- 通用模块
 function OnCommonInit()
 	EventController.Instance():Init()
+    ServiceMgr:Init();
 --	ServerManager.Instance():Init()
 --	UIManager.Instance():Init()
 --	SceneManager.Instance():Init()

@@ -37,7 +37,7 @@ function MsgLogin:Login( sock_id, proto_buf )
 	
 	print("sig:"..sign);
 	
-	--ClientService:Send( sock_id, "AuthOk", "PB_MSG.MsgLogin", msg_login );
+	--  通知客户端 账号认证通过.
     ClientService:Send( sock_id, "AuthOk" );
     
     
@@ -85,7 +85,7 @@ end
 
 function MsgLogin:DisConnect( sock_id, proto_buf )
 	print("CallbackClient:DisConnect"..sock_id);
-
+    ClientMgr:RemoveSockID(sock_id);
 end
 
 

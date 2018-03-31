@@ -7,11 +7,27 @@ import "define_attrib.proto";
 
 message MsgData
 {
-  optional uint64       ext640        = 1;
-  optional uint64       ext641        = 2;
+    optional uint64         ext640                  = 1;
+    optional uint64         ext641                  = 2;
 
   
   
 }
 
+message MsgGameType
+{
+    optional string         type                    = 1;
+    optional uint32         max                     = 2;
+    optional uint32         curr                    = 3;    
+    
+}
 
+message MsgServiceInfo
+{
+    repeated MsgGameType    gameTypeList            = 1;
+    optional uint32         maxPlayer               = 2;
+    optional uint32         currPlayer              = 3;
+    optional uint32         serviceId               = 4;
+    optional string         serviceName             = 5;
+
+}

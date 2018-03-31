@@ -11,11 +11,11 @@ end
 
 function MsgLogin:AuthOkCB( msg_from, proto_buf )
 
-	local proto_authok = protobuf.decode("MsgData" , proto_buf)
+	local pb_authok = protobuf.decode("MsgData" , proto_buf)
 	
     print("MsgLogin:AuthOkCB");
-	print(proto_authok.ext640);
-	print(proto_authok.ext641);
+	print(pb_authok.ext640);
+	print(pb_authok.ext641);
 	
 
 
