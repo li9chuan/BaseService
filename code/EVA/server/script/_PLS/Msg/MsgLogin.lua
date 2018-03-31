@@ -13,8 +13,9 @@ function MsgLogin:AuthOkCB( msg_from, proto_buf )
 
 	local proto_authok = protobuf.decode("MsgData" , proto_buf)
 	
-	print(proto_authok.ext64_0);
-	print(proto_authok.ext64_1);
+    print("MsgLogin:AuthOkCB");
+	print(proto_authok.ext640);
+	print(proto_authok.ext641);
 	
 
 

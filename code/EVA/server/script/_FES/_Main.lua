@@ -6,9 +6,18 @@ local BasePath = Utility.GetBasePath() .. "/script/";
 package.path = BasePath .. "_FES/?.lua;" .. BasePath .. "Framework/?.lua;";
 
 require("InitFramework")
+require("ClientMgr")
 
+
+
+
+Client = require("Client");
 
 print(" =========FES Main Start============ ");
+
+
+ClientMgr:Init();
+
 
 
 FrontEndService = CallbackService:new();
@@ -19,7 +28,7 @@ ClientService:Listen( "ClientService", 9999 );
 
 
 MsgLogin = require("Msg/MsgLogin")
-lua_test = MsgLogin:new();
+msg_login = MsgLogin:new();
 
 
 DBProc = require("DBProc");

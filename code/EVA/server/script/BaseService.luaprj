@@ -34,6 +34,7 @@
         <Filter RelativePath=".\Msg" Toggle="false" >
             <LuaFile RelativePath=".\MsgLogin.lua" />
         </Filter>
+        <LuaFile RelativePath=".\Client.lua" />
     </Filter>
     <Filter RelativePath=".\_PLS" Toggle="false" >
         <LuaFile RelativePath=".\_Main.lua" />

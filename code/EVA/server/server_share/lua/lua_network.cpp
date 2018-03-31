@@ -252,7 +252,7 @@ namespace bin
                 msg_out.serial(msg_type);
                 msg_out.serial(pb_str);
 
-                Network->send( service_name, msg_out );
+                Network->send( service_name, msg_out, false );
             }
 
             return 1;

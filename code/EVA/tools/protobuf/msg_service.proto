@@ -7,8 +7,8 @@ import "define_attrib.proto";
 
 message MsgData
 {
-  optional uint64       ext64_0        = 1;
-  optional uint64       ext64_1        = 2;
+  optional uint64       ext640        = 1;
+  optional uint64       ext641        = 2;
 
   
   

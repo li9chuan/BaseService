@@ -33,7 +33,7 @@ function CallbackService:Broadcast( service_name, msg_type, proto_type, proto_ms
 	len  = string.len(code);
 	
 	msg = { service_name, msg_type, len };
-	ServerNet.Send( code, msg );
+	ServerNet.Broadcast( code, msg );
 
 end
 

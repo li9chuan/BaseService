@@ -11,7 +11,8 @@ require("InitFramework")
 PlayerLogicService = CallbackService:new();
 
 
-
+MsgLogin = require("Msg/MsgLogin")
+msg_login = MsgLogin:new();
 
 
 

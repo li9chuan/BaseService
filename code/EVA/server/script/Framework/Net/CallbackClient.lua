@@ -15,8 +15,14 @@ end
 
 function CallbackClient:Send( sock_id, msg_type, proto_type, proto_msg )
 
-	code = protobuf.encode(proto_type, proto_msg)
-	len  = string.len(code);
+	local code = "";
+	local len  = 0;
+    
+    if proto_type~=nil then
+        code = protobuf.encode(proto_type, proto_msg);
+        len  = string.len(code);
+    end
+
 	
 	msg = { sock_id, msg_type, len };
 	self.Service:Send( code, msg );
