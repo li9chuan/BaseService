@@ -17,7 +17,7 @@
         </Filter>
         <Filter RelativePath=".\Net" Toggle="false" >
             <LuaFile RelativePath=".\NetWorkHandler.lua" />
-            <LuaFile RelativePath=".\CallbackService.lua" />
+            <LuaFile RelativePath=".\BaseService.lua" />
             <LuaFile RelativePath=".\protobuf.lua" />
             <LuaFile RelativePath=".\CallbackClient.lua" />
             <LuaFile RelativePath=".\ServiceMgr.lua" />
@@ -36,6 +36,7 @@
             <LuaFile RelativePath=".\MsgLogin.lua" />
         </Filter>
         <LuaFile RelativePath=".\Client.lua" />
+        <LuaFile RelativePath=".\FrontEndService.lua" />
     </Filter>
     <Filter RelativePath=".\_PLS" Toggle="false" >
         <LuaFile RelativePath=".\_Main.lua" />
@@ -47,5 +48,6 @@
             <LuaFile RelativePath=".\PlayerHelper.lua" />
             <LuaFile RelativePath=".\PlayerMgr.lua" />
         </Filter>
+        <LuaFile RelativePath=".\PlayerLogicService.lua" />
     </Filter>
 </Project>

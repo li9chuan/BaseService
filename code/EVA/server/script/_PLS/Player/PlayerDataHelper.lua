@@ -1,10 +1,10 @@
-local PlayerDataHalper = class("PlayerDataHalper")
+local PlayerDataHelper = class("PlayerDataHelper")
 
 -- ¹¹Ôìº¯Êý;
-function PlayerDataHalper:ctor()
+function PlayerDataHelper:ctor()
     self.UID     = 0;
 end
 
 
 
-return PlayerDataHalper;
+return PlayerDataHelper;

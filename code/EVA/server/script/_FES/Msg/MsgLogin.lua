@@ -45,8 +45,8 @@ function MsgLogin:Login( sock_id, proto_buf )
     MsgData["ext640"] = msg_login.uid;
     MsgData["ext641"] = sock_id;
     
-    FrontEndService:Broadcast( "FES", "AuthOk", "PB_MSG.MsgData", MsgData )      -- 通知其它网关有玩家登录成功。
-    FrontEndService:Broadcast( "PLS", "AuthOk", "PB_MSG.MsgData", MsgData )      -- 玩家认证通过，请求发送数据。
+    BaseService:Broadcast( "FES", "AuthOk", "PB_MSG.MsgData", MsgData )      -- 通知其它网关有玩家登录成功。
+    BaseService:Broadcast( "PLS", "AuthOk", "PB_MSG.MsgData", MsgData )      -- 玩家认证通过，请求发送数据。
     
     
     local client = ClientMgr:GetClient(msg_login.uid);

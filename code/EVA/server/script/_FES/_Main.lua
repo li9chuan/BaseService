@@ -7,7 +7,7 @@ package.path = BasePath .. "_FES/?.lua;" .. BasePath .. "Framework/?.lua;";
 
 require("InitFramework")
 require("ClientMgr")
-
+require("FrontEndService")
 
 
 
@@ -17,10 +17,8 @@ print(" =========FES Main Start============ ");
 
 
 ClientMgr:Init();
+FrontEndService:Init();
 
-
-
-FrontEndService = CallbackService:new();
 
 
 ClientService = CallbackClient:new();

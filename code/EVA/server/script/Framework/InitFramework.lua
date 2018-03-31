@@ -24,6 +24,7 @@ require("functions")
 
 require("Net/NetWorkHandler")
 require("Net/ServiceMgr")
+require("Net/BaseService")
 
 
 ServiceGameInfo             = require("Net/ServiceGameInfo");
@@ -66,7 +67,6 @@ EventController             = require("Event/EventController")
 --ServerManager             = require("Net/ServerManager")
 EventRegister               = require("Event/EventRegister")
 CallbackClient              = require("Net/CallbackClient");
-CallbackService             = require("Net/CallbackService");
 
 
 

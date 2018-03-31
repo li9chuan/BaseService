@@ -7,11 +7,14 @@ package.path = BasePath .. "_PLS/?.lua;" .. BasePath .. "Framework/?.lua;";
 
 
 require("InitFramework")
+require("PlayerLogicService")
 
-PlayerLogicService = CallbackService:new();
 
-PlayerDataHalper = require("Player/PlayerDataHalper");
 
+PlayerDataHelper = require("Player/PlayerDataHelper");
+
+
+PlayerLogicService:Init();
 
 MsgLogin = require("Msg/MsgLogin")
 msg_login = MsgLogin:new();

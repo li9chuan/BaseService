@@ -1,6 +1,6 @@
-local CallbackService = class("CallbackService")
+local BaseService = {}
 
-function CallbackService:ctor()
+--[[function CallbackService:ctor()
 	self._EventRegister = EventRegister.new();
 	
 	self._EventRegister:RegisterEvent( "FESConnection",         self, self.Connection );
@@ -15,9 +15,9 @@ function CallbackService:ctor()
     ServerNet.SetConnectionCallback("PLS");
     ServerNet.SetDisConnectionCallback("PLS");
     
-end
+end--]]
 
-function CallbackService:Send( service_id, msg_type, proto_type, proto_msg )
+function BaseService:Send( service_id, msg_type, proto_type, proto_msg )
 
 	code = protobuf.encode(proto_type, proto_msg)
 	len  = string.len(code);
@@ -27,7 +27,7 @@ function CallbackService:Send( service_id, msg_type, proto_type, proto_msg )
 
 end
 
-function CallbackService:Broadcast( service_name, msg_type, proto_type, proto_msg )
+function BaseService:Broadcast( service_name, msg_type, proto_type, proto_msg )
 
 	code = protobuf.encode(proto_type, proto_msg)
 	len  = string.len(code);
@@ -37,7 +37,7 @@ function CallbackService:Broadcast( service_name, msg_type, proto_type, proto_ms
 
 end
 
-function CallbackService:Connection( service_id, service_name )
+--[[function CallbackService:Connection( service_id, service_name )
 	print("CallbackService:Connection:"..service_name.." sid:"..service_id);
 end
 
@@ -48,7 +48,7 @@ end
 --	ÊÍ·Åº¯Êý
 function CallbackService:OnRelease()
     self._EventRegister:UnRegisterAllEvent();
-end
+end--]]
 
-return CallbackService
+return BaseService
 
