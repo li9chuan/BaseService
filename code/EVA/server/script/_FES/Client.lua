@@ -1,6 +1,6 @@
 local Client = class("Client")
 
--- ¹¹Ôìº¯Êý;
+-- æž„é€ å‡½æ•°;
 function Client:ctor()
 	self.SockID     = 0;
 	self.PLSID      = 0;

@@ -1,6 +1,6 @@
 local PlayerHalper = class("PlayerHalper")
 
--- ¹¹Ôìº¯Êý;
+-- æž„é€ å‡½æ•°;
 function PlayerHalper:ctor()
     self.PlayerDataHalper      = PlayerDataHalper:new();
 

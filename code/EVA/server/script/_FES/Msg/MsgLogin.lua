@@ -1,9 +1,9 @@
 --========================================================= 
--- ÏûÏ¢×¢²á¹ÜÀí
+-- æ¶ˆæ¯æ³¨å†Œç®¡ç†
 --=========================================================
 local MsgLogin = class("MsgLogin")
 
--- ¹¹Ôìº¯Êı;
+-- æ„é€ å‡½æ•°;
 function MsgLogin:ctor( Data )
 
 	self._EventRegister = EventRegister.new();
@@ -11,10 +11,10 @@ function MsgLogin:ctor( Data )
 	self._EventRegister:RegisterEvent( ClientService.ConnectCallbackEvent,  	self, self.Connect );
 	self._EventRegister:RegisterEvent( ClientService.DisConnectCallbackEvent,   self, self.DisConnect );
 	
-    --  ¿Í»§¶ËÏûÏ¢
+    --  å®¢æˆ·ç«¯æ¶ˆæ¯
 	self._EventRegister:RegisterEvent( "LOGIN",  self, self.Login );
     
-    --  ·şÎñÆ÷¼äÏûÏ¢
+    --  æœåŠ¡å™¨é—´æ¶ˆæ¯
     self._EventRegister:RegisterEvent( "AuthOk",  self, self.AuthOk );
 	
 end
@@ -37,7 +37,7 @@ function MsgLogin:Login( sock_id, proto_buf )
 	
 	print("sig:"..sign);
 	
-	--  Í¨Öª¿Í»§¶Ë ÕËºÅÈÏÖ¤Í¨¹ı.
+	--  é€šçŸ¥å®¢æˆ·ç«¯ è´¦å·è®¤è¯é€šè¿‡.
     ClientService:Send( sock_id, "AuthOk" );
     
     
@@ -45,8 +45,8 @@ function MsgLogin:Login( sock_id, proto_buf )
     MsgData["ext640"] = msg_login.uid;
     MsgData["ext641"] = sock_id;
     
-    BaseService:Broadcast( "FES", "AuthOk", "PB_MSG.MsgData", MsgData )      -- Í¨ÖªÆäËüÍø¹ØÓĞÍæ¼ÒµÇÂ¼³É¹¦¡£
-    BaseService:Broadcast( "PLS", "AuthOk", "PB_MSG.MsgData", MsgData )      -- Íæ¼ÒÈÏÖ¤Í¨¹ı£¬ÇëÇó·¢ËÍÊı¾İ¡£
+    BaseService:Broadcast( "FES", "AuthOk", "PB_MSG.MsgData", MsgData )      -- é€šçŸ¥å…¶å®ƒç½‘å…³æœ‰ç©å®¶ç™»å½•æˆåŠŸã€‚
+    BaseService:Broadcast( "PLS", "AuthOk", "PB_MSG.MsgData", MsgData )      -- ç©å®¶è®¤è¯é€šè¿‡ï¼Œè¯·æ±‚å‘é€æ•°æ®ã€‚
     
     
     local client = ClientMgr:GetClient(msg_login.uid);
@@ -65,7 +65,7 @@ function MsgLogin:Login( sock_id, proto_buf )
 
 end
 
--- ÓĞ¿Í»§¶ËÔÚÆäËüFESÉÏµÇÂ¼³É¹¦¡£RemoveClient
+-- æœ‰å®¢æˆ·ç«¯åœ¨å…¶å®ƒFESä¸Šç™»å½•æˆåŠŸã€‚RemoveClient
 function MsgLogin:AuthOk( sock_id, proto_buf )
 
 	local MsgData = protobuf.decode("PB_MSG.MsgData", proto_buf)
@@ -89,7 +89,7 @@ function MsgLogin:DisConnect( sock_id, proto_buf )
 end
 
 
---ÊÍ·Åº¯Êı
+--é‡Šæ”¾å‡½æ•°
 function MsgLogin:OnRelease()
     self._EventRegister:UnRegisterAllEvent();
 end

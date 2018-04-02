@@ -8,7 +8,7 @@ local BaseService = {}
     self._EventRegister:RegisterEvent( "PLSConnection",         self, self.Connection );
 	self._EventRegister:RegisterEvent( "PLSDisConnection",      self, self.DisConnection );
     
-    -- 注册其它服务器启动的回调
+    -- 娉ㄥ唽鍏跺畠鏈嶅姟鍣ㄥ惎鍔ㄧ殑鍥炶皟
     ServerNet.SetConnectionCallback("FES");
     ServerNet.SetDisConnectionCallback("FES");
     
@@ -45,7 +45,7 @@ function CallbackService:DisConnection( service_id, service_name )
 	print("CallbackService:DisConnection"..service_name.." sid:"..service_id);
 end
 
---	释放函数
+--	閲婃斁鍑芥暟
 function CallbackService:OnRelease()
     self._EventRegister:UnRegisterAllEvent();
 end--]]

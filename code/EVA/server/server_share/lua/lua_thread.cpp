@@ -28,6 +28,10 @@ bool CLuaThread::Start( std::string& lua_start, std::string& export_name )
         m_SubLuaEngine.ExportModule("Utility");
         m_SubLuaEngine.ExportModule("LuaThread");
 
+        m_SubLuaEngine.ExportClass("MysqlStmt");
+        m_SubLuaEngine.ExportClass("MysqlConn");
+        m_SubLuaEngine.ExportClass("MysqlResult");
+
         m_ToSubEvent.init(1024*1024);
         m_ToMainEvent.init(1024*1024);
 

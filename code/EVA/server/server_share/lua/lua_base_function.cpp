@@ -83,13 +83,25 @@ int LuaAddSearchPath( lua_State *L )
          return 1;
      }
 
+     DEFINE_MODULE_FUNCTION(GetConfigInt, int, (std::string config_field))
+     {
+         CConfigFile::CVar *pVar = Config.getVarPtr (config_field);
+
+         if ( pVar!=NULL )
+         {
+             r = pVar->asInt();
+         }
+
+         return 1;
+     }
+
      DEFINE_MODULE_FUNCTION(MD5, std::string, (const char* buff, int len))
      {
          CHashKeyMD5 hash_key = getMD5( (const uint8*)buff, len );
          r = hash_key.toString();
          return 1;
      }
- 
+
      END_SCRIPT_MODULE()
  }
 

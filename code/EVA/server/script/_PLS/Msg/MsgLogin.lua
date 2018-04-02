@@ -1,9 +1,9 @@
 --========================================================= 
--- ÏûÏ¢×¢²á¹ÜÀí
+-- æ¶ˆæ¯æ³¨å†Œç®¡ç†
 --=========================================================
 local MsgLogin = class("MsgLogin")
 
--- ¹¹Ôìº¯Êı;
+-- æ„é€ å‡½æ•°;
 function MsgLogin:ctor( Data )
 	self._EventRegister = EventRegister.new();
 	self._EventRegister:RegisterEvent( "AuthOk",  self, self.AuthOkCB );
@@ -25,7 +25,7 @@ end
 
 
 
---ÊÍ·Åº¯Êı
+--é‡Šæ”¾å‡½æ•°
 function MsgLogin:OnRelease()
     self._EventRegister:UnRegisterAllEvent();
 end

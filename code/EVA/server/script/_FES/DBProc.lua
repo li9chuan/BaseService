@@ -1,9 +1,9 @@
 --========================================================= 
--- ÏûÏ¢×¢²á¹ÜÀí
+-- æ¶ˆæ¯æ³¨å†Œç®¡ç†
 --=========================================================
 local DBProc = class("DBProc")
 
--- ¹¹Ôìº¯Êı;
+-- æ„é€ å‡½æ•°;
 function DBProc:ctor( Data )
 	self:Init();
 end
@@ -43,7 +43,7 @@ function DBProc:Init()
 	self._EventRegister:RegisterEvent( "EVT_DB_MAIN",  self, self.LuaTestCB );
 end
 
---ÊÍ·Åº¯Êı
+--é‡Šæ”¾å‡½æ•°
 function DBProc:OnRelease()
     self._EventRegister:UnRegisterAllEvent();
 end

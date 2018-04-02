@@ -1,24 +1,31 @@
 PlayerMgr = {}
 
--- ³õÊ¼»¯º¯Êı
+-- åˆå§‹åŒ–å‡½æ•°
 function PlayerMgr:Init()
-	self.PlayerMap      = {};
+	self.playerMap      = {};
+
+    self.maxPlayer      = 3000;
+
+end
+
+function PlayerMgr:Count()
+    return #self.playerMap;
 end
 
 function PlayerMgr:GetPlayer( _uid )
-    if self.PlayerMap[_uid] ~= nil then
-        return self.PlayerMap[_uid];
+    if self.playerMap[_uid] ~= nil then
+        return self.playerMap[_uid];
     end
     return nil;
 end
 
 function PlayerMgr:SetPlayer( _uid, _player )
     if _uid ~= _player.UID then  assert()  end;
-    self.PlayerMap[_uid] = _player;
+    self.playerMap[_uid] = _player;
 end
 
 function PlayerMgr:RemovePlayer( _uid )
-    self.PlayerMap[_uid] = nil;
+    self.playerMap[_uid] = nil;
 end
 
 return PlayerMgr

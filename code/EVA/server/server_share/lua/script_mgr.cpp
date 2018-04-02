@@ -5,11 +5,15 @@
 #include "lua_engine.h"
 #include "server_share/bin_luabind/Public.hpp"
 #include <server_share/lua/lua_thread.h>
+#include "mysql_conn.h"
 
 using namespace std;
 using namespace DEF;
 using namespace NLMISC;
 using namespace NLNET;
+
+extern void forLuaMysqlConnForceLink();
+void luamysql()  {   forLuaMysqlConnForceLink();  }
 
 void CScriptMgr::init( LUA_OPEN pLuaOpen )
 {
@@ -109,12 +113,20 @@ void CScriptMgr::update()
     //m_LuaEngine.RunLuaFunction( "Update", "Main" );
 }
 
+
+
 void CScriptMgr::Export()
 {
     m_LuaEngine.ExportModule("Utility");
     m_LuaEngine.ExportModule("LuaThread");
     m_LuaEngine.ExportModule("ServerNet");
     m_LuaEngine.ExportClass("WebSocketNetwork");
+
+    m_LuaEngine.ExportClass("MysqlStmt");
+    m_LuaEngine.ExportClass("MysqlConn");
+    m_LuaEngine.ExportClass("MysqlResult");
+
+    
 }
 
 void CScriptMgr::ExecString( std::string exec_str )

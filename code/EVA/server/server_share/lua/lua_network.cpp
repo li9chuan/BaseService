@@ -294,6 +294,19 @@ namespace bin
             return 1;
         }
 
+        DEFINE_MODULE_FUNCTION(GetServiceID, int, ())
+        {
+            r = NLNET::IService::getInstance()->getServiceId().get();
+            return 1;
+        }
+
+        DEFINE_MODULE_FUNCTION(GetServiceName, std::string, ())
+        {
+            r = NLNET::IService::getInstance()->getServiceShortName();;
+            return 1;
+        }
+
+
 
 
     END_SCRIPT_MODULE()

@@ -1,6 +1,6 @@
 ServiceMgr = {}
 
--- ≥ı ºªØ∫Ø ˝
+-- ÂàùÂßãÂåñÂáΩÊï∞
 function ServiceMgr:Init()
 	self.PLSMap         = {};
 	self.FESMap         = {};
@@ -12,17 +12,18 @@ end
 function ServiceMgr:SvrUpdateInfoCB( msg_from, proto_buf )
 
 	local pb_sinfo = protobuf.decode("MsgServiceInfo" , proto_buf)
-	
-    if _service_info.serviceName=="FES" then
+    service_info = ServiceInfo:new();
+    service_info.LoadData(pb_sinfo);
         
-        service_info = ServiceInfo:new();
-        service_info.LoadData(pb_sinfo);
+    if _service_info.serviceName=="FES" then
         self.FESMap[_service_info.serviceID] = service_info;
+    elseif _service_info.serviceName=="PLS" then
+        self.PLSMap[_service_info.serviceID] = service_info;
     end
 	
 end
 
--- Õ∑≈∫Ø ˝
+--ÈáäÊîæÂáΩÊï∞
 function ServiceMgr:OnRelease()
     self._EventRegister:UnRegisterAllEvent();
 end

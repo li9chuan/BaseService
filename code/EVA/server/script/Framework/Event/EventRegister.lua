@@ -1,15 +1,15 @@
 --========================================================= 
--- ÏûÏ¢×¢²á¹ÜÀí
+-- æ¶ˆæ¯æ³¨å†Œç®¡ç†
 --=========================================================
 local EventRegister = class("EventRegister");
 
--- ¹¹Ôìº¯Êı
+-- æ„é€ å‡½æ•°
 function EventRegister:ctor()
-    self._EventCallBackTable = {};        -- ÊÂ¼ş»Øµ÷±í
+    self._EventCallBackTable = {};        -- äº‹ä»¶å›è°ƒè¡¨
 end
 
 
--- ×¢²áÄ³¸öÊÂ¼ş
+-- æ³¨å†ŒæŸä¸ªäº‹ä»¶
 function EventRegister:RegisterEvent(Name, Obj, Func)
 	if (nil == Name) then
 		logError("RegisterEvent Name == nil!")
@@ -29,7 +29,7 @@ function EventRegister:RegisterEvent(Name, Obj, Func)
 	EventController.Instance():RegisterEvent(Name, Handler);  
 end
 
--- »ñÈ¡ÊÂ¼ş×¢²á±í
+-- è·å–äº‹ä»¶æ³¨å†Œè¡¨
 function EventRegister:GetEventRegisterTable(Name)
 	for k,v in pairs(self._EventCallBackTable) do
         if(k == Name) then
@@ -39,7 +39,7 @@ function EventRegister:GetEventRegisterTable(Name)
     return nil;
 end
 
--- É¾³ıËùÓĞÊÂ¼ş
+-- åˆ é™¤æ‰€æœ‰äº‹ä»¶
 function EventRegister:UnRegisterAllEvent()
     for k,v in pairs(self._EventCallBackTable) do
         for i = 1, #v do

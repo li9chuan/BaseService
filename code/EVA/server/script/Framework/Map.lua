@@ -8,7 +8,7 @@ function this:ctor()
     self.count = 0
 end
 
--- ²åÈëĞÂÖµ
+-- æ’å…¥æ–°å€¼
 function this:Insert(k,v)
     if nil == self.List[k] then
         self.List[k] = v
@@ -16,7 +16,7 @@ function this:Insert(k,v)
     end
 end
 
--- ²åÈëĞÂÖµ²¢ÇÒÇĞ»»¾ÉÖµ
+-- æ’å…¥æ–°å€¼å¹¶ä¸”åˆ‡æ¢æ—§å€¼
 function this:Instead(k,v)
 	if nil == self.List[k] then
 		self.List[k] = v;
@@ -53,7 +53,7 @@ function this:Clear()
 end
 
 
--- ±éÀúËùÓĞ³ÉÔ±
+-- éå†æ‰€æœ‰æˆå‘˜
 function this:ForEach(fun, ...)
 	-- body
 	for k,v in pairs(self.List) do
@@ -61,7 +61,7 @@ function this:ForEach(fun, ...)
 	end
 end
 
--- »ñÈ¡×ÖµäµÄcount
+-- è·å–å­—å…¸çš„count
 function this:Count()
 	return self.count;
 end

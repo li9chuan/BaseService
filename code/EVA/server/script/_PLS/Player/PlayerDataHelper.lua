@@ -1,6 +1,6 @@
 local PlayerDataHelper = class("PlayerDataHelper")
 
--- ¹¹Ôìº¯Êý;
+-- æž„é€ å‡½æ•°;
 function PlayerDataHelper:ctor()
     self.UID     = 0;
 end

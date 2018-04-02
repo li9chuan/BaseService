@@ -1,6 +1,6 @@
 ClientMgr = {}
 
--- ³õÊ¼»¯º¯Êı
+-- åˆå§‹åŒ–å‡½æ•°
 function ClientMgr:Init()
 	self.ClientMap      = {};
     self.SocketMap      = {};

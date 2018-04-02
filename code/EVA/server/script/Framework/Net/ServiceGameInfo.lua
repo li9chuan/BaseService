@@ -1,6 +1,6 @@
 local ServiceGameInfo = class("ServiceGameInfo")
 
--- ¹¹Ôìº¯Êý;
+-- æž„é€ å‡½æ•°;
 function ServiceGameInfo:ctor()
     self.type       = "";
 	self.max        = 0;

@@ -1,6 +1,6 @@
 local ServiceInfo = class("ServiceInfo")
 
--- ¹¹Ôìº¯Êý;
+-- æž„é€ å‡½æ•°;
 function ServiceInfo:ctor()
 	self.serviceId      = 0;
     self.serviceName    = "";
