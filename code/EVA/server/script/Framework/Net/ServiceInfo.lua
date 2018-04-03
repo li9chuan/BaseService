@@ -10,10 +10,17 @@ function ServiceInfo:ctor()
 end
 
 function ServiceInfo:LoadData( _service_info )
+    
 	self.serviceId      = _service_info.serviceId;
     self.serviceName    = _service_info.serviceName;
     self.maxPlayer      = _service_info.maxPlayer;
     self.currPlayer     = _service_info.currPlayer;
+    
+    print( "ServiceInfo:LoadData" );
+    print( self.serviceId );
+    print( self.serviceName );
+    print( self.maxPlayer );
+    print( self.currPlayer );
     
     if _service_info.gameTypeList~=nil then
     

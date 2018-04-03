@@ -47,10 +47,10 @@ void CFrontEndService::init()
 
     TimerManager->init();
     LuaThreadMgr.Init();
-    ScriptMgr.init();
     LuaNetworkMgr.Init();
     
     
+    ICommand::execute ("initlua", *InfoLog);
 
     //////////////////////////////////////////////////
     // TCP 相关

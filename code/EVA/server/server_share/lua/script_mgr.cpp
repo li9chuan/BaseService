@@ -13,16 +13,18 @@ using namespace NLMISC;
 using namespace NLNET;
 
 extern void forLuaMysqlConnForceLink();
-void luamysql()  {   forLuaMysqlConnForceLink();  }
+
+void luaexportforcelink()  {   forLuaMysqlConnForceLink(); }
 
 void CScriptMgr::init( LUA_OPEN pLuaOpen )
 {
-	m_EventReg.resize(SCRIPT_EVENT_MAX);
+	//m_EventReg.resize(SCRIPT_EVENT_MAX);
 
     //string fn = IService::getInstance()->SaveFilesDirectory.toString();
     string log_file = /*fn +*/ Config.getVar("LogDirectory").asString();
     string lua_log = log_file + "lua_engine.log";
 
+    m_LuaEngine.Release();
     nlassert( m_LuaEngine.Init(lua_log) );
 
     if ( pLuaOpen!=NULL )
@@ -33,42 +35,18 @@ void CScriptMgr::init( LUA_OPEN pLuaOpen )
     ///  导出C++接口
     Export();
 
-    nlassert(ICommand::execute ("loadlua", *InfoLog));
 
-    //m_LuaEngine.RunLuaFunction( "Init", "_Main" );
+    CConfigFile::CVar* pVar = NULL;
 
-
-    //m_LuaEngine.GetScriptHandle()->CallFunc<const char*, std::string>("NetWorkHandler.OnMessage", "11111", str);
-    //m_LuaEngine.GetScriptHandle()->ExecString("NetWorkHandler.OnMessage(1,1)");
-}
-
-bool CScriptMgr::register_event( string script_scope, DEF::EVENT_ID script_event )
-{
-	bool res = false;
-	if ( script_event < SCRIPT_EVENT_MAX )
-	{
-		m_EventReg[script_event].push_back(script_scope);
-		res = true;
-	}
-	return res;
-}
-
-bool CScriptMgr::on_event( DEF::EVENT_ID script_event, LuaParams lua_in )
-{
-	bool res = false;
-
-	if ( script_event<SCRIPT_EVENT_MAX && m_EventReg[script_event].size()>0 )
-	{
-        LuaParams lua_params(script_event);
-        nlassert( lua_params.AddParams(lua_in) );
-
-		for ( uint i=0; i<m_EventReg[script_event].size(); ++i )
-		{
-			res = m_LuaEngine.RunLuaFunction( "OnEvent", m_EventReg[script_event][i].c_str(), NULL, &lua_params );
-		}
-	}
-
-	return res;
+    if ((pVar = Config.getVarPtr("LuaScript")) != NULL)
+    {
+        for (uint i = 0; i < pVar->size(); ++i)
+        {
+            string script_full_path = CPath::lookup( pVar->asString(i) );
+            nlinfo("Loading %s.", script_full_path.c_str());
+            ScriptMgr.LoadScrpit(script_full_path.c_str());
+        }
+    }
 }
 
 LuaParams CScriptMgr::run( std::string script_scope, std::string script_name, LuaParams lua_in, uint outnum )
@@ -98,19 +76,21 @@ lua_State * CScriptMgr::GetLuaState()
 
 void CScriptMgr::release()
 {
-    //m_LuaEngine.RunLuaFunction( "Release", "Main" );
+    m_LuaEngine.RunLuaFunction( "ServiceRelease" );
     m_LuaEngine.Release();
 }
 
-bool CScriptMgr::LoadScrpit( const char* szName )
+void CScriptMgr::LoadScrpit( const char* szName )
 {
-    //return m_LuaEngine.LoadLuaFile(szName);
-    return m_LuaEngine.GetScriptHandle()->Exec(szName)>0?true:false;
+    if( m_LuaEngine.LoadLuaFile(szName) )
+    {
+        m_LuaEngine.RunLuaFunction( "ServiceInit" );
+    }
 }
 
 void CScriptMgr::update()
 {
-    //m_LuaEngine.RunLuaFunction( "Update", "Main" );
+    m_LuaEngine.RunLuaFunction( "ServiceUpdate" );
 }
 
 
@@ -121,6 +101,8 @@ void CScriptMgr::Export()
     m_LuaEngine.ExportModule("LuaThread");
     m_LuaEngine.ExportModule("ServerNet");
     m_LuaEngine.ExportClass("WebSocketNetwork");
+    m_LuaEngine.ExportClass("LuaTimer");
+    
 
     m_LuaEngine.ExportClass("MysqlStmt");
     m_LuaEngine.ExportClass("MysqlConn");
@@ -145,30 +127,10 @@ NLMISC_COMMAND (exec, "run lua string.", "lua")
     return true;
 }
 
-NLMISC_COMMAND (loadlua, "reload lua script.", "lua")
+NLMISC_COMMAND (initlua, "init lua script.", "lua")
 {
     if(args.size() != 0) return false;
-
-    log.displayNL ("Load Script...");
-
-    CConfigFile::CVar* pVar = NULL;
-
-    if ((pVar = Config.getVarPtr("LuaScript")) != NULL)
-    {
-        for (uint i = 0; i < pVar->size(); ++i)
-        {
-            string script_full_path = CPath::lookup( pVar->asString(i) );
-            log.displayNL ("Loading %s.", script_full_path.c_str());
-
-            if ( !ScriptMgr.LoadScrpit(script_full_path.c_str()) )
-            {
-                log.displayNL ("Load Script Fail.  %s", script_full_path.c_str());
-                return false;
-            }
-        }
-    }
-
-    log.displayNL ("Load Script Sucess.");
+    ScriptMgr.init();
     return true;
 }
 

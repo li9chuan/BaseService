@@ -8,17 +8,37 @@ package.path = BasePath .. "_PLS/?.lua;" .. BasePath .. "Framework/?.lua;";
 
 require("InitFramework")
 require("PlayerLogicService")
-
+require("Player/PlayerMgr")
 
 
 PlayerDataHelper = require("Player/PlayerDataHelper");
 
 
+PlayerMgr:Init();
 PlayerLogicService:Init();
 
-MsgLogin = require("Msg/MsgLogin")
-msg_login = MsgLogin:new();
 
+MsgLogin        = require("Msg/MsgLogin")
+MsgLoginModule  = MsgLogin:new();
+
+
+-- 主入口函数。从这里开始lua逻辑
+function ServiceInit()
+	
+    print("Lua Start.");
+    
+    
+    
+end
+
+-- 游戏循环
+function ServiceUpdate()
+    TimerMgr:Update(math.floor(os.clock() * 1000));
+end
+
+function ServiceRelease()
+    print("Lua Release.");
+end
 
 
 --[[

@@ -25,10 +25,13 @@ require("functions")
 require("Net/NetWorkHandler")
 require("Net/ServiceMgr")
 require("Net/BaseService")
+require("TimerMgr");
+
 
 
 ServiceGameInfo             = require("Net/ServiceGameInfo");
 ServiceInfo                 = require("Net/ServiceInfo");
+
 
 --List 	= require("Common/List")
 --Queue   = require("Common/Queue")
@@ -73,6 +76,7 @@ CallbackClient              = require("Net/CallbackClient");
 -- 通用模块
 function OnCommonInit()
 	EventController.Instance():Init()
+    TimerMgr:Init(os.clock()*1000);
     ServiceMgr:Init();
 --	ServerManager.Instance():Init()
 --	UIManager.Instance():Init()

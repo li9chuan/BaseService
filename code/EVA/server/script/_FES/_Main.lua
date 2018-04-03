@@ -16,6 +16,9 @@ Client = require("Client");
 print(" =========FES Main Start============ ");
 
 
+
+
+
 ClientMgr:Init();
 FrontEndService:Init();
 
@@ -29,51 +32,31 @@ MsgLogin = require("Msg/MsgLogin")
 msg_login = MsgLogin:new();
 
 
---DBProc = require("DBProc");
---db_proc = DBProc:new();
---db_proc:LuaTest();
-
-
---[[MysqlConn = bin_types.MysqlConn.NewInstance();
-
-local conn_info = { "localhost", "root", "", "d_mt_player", 3306 };
-MysqlConn:Connect( conn_info );
-
-local MysqlStmt = bin_types.MysqlStmt.NewInstance("CALL _t_select_playerinfo(?)");
-
-local buff = "a\0000000ffff3e";
-
-MysqlStmt:SetUint64(3);
---MysqlStmt:SetBlob(buff,#buff);
-
-local MysqlResult = bin_types.MysqlResult.NewInstance();
-
-MysqlConn:Query( MysqlStmt, MysqlResult );
-
-MysqlResult:GetUint64();
-local blob = MysqlResult:GetBlob();
-
-print("====="..blob.."---"..#blob);--]]
 
 
 
---[[
+
+
+
+
+
 
 -- 主入口函数。从这里开始lua逻辑
-function Init()
+function ServiceInit()
 	
-
+    print("Lua Start.");
 end
 
 -- 游戏循环
-function Update()
-
+function ServiceUpdate()
+    TimerMgr:Update(math.floor(os.clock() * 1000))
 end
 
-function Release()
-
+function ServiceRelease()
+    print("Lua Release.");
 end
 
+--[[
 
 --bash_path = "E:\\BaseService\\code\\EVA\\server\\script\\";
 --package.path = bash_path .. "Framework\\?.lua;" .. bash_path .. "Framework\\Net\\?.lua;";

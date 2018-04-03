@@ -16,33 +16,18 @@ public:
     void            update();
     void		    release();
 
-	bool            register_event( std::string script_scope, DEF::EVENT_ID script_event );
-	bool            on_event( DEF::EVENT_ID script_event, LuaParams lua_in );
     LuaParams       run( std::string script_scope, std::string script_name, LuaParams lua_in, uint outnum=0 );
 
     void            ExecString( std::string );
 
 
-    bool            LoadScrpit(const char* szName);
+    void            LoadScrpit(const char* szName);
     lua_State*      GetLuaState();
     CLuaEngine&     GetLuaEngine()  { return m_LuaEngine; }
-    
-
-
 
 private:
 
     void            Export();
-
-	enum	{ SCRIPT_EVENT_MAX = 0xffff };
-
-	typedef std::set<DEF::SCRIPT_ID>   TScriptReg;
-	TScriptReg	m_ScriptReg;
-
-	typedef std::vector<std::string>			   TEventScript;
-	typedef std::vector<TEventScript>              TEventReg;	//	TEventReg[MISSION_EVENT][MISSION_ID]
-
-	TEventReg       m_EventReg;
     CLuaEngine      m_LuaEngine;
 };
 

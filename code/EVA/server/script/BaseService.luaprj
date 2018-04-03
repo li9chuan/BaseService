@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <Project Name="BaseService.luaprj" Cmd="" Arg="" Dir="" Toggle="false" >
     <Filter RelativePath=".\Framework" Toggle="false" >
@@ -25,6 +25,8 @@
             <LuaFile RelativePath=".\ServiceGameInfo.lua" />
         </Filter>
         <LuaFile RelativePath=".\InitFramework.lua" />
+        <LuaFile RelativePath=".\Utils.lua" />
+        <LuaFile RelativePath=".\TimerMgr.lua" />
     </Filter>
     <Filter RelativePath=".\_FES" Toggle="false" >
         <LuaFile RelativePath=".\_Main.lua" />
@@ -37,6 +39,7 @@
         </Filter>
         <LuaFile RelativePath=".\Client.lua" />
         <LuaFile RelativePath=".\FrontEndService.lua" />
+        <LuaFile RelativePath=".\TimerTest.lua" />
     </Filter>
     <Filter RelativePath=".\_PLS" Toggle="false" >
         <LuaFile RelativePath=".\_Main.lua" />

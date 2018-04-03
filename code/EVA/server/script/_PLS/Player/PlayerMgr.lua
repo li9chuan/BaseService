@@ -8,6 +8,10 @@ function PlayerMgr:Init()
 
 end
 
+function PlayerMgr:MaxPlayer()
+    return self.maxPlayer;
+end
+
 function PlayerMgr:Count()
     return #self.playerMap;
 end

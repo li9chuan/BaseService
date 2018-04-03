@@ -150,6 +150,7 @@ void CLuaEngine::Release()
 {
 	if(m_pLuaState != NULL)
 	{
+        m_ScriptHandle->Release();
 		lua_close(m_pLuaState);
 	}
 }
@@ -176,8 +177,10 @@ bool CLuaEngine::LoadLuaFile(const char* fileName)
 		}
 	}		
 
-	nldebug("load %s file error, cause %s.", fileName, GetLastError());
+	//nlwarning("load %s file error, cause %s.", fileName, GetLastError());
 	lua_settop(m_pLuaState, top);		
+
+    nlerror("load %s file error, cause %s.", fileName, GetLastError());
 	return false;
 }
 
@@ -198,7 +201,7 @@ bool CLuaEngine::RunMemoryLua(const char* pLuaData, int nDataLen)
 		}
 	}
 
-	nldebug("exec memory lua error, cause %s", GetLastError());
+	nlwarning("exec memory lua error, cause %s", GetLastError());
 	lua_settop(m_pLuaState, top);	
 	return false;
 }
@@ -234,7 +237,7 @@ bool CLuaEngine::RunLuaFunction(const char* szFunName, const char* szTableName, 
 	
 	if(!lua_isfunction(m_pLuaState, -1))
 	{
-        nldebug("call function(%s) fail, cause %s", szFunName, GetLastError());
+        nlwarning("call function(%s) fail, cause %s", szFunName, GetLastError());
 		lua_settop(m_pLuaState, top);
 		return false;
 	}
@@ -296,7 +299,7 @@ bool CLuaEngine::RunLuaFunction(const char* szFunName, const char* szTableName, 
 		return true;
 	}	
 	
-	nldebug("call function(%s) fail, cause %s", szFunName, GetLastError());
+	nlwarning("call function(%s) fail, cause %s", szFunName, GetLastError());
 	lua_settop(m_pLuaState, top);
 	return false;
 }

@@ -76,9 +76,9 @@ public:
         ///////////////////////////////
 
         TimerManager->init();
-        ScriptMgr.init();
         LuaNetworkMgr.Init();
 
+        ICommand::execute ("initlua", *InfoLog);
         ICommand::execute ("loadconfig", *InfoLog);
     }
 

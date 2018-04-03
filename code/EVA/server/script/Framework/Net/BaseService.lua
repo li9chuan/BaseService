@@ -1,4 +1,4 @@
-local BaseService = {}
+BaseService = {}
 
 --[[function CallbackService:ctor()
 	self._EventRegister = EventRegister.new();

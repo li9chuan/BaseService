@@ -16,14 +16,6 @@ int  GetCurrentDay1970( unsigned int time );
 */
 void LoadLuaFile(const char* szFileName);
 
-/**
-*   @brief 注册脚本事件到脚本管理器。
-*          服务器监听该事件，如果触发会调用脚本的OnEvent。
-*   @param script_scope 脚本名字。
-*   @param event_id 事件ID。
-*/
-void RegScriptEvent( const char* script_scope, int event_id );
-
 int LuaAddSearchPath( lua_State *L );
 int LuaPrint( lua_State *L );
 

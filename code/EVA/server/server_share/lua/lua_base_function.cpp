@@ -42,11 +42,6 @@ void LoadLuaFile(const char* szFileName)
     }
 }
 
-void RegScriptEvent( const char* script_scope, int event_id )
-{
-    ScriptMgr.register_event(script_scope,event_id);
-}
-
 int LuaAddSearchPath( lua_State *L )
 {
     int n = lua_gettop(L);
@@ -99,6 +94,13 @@ int LuaAddSearchPath( lua_State *L )
      {
          CHashKeyMD5 hash_key = getMD5( (const uint8*)buff, len );
          r = hash_key.toString();
+         return 1;
+     }
+
+     DEFINE_MODULE_FUNCTION(TestCall, void, ())
+     {
+         int nRet = 0;
+         lua.CallFunc("LuaTestCB()", nRet);
          return 1;
      }
 
