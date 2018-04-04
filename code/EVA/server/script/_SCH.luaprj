@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="_SCH.luaprj" Cmd="" Arg="" Dir="" Toggle="false" >
+<Project Name="_SCH.luaprj" Cmd="" Arg="" Dir="" Toggle="true" >
     <Filter RelativePath=".\_SCH" Toggle="false" >
         <LuaFile RelativePath=".\_SCHMain.lua" />
         <LuaFile RelativePath=".\ScheduleService.lua" />
@@ -11,7 +11,7 @@
         <Filter RelativePath=".\Msg" Toggle="false" >
             <LuaFile RelativePath=".\MsgLogin.lua" />
         </Filter>
-        <Filter RelativePath=".\PLSInfo" Toggle="true" >
+        <Filter RelativePath=".\PLSInfo" Toggle="false" >
             <LuaFile RelativePath=".\PLSGameInfo.lua" />
             <LuaFile RelativePath=".\PLSInfo.lua" />
             <LuaFile RelativePath=".\PLSInfoMgr.lua" />

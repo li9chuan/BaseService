@@ -18,5 +18,6 @@
             <LuaFile RelativePath=".\PlayerHelper.lua" />
             <LuaFile RelativePath=".\PlayerMgr.lua" />
         </Filter>
+        <LuaFile RelativePath=".\_PLSConfig.lua" />
     </Filter>
 </Project>

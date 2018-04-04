@@ -18,6 +18,14 @@ MsgLogin    = require("Msg/MsgLogin");
 
 
 
+
+
+
+--[[local json_text = JsonUtil.file_load(BasePath.."DataTable/Product.json")
+local t = Json.decode(json_text)
+print(JsonUtil.serialise_value(t))--]]
+
+
 ClientMgr:Init();
 FrontEndService:Init();
 

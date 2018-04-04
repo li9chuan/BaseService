@@ -9,6 +9,7 @@
 #include "server_share/bin_luabind/ScriptExporter.h"
 
 extern int  luaopen_protobuf_c (lua_State* tolua_S);
+extern int  luaopen_cjson(lua_State *l);
 
 //void Lua_Trace(lua_State *L, lua_Debug *debug_msg)
 //{
@@ -120,13 +121,17 @@ bool CLuaEngine::Init( std::string logpath )
 
     //luaopen_protobuf_c(m_pLuaState);
     luaL_requiref(m_pLuaState, "protobuf.c", luaopen_protobuf_c, 0);
-
+    luaL_requiref(m_pLuaState, "cjson", luaopen_cjson, 0);
 
     lua_register( m_pLuaState, "print",             LuaPrint );                /// ×¢²á³£ÓÃº¯Êý
     lua_register( m_pLuaState, "AddSearchPath",     LuaAddSearchPath );
 
 
+    //luaopen_cjson(m_pLuaState);
+
     m_ScriptHandle->Init(m_pLuaState);
+
+    
 
     //tolua_auto_lua_callback_open(m_pLuaState);
 

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="_FES.luaprj" Cmd="" Arg="" Dir="" Toggle="false" >
+<Project Name="_FES.luaprj" Cmd="E:\BaseService\build\bin\Debug\frontend_service.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="false" >
     <Filter RelativePath=".\_FES" Toggle="false" >
         <LuaFile RelativePath=".\_FESMain.lua" />
         <LuaFile RelativePath=".\FrontEndService.lua" />

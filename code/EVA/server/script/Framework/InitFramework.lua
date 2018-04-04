@@ -7,13 +7,17 @@ package.path = package.path .. BasePath .. "Framework/?.lua;";
 package.path = package.path .. BasePath .. "Framework/Event/?.lua;";
 package.path = package.path .. BasePath .. "Framework/Net/?.lua;";
 
-protobuf = require "protobuf"
+protobuf    = require "protobuf"
 
 addr = io.open( BasePath.."DataTable/proto_msg.pb", "rb")
 buffer = addr:read "*a"  
 addr:close()  
 protobuf.register(buffer) 
 protobuf.decode("google.protobuf.FileDescriptorSet", buffer)
+
+
+Json        = require "cjson"
+JsonUtil    = require "CJsonUtil"
 
 
 -- 工具库

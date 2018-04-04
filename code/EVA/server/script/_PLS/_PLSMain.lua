@@ -21,6 +21,10 @@ PlayerLogicService:Init();
 MsgLogin        = require("Msg/MsgLogin")
 MsgLoginModule  = MsgLogin:new();
 
+PLSConfig        = require("_PLSConfig")
+
+print(JsonUtil.serialise_value(PLSConfig))
+
 
 -- 主入口函数。从这里开始lua逻辑
 function ServiceInit()
