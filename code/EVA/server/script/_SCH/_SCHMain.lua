@@ -3,41 +3,20 @@
 --=========================================================
 
 local BasePath = Utility.GetBasePath() .. "/script/";
-package.path = BasePath .. "_FES/?.lua;" .. BasePath .. "Framework/?.lua;";
+package.path = BasePath .. "_SCH/?.lua;" .. BasePath .. "Framework/?.lua;";
+
 
 require("InitFramework")
-require("ClientMgr")
-require("FrontEndService")
+require("ScheduleService")
+require("PLSInfo/PLSInfoMgr")
+
+PLSGameInfo     = require("PLSInfo/PLSGameInfo")
+PLSInfo         = require("PLSInfo/PLSInfo")
 
 
 
-Client = require("Client");
-
-print(" =========FES Main Start============ ");
-
-
-
-
-
-ClientMgr:Init();
-FrontEndService:Init();
-
-
-
-ClientService = CallbackClient:new();
-ClientService:Listen( "ClientService", 9999 );
-
-
-MsgLogin = require("Msg/MsgLogin")
-msg_login = MsgLogin:new();
-
-
-
-
-
-
-
-
+PLSInfoMgr:Init();
+ScheduleService:Init();
 
 
 
@@ -45,18 +24,25 @@ msg_login = MsgLogin:new();
 function ServiceInit()
 	
     print("Lua Start.");
+    
+    
+    
 end
 
 -- 游戏循环
 function ServiceUpdate()
-    TimerMgr:Update(math.floor(os.clock() * 1000))
+    TimerMgr:Update(math.floor(os.clock() * 1000));
 end
 
 function ServiceRelease()
     print("Lua Release.");
 end
 
+
 --[[
+
+
+
 
 --bash_path = "E:\\BaseService\\code\\EVA\\server\\script\\";
 --package.path = bash_path .. "Framework\\?.lua;" .. bash_path .. "Framework\\Net\\?.lua;";

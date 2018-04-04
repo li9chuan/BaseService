@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<Project Name="_FES.luaprj" Cmd="" Arg="" Dir="" Toggle="false" >
+    <Filter RelativePath=".\_FES" Toggle="false" >
+        <LuaFile RelativePath=".\_FESMain.lua" />
+        <LuaFile RelativePath=".\FrontEndService.lua" />
+        <LuaFile RelativePath=".\TimerTest.lua" />
+        <Filter RelativePath=".\Client" Toggle="false" >
+            <LuaFile RelativePath=".\Client.lua" />
+            <LuaFile RelativePath=".\ClientMgr.lua" />
+        </Filter>
+        <Filter RelativePath=".\Msg" Toggle="false" >
+            <LuaFile RelativePath=".\MsgLogin.lua" />
+        </Filter>
+        <Filter RelativePath=".\Player" Toggle="false" >
+            <LuaFile RelativePath=".\PlayerInfo.lua" />
+            <LuaFile RelativePath=".\PlayerInfoMgr.lua" />
+        </Filter>
+    </Filter>
+</Project>

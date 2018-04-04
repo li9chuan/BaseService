@@ -116,7 +116,7 @@ void CFrontEndService::IncReceiveMsgCount( std::string msg_name )
 }
 
 /****************************************************************************   
- * SanGuo FRONTEND SERVICE MAIN Function
+ * FRONTEND SERVICE MAIN Function
  *
  * This call create a main function for a service:
  *

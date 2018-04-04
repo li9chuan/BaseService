@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<Project Name="_PLS.luaprj" Cmd="" Arg="" Dir="" Toggle="false" >
+    <Filter RelativePath=".\_PLS" Toggle="false" >
+        <LuaFile RelativePath=".\_PLSMain.lua" />
+        <LuaFile RelativePath=".\PlayerLogicService.lua" />
+        <Filter RelativePath=".\DB" Toggle="true" >
+            <LuaFile RelativePath=".\DBMgr.lua" />
+            <LuaFile RelativePath=".\DBProc.lua" />
+            <LuaFile RelativePath=".\DBSubProc.lua" />
+            <LuaFile RelativePath=".\DBSubStart.lua" />
+        </Filter>
+        <Filter RelativePath=".\Msg" Toggle="false" >
+            <LuaFile RelativePath=".\MsgLogin.lua" />
+        </Filter>
+        <Filter RelativePath=".\Player" Toggle="true" >
+            <LuaFile RelativePath=".\PlayerDataHelper.lua" />
+            <LuaFile RelativePath=".\PlayerHelper.lua" />
+            <LuaFile RelativePath=".\PlayerMgr.lua" />
+        </Filter>
+    </Filter>
+</Project>

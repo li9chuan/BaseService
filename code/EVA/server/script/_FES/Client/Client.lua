@@ -8,14 +8,4 @@ function Client:ctor()
 end
 
 
-function Client:LuaTest()
-
-	
-    
-    print("----------"..self.SockID);
-
-end
-
-
-
 return Client;

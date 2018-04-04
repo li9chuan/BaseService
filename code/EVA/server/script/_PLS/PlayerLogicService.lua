@@ -1,43 +1,63 @@
 PlayerLogicService = {}
 
 function PlayerLogicService:Init()
-	self._EventRegister = EventRegister.new();
-	
-	self._EventRegister:RegisterEvent( "FESConnection",         self, self.Connection );
-	self._EventRegister:RegisterEvent( "FESDisConnection",      self, self.DisConnection );
-    self._EventRegister:RegisterEvent( "PLSConnection",         self, self.Connection );
-	self._EventRegister:RegisterEvent( "PLSDisConnection",      self, self.DisConnection );
-    
+
     -- 注册其它服务器启动的回调
-    ServerNet.SetConnectionCallback("FES");
-    ServerNet.SetDisConnectionCallback("FES");
+    ServerNet.SetConnectionCallback("SCH");
+    ServerNet.SetDisConnectionCallback("SCH");
     
-    ServerNet.SetConnectionCallback("PLS");
-    ServerNet.SetDisConnectionCallback("PLS");
     
+	self._EventRegister = EventRegister.new();
+    self._EventRegister:RegisterEvent( "SCHConnection",         self, self.SCHConnection );
+	self._EventRegister:RegisterEvent( "SCHDisConnection",      self, self.SCHDisConnection );
+    
+
+    self.timerid    = 0;
+    self.sch_sid    = 0;
 end
 
-function PlayerLogicService:UpdateServiceInfo( service_id )
+function PlayerLogicService:UpdatePLSInfo( service_id )
     
-    MsgServiceInfo = {};
+    local MsgServiceInfo = {};
     MsgServiceInfo.maxPlayer    = PlayerMgr:MaxPlayer();
     MsgServiceInfo.currPlayer   = PlayerMgr:Count();
     MsgServiceInfo.serviceId    = ServerNet.GetServiceID();
     MsgServiceInfo.serviceName  = ServerNet.GetServiceName();
+    MsgServiceInfo.gameTypeList = {};
     
+    local MsgGameType   = {};
+    MsgGameType.type    = "GM_TST";
+    MsgGameType.max     = 5;
+    MsgGameType.curr    = 1;
+    
+    table.insert( MsgServiceInfo.gameTypeList, MsgGameType );
+
+    PrintTable(MsgServiceInfo.gameTypeList);
+
     BaseService:Send( service_id, "SvrInfo", "PB_MSG.MsgServiceInfo", MsgServiceInfo )
 
 end
 
 
-function PlayerLogicService:Connection( service_id, service_name )
-	print("PlayerLogicService:Connection:"..service_name.." sid:"..service_id);
+function PlayerLogicService:SCHConnection( service_id, service_name )
+	print("PlayerLogicService:SCHConnection:"..service_name.." sid:"..service_id);
     
-    self:UpdateServiceInfo(service_id);
+    self.sch_sid = service_id;
+    self:UpdatePLSInfo(service_id);
+    self.timerid = TimerMgr:AddTimer(7000, self, self.UpdatePLSInfoTimer);
 end
 
-function PlayerLogicService:DisConnection( service_id, service_name )
-	print("PlayerLogicService:DisConnection"..service_name.." sid:"..service_id);
+function PlayerLogicService:SCHDisConnection( service_id, service_name )
+	print("PlayerLogicService:SCHDisConnection"..service_name.." sid:"..service_id);
+    
+    self.sch_sid = nil;
+    TimerMgr:RemoveTimer(self.timerid);
+    
+end
+
+function PlayerLogicService:UpdatePLSInfoTimer()
+    self:UpdatePLSInfo(self.sch_sid);
+    self.timerid = TimerMgr:AddTimer(7000, self, self.UpdatePLSInfoTimer);
 end
 
 --	释放函数

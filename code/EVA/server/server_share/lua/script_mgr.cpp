@@ -38,14 +38,11 @@ void CScriptMgr::init( LUA_OPEN pLuaOpen )
 
     CConfigFile::CVar* pVar = NULL;
 
-    if ((pVar = Config.getVarPtr("LuaScript")) != NULL)
+    if ((pVar = Config.getVarPtr("StartLuaScript")) != NULL)
     {
-        for (uint i = 0; i < pVar->size(); ++i)
-        {
-            string script_full_path = CPath::lookup( pVar->asString(i) );
-            nlinfo("Loading %s.", script_full_path.c_str());
-            ScriptMgr.LoadScrpit(script_full_path.c_str());
-        }
+        string script_full_path = CPath::lookup( pVar->asString() );
+        nlinfo("Loading %s.", script_full_path.c_str());
+        ScriptMgr.LoadScrpit(script_full_path.c_str());
     }
 }
 
