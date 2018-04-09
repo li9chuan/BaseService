@@ -175,7 +175,7 @@ void setAssert (bool assert)
 void nlFatalError (const char *format, ...)
 {
 	char *str;
-	NLMISC_CONVERT_VARGS (str, format, 256/*NLMISC::MaxCStringSize*/);
+	NLMISC_CONVERT_VARGS (str, format, NLMISC::MaxCStringSize);
 
 	INelContext::getInstance().setDebugNeedAssert( NLMISC::DefaultMsgBoxDisplayer==0 );
 
@@ -194,7 +194,7 @@ void nlFatalError (const char *format, ...)
 void nlError (const char *format, ...)
 {
 	char *str;
-	NLMISC_CONVERT_VARGS (str, format, 256/*NLMISC::MaxCStringSize*/);
+	NLMISC_CONVERT_VARGS (str, format, NLMISC::MaxCStringSize);
 
 	INelContext::getInstance().setDebugNeedAssert( NLMISC::DefaultMsgBoxDisplayer==0 );
 

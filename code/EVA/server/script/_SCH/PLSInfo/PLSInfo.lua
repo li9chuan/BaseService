@@ -2,38 +2,38 @@ local PLSInfo = class("PLSInfo")
 
 -- 构造函数;
 function PLSInfo:ctor()
-	self.serviceId      = 0;
-    self.serviceName    = "";
-    self.maxPlayer      = 0;
-    self.currPlayer     = 0;
-    self.gameTypeList   = {};
+	self.ServiceID      = 0;
+    self.ServiceName    = "";
+    self.MaxPlayer      = 0;
+    self.CurrPlayer     = 0;
+    self.GameTypeList   = {};
 end
 
 function PLSInfo:LoadData( _service_info )
     
-	self.serviceId      = _service_info.serviceId;
-    self.serviceName    = _service_info.serviceName;
-    self.maxPlayer      = _service_info.maxPlayer;
-    self.currPlayer     = _service_info.currPlayer;
-    self.gameTypeList   = {};
+	self.ServiceID      = _service_info.ServiceID;
+    self.ServiceName    = _service_info.ServiceName;
+    self.MaxPlayer      = _service_info.MaxPlayer;
+    self.CurrPlayer     = _service_info.CurrPlayer;
+    self.GameTypeList   = {};
     
-    if _service_info.gameTypeList~=nil then
+    if _service_info.GameTypeList~=nil then
     
-        for _,v in ipairs(_service_info.gameTypeList) do
+        for _,v in ipairs(_service_info.GameTypeList) do
             
             local game_info = PLSGameInfo:new();
-            game_info.type  = v.type;
-            game_info.max   = v.max;
-            game_info.curr  = v.curr;
+            game_info.Type  = v.Type;
+            game_info.Max   = v.Max;
+            game_info.Curr  = v.Curr;
 
-            self.gameTypeList[game_info.type] = game_info;
+            self.GameTypeList[game_info.Type] = game_info;
         end
     end
     
 end
 
 function PLSInfo:IsFull()
-    if( self.currPlayer > self.maxPlayer ) then
+    if( self.CurrPlayer > self.MaxPlayer ) then
         return true;
     end
     return false;

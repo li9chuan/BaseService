@@ -1,15 +1,14 @@
-local PlayerHalper = class("PlayerHalper")
+local PlayerHelper = class("PlayerHelper")
 
 -- 构造函数;
-function PlayerHalper:ctor()
-    self.PlayerDataHalper      = PlayerDataHalper:new();
+function PlayerHelper:ctor()
+    
+    self.PlayerDataHelper      = nil;
 
 
-    self.UID     = 0;
-    self.FES     = nil;
+    self.UID            = 0;
+    self.ConFES         = nil;
 end
 
 
-
-
-return PlayerHalper;
+return PlayerHelper;

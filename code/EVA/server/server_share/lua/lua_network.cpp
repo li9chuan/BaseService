@@ -33,27 +33,83 @@ void cbLuaClientMsg ( CMessage &msgin, TSockId from, CCallbackNetBase &netbase)
     ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params );
 }
 
+void cbLuaSendToClientMsg ( CMessage &msgin, TSockId uid, CCallbackNetBase &netbase)
+{
+    DEF::UID        client_uid;
+    std::string     msg_type;
+    std::string     pb_buff;
+
+    msgin.serial(client_uid);
+    msgin.serial(msg_type);
+    msgin.serial(pb_buff);
+
+    LuaNetworkMgr.SendToClient( client_uid, msg_type, pb_buff );
+}
+
 const TCallbackItem LuaClientCallbackArray[] =
 {
-    { "_LC",                         cbLuaClientMsg          },
+    { "_LC",                            cbLuaClientMsg              },
+    { "_LSC",                           cbLuaSendToClientMsg        },
 };
 
 NLNET::TUnifiedCallbackItem LuaCallbackArray[] =
 {
-    { "_LS",                         cbLuaServiceMsg         },
+    { "_LS",                            cbLuaServiceMsg             },
 };
 
 static void cbWSConnect( TSockId from, void *arg );
 static void cbWSDisConnect( TSockId from, void *arg );
 
-class CLuaWebSocketNetwork
+class CLuaClientNetwork
+{
+public:
+    CLuaClientNetwork( std::string name ) : m_NetName(name)
+    {
+        LuaNetworkMgr.RegisterNetModule( name, this );
+    }
+
+    virtual ~CLuaClientNetwork() { LuaNetworkMgr.RemoveNetModule(m_NetName); }
+
+    
+    virtual void Update() = 0;
+    virtual void Send( TSockId sock_id, std::string& msg_type, std::string& proto_str ) = 0;
+
+
+
+    void SetUIDMap( DEF::UID uid, TSockId sock_id ) { m_UIDMap[uid] = sock_id; }
+    void RemoveUIDMap( DEF::UID uid )               { m_UIDMap.erase(uid); }
+    void ClearUIDMap()                              { m_UIDMap.clear(); }
+
+    TSockId     GetSockId( DEF::UID uid )           
+    {
+        TUIDMap::iterator iter = m_UIDMap.find(uid);
+        if ( iter != m_UIDMap.end() )
+        {
+            return iter->second;
+        }
+
+        return InvalidSockId;
+    }
+
+    std::string         GetName()   { return m_NetName; }
+
+private:
+
+    std::string                                 m_NetName;
+
+    typedef     std::map<DEF::UID, TSockId>     TUIDMap;
+    TUIDMap                                     m_UIDMap;
+};
+
+
+
+class CLuaWebSocketNetwork : public CLuaClientNetwork
 {
     DECLARE_SCRIPT_CLASS();
 public:
 
-    CLuaWebSocketNetwork( std::string name, uint16 port )
+    CLuaWebSocketNetwork( std::string name, uint16 port ) : CLuaClientNetwork(name)
     {
-        m_NetName = name;
         m_CallbackServerHandle = new CCallbackServerWebSocket();
         m_CallbackServerHandle->addCallbackArray(LuaClientCallbackArray, sizeof(LuaClientCallbackArray)/sizeof(LuaClientCallbackArray[0]));
 
@@ -61,13 +117,10 @@ public:
         m_CallbackServerHandle->setDisconnectionCallback( cbWSDisConnect, this );
 
         m_CallbackServerHandle->init (port);
-        
-        LuaNetworkMgr.RegisterNetModule( name, this );
     }
 
     ~CLuaWebSocketNetwork()
     {
-        LuaNetworkMgr.RemoveNetModule(m_NetName);
         delete m_CallbackServerHandle; 
     }
 
@@ -93,10 +146,9 @@ public:
         m_CallbackServerHandle->send_buffer( mem_out, sock_id );
     }
 
-    std::string         GetName()   { return m_NetName; }
+
 private:
 
-    std::string                         m_NetName;
     CCallbackServerWebSocket*           m_CallbackServerHandle;
 };
 
@@ -106,13 +158,13 @@ void CLuaNetworkMgr::Init()
     NLNET::CUnifiedNetwork::getInstance()->addCallbackArray(LuaCallbackArray, sizeof(LuaCallbackArray)/sizeof(LuaCallbackArray[0]));
 }
 
-void CLuaNetworkMgr::RegisterNetModule( std::string name, CLuaWebSocketNetwork* pNet )
+void CLuaNetworkMgr::RegisterNetModule( std::string name, CLuaClientNetwork* pNet )
 {
-    TNetHandle::iterator iter = m_LuaWebSocketNetworkHandle.find(name);
+    TNetHandle::iterator iter = m_LuaClientNetworkHandle.find(name);
 
-    if ( iter == m_LuaWebSocketNetworkHandle.end() )
+    if ( iter == m_LuaClientNetworkHandle.end() )
     {
-        m_LuaWebSocketNetworkHandle.insert( make_pair(name, pNet) ); 
+        m_LuaClientNetworkHandle.insert( make_pair(name, pNet) ); 
     }
     else
     {
@@ -122,14 +174,14 @@ void CLuaNetworkMgr::RegisterNetModule( std::string name, CLuaWebSocketNetwork* 
 
 void CLuaNetworkMgr::RemoveNetModule( std::string name )
 {
-    m_LuaWebSocketNetworkHandle.erase(name);
+    m_LuaClientNetworkHandle.erase(name);
 }
 
 void CLuaNetworkMgr::Update()
 {
-    TNetHandle::iterator iter = m_LuaWebSocketNetworkHandle.begin();
+    TNetHandle::iterator iter = m_LuaClientNetworkHandle.begin();
 
-    while (iter!=m_LuaWebSocketNetworkHandle.end())
+    while (iter!=m_LuaClientNetworkHandle.end())
     {
 
         iter->second->Update();
@@ -139,16 +191,31 @@ void CLuaNetworkMgr::Update()
 
 void CLuaNetworkMgr::Release()
 {
-    TNetHandle::iterator iter = m_LuaWebSocketNetworkHandle.begin();
+    TNetHandle::iterator iter = m_LuaClientNetworkHandle.begin();
 
-    while (iter!=m_LuaWebSocketNetworkHandle.end())
+    while (iter!=m_LuaClientNetworkHandle.end())
     {
 
         delete iter->second;
         ++iter;
     }
 
-    m_LuaWebSocketNetworkHandle.clear();
+    m_LuaClientNetworkHandle.clear();
+}
+
+void CLuaNetworkMgr::SendToClient( uint64 uid, std::string& msg_type, std::string& pb_buff )
+{
+    TNetHandle::iterator iter = m_LuaClientNetworkHandle.begin();
+
+    if ( iter != m_LuaClientNetworkHandle.end() )
+    {
+        TSockId sock_id = iter->second->GetSockId(uid);
+
+        if ( sock_id != InvalidSockId )
+        {
+            iter->second->Send( sock_id, msg_type, pb_buff );
+        }
+    }
 }
 
 static void cbWSConnect( TSockId from, void *arg )
@@ -273,6 +340,33 @@ namespace bin
                 std::string     pb_str(proto_buf,buf_len);
 
                 CMessage msg_out("_LS");
+                msg_out.serial(msg_type);
+                msg_out.serial(pb_str);
+
+                Network->send( (NLNET::TServiceId)sid, msg_out );
+            }
+
+            return 1;
+        }
+
+        DEFINE_MODULE_FUNCTION(SendToClient, void, (const char* proto_buf, CScriptTable& tb_msg))
+        {
+            if( tb_msg.IsReferd() )
+            {
+                int             sid;
+                std::string     msg_type;
+                int             buf_len;
+                lua_Integer     client_uid;
+
+                tb_msg.Get(1, sid);
+                tb_msg.Get(2, msg_type);
+                tb_msg.Get(3, buf_len);
+                tb_msg.Get(4, client_uid);
+
+                std::string     pb_str(proto_buf, buf_len);
+
+                CMessage msg_out("_LSC");
+                msg_out.serial(client_uid);
                 msg_out.serial(msg_type);
                 msg_out.serial(pb_str);
 

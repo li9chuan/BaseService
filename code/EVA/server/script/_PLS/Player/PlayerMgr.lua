@@ -17,15 +17,30 @@ function PlayerMgr:Count()
 end
 
 function PlayerMgr:GetPlayer( _uid )
-    if self.playerMap[_uid] ~= nil then
-        return self.playerMap[_uid];
-    end
-    return nil;
+    return self.playerMap[_uid];
 end
 
-function PlayerMgr:SetPlayer( _uid, _player )
-    if _uid ~= _player.UID then  assert()  end;
-    self.playerMap[_uid] = _player;
+function PlayerMgr:LoadDBPlayer( _uid )
+    
+    local tb_playerinfo = DBMgr:GetPlayerInfo(_uid);
+    
+    if tb_playerinfo==nil then
+        if DBMgr:CreatePlayer(_uid)==true then
+            tb_playerinfo = DBMgr:GetPlayerInfo(_uid);
+        end
+    end
+    
+    if tb_playerinfo~=nil then
+        local player_helper    = PlayerHelper:new();
+        
+        player_helper.UID               = _uid;
+        player_helper.PlayerDataHelper  = tb_playerinfo;
+        
+        
+        self.playerMap[_uid] = player_helper;
+    end
+    
+    return self.playerMap[_uid];
 end
 
 function PlayerMgr:RemovePlayer( _uid )

@@ -333,12 +333,12 @@ void CLog::displayNL (const char *format, ...)
 	}
 
 	char *str;
-	NLMISC_CONVERT_VARGS (str, format, 256/*NLMISC::MaxCStringSize*/);
+	NLMISC_CONVERT_VARGS (str, format, NLMISC::MaxCStringSize);
 
-	if (strlen(str)<256/*NLMISC::MaxCStringSize*/-1)
+	if (strlen(str)<NLMISC::MaxCStringSize-1)
 		strcat (str, "\n");
 	else
-		str[256/*NLMISC::MaxCStringSize*/-2] = '\n';
+		str[NLMISC::MaxCStringSize-2] = '\n';
 
 	displayString (str);
 }
@@ -358,7 +358,7 @@ void CLog::display (const char *format, ...)
 	}
 
 	char *str;
-	NLMISC_CONVERT_VARGS (str, format, 256/*NLMISC::MaxCStringSize*/);
+	NLMISC_CONVERT_VARGS (str, format, NLMISC::MaxCStringSize);
 
 	displayString (str);
 }
@@ -452,12 +452,12 @@ void CLog::displayRawNL( const char *format, ... )
 	}
 
 	char *str;
-	NLMISC_CONVERT_VARGS (str, format, 256/*NLMISC::MaxCStringSize*/);
+	NLMISC_CONVERT_VARGS (str, format, NLMISC::MaxCStringSize);
 
-	if (strlen(str)<256/*NLMISC::MaxCStringSize*/-1)
+	if (strlen(str)<NLMISC::MaxCStringSize-1)
 		strcat (str, "\n");
 	else
-		str[256/*NLMISC::MaxCStringSize*/-2] = '\n';
+		str[NLMISC::MaxCStringSize-2] = '\n';
 
 	displayRawString(str);
 }
@@ -477,7 +477,7 @@ void CLog::displayRaw( const char *format, ... )
 	}
 
 	char *str;
-	NLMISC_CONVERT_VARGS (str, format, 256/*NLMISC::MaxCStringSize*/);
+	NLMISC_CONVERT_VARGS (str, format, NLMISC::MaxCStringSize);
 
 	displayRawString(str);
 }
@@ -495,7 +495,7 @@ void CLog::forceDisplayRaw (const char *format, ...)
 	}
 
 	char *str;
-	NLMISC_CONVERT_VARGS (str, format, 256/*NLMISC::MaxCStringSize*/);
+	NLMISC_CONVERT_VARGS (str, format, NLMISC::MaxCStringSize);
 
 	TDisplayInfo args;
 	CDisplayers::iterator idi;

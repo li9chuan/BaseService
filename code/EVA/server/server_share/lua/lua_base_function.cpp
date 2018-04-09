@@ -67,44 +67,49 @@ int LuaAddSearchPath( lua_State *L )
     return 1;
 }
 
+
  namespace bin
  {
-     BEGIN_SCRIPT_MODULE(Utility)
+    BEGIN_SCRIPT_MODULE(Utility)
  
-     DEFINE_MODULE_FUNCTION(GetBasePath, std::string, (void))
-     {
-         //nldebug("Calling func5 with (%s, %lld)\n", path.c_str(), a1);
-         r = NLMISC::CPath::getCurrentPath();
-         return 1;
-     }
+        DEFINE_MODULE_FUNCTION(GetBasePath, std::string, (void))
+        {
+            //nldebug("Calling func5 with (%s, %lld)\n", path.c_str(), a1);
+            r = NLMISC::CPath::getCurrentPath();
+            return 1;
+        }
 
-     DEFINE_MODULE_FUNCTION(GetConfigInt, int, (std::string config_field))
-     {
-         CConfigFile::CVar *pVar = Config.getVarPtr (config_field);
+        DEFINE_MODULE_FUNCTION(GetConfigInt, int, (std::string config_field))
+        {
+            CConfigFile::CVar *pVar = Config.getVarPtr (config_field);
 
-         if ( pVar!=NULL )
-         {
-             r = pVar->asInt();
-         }
+            if ( pVar!=NULL )
+            {
+                r = pVar->asInt();
+            }
 
-         return 1;
-     }
+            return 1;
+        }
 
-     DEFINE_MODULE_FUNCTION(MD5, std::string, (const char* buff, int len))
-     {
-         CHashKeyMD5 hash_key = getMD5( (const uint8*)buff, len );
-         r = hash_key.toString();
-         return 1;
-     }
+        DEFINE_MODULE_FUNCTION(MD5, std::string, (const char* buff, int len))
+        {
+            CHashKeyMD5 hash_key = getMD5( (const uint8*)buff, len );
+            r = hash_key.toString();
+            return 1;
+        }
 
-     DEFINE_MODULE_FUNCTION(TestCall, void, ())
-     {
-         int nRet = 0;
-         lua.CallFunc("LuaTestCB()", nRet);
-         return 1;
-     }
+    END_SCRIPT_MODULE()
 
-     END_SCRIPT_MODULE()
+
+    BEGIN_SCRIPT_MODULE(Debug)
+
+        DEFINE_MODULE_FUNCTION(Warning, void, (const char* waring_str))
+        {
+            nlwarning(waring_str);
+            return 1;
+        }
+
+    END_SCRIPT_MODULE()
  }
 
 int LuaPrint(lua_State *L)

@@ -13,6 +13,8 @@ public:
     // release.
     void release( void );
 
+    void clear();
+
     // set bool value.
     void set_bool( my_bool bval_ );
 

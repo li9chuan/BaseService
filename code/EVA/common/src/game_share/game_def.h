@@ -16,8 +16,7 @@ namespace DEF {
 #define TRUE                1
 #endif
 
-typedef	uint32   UID;
-typedef	uint64   PID;
+typedef	uint64   UID;
 typedef	uint32   RPC_SESSION;           ///  远程调用session
 typedef uint64   CLIENT_SESSION;        ///  客户端身份
 typedef uint32   TEMPLATE_ID;           ///  配置表使用的ID

@@ -7,23 +7,32 @@ import "define_attrib.proto";
 
 message MsgLogin
 {
-  optional string       version      = 1;
-  optional string       authType     = 2;
-  optional string       appid        = 3;
-  optional string       user         = 4;
-  optional string       key          = 5;
-  optional string       token        = 6;
-  optional string       timestamp    = 7;
-  optional uint64       uid          = 8;
+  optional string       Version         = 1;
+  optional string       AuthType        = 2;
+  optional string       APPID           = 3;
+  optional string       User            = 4;
+  optional string       NonceStr        = 5;
+  optional string       Token           = 6;
+  optional string       Timestamp       = 7;
+  optional uint64       UID             = 8;
+  optional string       GameType        = 9;
   
   
 }
 
 
-message MsgSession
+message MsgError
 {
-  optional fixed64      session    = 1;
-  optional fixed32      check      = 2;
-  optional uint32       index      = 3;
+  optional string       Version      = 1;
+  optional string       AuthType     = 2;
+  optional string       APPID        = 3;
+  optional string       User         = 4;
+  optional string       Key          = 5;
+  optional string       Token        = 6;
+  optional string       Timestamp    = 7;
+  optional uint64       UID          = 8;
+  optional string       GameType     = 9;
+  
+  
 }
 

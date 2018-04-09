@@ -1,19 +1,6 @@
 FILE(GLOB SRC 						*.cpp *.h)
-FILE(GLOB SRC_LOGIN                 login/*.h login/*.cpp)
-FILE(GLOB SRC_LUA                   lua/*.h lua/*.cpp)
-FILE(GLOB SRC_PLAYER                player/*.h player/*.cpp)
-FILE(GLOB SRC_PROC_MSG              process_msg/*.h process_msg/*.cpp)
-FILE(GLOB SRC_CHAT                  chat/*.h chat/*.cpp)
 
-
-SOURCE_GROUP("Login"		FILES ${SRC_LOGIN})
-SOURCE_GROUP("Lua"			FILES ${SRC_LUA})
-SOURCE_GROUP("Player"		FILES ${SRC_PLAYER})
-SOURCE_GROUP("ProcessMsg"	FILES ${SRC_PROC_MSG})
-SOURCE_GROUP("Chat"			FILES ${SRC_CHAT})
-
-ADD_EXECUTABLE(player_logic_service WIN32 ${SRC} ${SRC_LOGIN} ${SRC_LUA}
-										  ${SRC_PLAYER} ${SRC_PROC_MSG} ${SRC_CHAT} )
+ADD_EXECUTABLE(player_logic_service WIN32 ${SRC} )
 
 INCLUDE_DIRECTORIES(${LIBXML2_INCLUDE_DIR} ${LUA_INCLUDE_DIR} ${PBC_INCLUDE_DIR})
 

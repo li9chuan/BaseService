@@ -262,7 +262,7 @@ bool CLuaEngine::RunLuaFunction(const char* szFunName, const char* szTableName, 
 				lua_pushlightuserdata(m_pLuaState, pInParams->at(i).Data());
 				break;
 			default:
-				nldebug("call function(%s) fail, in param type error", szFunName);
+				nlwarning("call function(%s) fail, in param type error", szFunName);
 				lua_settop(m_pLuaState, top);
 				return false;
 		}
@@ -293,7 +293,7 @@ bool CLuaEngine::RunLuaFunction(const char* szFunName, const char* szTableName, 
 					lua_pop(m_pLuaState, 1);
 					break;
 				default:
-					nldebug("call function(%s) fail, out param type error = %s ", szFunName , lua_typename( m_pLuaState , -1 ) );
+					nlwarning("call function(%s) fail, out param type error = %s ", szFunName , lua_typename( m_pLuaState , -1 ) );
 					lua_settop(m_pLuaState, top);
 					return false;					
 			}

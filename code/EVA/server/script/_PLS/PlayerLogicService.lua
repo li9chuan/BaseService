@@ -12,27 +12,28 @@ function PlayerLogicService:Init()
 	self._EventRegister:RegisterEvent( "SCHDisConnection",      self, self.SCHDisConnection );
     
 
-    self.timerid    = 0;
+    self.TimerID    = 0;
     self.sch_sid    = 0;
 end
 
 function PlayerLogicService:UpdatePLSInfo( service_id )
     
     local MsgServiceInfo = {};
-    MsgServiceInfo.maxPlayer    = PlayerMgr:MaxPlayer();
-    MsgServiceInfo.currPlayer   = PlayerMgr:Count();
-    MsgServiceInfo.serviceId    = ServerNet.GetServiceID();
-    MsgServiceInfo.serviceName  = ServerNet.GetServiceName();
-    MsgServiceInfo.gameTypeList = {};
+    MsgServiceInfo.MaxPlayer    = PlayerMgr:MaxPlayer();
+    MsgServiceInfo.CurrPlayer   = PlayerMgr:Count();
+    MsgServiceInfo.ServiceID    = ServerNet.GetServiceID();
+    MsgServiceInfo.ServiceName  = ServerNet.GetServiceName();
+    MsgServiceInfo.GameTypeList = {};
     
-    local MsgGameType   = {};
-    MsgGameType.type    = "GM_TST";
-    MsgGameType.max     = 5;
-    MsgGameType.curr    = 1;
-    
-    table.insert( MsgServiceInfo.gameTypeList, MsgGameType );
+    for k, v in pairs(PLSConfig.GameConfig) do  
 
-    PrintTable(MsgServiceInfo.gameTypeList);
+        local MsgGameType   = {};
+        MsgGameType.Type    = k;
+        MsgGameType.Max     = v.Max;
+        MsgGameType.Curr    = PlayerMgr:Count();
+        
+        table.insert( MsgServiceInfo.GameTypeList, MsgGameType );
+    end  
 
     BaseService:Send( service_id, "SvrInfo", "PB_MSG.MsgServiceInfo", MsgServiceInfo )
 
@@ -44,20 +45,20 @@ function PlayerLogicService:SCHConnection( service_id, service_name )
     
     self.sch_sid = service_id;
     self:UpdatePLSInfo(service_id);
-    self.timerid = TimerMgr:AddTimer(7000, self, self.UpdatePLSInfoTimer);
+    self.TimerID = TimerMgr:AddTimer(7000, self, self.UpdatePLSInfoTimer);
 end
 
 function PlayerLogicService:SCHDisConnection( service_id, service_name )
 	print("PlayerLogicService:SCHDisConnection"..service_name.." sid:"..service_id);
     
     self.sch_sid = nil;
-    TimerMgr:RemoveTimer(self.timerid);
+    TimerMgr:RemoveTimer(self.TimerID);
     
 end
 
 function PlayerLogicService:UpdatePLSInfoTimer()
     self:UpdatePLSInfo(self.sch_sid);
-    self.timerid = TimerMgr:AddTimer(7000, self, self.UpdatePLSInfoTimer);
+    self.TimerID = TimerMgr:AddTimer(7000, self, self.UpdatePLSInfoTimer);
 end
 
 --	释放函数

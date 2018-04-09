@@ -35,7 +35,9 @@ function TimerMgr:AddTimer(delay, obj, func)
 end
 
 function TimerMgr:RemoveTimer( timerid )
-	self._removemap[timerid]=true;
+    if timerid~=nil then
+        self._removemap[timerid]=true;
+    end
 end
 
 function TimerMgr:__Insert__(delay, timerid, func)

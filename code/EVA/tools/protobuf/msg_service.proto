@@ -5,29 +5,29 @@ import "define_pro.proto";
 import "define_attrib.proto";
 
 
-message MsgData
+message MsgSvrLogin
 {
-    optional uint64         ext640                  = 1;
-    optional uint64         ext641                  = 2;
-
+    optional uint64         UID                     = 1;
+    optional string         GameType                = 2;
+    optional uint32         ConFES                  = 3;
   
   
 }
 
 message MsgGameType
 {
-    optional string         type                    = 1;
-    optional uint32         max                     = 2;
-    optional uint32         curr                    = 3;    
+    optional string         Type                    = 1;
+    optional uint32         Max                     = 2;
+    optional uint32         Curr                    = 3;    
     
 }
 
 message MsgServiceInfo
 {
-    repeated MsgGameType    gameTypeList            = 1;
-    optional uint32         maxPlayer               = 2;
-    optional uint32         currPlayer              = 3;
-    optional uint32         serviceId               = 4;
-    optional string         serviceName             = 5;
+    repeated MsgGameType    GameTypeList            = 1;
+    optional uint32         MaxPlayer               = 2;
+    optional uint32         CurrPlayer              = 3;
+    optional uint32         ServiceID               = 4;
+    optional string         ServiceName             = 5;
 
 }

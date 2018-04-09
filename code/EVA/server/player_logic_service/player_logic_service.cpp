@@ -10,20 +10,13 @@
 #include <server_share/i18n_def.h>
 #include <game_share/static_table/static_table_mgr.h>
 #include <game_share/singleton_registry.h>
-
-#include "process_msg/process_msg_pls.h"
-#include "process_msg/process_msg_fes.h"
-
-#include "player/player_mgr.h"
-#include "player/player_timer_event.h"
-#include "lua/lua_event_callback.h"
+#include <game_share/timer.h>
 #include <nel/net/naming_client.h>
 
 
 using namespace NLMISC;
 using namespace NLNET;
 using namespace std;
-using namespace PLS;
 
 CFileDisplayer *Fd = NULL;
 CStdDisplayer Sd;
@@ -42,18 +35,6 @@ void displayInfo ()
     ICommand::execute ("info", *NLMISC::InfoLog);
 }
 
-NLNET::TUnifiedCallbackItem PLSCallbackArray[] =
-{
-    ///   msg.xml
-    { "SCS",                        cbSyncChecksum          },     // 客户端请求数据校验和
-    { "SPLY",                       cbSyncPlayerInfo        },
-    { "GC",                         cbGlobleChat            },
-
-
-    ///     
-    { "LOGOUT",                     cbPlayerLogout          },
-};
-
 class CPlayerLogicService : public NLNET::IService
 {
 public:
@@ -61,15 +42,6 @@ public:
     /// Init the service, load the universal time.
     void init ()
     {
-        CUnifiedNetwork::getInstance()->setServiceUpCallback("FES", cbFESConnection);
-        CUnifiedNetwork::getInstance()->setServiceDownCallback("FES", cbFESDisconnection);
-
-        ///////////////////////////////    注册监听事件
-        CLuaEventCallback::getInstance().RegisterMoniterEvent();
-
-        
-
-
         ///////////////////////////////
         CI18N::load( Config.getVar("Language").asString() );
 
@@ -87,9 +59,7 @@ public:
     {
         NLMISC::TTicks curr_ticks = CTime::getLocalTime();
 		LocalTime.SetCurrTime(curr_ticks);
-        PlayerMgr.update(curr_ticks);
         TimerManager->tickUpdate();
-
         ScriptMgr.update();
         LuaNetworkMgr.Update();
         return true;
@@ -105,7 +75,7 @@ public:
 };
 
 // Service instantiation
-NLNET_SERVICE_MAIN (CPlayerLogicService, LogicService.c_str(), "player_logic_service", 0, PLSCallbackArray, "", "");
+NLNET_SERVICE_MAIN (CPlayerLogicService, LogicService.c_str(), "player_logic_service", 0, EmptyCallbackArray, "", "");
 
 //
 // Commands
@@ -133,26 +103,6 @@ NLMISC_COMMAND (loadconfig, "reload config file.", "")
     StaticTableMgr.init();
 
     log.displayNL ("PLS Load config done.");
-    return true;
-}
-
-NLMISC_COMMAND ( playerinfo, "player info", "")
-{
-    if(args.size() != 1) return false;
-
-    CSString pid_str = args[0];
-    PLS::CPlayer* pPlayer = PlayerMgr.findPlayer( pid_str.atoi64() );
-
-    if ( pPlayer != NULL )
-    {
-        log.displayNL( "Player Base Info:" );
-        log.displayNL( "Name:%s       UID:%d", pPlayer->getPlayerHelper().getName().c_str(), (uint32)pPlayer->getUID() );
-    }
-    else
-    {
-        log.displayNL( "Player Not Found." );
-    }
-
     return true;
 }
 

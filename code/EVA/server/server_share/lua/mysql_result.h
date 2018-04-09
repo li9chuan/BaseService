@@ -18,6 +18,8 @@ public:
     // close.
     void release( void );
 
+    void clear();
+
     // next.
     bool next( void );
 

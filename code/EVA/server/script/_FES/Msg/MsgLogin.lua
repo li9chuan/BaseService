@@ -1,6 +1,3 @@
---========================================================= 
--- 消息注册管理
---=========================================================
 local MsgLogin = class("MsgLogin")
 
 -- 构造函数;
@@ -23,17 +20,18 @@ function MsgLogin:Login( sock_id, proto_buf )
 
 	local msg_login = protobuf.decode("PB_MSG.MsgLogin", proto_buf)
 	
-	print(msg_login.version);
-	print(msg_login.authType);
-	print(msg_login.appid);
-	print(msg_login.user);
-	print(msg_login.key);
-	print(msg_login.token);
-	print(msg_login.timestamp);
-    print(msg_login.uid);
+	print(msg_login.Version);
+	print(msg_login.AuthType);
+	print(msg_login.APPID);
+	print(msg_login.User);
+	print(msg_login.NonceStr);
+	print(msg_login.Token);
+	print(msg_login.Timestamp);
+    print(msg_login.UID);
+    print(msg_login.GameType);
 	
-	local sign_str = msg_login.version .. msg_login.authType .. msg_login.appid .. "BLACKSHEEPWALL";
-	local sign     = md5( sign_str );
+	local sign_str = msg_login.Version .. msg_login.AuthType .. msg_login.APPID .. "BLACKSHEEPWALL";
+	local sign     = md5( string.upper(sign_str) );
 	
 	print("sig:"..sign);
 	
@@ -41,15 +39,15 @@ function MsgLogin:Login( sock_id, proto_buf )
     ClientService:Send( sock_id, "AuthOk" );
     
     
-    local MsgData = {};
-    MsgData["ext640"] = msg_login.uid;
-    MsgData["ext641"] = sock_id;
+    local MsgSvrLogin = {};
+    MsgSvrLogin["UID"]          = msg_login.UID;
+    MsgSvrLogin["GameType"]     = msg_login.GameType;
     
-    BaseService:Broadcast( "FES", "AuthOk", "PB_MSG.MsgData", MsgData )      -- 通知其它网关有玩家登录成功。
-    BaseService:Broadcast( "PLS", "AuthOk", "PB_MSG.MsgData", MsgData )      -- 玩家认证通过，请求发送数据。
+    BaseService:Broadcast( "FES", "AuthOk", "PB_MSG.MsgSvrLogin", MsgSvrLogin )      -- 通知其它网关有玩家登录成功。
+    BaseService:Broadcast( "SCH", "AuthOk", "PB_MSG.MsgSvrLogin", MsgSvrLogin )      -- 玩家认证通过，请求发送数据。
     
     
-    local client = ClientMgr:GetClient(msg_login.uid);
+    local client = ClientMgr:GetClient(msg_login.UID);
     
     if( client ~= nil ) then
         client.SockID = sock_id;
@@ -57,9 +55,9 @@ function MsgLogin:Login( sock_id, proto_buf )
         
         client              = Client:new();
         client.SockID       = sock_id;
-        client.UID          = msg_login.uid;
+        client.UID          = msg_login.UID;
         
-        ClientMgr:SetClient(msg_login.uid, client);
+        ClientMgr:SetClient(msg_login.UID, client);
     end
     
 
@@ -68,13 +66,10 @@ end
 -- 有客户端在其它FES上登录成功。RemoveClient
 function MsgLogin:AuthOk( sock_id, proto_buf )
 
-	local MsgData = protobuf.decode("PB_MSG.MsgData", proto_buf)
+	local MsgSvrLogin = protobuf.decode("PB_MSG.MsgSvrLogin", proto_buf)
     
-	print(MsgData.ext640);
-	print(MsgData.ext641);
-    
-    local uid = MsgData.exe640;
-    ClientMgr:RemoveClient(uid);
+	print("MsgLogin:AuthOk"..MsgSvrLogin.UID);
+    ClientMgr:RemoveClient(MsgSvrLogin.UID);
     
 end
 

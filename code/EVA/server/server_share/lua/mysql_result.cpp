@@ -21,6 +21,16 @@ void CLuaMysqlResult::release( void )
     delete this;
 }
 
+void CLuaMysqlResult::clear()
+{
+    m_Result.clear();
+
+    m_RowCount      = 0;
+    m_CurrRow       = -1;
+    m_FieldCount    = 0;
+    m_Idx           = 0;
+}
+
 size_t CLuaMysqlResult::count( void ) const
 {
     return m_RowCount;
@@ -873,73 +883,85 @@ namespace bin
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( Count, lua_Integer, ())
+        DEFINE_CLASS_FUNCTION( Count, lua_Integer, () )
         {
             r = obj->count();
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetBool, bool, ())
+        DEFINE_CLASS_FUNCTION( Clear, void, () )
+        {
+            obj->clear();
+            return 1;
+        }
+
+        DEFINE_CLASS_FUNCTION( GetBool, bool, () )
         {
             r = obj->get_bool();
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetInt8, lua_Integer, ())
+        DEFINE_CLASS_FUNCTION( GetInt8, lua_Integer, () )
         {
             r = obj->get_int8();
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetUint8, lua_Integer, ())
+        DEFINE_CLASS_FUNCTION( GetUint8, lua_Integer, () )
         {
             r = obj->get_uint8();
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetInt32, lua_Integer, ())
+        DEFINE_CLASS_FUNCTION( GetInt32, lua_Integer, () )
         {
             r = obj->get_int32();
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetUint32, lua_Integer, ())
+        DEFINE_CLASS_FUNCTION( GetUint32, lua_Integer, () )
         {
             r = obj->get_uint32();
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetInt64, lua_Integer, ())
+        DEFINE_CLASS_FUNCTION( GetInt64, lua_Integer, () )
         {
             r = obj->get_int64();
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetUInt64, lua_Integer, ())
+        DEFINE_CLASS_FUNCTION( GetUint64, lua_Integer, () )
         {
             r = obj->get_uint64();
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetFloat, lua_Number, ())
+        DEFINE_CLASS_FUNCTION( GetFloat, lua_Number, () )
         {
             r = obj->get_float();
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetDouble, lua_Number, ())
+        DEFINE_CLASS_FUNCTION( GetDouble, lua_Number, () )
         {
             r = obj->get_double();
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetBlob, CScriptTable, ())
+        DEFINE_CLASS_FUNCTION( GetString,  std::string, () )
+        {
+            std::pair<size_t, char const*> pair = obj->get_string();
+            r.assign(pair.second, pair.first);
+            return 1;
+        }
+
+        DEFINE_CLASS_FUNCTION( GetBlob, CScriptTable, () )
         {
             std::pair<size_t, void const*> pair = obj->get_blob();
 
             r.Set(1, (const char*)pair.second);
             r.Set(2, (int)pair.first);
-
             return 1;
         }
 

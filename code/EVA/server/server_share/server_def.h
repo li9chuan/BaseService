@@ -4,7 +4,6 @@
 #include <game_share/define_sys.pb.h>
 #include <game_share/game_def.h>
 #include <game_share/tools.h>
-#include <server_share/database/def_db.h>
 #include <nel/net/message.h>
 #include <nel/net/unified_network.h>
 #include <nel/net/callback_server.h>
@@ -170,49 +169,7 @@ inline google::protobuf::Message* CreateMessage(const std::string& typeName)
     Network->send( Persistent , msg_pds );\
     }while( 0 )
 
-inline void SendERR( DEF::ERROR_TYPE errNO, DEF::PID pid, NLNET::TServiceId sid, DEF::RPC_SESSION rpc_session=0 )
-{
-	NLNET::CMessage msgout(rpc_session,ERR);
-	msgout.serial(errNO);
-	msgout.serial(pid);
-	Network->send(sid, msgout);
-}
 
-inline void SendERR( DEF::ERROR_TYPE errNO, DEF::PID pid, std::string serviceName, DEF::RPC_SESSION rpc_session=0 )
-{
-	NLNET::CMessage msgout(rpc_session,ERR);
-	msgout.serial(errNO);
-	msgout.serial(pid);
-	Network->send( serviceName, msgout );
-}
-
-inline void SendSyncData( std::string serviceName , uint32 type , DEF::PID pid , sint64 param1=0 , uint64 param2 =0 )
-{
-    NLNET::CMessage msgout( "SyncPlayerData" );
-    msgout.serial( pid );
-    msgout.serial( type );
-    msgout.serial( param1 );
-    msgout.serial( param2 );
-    Network->send( serviceName, msgout );
-}
-
-inline void SendSyncData( NLNET::TServiceId sid , uint32 type , DEF::PID pid , sint64 param1=0 , uint64 param2 =0 )
-{
-    NLNET::CMessage msgout( "SyncPlayerData" );
-    msgout.serial( pid );
-    msgout.serial( type );
-    msgout.serial( param1 );
-    msgout.serial( param2 );
-    Network->send( sid, msgout );
-}
-
-//inline void SendERR( DEF::ERROR_TYPE errNO, NLNET::TSockId from, NLNET::CCallbackServer* pCallbackServer )
-//{
-//	NLNET::CMessage msgout("ERR");
-//	msgout.serial(errNO);
-//	pCallbackServer->send(msgout, from);
-//	pCallbackServer->disconnect (from);
-//}
 
 inline void SendErrorToClient( DEF::ERROR_TYPE errNO, DEF::RPC_SESSION session )
 {
@@ -255,18 +212,6 @@ inline void SendErrorToClient( NLNET::TServiceId conFES, DEF::UID uid, DEF::ERRO
     SendUDP( conFES, uid, msgsub, true);
 }
 
-inline void SendEvent( NLNET::TServiceId sid, DEF::PID pid, TEvent type, sint32 param1 = 0 , sint32 param2 = 0 )
-{
-    NLNET::CMessage msgout( "TEVENT" );
-    uint32 triggerType = (uint32)type;
-
-    msgout.serial( pid );
-    msgout.serial( triggerType );
-    msgout.serial( param1 );
-    msgout.serial( param2 );
-
-    Network->send( sid, msgout );
-}
 
 
 #endif

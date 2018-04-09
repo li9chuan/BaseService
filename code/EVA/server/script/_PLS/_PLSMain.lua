@@ -9,30 +9,32 @@ package.path = BasePath .. "_PLS/?.lua;" .. BasePath .. "Framework/?.lua;";
 require("InitFramework")
 require("PlayerLogicService")
 require("Player/PlayerMgr")
+require("DB/DBMgr")
 
 
-PlayerDataHelper = require("Player/PlayerDataHelper");
+PlayerDataHelper    = require("Player/PlayerDataHelper");
+PlayerHelper        = require("Player/PlayerHelper");
+MsgLogin            = require("Msg/MsgLogin")
+
+MsgLoginModule      = MsgLogin:new();
+
+PLSConfig           = require("_PLSConfig")
 
 
-PlayerMgr:Init();
-PlayerLogicService:Init();
 
-
-MsgLogin        = require("Msg/MsgLogin")
-MsgLoginModule  = MsgLogin:new();
-
-PLSConfig        = require("_PLSConfig")
-
-print(JsonUtil.serialise_value(PLSConfig))
 
 
 -- 主入口函数。从这里开始lua逻辑
 function ServiceInit()
-	
+
     print("Lua Start.");
-    
-    
-    
+    PrintTable(PLSConfig)
+
+	
+    DBMgr:Init();
+    PlayerMgr:Init();
+    PlayerLogicService:Init();
+
 end
 
 -- 游戏循环
@@ -41,6 +43,7 @@ function ServiceUpdate()
 end
 
 function ServiceRelease()
+    DBMgr:OnRelease();
     print("Lua Release.");
 end
 

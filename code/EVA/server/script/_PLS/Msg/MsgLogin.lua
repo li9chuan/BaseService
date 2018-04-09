@@ -1,29 +1,37 @@
---========================================================= 
--- 消息注册管理
---=========================================================
 local MsgLogin = class("MsgLogin")
 
 -- 构造函数;
 function MsgLogin:ctor( Data )
 	self._EventRegister = EventRegister.new();
-	self._EventRegister:RegisterEvent( "AuthOk",  self, self.AuthOkCB );
+
+    self._EventRegister:RegisterEvent( "SyncData",          self, self.CBSyncData );
+    
+    
+    self._EventRegister:RegisterEvent( "RemovePlayer",      self, self.CBRemovePlayer );
+    
 end
 
-function MsgLogin:AuthOkCB( msg_from, proto_buf )
+function MsgLogin:CBSyncData( sch_sid, proto_buf )
 
-	local pb_authok = protobuf.decode("MsgData" , proto_buf)
+	local MsgSvrLogin = protobuf.decode("PB_MSG.MsgSvrLogin" , proto_buf)
+    local player_helper = PlayerMgr:LoadDBPlayer(MsgSvrLogin.UID);
+    
+    if player_helper~=nil then
+        
+        player_helper.ConFES = MsgSvrLogin.ConFES;
+        
+        
+        PrintTable(player_helper);
+    end
 	
-    print("MsgLogin:AuthOkCB");
-	print(pb_authok.ext640);
-	print(pb_authok.ext641);
-	
+end
+
+function MsgLogin:CBRemovePlayer( sid, proto_buf )
+
 
 
 	
 end
-
-
-
 
 --释放函数
 function MsgLogin:OnRelease()

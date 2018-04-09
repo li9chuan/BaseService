@@ -30,6 +30,12 @@ void CLuaMysqlStmt::release( void )
     delete this;
 }
 
+void CLuaMysqlStmt::clear()
+{
+    m_count_ = 0;
+    m_idx = 0;
+}
+
 // set bool value.
 void CLuaMysqlStmt::set_bool( my_bool bval_ )
 {
@@ -231,6 +237,12 @@ void CLuaMysqlStmt::_bind( size_t count_ )
 namespace bin
 {
     BEGIN_SCRIPT_CLASS( MysqlStmt, CLuaMysqlStmt )
+
+        DEFINE_CLASS_FUNCTION( Clear, void, (void))
+        {
+            obj->clear();
+            return 1;
+        }
 
         DEFINE_CLASS_FUNCTION( SetBool, void, (bool lua_bool))
         {

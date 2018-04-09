@@ -6,6 +6,8 @@ function PLSInfoMgr:Init()
     self._EventRegister = EventRegister.new();
     
     self._EventRegister:RegisterEvent( "SvrInfo",  self, self.SvrUpdateInfoCB );
+    
+    print("PLSInfoMgr:Init");
 end
 
 function PLSInfoMgr:SvrUpdateInfoCB( msg_from, proto_buf )
@@ -14,38 +16,40 @@ function PLSInfoMgr:SvrUpdateInfoCB( msg_from, proto_buf )
     local pls_info = PLSInfo:new();
     pls_info:LoadData(pb_sinfo);
     
-    if pls_info.serviceName=="PLS" then
-        self.PLSMap[pls_info.serviceId] = pls_info;
-        
+    if pls_info.ServiceName=="PLS" then
+        self.PLSMap[pls_info.ServiceID] = pls_info;
+--[[        
         print("PLSInfoMgr:SvrUpdateInfoCB  ----  update pls info.");
-        print( pls_info.serviceId );
-        print( pls_info.serviceName );
-        print( pls_info.maxPlayer );
-        print( pls_info.currPlayer );
+        print( pls_info.ServiceID );
+        print( pls_info.ServiceName );
+        print( pls_info.MaxPlayer );
+        print( pls_info.CurrPlayer );
         
-        for k,v in pairs(pls_info.gameTypeList) do
-            print( "type:"..v.type.."  max:"..v.max.."   curr:"..v.curr);
+        for k,v in pairs(pls_info.GameTypeList) do
+            print( "type:"..v.Type.."  max:"..v.Max.."   curr:"..v.Curr );
         end
-
+--]]
     end
 
 end
 
-function PLSInfoMgr:AllocGame( game_type )
+function PLSInfoMgr:AllocPLS( game_type )
 
     for _,v in ipairs(self.PLSMap) do
         
-        if v.gameTypeList[game_type] ~= nil then
+        if v.GameTypeList[game_type] ~= nil then
             
-            local game_info = v.gameTypeList[game_type];
-            if ~game_info.IsFull() then
-                return v.serviceId;
-            end
+            local game_info = v.GameTypeList[game_type];
             
-        end
-    end
+            if game_info:IsFull()==false then
+                game_info.Curr = game_info.Curr + 1;
+                return v.ServiceID;
+            end;
+            
+        end;
+    end;
     
-    return 0;
+    return nil;
 end
 
 

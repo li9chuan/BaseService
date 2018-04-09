@@ -17,13 +17,45 @@ end
 -- 分配PLS
 function MsgLogin:DispatchPLS( fes_id, proto_buf )
 
-	local MsgData = protobuf.decode("PB_MSG.MsgData", proto_buf)
+	local MsgSvrLogin = protobuf.decode("PB_MSG.MsgSvrLogin", proto_buf)
+    MsgSvrLogin.ConFES = fes_id;
+    local uid = MsgSvrLogin.UID;
+    local player = PlayerInfoMgr:GetPlayerInfo(uid);
     
-	print(MsgData.ext640);
+    if player~=nil then
+
+        player.ConFES = fes_id;
+        
+        if player.ConPLS~=nil then
+            Debug.Warning("player.ConPLS    PB_MSG.MsgSvrLogin");
+            BaseService:Send( player.ConPLS, "SyncData", "PB_MSG.MsgSvrLogin", MsgSvrLogin )
+        else
+            local pls_sid = PLSInfoMgr:AllocPLS(player.GameType);
+            
+            if pls_sid~=nil then
+                player.ConPLS = pls_sid;
+                BaseService:Send( player.ConPLS, "SyncData", "PB_MSG.MsgSvrLogin", MsgSvrLogin )
+            else
+                Debug.Warning("======");
+            end
+        end
+    else
+        local pls_sid = PLSInfoMgr:AllocPLS(MsgSvrLogin.GameType);
+        
+        Debug.Warning("pls_sid:"..pls_sid);
     
-    local uid = MsgData.exe640;
-    ClientMgr:RemoveClient(uid);
-    
+        if pls_sid~=nil then
+            player = PlayerInfoMgr:CreatePlayerInfo(uid);
+            
+            player.ConFES   = fes_id;
+            player.ConPLS   = pls_sid;
+            player.GameType = MsgSvrLogin.GameType;
+            
+            BaseService:Send( player.ConPLS, "SyncData", "PB_MSG.MsgSvrLogin", MsgSvrLogin )
+            
+            Debug.Warning("fes_id:"..player.GameType);
+        end
+    end
 end
 
 --释放函数

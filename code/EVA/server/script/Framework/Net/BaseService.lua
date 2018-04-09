@@ -37,6 +37,16 @@ function BaseService:Broadcast( service_name, msg_type, proto_type, proto_msg )
 
 end
 
+function BaseService:SendToClient( service_id, client_uid, msg_type, proto_type, proto_msg )
+
+	code = protobuf.encode(proto_type, proto_msg)
+	len  = string.len(code);
+	
+	msg = { service_id, msg_type, len, client_uid };
+	ServerNet.SendToClient( code, msg );
+
+end
+
 --[[function CallbackService:Connection( service_id, service_name )
 	print("CallbackService:Connection:"..service_name.." sid:"..service_id);
 end
