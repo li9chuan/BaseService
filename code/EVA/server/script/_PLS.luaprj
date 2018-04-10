@@ -13,11 +13,16 @@
         <Filter RelativePath=".\Msg" Toggle="false" >
             <LuaFile RelativePath=".\MsgLogin.lua" />
         </Filter>
-        <Filter RelativePath=".\Player" Toggle="true" >
+        <Filter RelativePath=".\Player" Toggle="false" >
             <LuaFile RelativePath=".\PlayerDataHelper.lua" />
             <LuaFile RelativePath=".\PlayerHelper.lua" />
             <LuaFile RelativePath=".\PlayerMgr.lua" />
         </Filter>
         <LuaFile RelativePath=".\_PLSConfig.lua" />
+        <Filter RelativePath=".\Room" Toggle="false" >
+            <LuaFile RelativePath=".\RoomBase.lua" />
+            <LuaFile RelativePath=".\RoomMgr.lua" />
+        </Filter>
+        <Filter RelativePath=".\Games" Toggle="true" />
     </Filter>
 </Project>

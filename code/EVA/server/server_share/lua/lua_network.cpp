@@ -33,7 +33,8 @@ void cbLuaClientMsg ( CMessage &msgin, TSockId from, CCallbackNetBase &netbase)
     ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params );
 }
 
-void cbLuaSendToClientMsg ( CMessage &msgin, TSockId uid, CCallbackNetBase &netbase)
+///  转发到客户端
+void cbLuaSendToClientMsg ( NLNET::CMessage& msgin, const std::string &serviceName, NLNET::TServiceId serviceId )
 {
     DEF::UID        client_uid;
     std::string     msg_type;
@@ -49,12 +50,12 @@ void cbLuaSendToClientMsg ( CMessage &msgin, TSockId uid, CCallbackNetBase &netb
 const TCallbackItem LuaClientCallbackArray[] =
 {
     { "_LC",                            cbLuaClientMsg              },
-    { "_LSC",                           cbLuaSendToClientMsg        },
 };
 
 NLNET::TUnifiedCallbackItem LuaCallbackArray[] =
 {
     { "_LS",                            cbLuaServiceMsg             },
+    { "_LSC",                           cbLuaSendToClientMsg        },
 };
 
 static void cbWSConnect( TSockId from, void *arg );
@@ -284,6 +285,24 @@ namespace bin
                 obj->Send( (TSockId)sock_id, msg_type, pb_str );
             }
 
+            return 1;
+        }
+
+        DEFINE_CLASS_FUNCTION( SetUIDMap, void, (lua_Integer uid, lua_Integer sock_id))
+        {
+            obj->SetUIDMap( uid, (TSockId)sock_id );
+            return 1;
+        }
+
+        DEFINE_CLASS_FUNCTION( RemoveUIDMap, void, (lua_Integer uid))
+        {
+            obj->RemoveUIDMap( uid );
+            return 1;
+        }
+
+        DEFINE_CLASS_FUNCTION( ClearUIDMap, void, ())
+        {
+            obj->ClearUIDMap();
             return 1;
         }
 

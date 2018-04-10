@@ -4,7 +4,6 @@
     <Filter RelativePath=".\_FES" Toggle="false" >
         <LuaFile RelativePath=".\_FESMain.lua" />
         <LuaFile RelativePath=".\FrontEndService.lua" />
-        <LuaFile RelativePath=".\TimerTest.lua" />
         <Filter RelativePath=".\Client" Toggle="false" >
             <LuaFile RelativePath=".\Client.lua" />
             <LuaFile RelativePath=".\ClientMgr.lua" />

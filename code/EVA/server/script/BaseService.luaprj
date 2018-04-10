@@ -10,20 +10,27 @@
         <LuaFile RelativePath=".\Queue.lua" />
         <LuaFile RelativePath=".\Stack.lua" />
         <LuaFile RelativePath=".\StateFul.lua" />
-        <Filter RelativePath=".\Event" Toggle="false" >
+        <Filter RelativePath=".\Event" Toggle="true" >
             <LuaFile RelativePath=".\EventController.lua" />
             <LuaFile RelativePath=".\EventRegister.lua" />
             <LuaFile RelativePath=".\EventType.lua" />
         </Filter>
-        <Filter RelativePath=".\Net" Toggle="false" >
+        <Filter RelativePath=".\Net" Toggle="true" >
             <LuaFile RelativePath=".\NetWorkHandler.lua" />
             <LuaFile RelativePath=".\BaseService.lua" />
             <LuaFile RelativePath=".\protobuf.lua" />
-            <LuaFile RelativePath=".\CallbackClient.lua" />
+            <LuaFile RelativePath=".\WebSocketCbClient.lua" />
         </Filter>
         <LuaFile RelativePath=".\InitFramework.lua" />
         <LuaFile RelativePath=".\Utils.lua" />
         <LuaFile RelativePath=".\TimerMgr.lua" />
         <LuaFile RelativePath=".\CJsonUtil.lua" />
+        <LuaFile RelativePath=".\statemachine.lua" />
+        <Filter RelativePath=".\Test" Toggle="true" >
+            <LuaFile RelativePath=".\TestFSM.lua" />
+            <LuaFile RelativePath=".\FSMClass.lua" />
+            <LuaFile RelativePath=".\TimerTest.lua" />
+        </Filter>
+        <LuaFile RelativePath=".\SimpleStateMachine.lua" />
     </Filter>
 </Project>

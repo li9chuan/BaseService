@@ -1,6 +1,0 @@
-ADD_SUBDIRECTORY(tools_test)
-
-IF(WIN32)
-#ADD_SUBDIRECTORY(robot)
-ENDIF(WIN32)
-  

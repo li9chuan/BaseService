@@ -20,7 +20,13 @@ MsgLoginModule      = MsgLogin:new();
 
 PLSConfig           = require("_PLSConfig")
 
+--[[
+local json_text = JsonUtil.file_load(BasePath.."DataTable/Sheet1.json")
+local t = Json.decode(json_text)
+PrintTable(t);
+print(JsonUtil.serialise_value(t))
 
+--]]
 
 
 

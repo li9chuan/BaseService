@@ -24,6 +24,7 @@ JsonUtil    = require "CJsonUtil"
 require("Class")
 --require("Framework/Stack")
 require("functions")
+
 --require ("bit")
 
 require("Net/NetWorkHandler")
@@ -62,13 +63,17 @@ LuaManager					= LuaHelper.GetLuaManger();
 
 
 -- 工具
+
+
 --LSModule					= require("SDK/LService/LSModule")
 --WebModule					= require("SDK/Web/WebModule")
 --HttpClient					= require("Common/Net/HttpClient")
+
 EventController             = require("Event/EventController")
 --ServerManager             = require("Net/ServerManager")
 EventRegister               = require("Event/EventRegister")
-CallbackClient              = require("Net/CallbackClient");
+WebSocketCbClient           = require("Net/WebSocketCbClient");
+StateMachine                = require("SimpleStateMachine");
 
 
 

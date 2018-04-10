@@ -13,7 +13,7 @@ end
 
 function MsgLogin:CBSyncData( sch_sid, proto_buf )
 
-	local MsgSvrLogin = protobuf.decode("PB_MSG.MsgSvrLogin" , proto_buf)
+	local MsgSvrLogin   = protobuf.decode("PB_MSG.MsgSvrLogin" , proto_buf)
     local player_helper = PlayerMgr:LoadDBPlayer(MsgSvrLogin.UID);
     
     if player_helper~=nil then
@@ -22,6 +22,10 @@ function MsgLogin:CBSyncData( sch_sid, proto_buf )
         
         
         PrintTable(player_helper);
+        BaseService:Send( player_helper.ConFES, "LoginPLS", "PB_MSG.MsgSvrLogin" , MsgSvrLogin);
+        
+        BaseService:SendToClient( player_helper.ConFES, player_helper.UID, "SyncPlayerInfo",
+                                "PB_MSG.MsgPlayerInfo", player_helper.PlayerDataHelper:ToProtoMsg() )
     end
 	
 end
