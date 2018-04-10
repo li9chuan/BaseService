@@ -33,18 +33,9 @@ function ServiceInit()
     PlayerMgr:Init();
     PlayerLogicService:Init();
     
-    local id_gen = IDGenerate.NewInstance(1024);
     
-    print(id_gen:Generate());
-    print(id_gen:Generate());
-    print(id_gen:Generate());
-    print(id_gen:Generate());
-    print(id_gen:Generate());
-    print(id_gen:Generate());
-    print(id_gen:Generate());
-    print(id_gen:Generate());
-    print(id_gen:Generate());
-    print(id_gen:Generate());
+    
+
 
 end
 

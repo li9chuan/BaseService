@@ -2,23 +2,27 @@ DBMgr = {}
 
 function DBMgr:Init()
 	
-	--self._EventRegister = EventRegister.new();
-	--self._EventRegister:RegisterEvent( "EVT_DB_MAIN",  self, self.LuaTestCB );
+	
     
     
-    self.ConnPlayerInfo = bin_types.MysqlConn.NewInstance();
+    self.ConnPlayerInfo = MysqlConn.NewInstance();
     local conn_info = { "localhost", "root", "", "d_mt_player", 3306 };
     self.ConnPlayerInfo:Connect( conn_info );
 
 
 
 
-    self.StmtGetPlayerInfo      = bin_types.MysqlStmt.NewInstance("CALL _t_mt_select_playerinfo(?)");
+    self.StmtGetPlayerInfo      = MysqlStmt.NewInstance("CALL _t_mt_select_playerinfo(?)");
     
-    self.StmtCreatePlayer       = bin_types.MysqlStmt.NewInstance("CALL _t_mt_insert_playerinfo(?)");
+    self.StmtCreatePlayer       = MysqlStmt.NewInstance("CALL _t_mt_insert_playerinfo(?)");
     
     
-    self.MysqlResult = bin_types.MysqlResult.NewInstance();
+    self.MysqlResult = MysqlResult.NewInstance();
+    
+    
+    
+    self.ItemIDGen = IDGenerate.NewInstance(1020);
+    
 end
 
 function DBMgr:GetPlayerInfo(_uid)

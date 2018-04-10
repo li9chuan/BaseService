@@ -3,7 +3,7 @@
 --=========================================================
 
 local BasePath = Utility.GetBasePath() .. "/script/";
-package.path = BasePath .. "_PLS/?.lua;" .. BasePath .. "SharedLib/?.lua;";
+package.path = BasePath .. "_SCH/?.lua;" .. BasePath .. "SharedLib/?.lua;";
 
 
 require("InitSharedLib")

@@ -10,7 +10,7 @@ function WebSocketCbClient:Listen( name, port )
 	self.ConnectCallbackEvent     = name .. "Connection";
 	self.DisConnectCallbackEvent  = name .. "DisConnection";
 	
-	self.Service = bin_types.WebSocketNetwork.NewInstance(name, port);
+	self.Service = WebSocketNetwork.NewInstance(name, port);
 end
 
 function WebSocketCbClient:SetUIDMap( uid, sock_id )

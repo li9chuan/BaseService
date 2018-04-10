@@ -5,6 +5,7 @@ function RoomMgr:Init()
     self.GameRooms          = {};
     self.RoomTypes          = {};
     
+    self.RoomIDGen          = IDGenerate.NewInstance(1020);
 end
 
 function RoomMgr:CreateRoom( room_type )
