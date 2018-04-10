@@ -41,8 +41,11 @@ require("TimerMgr");
 -- protobuf
 --require ("Common/ProtoBuffer/define_attrib_pb")
 
---[[
+
 -- LuaFramework --
+IDGenerate                  = bin_types.IDGenerate;
+
+--[[
 Util						= LuaFramework.Util;
 NativeUtil					= LuaFramework.NativeUtil;
 AppConst					= LuaFramework.AppConst;

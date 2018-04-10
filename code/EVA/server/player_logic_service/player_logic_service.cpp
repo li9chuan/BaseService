@@ -33,6 +33,7 @@ void displayInfo ()
     ICommand::execute ("info", *NLMISC::InfoLog);
 }
 
+#include <server_share/id_generate.h>
 class CPlayerLogicService : public NLNET::IService
 {
 public:

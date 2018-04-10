@@ -5,7 +5,8 @@
 #include "lua_engine.h"
 #include "server_share/bin_luabind/Public.hpp"
 #include <server_share/lua/lua_thread.h>
-#include "mysql_conn.h"
+#include <server_share/lua_mysql/mysql_conn.h>
+#include <server_share/id_generate.h>
 
 using namespace std;
 using namespace DEF;
@@ -14,11 +15,11 @@ using namespace NLNET;
 
 extern void forLuaMysqlConnForceLink();
 
-void luaexportforcelink()  {   forLuaMysqlConnForceLink(); }
+void luaexportforcelink()  {   forLuaMysqlConnForceLink();  CIDGenerate idgen; }
 
 void CScriptMgr::init( LUA_OPEN pLuaOpen )
 {
-	UpdateServiceBootCount();
+	//UpdateServiceBootCount();
 
     //string fn = IService::getInstance()->SaveFilesDirectory.toString();
     string log_file = /*fn +*/ Config.getVar("LogDirectory").asString();
@@ -100,7 +101,8 @@ void CScriptMgr::Export()
     m_LuaEngine.ExportModule("ServerNet");
     m_LuaEngine.ExportClass("WebSocketNetwork");
     m_LuaEngine.ExportClass("LuaTimer");
-    
+    m_LuaEngine.ExportClass("IDGenerate");
+
 
     m_LuaEngine.ExportClass("MysqlStmt");
     m_LuaEngine.ExportClass("MysqlConn");
