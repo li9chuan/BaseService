@@ -3,10 +3,10 @@
 --=========================================================
 
 local BasePath = Utility.GetBasePath() .. "/script/";
-package.path = BasePath .. "_PLS/?.lua;" .. BasePath .. "Framework/?.lua;";
+package.path = BasePath .. "_PLS/?.lua;" .. BasePath .. "SharedLib/?.lua;";
 
 
-require("InitFramework")
+require("InitSharedLib")
 require("PlayerLogicService")
 require("Player/PlayerMgr")
 require("DB/DBMgr")
@@ -20,13 +20,6 @@ MsgLoginModule      = MsgLogin:new();
 
 PLSConfig           = require("_PLSConfig")
 
---[[
-local json_text = JsonUtil.file_load(BasePath.."DataTable/Sheet1.json")
-local t = Json.decode(json_text)
-PrintTable(t);
-print(JsonUtil.serialise_value(t))
-
---]]
 
 
 
@@ -35,8 +28,7 @@ function ServiceInit()
 
     print("Lua Start.");
     PrintTable(PLSConfig)
-
-	
+    
     DBMgr:Init();
     PlayerMgr:Init();
     PlayerLogicService:Init();

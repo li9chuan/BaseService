@@ -13,7 +13,6 @@ TARGET_LINK_LIBRARIES(	schedule_service
 						${LIBEVENT_LIBRARY}
 						nelmisc
 						nelnet
-						gameshare
 						servershare)
 
 NL_DEFAULT_PROPS(schedule_service "Base, Services: Schedule Service (SCH)")

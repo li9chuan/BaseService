@@ -33,4 +33,8 @@
         </Filter>
         <LuaFile RelativePath=".\SimpleStateMachine.lua" />
     </Filter>
+    <Filter RelativePath=".\SharedLib" Toggle="false" >
+        <LuaFile RelativePath=".\StaticTableMgr.lua" />
+        <LuaFile RelativePath=".\InitSharedLib.lua" />
+    </Filter>
 </Project>

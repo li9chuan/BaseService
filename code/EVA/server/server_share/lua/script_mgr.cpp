@@ -18,7 +18,7 @@ void luaexportforcelink()  {   forLuaMysqlConnForceLink(); }
 
 void CScriptMgr::init( LUA_OPEN pLuaOpen )
 {
-	//m_EventReg.resize(SCRIPT_EVENT_MAX);
+	UpdateServiceBootCount();
 
     //string fn = IService::getInstance()->SaveFilesDirectory.toString();
     string log_file = /*fn +*/ Config.getVar("LogDirectory").asString();
@@ -114,21 +114,46 @@ void CScriptMgr::ExecString( std::string exec_str )
     m_LuaEngine.GetScriptHandle()->ExecString( exec_str.c_str() );
 }
 
+void CScriptMgr::UpdateServiceBootCount()
+{
+    std::string cache_file = ".";
+    cache_file.append( NLNET::IService::getInstance()->getServiceShortName() );
+    cache_file.append( "-" );
+    cache_file.append( NLMISC::toString(NLNET::IService::getInstance()->getServiceId().get()) );
+    cache_file.append( ".che" );
+
+    if (!NLMISC::CFile::fileExists(cache_file))
+    {
+        NLMISC::CFile::createEmptyFile(cache_file);
+    }
+
+    CConfigFile cf;
+    cf.load(cache_file);
+
+    if ( !cf.exists("BootCnt") )
+    {
+        CConfigFile::CVar var;
+        var.forceAsInt(1);
+        cf.insertVar("BootCnt", var);
+    }
+    else
+    {
+        CConfigFile::CVar* pVar = cf.getVarPtr("BootCnt");
+        uint32 boot_cnt = pVar->asInt();
+        ++boot_cnt;
+        pVar->setAsInt(boot_cnt);
+    }
+
+    cf.save();
+}
 
 
 
-
-NLMISC_COMMAND (exec, "run lua string.", "lua")
+NLMISC_COMMAND (lua, "run lua string.", "lua")
 {
     if(args.size() != 1) return false;
     ScriptMgr.ExecString( args[0] );
     return true;
 }
 
-NLMISC_COMMAND (initlua, "init lua script.", "lua")
-{
-    if(args.size() != 0) return false;
-    ScriptMgr.init();
-    return true;
-}
 

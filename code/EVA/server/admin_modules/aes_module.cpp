@@ -23,7 +23,7 @@
 #include "nel/net/unified_network.h"
 #include "nel/net/service.h"
 
-#include "game_share/utils.h"
+#include "server_share/utils.h"
 
 #include "admin_modules_itf.h"
 

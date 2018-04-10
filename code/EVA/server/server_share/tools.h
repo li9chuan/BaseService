@@ -1,11 +1,11 @@
 ﻿#ifndef SWG_TOOLS_H
 #define SWG_TOOLS_H
 
-#include <game_share/game_def.h>
 #include <nel/misc/singleton.h>
 #include <nel/net/unified_network.h>
 #include <nel/misc/mutex.h>
 #include <vector>
+#include "game_def.h"
 
 /// 基础小工具命名空间
 //namespace SWG

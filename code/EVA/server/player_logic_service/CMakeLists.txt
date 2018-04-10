@@ -12,7 +12,6 @@ TARGET_LINK_LIBRARIES(  player_logic_service
 						${LIBEVENT_LIBRARY}
 						nelmisc
 						nelnet
-						gameshare
 						servershare
 						eva_adminmodules)
 

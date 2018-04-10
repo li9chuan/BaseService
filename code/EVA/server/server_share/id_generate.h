@@ -1,7 +1,7 @@
 #ifndef SERVER_SHARED_ID_GENERATE_H
 #define SERVER_SHARED_ID_GENERATE_H
 
-#include <game_share/game_def.h>
+#include "game_def.h"
 
 /**
  *  IDÉú³ÉÆ÷  

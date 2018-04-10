@@ -1,5 +1,5 @@
 --========================================================= 
--- 初始化
+-- 初始化基础通用工具
 --=========================================================
 
 local BasePath = Utility.GetBasePath() .. "/script/";
@@ -7,9 +7,10 @@ package.path = package.path .. BasePath .. "Framework/?.lua;";
 package.path = package.path .. BasePath .. "Framework/Event/?.lua;";
 package.path = package.path .. BasePath .. "Framework/Net/?.lua;";
 
+
 protobuf    = require "protobuf"
 
-addr = io.open( BasePath.."DataTable/proto_msg.pb", "rb")
+addr = io.open( BasePath.."DataTable/ProtoMsg.pb", "rb")
 buffer = addr:read "*a"  
 addr:close()  
 protobuf.register(buffer) 
@@ -77,20 +78,13 @@ StateMachine                = require("SimpleStateMachine");
 
 
 
--- 通用模块
-function OnCommonInit()
-	EventController.Instance():Init()
-    TimerMgr:Init(os.clock()*1000);
 
---	ServerManager.Instance():Init()
---	UIManager.Instance():Init()
---	SceneManager.Instance():Init()
-end
 
 -- 初始化单例
-function OnInit()
-	OnCommonInit();		-- 通用模块
---	OnLoginInit();		-- 登录模块
+function OnInitFramework()
+    EventController.Instance():Init()
+    TimerMgr:Init(os.clock()*1000);
 end
 
-OnInit();
+
+OnInitFramework();

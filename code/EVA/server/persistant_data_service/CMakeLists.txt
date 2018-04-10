@@ -18,7 +18,6 @@ ENDIF(FREEBSD)
 TARGET_LINK_LIBRARIES(persistant_data_service
 						eva_adminmodules
 						servershare
-						gameshare
 						${LIBXML2_LIBRARIES}
 						${PROTOBUF_LIBRARIES}
 						${LIBEVENT_LIBRARY}

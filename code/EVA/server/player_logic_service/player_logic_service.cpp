@@ -8,9 +8,7 @@
 #include <server_share/lua/script_mgr.h>
 #include <server_share/lua/lua_network.h>
 #include <server_share/i18n_def.h>
-#include <game_share/static_table/static_table_mgr.h>
-#include <game_share/singleton_registry.h>
-#include <game_share/timer.h>
+#include <server_share/timer.h>
 #include <nel/net/naming_client.h>
 
 
@@ -49,9 +47,7 @@ public:
 
         TimerManager->init();
         LuaNetworkMgr.Init();
-
-        ICommand::execute ("initlua", *InfoLog);
-        ICommand::execute ("loadconfig", *InfoLog);
+        ScriptMgr.init();
     }
 
 
@@ -91,18 +87,6 @@ NLMISC_COMMAND (info, "service information.", "")
     log.displayNL ("PlayerBarUpdateTimerEvent:%d", NL_GET_LOCAL_INSTANCE_COUNTER(CTimerEvent));
     //log.displayNL ("PlayerBarUpdateTimerEvent:%d", NL_GET_INSTANCE_COUNTER(CTimerEvent));
 
-    return true;
-}
-
-NLMISC_COMMAND (loadconfig, "reload config file.", "")
-{
-    if(args.size() != 0) return false;
-
-    log.displayNL ("PLS Load config files...");
-
-    StaticTableMgr.init();
-
-    log.displayNL ("PLS Load config done.");
     return true;
 }
 

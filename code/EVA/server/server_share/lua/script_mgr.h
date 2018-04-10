@@ -2,7 +2,7 @@
 #define SERVER_SHARD_SCRIPT_MGR_H
 
 #include <nel/misc/singleton.h>
-#include <game_share/game_def.h>
+#include <server_share/game_def.h>
 #include <set>
 #include "lua_engine.h"
 
@@ -26,6 +26,8 @@ public:
     CLuaEngine&     GetLuaEngine()  { return m_LuaEngine; }
 
 private:
+
+    void            UpdateServiceBootCount();
 
     void            Export();
     CLuaEngine      m_LuaEngine;

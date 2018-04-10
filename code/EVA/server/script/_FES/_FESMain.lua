@@ -3,11 +3,10 @@
 --=========================================================
 
 local BasePath = Utility.GetBasePath() .. "/script/";
-package.path = BasePath .. "_FES/?.lua;" .. BasePath .. "Framework/?.lua;";
+package.path = BasePath .. "_PLS/?.lua;" .. BasePath .. "SharedLib/?.lua;";
 
 
--- Table
-require("InitFramework");
+require("InitSharedLib")
 require("FrontEndService");
 require("Client/ClientMgr");
 

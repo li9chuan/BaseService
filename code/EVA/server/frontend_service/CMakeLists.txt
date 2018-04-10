@@ -13,7 +13,6 @@ TARGET_LINK_LIBRARIES(	frontend_service
 						${LIBEVENT_LIBRARY}
 						nelmisc
 						nelnet
-						gameshare
 						servershare)
 
 NL_DEFAULT_PROPS(frontend_service "Base, Services: Frontend Service (FES)")

@@ -5,7 +5,6 @@
 #include "lua_base_function.h"
 #include "lua_engine.h"
 #include "script_mgr.h"
-#include "static_table/static_table_mgr.h"
 #include <nel/misc/md5.h>
 
 #include "server_share/bin_luabind/Public.hpp"
@@ -14,8 +13,6 @@ using namespace std;
 using namespace NLMISC;
 using namespace NLNET;
 using namespace DEF;
-using namespace ATTRIB_TYPE;
-using namespace StaticData;
 
 int  GetCurrentDay1970( uint32 time )
 {

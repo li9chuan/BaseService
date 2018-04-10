@@ -1,0 +1,24 @@
+{
+  "1": {
+    "_id": 1,
+    "game_type": "GM_DDZ",
+    "app_name": "APP_DDZ",
+    "min_ver": 1.16,
+    "challenge_type": "game",
+    "room_name": "斗地主",
+    "enter_level": 0,
+    "enter_score": 0,
+    "room_max": 3,
+    "room_min": 3,
+    "viewer_max": 5,
+    "is_goback": 1,
+    "auto_return": 1,
+    "room_time": 28800,
+    "room_icon": "icon_yule",
+    "room_bg": "Texture/BackGround/nj_mahjong_room_logo_4",
+    "game_icon": "Texture/BackGround/hall_game_icon_4",
+    "game_bg": "Texture/BackGround/hall_game_bg",
+    "enter_game_scene": "BlackJackScene",
+    "enter_room_scene": "jiuguan"
+  }
+}

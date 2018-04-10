@@ -5,7 +5,7 @@ ADD_EXECUTABLE(admin_service WIN32 ${SRC})
 INCLUDE_DIRECTORIES(${LIBXML2_INCLUDE_DIR} ${MYSQL_INCLUDE_DIR} ${ZLIB_INCLUDE_DIR})
 
 TARGET_LINK_LIBRARIES(  admin_service
-						gameshare
+						servershare
 						eva_adminmodules
 						${LIBXML2_LIBRARIES}
 						nelmisc 

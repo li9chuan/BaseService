@@ -4,7 +4,7 @@
 
 #include <map>
 #include <utility>
-#include <game_share/tools.h>
+#include <server_share/tools.h>
 #include <server_share/server_def.h>
 #include <server_share/client_msg_desc.h>
 #include <server_share/lua/script_mgr.h>
@@ -13,7 +13,7 @@
 #include <nel/net/naming_client.h>
 
 #include "frontend_service.h"
-#include <game_share/timer.h>
+#include <server_share/timer.h>
 #include <server_share/lua/lua_thread.h>
 
 #ifdef NL_OS_WINDOWS
@@ -48,9 +48,7 @@ void CFrontEndService::init()
     TimerManager->init();
     LuaThreadMgr.Init();
     LuaNetworkMgr.Init();
-    
-    
-    ICommand::execute ("initlua", *InfoLog);
+    ScriptMgr.init();
 
     //////////////////////////////////////////////////
     // TCP 相关

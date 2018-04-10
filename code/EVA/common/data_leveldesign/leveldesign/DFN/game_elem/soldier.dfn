@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<DFN Revision="$Revision$" State="modified">
-  <ELEMENT Name="item" Type="Dfn" Filename="item.dfn"/>
-  <ELEMENT Name="attrib" Type="Dfn" Filename="attrib.dfn" Array="true"/>
-  <LOG>Tue Sep 24 20:46:06 2013 (new) Dfn Structure = 
-Tue Sep 24 20:54:50 2013 (new) Dfn Structure = </LOG>
-</DFN>

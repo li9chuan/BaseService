@@ -30,7 +30,7 @@
 #include "nel/net/module_message.h"
 #include "nel/net/module_gateway.h"
 
-#include "game_share/callback_adaptor.h"
+#include "server_share/callback_adaptor.h"
 
 #include "nel/misc/time_nl.h"
 

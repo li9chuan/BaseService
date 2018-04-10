@@ -3,10 +3,10 @@
 --=========================================================
 
 local BasePath = Utility.GetBasePath() .. "/script/";
-package.path = BasePath .. "_SCH/?.lua;" .. BasePath .. "Framework/?.lua;";
+package.path = BasePath .. "_PLS/?.lua;" .. BasePath .. "SharedLib/?.lua;";
 
 
-require("InitFramework")
+require("InitSharedLib")
 require("ScheduleService")
 require("PLSInfo/PLSInfoMgr")
 require("Player/PlayerInfoMgr")

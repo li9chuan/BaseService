@@ -1,9 +1,6 @@
 #ifndef SERVICE_SHARED_SERVER_DEF_H
 #define SERVICE_SHARED_SERVER_DEF_H
 
-#include <game_share/define_sys.pb.h>
-#include <game_share/game_def.h>
-#include <game_share/tools.h>
 #include <nel/net/message.h>
 #include <nel/net/unified_network.h>
 #include <nel/net/callback_server.h>
@@ -12,6 +9,10 @@
 
 #include <google/protobuf/message.h>
 #include <google/protobuf/descriptor.h>
+
+#include "game_def.h"
+#include "tools.h"
+
 //NLMISC::CLog& Loger();
 
 #define     MaxUDPPacketSize   512
@@ -41,24 +42,6 @@ const std::string DB_PUT    = "DB_PUT";
 const std::string DB_GET    = "DB_GET";
 const std::string PLS2DB    = "PLS2DB";
 const std::string DB2PLS    = "DB2PLS";
-
-/** Callback function type for message processing
- *
- * msgin contains parameters of the message
- * from is the SockId of the connection, for a client, from is always the same value
- */
-typedef void (*TUDPCallback) (NLNET::CMessage &msgin, NLNET::CInetAddress& AddrFrom, MsgSession& ProtoSession);
-
-
-/// Callback items. See CMsgSocket::update() for an explanation on how the callbacks are called.
-typedef struct
-{
-	/// Key C string. It is a message type name, or "C" for connection or "D" for disconnection
-	const char		*Key;
-	/// The callback function
-	TUDPCallback	Callback;
-
-} TUDPCallbackItem;
 
 inline void SendToClient( DEF::RPC_SESSION session, NLNET::CMessage& msgout, bool disconnect=true )
 {

@@ -18,7 +18,6 @@ TARGET_LINK_LIBRARIES(login_service
 						${ZLIB_LIBRARIES}
 						nelmisc
 						nelnet
-						gameshare
 						servershare
 						eva_adminmodules)
 

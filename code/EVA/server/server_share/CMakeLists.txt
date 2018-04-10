@@ -18,7 +18,6 @@ INCLUDE_DIRECTORIES(${LIBXML2_INCLUDE_DIR} ${MYSQL_INCLUDE_DIR} ${LUA_INCLUDE_DI
 TARGET_LINK_LIBRARIES(  servershare
 						nelmisc
 						nelnet
-						gameshare
 						${LUA_LIBRARIES}
 						${PBC_LIBRARY}
 						${MYSQL_LIBRARIES}

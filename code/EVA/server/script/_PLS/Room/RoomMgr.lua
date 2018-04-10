@@ -9,7 +9,12 @@ end
 
 function RoomMgr:CreateRoom( room_type )
 
-
+    local ROOM_CFG = StaticTableMgr:GetRoomConfigXml(room_type);
+    
+    if ROOM_CFG~=nil then
+    
+        
+    end
 
     return nil;
 end

@@ -3,8 +3,7 @@
 
 #include <nel/misc/singleton.h>
 #include <nel/misc/sstring.h>
-#include <game_share/game_def.h>
-
+#include "game_def.h"
 #include "msg_leaf.h"
 
 class CMsgDesc : public NLMISC::CSingleton<CMsgDesc>

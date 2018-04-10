@@ -2,9 +2,6 @@
 #define GAME_SHARD_GAME_DEF_H
 
 #include <nel/misc/types_nl.h>
-#include "define_sys.pb.h"
-#include "define_pro.pb.h"
-#include "define_attrib.pb.h"
 
 namespace DEF {
 

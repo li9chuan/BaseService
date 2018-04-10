@@ -3,7 +3,7 @@
 
 #include <nel/misc/singleton.h>
 #include <nel/misc/mutex.h>
-#include <game_share/buf_fifo2.h>
+#include <server_share/buf_fifo2.h>
 #include <server_share/bin_luabind/Public.hpp>
 #include <server_share/lua/lua_engine.h>
 
