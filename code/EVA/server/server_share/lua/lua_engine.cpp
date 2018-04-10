@@ -182,9 +182,8 @@ bool CLuaEngine::LoadLuaFile(const char* fileName)
 		}
 	}		
 
-	lua_settop(m_pLuaState, top);		
-
     nlerror("load %s file error, cause %s.", fileName, GetLastError());
+	lua_settop(m_pLuaState, top);		
 	return false;
 }
 

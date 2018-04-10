@@ -44,7 +44,7 @@ require("TimerMgr");
 
 -- LuaFramework --
 IDGenerate                  = bin_types.IDGenerate;
-MysqlStme                   = bin_types.MysqlStmt;
+MysqlStmt                   = bin_types.MysqlStmt;
 MysqlConn                   = bin_types.MysqlConn;
 MysqlResult                 = bin_types.MysqlResult;
 WebSocketNetwork            = bin_types.WebSocketNetwork;
