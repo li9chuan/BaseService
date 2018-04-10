@@ -1,0 +1,33 @@
+syntax = "proto2";
+package PB_MSG;
+
+import "define_pro.proto";
+import "define_attrib.proto";
+
+
+message MsgLogin
+{
+  optional string       Version         = 1;
+  optional string       AuthType        = 2;
+  optional string       APPID           = 3;
+  optional string       User            = 4;
+  optional string       NonceStr        = 5;
+  optional string       Token           = 6;
+  optional string       Timestamp       = 7;
+  optional uint64       UID             = 8;
+  optional string       GameType        = 9;
+  
+  
+}
+
+message MsgPlayerInfo
+{
+  optional uint64       UID             = 1;
+  optional string       Nickname        = 2;
+  optional uint32       Portrait        = 3;
+  optional uint64       Money           = 4;
+  optional uint64       RMB             = 5;
+  optional uint32       Main            = 6;
+  optional uint64       FlagBit         = 7;
+}
+
