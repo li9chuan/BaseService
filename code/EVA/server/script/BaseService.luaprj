@@ -25,7 +25,6 @@
         <LuaFile RelativePath=".\Utils.lua" />
         <LuaFile RelativePath=".\TimerMgr.lua" />
         <LuaFile RelativePath=".\CJsonUtil.lua" />
-        <LuaFile RelativePath=".\statemachine.lua" />
         <Filter RelativePath=".\Test" Toggle="true" >
             <LuaFile RelativePath=".\TestFSM.lua" />
             <LuaFile RelativePath=".\FSMClass.lua" />

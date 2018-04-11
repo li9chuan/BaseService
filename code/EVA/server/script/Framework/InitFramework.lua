@@ -49,6 +49,11 @@ MysqlConn                   = bin_types.MysqlConn;
 MysqlResult                 = bin_types.MysqlResult;
 WebSocketNetwork            = bin_types.WebSocketNetwork;
 
+print                       = Debug.Info;
+nldebug                     = Debug.Debug;
+nlinfo                      = Debug.Info;
+nlwarning                   = Debug.Warning;
+
 --[[
 Util						= LuaFramework.Util;
 NativeUtil					= LuaFramework.NativeUtil;

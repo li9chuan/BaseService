@@ -27,7 +27,7 @@ function MsgLogin:DispatchPLS( fes_id, proto_buf )
         player.ConFES = fes_id;
         
         if player.ConPLS~=nil then
-            Debug.Warning("player.ConPLS    PB_MSG.MsgSvrLogin");
+            nlwarning("player.ConPLS    PB_MSG.MsgSvrLogin");
             BaseService:Send( player.ConPLS, "SyncData", "PB_MSG.MsgSvrLogin", MsgSvrLogin )
         else
             local pls_sid = PLSInfoMgr:AllocPLS(player.GameType);
@@ -36,13 +36,13 @@ function MsgLogin:DispatchPLS( fes_id, proto_buf )
                 player.ConPLS = pls_sid;
                 BaseService:Send( player.ConPLS, "SyncData", "PB_MSG.MsgSvrLogin", MsgSvrLogin )
             else
-                Debug.Warning("======");
+                nlwarning("======");
             end
         end
     else
         local pls_sid = PLSInfoMgr:AllocPLS(MsgSvrLogin.GameType);
         
-        Debug.Warning("pls_sid:"..pls_sid);
+        nlwarning("pls_sid:"..pls_sid);
     
         if pls_sid~=nil then
             player = PlayerInfoMgr:CreatePlayerInfo(uid);
@@ -53,7 +53,7 @@ function MsgLogin:DispatchPLS( fes_id, proto_buf )
             
             BaseService:Send( player.ConPLS, "SyncData", "PB_MSG.MsgSvrLogin", MsgSvrLogin )
             
-            Debug.Warning("fes_id:"..player.GameType);
+            nlwarning("fes_id:"..player.GameType);
         end
     end
 end

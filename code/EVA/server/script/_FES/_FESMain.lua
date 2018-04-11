@@ -5,7 +5,6 @@
 local BasePath = Utility.GetBasePath() .. "/script/";
 package.path = BasePath .. "_FES/?.lua;" .. BasePath .. "SharedLib/?.lua;";
 
-
 require("InitSharedLib")
 require("FrontEndService");
 require("Client/ClientMgr");
@@ -16,23 +15,8 @@ Client      = require("Client/Client");
 MsgLogin    = require("Msg/MsgLogin");
 
 
-
-
-
-
-
-
-ClientMgr:Init();
-FrontEndService:Init();
-
-
-ClientService = WebSocketCbClient:new();
-ClientService:Listen( "ClientService", 9999 );
-
-
-
-LoginModule = MsgLogin:new();
-
+ClientService   = WebSocketCbClient:new();
+LoginModule     = MsgLogin:new();
 
 
 
@@ -40,6 +24,11 @@ LoginModule = MsgLogin:new();
 function ServiceInit()
 	
     print(" =========FES Main Start============ ");
+    
+    ClientMgr:Init();
+    FrontEndService:Init();
+
+    ClientService:Listen( "ClientService", 9999 );
 
 end
 
