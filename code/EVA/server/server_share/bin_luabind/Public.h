@@ -13,7 +13,7 @@
 
 #include <nel/misc/debug.h>
 
-#define     LOG_MESSAGE     nldebug
+#define     LOG_MESSAGE     nlwarning
 
 
 #endif

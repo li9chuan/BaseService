@@ -19,13 +19,14 @@ function EventRegister:RegisterEvent(Name, Obj, Func)
     local Handler = handler(Obj, Func);
     local EventTable = self:GetEventRegisterTable(Name);
     if (nil ~= EventTable) then
-        local idx = table.getn(EventTable);
+        local idx = #EventTable;
         EventTable[idx + 1] = Handler;
     else
         local v = {};
         v[1] = Handler;
         self._EventCallBackTable[Name] = v;
     end
+    
 	EventController.Instance():RegisterEvent(Name, Handler);  
 end
 

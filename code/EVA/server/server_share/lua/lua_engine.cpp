@@ -3,8 +3,6 @@
 #include <nel/misc/displayer.h>
 #include <nel/misc/path.h>
 #include "pbc.h"
-
-#include "lua_base_function.h"
 #include "server_share/bin_luabind/ScriptHandle.h"
 #include "server_share/bin_luabind/ScriptExporter.h"
 
@@ -123,12 +121,6 @@ bool CLuaEngine::Init( std::string logpath )
     luaL_requiref(m_pLuaState, "protobuf.c", luaopen_protobuf_c, 0);
     luaL_requiref(m_pLuaState, "cjson", luaopen_cjson, 0);
 
-    lua_register( m_pLuaState, "print",             LuaPrint );                /// ×¢²á³£ÓÃº¯Êý
-    lua_register( m_pLuaState, "AddSearchPath",     LuaAddSearchPath );
-
-
-    //luaopen_cjson(m_pLuaState);
-
     m_ScriptHandle->Init(m_pLuaState);
 
     
@@ -172,19 +164,7 @@ const char* CLuaEngine::GetLastError()
 
 bool CLuaEngine::LoadLuaFile(const char* fileName)
 {
-	int top = lua_gettop(m_pLuaState);			
-	if( !luaL_loadfile(m_pLuaState, fileName) )
-	{
-		if( !lua_pcall(m_pLuaState, 0, 0, 0) )
-		{
-			lua_settop(m_pLuaState, top);			
-			return true;
-		}
-	}		
-
-    nlerror("load %s file error, cause %s.", fileName, GetLastError());
-	lua_settop(m_pLuaState, top);		
-	return false;
+	return m_ScriptHandle->Exec(fileName);
 }
 
 
@@ -305,77 +285,6 @@ bool CLuaEngine::RunLuaFunction(const char* szFunName, const char* szTableName, 
 	nlwarning("call function(%s) fail, cause %s", szFunName, GetLastError());
 	lua_settop(m_pLuaState, top);
 	return false;
-}
-
-//bool CLuaEngine::RegUserFunc( const char *classname, const luaL_Reg *l)
-//{
-//	if(!classname)
-//		return RegUserFunc(l);
-//	luaL_register(m_pLuaState,classname,l);
-//	return true;
-//}
-//
-//bool CLuaEngine::RegUserFunc(const luaL_Reg* l)
-//{
-//	lua_pushvalue(m_pLuaState,LUA_GLOBALSINDEX);
-//	luaL_register(m_pLuaState,NULL,l);
-//	return true;
-//}
-//
-//bool CLuaEngine::RegGlobalFunc(const char* name, lua_CFunction func)
-//{
-//	lua_register(m_pLuaState,name,func);
-//	return true;
-//}
-
-lua_Number CLuaEngine::GetLuaVariableNumber( const char* szVariableName, const char* szTableName /* = NULL */)
-{
-	int top = lua_gettop(m_pLuaState);
-	if(szTableName==NULL)
-	{
-		lua_getglobal(m_pLuaState, szVariableName);
-	}
-	else 
-	{
-		lua_getglobal(m_pLuaState, szTableName);
-		if(lua_istable(m_pLuaState, -1))
-		{
-			lua_getfield(m_pLuaState,-1,szVariableName);
-		}
-	}
-	lua_Number result = 0;
-	if (lua_isnumber(m_pLuaState, -1))
-	{
-		result = lua_tonumber(m_pLuaState, -1);
-	}
-	lua_settop(m_pLuaState, top);
-
-	return result;
-}
-
-const char* CLuaEngine::GetLuaVariableString( const char* szVariableName, const char* szTableName /* = NULL */)
-{
-	int top = lua_gettop(m_pLuaState);
-	if(szTableName==NULL)
-	{
-		lua_getglobal(m_pLuaState, szVariableName);
-	}
-	else 
-	{
-		lua_getglobal(m_pLuaState, szTableName);
-		if(lua_istable(m_pLuaState, -1))
-		{
-			lua_getfield(m_pLuaState,-1,szVariableName);
-		}
-	}
-	const char *result = 0;
-	if (lua_isstring(m_pLuaState, -1))
-	{
-		result = lua_tostring(m_pLuaState, -1);
-	}
-	lua_settop(m_pLuaState, top);
-
-	return result;
 }
 
 void CLuaEngine::ExportModule( const char* pszName )

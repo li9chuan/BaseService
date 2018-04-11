@@ -25,6 +25,8 @@ public:
     lua_State*      GetLuaState();
     CLuaEngine&     GetLuaEngine()  { return m_LuaEngine; }
 
+    
+
 private:
 
     void            UpdateServiceBootCount();

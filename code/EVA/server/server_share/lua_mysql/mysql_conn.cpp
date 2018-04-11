@@ -4,7 +4,7 @@
 #include "mysql_result.h"
 #include "string"
 
-#include "script_mgr.h"
+#include <server_share/lua/script_mgr.h>
 
 #ifdef NL_OS_WINDOWS
 static const char* DB_NAMES = "utf8";

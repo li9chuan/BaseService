@@ -26,16 +26,12 @@ PLSConfig           = require("_PLSConfig")
 -- 主入口函数。从这里开始lua逻辑
 function ServiceInit()
 
-    print("Lua Start.");
+    print("Lua PLSConfig:");
     PrintTable(PLSConfig)
     
     DBMgr:Init();
     PlayerMgr:Init();
     PlayerLogicService:Init();
-    
-    
-    
-
 
 end
 

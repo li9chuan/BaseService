@@ -57,8 +57,7 @@ function MsgLogin:CBLogin( sock_id, proto_buf )
     
 	--  通知客户端 账号认证通过.
     ClientService:Send( sock_id, "AuthOk" );
-    
-    
+
 end
 
 -- 有客户端在其它FES上登录成功。RemoveClient

@@ -9,6 +9,7 @@ function MsgLogin:ctor( Data )
     
     self._EventRegister:RegisterEvent( "RemovePlayer",      self, self.CBRemovePlayer );
     
+   
 end
 
 function MsgLogin:CBSyncData( sch_sid, proto_buf )

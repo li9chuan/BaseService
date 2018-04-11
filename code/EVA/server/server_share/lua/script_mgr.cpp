@@ -14,8 +14,9 @@ using namespace NLMISC;
 using namespace NLNET;
 
 extern void forLuaMysqlConnForceLink();
+extern void forLuaBaseFunctionForceLink();
 
-void luaexportforcelink()  {   forLuaMysqlConnForceLink();  CIDGenerate idgen; }
+void luaexportforcelink()  {   forLuaMysqlConnForceLink(); forLuaBaseFunctionForceLink(); CIDGenerate idgen; }
 
 void CScriptMgr::init( LUA_OPEN pLuaOpen )
 {
