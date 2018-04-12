@@ -7,11 +7,20 @@ $LoginModuleIP   = "localhost";
 $LoginModulePort = 30001;
 
 
+// ----------------------------------------------------------------------------------------
+// Variables for database access
+// ----------------------------------------------------------------------------------------
+
+// where we can find the mysql database
+$DBHost         = "localhost";
+$DBUserName     = "wxtest";
+$DBPassword     = "nd9s32S!zz";
+$DBName         = "d_mt_account";
 
 
-$SIG_KEY['APP_XQ']          = "BLACKSHEEPWALL";
-$WX_APPID['APP_XQ']         = "wxc1111111111111";						//	appid
-$WX_SECRET['APP_XQ']        = "38ccccccccccccccccccccccccccccc";		//	商户api秘钥
+$SIG_KEY['WX_5E8A']          = "BLACKSHEEPWALL";
+$WX_APPID['WX_5E8A']         = "wxc1111111111111";
+$WX_SECRET['WX_5E8A']        = "38ccccccccccccccccccccccccccccc";
 
 
 

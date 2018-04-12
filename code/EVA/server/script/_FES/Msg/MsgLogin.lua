@@ -25,9 +25,12 @@ function MsgLogin:CBLogin( sock_id, proto_buf )
 	PrintTable(msg_login);
     
 	
-	local sign_str = msg_login.Version .. msg_login.AuthType .. msg_login.APPID .. "BLACKSHEEPWALL";
+	local sign_str = msg_login.Channel .. msg_login.GameType .. msg_login.AppName .. msg_login.User;
+          sign_str = sign_str .. msg_login.NonceStr .. msg_login.Timestamp .. "BLACKSHEEPWALL";
+        
 	local sign     = md5( string.upper(sign_str) );
-	
+    
+    
 	print("sig:"..sign);
 	
 

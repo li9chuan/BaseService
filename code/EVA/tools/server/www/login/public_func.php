@@ -9,7 +9,7 @@
 		return '0:'.call_user_func_array('errorMsg', $args);
 	}
 	
-	function randomkeys($length)
+	function RandomKeys($length)
 	{
 		$output='';
 		for ($a = 0; $a < $length; $a++) {
@@ -18,7 +18,7 @@
 		return $output;
 	}
 
-	function random_nums($length)
+	function RandomNums($length)
 	{
 		$output='';
 		for ($a = 0; $a < $length; $a++) {
@@ -32,7 +32,7 @@
 	 * @param $length int 需要生成的字符串的长度
 	 * @return string 包含 大小写英文字母 和 数字 的随机字符串
 	 */
-	function random_str($length){    
+	function RandomStr($length){    
 		//生成一个包含 大写英文字母, 小写英文字母, 数字 的数组    
 		$arr = array_merge(range(0, 9), range('a', 'z'), range('A', 'Z'));    
 		$str = '';    
