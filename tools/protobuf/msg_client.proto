@@ -13,7 +13,7 @@ message MsgLogin
   optional string       User            = 4;
   optional string       NonceStr        = 5;
   optional string       Token           = 6;
-  optional string       Timestamp       = 7;
+  optional uint64       Timestamp       = 7;
   optional uint64       UID             = 8;
   optional string       GameType        = 9;
   
