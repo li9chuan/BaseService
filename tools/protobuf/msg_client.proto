@@ -8,8 +8,8 @@ import "define_attrib.proto";
 message MsgLogin
 {
   optional string       Version         = 1;
-  optional string       AuthType        = 2;
-  optional string       APPID           = 3;
+  optional string       Channel         = 2;
+  optional string       AppName         = 3;
   optional string       User            = 4;
   optional string       NonceStr        = 5;
   optional string       Token           = 6;
