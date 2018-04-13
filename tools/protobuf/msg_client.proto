@@ -15,7 +15,7 @@ message MsgLogin
   optional string       Token           = 6;
   optional uint64       Timestamp       = 7;
   optional uint64       UID             = 8;
-  optional string       GameType        = 9;
+  optional string       RoomType        = 9;
   
   
 }

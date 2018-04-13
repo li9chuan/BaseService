@@ -8,7 +8,7 @@ import "define_attrib.proto";
 message MsgSvrLogin
 {
     optional uint64         UID                     = 1;
-    optional string         GameType                = 2;
+    optional string         RoomType                = 2;
     optional uint32         ConFES                  = 3;
   
   
@@ -24,7 +24,7 @@ message MsgGameType
 
 message MsgServiceInfo
 {
-    repeated MsgGameType    GameTypeList            = 1;
+    repeated MsgGameType    RoomList                = 1;
     optional uint32         MaxPlayer               = 2;
     optional uint32         CurrPlayer              = 3;
     optional uint32         ServiceID               = 4;
