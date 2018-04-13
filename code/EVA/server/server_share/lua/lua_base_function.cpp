@@ -16,7 +16,7 @@ void forLuaBaseFunctionForceLink()
     ScriptMgr.ExecString( "" );
 }
 
- namespace bin
+namespace bin
  {
     BEGIN_SCRIPT_MODULE(Utility)
  
@@ -51,21 +51,55 @@ void forLuaBaseFunctionForceLink()
 
     BEGIN_SCRIPT_MODULE(Debug)
 
-        DEFINE_MODULE_FUNCTION(Warning, void, (const char* waring_str))
+        DEFINE_MODULE_FUNCTION(Warning, void, (const char* str))
         {
-            nlwarning(waring_str);
+            lua_Debug ar;
+            lua_getstack(lua.GetHandle(),1,&ar);
+            lua_getinfo(lua.GetHandle(), "Sln", &ar);
+
+            NLMISC::createDebug();
+            NLMISC::INelContext::getInstance().getWarningLog()->setPosition( ar.currentline, ar.short_src, ar.name );
+            NLMISC::INelContext::getInstance().getWarningLog()->displayNL(str);
             return 1;
         }
 
         DEFINE_MODULE_FUNCTION(Info, void, (const char* str))
         {
-            nlinfo(str);
+            lua_Debug ar;
+            lua_getstack(lua.GetHandle(),1,&ar);
+            lua_getinfo(lua.GetHandle(), "Sln", &ar);
+
+            NLMISC::createDebug();
+            NLMISC::INelContext::getInstance().getInfoLog()->setPosition( ar.currentline, ar.short_src, ar.name );
+            NLMISC::INelContext::getInstance().getInfoLog()->displayNL(str);
             return 1;
         }
 
         DEFINE_MODULE_FUNCTION(Debug, void, (const char* str))
         {
-            nldebug(str);
+            lua_Debug ar;
+            lua_getstack(lua.GetHandle(),1,&ar);
+            lua_getinfo(lua.GetHandle(), "Sln", &ar);
+
+            NLMISC::createDebug();
+            NLMISC::INelContext::getInstance().getDebugLog()->setPosition( ar.currentline, ar.short_src, ar.name );
+            NLMISC::INelContext::getInstance().getDebugLog()->displayNL(str);
+            return 1;
+        }
+
+        DEFINE_MODULE_FUNCTION(Stop, void, (const char* str))
+        {
+            lua_Debug ar;
+            lua_getstack(lua.GetHandle(),1,&ar);
+            lua_getinfo(lua.GetHandle(), "Sln", &ar);
+
+            static bool ignoreNextTime = false; 
+            if (!ignoreNextTime) 
+            {
+                if(NLMISC::_assert_stop(ignoreNextTime, ar.currentline, ar.short_src, ar.name, NULL))
+                    NLMISC_BREAKPOINT; 
+            }
+
             return 1;
         }
 

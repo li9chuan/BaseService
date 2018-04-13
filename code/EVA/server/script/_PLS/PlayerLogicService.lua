@@ -23,16 +23,16 @@ function PlayerLogicService:UpdatePLSInfo( service_id )
     MsgServiceInfo.CurrPlayer   = PlayerMgr:Count();
     MsgServiceInfo.ServiceID    = ServerNet.GetServiceID();
     MsgServiceInfo.ServiceName  = ServerNet.GetServiceName();
-    MsgServiceInfo.GameTypeList = {};
+    MsgServiceInfo.RoomList     = {};
     
     for k, v in pairs(PLSConfig.GameConfig) do  
 
-        local MsgGameType   = {};
-        MsgGameType.Type    = k;
-        MsgGameType.Max     = v.Max;
-        MsgGameType.Curr    = PlayerMgr:Count();
+        local MsgRoomType   = {};
+        MsgRoomType.Type    = k;
+        MsgRoomType.Max     = v.Max;
+        MsgRoomType.Curr    = PlayerMgr:Count();
         
-        table.insert( MsgServiceInfo.GameTypeList, MsgGameType );
+        table.insert( MsgServiceInfo.RoomList, MsgRoomType );
     end  
 
     BaseService:Send( service_id, "SvrInfo", "PB_MSG.MsgServiceInfo", MsgServiceInfo )

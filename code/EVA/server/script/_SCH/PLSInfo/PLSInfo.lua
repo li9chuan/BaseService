@@ -6,7 +6,7 @@ function PLSInfo:ctor()
     self.ServiceName    = "";
     self.MaxPlayer      = 0;
     self.CurrPlayer     = 0;
-    self.GameTypeList   = {};
+    self.RoomList       = {};
 end
 
 function PLSInfo:LoadData( _service_info )
@@ -15,18 +15,18 @@ function PLSInfo:LoadData( _service_info )
     self.ServiceName    = _service_info.ServiceName;
     self.MaxPlayer      = _service_info.MaxPlayer;
     self.CurrPlayer     = _service_info.CurrPlayer;
-    self.GameTypeList   = {};
+    self.RoomList   = {};
     
-    if _service_info.GameTypeList~=nil then
+    if _service_info.RoomList~=nil then
     
-        for _,v in ipairs(_service_info.GameTypeList) do
+        for _,v in ipairs(_service_info.RoomList) do
             
             local game_info = PLSGameInfo:new();
             game_info.Type  = v.Type;
             game_info.Max   = v.Max;
             game_info.Curr  = v.Curr;
 
-            self.GameTypeList[game_info.Type] = game_info;
+            self.RoomList[game_info.Type] = game_info;
         end
     end
     

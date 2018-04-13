@@ -1,6 +1,6 @@
 {
-  "1": {
-    "_id": 1,
+  "RM_DDZ": {
+    "room_type": "RM_DDZ",
     "game_type": "GM_DDZ",
     "app_name": "APP_DDZ",
     "min_ver": 1.16,

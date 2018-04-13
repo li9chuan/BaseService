@@ -23,6 +23,13 @@
             <LuaFile RelativePath=".\RoomBase.lua" />
             <LuaFile RelativePath=".\RoomMgr.lua" />
         </Filter>
-        <Filter RelativePath=".\Games" Toggle="true" />
+        <Filter RelativePath=".\Games" Toggle="false" >
+            <Filter RelativePath=".\PokerDdz" Toggle="false" >
+                <LuaFile RelativePath=".\DdzCardTypeHelper.lua" />
+                <LuaFile RelativePath=".\DdzFSM.lua" />
+                <LuaFile RelativePath=".\DdzStruct.lua" />
+                <LuaFile RelativePath=".\RoomDdz.lua" />
+            </Filter>
+        </Filter>
     </Filter>
 </Project>

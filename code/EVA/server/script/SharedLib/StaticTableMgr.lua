@@ -11,8 +11,8 @@ function StaticTableMgr:Init()
 end
 
 
-function StaticTableMgr:GetRoomConfigXml( room_id )
-    return self._RoomConfig[tostring(room_id)];
+function StaticTableMgr:GetRoomConfigXml( room_type )
+    return self._RoomConfig[tostring(room_type)];
 end
 
 

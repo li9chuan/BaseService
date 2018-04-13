@@ -25,7 +25,7 @@ function PLSInfoMgr:SvrUpdateInfoCB( msg_from, proto_buf )
         print( pls_info.MaxPlayer );
         print( pls_info.CurrPlayer );
         
-        for k,v in pairs(pls_info.GameTypeList) do
+        for k,v in pairs(pls_info.RoomList) do
             print( "type:"..v.Type.."  max:"..v.Max.."   curr:"..v.Curr );
         end
 --]]
@@ -37,9 +37,9 @@ function PLSInfoMgr:AllocPLS( game_type )
 
     for _,v in ipairs(self.PLSMap) do
         
-        if v.GameTypeList[game_type] ~= nil then
+        if v.RoomList[game_type] ~= nil then
             
-            local game_info = v.GameTypeList[game_type];
+            local game_info = v.RoomList[game_type];
             
             if game_info:IsFull()==false then
                 game_info.Curr = game_info.Curr + 1;

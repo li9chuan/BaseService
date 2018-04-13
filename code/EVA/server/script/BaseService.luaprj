@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="BaseService.luaprj" Cmd="" Arg="" Dir="" Toggle="false" >
-    <Filter RelativePath=".\Framework" Toggle="true" >
+<Project Name="BaseService.luaprj" Cmd="" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="true" >
+    <Filter RelativePath=".\Framework" Toggle="false" >
         <LuaFile RelativePath=".\Class.lua" />
         <LuaFile RelativePath=".\functions.lua" />
         <LuaFile RelativePath=".\List.lua" />
@@ -13,8 +13,9 @@
         <Filter RelativePath=".\Event" Toggle="false" >
             <LuaFile RelativePath=".\EventController.lua" />
             <LuaFile RelativePath=".\EventRegister.lua" />
+            <LuaFile RelativePath=".\EventTrigger.lua" />
         </Filter>
-        <Filter RelativePath=".\Net" Toggle="false" >
+        <Filter RelativePath=".\Net" Toggle="true" >
             <LuaFile RelativePath=".\NetWorkHandler.lua" />
             <LuaFile RelativePath=".\BaseService.lua" />
             <LuaFile RelativePath=".\protobuf.lua" />
@@ -34,8 +35,7 @@
     <Filter RelativePath=".\SharedLib" Toggle="false" >
         <LuaFile RelativePath=".\StaticTableMgr.lua" />
         <LuaFile RelativePath=".\InitSharedLib.lua" />
-        <Filter RelativePath=".\Event" Toggle="true" >
-            <LuaFile RelativePath=".\EventTrigger.lua" />
+        <Filter RelativePath=".\Event" Toggle="false" >
             <LuaFile RelativePath=".\EventType.lua" />
         </Filter>
     </Filter>

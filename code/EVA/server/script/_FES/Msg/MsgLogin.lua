@@ -24,7 +24,7 @@ function MsgLogin:CBLogin( sock_id, proto_buf )
 	
 	PrintTable(msg_login);
 	
-	local sign_str = msg_login.UID .. msg_login.Channel .. msg_login.GameType .. msg_login.AppName;
+	local sign_str = msg_login.UID .. msg_login.Channel .. msg_login.RoomType .. msg_login.AppName;
           sign_str = sign_str .. msg_login.User .. msg_login.NonceStr .. msg_login.Timestamp;
           sign_str = sign_str .. "BLACKSHEEPWALL";
         
@@ -41,7 +41,7 @@ function MsgLogin:CBLogin( sock_id, proto_buf )
     
     local MsgSvrLogin = {};
     MsgSvrLogin["UID"]          = msg_login.UID;
-    MsgSvrLogin["GameType"]     = msg_login.GameType;
+    MsgSvrLogin["RoomType"]     = msg_login.RoomType;
     
     BaseService:Broadcast( "FES", "AuthOk", "PB_MSG.MsgSvrLogin", MsgSvrLogin )      -- 通知其它网关有玩家登录成功。
     BaseService:Broadcast( "SCH", "AuthOk", "PB_MSG.MsgSvrLogin", MsgSvrLogin )      -- 玩家认证通过，请求发送数据。

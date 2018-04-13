@@ -22,11 +22,11 @@ end
 
 function PlayerMgr:LoadDBPlayer( _uid )
     
-    local tb_playerinfo = DBMgr:GetPlayerInfo(_uid);
+    local tb_playerinfo = DBMgr:LoadPlayerInfo(_uid);
     
     if tb_playerinfo==nil then
         if DBMgr:CreatePlayer(_uid)==true then
-            tb_playerinfo = DBMgr:GetPlayerInfo(_uid);
+            tb_playerinfo = DBMgr:LoadPlayerInfo(_uid);
         end
     end
     

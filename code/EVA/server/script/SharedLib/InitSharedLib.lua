@@ -9,7 +9,6 @@ require("InitFramework")
 
 
 require("StaticTableMgr");
-require("Event/EventTrigger");
 require("Event/EventType");
 
 

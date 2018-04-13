@@ -74,7 +74,9 @@ function PrintTable( tbl, depth )
     print(indent_str .. "}")
 end
 
-
+function Table2Str( tbl )
+    return JsonUtil.serialise_value(tbl);
+end
 -- start --
 
 --------------------------------

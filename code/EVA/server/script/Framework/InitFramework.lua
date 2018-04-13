@@ -31,7 +31,7 @@ require("functions")
 require("Net/NetWorkHandler")
 require("Net/BaseService")
 require("TimerMgr");
-
+require("Event/EventTrigger");
 
 
 --List 	= require("Common/List")
@@ -53,6 +53,7 @@ print                       = Debug.Info;
 nldebug                     = Debug.Debug;
 nlinfo                      = Debug.Info;
 nlwarning                   = Debug.Warning;
+nlstop                      = Debug.Stop;
 
 --[[
 Util						= LuaFramework.Util;

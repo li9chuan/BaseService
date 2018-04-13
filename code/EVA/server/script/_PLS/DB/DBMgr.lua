@@ -1,12 +1,11 @@
 DBMgr = {}
 
+
 function DBMgr:Init()
 
     self.ConnPlayerInfo = MysqlConn.NewInstance();
     local conn_info = { "localhost", "root", "", "d_mt_player", 3306 };
     self.ConnPlayerInfo:Connect( conn_info );
-
-
 
 
     self.StmtGetPlayerInfo      = MysqlStmt.NewInstance("CALL _t_mt_select_playerinfo(?)");
@@ -21,7 +20,7 @@ function DBMgr:Init()
     
 end
 
-function DBMgr:GetPlayerInfo(_uid)
+function DBMgr:LoadPlayerInfo(_uid)
 
     self.MysqlResult:Clear();
     self.StmtGetPlayerInfo:Clear();

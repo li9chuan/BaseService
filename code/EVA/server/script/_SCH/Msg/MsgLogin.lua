@@ -30,17 +30,17 @@ function MsgLogin:DispatchPLS( fes_id, proto_buf )
             nlwarning("player.ConPLS    PB_MSG.MsgSvrLogin");
             BaseService:Send( player.ConPLS, "SyncData", "PB_MSG.MsgSvrLogin", MsgSvrLogin )
         else
-            local pls_sid = PLSInfoMgr:AllocPLS(player.GameType);
+            local pls_sid = PLSInfoMgr:AllocPLS(player.RoomType);
             
             if pls_sid~=nil then
                 player.ConPLS = pls_sid;
                 BaseService:Send( player.ConPLS, "SyncData", "PB_MSG.MsgSvrLogin", MsgSvrLogin )
             else
-                nlwarning("======");
+                nlwarning(player.RoomType.." not in pls config.");
             end
         end
     else
-        local pls_sid = PLSInfoMgr:AllocPLS(MsgSvrLogin.GameType);
+        local pls_sid = PLSInfoMgr:AllocPLS(MsgSvrLogin.RoomType);
         
         nlwarning("pls_sid:"..pls_sid);
     
@@ -49,11 +49,12 @@ function MsgLogin:DispatchPLS( fes_id, proto_buf )
             
             player.ConFES   = fes_id;
             player.ConPLS   = pls_sid;
-            player.GameType = MsgSvrLogin.GameType;
+            player.RoomType = MsgSvrLogin.RoomType;
             
             BaseService:Send( player.ConPLS, "SyncData", "PB_MSG.MsgSvrLogin", MsgSvrLogin )
             
-            nlwarning("fes_id:"..player.GameType);
+        else
+            nlwarning(MsgSvrLogin.RoomType.." not in pls config.");
         end
     end
 end

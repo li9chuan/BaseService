@@ -574,9 +574,12 @@ std::pair<size_t, char const*> CLuaMysqlResult::get_string()
 
         if ( !_res.is_null )
         {
-            _ret.first  = _res.size;
-            _ret.second = _res.buf.c_str();
-            *(((char*)_ret.second) + _ret.first) = '\0';
+            if ( _res.size > 0 )
+            {
+                _ret.first  = _res.size;
+                _ret.second = _res.buf.c_str();
+                *(((char*)_ret.second) + _ret.first) = '\0';
+            }
         }
 
         ++m_Idx;
@@ -596,8 +599,11 @@ std::pair<size_t, void const*> CLuaMysqlResult::get_blob()
 
         if ( !_res.is_null )
         {
-            _ret.first  = _res.size;
-            _ret.second = _res.buf.c_str();
+            if ( _res.size > 0 )
+            {
+                _ret.first  = _res.size;
+                _ret.second = _res.buf.c_str();
+            }
         }
 
         ++m_Idx;

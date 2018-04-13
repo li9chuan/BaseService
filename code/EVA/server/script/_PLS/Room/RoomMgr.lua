@@ -14,6 +14,11 @@ function RoomMgr:CreateRoom( room_type )
     
     if ROOM_CFG~=nil then
     
+    
+        PrintTable(ROOM_CFG);
+        
+        room_ddz = RoomDdz:new();
+        room_ddz:Init();
         
     end
 

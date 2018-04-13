@@ -10,7 +10,7 @@ function PlayerInfo:ctor()
     self.GameID         = nil;
     self.LogoutTime     = nil;
     self.TimerID        = nil;
-    self.GameType       = nil;
+    self.RoomType       = nil;
 end
 
 

@@ -10,7 +10,7 @@ require("InitSharedLib")
 require("PlayerLogicService")
 require("Player/PlayerMgr")
 require("DB/DBMgr")
-
+require("Room/RoomMgr")
 
 PlayerDataHelper    = require("Player/PlayerDataHelper");
 PlayerHelper        = require("Player/PlayerHelper");
@@ -20,6 +20,8 @@ MsgLoginModule      = MsgLogin:new();
 
 PLSConfig           = require("_PLSConfig")
 
+RoomBase           = require("Room/RoomBase")
+RoomDdz            = require("Games/PokerDdz/RoomDdz")
 
 
 
@@ -29,9 +31,12 @@ function ServiceInit()
     print("Lua PLSConfig:");
     PrintTable(PLSConfig)
     
+    RoomMgr:Init();
     DBMgr:Init();
     PlayerMgr:Init();
     PlayerLogicService:Init();
+    
+    RoomMgr:CreateRoom("RM_DDZ");
 
 end
 
