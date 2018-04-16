@@ -8,6 +8,10 @@
 
 typedef int (*LUA_OPEN)(lua_State* tolua_S);
 
+namespace bin{
+    class CScriptHandle;
+}
+
 class CScriptMgr : public NLMISC::CSingleton<CScriptMgr>
 {
 public:
@@ -21,9 +25,10 @@ public:
     void            ExecString( std::string );
 
 
-    void            LoadScrpit(const char* szName);
-    lua_State*      GetLuaState();
-    CLuaEngine&     GetLuaEngine()  { return m_LuaEngine; }
+    void                    LoadScrpit(const char* szName);
+    lua_State*              GetLuaState();
+    CLuaEngine&             GetLuaEngine()      { return m_LuaEngine; }
+    bin::CScriptHandle*     GetScriptHandle()   { return m_LuaEngine.GetScriptHandle(); }
 
     
 

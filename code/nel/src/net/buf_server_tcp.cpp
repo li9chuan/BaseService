@@ -18,7 +18,7 @@
 
 #include "nel/misc/hierarchical_timer.h"
 
-#include "nel/net/buf_server_websocket.h"
+#include "nel/net/buf_server_tcp.h"
 #include "nel/net/net_log.h"
 #include "nel/net/message.h"
 
@@ -39,7 +39,7 @@
 #	include <sys/time.h>
 #endif
 
-#include "nel/net/buf_server_websocket_func.h"
+#include "nel/net/buf_server_tcp_func.h"
 
 
 /*
@@ -51,7 +51,6 @@ using namespace std;
 
 namespace NLNET {
 
-
 /***************************************************************************************************
  * User main thread (initialization)
  **************************************************************************************************/
@@ -59,19 +58,19 @@ namespace NLNET {
 /*
  * Constructor
  */
-CBufServerWebsocket::CBufServerWebsocket() : _ConnectionCallback(NULL)
+CBufServerTcp::CBufServerTcp() : _ConnectionCallback(NULL)
 {
-	nlnettrace( "CBufServerWebsocket::CBufServerWebsocket" );
+	nlnettrace( "CBufServerTcp::CBufServerTcp" );
 
-    _WebSocketReceiveTask = new CWebSocketReceiveTask();
+    _WebSocketReceiveTask = new CTcpReceiveTask();
 }
 
 /*
  * Listens on the specified port
  */
-void CBufServerWebsocket::init( uint16 port )
+void CBufServerTcp::init( uint16 port )
 {
-	nlnettrace( "CBufServerWebsocket::init" );
+	nlnettrace( "CBufServerTcp::init" );
 
     _MaxExpectedBlockSize = maxExpectedBlockSize();
 
@@ -82,9 +81,9 @@ void CBufServerWebsocket::init( uint16 port )
 /*
  * Destructor
  */
-CBufServerWebsocket::~CBufServerWebsocket()
+CBufServerTcp::~CBufServerTcp()
 {
-	nlnettrace( "CBufServerWebsocket::~CBufServerWebsocket" );
+	nlnettrace( "CBufServerTcp::~CBufServerTcp" );
 
 	// Clean listen thread exit
 
@@ -100,7 +99,7 @@ CBufServerWebsocket::~CBufServerWebsocket()
 
     _WebSocketReceiveTask->close();
 
-	nlnettrace( "Exiting CBufServerWebsocket::~CBufServer" );
+	nlnettrace( "Exiting CBufServerTcp::~CBufServer" );
 }
 
 
@@ -110,9 +109,9 @@ CBufServerWebsocket::~CBufServerWebsocket()
  * If hostid is not null and the socket is not connected, the method does nothing.
  * If quick is true, any pending data will not be sent before disconnecting.
  */
-void CBufServerWebsocket::disconnect( TSockId hostid, bool quick )
+void CBufServerTcp::disconnect( TSockId hostid, bool quick )
 {
-	nlnettrace( "CBufServerWebsocket::disconnect" );
+	nlnettrace( "CBufServerTcp::disconnect" );
 	//if ( hostid != InvalidSockId )
 	//{
 	//	if (_ConnectedClients.find(hostid) == _ConnectedClients.end())
@@ -142,9 +141,9 @@ void CBufServerWebsocket::disconnect( TSockId hostid, bool quick )
 /*
  * Send a message to the specified host
  */
-void CBufServerWebsocket::send_buffer( const CMemStream& buffer, TSockId hostid )
+void CBufServerTcp::send( const CMemStream& buffer, TSockId hostid )
 {
-	nlnettrace( "CBufServerWebsocket::send" );
+	nlnettrace( "CBufServerTcp::send" );
 	nlassert( buffer.length() > 0 );
 	nlassertex( buffer.length() <= maxSentBlockSize(), ("length=%u max=%u", buffer.length(), maxSentBlockSize()) );
 
@@ -158,9 +157,7 @@ void CBufServerWebsocket::send_buffer( const CMemStream& buffer, TSockId hostid 
 			return;
 		}
 
-        std::vector<uint8>  out_frame;
-        fill_frame_buffer( buffer.buffer(), buffer.length(), out_frame, WEBSOCK_FRAME_BIN );
-        bufferevent_write( hostid->m_BEVHandle, out_frame.data(), out_frame.size() );  
+        bufferevent_write( hostid->m_BEVHandle, buffer.buffer(), buffer.length() );  
 	}
 	else
 	{
@@ -173,7 +170,7 @@ void CBufServerWebsocket::send_buffer( const CMemStream& buffer, TSockId hostid 
 /*
  * Checks if there are some data to receive
  */
-bool CBufServerWebsocket::dataAvailable()
+bool CBufServerTcp::dataAvailable()
 {
 	// slow down the layer H_AUTO (CBufServer_dataAvailable);
 	{
@@ -241,9 +238,7 @@ bool CBufServerWebsocket::dataAvailable()
                     {
                         //  自动close套接字和free读写缓冲区 
                         bufferevent_free(sockid->m_BEVHandle);
-
                         delete sockid;
-
                     }
                     
 					break;
@@ -296,7 +291,7 @@ bool CBufServerWebsocket::dataAvailable()
  * This is where the connection/disconnection callbacks can be called.
  * \param usecMax Max time to wait in microsecond (up to 1 sec)
  */
-void	CBufServerWebsocket::sleepUntilDataAvailable( uint usecMax )
+void	CBufServerTcp::sleepUntilDataAvailable( uint usecMax )
 {
 	// Prevent looping infinitely if the system time was changed
 	if ( usecMax > 999999 ) // limit not told in Linux man but here: http://docs.hp.com/en/B9106-90009/select.2.html
@@ -323,9 +318,9 @@ void	CBufServerWebsocket::sleepUntilDataAvailable( uint usecMax )
  * Receives next block of data in the specified. The length and hostid are output arguments.
  * Precond: dataAvailable() has returned true, phostid not null
  */
-void CBufServerWebsocket::receive( CMemStream& buffer, TSockId* phostid )
+void CBufServerTcp::receive( CMemStream& buffer, TSockId* phostid )
 {
-	nlnettrace( "CBufServerWebsocket::receive" );
+	nlnettrace( "CBufServerTcp::receive" );
 	//nlassert( dataAvailable() );
 	nlassert( phostid != NULL );
 
@@ -354,7 +349,7 @@ void CBufServerWebsocket::receive( CMemStream& buffer, TSockId* phostid )
 /*
  * Update the network (call this method evenly)
  */
-void CBufServerWebsocket::update()
+void CBufServerTcp::update()
 {
 	//nlnettrace( "CBufServer::update-BEGIN" );
 
@@ -366,7 +361,7 @@ void CBufServerWebsocket::update()
 	//nlnettrace( "CBufServer::update-END" );
 }
 
-uint32 CBufServerWebsocket::getSendQueueSize( TSockId destid )
+uint32 CBufServerTcp::getSendQueueSize( TSockId destid )
 {
 	if ( destid != InvalidSockId )
 	{
@@ -390,7 +385,7 @@ uint32 CBufServerWebsocket::getSendQueueSize( TSockId destid )
 	}
 }
 
-void CBufServerWebsocket::displayThreadStat (NLMISC::CLog *log)
+void CBufServerTcp::displayThreadStat (NLMISC::CLog *log)
 {
 	//// For each thread
 	//CThreadPool::iterator ipt;
@@ -408,21 +403,21 @@ void CBufServerWebsocket::displayThreadStat (NLMISC::CLog *log)
 	//log->displayNL ("server listen thread %p nbloop %d", _ListenTask, _ListenTask->NbLoop);
 }
 
-void CBufServerWebsocket::setTimeFlushTrigger( TSockId destid, sint32 ms )
+void CBufServerTcp::setTimeFlushTrigger( TSockId destid, sint32 ms )
 {
 	nlassert( destid != InvalidSockId );
 	if (_ConnectedClients.find(destid) != _ConnectedClients.end())
 		destid->setTimeFlushTrigger( ms );
 }
 
-void CBufServerWebsocket::setSizeFlushTrigger( TSockId destid, sint32 size )
+void CBufServerTcp::setSizeFlushTrigger( TSockId destid, sint32 size )
 {
 	nlassert( destid != InvalidSockId );
 	if (_ConnectedClients.find(destid) != _ConnectedClients.end())
 		destid->setSizeFlushTrigger( size );
 }
 
-bool CBufServerWebsocket::flush( TSockId destid, uint *nbBytesRemaining)
+bool CBufServerTcp::flush( TSockId destid, uint *nbBytesRemaining)
 {
 	nlassert( destid != InvalidSockId );
 	if (_ConnectedClients.find(destid) != _ConnectedClients.end())
@@ -430,7 +425,7 @@ bool CBufServerWebsocket::flush( TSockId destid, uint *nbBytesRemaining)
 	else
 		return true;
 }
-const CInetAddress& CBufServerWebsocket::hostAddress( TSockId hostid )
+const CInetAddress& CBufServerTcp::hostAddress( TSockId hostid )
 {
 	nlassert( hostid != InvalidSockId );
 	if (_ConnectedClients.find(hostid) != _ConnectedClients.end())
@@ -440,7 +435,7 @@ const CInetAddress& CBufServerWebsocket::hostAddress( TSockId hostid )
 	return nullAddr;
 }
 
-void CBufServerWebsocket::displaySendQueueStat (NLMISC::CLog *log, TSockId destid)
+void CBufServerTcp::displaySendQueueStat (NLMISC::CLog *log, TSockId destid)
 {
 
 }
@@ -449,7 +444,7 @@ void CBufServerWebsocket::displaySendQueueStat (NLMISC::CLog *log, TSockId desti
 /*
  * Returns the number of bytes received since the previous call to this method
  */
-uint64 CBufServerWebsocket::newBytesReceived()
+uint64 CBufServerTcp::newBytesReceived()
 {
 	uint64 b = bytesReceived();
 	uint64 nbrecvd = b - _PrevBytesPoppedIn;
@@ -461,7 +456,7 @@ uint64 CBufServerWebsocket::newBytesReceived()
 /*
  * Returns the number of bytes sent since the previous call to this method
  */
-uint64 CBufServerWebsocket::newBytesSent()
+uint64 CBufServerTcp::newBytesSent()
 {
 	uint64 b = bytesSent();
 	uint64 nbsent = b - _PrevBytesPushedOut;
@@ -472,7 +467,7 @@ uint64 CBufServerWebsocket::newBytesSent()
 
 
 
-void CWebSocketReceiveTask::init( CBufServerWebsocket *server, uint16 port )
+void CTcpReceiveTask::init( CBufServerTcp *server, uint16 port )
 {
 	_Server = server;
 
@@ -484,22 +479,22 @@ void CWebSocketReceiveTask::init( CBufServerWebsocket *server, uint16 port )
     evthread_use_windows_threads();
 
     pEventBase = event_base_new();
-    WSListenArgs* pListenArgs = new struct WSListenArgs(pEventBase,_Server);
+    TcpListenArgs* pListenArgs = new struct TcpListenArgs(pEventBase,_Server);
     
 
-    pEvListener = evconnlistener_new_bind(  pEventBase, ws_listener_cb, (void*)pListenArgs, 
+    pEvListener = evconnlistener_new_bind(  pEventBase, tcp_listener_cb, (void*)pListenArgs, 
                                             LEV_OPT_REUSEABLE|LEV_OPT_CLOSE_ON_FREE, 10, 
                                             (struct sockaddr*)&sin, sizeof(struct sockaddr_in));  
 
 }
 
-void CWebSocketReceiveTask::run()
+void CTcpReceiveTask::run()
 {
-	nlnettrace( "CWebSocketReceiveTask::run" );
+	nlnettrace( "CTcpReceiveTask::run" );
     event_base_dispatch(pEventBase);  
 }
 
-bool CWebSocketReceiveTask::start()
+bool CTcpReceiveTask::start()
 {
     _ProcTableThread = NLMISC::IThread::create( this );
 
@@ -512,7 +507,7 @@ bool CWebSocketReceiveTask::start()
     return ( NULL != _ProcTableThread );
 }
 
-void CWebSocketReceiveTask::close()
+void CTcpReceiveTask::close()
 {
     if ( NULL != _ProcTableThread )
     {

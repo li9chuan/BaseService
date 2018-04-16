@@ -1,27 +1,27 @@
-local WebSocketCbClient = class("WebSocketCbClient")
+local WebSocketCbServer = class("WebSocketCbServer")
 
-function WebSocketCbClient:ctor()
+function WebSocketCbServer:ctor()
 	self.Service = nil;
 	self.ConnectCallbackEvent = "";
 	self.DisConnectCallbackEvent = "";
 end
 
-function WebSocketCbClient:Listen( name, port )
+function WebSocketCbServer:Listen( name, port )
 	self.ConnectCallbackEvent     = name .. "Connection";
 	self.DisConnectCallbackEvent  = name .. "DisConnection";
 	
-	self.Service = WebSocketNetwork.NewInstance(name, port);
+	self.Service = NetworkWebSocket.NewInstance(name, port);
 end
 
-function WebSocketCbClient:SetUIDMap( uid, sock_id )
+function WebSocketCbServer:SetUIDMap( uid, sock_id )
 	self.Service:SetUIDMap(uid, sock_id);
 end
 
-function WebSocketCbClient:RemoveUIDMap( uid )
+function WebSocketCbServer:RemoveUIDMap( uid )
 	self.Service:RemoveUIDMap(uid);
 end
 
-function WebSocketCbClient:Send( sock_id, msg_type, proto_type, proto_msg )
+function WebSocketCbServer:Send( sock_id, msg_type, proto_type, proto_msg )
 
 	local code = "";
 	local len  = 0;
@@ -37,5 +37,5 @@ function WebSocketCbClient:Send( sock_id, msg_type, proto_type, proto_msg )
 
 end
 
-return WebSocketCbClient
+return WebSocketCbServer
 

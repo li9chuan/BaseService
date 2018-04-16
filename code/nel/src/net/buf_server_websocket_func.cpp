@@ -1,4 +1,4 @@
-#include "nel/net/web_sock_fun.h"
+#include "nel/net/buf_server_websocket_func.h"
 #include "nel/misc/sha1.h"
 #include "nel/misc/base64.h"
 #include "nel/net/buf_sock.h"
@@ -48,7 +48,7 @@ sint32 NLNET::parse_frame_header( const uint8 *buf, WebSocketFrame& frame )
     return 0;
 }
 
-void NLNET::socket_read_cb( bufferevent *bev, void *args )
+void NLNET::ws_socket_read_cb( bufferevent *bev, void *args )
 {  
     char read_buffer[4096];  
     size_t  len = bufferevent_read(bev, read_buffer, sizeof(read_buffer) );
@@ -97,7 +97,7 @@ void NLNET::socket_read_cb( bufferevent *bev, void *args )
             }
             else if (frame.payload_len == 127)
             {
-                frame.payload_len = ntohs(*(uint64*)(buff+offset));
+                frame.payload_len = myntohll(*(uint64*)(buff+offset));
                 offset = 10;
             }
             else if( frame.payload_len < 126 )
@@ -195,22 +195,22 @@ void NLNET::socket_read_cb( bufferevent *bev, void *args )
     }
 }  
 
-void NLNET::socket_event_cb( bufferevent *bev, short events, void *args )
+void NLNET::ws_socket_event_cb( bufferevent *bev, short events, void *args )
 {  
     if (events & BEV_EVENT_EOF)  
-        nlinfo("connection closed\n");  
+        LNETL1_DEBUG("connection closed\n");  
     else if (events & BEV_EVENT_ERROR)  
-        nlinfo("some other error\n");
+        LNETL1_DEBUG("some other error\n");
 
-    nlinfo( "socket_event_cb:%d", events );
+    LNETL1_DEBUG( "socket_event_cb:%d", events );
 
     CServerBufSock* pBufSock = (CServerBufSock*)args;
     pBufSock->advertiseDisconnection( pBufSock->m_BufNetHandle, pBufSock );
 }
 
-void NLNET::listener_cb( evconnlistener *listener, evutil_socket_t fd, struct sockaddr *sock, int socklen, void *args )
+void NLNET::ws_listener_cb( evconnlistener *listener, evutil_socket_t fd, struct sockaddr *sock, int socklen, void *args )
 {  
-    SListenArgs*    pListenArgs = (SListenArgs*)args;
+    WSListenArgs*    pListenArgs = (WSListenArgs*)args;
     SOCKET          newSock = (SOCKET)fd;
 
     if ( newSock == INVALID_SOCKET )
@@ -235,7 +235,7 @@ void NLNET::listener_cb( evconnlistener *listener, evutil_socket_t fd, struct so
     pBufSock->m_BufNetHandle    = pListenArgs->pServer;
     pBufSock->m_BEVHandle       = bev;
 
-    bufferevent_setcb(bev, socket_read_cb , NULL, socket_event_cb, (void*)pBufSock);
+    bufferevent_setcb(bev, ws_socket_read_cb , NULL, ws_socket_event_cb, (void*)pBufSock);
     bufferevent_enable(bev, EV_READ | EV_PERSIST); 
 }  
 

@@ -15,7 +15,7 @@ Client      = require("Client/Client");
 MsgLogin    = require("Msg/MsgLogin");
 
 
-ClientService   = WebSocketCbClient:new();
+ClientService   = WebSocketCbServer:new();
 LoginModule     = MsgLogin:new();
 
 

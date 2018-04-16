@@ -15,8 +15,16 @@ using namespace NLNET;
 
 extern void forLuaMysqlConnForceLink();
 extern void forLuaBaseFunctionForceLink();
+extern void forLuaMessageForceLink();
 
-void luaexportforcelink()  {   forLuaMysqlConnForceLink(); forLuaBaseFunctionForceLink(); CIDGenerate idgen; }
+void luaexportforcelink()
+{
+    CIDGenerate idgen; 
+
+    forLuaMysqlConnForceLink(); 
+    forLuaBaseFunctionForceLink(); 
+    forLuaMessageForceLink();
+}
 
 void CScriptMgr::init( LUA_OPEN pLuaOpen )
 {
@@ -100,9 +108,11 @@ void CScriptMgr::Export()
     m_LuaEngine.ExportModule("Debug");
     m_LuaEngine.ExportModule("LuaThread");
     m_LuaEngine.ExportModule("ServerNet");
-    m_LuaEngine.ExportClass("WebSocketNetwork");
-    m_LuaEngine.ExportClass("LuaTimer");
+    m_LuaEngine.ExportClass("NetworkWebSocket");
+    m_LuaEngine.ExportClass("NetworkTcp");
+    m_LuaEngine.ExportClass("LuaMessage");
     m_LuaEngine.ExportClass("IDGenerate");
+
 
 
     m_LuaEngine.ExportClass("MysqlStmt");

@@ -1,7 +1,9 @@
 #include "lua_network.h"
-#include <nel/net/callback_server_websocket.h>
-#include <server_share/server_def.h>
-#include "script_mgr.h"
+#include "lua_message.h"
+#include "lua_network_base.h"
+#include "lua_network_tcp.h"
+#include "lua_network_websocket.h"
+#include <server_share/lua/script_mgr.h>
 #include "server_share/bin_luabind/Public.hpp"
 
 using namespace NLMISC;
@@ -20,18 +22,7 @@ void cbLuaServiceMsg ( NLNET::CMessage& msgin, const std::string &serviceName, N
     ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params);
 }
 
-void cbLuaClientMsg ( CMessage &msgin, TSockId from, CCallbackNetBase &netbase)
-{
-    uint64          msg_from = (uint64)from;
-    std::string     msg_type;
-    std::string     msg_buff;
 
-    msgin.serial(msg_type);
-    msgin.serial(msg_buff);
-
-    LuaParams lua_params( msg_from, msg_type, msg_buff );  
-    ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params );
-}
 
 ///  转发到客户端
 void cbLuaSendToClientMsg ( NLNET::CMessage& msgin, const std::string &serviceName, NLNET::TServiceId serviceId )
@@ -47,10 +38,7 @@ void cbLuaSendToClientMsg ( NLNET::CMessage& msgin, const std::string &serviceNa
     LuaNetworkMgr.SendToClient( client_uid, msg_type, pb_buff );
 }
 
-const TCallbackItem LuaClientCallbackArray[] =
-{
-    { "_LC",                            cbLuaClientMsg              },
-};
+
 
 NLNET::TUnifiedCallbackItem LuaCallbackArray[] =
 {
@@ -58,108 +46,12 @@ NLNET::TUnifiedCallbackItem LuaCallbackArray[] =
     { "_LSC",                           cbLuaSendToClientMsg        },
 };
 
-static void cbWSConnect( TSockId from, void *arg );
-static void cbWSDisConnect( TSockId from, void *arg );
-
-class CLuaClientNetwork
-{
-public:
-    CLuaClientNetwork( std::string name ) : m_NetName(name)
-    {
-        LuaNetworkMgr.RegisterNetModule( name, this );
-    }
-
-    virtual ~CLuaClientNetwork() { LuaNetworkMgr.RemoveNetModule(m_NetName); }
-
-    
-    virtual void Update() = 0;
-    virtual void Send( TSockId sock_id, std::string& msg_type, std::string& proto_str ) = 0;
-
-
-
-    void SetUIDMap( DEF::UID uid, TSockId sock_id ) { m_UIDMap[uid] = sock_id; }
-    void RemoveUIDMap( DEF::UID uid )               { m_UIDMap.erase(uid); }
-    void ClearUIDMap()                              { m_UIDMap.clear(); }
-
-    TSockId     GetSockId( DEF::UID uid )           
-    {
-        TUIDMap::iterator iter = m_UIDMap.find(uid);
-        if ( iter != m_UIDMap.end() )
-        {
-            return iter->second;
-        }
-
-        return InvalidSockId;
-    }
-
-    std::string         GetName()   { return m_NetName; }
-
-private:
-
-    std::string                                 m_NetName;
-
-    typedef     std::map<DEF::UID, TSockId>     TUIDMap;
-    TUIDMap                                     m_UIDMap;
-};
-
-
-
-class CLuaWebSocketNetwork : public CLuaClientNetwork
-{
-    DECLARE_SCRIPT_CLASS();
-public:
-
-    CLuaWebSocketNetwork( std::string name, uint16 port ) : CLuaClientNetwork(name)
-    {
-        m_CallbackServerHandle = new CCallbackServerWebSocket();
-        m_CallbackServerHandle->addCallbackArray(LuaClientCallbackArray, sizeof(LuaClientCallbackArray)/sizeof(LuaClientCallbackArray[0]));
-
-        m_CallbackServerHandle->setConnectionCallback( cbWSConnect, this );
-        m_CallbackServerHandle->setDisconnectionCallback( cbWSDisConnect, this );
-
-        m_CallbackServerHandle->init (port);
-    }
-
-    ~CLuaWebSocketNetwork()
-    {
-        delete m_CallbackServerHandle; 
-    }
-
-    void Update()
-    {
-        if( m_CallbackServerHandle->connected() )
-        {
-            m_CallbackServerHandle->update();
-        }
-    }
-
-    void Send( TSockId sock_id, std::string& msg_type, std::string& proto_str )
-    {
-        CMemStream mem_out;
-
-        //uint32 buff_len = proto_str.size() + msg_type.size() + 1 + 4;
-        //mem_out.serial(buff_len);
-        uint8 msg_type_len = msg_type.size();
-        mem_out.serial(msg_type_len);
-        mem_out.serialBuffer( (uint8*)msg_type.c_str(), msg_type_len );
-        mem_out.serialBuffer( (uint8*)proto_str.c_str(), proto_str.size() );
-
-        m_CallbackServerHandle->send_buffer( mem_out, sock_id );
-    }
-
-
-private:
-
-    CCallbackServerWebSocket*           m_CallbackServerHandle;
-};
-
-
 void CLuaNetworkMgr::Init()
 {
     NLNET::CUnifiedNetwork::getInstance()->addCallbackArray(LuaCallbackArray, sizeof(LuaCallbackArray)/sizeof(LuaCallbackArray[0]));
 }
 
-void CLuaNetworkMgr::RegisterNetModule( std::string name, CLuaClientNetwork* pNet )
+void CLuaNetworkMgr::RegisterNetModule( std::string name, CLuaBaseNetwork* pNet )
 {
     TNetHandle::iterator iter = m_LuaClientNetworkHandle.find(name);
 
@@ -219,9 +111,9 @@ void CLuaNetworkMgr::SendToClient( uint64 uid, std::string& msg_type, std::strin
     }
 }
 
-static void cbWSConnect( TSockId from, void *arg )
+void cbLuaSvrConnect( TSockId from, void *arg )
 {
-    CLuaWebSocketNetwork* pLuaNetwork = (CLuaWebSocketNetwork*)arg;
+    CLuaBaseNetwork* pLuaNetwork = (CLuaBaseNetwork*)arg;
 
     std::string lua_event = pLuaNetwork->GetName();
     lua_event.append("Connection");
@@ -234,9 +126,9 @@ static void cbWSConnect( TSockId from, void *arg )
     ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params );
 }
 
-static void cbWSDisConnect( TSockId from, void *arg )
+void cbLuaSvrDisConnect( TSockId from, void *arg )
 {
-    CLuaWebSocketNetwork* pLuaNetwork = (CLuaWebSocketNetwork*)arg;
+    CLuaBaseNetwork* pLuaNetwork = (CLuaBaseNetwork*)arg;
 
     std::string lua_event = pLuaNetwork->GetName();
     lua_event.append("DisConnection");
@@ -267,7 +159,7 @@ void cbDisconnection( const std::string &serviceName, NLNET::TServiceId sid, voi
 
 namespace bin
 {
-    BEGIN_SCRIPT_CLASS( WebSocketNetwork, CLuaWebSocketNetwork )
+    BEGIN_SCRIPT_CLASS( NetworkWebSocket, CLuaNetworkWebSocket )
 
         DEFINE_CLASS_FUNCTION( Send, void, (const char* proto_buf, CScriptTable& tb_msg))
         {
@@ -306,9 +198,9 @@ namespace bin
             return 1;
         }
 
-        DEFINE_STATIC_FUNCTION(NewInstance, CLuaWebSocketNetwork*, (std::string name, int port))
+        DEFINE_STATIC_FUNCTION(NewInstance, CLuaNetworkWebSocket*, (std::string name, int port))
         {
-            r = new CLuaWebSocketNetwork(name, port);
+            r = new CLuaNetworkWebSocket(name, port);
             r->GetScriptObject().SetDelByScr(true);
 
             return 1;
@@ -316,6 +208,43 @@ namespace bin
 
     END_SCRIPT_CLASS()
 
+
+
+    BEGIN_SCRIPT_CLASS( NetworkTcp, CLuaNetworkTcp )
+
+    DEFINE_CLASS_FUNCTION( Send, void, (lua_Integer sock_id, CLuaMessage* lua_msg))
+    {
+        obj->Send( lua_msg->m_Msg, (TSockId)sock_id );
+        return 1;
+    }
+
+    DEFINE_CLASS_FUNCTION( SetUIDMap, void, (lua_Integer uid, lua_Integer sock_id))
+    {
+        obj->SetUIDMap( uid, (TSockId)sock_id );
+        return 1;
+    }
+
+    DEFINE_CLASS_FUNCTION( RemoveUIDMap, void, (lua_Integer uid))
+    {
+        obj->RemoveUIDMap( uid );
+        return 1;
+    }
+
+    DEFINE_CLASS_FUNCTION( ClearUIDMap, void, ())
+    {
+        obj->ClearUIDMap();
+        return 1;
+    }
+
+    DEFINE_STATIC_FUNCTION(NewInstance, CLuaNetworkTcp*, (std::string name, int port))
+    {
+        r = new CLuaNetworkTcp(name, port);
+        r->GetScriptObject().SetDelByScr(true);
+
+        return 1;
+    }
+
+    END_SCRIPT_CLASS()
 
     ///   
     BEGIN_SCRIPT_MODULE(ServerNet)

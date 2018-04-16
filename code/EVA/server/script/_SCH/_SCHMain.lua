@@ -19,6 +19,9 @@ MsgLogin            = require("Msg/MsgLogin")
 
 MsgLoginModule      = MsgLogin:new();
 
+PHPService          = TcpCbServer:new();
+
+
 
 -- 主入口函数。从这里开始lua逻辑
 function ServiceInit()
@@ -28,6 +31,8 @@ function ServiceInit()
     PLSInfoMgr:Init();
     PlayerInfoMgr:Init();
     ScheduleService:Init();
+    
+    PHPService:Listen( "PHP", 20458 );
     
 end
 

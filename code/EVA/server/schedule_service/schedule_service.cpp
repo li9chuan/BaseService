@@ -2,13 +2,11 @@
 #include "config.h"
 #endif // HAVE_CONFIG_H
 
-#include <map>
-#include <utility>
 #include <server_share/tools.h>
 #include <server_share/server_def.h>
 #include <server_share/client_msg_desc.h>
 #include <server_share/lua/script_mgr.h>
-#include <server_share/lua/lua_network.h>
+#include <server_share/lua_net/lua_network.h>
 #include <nel/misc/window_displayer.h>
 #include <nel/net/naming_client.h>
 

@@ -62,11 +62,11 @@ namespace NLNET {
     class CBufServerWebsocket;
     class CServerBufSock;
 
-    struct SListenArgs
+    struct WSListenArgs
     {
         event_base*             pEventBase;
         CBufServerWebsocket*    pServer;
-        SListenArgs( event_base* eventbase, CBufServerWebsocket* bufsvr ) : pEventBase(eventbase), pServer(bufsvr) {}
+        WSListenArgs( event_base* eventbase, CBufServerWebsocket* bufsvr ) : pEventBase(eventbase), pServer(bufsvr) {}
     };
 
     //struct SEventArgs
@@ -105,14 +105,14 @@ namespace NLNET {
 
     void    fill_frame_buffer( const uint8* payload_data, uint32 payload_len, std::vector<uint8>& out_frame, uint8 opcode, uint8 fin=1 );
 
-    void    socket_event_cb( bufferevent *bev, short events, void *args );
+    void    ws_socket_event_cb( bufferevent *bev, short events, void *args );
 
-    void    socket_read_cb( bufferevent *bev, void *args ); 
+    void    ws_socket_read_cb( bufferevent *bev, void *args ); 
 
     //一个新客户端连接上服务器了  
     //当此函数被调用时，libevent已经帮我们accept了这个客户端。该客户端的
     //文件描述符为fd
-    void listener_cb( evconnlistener *listener, evutil_socket_t fd, sockaddr *sock, int socklen, void *args );  
+    void ws_listener_cb( evconnlistener *listener, evutil_socket_t fd, sockaddr *sock, int socklen, void *args );  
 
 
 }

@@ -6,7 +6,7 @@
 #include <server_share/server_def.h>
 #include <server_share/lua/lua_engine.h>
 #include <server_share/lua/script_mgr.h>
-#include <server_share/lua/lua_network.h>
+#include <server_share/lua_net/lua_network.h>
 #include <server_share/i18n_def.h>
 #include <server_share/timer.h>
 #include <nel/net/naming_client.h>

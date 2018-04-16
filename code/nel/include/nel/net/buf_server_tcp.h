@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef NL_BUF_SERVER_WEBSOCKET_H
-#define NL_BUF_SERVER_WEBSOCKET_H
+#ifndef NL_BUF_SERVER_TCP_H
+#define NL_BUF_SERVER_TCP_H
 
 #include "nel/misc/types_nl.h"
 #include "nel/misc/mutex.h"
@@ -35,8 +35,8 @@ namespace NLNET {
 
 
 class CInetAddress;
-class CBufServerWebsocket;
-class CWebSocketReceiveTask;
+class CBufServerTcp;
+class CTcpReceiveTask;
 
 
 /**
@@ -61,7 +61,7 @@ class CWebSocketReceiveTask;
  * \date 2018
  */
 
-class CBufServerWebsocket : public CBufNetBase
+class CBufServerTcp : public CBufNetBase
 {
 public:
 
@@ -72,10 +72,10 @@ public:
 	 * initPipeForDataAvailable is for Linux only. Set it to false if you provide an external pipe with
 	 * setExternalPipeForDataAvailable().
 	 */
-	CBufServerWebsocket();
+	CBufServerTcp();
 
 	/// Destructor
-	virtual ~CBufServerWebsocket();
+	virtual ~CBufServerTcp();
 
 	/// Listens on the specified port
 	void	init( uint16 port );
@@ -98,7 +98,7 @@ public:
 	/** Send a message to the specified host, or to all hosts if hostid is InvalidSockId
 	 */
 	//void	send( const std::vector<uint8>& buffer, TSockId hostid );
-	void	send_buffer( const NLMISC::CMemStream& buffer, TSockId hostid );
+	void	send( const NLMISC::CMemStream& buffer, TSockId hostid );
 
 	/** Checks if there is some data to receive. Returns false if the receive queue is empty.
 	 * This is where the connection/disconnection callbacks can be called.
@@ -189,7 +189,7 @@ public:
 
 protected:
 
-	friend class CWebSocketReceiveTask;
+	friend class CTcpReceiveTask;
 
 	/// Returns the receive task corresponding to a particular thread
 	CServerReceiveTask	*receiveTask( std::vector<NLMISC::IThread*>::iterator ipt )
@@ -231,7 +231,7 @@ private:
 	uint32							_MaxExpectedBlockSize;
 
 
-	CWebSocketReceiveTask			*_WebSocketReceiveTask;
+	CTcpReceiveTask			*_WebSocketReceiveTask;
 
 
 	typedef std::set<TSockId>		TClientSet;
@@ -281,14 +281,14 @@ private:
 
 typedef std::set<TSockId>					CConnections;
 
-class CWebSocketReceiveTask : public NLMISC::IRunnable
+class CTcpReceiveTask : public NLMISC::IRunnable
 {
 public:
 
 	/// Constructor
-	CWebSocketReceiveTask() : _Connections("CWebSocketReceiveTask::_Connections"), _RemoveSet("CWebSocketReceiveTask::_RemoveSet")  {}
+	CTcpReceiveTask() : _Connections("CTcpReceiveTask::_Connections"), _RemoveSet("CTcpReceiveTask::_RemoveSet")  {}
 
-	void init( CBufServerWebsocket*, uint16 port );
+	void init( CBufServerTcp*, uint16 port );
     bool start();
     void close();
 
@@ -326,7 +326,7 @@ public:
 	 */
 	void	addToRemoveSet( TSockId sockid )
 	{
-		nlnettrace( "CWebSocketReceiveTask::addToRemoveSet" );
+		nlnettrace( "CTcpReceiveTask::addToRemoveSet" );
 		nlassert( sockid != InvalidSockId );
 		{
 			// Three possibilities :
@@ -345,9 +345,9 @@ public:
 	}
 
 	/// Access to the server
-	CBufServerWebsocket	*server()	{ return _Server; }
+	CBufServerTcp	*server()	{ return _Server; }
 
-	friend	class CBufServerWebsocket;
+	friend	class CBufServerTcp;
 
 
 
@@ -358,7 +358,7 @@ protected:
 
 private:
 
-	CBufServerWebsocket						*_Server;
+	CBufServerTcp						    *_Server;
     NLMISC::IThread*                        _ProcTableThread;
     volatile bool	                        _ExitRequired;
 
@@ -377,6 +377,6 @@ private:
 } // NLNET
 
 
-#endif // NL_BUF_SERVER_WEBSOCKET_H
+#endif // NL_BUF_SERVER_TCP_H
 
-/* End of buf_server_websocket.h */
+/* End of buf_server_tcp.h */
