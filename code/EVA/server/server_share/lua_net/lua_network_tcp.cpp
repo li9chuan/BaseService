@@ -7,14 +7,14 @@ using namespace bin;
 
 static CLuaMessage* pLuaMsg = new CLuaMessage();
 
-void cbLuaTcpMsg ( CMessage &msgin, TSockId from, CCallbackNetBase &netbase)
+void cbLuaServiceMsg ( CMessage &msgin, TSockId from, CCallbackNetBase &netbase )
 {
     CScriptTable    functbl;
     ScriptMgr.GetScriptHandle()->Get("NetWorkHandler", functbl);
 
     int nRet = 0;
     pLuaMsg->m_Msg.swap(msgin);
-    
+
     functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnTestMessage", (lua_Integer)from, pLuaMsg, nRet);
 }
 
@@ -26,7 +26,7 @@ CLuaNetworkTcp::CLuaNetworkTcp( std::string name, uint16 port ) : CLuaBaseNetwor
     m_CallbackServerHandle->setConnectionCallback( cbLuaSvrConnect, this );
     m_CallbackServerHandle->setDisconnectionCallback( cbLuaSvrDisConnect, this );
 
-    m_CallbackServerHandle->setDefaultCallback(cbLuaTcpMsg);
+    m_CallbackServerHandle->setDefaultCallback(cbLuaServiceMsg);
 
     m_CallbackServerHandle->init (port);
 }

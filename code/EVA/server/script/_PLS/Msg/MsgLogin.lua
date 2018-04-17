@@ -12,18 +12,20 @@ function MsgLogin:ctor( Data )
    
 end
 
-function MsgLogin:CBSyncData( sch_sid, proto_buf )
+function MsgLogin:CBSyncData( sch_sid, msg_sdata_1 )
 
-	local MsgSvrLogin   = protobuf.decode("PB_MSG.MsgSvrLogin" , proto_buf)
-    local player_helper = PlayerMgr:LoadDBPlayer(MsgSvrLogin.UID);
+    local uid           = msg_sdata_1:rint64();
+    local fes_sid       = msg_sdata_1:rint32();
+    
+    local player_helper = PlayerMgr:LoadDBPlayer(uid);
     
     if player_helper~=nil then
         
-        player_helper.ConFES = MsgSvrLogin.ConFES;
-        
-        
+        player_helper.ConFES = fes_sid;
         PrintTable(player_helper);
-        BaseService:Send( player_helper.ConFES, "LoginPLS", "PB_MSG.MsgSvrLogin" , MsgSvrLogin);
+        
+        msg_sdata_1:invert();
+        BaseService:Send( player_helper.ConFES, msg_sdata_1);
         
         BaseService:SendToClient( player_helper.ConFES, player_helper.UID, "SyncPlayerInfo",
                                 "PB_MSG.MsgPlayerInfo", player_helper.PlayerDataHelper:ToProtoMsg() )

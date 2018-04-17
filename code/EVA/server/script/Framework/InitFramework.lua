@@ -49,6 +49,7 @@ MysqlConn                   = bin_types.MysqlConn;
 MysqlResult                 = bin_types.MysqlResult;
 NetworkWebSocket            = bin_types.NetworkWebSocket;
 NetworkTcp                  = bin_types.NetworkTcp;
+CMessage                    = bin_types.LuaMessage.NewInstance;
 
 print                       = Debug.Info;
 nldebug                     = Debug.Debug;

@@ -1,31 +1,28 @@
 BaseService = {}
 
-function BaseService:Send( service_id, msg_type, proto_type, proto_msg )
+function BaseService:SendPB( service_id, msg_type, proto_type, proto_msg )
 
-	code = protobuf.encode(proto_type, proto_msg)
-	len  = string.len(code);
-	
-	msg = { service_id, msg_type, len };
-	ServerNet.Send( code, msg );
+    local code = protobuf.encode(proto_type, proto_msg)
+    local msg_out = CMessage(msg_type);
+    msg_out:wstring( code );
+    ServerNet.Send( service_id, msg_out );
 
 end
 
-function BaseService:Broadcast( service_name, msg_type, proto_type, proto_msg )
+function BaseService:Send( service_id, msg_out )
+    ServerNet.Send( service_id, msg_out );
+end
 
-	code = protobuf.encode(proto_type, proto_msg)
-	len  = string.len(code);
-	
-	msg = { service_name, msg_type, len };
-	ServerNet.Broadcast( code, msg );
-
+function BaseService:Broadcast( service_name, msg_out )
+    ServerNet.Broadcast( service_name, msg_out );
 end
 
 function BaseService:SendToClient( service_id, client_uid, msg_type, proto_type, proto_msg )
 
-	code = protobuf.encode(proto_type, proto_msg)
-	len  = string.len(code);
+	local code = protobuf.encode(proto_type, proto_msg)
+	local len  = string.len(code);
 	
-	msg = { service_id, msg_type, len, client_uid };
+	local msg = { service_id, msg_type, len, client_uid };
 	ServerNet.SendToClient( code, msg );
 
 end

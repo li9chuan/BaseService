@@ -15,11 +15,15 @@ function MsgLogin:ctor( Data )
 end
 
 -- 分配PLS
-function MsgLogin:DispatchPLS( fes_id, proto_buf )
+function MsgLogin:DispatchPLS( fes_id, msg_authok )
 
-	local MsgSvrLogin = protobuf.decode("PB_MSG.MsgSvrLogin", proto_buf)
-    MsgSvrLogin.ConFES = fes_id;
-    local uid = MsgSvrLogin.UID;
+    local uid       = msg_authok:rint64();
+    local room_type = msg_authok:rstring();
+    
+    local msg_sdata_0 = CMessage("SyncData");
+    msg_sdata_0:wint64(uid);
+    msg_sdata_0:wint32(fes_id);
+
     local player = PlayerInfoMgr:GetPlayerInfo(uid);
     
     if player~=nil then
@@ -28,19 +32,19 @@ function MsgLogin:DispatchPLS( fes_id, proto_buf )
         
         if player.ConPLS~=nil then
             nlwarning("player.ConPLS    PB_MSG.MsgSvrLogin");
-            BaseService:Send( player.ConPLS, "SyncData", "PB_MSG.MsgSvrLogin", MsgSvrLogin )
+            BaseService:Send( player.ConPLS, msg_sdata_0 )
         else
             local pls_sid = PLSInfoMgr:AllocPLS(player.RoomType);
             
             if pls_sid~=nil then
                 player.ConPLS = pls_sid;
-                BaseService:Send( player.ConPLS, "SyncData", "PB_MSG.MsgSvrLogin", MsgSvrLogin )
+                BaseService:Send( player.ConPLS, msg_sdata_0 )
             else
                 nlwarning(player.RoomType.." not in pls config.");
             end
         end
     else
-        local pls_sid = PLSInfoMgr:AllocPLS(MsgSvrLogin.RoomType);
+        local pls_sid = PLSInfoMgr:AllocPLS(room_type);
         
         nlwarning("pls_sid:"..pls_sid);
     
@@ -49,12 +53,12 @@ function MsgLogin:DispatchPLS( fes_id, proto_buf )
             
             player.ConFES   = fes_id;
             player.ConPLS   = pls_sid;
-            player.RoomType = MsgSvrLogin.RoomType;
+            player.RoomType = room_type;
             
-            BaseService:Send( player.ConPLS, "SyncData", "PB_MSG.MsgSvrLogin", MsgSvrLogin )
+            BaseService:Send( player.ConPLS, msg_sdata_0 )
             
         else
-            nlwarning(MsgSvrLogin.RoomType.." not in pls config.");
+            nlwarning(room_type.." not in pls config.");
         end
     end
 end

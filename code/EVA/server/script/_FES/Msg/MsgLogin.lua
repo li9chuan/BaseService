@@ -13,7 +13,7 @@ function MsgLogin:ctor( Data )
     
     --  服务器间消息
     self._EventRegister:RegisterEvent( "AuthOk",    self, self.CBAuthOk );          -- 有客户端在其它FES上登录成功。RemoveClient
-    self._EventRegister:RegisterEvent( "LoginPLS",  self, self.CBLoginPLS );        -- 在PLS上登录成功。
+    self._EventRegister:RegisterEvent( "SyncData",  self, self.CBLoginPLS );        -- 在PLS上登录成功。
     
 	
 end
@@ -38,13 +38,14 @@ function MsgLogin:CBLogin( sock_id, proto_buf )
     
     
     --------------  账号认证通过
+
     
-    local MsgSvrLogin = {};
-    MsgSvrLogin["UID"]          = msg_login.UID;
-    MsgSvrLogin["RoomType"]     = msg_login.RoomType;
+    local msg_authok = CMessage("AuthOk");
+    msg_authok:wint64(msg_login.UID);
+    BaseService:Broadcast( "FES", msg_authok )      -- 通知其它网关有玩家登录成功。
     
-    BaseService:Broadcast( "FES", "AuthOk", "PB_MSG.MsgSvrLogin", MsgSvrLogin )      -- 通知其它网关有玩家登录成功。
-    BaseService:Broadcast( "SCH", "AuthOk", "PB_MSG.MsgSvrLogin", MsgSvrLogin )      -- 玩家认证通过，请求发送数据。
+    msg_authok:wstring(msg_login.RoomType);
+    BaseService:Broadcast( "SCH", msg_authok )      -- 玩家认证通过，请求发送数据。
     
     
     local client = ClientMgr:GetClient(msg_login.UID);
@@ -67,31 +68,30 @@ function MsgLogin:CBLogin( sock_id, proto_buf )
 end
 
 -- 有客户端在其它FES上登录成功。RemoveClient
-function MsgLogin:CBAuthOk( sock_id, proto_buf )
+function MsgLogin:CBAuthOk( sock_id, msg_authok )
 
-	local MsgSvrLogin = protobuf.decode("PB_MSG.MsgSvrLogin", proto_buf)
-    
-	print("MsgLogin:AuthOk"..MsgSvrLogin.UID);
-    ClientMgr:RemoveClient(MsgSvrLogin.UID);
+    local uid = msg_authok:rint64();
+	print("MsgLogin:AuthOk"..uid);
+    ClientMgr:RemoveClient(uid);
     
 end
 
-function MsgLogin:CBLoginPLS( sock_id, proto_buf )
+function MsgLogin:CBLoginPLS( pls_id, msg_sdata_2 )
     
-	local MsgSvrLogin = protobuf.decode("PB_MSG.MsgSvrLogin", proto_buf)
-    local client = ClientMgr:GetClient(MsgSvrLogin.UID);
+	local uid           = msg_sdata_2:rint64();
+    local client = ClientMgr:GetClient(uid);
     
     if( client ~= nil ) then
-        client.ConPLS = sock_id;
+        client.ConPLS = pls_id;
     end
 end
 
 
-function MsgLogin:Connect( sock_id, proto_buf )
+function MsgLogin:Connect( sock_id )
 	print("CallbackClient:Connect"..sock_id);
 end
 
-function MsgLogin:DisConnect( sock_id, proto_buf )
+function MsgLogin:DisConnect( sock_id )
 	print("CallbackClient:DisConnect"..sock_id);
     ClientMgr:RemoveSockID(sock_id);
 end

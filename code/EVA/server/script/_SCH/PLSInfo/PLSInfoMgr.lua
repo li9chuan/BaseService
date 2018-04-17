@@ -10,10 +10,11 @@ function PLSInfoMgr:Init()
     print("PLSInfoMgr:Init");
 end
 
-function PLSInfoMgr:SvrUpdateInfoCB( msg_from, proto_buf )
+function PLSInfoMgr:SvrUpdateInfoCB( msg_from, msg_svrinfo )
     
-    local pb_sinfo = protobuf.decode("PB_MSG.MsgServiceInfo" , proto_buf)
-    local pls_info = PLSInfo:new();
+    local proto_buf = msg_svrinfo:rstring();
+    local pb_sinfo  = protobuf.decode("PB_MSG.MsgServiceInfo" , proto_buf)
+    local pls_info  = PLSInfo:new();
     pls_info:LoadData(pb_sinfo);
     
     if pls_info.ServiceName=="PLS" then

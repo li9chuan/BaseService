@@ -40,8 +40,6 @@ function EventController:TriggerEvent( msg_type, ... )
     end
     for i,v in pairs(self._MessageQue[msg_type]) do
 		if (v ~= nil)then
-            --local params = {...}
-            --table.unpack(args)
 			v(...)
 		else
 		end

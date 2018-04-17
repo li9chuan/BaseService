@@ -35,7 +35,7 @@ function PlayerLogicService:UpdatePLSInfo( service_id )
         table.insert( MsgServiceInfo.RoomList, MsgRoomType );
     end  
 
-    BaseService:Send( service_id, "SvrInfo", "PB_MSG.MsgServiceInfo", MsgServiceInfo )
+    BaseService:SendPB( service_id, "SvrInfo", "PB_MSG.MsgServiceInfo", MsgServiceInfo )
 
 end
 

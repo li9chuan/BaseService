@@ -9,17 +9,25 @@
 using namespace NLMISC;
 using namespace NLNET;
 
-void cbLuaServiceMsg ( NLNET::CMessage& msgin, const std::string &serviceName, NLNET::TServiceId serviceId )
+static CLuaMessage* pUnifiedServiceMsg = new CLuaMessage();
+
+void cbLuaUnifiedServiceMsg ( NLNET::CMessage& msgin, const std::string &serviceName, NLNET::TServiceId serviceId )
 {
-    uint64          msg_from = serviceId.get();
-    std::string     msg_type;
-    std::string     msg_buff;
+    uint32 subSize;
+    msgin.serial(subSize);
+    msgin.lockSubMessage(subSize);
 
-    msgin.serial(msg_type);
-    msgin.serial(msg_buff);
+    pUnifiedServiceMsg->m_Msg.clear();
+    pUnifiedServiceMsg->m_Msg.assignFromSubMessage(msgin);
 
-    LuaParams lua_params( msg_from, msg_type, msg_buff );  
-    ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params);
+    msgin.unlockSubMessage();
+
+
+    bin::CScriptTable    functbl;
+    ScriptMgr.GetScriptHandle()->Get("NetWorkHandler", functbl);
+
+    int nRet = 0;
+    functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnTestMessage", (lua_Integer)serviceId.get(), pUnifiedServiceMsg, nRet);
 }
 
 
@@ -42,8 +50,8 @@ void cbLuaSendToClientMsg ( NLNET::CMessage& msgin, const std::string &serviceNa
 
 NLNET::TUnifiedCallbackItem LuaCallbackArray[] =
 {
-    { "_LS",                            cbLuaServiceMsg             },
-    { "_LSC",                           cbLuaSendToClientMsg        },
+    { "_LS",                            cbLuaUnifiedServiceMsg          },
+    { "_LSC",                           cbLuaSendToClientMsg            },
 };
 
 void CLuaNetworkMgr::Init()
@@ -249,51 +257,19 @@ namespace bin
     ///   
     BEGIN_SCRIPT_MODULE(ServerNet)
 
-        DEFINE_MODULE_FUNCTION(Broadcast, void, (const char* proto_buf, CScriptTable& tb_msg))
+        DEFINE_MODULE_FUNCTION(Broadcast, void, (const char* service_name, CLuaMessage* pMsg))
         {
-            if( tb_msg.IsReferd() )
-            {
-                std::string     service_name;
-                std::string     msg_type;
-                int             buf_len;
-
-                tb_msg.Get(1, service_name);
-                tb_msg.Get(2, msg_type);
-                tb_msg.Get(3, buf_len);
-
-                std::string      pb_str(proto_buf,buf_len);
-
-                CMessage msg_out("_LS");
-                msg_out.serial(msg_type);
-                msg_out.serial(pb_str);
-
-                Network->send( service_name, msg_out, false );
-            }
-
+            NLNET::CMessage msgout("_LS");
+            msgout.serialMessage(pMsg->m_Msg);
+            Network->send( service_name, msgout, false );
             return 1;
         }
 
-        DEFINE_MODULE_FUNCTION(Send, void, (const char* proto_buf, CScriptTable& tb_msg))
+        DEFINE_MODULE_FUNCTION(Send, void, (lua_Integer service_id, CLuaMessage* pMsg))
         {
-            if( tb_msg.IsReferd() )
-            {
-                int             sid;
-                std::string     msg_type;
-                int             buf_len;
-
-                tb_msg.Get(1, sid);
-                tb_msg.Get(2, msg_type);
-                tb_msg.Get(3, buf_len);
-
-                std::string     pb_str(proto_buf,buf_len);
-
-                CMessage msg_out("_LS");
-                msg_out.serial(msg_type);
-                msg_out.serial(pb_str);
-
-                Network->send( (NLNET::TServiceId)sid, msg_out );
-            }
-
+            NLNET::CMessage msgout("_LS");
+            msgout.serialMessage(pMsg->m_Msg);
+            Network->send( (NLNET::TServiceId)service_id, msgout );
             return 1;
         }
 
