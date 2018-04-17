@@ -200,19 +200,7 @@ public:
 		return false;
 	}
 
-	bool SendToLibEvent( const std::vector<uint8>& buffer )
-	{
-		nlassert (this != InvalidSockId);	// invalid bufsock
-//		LNETL1_DEBUG( "LNETL1: Pushing buffer to %s", asString().c_str() );
-
-
-        if( connectedState() )
-        {
-        }
-
-		return false;
-	}
-
+	bool SendToLibEvent( const NLMISC::CMemStream& buffer );
 
 	/// Connects to the specified addr; set connectedstate to true if no connection advertising is needed
 	void connect( const CInetAddress& addr, bool nodelay, bool connectedstate );

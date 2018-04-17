@@ -151,13 +151,10 @@ void CBufServerTcp::send( const CMemStream& buffer, TSockId hostid )
 
 	if ( hostid != InvalidSockId )
 	{
-		if (_ConnectedClients.find(hostid) == _ConnectedClients.end())
+		if (_ConnectedClients.find(hostid) != _ConnectedClients.end())
 		{
-			// this host is not connected
-			return;
+			hostid->SendToLibEvent(buffer);
 		}
-
-        bufferevent_write( hostid->m_BEVHandle, buffer.buffer(), buffer.length() );  
 	}
 	else
 	{
@@ -165,7 +162,6 @@ void CBufServerTcp::send( const CMemStream& buffer, TSockId hostid )
         // 全服广播在逻辑层用定时器实现
 	}
 }
-
 
 /*
  * Checks if there are some data to receive

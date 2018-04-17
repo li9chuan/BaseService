@@ -8,6 +8,7 @@ TARGET_LINK_LIBRARIES(  admin_service
 						servershare
 						eva_adminmodules
 						${LIBXML2_LIBRARIES}
+                        ${LIBEVENT_LIBRARY}
 						nelmisc 
 						nelnet)
 
