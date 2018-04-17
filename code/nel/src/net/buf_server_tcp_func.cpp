@@ -25,7 +25,8 @@ void NLNET::tcp_socket_read_cb( bufferevent *bev, void *args )
         /// 如果缓存中已经收够了一个完整的消息
         if ( buff_len >= data_len+sizeof(TBlockSize) )
         {
-            CMessage  msg;
+            NLMISC::CMemStream& msg=pBufSock->CompleteMsg;
+
             msg.fill( buff+sizeof(TBlockSize), data_len );
             uint8 event_type    = CBufNetBase::User;
             uint64 sockid       = (uint64)pBufSock;

@@ -322,6 +322,8 @@ public:
 	// Buffer for nonblocking receives
 	std::vector<uint8>			_ReceiveBuffer;
 
+    NLMISC::CMemStream          CompleteMsg;
+
 	// Max payload size than can be received in a block
 	uint32						_MaxExpectedBlockSize;
 
