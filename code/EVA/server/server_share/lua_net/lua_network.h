@@ -5,7 +5,7 @@
 #include <nel/net/unified_network.h>
 #include <nel/net/buf_net_base.h>
 
-class CLuaBaseNetwork; 
+class CLuaCallbackServer; 
 
 void cbLuaSvrConnect( NLNET::TSockId from, void *arg );
 void cbLuaSvrDisConnect( NLNET::TSockId from, void *arg );
@@ -18,10 +18,10 @@ public:
 
     void Init();
 
-    void RegisterNetModule( std::string name, CLuaBaseNetwork* pNet );
+    void RegisterNetModule( std::string name, CLuaCallbackServer* pNet );
     void RemoveNetModule( std::string name );
 
-    void SendToClient( uint64 uid, std::string& msg_type, std::string& pb_buff );
+    void SendToClient( uint64 uid, NLNET::CMessage& msgin );
 
     void Update();
 
@@ -32,7 +32,7 @@ public:
 
 private:
 
-    typedef std::map<std::string, CLuaBaseNetwork*>    TNetHandle;
+    typedef std::map<std::string, CLuaCallbackServer*>    TNetHandle;
     TNetHandle          m_LuaClientNetworkHandle;
 };
 

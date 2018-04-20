@@ -3,10 +3,10 @@ ScheduleService = {}
 function ScheduleService:Init()
 	self._EventRegister = EventRegister.new();
 	
-	self._EventRegister:RegisterEvent( "FESConnection",         self, self.CbConnection );
-	self._EventRegister:RegisterEvent( "FESDisConnection",      self, self.CbFESDisConnection );
-    self._EventRegister:RegisterEvent( "PLSConnection",         self, self.CbConnection );
-	self._EventRegister:RegisterEvent( "PLSDisConnection",      self, self.CbPLSDisConnection );
+	self._EventRegister:RegisterEvent( "FESCon",            self, self.CbConnection );
+	self._EventRegister:RegisterEvent( "FESDis",            self, self.CbFESDisConnection );
+    self._EventRegister:RegisterEvent( "PLSCon",            self, self.CbConnection );
+	self._EventRegister:RegisterEvent( "PLSDis",            self, self.CbPLSDisConnection );
     
     -- 注册其它服务器启动的回调
     ServerNet.SetConnectionCallback("FES");

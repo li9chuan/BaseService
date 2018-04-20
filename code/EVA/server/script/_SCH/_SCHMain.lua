@@ -19,7 +19,7 @@ MsgLogin            = require("Msg/MsgLogin")
 
 MsgLoginModule      = MsgLogin:new();
 
-PHPService          = TcpCbServer:new();
+PHPService          = CallbackServer:new();
 
 
 
@@ -32,7 +32,7 @@ function ServiceInit()
     PlayerInfoMgr:Init();
     ScheduleService:Init();
     
-    PHPService:Listen( "PHP", 20458 );
+    PHPService:Listen( "PHP", "tcp", 20458 );
     
 end
 

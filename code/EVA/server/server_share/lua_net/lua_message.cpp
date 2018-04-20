@@ -41,6 +41,12 @@ namespace bin
         return 1;
     }
 
+    DEFINE_CLASS_FUNCTION( wbool, void, (bool in_val))
+    {
+        obj->m_Msg.serial(in_val);
+        return 1;
+    }
+
     DEFINE_CLASS_FUNCTION( wint, void, (sint64 in_val))
     {
         obj->m_Msg.serial(in_val);
@@ -63,6 +69,13 @@ namespace bin
     {
         uint32  serial_val=in_val;
         obj->m_Msg.serial(serial_val);
+        return 1;
+    }
+
+    DEFINE_CLASS_FUNCTION( rbool, bool, ())
+    {
+        nlassert(obj->m_Msg.isReading());
+        obj->m_Msg.serial(r);
         return 1;
     }
 
@@ -89,6 +102,13 @@ namespace bin
         return 1;
     }
 
+    DEFINE_CLASS_FUNCTION( rdouble, double, ())
+    {
+        nlassert(obj->m_Msg.isReading());
+        obj->m_Msg.serial(r);
+        return 1;
+    }
+
     DEFINE_CLASS_FUNCTION( rint, sint64, ())
     {
         nlassert(obj->m_Msg.isReading());
@@ -100,6 +120,18 @@ namespace bin
     {
         nlassert(obj->m_Msg.isReading());
         obj->m_Msg.serial(r);
+        return 1;
+    }
+
+    DEFINE_CLASS_FUNCTION( rtable, CScriptTable, ())
+    {
+        nlassert(obj->m_Msg.isReading());
+
+        std::string json_str;
+        obj->m_Msg.serial(json_str);
+        obj->GetScriptHandle().NewTable(r);
+        obj->GetScriptHandle().CallFunc<std::string&, CScriptTable>( "Json2Table", json_str, r );
+
         return 1;
     }
 

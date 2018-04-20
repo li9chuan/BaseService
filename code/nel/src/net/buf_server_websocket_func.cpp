@@ -160,27 +160,21 @@ void NLNET::ws_socket_read_cb( bufferevent *bev, void *args )
                     msg_buff.assign( buff+offset, buff+offset+frame.payload_len );
 
 
-                    if( msg_buff.size() >= 2 )
+                    if( msg_buff.size() >= 4 )
                     {
-                        uint8 msg_type_len = (uint8)msg_buff[0];
+                        uint32 msg_type_len = ntohl(*(uint32*)msg_buff.data());
 
-                        if( msg_type_len<127 && msg_type_len <= msg_buff.size()-1 )
+                        if( msg_type_len>9 && msg_type_len<65535 )
                         {
-                            CSString msg_type = msg_buff.substr( 1, msg_type_len );
-                            CMessage msg( "_LC" );
-                            msg.serial(  msg_type );
-
-                            if( msg_buff.size()-msg_type_len-1 > 0 )
-                            {
-                                msg.serialBufferWithSize( (uint8*)&*msg_buff.begin()+msg_type_len+1, msg_buff.size()-msg_type_len-1);
-                            }
+                            CMemStream  mem_msg;
+                            mem_msg.fill( (const uint8*)msg_buff.data()+sizeof(uint32), msg_type_len );
 
                             uint8 event_type    = CBufNetBase::User;
                             uint64 sockid       = (uint64)pBufSock;
-                            msg.serial( sockid );
-                            msg.serial( event_type );
+                            mem_msg.serial( sockid );
+                            mem_msg.serial( event_type );
 
-                            pBufSock->m_BufNetHandle->pushMessageIntoReceiveQueue( msg.buffer(), msg.length() );
+                            pBufSock->m_BufNetHandle->pushMessageIntoReceiveQueue( mem_msg.buffer(), mem_msg.length() );
                         }
                     }
                 }
@@ -239,7 +233,7 @@ void NLNET::ws_listener_cb( evconnlistener *listener, evutil_socket_t fd, struct
     bufferevent_enable(bev, EV_READ | EV_PERSIST); 
 }  
 
-void NLNET::fill_frame_buffer( const uint8* payload_data, uint32 payload_len, std::vector<uint8>& out_frame, uint8 opcode, uint8 fin/* =1 */ )
+void NLNET::fill_frame_buffer( const uint8* payload_data, uint32 payload_len, NLMISC::CObjectVector<uint8>& out_frame, uint8 opcode, uint8 fin/* =1 */ )
 {
     out_frame.clear();
 
@@ -248,6 +242,7 @@ void NLNET::fill_frame_buffer( const uint8* payload_data, uint32 payload_len, st
         return;
     }
 
+    uint32  buff_len = payload_len + 4;
     uint8   mask = 0;               //  must not mask at server endpoint
     uint8   masking_key[4] = {0};   //  no need at server endpoint
     uint8   c1 = 0x00;
@@ -257,7 +252,7 @@ void NLNET::fill_frame_buffer( const uint8* payload_data, uint32 payload_len, st
     c1 = c1 | opcode;               //  set opcode
     c2 = c2 | (mask << 7);          //  set mask
 
-    if ( payload_len == 0 )
+    if ( buff_len == 0 )
     {
         if (mask == 0)
         {
@@ -274,80 +269,101 @@ void NLNET::fill_frame_buffer( const uint8* payload_data, uint32 payload_len, st
             memcpy( &out_frame[2], masking_key, sizeof(masking_key) );
         }
     }
-    else if ( payload_len <= 125 )
+    else if ( buff_len <= 125 )
     {
         if (mask == 0)
         {
-            out_frame.resize(2+payload_len);
+            out_frame.resize(2+buff_len);
 
             out_frame[0] = c1;
-            out_frame[1] = c2 + payload_len;
+            out_frame[1] = c2 + buff_len;
 
-            memcpy( out_frame.data()+2, payload_data, payload_len );
+            uint32 netlen = myhtonl( (uint32)payload_len );
+            *(uint32*)&(out_frame[2])=netlen;
+
+            memcpy( out_frame.getPtr()+2+sizeof(uint32), payload_data, payload_len );
         }
         else
         {
-            out_frame.resize(2+4+payload_len);
+            out_frame.resize(2+4+buff_len);      // frame len + mask len + payload len + data
 
             out_frame[0] = c1;
-            out_frame[1] = c2 + payload_len;
+            out_frame[1] = c2 + buff_len;
 
-            memcpy( out_frame.data()+2, masking_key, sizeof(masking_key) );
-            memcpy( out_frame.data()+6, payload_data, payload_len );
+            memcpy( out_frame.getPtr()+2, masking_key, sizeof(masking_key) );
+
+            uint32 netlen = myhtonl( (uint32)payload_len );
+            *(uint32*)&(out_frame[6])=netlen;
+
+            memcpy( out_frame.getPtr()+10, payload_data, payload_len );
         }
     }
-    else if ( payload_len >= 126 && payload_len <= 65535 )
+    else if ( buff_len >= 126 && buff_len <= 65535 )
     {
         if (mask == 0)
         {
-            out_frame.resize(4+payload_len);
+            out_frame.resize(4+buff_len);      //  frame len + payload len + data
 
             out_frame[0] = c1;
             out_frame[1] = c2 + 126;
 
-            uint16 tmplen = myhtons((uint16)payload_len);
+            uint16 tmplen = myhtons((uint16)buff_len);
+            memcpy( out_frame.getPtr()+2, &tmplen, 2 );
 
+            uint32 netlen = myhtonl( (uint32)payload_len );
+            *(uint32*)&(out_frame[4])=netlen;
 
-            memcpy( out_frame.data()+2, &tmplen, 2 );
-            memcpy( out_frame.data()+4, payload_data, payload_len );
+            memcpy( out_frame.getPtr()+8, payload_data, payload_len );
         }
         else
         {
-            out_frame.resize(4+4+payload_len);
+            out_frame.resize(4+4+buff_len);
 
             out_frame[0] = c1;
             out_frame[1] = c2 + 126;
 
-            uint16 tmplen = myhtons((uint16)payload_len);
-            memcpy( out_frame.data()+2, &tmplen, 2 );
-            memcpy( out_frame.data()+4, masking_key, sizeof(masking_key) );
-            memcpy( out_frame.data()+8, payload_data, payload_len );
+            uint16 tmplen = myhtons((uint16)buff_len);
+            memcpy( out_frame.getPtr()+2, &tmplen, 2 );
+            memcpy( out_frame.getPtr()+4, masking_key, sizeof(masking_key) );
+
+            uint32 netlen = myhtonl( (uint32)payload_len );
+            *(uint32*)&(out_frame[8])=netlen;
+
+            memcpy( out_frame.getPtr()+12, payload_data, payload_len );
         }
     }
-    else if ( payload_len >= 65536 )
+    else if ( buff_len >= 65536 )
     {
         if (mask == 0)
         {
-            out_frame.resize(2+8+payload_len);
+            out_frame.resize(2+8+buff_len);
 
             out_frame[0] = c1;
             out_frame[1] = c2 + 127;
 
-            uint64 tmplen = myhtonll(payload_len);
-            memcpy( out_frame.data()+2, &tmplen, 8 );
-            memcpy( out_frame.data()+10, payload_data, payload_len );
+            uint64 tmplen = myhtonll(buff_len);
+            memcpy( out_frame.getPtr()+2, &tmplen, 8 );
+
+            uint32 netlen = myhtonl( (uint32)payload_len );
+            *(uint32*)&(out_frame[10])=netlen;
+
+            memcpy( out_frame.getPtr()+14, payload_data, payload_len );
         }
         else
         {
-            out_frame.resize(2+8+4+payload_len);
+            out_frame.resize(2+8+4+buff_len);
 
             out_frame[0] = c1;
             out_frame[1] = c2 + 127;
 
-            uint64 tmplen = myhtonll(payload_len);
-            memcpy( out_frame.data()+2, &tmplen, 8 );
-            memcpy( out_frame.data()+10, masking_key, sizeof(masking_key) );
-            memcpy( out_frame.data()+14, payload_data, payload_len );
+            uint64 tmplen = myhtonll(buff_len);
+            memcpy( out_frame.getPtr()+2, &tmplen, 8 );
+            memcpy( out_frame.getPtr()+10, masking_key, sizeof(masking_key) );
+
+            uint32 netlen = myhtonl( (uint32)payload_len );
+            *(uint32*)&(out_frame[14])=netlen;
+
+            memcpy( out_frame.getPtr()+18, payload_data, payload_len );
         }
     }
 }

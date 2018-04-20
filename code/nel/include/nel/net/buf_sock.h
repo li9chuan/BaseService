@@ -200,7 +200,7 @@ public:
 		return false;
 	}
 
-	bool SendToLibEvent( const NLMISC::CMemStream& buffer );
+	bool SendToLibEvent( const NLMISC::CMemStream& buffer, bool add_ws_head=false );
 
 	/// Connects to the specified addr; set connectedstate to true if no connection advertising is needed
 	void connect( const CInetAddress& addr, bool nodelay, bool connectedstate );

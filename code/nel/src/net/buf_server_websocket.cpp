@@ -142,7 +142,7 @@ void CBufServerWebsocket::disconnect( TSockId hostid, bool quick )
 /*
  * Send a message to the specified host
  */
-void CBufServerWebsocket::send_buffer( const CMemStream& buffer, TSockId hostid )
+void CBufServerWebsocket::send( const CMemStream& buffer, TSockId hostid )
 {
 	nlnettrace( "CBufServerWebsocket::send" );
 	nlassert( buffer.length() > 0 );
@@ -150,23 +150,18 @@ void CBufServerWebsocket::send_buffer( const CMemStream& buffer, TSockId hostid 
 
 	// slow down the layer H_AUTO (CBufServer_send);
 
-	if ( hostid != InvalidSockId )
-	{
-		if (_ConnectedClients.find(hostid) == _ConnectedClients.end())
-		{
-			// this host is not connected
-			return;
-		}
-
-        std::vector<uint8>  out_frame;
-        fill_frame_buffer( buffer.buffer(), buffer.length(), out_frame, WEBSOCK_FRAME_BIN );
-        bufferevent_write( hostid->m_BEVHandle, out_frame.data(), out_frame.size() );  
-	}
-	else
-	{
-		// Push into all send queues
+    if ( hostid != InvalidSockId )
+    {
+        if (_ConnectedClients.find(hostid) != _ConnectedClients.end())
+        {
+            hostid->SendToLibEvent(buffer, true);
+        }
+    }
+    else
+    {
+        // Push into all send queues
         // 全服广播在逻辑层用定时器实现
-	}
+    }
 }
 
 

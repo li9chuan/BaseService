@@ -1,5 +1,5 @@
-#ifndef SERVER_SHARD_LUA_NETWORK_BASE_H
-#define SERVER_SHARD_LUA_NETWORK_BASE_H
+#ifndef SERVER_SHARD_LUA_CALLBACK_SERVER_H
+#define SERVER_SHARD_LUA_CALLBACK_SERVER_H
 
 #include <nel/misc/singleton.h>
 #include "lua_network.h"
@@ -7,17 +7,26 @@
 #include <server_share/server_def.h>
 #include <server_share/bin_luabind/Public.hpp>
 
-class CLuaBaseNetwork
+class CLuaCallbackServer
 {
     DECLARE_SCRIPT_CLASS()
 public:
-    CLuaBaseNetwork( std::string name ) : m_NetName(name)
+
+    CLuaCallbackServer( std::string& name, std::string& protocal, uint16 port );
+    ~CLuaCallbackServer();
+
+    void Update()
     {
-        LuaNetworkMgr.RegisterNetModule( name, this );
+        if( m_CallbackServerHandle->connected() )
+        {
+            m_CallbackServerHandle->update();
+        }
     }
 
-    virtual void Update() = 0;
-    virtual void Send( NLNET::TSockId sock_id, const NLNET::CMessage &buffer ) {};
+    void Send( NLNET::TSockId sock_id, const NLNET::CMessage &buffer )
+    {
+        m_CallbackServerHandle->send( buffer, sock_id );
+    }
 
 
 
@@ -44,6 +53,8 @@ protected:
 
     typedef     std::map<DEF::UID, NLNET::TSockId>  TUIDMap;
     TUIDMap                                         m_UIDMap;
+
+    NLNET::CCallbackNetBase*                        m_CallbackServerHandle;
 };
 
-#endif          // SERVER_SHARD_LUA_NETWORK_BASE_H
+#endif          // SERVER_SHARD_LUA_CALLBACK_SERVER_H

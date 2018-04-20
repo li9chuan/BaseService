@@ -8,8 +8,8 @@ function PlayerLogicService:Init()
     
     
 	self._EventRegister = EventRegister.new();
-    self._EventRegister:RegisterEvent( "SCHConnection",         self, self.SCHConnection );
-	self._EventRegister:RegisterEvent( "SCHDisConnection",      self, self.SCHDisConnection );
+    self._EventRegister:RegisterEvent( "SCHCon",            self, self.SCHConnection );
+	self._EventRegister:RegisterEvent( "SCHDis",            self, self.SCHDisConnection );
     
 
     self.TimerID    = 0;
@@ -35,7 +35,7 @@ function PlayerLogicService:UpdatePLSInfo( service_id )
         table.insert( MsgServiceInfo.RoomList, MsgRoomType );
     end  
 
-    BaseService:SendPB( service_id, "SvrInfo", "PB_MSG.MsgServiceInfo", MsgServiceInfo )
+    BaseService:Send( service_id, "SvrInfo", "PB_MSG.MsgServiceInfo", MsgServiceInfo )
 
 end
 

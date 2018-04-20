@@ -47,8 +47,6 @@ IDGenerate                  = bin_types.IDGenerate;
 MysqlStmt                   = bin_types.MysqlStmt;
 MysqlConn                   = bin_types.MysqlConn;
 MysqlResult                 = bin_types.MysqlResult;
-NetworkWebSocket            = bin_types.NetworkWebSocket;
-NetworkTcp                  = bin_types.NetworkTcp;
 CMessage                    = bin_types.LuaMessage.NewInstance;
 
 print                       = Debug.Info;
@@ -88,8 +86,7 @@ LuaManager					= LuaHelper.GetLuaManger();
 EventController             = require("Event/EventController")
 --ServerManager             = require("Net/ServerManager")
 EventRegister               = require("Event/EventRegister")
-WebSocketCbServer           = require("Net/WebSocketCbServer");
-TcpCbServer                 = require("Net/TcpCbServer");
+CallbackServer              = require("Net/CallbackServer");
 StateMachine                = require("SimpleStateMachine");
 
 

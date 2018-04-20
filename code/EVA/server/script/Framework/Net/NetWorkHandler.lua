@@ -1,14 +1,15 @@
 NetWorkHandler = {};
 local this = NetWorkHandler;
 
--- 收到网络消息，由C++调起
-function NetWorkHandler.OnMessage( msg_from, msg_type, proto_buf )	
-	EventController.Instance():TriggerEvent( msg_type, msg_from, proto_buf );
+-- 收到连接，断开事件
+function NetWorkHandler.OnNetEvent( event_from, event_type, event_val )	
+	EventController.Instance():TriggerEvent( event_type, event_from, event_val );
 end
 
-function NetWorkHandler.OnTestMessage( msg_from, lua_msg )	
+-- 收到网络消息
+function NetWorkHandler.OnMessage( msg_from, lua_msg )	
 
-    nlinfo(msg_from.."NetWorkHandler.OnTestMessage   " .. lua_msg:name());
+    nlinfo(msg_from.."NetWorkHandler.OnMessage   " .. lua_msg:name());
     
     EventController.Instance():TriggerEvent( lua_msg:name(), msg_from, lua_msg );
     

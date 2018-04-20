@@ -27,20 +27,10 @@ public:
         }
     }
 
-    void Send( NLNET::TSockId sock_id, std::string& msg_type, std::string& proto_str )
+    void Send( NLNET::TSockId sock_id, const NLNET::CMessage &buffer )
     {
-        NLMISC::CMemStream mem_out;
-
-        //uint32 buff_len = proto_str.size() + msg_type.size() + 1 + 4;
-        //mem_out.serial(buff_len);
-        uint8 msg_type_len = msg_type.size();
-        mem_out.serial(msg_type_len);
-        mem_out.serialBuffer( (uint8*)msg_type.c_str(), msg_type_len );
-        mem_out.serialBuffer( (uint8*)proto_str.c_str(), proto_str.size() );
-
-        m_CallbackServerHandle->send_buffer( mem_out, sock_id );
+        m_CallbackServerHandle->send( buffer, sock_id );
     }
-
 
 private:
 

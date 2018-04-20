@@ -21,8 +21,7 @@
 #include "nel/net/buf_sock.h"
 #include "nel/net/buf_server.h"
 #include "nel/net/net_log.h"
-#include "libevent/event2/event.h"
-#include "libevent/event2/bufferevent.h"
+#include "nel/net/buf_server_websocket_func.h"
 
 #ifdef NL_OS_WINDOWS
 #	ifndef NL_COMP_MINGW
@@ -378,18 +377,26 @@ string CBufSock::asString() const
 	return str;
 }
 
-bool CBufSock::SendToLibEvent( const CMemStream& buffer )
+bool CBufSock::SendToLibEvent( const CMemStream& buffer, bool add_ws_head/*=false*/ )
 {
     nlassert (this != InvalidSockId);	// invalid bufsock
 
     if( connectedState() )
     {
         LNETL1_DEBUG( "LNETL1: Pushing buffer to %s", asString().c_str() );
-        uint32 netlen = htonl( (TBlockSize)buffer.length() );
-        _ReadyToSendBuffer.clear();
-        _ReadyToSendBuffer.resize (buffer.length()+sizeof(TBlockSize));
-        *(TBlockSize*)&(_ReadyToSendBuffer[0])=netlen;
-        CFastMem::memcpy (&_ReadyToSendBuffer[sizeof(TBlockSize)], buffer.buffer(), buffer.length());
+
+        if ( add_ws_head )
+        {
+            fill_frame_buffer( buffer.buffer(), buffer.length(), _ReadyToSendBuffer, WEBSOCK_FRAME_BIN );
+        }
+        else
+        {
+            uint32 netlen = htonl( (TBlockSize)buffer.length() );
+            _ReadyToSendBuffer.clear();
+            _ReadyToSendBuffer.resize (buffer.length()+sizeof(TBlockSize));
+            *(TBlockSize*)&(_ReadyToSendBuffer[0])=netlen;
+            CFastMem::memcpy (&_ReadyToSendBuffer[sizeof(TBlockSize)], buffer.buffer(), buffer.length());
+        }
 
         bufferevent_write( m_BEVHandle, _ReadyToSendBuffer.getPtr(), _ReadyToSendBuffer.size() );
         return true;

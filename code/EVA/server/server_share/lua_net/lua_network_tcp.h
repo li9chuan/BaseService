@@ -26,7 +26,7 @@ public:
         }
     }
 
-    void Send( const NLNET::CMessage &buffer, NLNET::TSockId sock_id )
+    void Send( NLNET::TSockId sock_id, const NLNET::CMessage &buffer )
     {
         m_CallbackServerHandle->send( buffer, sock_id );
     }

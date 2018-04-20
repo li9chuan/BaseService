@@ -103,7 +103,7 @@ namespace NLNET {
         }
     }
 
-    void    fill_frame_buffer( const uint8* payload_data, uint32 payload_len, std::vector<uint8>& out_frame, uint8 opcode, uint8 fin=1 );
+    void    fill_frame_buffer( const uint8* payload_data, uint32 payload_len, NLMISC::CObjectVector<uint8>& out_frame, uint8 opcode, uint8 fin=1 );
 
     void    ws_socket_event_cb( bufferevent *bev, short events, void *args );
 

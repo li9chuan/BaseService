@@ -15,7 +15,7 @@ Client      = require("Client/Client");
 MsgLogin    = require("Msg/MsgLogin");
 
 
-ClientService   = WebSocketCbServer:new();
+ClientService   = CallbackServer:new();
 LoginModule     = MsgLogin:new();
 
 
@@ -28,7 +28,7 @@ function ServiceInit()
     ClientMgr:Init();
     FrontEndService:Init();
 
-    ClientService:Listen( "ClientService", 9999 );
+    ClientService:Listen( "ClientService", "ws", 9999 );
 
 end
 

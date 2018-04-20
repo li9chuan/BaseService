@@ -18,22 +18,31 @@ function MsgLogin:ctor( Data )
 	
 end
 
-function MsgLogin:CBLogin( sock_id, proto_buf )
+function MsgLogin:CBLogin( sock_id, msg_login )
 
-	local msg_login = protobuf.decode("PB_MSG.MsgLogin", proto_buf)
+
+    nlinfo( msg_login:rint32() );
+    nlinfo( msg_login:rdouble() );
+    nlinfo( msg_login:rstring() );
+    nlinfo( msg_login:rint64() );
+    nlinfo( msg_login:rint64() );
+    
+    local pb_login = msg_login:rstring();
+    
+
+	local tbl_login = protobuf.decode("PB_MSG.MsgLogin", pb_login)
 	
-	PrintTable(msg_login);
-	
-	local sign_str = msg_login.UID .. msg_login.Channel .. msg_login.RoomType .. msg_login.AppName;
-          sign_str = sign_str .. msg_login.User .. msg_login.NonceStr .. msg_login.Timestamp;
+	PrintTable(tbl_login);
+    
+	local sign_str = tbl_login.UID .. tbl_login.Channel .. tbl_login.RoomType .. tbl_login.AppName;
+          sign_str = sign_str .. tbl_login.User .. tbl_login.NonceStr .. tbl_login.Timestamp;
           sign_str = sign_str .. "BLACKSHEEPWALL";
         
 	local sign     = string.upper( md5(sign_str) );
-    local sig1     = sign_str;
-    
-    
-	print("sig:"..sign);
-	print("sig:"..sig1);
+
+
+	print("sign_str:"..sign_str);
+	print("sign:"..sign);
     
     
     
@@ -41,29 +50,30 @@ function MsgLogin:CBLogin( sock_id, proto_buf )
 
     
     local msg_authok = CMessage("AuthOk");
-    msg_authok:wint64(msg_login.UID);
+    msg_authok:wint64(tbl_login.UID);
     BaseService:Broadcast( "FES", msg_authok )      -- 通知其它网关有玩家登录成功。
     
-    msg_authok:wstring(msg_login.RoomType);
+    msg_authok:wstring(tbl_login.RoomType);
     BaseService:Broadcast( "SCH", msg_authok )      -- 玩家认证通过，请求发送数据。
     
     
-    local client = ClientMgr:GetClient(msg_login.UID);
+    local client = ClientMgr:GetClient(tbl_login.UID);
     
     if( client ~= nil ) then
         client.SockID = sock_id;
     else
         client              = Client:new();
         client.SockID       = sock_id;
-        client.UID          = msg_login.UID;
+        client.UID          = tbl_login.UID;
         
-        ClientMgr:SetClient(msg_login.UID, client);
+        ClientMgr:SetClient(tbl_login.UID, client);
     end
     
     ClientService:SetUIDMap(client.UID, client.SockID);
     
 	--  通知客户端 账号认证通过.
     ClientService:Send( sock_id, "AuthOk" );
+--]]
 
 end
 

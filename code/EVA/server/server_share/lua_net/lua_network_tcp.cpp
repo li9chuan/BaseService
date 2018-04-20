@@ -1,22 +1,8 @@
 #include "lua_network_tcp.h"
-#include "lua_message.h"
-#include <server_share/lua/script_mgr.h>
 
 using namespace NLNET;
-using namespace bin;
 
-static CLuaMessage* pLuaMsg = new CLuaMessage();
-
-void cbLuaServiceMsg ( CMessage &msgin, TSockId from, CCallbackNetBase &netbase )
-{
-    CScriptTable    functbl;
-    ScriptMgr.GetScriptHandle()->Get("NetWorkHandler", functbl);
-
-    int nRet = 0;
-    pLuaMsg->m_Msg.swap(msgin);
-
-    functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnTestMessage", (lua_Integer)from, pLuaMsg, nRet);
-}
+extern void cbLuaServiceMsg ( CMessage &msgin, TSockId from, CCallbackNetBase &netbase );
 
 CLuaNetworkTcp::CLuaNetworkTcp( std::string name, uint16 port ) : CLuaBaseNetwork(name)
 {

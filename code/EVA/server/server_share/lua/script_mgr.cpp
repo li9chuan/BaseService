@@ -108,8 +108,8 @@ void CScriptMgr::Export()
     m_LuaEngine.ExportModule("Debug");
     m_LuaEngine.ExportModule("LuaThread");
     m_LuaEngine.ExportModule("ServerNet");
-    m_LuaEngine.ExportClass("NetworkWebSocket");
-    m_LuaEngine.ExportClass("NetworkTcp");
+
+    m_LuaEngine.ExportClass("LuaCallbackServer");
     m_LuaEngine.ExportClass("LuaMessage");
     m_LuaEngine.ExportClass("IDGenerate");
 

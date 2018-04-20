@@ -1,16 +1,26 @@
 BaseService = {}
 
-function BaseService:SendPB( service_id, msg_type, proto_type, proto_msg )
+function BaseService:Send( service_id, msg_or_type, proto_type, proto_msg )
 
-    local code = protobuf.encode(proto_type, proto_msg)
-    local msg_out = CMessage(msg_type);
-    msg_out:wstring( code );
-    ServerNet.Send( service_id, msg_out );
-
-end
-
-function BaseService:Send( service_id, msg_out )
-    ServerNet.Send( service_id, msg_out );
+    local param_type = type(msg_or_type)
+    
+    if param_type=="string" then
+               
+        local lua_msg   = CMessage(msg_or_type);
+        
+        if type(proto_type)=="table" then           --  send table => json str
+            local json_str = Table2Json(msg_or_type);
+            lua_msg:wstring(json_str);
+        elseif type(proto_type)=="string" then      --  send proto msg
+            local proto_code      = protobuf.encode(proto_type, proto_msg);
+            lua_msg:wstring(proto_code);
+        end
+        ServerNet.Send( service_id, lua_msg );
+        
+    elseif param_type=="userdata" then              --  send cmessage
+        ServerNet.Send( service_id, msg_or_type );
+    end
+    
 end
 
 function BaseService:Broadcast( service_name, msg_out )
@@ -19,11 +29,11 @@ end
 
 function BaseService:SendToClient( service_id, client_uid, msg_type, proto_type, proto_msg )
 
-	local code = protobuf.encode(proto_type, proto_msg)
-	local len  = string.len(code);
-	
-	local msg = { service_id, msg_type, len, client_uid };
-	ServerNet.SendToClient( code, msg );
+	local send_info = { service_id, client_uid };
+	local code      = protobuf.encode(proto_type, proto_msg)
+    local lua_msg   = CMessage(msg_type);
+    lua_msg:wstring(code);
+	ServerNet.SendToClient( lua_msg, send_info );
 
 end
 
