@@ -13,10 +13,14 @@ start %MODE%\naming_service --nolog
 ping -n 2 127.0.0.1 > NUL 2>&1
 
 rem  pls
-rem start %MODE%\player_logic_service --nolog
-rem ping -n 2 127.0.0.1 > NUL 2>&1
+start %MODE%\player_logic_service --nolog
+ping -n 2 127.0.0.1 > NUL 2>&1
 
 rem  fes
 start %MODE%\frontend_service --nolog
+ping -n 2 127.0.0.1 > NUL 2>&1
+
+rem sch
+start %MODE%\schedule_service --nolog
 ping -n 2 127.0.0.1 > NUL 2>&1
 

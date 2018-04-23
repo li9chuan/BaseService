@@ -9,6 +9,8 @@ rem  fes
 taskkill /IM frontend_service.exe /F
 
 rem  pls
-rem taskkill /IM player_logic_service.exe /F
+taskkill /IM player_logic_service.exe /F
 
+rem  pls
+taskkill /IM schedule_service.exe /F
 

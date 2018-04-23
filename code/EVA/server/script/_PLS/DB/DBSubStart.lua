@@ -1,5 +1,5 @@
 local BasePath = Utility.GetBasePath() .. "/script/";
-package.path = BasePath .. "_FES/?.lua;" .. BasePath .. "Framework/?.lua;";
+package.path = BasePath .. "_PLS/?.lua;" .. BasePath .. "Framework/?.lua;";
 
 
 require("InitFramework")

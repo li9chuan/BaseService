@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="_PLS.luaprj" Cmd="" Arg="" Dir="" Toggle="true" >
+<Project Name="_PLS.luaprj" Cmd="" Arg="" Dir="" Toggle="false" >
     <Filter RelativePath=".\_PLS" Toggle="false" >
         <LuaFile RelativePath=".\_PLSMain.lua" />
         <LuaFile RelativePath=".\PlayerLogicService.lua" />
-        <Filter RelativePath=".\DB" Toggle="true" >
+        <Filter RelativePath=".\DB" Toggle="false" >
             <LuaFile RelativePath=".\DBMgr.lua" />
             <LuaFile RelativePath=".\DBProc.lua" />
             <LuaFile RelativePath=".\DBSubProc.lua" />
