@@ -8,11 +8,7 @@ end
 
 -- 收到网络消息
 function NetWorkHandler.OnMessage( msg_from, lua_msg )	
-
-    nlinfo(msg_from.."NetWorkHandler.OnMessage   " .. lua_msg:name());
-    
     EventController.Instance():TriggerEvent( lua_msg:name(), msg_from, lua_msg );
-    
 end
 
 function NetWorkHandler.OnError(state)
