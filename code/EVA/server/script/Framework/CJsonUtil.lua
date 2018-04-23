@@ -64,7 +64,8 @@ local function serialise_table(value, indent, depth)
                 table.insert(fragment, "," .. spacing2)
             end
             table.insert(fragment,
-                ("[%s] = %s"):format(serialise_value(k, indent2, depth),
+                --("[%s] = %s"):format(serialise_value(k, indent2, depth),
+                ("%s : %s"):format(serialise_value(k, indent2, depth),
                                      serialise_value(v, indent2, depth)))
             comma = true
         end

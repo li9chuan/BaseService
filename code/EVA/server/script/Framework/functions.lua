@@ -79,7 +79,7 @@ function Table2Json( tbl )
 end
 
 function Json2Table( str )
-    return JsonUtil.serialise_table(str);
+    return Json.decode(str);
 end
 
 -- start --

@@ -27,8 +27,8 @@ function MsgLogin:CBSyncData( sch_sid, msg_sdata_1 )
         msg_sdata_1:invert();
         BaseService:Send( player_helper.ConFES, msg_sdata_1);
         
-        BaseService:SendToClient( player_helper.ConFES, player_helper.UID, "SyncPlayerInfo",
-                                "PB_MSG.MsgPlayerInfo", player_helper.PlayerDataHelper:ToProtoMsg() )
+        BaseService:SendToClient( player_helper, "SyncPlayerInfo",
+                                  player_helper.PlayerDataHelper:ToMsg() )
     end
 	
 end

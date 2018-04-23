@@ -20,7 +20,6 @@ end
 
 function MsgLogin:CBLogin( sock_id, msg_login )
 
-
     nlinfo( msg_login:rint32() );
     nlinfo( msg_login:rdouble() );
     nlinfo( msg_login:rstring() );

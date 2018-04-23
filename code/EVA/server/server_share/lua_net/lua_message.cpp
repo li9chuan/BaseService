@@ -75,63 +75,165 @@ namespace bin
     DEFINE_CLASS_FUNCTION( rbool, bool, ())
     {
         nlassert(obj->m_Msg.isReading());
-        obj->m_Msg.serial(r);
+        try
+        {
+            obj->m_Msg.serial(r);
+        }
+        catch (const NLMISC::EStream&)
+        {
+            lua_Debug ar;
+            lua_getstack(obj->GetScriptHandle().GetHandle(),1,&ar);
+            lua_getinfo(obj->GetScriptHandle().GetHandle(), "Sln", &ar);
+
+            NLMISC::createDebug();
+            NLMISC::INelContext::getInstance().getWarningLog()->setPosition( ar.currentline, ar.short_src, ar.name );
+            NLMISC::INelContext::getInstance().getWarningLog()->displayNL("rbool is nil");
+        }
         return 1;
     }
 
     DEFINE_CLASS_FUNCTION( rint32, sint32, ())
     {
         nlassert(obj->m_Msg.isReading());
-        obj->m_Msg.serial(r);
+        try
+        {
+            obj->m_Msg.serial(r);
+        }
+        catch (const NLMISC::EStream&)
+        {
+            lua_Debug ar;
+            lua_getstack(obj->GetScriptHandle().GetHandle(),1,&ar);
+            lua_getinfo(obj->GetScriptHandle().GetHandle(), "Sln", &ar);
+
+            NLMISC::createDebug();
+            NLMISC::INelContext::getInstance().getWarningLog()->setPosition( ar.currentline, ar.short_src, ar.name );
+            NLMISC::INelContext::getInstance().getWarningLog()->displayNL("rint32 is nil");
+        }
         return 1;
     }
 
     DEFINE_CLASS_FUNCTION( ruint32, lua_Integer, ())
     {
         nlassert(obj->m_Msg.isReading());
-        uint32  result=0;
-        obj->m_Msg.serial(result);
-        r = result;
+        try
+        {
+            uint32  result=0;
+            obj->m_Msg.serial(result);
+            r = result;
+        }
+        catch (const NLMISC::EStream&)
+        {
+            lua_Debug ar;
+            lua_getstack(obj->GetScriptHandle().GetHandle(),1,&ar);
+            lua_getinfo(obj->GetScriptHandle().GetHandle(), "Sln", &ar);
+
+            NLMISC::createDebug();
+            NLMISC::INelContext::getInstance().getWarningLog()->setPosition( ar.currentline, ar.short_src, ar.name );
+            NLMISC::INelContext::getInstance().getWarningLog()->displayNL("ruint32 is nil");
+        }
         return 1;
     }
 
     DEFINE_CLASS_FUNCTION( rint64, sint64, ())
     {
         nlassert(obj->m_Msg.isReading());
-        obj->m_Msg.serial(r);
+        try
+        {
+            obj->m_Msg.serial(r);
+        }
+        catch (const NLMISC::EStream&)
+        {
+            lua_Debug ar;
+            lua_getstack(obj->GetScriptHandle().GetHandle(),1,&ar);
+            lua_getinfo(obj->GetScriptHandle().GetHandle(), "Sln", &ar);
+
+            NLMISC::createDebug();
+            NLMISC::INelContext::getInstance().getWarningLog()->setPosition( ar.currentline, ar.short_src, ar.name );
+            NLMISC::INelContext::getInstance().getWarningLog()->displayNL("rint64 is nil");
+        }
         return 1;
     }
 
     DEFINE_CLASS_FUNCTION( rdouble, double, ())
     {
         nlassert(obj->m_Msg.isReading());
-        obj->m_Msg.serial(r);
+        try
+        {
+            obj->m_Msg.serial(r);
+        }
+        catch (const NLMISC::EStream&)
+        {
+            lua_Debug ar;
+            lua_getstack(obj->GetScriptHandle().GetHandle(),1,&ar);
+            lua_getinfo(obj->GetScriptHandle().GetHandle(), "Sln", &ar);
+
+            NLMISC::createDebug();
+            NLMISC::INelContext::getInstance().getWarningLog()->setPosition( ar.currentline, ar.short_src, ar.name );
+            NLMISC::INelContext::getInstance().getWarningLog()->displayNL("rdouble is nil");
+        }
         return 1;
     }
 
     DEFINE_CLASS_FUNCTION( rint, sint64, ())
     {
         nlassert(obj->m_Msg.isReading());
-        obj->m_Msg.serial(r);
+        try
+        {
+            obj->m_Msg.serial(r);
+        }
+        catch (const NLMISC::EStream&)
+        {
+            lua_Debug ar;
+            lua_getstack(obj->GetScriptHandle().GetHandle(),1,&ar);
+            lua_getinfo(obj->GetScriptHandle().GetHandle(), "Sln", &ar);
+
+            NLMISC::createDebug();
+            NLMISC::INelContext::getInstance().getWarningLog()->setPosition( ar.currentline, ar.short_src, ar.name );
+            NLMISC::INelContext::getInstance().getWarningLog()->displayNL("rint is nil");
+        }
         return 1;
     }
 
     DEFINE_CLASS_FUNCTION( rstring, std::string, ())
     {
         nlassert(obj->m_Msg.isReading());
-        obj->m_Msg.serial(r);
+        try
+        {
+            obj->m_Msg.serial(r);
+        }
+        catch (const NLMISC::EStream&)
+        {
+            lua_Debug ar;
+            lua_getstack(obj->GetScriptHandle().GetHandle(),1,&ar);
+            lua_getinfo(obj->GetScriptHandle().GetHandle(), "Sln", &ar);
+
+            NLMISC::createDebug();
+            NLMISC::INelContext::getInstance().getWarningLog()->setPosition( ar.currentline, ar.short_src, ar.name );
+            NLMISC::INelContext::getInstance().getWarningLog()->displayNL("rstring is nil");
+        }
         return 1;
     }
 
     DEFINE_CLASS_FUNCTION( rtable, CScriptTable, ())
     {
         nlassert(obj->m_Msg.isReading());
+        try
+        {
+            std::string json_str;
+            obj->m_Msg.serial(json_str);
+            obj->GetScriptHandle().NewTable(r);
+            obj->GetScriptHandle().CallFunc<std::string&, CScriptTable>( "Json2Table", json_str, r );
+        }
+        catch (const NLMISC::EStream&)
+        {
+            lua_Debug ar;
+            lua_getstack(obj->GetScriptHandle().GetHandle(),1,&ar);
+            lua_getinfo(obj->GetScriptHandle().GetHandle(), "Sln", &ar);
 
-        std::string json_str;
-        obj->m_Msg.serial(json_str);
-        obj->GetScriptHandle().NewTable(r);
-        obj->GetScriptHandle().CallFunc<std::string&, CScriptTable>( "Json2Table", json_str, r );
-
+            NLMISC::createDebug();
+            NLMISC::INelContext::getInstance().getWarningLog()->setPosition( ar.currentline, ar.short_src, ar.name );
+            NLMISC::INelContext::getInstance().getWarningLog()->displayNL("rtable is nil");
+        }
         return 1;
     }
 

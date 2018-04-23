@@ -39,25 +39,5 @@ function CallbackServer:Send( sock_id, msg_or_type, proto_type, proto_msg )
 
 end
 
-function CallbackServer:ToMsg( msg_table )
-    
-    local msg_out = CMessage();
-    local tbl_type = type(msg_table);
-    
-    if tbl_type == "nil" then
-        return "json.null"
-    elseif type(value) == "string" then
-        return ("%q"):format(value)
-    elseif type(value) == "nil" or type(value) == "number" or
-           type(value) == "boolean" then
-        return tostring(value)
-    elseif type(value) == "table" then
-        return serialise_table(value, indent, depth)
-    else
-        return "\"<" .. type(value) .. ">\""
-    end
-
-end
-
 return CallbackServer
 

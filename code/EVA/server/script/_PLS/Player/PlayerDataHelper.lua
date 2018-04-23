@@ -2,6 +2,7 @@ local PlayerDataHelper = class("PlayerDataHelper")
 
 -- 构造函数;
 function PlayerDataHelper:ctor()
+
     self.f_uid          = nil;
     self.f_nickname     = nil;
     self.f_portrait     = nil;
@@ -11,7 +12,7 @@ function PlayerDataHelper:ctor()
     self.f_flag_bit     = nil;
 end
 
-function PlayerDataHelper:ToProtoMsg()
+function PlayerDataHelper:ToMsg()
     
     local MsgPlayerInfo = {};
     MsgPlayerInfo["UID"]        = self.f_uid;

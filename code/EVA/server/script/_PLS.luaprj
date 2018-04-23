@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="_PLS.luaprj" Cmd="" Arg="" Dir="" Toggle="false" >
+<Project Name="_PLS.luaprj" Cmd="" Arg="" Dir="" Toggle="true" >
     <Filter RelativePath=".\_PLS" Toggle="false" >
         <LuaFile RelativePath=".\_PLSMain.lua" />
         <LuaFile RelativePath=".\PlayerLogicService.lua" />
