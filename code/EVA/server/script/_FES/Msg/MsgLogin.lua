@@ -24,6 +24,7 @@ function MsgLogin:CBLogin( sock_id, msg_login )
 
 	PrintTable(tbl_login);
     
+    -- 验证签名
 	local sign_str = tbl_login.UID .. tbl_login.Channel .. tbl_login.RoomType .. tbl_login.AppName;
           sign_str = sign_str .. tbl_login.User .. tbl_login.NonceStr .. tbl_login.Timestamp;
           sign_str = sign_str .. "BLACKSHEEPWALL";
@@ -37,8 +38,6 @@ function MsgLogin:CBLogin( sock_id, msg_login )
     
     
     --------------  账号认证通过
-
-    
     local msg_authok = CMessage("AuthOk");
     msg_authok:wint64(tbl_login.UID);
     BaseService:Broadcast( "FES", msg_authok )      -- 通知其它网关有玩家登录成功。
@@ -46,7 +45,7 @@ function MsgLogin:CBLogin( sock_id, msg_login )
     msg_authok:wstring(tbl_login.RoomType);
     BaseService:Broadcast( "SCH", msg_authok )      -- 玩家认证通过，请求发送数据。
     
-    
+    -- 保存客户端连接
     local client = ClientMgr:GetClient(tbl_login.UID);
     
     if( client ~= nil ) then
@@ -63,7 +62,6 @@ function MsgLogin:CBLogin( sock_id, msg_login )
     
 	--  通知客户端 账号认证通过.
     ClientService:Send( sock_id, "AuthOk" );
---]]
 
 end
 

@@ -24,9 +24,11 @@ function MsgLogin:CBSyncData( sch_sid, msg_sdata_1 )
         player_helper.ConFES = fes_sid;
         PrintTable(player_helper);
         
+        -- 通知FES保存玩家在哪个PLS
         msg_sdata_1:invert();
         BaseService:Send( player_helper.ConFES, msg_sdata_1);
         
+        -- 发送玩家数据给客户端
         BaseService:SendToClient( player_helper, "SyncPlayerInfo",
                                   player_helper.PlayerDataHelper:ToMsg() )
     end

@@ -31,7 +31,6 @@ function MsgLogin:DispatchPLS( fes_id, msg_authok )
         player.ConFES = fes_id;
         
         if player.ConPLS~=nil then
-            nlwarning("player.ConPLS    PB_MSG.MsgSvrLogin");
             BaseService:Send( player.ConPLS, msg_sdata_0 )
         else
             local pls_sid = PLSInfoMgr:AllocPLS(player.RoomType);
