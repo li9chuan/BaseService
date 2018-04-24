@@ -20,17 +20,8 @@ end
 
 function MsgLogin:CBLogin( sock_id, msg_login )
 
-    nlinfo( msg_login:rint32() );
-    nlinfo( msg_login:rdouble() );
-    nlinfo( msg_login:rstring() );
-    nlinfo( msg_login:rint64() );
-    nlinfo( msg_login:rint64() );
-    
-    local pb_login = msg_login:rstring();
-    
+    local tbl_login = msg_login:rtable();
 
-	local tbl_login = protobuf.decode("PB_MSG.MsgLogin", pb_login)
-	
 	PrintTable(tbl_login);
     
 	local sign_str = tbl_login.UID .. tbl_login.Channel .. tbl_login.RoomType .. tbl_login.AppName;

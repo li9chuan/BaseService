@@ -37,8 +37,6 @@ function BaseService:SendToClient( player, msg_or_type, proto_type, proto_msg )
         local lua_msg   = CMessage(msg_or_type);
         
         if type(proto_type)=="table" then           --  send table => json str
-        
-            PrintTable(proto_type);
             local json_str = Table2Json(proto_type);
             lua_msg:wstring(json_str);
             nlwarning(json_str);
