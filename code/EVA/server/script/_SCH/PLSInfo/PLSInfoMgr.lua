@@ -55,7 +55,7 @@ end
 
 
 --释放函数
-function PLSInfoMgr:OnRelease()
+function PLSInfoMgr:Release()
     self._EventRegister:UnRegisterAllEvent();
 end
 

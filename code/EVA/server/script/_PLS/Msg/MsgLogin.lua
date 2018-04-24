@@ -1,7 +1,7 @@
-local MsgLogin = class("MsgLogin")
+MsgLogin = {}
 
 -- 构造函数;
-function MsgLogin:ctor( Data )
+function MsgLogin:Init()
 	self._EventRegister = EventRegister.new();
 
     self._EventRegister:RegisterEvent( "SyncData",          self, self.CBSyncData );
@@ -43,7 +43,7 @@ function MsgLogin:CBRemovePlayer( sid, proto_buf )
 end
 
 --释放函数
-function MsgLogin:OnRelease()
+function MsgLogin:Release()
     self._EventRegister:UnRegisterAllEvent();
 end
 

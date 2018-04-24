@@ -15,13 +15,12 @@ require("Room/RoomMgr")
 PlayerDataHelper    = require("Player/PlayerDataHelper");
 PlayerHelper        = require("Player/PlayerHelper");
 MsgLogin            = require("Msg/MsgLogin")
-
-MsgLoginModule      = MsgLogin:new();
+MsgRoom             = require("Msg/MsgRoom")
 
 PLSConfig           = require("_PLSConfig")
 
-RoomBase           = require("Room/RoomBase")
-RoomDdz            = require("Games/PokerDdz/RoomDdz")
+RoomBase            = require("Room/RoomBase")
+RoomDdz             = require("Games/PokerDdz/RoomDdz")
 
 
 
@@ -30,6 +29,9 @@ function ServiceInit()
 
     print("Lua PLSConfig:");
     PrintTable(PLSConfig)
+    
+    MsgLogin:Init();
+    MsgRoom:Init();
     
     RoomMgr:Init();
     DBMgr:Init();
@@ -46,7 +48,13 @@ function ServiceUpdate()
 end
 
 function ServiceRelease()
-    DBMgr:OnRelease();
+    MsgLogin:Release();
+    MsgRoom:Release();
+    
+    RoomMgr:Release();
+    DBMgr:Release();
+    PlayerLogicService:Release();
+
     print("Lua Release.");
 end
 

@@ -2,7 +2,7 @@
 #include "lua_param.h"
 #include <nel/misc/displayer.h>
 #include <nel/misc/path.h>
-#include "pbc.h"
+#include <server_share/pbc/pbc.h>
 #include "server_share/bin_luabind/ScriptHandle.h"
 #include "server_share/bin_luabind/ScriptExporter.h"
 

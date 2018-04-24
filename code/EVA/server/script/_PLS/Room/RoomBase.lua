@@ -37,7 +37,7 @@ function RoomBase:OnInit()
 end
 
 --释放函数
-function RoomBase:OnRelease()
+function RoomBase:Release()
     
 end
 

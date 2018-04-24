@@ -14,12 +14,12 @@ function CallbackServer:Listen( name, protocal, port )
     self.Service = bin_types.LuaCallbackServer.NewInstance( {name, listen_proc, port} );
 end
 
-function CallbackServer:SetUIDMap( uid, sock_id )
-	self.Service:SetUIDMap(uid, sock_id);
+function CallbackServer:SetClientData( client_data )
+	self.Service:SetClientData( client_data );
 end
 
-function CallbackServer:RemoveUIDMap( uid )
-	self.Service:RemoveUIDMap(uid);
+function CallbackServer:RemoveClientData( uid )
+	self.Service:RemoveClientData(uid);
 end
 
 function CallbackServer:Send( sock_id, msg_or_type, proto_type, proto_msg )

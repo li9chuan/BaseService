@@ -20,7 +20,7 @@ function TimerTest:CallBack()
 end
 
 --释放函数
-function TimerTest:OnRelease()
+function TimerTest:Release()
     
 end
 

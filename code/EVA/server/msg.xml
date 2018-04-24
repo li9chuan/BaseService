@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<client_messages_description>
+
+<!--
+                客户端消息转发     li9chuan@qq.com   2014
+				
+				name         消息名字 (key)
+				sendto       需要转发到的服务器，可填多个  sendto="PLS EGS PDS"
+				format       转发消息结构 :
+											UID   : 使用userid填充。
+											JSON  : 
+											proto消息：填写protobuf定义的名字。
+											基础数据类型：f(float) d(double) b(bool) s(string) s8 s16 s32 s64 u8 u16 u32 u64
+										
+				description  消息描述，可用作打印log。
+-->
+
+    <proto_src path="./script/DataTable/proto">
+        <file name="define_attrib.proto"/>
+        <file name="define_pro.proto"/>
+        <file name="msg_client.proto"/>
+    </proto_src>
+
+    
+    <!-- Common  -->                                                                                               
+    <leaf name="ER"               sendto="PLS"        format="UID s"                                            description="Enter Room" />
+    <leaf name="LR"               sendto="PLS"        format="UID"                                              description="Leave Room" />
+    <leaf name="CPRM"             sendto="EGS"        format="UID JSON"                                         description="Create Private RoomGame" />
+    <leaf name="EPRM"             sendto="EGS"        format="UID JSON"                                         description="Enter Private RoomGame" />
+    <leaf name="RRM"              sendto="PLS"        format="UID"       			   	                        description="Release Private RoomGame" />
+
+</client_messages_description>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -63,7 +63,7 @@ function MsgLogin:DispatchPLS( fes_id, msg_authok )
 end
 
 --释放函数
-function MsgLogin:OnRelease()
+function MsgLogin:Release()
     self._EventRegister:UnRegisterAllEvent();
 end
 

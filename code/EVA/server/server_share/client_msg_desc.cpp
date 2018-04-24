@@ -1,8 +1,11 @@
 ﻿#include "client_msg_desc.h"
 #include <nel/misc/file.h>
-
-#include <google/protobuf/descriptor.h>
 #include <nel/net/callback_net_base.h>
+
+#include <google/protobuf/descriptor.h>  
+#include <google/protobuf/descriptor.pb.h>  
+#include <google/protobuf/dynamic_message.h>  
+#include <google/protobuf/compiler/importer.h>  
 
 using namespace std;
 using namespace NLMISC;
@@ -20,11 +23,28 @@ void CMsgDesc::LoadMsgXml()
         {
             xmlNodePtr rootPtr = xml.getRootNode();
 
-            if ( rootPtr )
+            if ( rootPtr != NULL )
             {
-                m_MsgDescTCP.clear();
-                m_MsgDescUDP.clear();
+                xmlNodePtr proto_desc   = xml.getFirstChildNode (rootPtr, "proto_src");
+                std::string proto_path  = xml.getStringProperty(proto_desc, "path", "");
 
+                if ( !proto_path.empty() )
+                {
+                    m_DiskSourceTree->MapPath("",proto_path);
+                }
+
+                xmlNodePtr proto_file   = xml.getFirstChildNode (proto_desc, "file");
+
+                for ( ; proto_file; proto_file=xml.getNextChildNode (proto_file, "file") )
+                {
+                    std::string proto_name  = xml.getStringProperty(proto_file, "name", "");
+                    m_Importer->Import(proto_name);
+                }
+            }
+
+            if ( rootPtr != NULL )
+            {
+                m_MsgDesc.clear();
                 xmlNodePtr record=xml.getFirstChildNode (rootPtr, "leaf");
 
                 for ( ; record; record=xml.getNextChildNode (record, "leaf") )
@@ -33,6 +53,7 @@ void CMsgDesc::LoadMsgXml()
 
                     msg_leaf.msgname        = xml.getStringProperty(record, "name", "");
                     msg_leaf.description    = xml.getStringProperty(record, "description", "");
+                    msg_leaf.is_log_event   = xml.getIntProperty(record, "log_event", 1) > 0 ? true: false;
 
                     ///  解析转发到哪个服务器
                     const CSString sendto   = xml.getStringProperty(record, "sendto", "");
@@ -61,7 +82,7 @@ void CMsgDesc::LoadMsgXml()
                         if ( msg_format==MSG_FORMAT::UNKNOWN )
                         {
                             const google::protobuf::Descriptor* descriptor = NULL;
-                            descriptor = google::protobuf::DescriptorPool::generated_pool()->FindMessageTypeByName(vct_str[i]);
+                            descriptor = m_Importer->pool()->FindMessageTypeByName(vct_str[i]);
 
                             if (descriptor)
                             {
@@ -70,7 +91,7 @@ void CMsgDesc::LoadMsgXml()
                             }
                             else
                             {
-                                nlassert(0);
+                                nlwarning("not define %s", vct_str[i].c_str());
                             }
                         }
                         else
@@ -79,37 +100,10 @@ void CMsgDesc::LoadMsgXml()
                         }
                     }
 
-                    ///    根据使用协议插入到相应map
-                    const CSString protocol = xml.getStringProperty(record, "protocol", "");
-
-                    vct_str.clear();
-                    protocol.splitBySeparator(' ', vct_str);
+                    ///    保存
                     std::pair< TMsgDesc::iterator, bool > res;
-
-                    for ( uint i=0; i<vct_str.size(); ++i )
-                    {
-                        if ( vct_str[i]=="TCP" )
-                        {
-                            res = m_MsgDescTCP.insert( make_pair(msg_leaf.msgname, msg_leaf) );
-                            nlassert(res.second);
-                        }
-                        else if ( vct_str[i]=="UDP" )
-                        {
-                            res = m_MsgDescUDP.insert( make_pair(msg_leaf.msgname, msg_leaf) );
-                            nlassert(res.second);
-                        }
-                        else
-                        {
-                            nlassert(0);
-                        }
-                    }
-
-                    ///  默认使用UDP协议 - 如果没配置
-                    if ( vct_str.size()==0 )
-                    {
-                        res = m_MsgDescUDP.insert( make_pair(msg_leaf.msgname, msg_leaf) );
-                        nlassert(res.second);
-                    }
+                    res = m_MsgDesc.insert( make_pair(msg_leaf.msgname, msg_leaf) );
+                    nlassert(res.second);
                 }
                 res = true;
             }
@@ -120,12 +114,12 @@ void CMsgDesc::LoadMsgXml()
     nlassert(res);
 }
 
-MsgLeaf* CMsgDesc::GetTCPMsgLeaf( std::string msg_name )
+MsgLeaf* CMsgDesc::GetMsgLeaf( std::string msg_name )
 {
     MsgLeaf* pMsgLeaf = NULL;
-    TMsgDesc::iterator iter = m_MsgDescTCP.find(msg_name);
+    TMsgDesc::iterator iter = m_MsgDesc.find(msg_name);
 
-    if ( iter != m_MsgDescTCP.end() )
+    if ( iter != m_MsgDesc.end() )
     {
         pMsgLeaf = &iter->second;
     }
@@ -133,19 +127,37 @@ MsgLeaf* CMsgDesc::GetTCPMsgLeaf( std::string msg_name )
     return pMsgLeaf;
 }
 
-MsgLeaf* CMsgDesc::GetUDPMsgLeaf( std::string msg_name )
+CMsgDesc::CMsgDesc()
 {
-    MsgLeaf* pMsgLeaf = NULL;
-    TMsgDesc::iterator iter = m_MsgDescUDP.find(msg_name);
+    m_DiskSourceTree    = new google::protobuf::compiler::DiskSourceTree();
+    m_Importer          = new google::protobuf::compiler::Importer(m_DiskSourceTree, NULL);
+    m_Factory           = new google::protobuf::DynamicMessageFactory(m_Importer->pool());
 
-    if ( iter != m_MsgDescUDP.end() )
-    {
-        pMsgLeaf = &iter->second;
-    }
-
-    return pMsgLeaf;
 }
 
+CMsgDesc::~CMsgDesc()
+{
+    SAFE_DELETE(m_Factory);
+    SAFE_DELETE(m_Importer);
+    SAFE_DELETE(m_DiskSourceTree);
+}
+
+google::protobuf::Message* CMsgDesc::CreateMessage( const std::string& typeName )
+{
+    google::protobuf::Message* pMsg = NULL;
+    const google::protobuf::Descriptor* pDescriptor = m_Importer->pool()->FindMessageTypeByName(typeName);
+
+    if (pDescriptor)
+    {
+        const google::protobuf::Message* pPrototype = m_Factory->GetPrototype(pDescriptor);
+
+        if (pPrototype)
+        {
+            pMsg = pPrototype->New();
+        }
+    }
+    return pMsg;
+}
 
 
 //TCallbackItem* CMsgDesc::GetTCPCallbackItem()

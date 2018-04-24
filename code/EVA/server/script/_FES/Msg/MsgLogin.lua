@@ -57,9 +57,7 @@ function MsgLogin:CBLogin( sock_id, msg_login )
         
         ClientMgr:SetClient(tbl_login.UID, client);
     end
-    
-    ClientService:SetUIDMap(client.UID, client.SockID);
-    
+
 	--  通知客户端 账号认证通过.
     ClientService:Send( sock_id, "AuthOk" );
 
@@ -81,6 +79,9 @@ function MsgLogin:CBLoginPLS( pls_id, msg_sdata_2 )
     
     if( client ~= nil ) then
         client.ConPLS = pls_id;
+        
+        -- 设置UID相关信息，用于底层转发消息。   msg.xml  
+        ClientService:SetClientData( {client.UID, client.SockID, pls_id} );
     end
 end
 
@@ -96,7 +97,7 @@ end
 
 
 --释放函数
-function MsgLogin:OnRelease()
+function MsgLogin:Release()
     self._EventRegister:UnRegisterAllEvent();
 end
 

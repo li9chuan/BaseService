@@ -29,7 +29,7 @@ end
 
 
 --释放函数
-function RoomMgr:OnRelease()
+function RoomMgr:Release()
     
 end
 

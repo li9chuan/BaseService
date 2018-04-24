@@ -43,9 +43,9 @@ end
 
 function ServiceRelease()
     
-    PLSInfoMgr:OnRelease();
-    PlayerInfoMgr:OnRelease();
-    ScheduleService:OnRelease();
+    PLSInfoMgr:Release();
+    PlayerInfoMgr:Release();
+    ScheduleService:Release();
     print("Lua Release.");
 end
 

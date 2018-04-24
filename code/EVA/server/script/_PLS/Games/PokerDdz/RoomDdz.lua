@@ -30,7 +30,7 @@ end
 
 
 --释放函数
-function RoomDdz:OnRelease()
+function RoomDdz:Release()
     
 end
 

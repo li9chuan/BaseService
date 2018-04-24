@@ -41,7 +41,7 @@ function DBProc:Init()
 end
 
 --释放函数
-function DBProc:OnRelease()
+function DBProc:Release()
     self._EventRegister:UnRegisterAllEvent();
 end
 

@@ -26,7 +26,7 @@ function PlayerInfo:RemoveCachePlayerTimer()
     
 end
 
-function PlayerInfo:OnRelease()
+function PlayerInfo:Release()
 
 
 end

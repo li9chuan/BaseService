@@ -62,7 +62,7 @@ function PlayerLogicService:UpdatePLSInfoTimer()
 end
 
 --	释放函数
-function PlayerLogicService:OnRelease()
+function PlayerLogicService:Release()
     self._EventRegister:UnRegisterAllEvent();
 end
 

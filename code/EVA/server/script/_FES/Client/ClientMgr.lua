@@ -35,7 +35,7 @@ function ClientMgr:RemoveClient( _uid )
         self.SocketMap[old_client.SockID] = nil;
         self.ClientMap[_uid] = nil;
         
-        ClientService:RemoveUIDMap(_uid);
+        ClientService:RemoveClientData(_uid);
     end
 end
 
@@ -45,7 +45,7 @@ function ClientMgr:RemoveSockID( _sockid )
         
         print("ClientMgr:RemoveSockID:".._sockid.."   UID:"..old_client.UID);
         
-        ClientService:RemoveUIDMap(old_client.UID);
+        ClientService:RemoveClientData(old_client.UID);
         self.ClientMap[old_client.UID] = nil;
         self.SocketMap[_sockid] = nil;
     end

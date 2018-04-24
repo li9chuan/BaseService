@@ -28,24 +28,8 @@ public:
     bool update();
     void release();
 
-    void SendToClient (const NLNET::CMessage &buffer, NLNET::TSockId hostid, bool log = true) {  /*m_Clients->send(buffer, hostid, log);*/  }
-    void DisconnectClient (NLNET::TSockId hostid) {  /*m_Clients->disconnect(hostid);*/  }
-
     NLMISC::CStopWatch	ReceiveWatch;				// All Receive Sub
     NLMISC::CStopWatch  SendWatch;					// All Send Sub
-
-    bool				AcceptClients;
-
-    void  IncReceiveMsgCount( std::string msg_name );
-
-    typedef std::map<std::string, uint64>   TReceiveMsgCount;
-    TReceiveMsgCount                        m_ReceiveMsgCount;
-
-private:
-
-    NLMISC::TTime   _CurrTicks;
-
-    std::vector<std::string>    _WaitServiceAccess;
 
 };
 

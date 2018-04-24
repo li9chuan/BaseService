@@ -176,21 +176,31 @@ namespace bin
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( SetUIDMap, void, (lua_Integer uid, lua_Integer sock_id))
+        DEFINE_CLASS_FUNCTION( SetClientData, void, (CScriptTable& uid_data))
         {
-            obj->SetUIDMap( uid, (TSockId)sock_id );
+            if( uid_data.IsReferd() )
+            {
+                ClientData      cdata;
+                lua_Integer     int64_val;
+
+                uid_data.Get(1, int64_val);         cdata.uid   = int64_val;
+                uid_data.Get(2, int64_val);         cdata.sid   = (NLNET::TSockId)int64_val;
+                uid_data.Get(3, int64_val);         cdata.pls_sid.set(int64_val);
+
+                obj->SetClientData( cdata );
+            }
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( RemoveUIDMap, void, (lua_Integer uid))
+        DEFINE_CLASS_FUNCTION( RemoveClientData, void, (lua_Integer uid))
         {
-            obj->RemoveUIDMap( uid );
+            obj->RemoveClientData( uid );
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( ClearUIDMap, void, ())
+        DEFINE_CLASS_FUNCTION( ClearClientData, void, ())
         {
-            obj->ClearUIDMap();
+            obj->ClearClientData();
             return 1;
         }
 

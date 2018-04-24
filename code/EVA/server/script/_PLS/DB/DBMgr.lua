@@ -59,7 +59,7 @@ end
 
 
 --释放函数
-function DBMgr:OnRelease()
+function DBMgr:Release()
     
 end
 

@@ -31,7 +31,7 @@ function PlayerInfoMgr:RemovePlayerInfo( _uid )
     
     if self.PlayerInfoMap[_uid] ~= nil then
         
-        self.PlayerInfoMap[_uid]:OnRelease();
+        self.PlayerInfoMap[_uid]:Release();
         self.PlayerInfoMap[_uid] = nil;
 
     end
@@ -53,10 +53,10 @@ function PlayerInfoMgr:RemovePLS( pls_sid )
     print("PlayerInfoMgr.RemovePLS:"..pls_sid);
 end
 
-function PlayerInfoMgr:OnRelease()
+function PlayerInfoMgr:Release()
     
 	for _,v in pairs(self.PlayerInfoMap) do
-        v:OnRelease();
+        v:Release();
     end 
     
     self.PlayerInfoMap = nil;
