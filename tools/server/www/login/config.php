@@ -13,8 +13,8 @@ $LoginModulePort = 30001;
 
 // where we can find the mysql database
 $DBHost         = "localhost";
-$DBUserName     = "wxtest";
-$DBPassword     = "nd9s32S!zz";
+$DBUserName     = "root";
+$DBPassword     = "";
 $DBName         = "d_mt_account";
 
 
