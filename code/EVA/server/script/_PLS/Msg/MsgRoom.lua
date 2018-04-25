@@ -8,7 +8,7 @@ function MsgRoom:Init()
    
 end
 
-function MsgRoom:CBEnterRoom( sch_sid, msg_enter_room )
+function MsgRoom:CBEnterRoom( fes_sid, msg_enter_room )
 
 
     print("MsgRoom:cbEnterRoom");
