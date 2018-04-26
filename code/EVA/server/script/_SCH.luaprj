@@ -16,5 +16,9 @@
             <LuaFile RelativePath=".\PLSInfo.lua" />
             <LuaFile RelativePath=".\PLSInfoMgr.lua" />
         </Filter>
+        <Filter RelativePath=".\Room" Toggle="false" >
+            <LuaFile RelativePath=".\RoomMgr.lua" />
+            <LuaFile RelativePath=".\RoomIDAlloter.lua" />
+        </Filter>
     </Filter>
 </Project>

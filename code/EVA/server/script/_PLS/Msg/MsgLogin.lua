@@ -30,7 +30,7 @@ function MsgLogin:CBSyncData( sch_sid, msg_sdata_1 )
         
         -- 发送玩家数据给客户端
         BaseService:SendToClient( player_helper, "SyncPlayerInfo",
-                                  player_helper.PlayerDataHelper:ToMsg() )
+                                  "PB_MSG.MsgPlayerInfo", player_helper.PlayerDataHelper:ToMsg() )
     end
 	
 end
