@@ -12,8 +12,8 @@ function PlayerHelper:ctor()
     
     self.IsRobot                = false;
     
-    self.RoomID                 = nil;
-    self.JoinRoomTime           = nil;
+    self.RoomID                 = 0;
+    self.JoinRoomTime           = 0;
 
     self.OfflineTime            = 0;
     self.LogoutTime             = nil;

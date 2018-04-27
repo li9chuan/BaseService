@@ -19,28 +19,17 @@ function PLSInfoMgr:SvrUpdateInfoCB( msg_from, msg_svrinfo )
     
     if pls_info.ServiceName=="PLS" then
         self.PLSMap[pls_info.ServiceID] = pls_info;
---[[        
-        print("PLSInfoMgr:SvrUpdateInfoCB  ----  update pls info.");
-        print( pls_info.ServiceID );
-        print( pls_info.ServiceName );
-        print( pls_info.MaxPlayer );
-        print( pls_info.CurrPlayer );
-        
-        for k,v in pairs(pls_info.RoomList) do
-            print( "type:"..v.Type.."  max:"..v.Max.."   curr:"..v.Curr );
-        end
---]]
     end
 
 end
 
-function PLSInfoMgr:AllocPLS( game_type )
+function PLSInfoMgr:AllocPLS( room_type )
 
     for _,v in ipairs(self.PLSMap) do
         
-        if v.RoomList[game_type] ~= nil then
+        if v.RoomList[room_type] ~= nil then
             
-            local game_info = v.RoomList[game_type];
+            local game_info = v.RoomList[room_type];
             
             if game_info:IsFull()==false then
                 game_info.Curr = game_info.Curr + 1;
@@ -50,7 +39,19 @@ function PLSInfoMgr:AllocPLS( game_type )
         end;
     end;
     
-    return nil;
+    return -1;
+end
+
+function PLSInfoMgr:IsInPLS( room_type, pls_sid )
+    local pls_info = self.PLSMap[pls_sid];
+    
+    if pls_info~=nil then
+        if pls_info[room_type]~=nil then
+            return true;
+        end
+    end
+    
+    return false;
 end
 
 

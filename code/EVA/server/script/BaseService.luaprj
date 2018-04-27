@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="BaseService.luaprj" Cmd="E:\BaseService\build\bin\Debug\schedule_service.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="false" >
+<Project Name="BaseService.luaprj" Cmd="E:\BaseService\build\bin\Debug\schedule_service.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="true" >
     <Filter RelativePath=".\Framework" Toggle="false" >
         <LuaFile RelativePath=".\Class.lua" />
         <LuaFile RelativePath=".\functions.lua" />
@@ -15,7 +15,7 @@
             <LuaFile RelativePath=".\EventRegister.lua" />
             <LuaFile RelativePath=".\EventTrigger.lua" />
         </Filter>
-        <Filter RelativePath=".\Net" Toggle="true" >
+        <Filter RelativePath=".\Net" Toggle="false" >
             <LuaFile RelativePath=".\NetWorkHandler.lua" />
             <LuaFile RelativePath=".\BaseService.lua" />
             <LuaFile RelativePath=".\protobuf.lua" />

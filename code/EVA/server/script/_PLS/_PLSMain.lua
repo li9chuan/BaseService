@@ -19,8 +19,10 @@ MsgRoom             = require("Msg/MsgRoom")
 
 PLSConfig           = require("_PLSConfig")
 
+
 RoomBase            = require("Room/RoomBase")
-RoomDdz             = require("Games/PokerDdz/RoomDdz")
+RoomFactory         = require("Room/RoomFactory")
+
 
 
 
@@ -29,16 +31,15 @@ function ServiceInit()
 
     print("Lua PLSConfig:");
     PrintTable(PLSConfig)
-    
+
     MsgLogin:Init();
     MsgRoom:Init();
     
+    RoomFactory:Init();
     RoomMgr:Init();
     DBMgr:Init();
     PlayerMgr:Init();
     PlayerLogicService:Init();
-    
-    RoomMgr:CreateRoom("RM_DDZ");
 
 end
 

@@ -23,6 +23,7 @@
         <Filter RelativePath=".\Room" Toggle="false" >
             <LuaFile RelativePath=".\RoomBase.lua" />
             <LuaFile RelativePath=".\RoomMgr.lua" />
+            <LuaFile RelativePath=".\RoomFactory.lua" />
         </Filter>
         <Filter RelativePath=".\Games" Toggle="false" >
             <Filter RelativePath=".\PokerDdz" Toggle="false" >

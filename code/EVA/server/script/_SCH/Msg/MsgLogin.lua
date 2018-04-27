@@ -9,7 +9,6 @@ function MsgLogin:Init()
 	
     --  服务器间消息
     self._EventRegister:RegisterEvent( "AuthOk",  self, self.DispatchPLS );
-	
 end
 
 -- 分配PLS
@@ -42,9 +41,7 @@ function MsgLogin:DispatchPLS( fes_id, msg_authok )
         end
     else
         local pls_sid = PLSInfoMgr:AllocPLS(room_type);
-        
-        nlwarning("pls_sid:"..pls_sid);
-    
+
         if pls_sid~=nil then
             player = PlayerInfoMgr:CreatePlayerInfo(uid);
             
@@ -53,7 +50,6 @@ function MsgLogin:DispatchPLS( fes_id, msg_authok )
             player.RoomType = room_type;
             
             BaseService:Send( player.ConPLS, msg_sdata_0 )
-            
         else
             nlwarning(room_type.." not in pls config.");
         end

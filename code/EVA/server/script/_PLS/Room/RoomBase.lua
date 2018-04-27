@@ -3,12 +3,12 @@ local RoomBase = class("RoomBase")
 -- 构造函数;
 function RoomBase:ctor( Data )
 
+    self.RoomID                 = RoomMgr:GenerateRoomID();
+    self.PrvRoomID              = 0;
+    self.RoomType               = "";
+    
     self.SeatPlayers            = {};
-    
     self.ViewPlayers            = {};
-
-    print("RoomBase:ctor");
-    
 end
 
 -- 玩家加入房间

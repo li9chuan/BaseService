@@ -3,11 +3,10 @@ local PlayerInfo = class("PlayerInfo")
 
 -- 构造函数;
 function PlayerInfo:ctor()
-	self.ConPLS         = nil;
+	self.ConPLS         = -1;
     self.ConFES         = nil;
 	self.UID            = nil;
     self.IsOffline      = false;
-    self.GameID         = nil;
     self.LogoutTime     = nil;
     self.TimerID        = nil;
     self.RoomType       = "";

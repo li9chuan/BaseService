@@ -60,14 +60,17 @@ local function serialise_table(value, indent, depth)
     elseif max < 0 then
         -- Serialise table
         for k, v in pairs(value) do
-            if comma then
-                table.insert(fragment, "," .. spacing2)
+            
+            if k ~= "class" then
+                if comma then
+                    table.insert(fragment, "," .. spacing2)
+                end
+                table.insert(fragment,
+                    --("[%s] = %s"):format(serialise_value(k, indent2, depth),
+                    ("%s : %s"):format(serialise_value(k, indent2, depth),
+                                         serialise_value(v, indent2, depth)))
+                comma = true
             end
-            table.insert(fragment,
-                --("[%s] = %s"):format(serialise_value(k, indent2, depth),
-                ("%s : %s"):format(serialise_value(k, indent2, depth),
-                                     serialise_value(v, indent2, depth)))
-            comma = true
         end
     end
     table.insert(fragment, spacing .. "}")

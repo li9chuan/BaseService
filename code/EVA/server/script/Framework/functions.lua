@@ -29,6 +29,25 @@ function md5(value)
     return Utility.MD5( value, string.len(value) );
 end
 
+function nldebug( str )
+	Debug.Debug(str,2);
+end
+
+function nlinfo( str )
+	Debug.Info(str,2);
+end
+
+function nlwarning( str )
+	Debug.Warning(str,2);
+end
+
+function nlstop( str )
+	Debug.Stop(str,2);
+end
+
+print   = nlinfo;
+
+
 function PostSub( thread_name, event_type, pb_name, pb_data, from )
 	
 	code = protobuf.encode(pb_name, pb_data)
@@ -49,9 +68,9 @@ function PostMain( thread_name, event_type, pb_name, pb_data, from )
 
 end
 
-function PrintTable( tbl, depth )
-  --print(JsonUtil.serialise_value(value, indent, depth));
-
+function PrintTable( tbl, indent, depth )
+    Debug.Info(JsonUtil.serialise_value(tbl, indent, depth), 2);
+    --[[
     if tbl==nil then
         return;
     end
@@ -76,6 +95,8 @@ function PrintTable( tbl, depth )
         end
     end
     print(indent_str .. "}")
+    
+    --]]
 end
 
 function Table2Json( tbl )

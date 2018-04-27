@@ -49,12 +49,6 @@ MysqlConn                   = bin_types.MysqlConn;
 MysqlResult                 = bin_types.MysqlResult;
 CMessage                    = bin_types.LuaMessage.NewInstance;
 
-print                       = Debug.Info;
-nldebug                     = Debug.Debug;
-nlinfo                      = Debug.Info;
-nlwarning                   = Debug.Warning;
-nlstop                      = Debug.Stop;
-
 --[[
 Util						= LuaFramework.Util;
 NativeUtil					= LuaFramework.NativeUtil;

@@ -1,12 +1,12 @@
 BaseService = {}
 
-function BaseService:Send( service_id, msg_or_type, proto_type, proto_msg )
+function BaseService:Send( service_id, cmsg_or_type, proto_type, proto_msg )
 
-    local param_type = type(msg_or_type)
+    local param_type = type(cmsg_or_type)
     
     if param_type=="string" then
                
-        local lua_msg   = CMessage(msg_or_type);
+        local lua_msg   = CMessage(cmsg_or_type);
         
         if type(proto_type)=="table" then           --  send table => json str
             local json_str = Table2Json(proto_type);
@@ -18,7 +18,7 @@ function BaseService:Send( service_id, msg_or_type, proto_type, proto_msg )
         ServerNet.Send( service_id, lua_msg );
         
     elseif param_type=="userdata" then              --  send cmessage
-        ServerNet.Send( service_id, msg_or_type );
+        ServerNet.Send( service_id, cmsg_or_type );
     end
     
 end
@@ -27,14 +27,14 @@ function BaseService:Broadcast( service_name, msg_out )
     ServerNet.Broadcast( service_name, msg_out );
 end
 
-function BaseService:SendToClient( player, msg_or_type, proto_type, proto_msg )
+function BaseService:SendToClient( player, cmsg_or_type, proto_type, proto_msg )
 
 	local send_info = { player.ConFES, player.UID };
-    local param_type = type(msg_or_type)
+    local param_type = type(cmsg_or_type)
     
     if param_type=="string" then
                
-        local lua_msg   = CMessage(msg_or_type);
+        local lua_msg   = CMessage(cmsg_or_type);
         
         if type(proto_type)=="table" then           --  send table => json str
             local json_str = Table2Json(proto_type);
@@ -47,7 +47,7 @@ function BaseService:SendToClient( player, msg_or_type, proto_type, proto_msg )
         ServerNet.SendToClient( lua_msg, send_info );
         
     elseif param_type=="userdata" then              --  send cmessage
-        ServerNet.SendToClient( msg_or_type, send_info );
+        ServerNet.SendToClient( cmsg_or_type, send_info );
     end
 
 end

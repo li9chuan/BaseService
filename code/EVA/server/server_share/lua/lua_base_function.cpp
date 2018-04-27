@@ -51,10 +51,10 @@ namespace bin
 
     BEGIN_SCRIPT_MODULE(Debug)
 
-        DEFINE_MODULE_FUNCTION(Warning, void, (const char* str))
+        DEFINE_MODULE_FUNCTION(Warning, void, (const char* str, int stack_level))
         {
             lua_Debug ar;
-            lua_getstack(lua.GetHandle(),1,&ar);
+            lua_getstack(lua.GetHandle(),stack_level,&ar);
             lua_getinfo(lua.GetHandle(), "Sln", &ar);
 
             NLMISC::createDebug();
@@ -63,10 +63,10 @@ namespace bin
             return 1;
         }
 
-        DEFINE_MODULE_FUNCTION(Info, void, (const char* str))
+        DEFINE_MODULE_FUNCTION(Info, void, (const char* str, int stack_level))
         {
             lua_Debug ar;
-            lua_getstack(lua.GetHandle(),1,&ar);
+            lua_getstack(lua.GetHandle(),stack_level,&ar);
             lua_getinfo(lua.GetHandle(), "Sln", &ar);
 
             NLMISC::createDebug();
@@ -75,10 +75,10 @@ namespace bin
             return 1;
         }
 
-        DEFINE_MODULE_FUNCTION(Debug, void, (const char* str))
+        DEFINE_MODULE_FUNCTION(Debug, void, (const char* str, int stack_level))
         {
             lua_Debug ar;
-            lua_getstack(lua.GetHandle(),1,&ar);
+            lua_getstack(lua.GetHandle(),stack_level,&ar);
             lua_getinfo(lua.GetHandle(), "Sln", &ar);
 
             NLMISC::createDebug();
@@ -87,10 +87,10 @@ namespace bin
             return 1;
         }
 
-        DEFINE_MODULE_FUNCTION(Stop, void, (const char* str))
+        DEFINE_MODULE_FUNCTION(Stop, void, (const char* str, int stack_level))
         {
             lua_Debug ar;
-            lua_getstack(lua.GetHandle(),1,&ar);
+            lua_getstack(lua.GetHandle(),stack_level,&ar);
             lua_getinfo(lua.GetHandle(), "Sln", &ar);
 
             static bool ignoreNextTime = false; 

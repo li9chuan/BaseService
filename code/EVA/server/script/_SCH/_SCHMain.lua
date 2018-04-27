@@ -18,6 +18,7 @@ PLSGameInfo         = require("PLSInfo/PLSGameInfo")
 PLSInfo             = require("PLSInfo/PLSInfo")
 PlayerInfo          = require("Player/PlayerInfo")
 
+RoomInfo            = require("Room/RoomInfo")
 RoomMgr             = require("Room/RoomMgr")
 RoomIDAlloter       = require("Room/RoomIDAlloter")
 
