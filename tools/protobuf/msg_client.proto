@@ -31,3 +31,21 @@ message MsgPlayerInfo
   optional uint64       FlagBit         = 7;
 }
 
+message MsgCreatePrivateRoom
+{
+	optional string 				room_type	        = 1;
+}
+
+message MsgEnterPrivateRoom
+{
+	optional uint64					room_id				= 1;
+	optional string 				app_name			= 2;
+	optional uint32					game_versione		= 3;
+}
+
+message MsgCards
+{
+	optional PB_DEF.TCardsType      suit     = 1;
+	optional uint32                 index    = 2;
+}
+

@@ -3,41 +3,41 @@ package PB_DEF;
 
 enum TEvent
 {
-	EventInvalid			     = 0;  		// 无效事件
-    EventPlayerUp	             = 2;  		// 玩家升级	 
-	EventCostMoney               = 40; 		// 消费金钱
-	EventLogin                   = 46;		//	玩家登录
+	EventInvalid			                = 0;  		//  无效事件
+    EventPlayerUp	                        = 2;  		//  玩家升级	 
+	EventCostMoney                          = 40; 		//  消费金钱
+	EventLogin                              = 46;		//  玩家登录
 };
 
 
 ///  标识占据第几位   0-63
 enum TPlayerFlagBit
 {
-	PLAYER_FLAG_TEST_0                     = 0;		//	玩家第一次做xx事的标识位
-	PLAYER_FLAG_FIRST_CARD_ONE             = 1;		//	
-	PLAYER_FLAG_FIRST_CARD_TEN             = 2;		//	
+	PLAYER_FLAG_TEST_0                      = 0;		//	玩家第一次做xx事的标识位
+	PLAYER_FLAG_FIRST_CARD_ONE              = 1;		//	
+	PLAYER_FLAG_FIRST_CARD_TEN              = 2;		//	
 	
 };
 
 enum TErrorType
 {
-	INVALID_TYPE                 = 0;
+	INVALID_TYPE                            = 0;
 	
-	ACCOUNT_LOGGED               = 1;
-	SERVER_FULL                  = 2;
-	SERVER_NOT_OPEN              = 3;
-	TEXT_SUCESS                  = 4;
-	TEXT_FAIL                    = 5;
-	PWD_ERROR                    = 6;
-	PLAYER_ONLINE_TO_FES         = 7;
-	PLAYER_EXISTS                = 8;
-	PLAYER_RELOAD                = 9;
-	SUCESS                       = 23;
-	NO_AUTH_TYPE                 = 24;
-	CONFIG_NOT_FOUND             = 33;		// 配置未找到
-	NOT_ENOUGH_MONEY             = 37;		//	金币不足
+	ACCOUNT_LOGGED                          = 1;
+	SERVER_FULL                             = 2;
+	SERVER_NOT_OPEN                         = 3;
+	TEXT_SUCESS                             = 4;
+	TEXT_FAIL                               = 5;
+	PWD_ERROR                               = 6;
+	PLAYER_ONLINE_TO_FES                    = 7;
+	PLAYER_EXISTS                           = 8;
+	PLAYER_RELOAD                           = 9;
+	SUCESS                                  = 23;
+	NO_AUTH_TYPE                            = 24;
+	CONFIG_NOT_FOUND                        = 33;		// 配置未找到
+	NOT_ENOUGH_MONEY                        = 37;		//	金币不足
 	
-	PLAYER_BASE_ERROR            = 128;		//	玩家基本数据不正确
+	PLAYER_BASE_ERROR                       = 128;		//	玩家基本数据不正确
 	
 };
 
@@ -46,6 +46,18 @@ enum TGender
 	MALE          = 0;	//	男性
 	FEMALE        = 1;	//	女性
 };
+
+
+enum TCardsType
+{
+    CardsNone                              = 0;         //  无色
+    CardsSpade                             = 1; 		//	黑桃
+	CardsHearts                            = 2; 		//	红桃
+	CardsPlumBlossom                       = 3; 		//	梅花
+    CardsDiamond                           = 4; 		//	方片
+};
+
+
 
 
 
