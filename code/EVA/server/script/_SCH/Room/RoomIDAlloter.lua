@@ -7,10 +7,8 @@ function RoomIDAlloter:ctor()
     self.IDMax          = 999999;
     self.__AllocIdx     = 1;
 
-    self.Init();
+    self:Init();
 end
-
-
 
 function RoomIDAlloter:Init()
     
@@ -34,8 +32,10 @@ function RoomIDAlloter:AllocID()
     if self.__AllocIdx == self.IDMax then
         self.__AllocIdx = 1;
     end
-    
-    return self.IDPool[__AllocIdx];
+
+    local newid = self.IDPool[self.__AllocIdx];
+    self.__AllocIdx = self.__AllocIdx + 1;
+    return newid;
 end
 
 return RoomIDAlloter;

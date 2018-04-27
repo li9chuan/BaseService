@@ -8,10 +8,7 @@ function PlayerInfoMgr:Init()
 end
 
 function PlayerInfoMgr:GetPlayerInfo( _uid )
-    if self.PlayerInfoMap[_uid] ~= nil then
-        return self.PlayerInfoMap[_uid];
-    end
-    return nil;
+    return self.PlayerInfoMap[_uid];
 end
 
 function PlayerInfoMgr:CreatePlayerInfo( _uid )

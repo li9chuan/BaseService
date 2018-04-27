@@ -141,7 +141,7 @@ bool CLuaCallbackServer::ForwardingMsg( ClientData* pClient, NLNET::CMessage& ms
                         return false;
                     }
 
-                    pMessage = CreateMessage(format_msg[j]);
+                    pMessage = MsgDesc.CreateMessage(format_msg[j]);
 
                     if ( pMessage!=NULL )
                     {
@@ -155,6 +155,11 @@ bool CLuaCallbackServer::ForwardingMsg( ClientData* pClient, NLNET::CMessage& ms
                         }
 
                         SAFE_DELETE(pMessage);
+                    }
+                    else
+                    {
+                        nlwarning("msg:% define not found.", format_msg[j].c_str());
+                        return false;
                     }
                     break;
                 }

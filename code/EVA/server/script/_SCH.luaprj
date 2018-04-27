@@ -10,6 +10,7 @@
         </Filter>
         <Filter RelativePath=".\Msg" Toggle="false" >
             <LuaFile RelativePath=".\MsgLogin.lua" />
+            <LuaFile RelativePath=".\MsgRoom.lua" />
         </Filter>
         <Filter RelativePath=".\PLSInfo" Toggle="false" >
             <LuaFile RelativePath=".\PLSGameInfo.lua" />
@@ -19,6 +20,7 @@
         <Filter RelativePath=".\Room" Toggle="false" >
             <LuaFile RelativePath=".\RoomMgr.lua" />
             <LuaFile RelativePath=".\RoomIDAlloter.lua" />
+            <LuaFile RelativePath=".\RoomInfo.lua" />
         </Filter>
     </Filter>
 </Project>

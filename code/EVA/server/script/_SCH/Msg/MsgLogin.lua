@@ -2,11 +2,9 @@
 -- SCH   负责分配到一个PLS
 --=========================================================
 
-local MsgLogin = class("MsgLogin")
+MsgLogin = {}
 
--- 构造函数;
-function MsgLogin:ctor( Data )
-
+function MsgLogin:Init()
 	self._EventRegister = EventRegister.new();
 	
     --  服务器间消息

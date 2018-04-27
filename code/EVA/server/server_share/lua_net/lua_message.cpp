@@ -237,6 +237,29 @@ namespace bin
         return 1;
     }
 
+    DEFINE_CLASS_FUNCTION( rpb, CScriptTable, (std::string& pbstru))
+    {
+        nlassert(obj->m_Msg.isReading());
+        try
+        {
+            std::string pb_data;
+            obj->m_Msg.serial(pb_data);
+            obj->GetScriptHandle().NewTable(r);
+            obj->GetScriptHandle().CallFunc<std::string&, std::string&, CScriptTable>( "PB2Table", pbstru, pb_data, r );
+        }
+        catch (const NLMISC::EStream&)
+        {
+            lua_Debug ar;
+            lua_getstack(obj->GetScriptHandle().GetHandle(),1,&ar);
+            lua_getinfo(obj->GetScriptHandle().GetHandle(), "Sln", &ar);
+
+            NLMISC::createDebug();
+            NLMISC::INelContext::getInstance().getWarningLog()->setPosition( ar.currentline, ar.short_src, ar.name );
+            NLMISC::INelContext::getInstance().getWarningLog()->displayNL("rpb is nil");
+        }
+        return 1;
+    }
+
     DEFINE_STATIC_FUNCTION(NewInstance, CLuaMessage*, (std::string name))
     {
         r = new CLuaMessage(name);

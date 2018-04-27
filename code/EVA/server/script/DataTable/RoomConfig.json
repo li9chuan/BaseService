@@ -4,7 +4,7 @@
     "game_type": "GM_DDZ",
     "app_name": "APP_DDZ",
     "min_ver": 1.16,
-    "challenge_type": "game",
+    "match": "private",
     "room_name": "斗地主",
     "enter_level": 0,
     "enter_score": 0,

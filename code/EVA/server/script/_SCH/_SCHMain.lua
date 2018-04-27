@@ -11,13 +11,16 @@ require("ScheduleService")
 require("PLSInfo/PLSInfoMgr")
 require("Player/PlayerInfoMgr")
 
+MsgLogin            = require("Msg/MsgLogin")
+MsgRoom             = require("Msg/MsgRoom")
+
 PLSGameInfo         = require("PLSInfo/PLSGameInfo")
 PLSInfo             = require("PLSInfo/PLSInfo")
 PlayerInfo          = require("Player/PlayerInfo")
-MsgLogin            = require("Msg/MsgLogin")
 
+RoomMgr             = require("Room/RoomMgr")
+RoomIDAlloter       = require("Room/RoomIDAlloter")
 
-MsgLoginModule      = MsgLogin:new();
 
 PHPService          = CallbackServer:new();
 
@@ -28,9 +31,15 @@ function ServiceInit()
 	
     print("Lua Start.");
     
+    MsgLogin:Init();
+    MsgRoom:Init();
+    
+    RoomMgr:Init();
     PLSInfoMgr:Init();
     PlayerInfoMgr:Init();
     ScheduleService:Init();
+    
+
     
     PHPService:Listen( "PHP", "tcp", 20458 );
     

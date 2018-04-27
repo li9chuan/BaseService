@@ -117,20 +117,20 @@ inline void AddToClientBuffer( NLNET::TServiceId conFES, DEF::UID uid, std::stri
 	AddToClientBuffer(conFES,uid,msgout);
 }
 
-inline google::protobuf::Message* CreateMessage(const std::string& typeName)
-{
-    google::protobuf::Message* message = NULL;
-    const google::protobuf::Descriptor* descriptor = google::protobuf::DescriptorPool::generated_pool()->FindMessageTypeByName(typeName);
-    if (descriptor)
-    {
-        const google::protobuf::Message* prototype = google::protobuf::MessageFactory::generated_factory()->GetPrototype(descriptor);
-        if (prototype)
-        {
-            message = prototype->New();
-        }
-    }
-    return message;
-}
+//inline google::protobuf::Message* CreateMessage(const std::string& typeName)
+//{
+//    google::protobuf::Message* message = NULL;
+//    const google::protobuf::Descriptor* descriptor = google::protobuf::DescriptorPool::generated_pool()->FindMessageTypeByName(typeName);
+//    if (descriptor)
+//    {
+//        const google::protobuf::Message* prototype = google::protobuf::MessageFactory::generated_factory()->GetPrototype(descriptor);
+//        if (prototype)
+//        {
+//            message = prototype->New();
+//        }
+//    }
+//    return message;
+//}
 
 #define  SaveToDB( opt, id, stru ) do {\
 	DB_OPT _opt = opt;\

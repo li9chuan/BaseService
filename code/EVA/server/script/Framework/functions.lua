@@ -52,6 +52,10 @@ end
 function PrintTable( tbl, depth )
   --print(JsonUtil.serialise_value(value, indent, depth));
 
+    if tbl==nil then
+        return;
+    end
+    
     local msg = ""
     depth = depth or 1
     local indent_str = ""
@@ -80,6 +84,10 @@ end
 
 function Json2Table( str )
     return Json.decode(str);
+end
+
+function PB2Table( pb_stru, pb_data )
+    return protobuf.decode(pb_stru, pb_data);
 end
 
 -- start --

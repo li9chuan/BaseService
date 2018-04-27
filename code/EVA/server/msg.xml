@@ -25,8 +25,8 @@
     <!-- Common  -->                                                                                               
     <leaf name="ER"               sendto="PLS"        format="UID s"                                            description="Enter Room" />
     <leaf name="LR"               sendto="PLS"        format="UID"                                              description="Leave Room" />
-    <leaf name="CPRM"             sendto="EGS"        format="UID JSON"                                         description="Create Private RoomGame" />
-    <leaf name="EPRM"             sendto="EGS"        format="UID JSON"                                         description="Enter Private RoomGame" />
+    <leaf name="CPRM"             sendto="SCH"        format="UID PB_MSG.MsgCreatePrivateRoom"                                         description="Create Private RoomGame" />
+    <leaf name="EPRM"             sendto="SCH"        format="UID JSON"                                         description="Enter Private RoomGame" />
     <leaf name="RRM"              sendto="PLS"        format="UID"       			   	                        description="Release Private RoomGame" />
 
 </client_messages_description>

@@ -1,15 +1,9 @@
 MsgLogin = {}
 
--- 构造函数;
 function MsgLogin:Init()
 	self._EventRegister = EventRegister.new();
-
     self._EventRegister:RegisterEvent( "SyncData",          self, self.CBSyncData );
-    
-    
     self._EventRegister:RegisterEvent( "RemovePlayer",      self, self.CBRemovePlayer );
-    
-   
 end
 
 function MsgLogin:CBSyncData( sch_sid, msg_sdata_1 )

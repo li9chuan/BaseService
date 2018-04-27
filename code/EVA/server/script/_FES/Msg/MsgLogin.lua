@@ -20,9 +20,7 @@ end
 
 function MsgLogin:CBLogin( sock_id, msg_login )
 
-    local pb_login  = msg_login:rstring();
-	local tbl_login = protobuf.decode("PB_MSG.MsgLogin", pb_login)
-	
+    local tbl_login = msg_login:rpb("PB_MSG.MsgLogin");
 	PrintTable(tbl_login);
     
     -- 验证签名
