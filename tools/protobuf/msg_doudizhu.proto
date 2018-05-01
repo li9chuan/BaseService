@@ -1,0 +1,242 @@
+syntax = "proto2";
+package PB_MSG;
+
+import "msg_client.proto";
+
+enum TDDZPlayerWik                                                     // 玩家权限
+{
+	ASK_DDZ_NULL                         = 0x01;                        // 空
+	ASK_DDZ_TISHI                        = 0x02;                        // 提示 
+	ASK_DDZ_BUCHU                        = 0x04;                        // 不出
+	ASK_DDZ_CHUPAI                       = 0x08;                        // 出牌
+	ASK_DDZ_DIZHU_MINGPAI                = 0x10;                        // 地主明牌
+};
+
+enum TDDZPlayerState                                                    // 玩家状态
+{
+	STATE_DDZ_READY                        = 0x01;                      // 准备
+	STATE_DDZ_GUOPAI                       = 0x02;                      // 过牌
+	STATE_DDZ_CHUNTIAN                     = 0x04;                      // 春天
+	STATE_DDZ_NEWROLE                      = 0x08;                      // 新玩家
+	STATE_DDZ_ROOM_OWNER                   = 0x10;                      // 房主
+	STATE_DDZ_RELIEVE			           = 0x20;			            // 解除房间状态;
+	STATE_DDZ_LEAVE                        = 0x40;                      // 离开状态                    
+    STATE_DDZ_LIMIT                        = 0x80;                      // 限制状态
+	STATE_DDZ_OFFLINE                      = 0x100;                     // 脱机状态;
+	STATE_DDZ_MINGPAI                      = 0x200;                     // 明牌 状态;
+	STATE_DDZ_DIZHU                        = 0x400;                     // 地主状态;
+	STATE_DDZ_NONGMING                     = 0x800;                     // 农民状态;
+	STATE_DDZ_JIABEI                       = 0x1000;                    // 加倍状态
+	STATE_DDZ_QIANGDIZHU                   = 0x2000;                    // 抢地主状态
+	STATE_DDZ_SELECT_JIABEI                = 0x4000;                    // 选择加倍状态
+	STATE_DDZ_SELECT_MINGPAISTART          = 0x8000;                    // 选择明牌开始状态
+	STATE_DDZ_FENGDING                     = 0x10000;                   // 封顶状态
+	STATE_DDZ_CONTINUE_GAME                = 0x20000;                   // 继续游戏状态
+};
+
+enum TDDZState                          							// 游戏房间状态
+{
+	TDDZStateWait        	        	= 0;						// 等待开始
+	TDDZStateCheckStartGame             = 1;                        // 检查是否可以开始游戏
+	TDDZStateSelectMingCardStart        = 2;                        // 选择明牌开始阶段
+    TDDZStateStartGame   	   	        = 3;						// 开始游戏	
+	TDDZStateSendCard	 	            = 4; 						// 发送手牌
+	TDDZStateQiangDiZhu	 	            = 5; 						// 抢地主阶段
+	TDDZStateSelectAddTimes	        	= 6; 						// 选择加倍阶段
+	TDDZStateAction 	        		= 7;						// 玩家自由活动
+	TDDZStateOutCard                    = 8;                        // 出牌状态
+	TDDZStateShowDown		         	= 9;     					// 游戏结算
+	TDDZStateRelieveRoom                = 10;                       // 解散房间
+};
+
+enum TDDZCT                             					    	// 牌型
+{
+	CT_DDZ_ERROR						= 0;						// 错误类型
+	CT_DDZ_SINGLE						= 1;						// 单牌类型
+	CT_DDZ_DOUBLE						= 2;				        // 对子类型
+	CT_DDZ_THREE_TIAO					= 3;					    // 三条类型
+	CT_DDZ_THREE_TIAO_WITH_ONE          = 4;    					// 三带一单类型
+	CT_DDZ_THREE_TIAO_WITH_YIDUI        = 5;    					// 三带一对类型
+	CT_DDZ_SHUN_ZI						= 6;						// 顺子类型
+	CT_DDZ_LIAN_DUI				        = 7;						// 连对类型
+	CT_DDZ_FEIJI_WITH_NULL              = 8;    					// 飞机不带类型
+	CT_DDZ_FEIJI_WITH_ONE               = 9;    					// 飞机带单类型
+	CT_DDZ_FEIJI_WITH_YIDUI             = 10;    					// 飞机带对类型
+	CT_DDZ_FOUR_WITHDOUBLE              = 11;    					// 四带二类型
+	CT_DDZ_FOUR_LIANGDUI                = 12;    					// 四带二对类型
+	CT_DDZ_ZHADAN_SIZHANG               = 13;   					// 炸弹
+	CT_DDZ_HUOJIAN				 	    = 14;						// 火箭
+};
+
+enum TDDZBottomType                             			    // 底牌牌型
+{
+	DDZ_BT_NULL						= 0;						// 无类型
+	DDZ_BT_XIAO_KING			    = 1;						// 小王类型
+	DDZ_BT_DA_KING				    = 2;				        // 大王类型
+	DDZ_BT_DUIZI					= 3;					    // 对子类型
+	DDZ_BT_TONGHUA                  = 4;    					// 同花类型
+	DDZ_BT_SHUNZI				    = 5;						// 顺子类型
+	DDZ_BT_SANZHANG				    = 6;						// 三张类型
+	DDZ_BT_TONGHUASHUN              = 7;    					// 同花顺类型
+};
+
+enum TDDZQiangDiZhu                             			   // 抢地主权限
+{
+	DDZ_QDZ_JIAODIZHU				   = 0x01;				   // 叫地主
+	DDZ_QDZ_BUJIAO					   = 0x02;				   // 不叫
+	DDZ_QDZ_QIANGDIZHU				   = 0x04;				   // 抢地主
+	DDZ_QDZ_BUQIANG					   = 0x08;				   // 不抢
+};
+
+enum TDDZJiaoFen                            			       // 叫分权限
+{
+	DDZ_JF_BUJIAO					   = 0x01;				   // 不叫
+	DDZ_JF_JIAO_ONE				       = 0x02;				   // 叫一分
+	DDZ_JF_JIAO_TWO				       = 0x04;				   // 叫二分
+	DDZ_JF_JIAO_THREE				   = 0x08;				   // 叫三分
+};
+
+enum TDDZAddTimes                           			       // 加倍选择
+{
+	DDZ_AT_NULL					       = 0;				  
+	DDZ_AT_BUJIABIE				       = 1;				       // 不加倍
+	DDZ_AT_JIABIE			           = 2;				       // 加倍
+};
+
+enum TDDZMingPaiType                           			       // 明牌选择
+{
+	DDZ_MP_NULL					       = 0;				   
+	DDZ_MP_NORMALSTART				   = 1;				       // 普通开始
+	DDZ_MP_MINGPAISTART			       = 2;				       // 明牌开始
+};
+
+message MsgQiangDiZhu                                               // 抢地主信息(服务器发给客户端的)
+{
+	optional uint64 playid                = 1;                      // 玩家id
+	optional uint64 qingdizhu_wiki        = 2;                      // 玩家可操作的权限
+}
+
+message MsgQiangDiZhuResult                                          // 抢地主结果(客户端发给服务器的，服务器广播的)
+{
+	optional uint64 playid                = 1;                       // 玩家id
+	optional uint64 result                = 2;                       // 玩家选择的结果
+	optional uint64 state                 = 3;                       // 状态
+	repeated MsgDDZCardInfo   dizhu_card  = 4;             	         // 刷新地主的手牌
+	optional uint64 CardCount             = 5;                       // 手牌数量
+	optional uint64 multiple              = 6;                       // 房间倍数
+}
+
+message MsgBRQiangDiZhuResult                                       // 抢地主最终结果(服务器广播的)
+{
+	repeated MsgQiangDiZhuResult player_list  = 1;
+	optional uint64 multiple                  = 2;                  // 房间倍数
+	repeated MsgDiPaiMutiple dipai_multi_list = 3;                  // 底牌翻倍列表
+}
+
+message MsgDiPaiMutiple                                             // 底牌翻倍的类型事件
+{
+	optional uint32 			event_id		= 1;
+	optional uint32 			count			= 2;
+}
+
+message MsgMingPaiResult                                             // 选择明牌结果(客户端发给服务器的，服务器广播的)
+{
+	optional uint64 playid                = 1;                       // 玩家id
+	optional uint64 result                = 2;                       // 玩家选择的结果
+	optional uint64 state                 = 3;                       // 状态
+	repeated MsgDDZCardInfo   dizhu_card  = 4;             	         // 地主明牌时刷新手牌
+	optional uint64 multiple              = 5;                       // 房间倍数
+}
+
+message MsgJiaBeiResult                                              // 选择加倍结果(客户端发给服务器的，服务器广播的)
+{
+	optional uint64 playid                = 1;                       // 玩家id
+	optional uint64 result                = 2;                       // 玩家选择的结果
+	optional uint64 state                 = 3;                       // 状态
+}
+
+message MsgDDZPlayer                                                // 玩家信息
+{
+	optional MsgPlayerInfo      player_base          = 1;			// 玩家信息(房间信息填充)
+	optional uint32 			state				 = 2;	        // 玩家状态
+	optional uint32 			hand_count			 = 3;           // 手牌数量
+	repeated MsgDDZCardInfo     card_list            = 4;          	// 手牌列表(房间信息、showdown填充)
+	optional uint32 			seats				 = 5;	        // 座位(房间信息填充)
+	optional int64              score                = 6;           // 玩家当前的积分
+	optional int64      		show_down_score      = 7;           // 玩家该局游戏的加减分
+	optional uint32             qingdizhu_wiki       = 8;           // 玩家抢地主的权限
+	optional uint32             qingdizhu_value      = 9;           // 玩家抢地主的结果
+	optional uint32             multiple             = 10;          // 玩家倍数,(结算时使用)
+	optional uint32      		integral_num         = 11;          // 加券数
+	repeated MsgDDZCardInfo     out_card     		 = 12;          // 上把玩家出的牌信息
+	optional uint32  	        out_type			 = 13;          // 上把玩家的出牌种类
+}
+
+message MsgDDZCardInfo
+{
+	optional uint32             card 	            = 1;                // 牌值
+}
+
+message MsgDDZActon
+{
+	optional uint64  	         new_actionid       = 1; 			    // 当前活动玩家
+	optional uint64  	         old_actionid		= 2; 			    // 上把的活动玩家
+	repeated MsgDDZCardInfo      last_out_card      = 3;             	// 上把玩家出的牌信息
+	optional uint32  	         last_out_type		= 4;                // 上把玩家的出牌种类
+	optional uint32              wik                = 5;                // 当前活动玩家的权限
+	repeated MsgDDZPlayer        player_list        = 6;                // 玩家信息
+}
+
+
+message MsgDDZUserOutCard
+{
+	optional uint64 	           old_actionid	       = 1;              // 旧玩家ID
+	optional uint32  	           out_type		       = 2;              // 出牌种类
+	optional uint32  	           hand_count          = 3;              // 玩家手牌数量
+	repeated MsgDDZCardInfo        out_card            = 4;              // 出牌列表
+	optional uint64                multiple            = 5;              // 房间倍数
+	repeated MsgDDZCardInfo        hand_card           = 6;              // 明牌玩家剩余的手牌，客户端刷新使用
+}
+
+message MsgDDZRoom                                                      // 房间信息
+{       
+	optional TDDZState                    room_state           = 1;     // 房间当前状态
+	optional uint32 					  state_time 		   = 2;     // 状态运行时间
+	repeated MsgDDZPlayer			      player_list		   = 3;     // 玩家信息
+	optional uint64 					  action_id 		   = 4;     // 当前活动玩家
+	optional uint64						  room_id			   = 5;     // 房间ID
+	optional uint32                       game_count           = 6;     // 当前是该房间的第几局
+	optional MsgCreatePrivateRoom		  private_room 	       = 7;	    // 私房信息;
+	optional MsgDDZUserOutCard            last_outcard         = 8;     // 房间上家牌的信息
+	optional uint32                       wik                  = 9;     // 当前活动玩家的权限
+	repeated MsgDDZCardInfo               bottom_card          = 10;    // 底牌列表
+	optional uint64                       multiple             = 11;    // 房间倍数
+	repeated MsgDiPaiMutiple 			  dipai_multi_list     = 12;    // 底牌翻倍列表
+	optional uint32						  room_pay_type        = 13;    // 付费类型
+}
+
+message MsgDDZRoomShowDown                                              // 结算房间信息
+{       
+	optional TDDZState                    room_state           = 1;     // 房间当前状态
+	optional uint32 					  state_time 		   = 2;     // 状态运行时间
+	repeated MsgDDZPlayer			      player_list		   = 3;     // 玩家信息
+	optional uint64						  room_id			   = 4;     // 房间ID
+	optional uint32                       game_count           = 5;     // 当前是该房间的第几局
+	optional uint32 			          time 		           = 6;     // 时间 
+	optional bool                         game_over            = 8;     // 是否结束
+	repeated MsgDDZShowDownEvent	      event_count	  	   = 9;		// 结算事件;
+	repeated MsgDDZIntegralCount		  integral_list 	   = 10;	// 积分卷;
+}
+
+// 积分卷
+message MsgDDZIntegralCount
+{
+	optional uint64				roleid			= 1;
+	optional uint32 			count 			= 2;
+}
+
+message MsgDDZShowDownEvent                                            // 结算事件;
+{
+	optional uint32 			event_id		= 1;
+	optional uint32 			count			= 2;
+}
