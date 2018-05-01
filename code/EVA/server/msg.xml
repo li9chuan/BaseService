@@ -19,6 +19,7 @@
         <file name="define_attrib.proto"/>
         <file name="define_pro.proto"/>
         <file name="msg_client.proto"/>
+		<file name="msg_doudizhu.proto"/>
     </proto_src>
 
     

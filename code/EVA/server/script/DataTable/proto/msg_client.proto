@@ -2,8 +2,6 @@ syntax = "proto2";
 package PB_MSG;
 
 import "define_pro.proto";
-import "define_attrib.proto";
-
 
 message MsgLogin
 {
