@@ -29,6 +29,10 @@ end
 
 function BaseService:SendToClient( player, cmsg_or_type, proto_type, proto_msg )
 
+	if player==nil then
+		return
+	end
+	
 	local send_info = { player.ConFES, player.UID };
     local param_type = type(cmsg_or_type)
     

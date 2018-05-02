@@ -47,6 +47,10 @@ end
 
 print   = nlinfo;
 
+function enum(enum_type, enum_name)
+	return protobuf.enum_id(enum_type, enum_name);
+end
+
 
 function PostSub( thread_name, event_type, pb_name, pb_data, from )
 	

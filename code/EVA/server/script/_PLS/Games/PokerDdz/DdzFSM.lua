@@ -45,6 +45,10 @@ function FSMDouDiZhu:SwitchState( event, ... )
     self._GameFSM:do_event( event, ... );
 end
 
+function FSMDouDiZhu:GetState()
+	self._GameFSM:get_state();
+end
+
 function FSMDouDiZhu:DoWait( event )
     print( "FSMClass:DoWait" .. event.args[1] );
 end
