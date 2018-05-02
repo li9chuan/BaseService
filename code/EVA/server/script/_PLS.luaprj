@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="_PLS.luaprj" Cmd="" Arg="" Dir="" Toggle="true" >
+<Project Name="_PLS.luaprj" Cmd="E:\BaseService\build\bin\Debug\player_logic_service.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="false" >
     <Filter RelativePath=".\_PLS" Toggle="false" >
         <LuaFile RelativePath=".\_PLSMain.lua" />
         <LuaFile RelativePath=".\PlayerLogicService.lua" />
-        <Filter RelativePath=".\DB" Toggle="false" >
+        <Filter RelativePath=".\DB" Toggle="true" >
             <LuaFile RelativePath=".\DBMgr.lua" />
             <LuaFile RelativePath=".\DBProc.lua" />
             <LuaFile RelativePath=".\DBSubProc.lua" />
@@ -14,7 +14,7 @@
             <LuaFile RelativePath=".\MsgLogin.lua" />
             <LuaFile RelativePath=".\MsgRoom.lua" />
         </Filter>
-        <Filter RelativePath=".\Player" Toggle="true" >
+        <Filter RelativePath=".\Player" Toggle="false" >
             <LuaFile RelativePath=".\PlayerDataHelper.lua" />
             <LuaFile RelativePath=".\PlayerHelper.lua" />
             <LuaFile RelativePath=".\PlayerMgr.lua" />
@@ -24,12 +24,13 @@
             <LuaFile RelativePath=".\RoomBase.lua" />
             <LuaFile RelativePath=".\RoomMgr.lua" />
             <LuaFile RelativePath=".\RoomFactory.lua" />
+            <LuaFile RelativePath=".\RoomPlayerBase.lua" />
         </Filter>
         <Filter RelativePath=".\Games" Toggle="false" >
             <Filter RelativePath=".\PokerDdz" Toggle="false" >
                 <LuaFile RelativePath=".\DdzCardTypeHelper.lua" />
                 <LuaFile RelativePath=".\DdzFSM.lua" />
-                <LuaFile RelativePath=".\DdzStruct.lua" />
+                <LuaFile RelativePath=".\DdzPlayerInfo.lua" />
                 <LuaFile RelativePath=".\RoomDdz.lua" />
             </Filter>
         </Filter>

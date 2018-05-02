@@ -13,7 +13,7 @@ end
 function PLSInfoMgr:SvrUpdateInfoCB( msg_from, msg_svrinfo )
     
     local proto_buf = msg_svrinfo:rstring();
-    local pb_sinfo  = protobuf.decode("PB_MSG.MsgServiceInfo" , proto_buf)
+    local pb_sinfo  = protobuf.decode("PB.MsgServiceInfo" , proto_buf)
     local pls_info  = PLSInfo:new();
     pls_info:LoadData(pb_sinfo);
     

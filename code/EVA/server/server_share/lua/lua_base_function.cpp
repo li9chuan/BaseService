@@ -18,7 +18,7 @@ void forLuaBaseFunctionForceLink()
 
 namespace bin
  {
-    BEGIN_SCRIPT_MODULE(Utility)
+    BEGIN_SCRIPT_MODULE(Misc)
  
         DEFINE_MODULE_FUNCTION(GetBasePath, std::string, (void))
         {
@@ -43,6 +43,30 @@ namespace bin
         {
             CHashKeyMD5 hash_key = getMD5( (const uint8*)buff, len );
             r = hash_key.toString();
+            return 1;
+        }
+
+        DEFINE_MODULE_FUNCTION(SetBit, void, (lua_Integer& flag_bit, int flag_idx))
+        {
+            uint64  shl = 1;
+            shl <<= flag_idx;
+            flag_bit |= shl;
+            return 1;
+        }
+
+        DEFINE_MODULE_FUNCTION(GetBit, bool, (lua_Integer flag_bit, int flag_idx))
+        {
+            uint64  shl = 1;
+            shl <<= flag_idx;
+            r = (flag_bit&shl)>0;
+            return 1;
+        }
+
+        DEFINE_MODULE_FUNCTION(ClearBit, void, (lua_Integer& flag_bit, int flag_idx))
+        {
+            uint64  shl = 1;
+            shl <<= flag_idx;
+            flag_bit ^= shl;
             return 1;
         }
 

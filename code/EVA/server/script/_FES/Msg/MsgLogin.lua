@@ -20,7 +20,7 @@ end
 
 function MsgLogin:CBLogin( sock_id, msg_login )
 
-    local tbl_login = msg_login:rpb("PB_MSG.MsgLogin");
+    local tbl_login = msg_login:rpb("PB.MsgLogin");
 	PrintTable(tbl_login);
     
     -- 验证签名

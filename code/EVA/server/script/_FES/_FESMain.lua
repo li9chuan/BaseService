@@ -2,7 +2,7 @@
 -- 加载常用模块
 --=========================================================
 
-local BasePath = Utility.GetBasePath() .. "/script/";
+local BasePath = Misc.GetBasePath() .. "/script/";
 package.path = BasePath .. "_FES/?.lua;" .. BasePath .. "SharedLib/?.lua;";
 
 require("InitSharedLib")

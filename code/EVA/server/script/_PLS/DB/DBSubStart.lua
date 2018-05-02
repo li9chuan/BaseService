@@ -1,4 +1,4 @@
-local BasePath = Utility.GetBasePath() .. "/script/";
+local BasePath = Misc.GetBasePath() .. "/script/";
 package.path = BasePath .. "_PLS/?.lua;" .. BasePath .. "Framework/?.lua;";
 
 

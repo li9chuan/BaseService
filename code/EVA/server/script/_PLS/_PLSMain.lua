@@ -2,7 +2,7 @@
 -- 加载常用模块
 --=========================================================
 
-local BasePath = Utility.GetBasePath() .. "/script/";
+local BasePath = Misc.GetBasePath() .. "/script/";
 package.path = BasePath .. "_PLS/?.lua;" .. BasePath .. "SharedLib/?.lua;";
 
 
@@ -19,7 +19,7 @@ MsgRoom             = require("Msg/MsgRoom")
 
 PLSConfig           = require("_PLSConfig")
 
-
+RoomPlayerBase      = require("Room/RoomPlayerBase")
 RoomBase            = require("Room/RoomBase")
 RoomFactory         = require("Room/RoomFactory")
 
@@ -40,6 +40,19 @@ function ServiceInit()
     DBMgr:Init();
     PlayerMgr:Init();
     PlayerLogicService:Init();
+    
+    local room = RoomFactory:CreateRoom("RM_DDZ");
+    
+    local msg_ddz = {};
+    
+    room:__FillRoomInfoMsg(msg_ddz, 0);
+    
+    PrintTable(msg_ddz);
+    
+
+    local eee = protobuf.enum_id( "PB.TDDZState", "TDDZStateShowDown" );
+    print(eee);
+    
 
 end
 

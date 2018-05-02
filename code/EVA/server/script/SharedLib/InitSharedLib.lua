@@ -2,7 +2,7 @@
 -- 初始化游戏内共享工具，游戏逻辑相关。
 --=========================================================
 
-local BasePath = Utility.GetBasePath() .. "/script/";
+local BasePath = Misc.GetBasePath() .. "/script/";
 package.path = package.path .. BasePath .. "Framework/?.lua;";
 
 require("InitFramework")

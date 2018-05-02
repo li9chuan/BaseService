@@ -104,7 +104,7 @@ void CScriptMgr::update()
 
 void CScriptMgr::Export()
 {
-    m_LuaEngine.ExportModule("Utility");
+    m_LuaEngine.ExportModule("Misc");
     m_LuaEngine.ExportModule("Debug");
     m_LuaEngine.ExportModule("LuaThread");
     m_LuaEngine.ExportModule("ServerNet");

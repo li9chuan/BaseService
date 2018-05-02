@@ -2,7 +2,7 @@
 -- 初始化基础通用工具
 --=========================================================
 
-local BasePath = Utility.GetBasePath() .. "/script/";
+local BasePath = Misc.GetBasePath() .. "/script/";
 package.path = package.path .. BasePath .. "Framework/?.lua;";
 package.path = package.path .. BasePath .. "Framework/Event/?.lua;";
 package.path = package.path .. BasePath .. "Framework/Net/?.lua;";

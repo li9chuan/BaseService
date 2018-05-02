@@ -8,7 +8,7 @@ end
 
 function MsgRoom:cbCreatePrivateRoom( sid, msgin )
     local uid       = msgin:rint64();
-    local msg_cpr   = msgin:rpb("PB_MSG.MsgCreatePrivateRoom");
+    local msg_cpr   = msgin:rpb("PB.MsgCreatePrivateRoom");
     RoomMgr:CreatePrivateRoom(uid, msg_cpr.room_type)
 end
 

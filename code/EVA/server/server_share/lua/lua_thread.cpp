@@ -25,7 +25,7 @@ bool CLuaThread::Start( std::string& lua_start, std::string& export_name )
     {
         m_SubLuaEngine.Init();
 
-        m_SubLuaEngine.ExportModule("Utility");
+        m_SubLuaEngine.ExportModule("Misc");
         m_SubLuaEngine.ExportModule("Debug");
         m_SubLuaEngine.ExportModule("LuaThread");
 

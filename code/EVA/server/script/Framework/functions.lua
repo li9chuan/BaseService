@@ -26,7 +26,7 @@ function checktable(value)
 end
 
 function md5(value)
-    return Utility.MD5( value, string.len(value) );
+    return Misc.MD5( value, string.len(value) );
 end
 
 function nldebug( str )

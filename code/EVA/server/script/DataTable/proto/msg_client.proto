@@ -1,5 +1,5 @@
 syntax = "proto2";
-package PB_MSG;
+package PB;
 
 import "define_pro.proto";
 
@@ -41,9 +41,28 @@ message MsgEnterPrivateRoom
 	optional uint32					game_versione		= 3;
 }
 
+message MsgCard
+{
+	optional uint32                 card                = 1;
+}
+
 message MsgCards
 {
-	optional PB_DEF.TCardsType      suit     = 1;
-	optional uint32                 index    = 2;
+	repeated uint32                 cards               = 1;
+}
+
+message MsgInt
+{
+	optional int64      value        = 1;
+}
+
+message MsgBool
+{
+	optional bool       value        = 1;
+}
+
+message MsgString
+{
+	optional string     str        = 1;
 }
 
