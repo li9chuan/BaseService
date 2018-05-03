@@ -47,6 +47,34 @@ function RoomMgr:CreatePrivateRoom( uid, room_type )
     end
 end
 
+function RoomMgr:EnterPrivateRoom( uid, room_type, room_id )
+    
+    local player = PlayerInfoMgr:GetPlayerInfo(uid);
+    
+    if player~=nil then
+        if player.RoomID==0 then
+            
+            local rooms = self._RoomsInfo[room_type];
+            
+            if rooms~=nil then
+                local room = rooms[room_id];
+                if room~=nil then
+                    
+                    local msgout = CMessage("EPRM=>PLS");
+                    msgout:wint(uid);
+                    msgout:wint(room.PLSID);
+                    msgout:wint(room.RoomID);
+                    msgout:wstring(room.RoomType);
+
+                    BaseService:Send( player.ConPLS, msgout );
+                end
+            end
+        else
+            
+        end
+    end
+end
+
 function RoomMgr:__NewRoomID( room_type )
 
     local idpool = self._RoomIDPool[room_type];

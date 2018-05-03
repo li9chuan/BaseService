@@ -52,6 +52,23 @@ function enum(enum_type, enum_name)
 end
 
 
+function shuffle(tbl)
+    
+    local tbl_count = #tbl;
+    for i=1,tbl_count do
+        local ridx  = math.random(1, tbl_count);
+        if i~=ridx then
+            local temp  = tbl[i];
+            tbl[i]      = tbl[ridx];
+            tbl[ridx]   = temp;
+        end
+    end
+end
+    
+function GetServiceID()
+	return ServerNet.GetServiceID();
+end
+
 function PostSub( thread_name, event_type, pb_name, pb_data, from )
 	
 	code = protobuf.encode(pb_name, pb_data)

@@ -8,6 +8,10 @@ function RoomPlayerBase:ctor()
 
 end
 
+function RoomPlayerBase:GetHandCount()
+    return #self._HandCards;
+end
+
 function RoomPlayerBase:SetStateEnum( enum_type, enum_name )
     local enum_val = protobuf.enum_id( enum_type, enum_name );
     Misc.GetBit(self._State, enum_val);
@@ -32,6 +36,11 @@ function RoomPlayerBase:ClearState( state_idx )
 end
 
 function RoomPlayerBase:GetState( state_idx )
+    
+    if state_idx==nil then
+        return self._State;
+    end
+    
     return Misc.GetBit(self._State, state_idx);
 end
         

@@ -70,6 +70,12 @@ namespace bin
             return 1;
         }
 
+        DEFINE_MODULE_FUNCTION(GetLocalTime, lua_Integer, ())
+        {
+            r = NLMISC::CTime::getLocalTime();
+            return 1;
+        }
+
     END_SCRIPT_MODULE()
 
 

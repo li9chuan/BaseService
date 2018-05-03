@@ -3,6 +3,8 @@ MsgRoom = {}
 function MsgRoom:Init()
 	self._EventRegister = EventRegister.new();
     self._EventRegister:RegisterEvent( "CPRM",          self, self.cbCreatePrivateRoom );
+    self._EventRegister:RegisterEvent( "EPRM",          self, self.cbEnterPrivateRoom );   
+    
 end
 
 
@@ -12,7 +14,11 @@ function MsgRoom:cbCreatePrivateRoom( sid, msgin )
     RoomMgr:CreatePrivateRoom(uid, msg_cpr.room_type)
 end
 
-
+function MsgRoom:cbEnterPrivateRoom( sid, msgin )
+    local uid       = msgin:rint64();
+    local msg_epr   = msgin:rpb("PB.MsgEnterPrivateRoom");
+    RoomMgr:EnterPrivateRoom(uid, msg_cpr.room_type, msg_cpr.room_id);
+end
 
 
 --释放函数

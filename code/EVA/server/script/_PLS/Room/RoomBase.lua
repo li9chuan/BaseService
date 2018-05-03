@@ -5,7 +5,7 @@ function RoomBase:ctor()
 
     self.RoomID                 = RoomMgr:GenerateRoomID();
     self.PrvRoomID              = 0;
-    
+    self.RoomType               = "";
     
     self.SeatPlayers            = {};
     self.ViewPlayers            = {};
@@ -49,34 +49,26 @@ end
 -- 玩家加入房间
 function RoomBase:BaseJoinRoom( player )
 
-
     player.RoomID   = self.RoomID;
-
     self:__AddRoomPlayer(player.UID);
     
 end
 
--- 玩家离开房间
-function RoomBase:BaseLeaveRoom( uid, is_broadcast, except_id )
-    
-    local msg_int = { value = uid };
-    
-	if is_broadcast then
-        self:BroadcastMsg( "LR", "PB.MsgInt", msg_int, except_id );
-    else
-        local player = PlayerMgr:GetPlayer(uid);
-        if player~=nil then
-            BaseService:SendToClient( player, "LR", "PB.MsgInt", msg_int )
-        end
-    end
-    
-    -- 离开房间删除数据
-    self:LeaveRoomRemoveData(uid);
+-- 玩家离开房间，子类可重写
+function RoomBase:LeaveRoom( uid )
+    self:BaseLeaveRoom(uid);
 end
 
-function RoomBase:LeaveRoomRemoveData( uid )
-    
+function RoomBase:BaseLeaveRoom( uid )
+    local msg_int = { value = uid };
+    self:BroadcastMsg( "LR", "PB.MsgInt", msg_int );
+end
 
+function RoomBase:ReleaseRoom( uid )
+    
+    -- 通知其它服务器离开房间
+    self:__NotifyOtherServiceLevel(uid);
+    
     self:__RemoveRoomPlayer(uid);
 
     local player = PlayerMgr:GetPlayer(uid);
@@ -105,7 +97,7 @@ function RoomBase:GetRoomPlayer( uid )
     return nil;
 end
 
-function RoomBase:__GetPlayerSeatIdx( uid )
+function RoomBase:GetPlayerSeatIdx( uid )
     for k,v in pairs(self.SeatPlayers) do
         if v==uid then
             return k;
@@ -124,9 +116,20 @@ function RoomBase:GetRoomPlayerNum()
     return count;
 end
 
+
+function RoomBase:__NotifyOtherServiceLevel( uid )
+
+    local msgout = CMessage("LURT");
+    msgout:wint(uid);
+    msgout:wstring(self.RoomType);
+    msgout:wint(self.PrvRoomID);
+
+    BaseService:Broadcast( "SCH", msgout );
+end
+
 function RoomBase:__AddRoomPlayer( uid )
     
-    local seat_idx = self:__GetPlayerSeatIdx(uid);
+    local seat_idx = self:GetPlayerSeatIdx(uid);
     
     if seat_idx==0 then
         

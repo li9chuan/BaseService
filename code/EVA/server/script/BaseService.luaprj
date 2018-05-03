@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="BaseService.luaprj" Cmd="E:\BaseService\build\bin\Debug\schedule_service.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="true" >
-    <Filter RelativePath=".\Framework" Toggle="true" >
+<Project Name="BaseService.luaprj" Cmd="E:\BaseService\build\bin\Debug\schedule_service.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="false" >
+    <Filter RelativePath=".\Framework" Toggle="false" >
         <LuaFile RelativePath=".\Class.lua" />
         <LuaFile RelativePath=".\functions.lua" />
         <LuaFile RelativePath=".\List.lua" />
@@ -10,7 +10,7 @@
         <LuaFile RelativePath=".\Queue.lua" />
         <LuaFile RelativePath=".\Stack.lua" />
         <LuaFile RelativePath=".\StateFul.lua" />
-        <Filter RelativePath=".\Event" Toggle="false" >
+        <Filter RelativePath=".\Event" Toggle="true" >
             <LuaFile RelativePath=".\EventController.lua" />
             <LuaFile RelativePath=".\EventRegister.lua" />
             <LuaFile RelativePath=".\EventTrigger.lua" />

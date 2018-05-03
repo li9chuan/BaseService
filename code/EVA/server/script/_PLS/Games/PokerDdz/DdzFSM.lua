@@ -4,6 +4,8 @@ local FSMDouDiZhu = class("FSMDouDiZhu")
 function FSMDouDiZhu:ctor()
     
     self._GameFSM 			= StateMachine:new();
+    self._StateEnterTime    = 0;
+    self._CurrState         = "TDDZStateWait";
 
     self._GameFSM:setup_state({
         events = 
@@ -35,22 +37,31 @@ function FSMDouDiZhu:ctor()
             onTDDZStateRelieveRoom  	    = handler(self, self.DoRelieveRoom),
 		}
     })
+    
+    self:SwitchState( self._CurrState );
 end
 
 function FSMDouDiZhu:TickUpdate()
-    self._GameFSM:do_event( self._GameFSM:get_state() );
+    self._GameFSM:do_event( self._CurrState, false );
 end
 
 function FSMDouDiZhu:SwitchState( event, ... )
-    self._GameFSM:do_event( event, ... );
+    self._CurrState = event;
+    self._GameFSM:do_event( event, true, ... );
 end
 
 function FSMDouDiZhu:GetState()
-	self._GameFSM:get_state();
+	return self._CurrState;
 end
 
 function FSMDouDiZhu:DoWait( event )
-    print( "FSMClass:DoWait" .. event.args[1] );
+    
+    if event.args[1] then
+        --print( "FSMClass:DoWait SwitchState" );
+    else
+        --print( "FSMClass:DoWait TickUpdate" );
+    end
+    
 end
 
 function FSMDouDiZhu:DoCheckStartGame( event )

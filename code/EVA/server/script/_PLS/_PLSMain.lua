@@ -24,7 +24,7 @@ RoomBase            = require("Room/RoomBase")
 RoomFactory         = require("Room/RoomFactory")
 
 
-
+require("Games/Common/PokerDef");
 
 -- 主入口函数。从这里开始lua逻辑
 function ServiceInit()
@@ -48,11 +48,8 @@ function ServiceInit()
     room:__FillRoomInfoMsg(msg_ddz, 0);
     
     PrintTable(msg_ddz);
-    
 
-    local eee = protobuf.enum_id( "PB.TDDZState", "TDDZStateShowDown" );
-    print(eee);
-    
+
 
 end
 

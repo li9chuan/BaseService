@@ -27,8 +27,9 @@
     <leaf name="ER"             sendto="PLS"        format="UID s"                                              description="Enter Room" />
     <leaf name="LR"             sendto="PLS"        format="UID"                                                description="Leave Room" />
     <leaf name="CPRM"           sendto="SCH"        format="UID PB.MsgCreatePrivateRoom"                        description="Create Private RoomGame" />
-    <leaf name="EPRM"           sendto="SCH"        format="UID"                                                description="Enter Private RoomGame" />
+    <leaf name="EPRM"           sendto="SCH"        format="UID PB.MsgEnterPrivateRoom"                         description="Enter Private RoomGame" />
     <leaf name="RRM"            sendto="PLS"        format="UID"       			   	                            description="Release Private RoomGame" />
+    
 
   <!-- DouDiZhu --> 
   <leaf name="DDZ_SR"           sendto="PLS"        format="UID"             		   	                        description="斗地主开始准备" />
