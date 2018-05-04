@@ -33,8 +33,8 @@ function PlayerLogicService:UpdatePLSInfo( service_id )
         MsgRoomType.Curr    = PlayerMgr:Count();
         
         table.insert( MsgServiceInfo.RoomList, MsgRoomType );
-    end  
-
+    end
+    
     BaseService:Send( service_id, "SvrInfo", "PB.MsgServiceInfo", MsgServiceInfo )
 
 end

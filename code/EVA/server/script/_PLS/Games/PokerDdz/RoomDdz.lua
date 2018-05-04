@@ -280,6 +280,9 @@ function RoomDdz:SendGameInfo( uid, msg_name, msg_ddz_room )
     self:__FillRoomInfoMsg(msg_ddz_room, uid);
 
 	local player = PlayerMgr:GetPlayer(uid);
+    
+    
+    PrintTable(msg_ddz_room);
     BaseService:SendToClient( player, msg_name, "PB.MsgDDZRoom", msg_ddz_room )
 end
 
@@ -339,6 +342,10 @@ function RoomDdz:__FillPlayerBaseInfoMsg( uid, msg_ddz_room, current_uid )
     
     
     self:__FillPlayerRoomInfoMsg(uid, room_player, current_uid )
+    
+    if msg_ddz_room.player_list==nil then
+        msg_ddz_room.player_list = {};
+    end
     
     table.insert( msg_ddz_room.player_list, room_player );
   

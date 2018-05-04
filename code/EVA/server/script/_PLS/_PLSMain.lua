@@ -49,7 +49,7 @@ function ServiceInit()
     
     PrintTable(msg_ddz);
 
-
+    
 end
 
 -- 游戏循环

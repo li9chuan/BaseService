@@ -29,8 +29,6 @@ function RoomMgr:CreatePrivateRoom( uid, prv_room_id, room_type )
                 room_base:JoinRoom(player);
             end
         end
-
-        PrintTable(self.GameRooms[room_base.RoomID]);
     end
 
     return nil;
