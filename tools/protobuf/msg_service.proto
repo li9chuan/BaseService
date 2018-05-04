@@ -1,18 +1,5 @@
 syntax = "proto2";
-package PB_MSG;
-
-import "define_pro.proto";
-import "define_attrib.proto";
-
-
-message MsgSvrLogin
-{
-    optional uint64         UID                     = 1;
-    optional string         RoomType                = 2;
-    optional uint32         ConFES                  = 3;
-  
-  
-}
+package PB;
 
 message MsgGameType
 {
