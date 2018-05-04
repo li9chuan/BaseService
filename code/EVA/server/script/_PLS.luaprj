@@ -35,7 +35,7 @@
                 <LuaFile RelativePath=".\DdzRoomMsg.lua" />
                 <LuaFile RelativePath=".\DDZOutCardData.lua" />
             </Filter>
-            <Filter RelativePath=".\Common" Toggle="true" >
+            <Filter RelativePath=".\Common" Toggle="false" >
                 <LuaFile RelativePath=".\PokerDef.lua" />
             </Filter>
         </Filter>

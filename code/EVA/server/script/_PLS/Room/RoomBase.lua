@@ -6,18 +6,31 @@ function RoomBase:ctor()
     self.RoomID                 = RoomMgr:GenerateRoomID();
     self.PrvRoomID              = 0;
     self.RoomType               = "";
+    self._RoomMin               = 9999;
     
+    self.RoomPlayerData         = {};
     self.SeatPlayers            = {};
     self.ViewPlayers            = {};
 
     self._TimerHandle           = 0;
     self._TimerTick             = 1000;
     print("RoomBase:ctor");
+    
+
 end
 
 function RoomBase:Init( room_type, update_tick )
+    self:BaseInit(room_type, update_tick);
+end
+
+function RoomBase:BaseInit( room_type, update_tick )
     
     self.RoomType               = room_type;
+    
+    local CFG = StaticTableMgr:GetRoomConfigXml(room_type);
+    
+    PrintTable(CFG);
+    self._RoomMin               = CFG.room_min;
     
     if update_tick~=nil then
         self._TimerTick = update_tick;
@@ -32,9 +45,6 @@ function RoomBase:Init( room_type, update_tick )
         
         self._TimerHandle = TimerMgr:AddTimer(self._TimerTick, self, self.TickUpdate);
     end
-    
-    PrintTable(self.SeatPlayers);
- 
 end
 
 function RoomBase:TickUpdate()
@@ -57,6 +67,7 @@ end
 -- 玩家离开房间，子类可重写
 function RoomBase:LeaveRoom( uid )
     self:BaseLeaveRoom(uid);
+    self:ReleaseRoomPlayer(uid);
 end
 
 function RoomBase:BaseLeaveRoom( uid )
@@ -64,7 +75,7 @@ function RoomBase:BaseLeaveRoom( uid )
     self:BroadcastMsg( "LR", "PB.MsgInt", msg_int );
 end
 
-function RoomBase:ReleaseRoom( uid )
+function RoomBase:ReleaseRoomPlayer( uid )
     
     -- 通知其它服务器离开房间
     self:__NotifyOtherServiceLevel(uid);
@@ -77,10 +88,14 @@ function RoomBase:ReleaseRoom( uid )
         player.RoomID = 0;
     end
     
+    if self.RoomPlayerData[uid]~=nil then
+        self.RoomPlayerData[uid] = nil;
+    end
+
 end
 
 function RoomBase:IsRoomPlayer( uid )
-    for _,v in pairs(self.SeatPlayers) do
+    for _,v in ipairs(self.SeatPlayers) do
         if v==uid then
             return true;
         end
@@ -89,7 +104,7 @@ function RoomBase:IsRoomPlayer( uid )
 end
 
 function RoomBase:GetRoomPlayer( uid )
-    for _,v in pairs(self.SeatPlayers) do
+    for _,v in ipairs(self.SeatPlayers) do
         if v==uid then
             return PlayerMgr:GetPlayer(uid);
         end
@@ -98,7 +113,7 @@ function RoomBase:GetRoomPlayer( uid )
 end
 
 function RoomBase:GetPlayerSeatIdx( uid )
-    for k,v in pairs(self.SeatPlayers) do
+    for k,v in ipairs(self.SeatPlayers) do
         if v==uid then
             return k;
         end
@@ -108,7 +123,7 @@ end
 
 function RoomBase:GetRoomPlayerNum()
     local count = 0;
-    for _,v in pairs(self.SeatPlayers) do
+    for _,v in ipairs(self.SeatPlayers) do
         if v~=0 then
             count = count + 1;
         end
@@ -133,7 +148,7 @@ function RoomBase:__AddRoomPlayer( uid )
     
     if seat_idx==0 then
         
-        for k,v in pairs(self.SeatPlayers) do
+        for k,v in ipairs(self.SeatPlayers) do
             if v==0 then
                 self.SeatPlayers[k] = uid;
                 seat_idx = k; 
@@ -146,7 +161,7 @@ end
 
 function RoomBase:__RemoveRoomPlayer( uid )
     
-    for k,v in pairs(self.SeatPlayers) do
+    for k,v in ipairs(self.SeatPlayers) do
         if v==uid then
             self.SeatPlayers[k] = 0;
         end
@@ -178,7 +193,7 @@ end
 --  广播消息给房间内桌上所有玩家  如有except_id，那么广播给除except_id的其它玩家。
 function RoomBase:BroadcastMsg( msg_name, proto_name, proto_stru, except_id )
     
-    for _,v in pairs(self.SeatPlayers) do
+    for _,v in ipairs(self.SeatPlayers) do
         if v~=0 then
             if except_id~=v then
                 local player = PlayerMgr:GetPlayer(v);

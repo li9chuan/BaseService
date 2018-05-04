@@ -11,37 +11,76 @@ function RoomDdz:ctor()
     print("RoomDdz:ctor");
 
     self.Fsm                    = DdzFSM:new();
-    self.RoomPlayerData         = {};
+    self.Fsm:Init(self);
     
-	
+    
+    self._LastOutCardData       = DDZOutCardData:new();
+
+
+    self.CFG_HAND_COUNT         = 17;       -- 每个玩家的初始手牌个数
+    self.CFG_TOTAL_CARD         = 54;       -- 牌池
+    self.CFG_BASE_SCORE         = 1;        -- 底分
+    self.CFG_DIPAI_COUNT        = 3;        -- 底牌个数
+    self.CFG_HANDCOUNT_MAX      = 20;       -- 手牌最大个数
+    self.CFG_TRUSTMAX           = 3;        -- 最大托管次数
+    self.CFG_FENGDING_16        = 16;       -- 16封顶
+    self.CFG_FENGDING_32        = 32;       -- 32封顶
+    self.CFG_FENGDING_64        = 64;       -- 64封顶
+    
+
+
+    self:ResetGameData();
+end
+
+function RoomDdz:ResetGameData()
+    
+    self._CardsPool             = {};
 	self._CardsBottom           = {}; 		-- 剩下的三张底牌
     self._ActionID              = 0;        -- 当前活动的玩家
     self._GameCount             = 1;        -- 当前是第几局
     self._Multiple              = 1;        -- 房间翻倍数
+    self._QingDiZhuWik          = 0;        -- 抢地主权限
+    self._QiangDiZhu            = true;     
     
-    self._LastOutCardData       = DDZOutCardData:new();
+    self._LastOutCardData:ClearData();
     
-    self.CardsPool              = {  };
+    -- 清空玩家临时数据
+    for _,v in ipairs(self.SeatPlayers) do
+        if v~=0 then
+            local room_player = self.RoomPlayerData[v];
+            if room_player~=nil then
+                room_player:ClearOneGameData();
+            end
+        end
+    end
+    
+    -- 洗牌
+    for i,v in pairs(ConstCardsPool) do
+        self._CardsPool[i] = v;
+    end
 
-    self:__InitData();
+    shuffle(self._CardsPool);
 end
 
-
+function RoomDdz:GameStartWait()
+    if self:GetRoomPlayerNum()>=self._RoomMin then
+        return true;
+    end
+    return false;
+end
 
 -- 玩家加入房间
 function RoomDdz:JoinRoom( player )
 
-
-    local ddz_player = DdzPlayerInfo:new();
-
-    ddz_player:SetState( "PB.TDDZPlayerState", "STATE_DDZ_NEWROLE" );
+    if #self.RoomPlayerData < self._RoomMin then
     
-    self.RoomPlayerData[player.UID] = ddz_player;
-    
-    self:BaseJoinRoom(player);
-    
-    self:BroadcastGameInfo();
-
+        local ddz_player = DdzPlayerInfo:new();
+        ddz_player:SetState( "PB.TDDZPlayerState", "STATE_DDZ_NEWROLE" );
+        self.RoomPlayerData[player.UID] = ddz_player;
+        
+        self:BaseJoinRoom(player);
+        self:BroadcastGameInfo();
+    end
 end
 
 
@@ -77,9 +116,156 @@ function RoomDdz:UserCancelReady( uid )
     end
 end
 
+
+function RoomDdz:SendQiangDiZhuWik()
+    
+    -- 随机一个玩家选择抢地主
+    
+    local seat_idx  = math.random(1, #self.SeatPlayers);
+    self._ActionID  = self.SeatPlayers[seat_idx];
+    local player    = self.RoomPlayerData[self._ActionID]
+    
+    if player~=nil then
+    
+        if _QiangDiZhu then
+            self._QingDiZhuWiki = SetBit( self._QingDiZhuWiki, "PB.TDDZQiangDiZhu", "DDZ_QDZ_BUJIAO" );
+            self._QingDiZhuWiki = SetBit( self._QingDiZhuWiki, "PB.TDDZQiangDiZhu", "DDZ_QDZ_JIAODIZHU" );
+        else
+            self._QingDiZhuWiki = SetBit( self._QingDiZhuWiki, "PB.TDDZQiangDiZhu", "DDZ_QDZ_BUJIAO" );
+            self._QingDiZhuWiki = SetBit( self._QingDiZhuWiki, "PB.TDDZQiangDiZhu", "DDZ_JF_JIAO_ONE" );
+            self._QingDiZhuWiki = SetBit( self._QingDiZhuWiki, "PB.TDDZQiangDiZhu", "DDZ_JF_JIAO_TWO" );
+            self._QingDiZhuWiki = SetBit( self._QingDiZhuWiki, "PB.TDDZQiangDiZhu", "DDZ_JF_JIAO_THREE" );
+        end
+
+        self:RefreshPlayerQiangDiZhuState(self._ActionID);
+        
+        local msg_qdz = {
+            playid = self._ActionID;
+            qingdizhu_wiki = self._QingDiZhuWiki;
+        }
+        
+        BaseService:SendToClient( player, "DDZ_QDZ_QX", "PB.MsgQiangDiZhu", msg_qdz );
+        
+        msg_qdz.qingdizhu_wiki = 0;
+        self:BroadcastMsg( "DDZ_QDZ_QX", "PB.MsgQiangDiZhu", msg_qdz, self._ActionID );
+    
+    end
+end
+
+function RoomDdz:RefreshPlayerQiangDiZhuState( uid )
+
+    for k,v in pairs(self.RoomPlayerData) do
+        if k==uid then
+            v:SetStateEnum("PB.TDDZPlayerState", "STATE_DDZ_QIANGDIZHU");
+        else
+            v:ClearStateEnum("PB.TDDZPlayerState", "STATE_DDZ_QIANGDIZHU");
+        end
+    end
+end
+
+-- 刷新加倍的选择
+function RoomDdz:RefreshSelectJiaBei( uid, msg_jbr )
+
+    if self.Fsm:IsState("TDDZStateQiangDiZhu") then
+        local room_player = self.RoomPlayerData[uid];
+        
+        if room_player~=nil then
+            --room_player:IsSelectJiaBei()
+            
+            room_player:SetStateEnum("PB.TDDZPlayerState", "STATE_DDZ_SELECT_JIABEI");
+            
+            if msg_jbr.result == enum("PB.TDDZAddTimes","DDZ_AT_JIABIE") then
+                room_player:SetStateEnum("PB.TDDZPlayerState", "STATE_DDZ_JIABEI");
+            end
+            
+            msg_jbr.playid  = uid;
+            msg_jbr.state   = room_player:GetState();
+            
+            self:BroadcastMsg("DDZ_JB", "PB.MsgJiaBeiResult", msg_jbr);
+            
+            
+            for k,v in pairs(self.RoomPlayerData) do
+                if v:IsSelectJiaBei()==false then
+                    return;
+                end
+            end
+               
+            -- 如果所有玩家都选择过了，进入下一状态
+            self.Fsm:SwitchState("TDDZStateAction");
+        end
+    end
+end
+
+-- 刷新抢地主
+function RoomDdz:RefrshRoleQiangDiZhu( uid, msg_qdz )
+
+    if self.Fsm:IsState("TDDZStateSelectAddTimes") then
+        local room_player = self.RoomPlayerData[uid];
+        
+        if room_player~=nil then
+            --room_player:IsSelectJiaBei()
+            
+            room_player.QiangDiZhu = msg_qdz.result;
+            
+            if self._QiangDiZhu then
+                
+                if msq_qdz.result==enum("PB.TDDZQiangDiZhu","DDZ_QDZ_QIANGDIZHU") then
+                
+                    self._Multiple = self._Multiple*3;
+                
+                end
+
+            end
+            
+            msg_qdz.playid      = uid;
+            msg_qdz.multiple    = self._Multiple;
+            
+            self:BroadcastMsg("DDZ_QDZ", "PB.MsgQiangDiZhuResult", msg_qdz)
+            
+            
+        end
+    end
+end
+
+
+
+function RoomDdz:SetDiZhuState( uid )
+    
+        
+end
+
+
+function RoomDdz:SendHandCard()
+
+    local start_send    = 1;
+    local end_send      = self.CFG_HAND_COUNT;
+    
+    for _,v in ipairs(self.SeatPlayers) do
+        local room_player = self.RoomPlayerData[v];
+        
+        if room_player~=nil then
+            
+            room_player:AddHandCards( self._CardsPool, start_send, end_send );
+            
+            start_send  = start_send + self.CFG_HAND_COUNT;
+            end_send    = end_send + self.CFG_HAND_COUNT;
+        end
+    end
+
+    -- 发底牌
+    self._CardsBottom           = {};
+    local i=1;
+    for idx=start_send, self.CFG_TOTAL_CARD do
+        self._CardsBottom[i] = self._CardsPool[idx];
+        i = i+1;
+    end
+    
+end
+
+
 function RoomDdz:BroadcastGameInfo( )
 
-    for k,v in pairs(self.SeatPlayers) do
+    for k,v in ipairs(self.SeatPlayers) do
         if v~=0 then
             local msg_gameinfo = {};
             self:SendGameInfo( v, "DDZ_GI", msg_gameinfo );
@@ -125,7 +311,7 @@ function RoomDdz:__FillRoomInfoMsg( msg_ddz_room, current_uid )
     msg_ddz_room.private_room = { room_type=self.RoomType };
 
 
-    for _,v in pairs(self.SeatPlayers) do
+    for _,v in ipairs(self.SeatPlayers) do
         if v>0 then
             self:__FillPlayerBaseInfoMsg( v, msg_ddz_room, current_uid );
         end
@@ -174,16 +360,7 @@ function RoomDdz:__FillPlayerRoomInfoMsg( uid, msg_room_player, current_uid )
   
 end
 
-function RoomDdz:__InitData()
-    
-    self.CardsPool              = {  };
-        
-    for i,v in pairs(ConstCardsPool) do
-        self.CardsPool[i] = v;
-    end
 
-    shuffle(self.CardsPool);
-end
 
 --释放函数
 function RoomDdz:Release()

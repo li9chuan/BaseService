@@ -65,6 +65,16 @@ function RoomMgr:GetRoom( room_id )
     return self.GameRooms[room_id];
 end
 
+function RoomMgr:GetRoomFromPID( uid )
+    local player    = PlayerMgr:GetPlayer(uid);
+    
+    if player~=nil then
+        return RoomMgr:GetRoom(player.RoomID);
+    end
+    
+    return nil;
+end
+
 function RoomMgr:GenerateRoomID()
     return self.RoomIDGen:Generate();
 end

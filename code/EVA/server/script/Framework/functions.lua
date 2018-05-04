@@ -64,6 +64,12 @@ function shuffle(tbl)
         end
     end
 end
+
+function SetBit( val, enum_type, enum_name )
+    local enum_val = protobuf.enum_id(enum_type, enum_name);
+    Misc.SetBit(val, enum_val);
+    return val;
+end
     
 function GetServiceID()
 	return ServerNet.GetServiceID();

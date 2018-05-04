@@ -2,11 +2,13 @@ local FSMDouDiZhu = class("FSMDouDiZhu")
 
 -- 构造函数;
 function FSMDouDiZhu:ctor()
-    
     self._GameFSM 			= StateMachine:new();
     self._StateEnterTime    = 0;
     self._CurrState         = "TDDZStateWait";
+    self.RoomDdz            = nil;
+end
 
+function FSMDouDiZhu:Init( room_ddz )
     self._GameFSM:setup_state({
         events = 
 		{
@@ -38,7 +40,13 @@ function FSMDouDiZhu:ctor()
 		}
     })
     
+    self.RoomDdz = room_ddz;
     self:SwitchState( self._CurrState );
+end
+
+
+function FSMDouDiZhu:__GetRunStateTime()
+    return Misc.GetLocalTime - self._StateEnterTime;
 end
 
 function FSMDouDiZhu:TickUpdate()
@@ -47,11 +55,23 @@ end
 
 function FSMDouDiZhu:SwitchState( event, ... )
     self._CurrState = event;
+    self._StateEnterTime = Misc.GetLocalTime();
     self._GameFSM:do_event( event, true, ... );
+end
+
+function FSMDouDiZhu:__ResetInStateTime()
+    self._StateEnterTime = Misc.GetLocalTime();
 end
 
 function FSMDouDiZhu:GetState()
 	return self._CurrState;
+end
+
+function FSMDouDiZhu:IsState( state )
+    if self._CurrState == state then
+        return true;
+    end
+	return false;
 end
 
 function FSMDouDiZhu:DoWait( event )
@@ -62,22 +82,56 @@ function FSMDouDiZhu:DoWait( event )
         --print( "FSMClass:DoWait TickUpdate" );
     end
     
+    
+    if self.RoomDdz:GameStartWait() then
+        self:SwitchState("TDDZStateCheckStartGame");
+    end
 end
 
+
+
+
 function FSMDouDiZhu:DoCheckStartGame( event )
-    print( "FSMClass:DoCheckStartGame".. event.args[1] );
+    -- 检查是否可以开始,暂不检查，直接跳下一状态
+    self:SwitchState("TDDZStateSelectMingCardStart");
 end
 
 function FSMDouDiZhu:DoSelectMingCardStart( event )
-    print( "FSMClass:DoSelectMingCardStart".. event.args[1] );
+    
+    
+    
 end
 
 function FSMDouDiZhu:DoStartGame( event )
-    print( "FSMClass:DoStartGame".. event.args[1] );
+    
+    if event.args[1] then
+        self.RoomDdz:ResetGameData();
+        self.RoomDdz:BroadcastGameInfo();
+    else
+        
+        if self:__GetRunStateTime()<3000 then
+            return;
+        end
+        
+        self:SwitchState("TDDZStateSendCard");
+    end
 end
 
 function FSMDouDiZhu:DoSendCard( event )
-    print( "FSMClass:DoSendCard".. event.args[1] );
+
+    
+    if event.args[1] then
+        self.RoomDdz:SendHandCard();
+        self.RoomDdz:BroadcastGameInfo();
+    else
+        
+        if self:__GetRunStateTime()<3000 then
+            return;
+        end
+        
+        self:SwitchState("TDDZStateQiangDiZhu");
+    end
+    
 end
 
 function FSMDouDiZhu:DoQiangDiZhu( event )

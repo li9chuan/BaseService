@@ -2,33 +2,47 @@ MsgRoomDdz = {}
 
 function MsgRoomDdz:Init()
 	self._EventRegister = EventRegister.new();
-    self._EventRegister:RegisterEvent( "DDZ_SR",            self, self.CBStartReady );
-    self._EventRegister:RegisterEvent( "DDZ_CR",            self, self.CBCancleReady );
+    self._EventRegister:RegisterEvent( "DDZ_SR",            self, self.cbStartReady );
+    self._EventRegister:RegisterEvent( "DDZ_CR",            self, self.cbCancleReady );
+    self._EventRegister:RegisterEvent( "DDZ_JB",            self, self.cbDouDiZhuAddTimes );
+    self._EventRegister:RegisterEvent( "DDZ_QDZ",           self, self.cbDouDiZhuQiangDiZhu );
 end
 
-function MsgRoomDdz:CBStartReady( fes_sid, msgin )
+function MsgRoomDdz:cbStartReady( fes_sid, msgin )
     local uid       = msgin:rint64();
-    local player    = PlayerMgr:GetPlayer(uid);
+    local room      = RoomMgr:GetRoomFromPID(uid);
     
-    if player~=nil then
-        local room = RoomMgr:GetRoom(player.RoomID);
-        
-        if room~=nil then
-            room:UserStartReady(uid);
-        end
+    if room~=nil then
+        room:UserStartReady(uid);
     end
 end
 
-function MsgRoomDdz:CBCancleReady( fes_sid, msgin )
+function MsgRoomDdz:cbCancleReady( fes_sid, msgin )
     local uid       = msgin:rint64();
-    local player    = PlayerMgr:GetPlayer(uid);
+    local room      = RoomMgr:GetRoomFromPID(uid);
     
-    if player~=nil then
-        local room = RoomMgr:GetRoom(player.RoomID);
-        
-        if room~=nil then
-            room:UserCancelReady(uid);
-        end
+    if room~=nil then
+        room:UserCancelReady(uid);
+    end
+end
+
+function MsgRoomDdz:cbDouDiZhuAddTimes( fes_sid, msgin )
+    local uid       = msgin:rint64();
+    local room      = RoomMgr:GetRoomFromPID(uid);
+    
+    if room~=nil then
+        local msg_jbr = msg_login:rpb("PB.MsgJiaBeiResult");
+        room:RefreshSelectJiaBei(uid, msg_jbr);
+    end
+end
+
+function MsgRoomDdz:cbDouDiZhuQiangDiZhu( fes_sid, msgin )
+    local uid       = msgin:rint64();
+    local room      = RoomMgr:GetRoomFromPID(uid);
+    
+    if room~=nil then
+        local msg_qdz = msg_login:rpb("PB.MsgQiangDiZhuResult");
+        room:RefrshRoleQiangDiZhu(uid, msg_qdz);
     end
 end
 
