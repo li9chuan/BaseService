@@ -78,5 +78,13 @@ void CScheduleService::release()
  ****************************************************************************/
 NLNET_SERVICE_MAIN (CScheduleService, "SCH", "schedule_service", 49971, EmptyCallbackArray, "", "")
 
+NLMISC_COMMAND (info, "service information.", "")
+{
+    if(args.size() != 0) return false;
+    log.displayNL ("service information.");
+
+	ScriptMgr.ExecString("ServiceInfo()");
+    return true;
+}
 
 /* end of file */

@@ -2,57 +2,47 @@ PlayerInfoMgr = {}
 
 -- 初始化函数
 function PlayerInfoMgr:Init()
-	self.PlayerInfoMap      = {};
+	self.PlayerInfoMap      = Map:new();
     
     print("PlayerInfoMgr:Init");
 end
 
 function PlayerInfoMgr:GetPlayerInfo( _uid )
-    return self.PlayerInfoMap[_uid];
+    return self.PlayerInfoMap:Find(_uid);
 end
 
 function PlayerInfoMgr:CreatePlayerInfo( _uid )
 
-    if self.PlayerInfoMap[_uid] ~= nil then
-        return self.PlayerInfoMap[_uid];
+    local player = self.PlayerInfoMap:Find(_uid);
+    if player~= nil then
+        return player;
+    else
+        player = PlayerInfo:new();
+        player.UID = _uid;
+        self.PlayerInfoMap:Insert(_uid, player);
     end
-    
-    local player = PlayerInfo:new();
-    player.UID = _uid;
-    self.PlayerInfoMap[_uid] = player;
-    
-    return self.PlayerInfoMap[_uid];
+
+    return player;
 end
 
 function PlayerInfoMgr:RemovePlayerInfo( _uid )
     
-    if self.PlayerInfoMap[_uid] ~= nil then
-        
-        self.PlayerInfoMap[_uid]:Release();
-        self.PlayerInfoMap[_uid] = nil;
-
+    local player = self.PlayerInfoMap:Find(_uid);
+    
+    if player ~= nil then
+        player:Release();
+        self.PlayerInfoMap:Remove(_uid);
     end
-
 end
 
 function PlayerInfoMgr:RemovePLS( pls_sid )
-
-    local newT = {} 
-    
-	for _,v in pairs(self.PlayerInfoMap) do
-        if v.ConPLS~=pls_sid then
-            newT[v.UID] = v;
-        end
-    end 
-    
-    self.PlayerInfoMap = newT;
-   
+    self.PlayerInfoMap:ForEachRemove("ConPLS", pls_sid);
     print("PlayerInfoMgr.RemovePLS:"..pls_sid);
 end
 
 function PlayerInfoMgr:Release()
     
-	for _,v in pairs(self.PlayerInfoMap) do
+	for _,v in pairs(self.PlayerInfoMap:GetTable()) do
         v:Release();
     end 
     

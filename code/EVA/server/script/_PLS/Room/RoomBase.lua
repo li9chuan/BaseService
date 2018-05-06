@@ -8,7 +8,7 @@ function RoomBase:ctor()
     self.RoomType               = "";
     self._RoomMin               = 9999;
     
-    self.RoomPlayerData         = {};
+    self.RoomPlayerData         = Map:new();
     self.SeatPlayers            = {};
     self.ViewPlayers            = {};
 
@@ -17,6 +17,13 @@ function RoomBase:ctor()
     print("RoomBase:ctor");
     
 
+end
+
+function RoomBase:PrintInfo()
+    nlinfo(self.RoomID);
+    nlinfo(self.PrvRoomID);
+    PrintTable(self.SeatPlayers);
+    PrintTable(self.RoomPlayerData:GetTable());
 end
 
 function RoomBase:Init( room_type, update_tick )
@@ -88,9 +95,7 @@ function RoomBase:ReleaseRoomPlayer( uid )
         player.RoomID = 0;
     end
     
-    if self.RoomPlayerData[uid]~=nil then
-        self.RoomPlayerData[uid] = nil;
-    end
+    self.RoomPlayerData:Remove(uid);
 
 end
 
@@ -143,7 +148,7 @@ function RoomBase:__NotifyOtherServiceLevel( uid )
 end
 
 function RoomBase:__AddRoomPlayer( uid )
-    
+
     local seat_idx = self:GetPlayerSeatIdx(uid);
     
     if seat_idx==0 then
@@ -151,7 +156,8 @@ function RoomBase:__AddRoomPlayer( uid )
         for k,v in ipairs(self.SeatPlayers) do
             if v==0 then
                 self.SeatPlayers[k] = uid;
-                seat_idx = k; 
+                seat_idx = k;
+                break;
             end
         end
     end

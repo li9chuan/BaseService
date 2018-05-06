@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="BaseService.luaprj" Cmd="E:\BaseService\build\bin\Debug\schedule_service.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="true" >
-    <Filter RelativePath=".\Framework" Toggle="true" >
+<Project Name="BaseService.luaprj" Cmd="E:\BaseService\build\bin\Debug\schedule_service.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="false" >
+    <Filter RelativePath=".\Framework" Toggle="false" >
         <LuaFile RelativePath=".\Class.lua" />
         <LuaFile RelativePath=".\functions.lua" />
         <LuaFile RelativePath=".\List.lua" />
@@ -31,6 +31,7 @@
             <LuaFile RelativePath=".\TimerTest.lua" />
         </Filter>
         <LuaFile RelativePath=".\SimpleStateMachine.lua" />
+        <LuaFile RelativePath=".\MapMap.lua" />
     </Filter>
     <Filter RelativePath=".\SharedLib" Toggle="false" >
         <LuaFile RelativePath=".\StaticTableMgr.lua" />

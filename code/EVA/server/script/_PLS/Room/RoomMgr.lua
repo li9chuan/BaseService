@@ -2,12 +2,18 @@ RoomMgr = {}
 
 function RoomMgr:Init()
 	
-    self.GameRooms          = {};               --  {roomid, room_ins}
+    self.GameRooms          = Map:new();               --  {roomid, room_ins}
     --self.RoomTypes          = {};               --  {roomtype, {roomids, room_ins} }
-    self.PrvRoomTypes       = {};               --  {roomtype, {prv_roomids, room_ins} }
+    self.PrvRoomTypes       = MapMap:new();               --  {roomtype, {prv_roomids, room_ins} }
     
     
     self.RoomIDGen          = IDGenerate.NewInstance(1020);
+end
+
+function RoomMgr:PrintInfo()
+    for _,v in ipairs(self.GameRooms:GetTable()) do
+        v:PrintInfo();
+    end
 end
 
 function RoomMgr:CreatePrivateRoom( uid, prv_room_id, room_type )
@@ -24,8 +30,8 @@ function RoomMgr:CreatePrivateRoom( uid, prv_room_id, room_type )
             
             if room_base~=nil then
                 room_base.PrvRoomID = prv_room_id;
-                self.GameRooms[room_base.RoomID] = room_base;
-                self.PrvRoomTypes[room_type] = { [prv_room_id] = room_base};
+                self.GameRooms:Insert(room_base.RoomID, room_base);
+                self.PrvRoomTypes:Insert(room_type, prv_room_id, room_base);
                 room_base:JoinRoom(player);
             end
         end
@@ -44,14 +50,10 @@ function RoomMgr:EnterPrivateRoom( uid, prv_room_id, room_type )
         if player.RoomID >0 then
             nlwarning("已经在房间了");
         else
-            local rooms = self.PrvRoomTypes[room_type];
-            
-            if rooms~=nil then
-                local room = rooms[prv_room_id];
-                
-                if room~=nil then
-                    room:JoinRoom(player);
-                end
+            local room = self.PrvRoomTypes:Find(room_type, prv_room_id);
+
+            if room~=nil then
+                room:JoinRoom(player);
             end
         end
     end
@@ -60,7 +62,20 @@ function RoomMgr:EnterPrivateRoom( uid, prv_room_id, room_type )
 end
 
 function RoomMgr:GetRoom( room_id )
-    return self.GameRooms[room_id];
+    return self.GameRooms:Find(room_id);
+end
+
+function RoomMgr:ReleaseRoom( room_id )
+    local room = self.GameRooms:Find(room_id);
+    
+    if room~=nil then
+        
+        if room.PrvRoomID > 0 then
+            self.PrvRoomTypes:Remove( room.RoomType, room.PrvRoomID );
+        end
+        
+        self.GameRooms:Remove(room_id);
+    end
 end
 
 function RoomMgr:GetRoomFromPID( uid )

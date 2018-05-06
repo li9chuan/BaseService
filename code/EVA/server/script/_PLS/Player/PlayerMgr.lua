@@ -2,7 +2,7 @@ PlayerMgr = {}
 
 -- 初始化函数
 function PlayerMgr:Init()
-	self.playerMap      = {};
+	self.playerMap      = Map:new();
 
     self.maxPlayer      = 3000;
 
@@ -13,11 +13,11 @@ function PlayerMgr:MaxPlayer()
 end
 
 function PlayerMgr:Count()
-    return #self.playerMap;
+    return self.playerMap:Count();
 end
 
 function PlayerMgr:GetPlayer( _uid )
-    return self.playerMap[_uid];
+    return self.playerMap:Find(_uid);
 end
 
 function PlayerMgr:LoadDBPlayer( _uid )
@@ -36,15 +36,15 @@ function PlayerMgr:LoadDBPlayer( _uid )
         player_helper.UID               = _uid;
         player_helper.PlayerDataHelper  = tb_playerinfo;
         
-        
-        self.playerMap[_uid] = player_helper;
+        self.playerMap:Insert(_uid, player_helper);
+        return player_helper;
     end
     
-    return self.playerMap[_uid];
+    return nil;
 end
 
 function PlayerMgr:RemovePlayer( _uid )
-    self.playerMap[_uid] = nil;
+    self.playerMap:Remove(_uid);
 end
 
 return PlayerMgr

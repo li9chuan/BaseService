@@ -2,7 +2,7 @@ PLSInfoMgr = {}
 
 -- 初始化函数
 function PLSInfoMgr:Init()
-    self.PLSMap         = {};
+    self.PLSMap         = Map:new();
     self._EventRegister = EventRegister.new();
     
     self._EventRegister:RegisterEvent( "SvrInfo",  self, self.SvrUpdateInfoCB );
@@ -18,14 +18,14 @@ function PLSInfoMgr:SvrUpdateInfoCB( msg_from, msg_svrinfo )
     pls_info:LoadData(pb_sinfo);
     
     if pls_info.ServiceName=="PLS" then
-        self.PLSMap[pls_info.ServiceID] = pls_info;
+        self.PLSMap:Insert(pls_info.ServiceID, pls_info);
     end
 
 end
 
 function PLSInfoMgr:AllocPLS( room_type )
 
-    for _,v in ipairs(self.PLSMap) do
+    for _,v in pairs(self.PLSMap:GetTable()) do
         
         if v.RoomList[room_type] ~= nil then
             
@@ -43,7 +43,7 @@ function PLSInfoMgr:AllocPLS( room_type )
 end
 
 function PLSInfoMgr:IsInPLS( room_type, pls_sid )
-    local pls_info = self.PLSMap[pls_sid];
+    local pls_info = self.PLSMap:Find(pls_sid);
     
     if pls_info~=nil then
         if pls_info[room_type]~=nil then

@@ -1,0 +1,20 @@
+syntax = "proto2";
+package PB;
+
+message MsgGameType
+{
+    optional string         Type                    = 1;
+    optional uint32         Max                     = 2;
+    optional uint32         Curr                    = 3;    
+    
+}
+
+message MsgServiceInfo
+{
+    repeated MsgGameType    RoomList                = 1;
+    optional uint32         MaxPlayer               = 2;
+    optional uint32         CurrPlayer              = 3;
+    optional uint32         ServiceID               = 4;
+    optional string         ServiceName             = 5;
+
+}
