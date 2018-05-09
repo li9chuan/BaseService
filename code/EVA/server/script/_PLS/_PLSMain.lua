@@ -41,15 +41,17 @@ function ServiceInit()
     PlayerMgr:Init();
     PlayerLogicService:Init();
     
-    local room = RoomFactory:CreateRoom("RM_DDZ");
+--    local room = RoomFactory:CreateRoom("RM_DDZ");
     
-    local msg_ddz = {};
+ --   local msg_ddz = {};
     
-    room:__FillRoomInfoMsg(msg_ddz, 0);
+  --  room:__FillRoomInfoMsg(msg_ddz, 0);
     
-    PrintTable(msg_ddz);
+    --PrintTable(msg_ddz);
 
 
+
+    
 end
 
 -- 游戏循环
@@ -68,6 +70,15 @@ function ServiceRelease()
     print("Lua Release.");
 end
 
+function ServiceInfo()
+    
+    nlinfo("PlayerNum:"..PlayerMgr:Count());
+    
+    PrintTable(PlayerMgr.playerMap)
+    RoomMgr:PrintInfo();
+
+    
+end
 
 --[[
 

@@ -43,7 +43,7 @@ function ServiceInit()
 
     
     PHPService:Listen( "PHP", "tcp", 20458 );
-    
+
 end
 
 -- 游戏循环
@@ -58,4 +58,11 @@ function ServiceRelease()
     ScheduleService:Release();
     print("Lua Release.");
 end
+
+
+function ServiceInfo()
+    
+    PrintTable(PlayerInfoMgr.PlayerInfoMap);
+end
+
 

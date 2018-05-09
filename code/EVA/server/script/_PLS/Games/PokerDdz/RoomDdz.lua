@@ -47,7 +47,7 @@ function RoomDdz:ResetGameData()
     -- 清空玩家临时数据
     for _,v in ipairs(self.SeatPlayers) do
         if v~=0 then
-            local room_player = self.RoomPlayerData[v];
+            local room_player = self.RoomPlayerData:Find(v);
             if room_player~=nil then
                 room_player:ClearOneGameData();
             end
@@ -72,12 +72,18 @@ end
 -- 玩家加入房间
 function RoomDdz:JoinRoom( player )
 
-    if #self.RoomPlayerData < self._RoomMin then
+    if self.RoomPlayerData:Count() < self._RoomMin then
     
-        local ddz_player = DdzPlayerInfo:new();
-        ddz_player:SetState( "PB.TDDZPlayerState", "STATE_DDZ_NEWROLE" );
-        self.RoomPlayerData[player.UID] = ddz_player;
-        
+        local ddz_player = self.RoomPlayerData:Find(player.UID);
+
+        if ddz_player~=nil then
+            ddz_player:SetState( "PB.TDDZPlayerState", "STATE_DDZ_NEWROLE" );
+        else
+            ddz_player = DdzPlayerInfo:new();
+            ddz_player:SetState( "PB.TDDZPlayerState", "STATE_DDZ_NEWROLE" );
+            self.RoomPlayerData:Insert(player.UID, ddz_player);
+        end
+
         self:BaseJoinRoom(player);
         self:BroadcastGameInfo();
     end
@@ -97,7 +103,7 @@ end
 
 
 function RoomDdz:UserStartReady( uid )
-    local room_player = self.RoomPlayerData[uid];
+    local room_player = self.RoomPlayerData:Find(uid);
     
     if room_player~=nil then
         room_player:SetReady();
@@ -107,7 +113,7 @@ function RoomDdz:UserStartReady( uid )
 end
 
 function RoomDdz:UserCancelReady( uid )
-    local room_player = self.RoomPlayerData[uid];
+    local room_player = self.RoomPlayerData:Find(uid);
     
     if room_player~=nil then
         room_player:CancleReady();
@@ -123,7 +129,7 @@ function RoomDdz:SendQiangDiZhuWik()
     
     local seat_idx  = math.random(1, #self.SeatPlayers);
     self._ActionID  = self.SeatPlayers[seat_idx];
-    local player    = self.RoomPlayerData[self._ActionID]
+    local player    = self.RoomPlayerData:Find(self._ActionID);
     
     if player~=nil then
     
@@ -154,7 +160,7 @@ end
 
 function RoomDdz:RefreshPlayerQiangDiZhuState( uid )
 
-    for k,v in pairs(self.RoomPlayerData) do
+    for k,v in pairs(self.RoomPlayerData:GetTable()) do
         if k==uid then
             v:SetStateEnum("PB.TDDZPlayerState", "STATE_DDZ_QIANGDIZHU");
         else
@@ -167,7 +173,7 @@ end
 function RoomDdz:RefreshSelectJiaBei( uid, msg_jbr )
 
     if self.Fsm:IsState("TDDZStateQiangDiZhu") then
-        local room_player = self.RoomPlayerData[uid];
+        local room_player = self.RoomPlayerData:Find(uid);
         
         if room_player~=nil then
             --room_player:IsSelectJiaBei()
@@ -184,7 +190,7 @@ function RoomDdz:RefreshSelectJiaBei( uid, msg_jbr )
             self:BroadcastMsg("DDZ_JB", "PB.MsgJiaBeiResult", msg_jbr);
             
             
-            for k,v in pairs(self.RoomPlayerData) do
+            for k,v in pairs(self.RoomPlayerData:GetTable()) do
                 if v:IsSelectJiaBei()==false then
                     return;
                 end
@@ -200,7 +206,7 @@ end
 function RoomDdz:RefrshRoleQiangDiZhu( uid, msg_qdz )
 
     if self.Fsm:IsState("TDDZStateSelectAddTimes") then
-        local room_player = self.RoomPlayerData[uid];
+        local room_player = self.RoomPlayerData:Find(uid);
         
         if room_player~=nil then
             --room_player:IsSelectJiaBei()
@@ -241,7 +247,7 @@ function RoomDdz:SendHandCard()
     local end_send      = self.CFG_HAND_COUNT;
     
     for _,v in ipairs(self.SeatPlayers) do
-        local room_player = self.RoomPlayerData[v];
+        local room_player = self.RoomPlayerData:Find(v);
         
         if room_player~=nil then
             
@@ -280,6 +286,9 @@ function RoomDdz:SendGameInfo( uid, msg_name, msg_ddz_room )
     self:__FillRoomInfoMsg(msg_ddz_room, uid);
 
 	local player = PlayerMgr:GetPlayer(uid);
+    
+    
+    PrintTable(msg_ddz_room);
     BaseService:SendToClient( player, msg_name, "PB.MsgDDZRoom", msg_ddz_room )
 end
 
@@ -340,13 +349,17 @@ function RoomDdz:__FillPlayerBaseInfoMsg( uid, msg_ddz_room, current_uid )
     
     self:__FillPlayerRoomInfoMsg(uid, room_player, current_uid )
     
+    if msg_ddz_room.player_list==nil then
+        msg_ddz_room.player_list = {};
+    end
+    
     table.insert( msg_ddz_room.player_list, room_player );
   
 end
 
 function RoomDdz:__FillPlayerRoomInfoMsg( uid, msg_room_player, current_uid )
     
-    local room_player = self.RoomPlayerData[uid];
+    local room_player = self.RoomPlayerData:Find(uid);
     
     if room_player~=nil then
     

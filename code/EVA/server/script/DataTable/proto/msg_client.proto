@@ -67,3 +67,9 @@ message MsgString
 	optional string     str        = 1;
 }
 
+message MsgError
+{
+	optional uint32     errno       = 1;
+    optional uint64     value       = 2;
+}
+

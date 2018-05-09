@@ -89,4 +89,13 @@ void CFrontEndService::release()
  ****************************************************************************/
 NLNET_SERVICE_MAIN (CFrontEndService, "FES", "frontend_service", 0, EmptyCallbackArray, "", "")
 
+NLMISC_COMMAND (info, "service information.", "")
+{
+    if(args.size() != 0) return false;
+    log.displayNL ("service information.");
+
+	ScriptMgr.ExecString("ServiceInfo()");
+    return true;
+}
+
 /* end of file */

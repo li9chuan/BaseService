@@ -23,8 +23,10 @@ JsonUtil    = require "CJsonUtil"
 
 -- 工具库
 require("Class")
---require("Framework/Stack")
 require("functions")
+
+require("Map")
+require("MapMap")
 
 --require ("bit")
 

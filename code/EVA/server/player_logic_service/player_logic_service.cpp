@@ -88,6 +88,7 @@ NLMISC_COMMAND (info, "service information.", "")
     log.displayNL ("PlayerBarUpdateTimerEvent:%d", NL_GET_LOCAL_INSTANCE_COUNTER(CTimerEvent));
     //log.displayNL ("PlayerBarUpdateTimerEvent:%d", NL_GET_INSTANCE_COUNTER(CTimerEvent));
 
+	ScriptMgr.ExecString("ServiceInfo()");
     return true;
 }
 

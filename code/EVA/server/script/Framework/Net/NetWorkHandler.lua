@@ -8,6 +8,7 @@ end
 
 -- 收到网络消息
 function NetWorkHandler.OnMessage( msg_from, lua_msg )	
+    print("recv msg:"..lua_msg:name());
     EventController.Instance():TriggerEvent( lua_msg:name(), msg_from, lua_msg );
 end
 

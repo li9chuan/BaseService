@@ -195,7 +195,7 @@ message MsgDDZUserOutCard
 
 message MsgDDZRoom                                                      // 房间信息
 {       
-	optional TDDZState                      room_state              = 1;     // 房间当前状态
+	optional uint32                      	room_state              = 1;     // 房间当前状态   TDDZState
 	optional uint32 					    state_time 		        = 2;     // 状态运行时间
 	repeated MsgDDZPlayer			        player_list		        = 3;     // 玩家信息
 	optional uint64 					    action_id 		        = 4;     // 当前活动玩家
@@ -212,7 +212,7 @@ message MsgDDZRoom                                                      // 房�
 
 message MsgDDZRoomShowDown                                              // 结算房间信息
 {       
-	optional TDDZState                    room_state           = 1;     // 房间当前状态
+	optional uint32                       room_state           = 1;     // 房间当前状态    TDDZState
 	optional uint32 					  state_time 		   = 2;     // 状态运行时间
 	repeated MsgDDZPlayer			      player_list		   = 3;     // 玩家信息
 	optional uint64						  room_id			   = 4;     // 房间ID

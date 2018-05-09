@@ -82,18 +82,18 @@ enum TDDZBottomType                             			    // 底牌牌型
 
 enum TDDZQiangDiZhu                             			   // 抢地主权限
 {
-	DDZ_QDZ_JIAODIZHU				   = 0x01;				   // 叫地主
-	DDZ_QDZ_BUJIAO					   = 0x02;				   // 不叫
-	DDZ_QDZ_QIANGDIZHU				   = 0x04;				   // 抢地主
-	DDZ_QDZ_BUQIANG					   = 0x08;				   // 不抢
+	DDZ_QDZ_JIAODIZHU				   = 1;				   // 叫地主
+	DDZ_QDZ_BUJIAO					   = 2;				   // 不叫
+	DDZ_QDZ_QIANGDIZHU				   = 3;				   // 抢地主
+	DDZ_QDZ_BUQIANG					   = 4;				   // 不抢
 };
 
 enum TDDZJiaoFen                            			       // 叫分权限
 {
-	DDZ_JF_BUJIAO					   = 0x01;				   // 不叫
-	DDZ_JF_JIAO_ONE				       = 0x02;				   // 叫一分
-	DDZ_JF_JIAO_TWO				       = 0x04;				   // 叫二分
-	DDZ_JF_JIAO_THREE				   = 0x08;				   // 叫三分
+	DDZ_JF_BUJIAO					   = 1;				   // 不叫
+	DDZ_JF_JIAO_ONE				       = 2;				   // 叫一分
+	DDZ_JF_JIAO_TWO				       = 3;				   // 叫二分
+	DDZ_JF_JIAO_THREE				   = 4;				   // 叫三分
 };
 
 enum TDDZAddTimes                           			       // 加倍选择
@@ -195,7 +195,7 @@ message MsgDDZUserOutCard
 
 message MsgDDZRoom                                                      // 房间信息
 {       
-	optional TDDZState                      room_state              = 1;     // 房间当前状态
+	optional uint32                      	room_state              = 1;     // 房间当前状态   TDDZState
 	optional uint32 					    state_time 		        = 2;     // 状态运行时间
 	repeated MsgDDZPlayer			        player_list		        = 3;     // 玩家信息
 	optional uint64 					    action_id 		        = 4;     // 当前活动玩家
@@ -212,7 +212,7 @@ message MsgDDZRoom                                                      // 房�
 
 message MsgDDZRoomShowDown                                              // 结算房间信息
 {       
-	optional TDDZState                    room_state           = 1;     // 房间当前状态
+	optional uint32                       room_state           = 1;     // 房间当前状态    TDDZState
 	optional uint32 					  state_time 		   = 2;     // 状态运行时间
 	repeated MsgDDZPlayer			      player_list		   = 3;     // 玩家信息
 	optional uint64						  room_id			   = 4;     // 房间ID
