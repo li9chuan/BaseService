@@ -59,7 +59,7 @@
                 $redata['NonceStr']	    = $NonceStr;
                 $redata['Timestamp']    = $Timestamp;
                 $redata['UID']          = $UserID;
-                $redata['FES']          = "127.0.0.1:9999";
+                $redata['FES']          = "ws://127.0.0.1:9999";
 
                 echo json_encode($redata);
             }
