@@ -122,25 +122,31 @@ function RoomDdz:UserCancelReady( uid )
     end
 end
 
+function SetWikQiangDiZhu( wik )
+    local enum_val = protobuf.enum_id("PB.TDDZQiangDiZhu", wik);
+    Misc.SetBit(self._QingDiZhuWiki, enum_val);
+end
+
 
 function RoomDdz:SendQiangDiZhuWik()
     
     -- 随机一个玩家选择抢地主
-    
     local seat_idx  = math.random(1, #self.SeatPlayers);
     self._ActionID  = self.SeatPlayers[seat_idx];
     local player    = self.RoomPlayerData:Find(self._ActionID);
     
     if player~=nil then
     
+        self._QingDiZhuWiki = 0;
+        
         if _QiangDiZhu then
-            self._QingDiZhuWiki = SetBit( self._QingDiZhuWiki, "PB.TDDZQiangDiZhu", "DDZ_QDZ_BUJIAO" );
-            self._QingDiZhuWiki = SetBit( self._QingDiZhuWiki, "PB.TDDZQiangDiZhu", "DDZ_QDZ_JIAODIZHU" );
+            self:SetWikQiangDiZhu("DDZ_QDZ_BUJIAO");
+            self:SetWikQiangDiZhu("DDZ_QDZ_JIAODIZHU");
         else
-            self._QingDiZhuWiki = SetBit( self._QingDiZhuWiki, "PB.TDDZQiangDiZhu", "DDZ_QDZ_BUJIAO" );
-            self._QingDiZhuWiki = SetBit( self._QingDiZhuWiki, "PB.TDDZQiangDiZhu", "DDZ_JF_JIAO_ONE" );
-            self._QingDiZhuWiki = SetBit( self._QingDiZhuWiki, "PB.TDDZQiangDiZhu", "DDZ_JF_JIAO_TWO" );
-            self._QingDiZhuWiki = SetBit( self._QingDiZhuWiki, "PB.TDDZQiangDiZhu", "DDZ_JF_JIAO_THREE" );
+            self:SetWikQiangDiZhu("DDZ_QDZ_BUJIAO");
+            self:SetWikQiangDiZhu("DDZ_JF_JIAO_ONE");
+            self:SetWikQiangDiZhu("DDZ_JF_JIAO_TWO");
+            self:SetWikQiangDiZhu("DDZ_JF_JIAO_THREE");
         end
 
         self:RefreshPlayerQiangDiZhuState(self._ActionID);

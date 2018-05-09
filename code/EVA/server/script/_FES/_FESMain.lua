@@ -30,9 +30,11 @@ function ServiceInit()
     
     ClientService:Init( "ClientService", "ws" );
     
+    --ClientService:Init( "ClientService", "wss" );
+    
     --ClientService:LoadSslCA(BasePath.."DataTable/ssl/1_root_bundle.crt");
-    --ClientService:LoadSslCrt(BasePath.."DataTable/ssl/2_ssl.com.crt");
-    --ClientService:LoadSslPrivateKey(BasePath.."DataTable/ssl/3_ssl.com.key");
+    --ClientService:LoadSslCrt(BasePath.."DataTable/ssl/2_ssl.ranatune.com.crt");
+    --ClientService:LoadSslPrivateKey(BasePath.."DataTable/ssl/3_ssl.ranatune.com.key");
 
     ClientService:Listen( 9999 );
 

@@ -37,7 +37,7 @@ namespace bin
 	class CScriptExporterManager
 	{
 	public:
-		typedef stdext::hash_map<std::string, IScriptExporter*>	ScriptExporters;
+		typedef CHashMap<std::string, IScriptExporter*>			ScriptExporters;
 		typedef ScriptExporters::const_iterator					ExporterIterator;
 	public:
 		CScriptExporterManager()

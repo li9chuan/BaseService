@@ -41,8 +41,8 @@ function ServiceInit()
     ScheduleService:Init();
     
 
-    
-    PHPService:Listen( "PHP", "tcp", 20458 );
+    PHPService:Init( "PHP", "tcp" );
+    PHPService:Listen( 20458 );
 
 end
 

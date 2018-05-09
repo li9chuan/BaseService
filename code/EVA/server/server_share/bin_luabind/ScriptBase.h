@@ -3,8 +3,6 @@
 
 #include "Public.h"
 
-#include <hash_map>
-
 namespace bin
 {
 	static const char* SCRIPT_OWN_OBJECTS	= "__bin_own_objects";
