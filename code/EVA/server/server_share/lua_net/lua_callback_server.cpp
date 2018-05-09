@@ -41,15 +41,14 @@ void cbLuaServiceMsg ( CMessage &msgin, TSockId from, CCallbackNetBase &netbase 
     }
 }
 
-CLuaCallbackServer::CLuaCallbackServer( std::string& name, std::string& protocal, uint16 port ) : m_NetName(name)
+CLuaCallbackServer::CLuaCallbackServer( std::string& name, std::string& protocal ) : m_NetName(name), m_Protocal(protocal)
 {
-    if( protocal=="ws" || protocal=="websocket" )
+    if( protocal=="wss" || protocal=="ws" )
     {
         CCallbackServerWebSocket* pServer = new CCallbackServerWebSocket();
         pServer->setConnectionCallback( cbLuaSvrConnect, this );
         pServer->setDisconnectionCallback( cbLuaSvrDisConnect, this );
         pServer->setDefaultCallback(cbLuaServiceMsg);
-        pServer->init (port);
 
         m_CallbackServerHandle = pServer;
     }
@@ -59,7 +58,6 @@ CLuaCallbackServer::CLuaCallbackServer( std::string& name, std::string& protocal
         pServer->setConnectionCallback( cbLuaSvrConnect, this );
         pServer->setDisconnectionCallback( cbLuaSvrDisConnect, this );
         pServer->setDefaultCallback(cbLuaServiceMsg);
-        pServer->init (port);
 
         m_CallbackServerHandle = pServer;
     }
@@ -74,6 +72,24 @@ CLuaCallbackServer::~CLuaCallbackServer()
 {
     LuaNetworkMgr.RemoveNetModule(m_NetName);
     delete m_CallbackServerHandle; 
+}
+
+void CLuaCallbackServer::Listen( uint16 port )
+{
+    if ( m_Protocal=="wss" )
+    {
+        CCallbackServerWebSocket* pServer = (CCallbackServerWebSocket*)m_CallbackServerHandle;
+        pServer->setupSsl( m_SslCA, m_SslCrt, m_SslPrvKey );
+        pServer->init(port);
+    }
+    else if ( m_Protocal=="ws" )
+    {
+        ((CCallbackServerWebSocket*)m_CallbackServerHandle)->init(port);
+    }
+    else if( m_Protocal=="tcp" )
+    {
+        ((CCallbackServerTcp*)m_CallbackServerHandle)->init(port);
+    }
 }
 
 void CLuaCallbackServer::IncReceiveMsgCount( std::string msg_name )

@@ -5,6 +5,9 @@
 #include "nel/net/callback_server_websocket.h"
 #include "nel/net/buf_server_websocket.h"
 
+#include "event2/bufferevent_ssl.h"
+#include "openssl/ssl.h"
+
 using namespace std;
 using namespace NLMISC;
 using namespace NLNET;
@@ -190,7 +193,12 @@ void NLNET::ws_socket_read_cb( bufferevent *bev, void *args )
 }  
 
 void NLNET::ws_socket_event_cb( bufferevent *bev, short events, void *args )
-{  
+{
+    if (events & BEV_EVENT_CONNECTED)  
+    {
+        return;
+    }
+
     if (events & BEV_EVENT_EOF)  
         LNETL1_DEBUG("connection closed\n");  
     else if (events & BEV_EVENT_ERROR)  
@@ -204,8 +212,8 @@ void NLNET::ws_socket_event_cb( bufferevent *bev, short events, void *args )
 
 void NLNET::ws_listener_cb( evconnlistener *listener, evutil_socket_t fd, struct sockaddr *sock, int socklen, void *args )
 {  
-    WSListenArgs*    pListenArgs = (WSListenArgs*)args;
-    SOCKET          newSock = (SOCKET)fd;
+    WSListenArgs*   pListenArgs = (WSListenArgs*)args;
+    NLNET::SOCKET   newSock = (NLNET::SOCKET)fd;
 
     if ( newSock == INVALID_SOCKET )
     {
@@ -224,7 +232,18 @@ void NLNET::ws_listener_cb( evconnlistener *listener, evutil_socket_t fd, struct
     pBufSock->advertiseConnection( pListenArgs->pServer );
 
     //为这个客户端分配一个bufferevent  
-    bufferevent *bev =  bufferevent_socket_new(pListenArgs->pEventBase, fd, BEV_OPT_CLOSE_ON_FREE|BEV_OPT_DEFER_CALLBACKS);
+    bufferevent *bev =  NULL;
+    
+    if ( pListenArgs->pSslCtx!=NULL )
+    {
+        SSL* pSsl   = SSL_new((SSL_CTX *)pListenArgs->pSslCtx);
+        bev         = bufferevent_openssl_socket_new(pListenArgs->pEventBase, fd, pSsl, BUFFEREVENT_SSL_ACCEPTING, BEV_OPT_CLOSE_ON_FREE|BEV_OPT_DEFER_CALLBACKS);
+        pBufSock->m_Ssl = pSsl;
+    }
+    else
+    {
+        bev = bufferevent_socket_new(pListenArgs->pEventBase, fd, BEV_OPT_CLOSE_ON_FREE|BEV_OPT_DEFER_CALLBACKS);
+    }
 
     pBufSock->m_BufNetHandle    = pListenArgs->pServer;
     pBufSock->m_BEVHandle       = bev;

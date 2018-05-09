@@ -226,6 +226,7 @@ public:
     bufferevent*        m_BEVHandle;
     CBufNetBase*        m_BufNetHandle;
     bool                m_Handshake;
+    void*               m_Ssl;              // SSL*
 
 private:
 

@@ -88,3 +88,33 @@ ELSE(LIBEVENT_FOUND)
 ENDIF(LIBEVENT_FOUND)
 
 MARK_AS_ADVANCED(LIBEVENT_LIBRARY_RELEASE LIBEVENT_LIBRARY_DEBUG)
+
+
+#   libevent_openssl
+FIND_LIBRARY(LIBEVENT_OPENSSL_LIBRARY
+  NAMES libevent_openssl
+  PATHS
+  $ENV{LIBEVENT_DIR}/lib
+  /usr/local/lib
+  /usr/lib
+  /usr/lib64
+  /usr/local/X11R6/lib
+  /usr/X11R6/lib
+  /sw/lib
+  /opt/local/lib
+  /opt/csw/lib
+  /opt/lib
+  /usr/freeware/lib64
+  /usr/local/lib/libevent
+  /mingw/lib
+)
+
+ADD_DEFINITIONS(-DEVENT__HAVE_OPENSSL)
+
+MESSAGE(STATUS "LIBEVENT_OPENSSL_LIBRARY: ${LIBEVENT_OPENSSL_LIBRARY}  ")
+
+
+
+
+
+

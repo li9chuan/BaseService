@@ -1,16 +1,10 @@
 FILE(GLOB SRC 						*.cpp *.h)
 
-ADD_EXECUTABLE(player_logic_service WIN32 ${SRC} )
+ADD_EXECUTABLE(player_logic_service WIN32 ${SRC})
 
-INCLUDE_DIRECTORIES(${LIBXML2_INCLUDE_DIR} ${LUA_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
 
 TARGET_LINK_LIBRARIES(  player_logic_service
-						${LIBXML2_LIBRARIES}
-						${LUA_LIBRARIES}
-						${PROTOBUF_LIBRARIES}
-						${LIBEVENT_LIBRARY}
-						nelmisc
-						nelnet
 						servershare
 						eva_adminmodules)
 

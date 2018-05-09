@@ -2,15 +2,11 @@ FILE(GLOB SRC *.cpp *.h)
 
 ADD_EXECUTABLE(admin_service WIN32 ${SRC})
 
-INCLUDE_DIRECTORIES(${LIBXML2_INCLUDE_DIR} ${MYSQL_INCLUDE_DIR} ${ZLIB_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${LIBXML2_INCLUDE_DIR} ${ZLIB_INCLUDE_DIR})
 
 TARGET_LINK_LIBRARIES(  admin_service
 						servershare
-						eva_adminmodules
-						${LIBXML2_LIBRARIES}
-                        ${LIBEVENT_LIBRARY}
-						nelmisc 
-						nelnet)
+						eva_adminmodules)
 
 NL_DEFAULT_PROPS(admin_service "Base, Services: Admin Service (AS)")
 NL_ADD_RUNTIME_FLAGS(admin_service)

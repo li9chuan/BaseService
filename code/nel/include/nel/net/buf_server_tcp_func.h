@@ -20,9 +20,9 @@
 #include "nel/misc/types_nl.h"
 #include "nel/misc/sstring.h"
 
-#include "libevent/event2/event.h"
-#include "libevent/event2/listener.h"
-#include "libevent/event2/bufferevent.h"
+#include "event2/event.h"
+#include "event2/listener.h"
+#include "event2/bufferevent.h"
 
 
 namespace NLNET {

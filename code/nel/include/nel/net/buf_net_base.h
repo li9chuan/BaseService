@@ -167,6 +167,11 @@ public:
 	/// The value that will be used if setMaxSentBlockSize() is not called (or called with a negative argument)
 	static uint32 DefaultMaxSentBlockSize;
 
+
+    std::string     m_SslCA;
+    std::string     m_SslCrt;
+    std::string     m_SslPrvKey;
+
 //protected:
 public:
 

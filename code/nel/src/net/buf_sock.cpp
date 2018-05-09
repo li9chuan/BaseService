@@ -58,6 +58,7 @@ CBufSock::CBufSock( CTcpSock *sock ) :
 	_ConnectedState( false ),
     m_BEVHandle(NULL),
     m_BufNetHandle(NULL),
+    m_Ssl(NULL),
     m_Handshake(false)
 {
 	nlnettrace( "CBufSock::CBufSock" ); // don't define a global object

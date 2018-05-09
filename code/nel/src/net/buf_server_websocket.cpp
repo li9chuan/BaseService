@@ -22,10 +22,12 @@
 #include "nel/net/net_log.h"
 #include "nel/net/message.h"
 
-#include "libevent/event2/event.h"
-#include "libevent/event2/listener.h"
-#include "libevent/event2/bufferevent.h"
-#include "libevent/event2/thread.h"
+#include "event2/event.h"
+#include "event2/listener.h"
+#include "event2/bufferevent.h"
+#include "event2/thread.h"
+
+#include "openssl/ssl.h"
 
 #ifdef NL_OS_WINDOWS
 #	ifndef NL_COMP_MINGW
@@ -40,7 +42,6 @@
 #endif
 
 #include "nel/net/buf_server_websocket_func.h"
-
 
 /*
  * On Linux, the default limit of descriptors is usually 1024, you can increase it with ulimit
@@ -59,7 +60,7 @@ namespace NLNET {
 /*
  * Constructor
  */
-CBufServerWebsocket::CBufServerWebsocket() : _ConnectionCallback(NULL)
+CBufServerWebsocket::CBufServerWebsocket() : _ConnectionCallback(NULL), _SslCtx(NULL)
 {
 	nlnettrace( "CBufServerWebsocket::CBufServerWebsocket" );
 
@@ -97,6 +98,13 @@ CBufServerWebsocket::~CBufServerWebsocket()
 //		_ListenThread->wait();
 //		delete _ListenThread;
 //		delete _ListenTask;
+
+
+
+    if ( _SslCtx!=NULL )
+    {
+        SSL_CTX_free((SSL_CTX*)_SslCtx);
+    }
 
     _WebSocketReceiveTask->close();
 
@@ -237,8 +245,13 @@ bool CBufServerWebsocket::dataAvailable()
                         //  自动close套接字和free读写缓冲区 
                         bufferevent_free(sockid->m_BEVHandle);
 
-                        delete sockid;
+                        if (sockid->m_Ssl!=NULL)
+                        {
+                            SSL_free((SSL*)sockid->m_Ssl);
+                            sockid->m_Ssl = NULL;
+                        }
 
+                        delete sockid;
                     }
                     
 					break;
@@ -465,7 +478,47 @@ uint64 CBufServerWebsocket::newBytesSent()
 	return nbsent;
 }
 
+void CBufServerWebsocket::setupSsl( std::string& ssl_ca, std::string& ssl_crt, std::string& ssl_prvkey )
+{
+    SSL_library_init();
+    SSL_load_error_strings();
 
+    const SSL_METHOD* pMethod   = SSLv23_server_method();
+    _SslCtx                     = SSL_CTX_new(pMethod);
+
+    // 是否要求校验对方证书 此处不验证客户端身份所以为： SSL_VERIFY_NONE
+    SSL_CTX_set_verify((SSL_CTX *)_SslCtx, SSL_VERIFY_NONE, NULL);
+
+    // 加载CA的证书  
+    if(!SSL_CTX_load_verify_locations((SSL_CTX *)_SslCtx, ssl_ca.c_str(), NULL))
+    {
+        nlwarning("SSL_CTX_load_verify_locations error!");
+        return;
+    }
+
+    // 加载自己的证书  
+    if(SSL_CTX_use_certificate_file((SSL_CTX *)_SslCtx, ssl_crt.c_str(), SSL_FILETYPE_PEM) <= 0)
+    {
+        nlwarning("SSL_CTX_use_certificate_file error!");
+        return;
+    }
+
+    // 加载自己的私钥  私钥的作用是，ssl握手过程中，对客户端发送过来的随机
+    //消息进行加密，然后客户端再使用服务器的公钥进行解密，若解密后的原始消息跟
+    //客户端发送的消息一直，则认为此服务器是客户端想要链接的服务器
+    if(SSL_CTX_use_PrivateKey_file((SSL_CTX *)_SslCtx, ssl_prvkey.c_str(), SSL_FILETYPE_PEM) <= 0)
+    {
+        nlwarning("SSL_CTX_use_PrivateKey_file error!");
+        return;
+    }
+
+    // 判定私钥是否正确  
+    if(!SSL_CTX_check_private_key((SSL_CTX *)_SslCtx))
+    {
+        nlwarning("SSL_CTX_check_private_key error!");
+        return;
+    }
+}
 
 void CWebSocketReceiveTask::init( CBufServerWebsocket *server, uint16 port )
 {
@@ -479,13 +532,12 @@ void CWebSocketReceiveTask::init( CBufServerWebsocket *server, uint16 port )
     evthread_use_windows_threads();
 
     pEventBase = event_base_new();
-    WSListenArgs* pListenArgs = new struct WSListenArgs(pEventBase,_Server);
-    
+    WSListenArgs* pListenArgs   = new struct WSListenArgs(pEventBase,_Server);
+    pListenArgs->pSslCtx        = server->getSslCtx();
 
     pEvListener = evconnlistener_new_bind(  pEventBase, ws_listener_cb, (void*)pListenArgs, 
-                                            LEV_OPT_REUSEABLE|LEV_OPT_CLOSE_ON_FREE, 10, 
-                                            (struct sockaddr*)&sin, sizeof(struct sockaddr_in));  
-
+        LEV_OPT_REUSEABLE|LEV_OPT_CLOSE_ON_FREE, 10, 
+        (struct sockaddr*)&sin, sizeof(struct sockaddr_in));
 }
 
 void CWebSocketReceiveTask::run()

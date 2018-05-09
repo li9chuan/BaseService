@@ -24,10 +24,10 @@ INCLUDE_DIRECTORIES(${LIBXML2_INCLUDE_DIR} ${MYSQL_INCLUDE_DIR} ${LUA_INCLUDE_DI
 TARGET_LINK_LIBRARIES(  servershare
 						nelmisc
 						nelnet
+                        ${LIBXML2_LIBRARIES}
 						${LUA_LIBRARIES}
 #						${PBC_LIBRARY}
-						${MYSQL_LIBRARIES}
-						${PROTOBUF_LIBRARIES})
+						${MYSQL_LIBRARIES})
 
 NL_DEFAULT_PROPS(servershare "Base, Library: Service Shared")
 NL_ADD_RUNTIME_FLAGS(servershare)

@@ -22,10 +22,10 @@
 #include "nel/net/net_log.h"
 #include "nel/net/message.h"
 
-#include "libevent/event2/event.h"
-#include "libevent/event2/listener.h"
-#include "libevent/event2/bufferevent.h"
-#include "libevent/event2/thread.h"
+#include "event2/event.h"
+#include "event2/listener.h"
+#include "event2/bufferevent.h"
+#include "event2/thread.h"
 
 #ifdef NL_OS_WINDOWS
 #	ifndef NL_COMP_MINGW
@@ -234,6 +234,14 @@ bool CBufServerTcp::dataAvailable()
                     {
                         //  自动close套接字和free读写缓冲区 
                         bufferevent_free(sockid->m_BEVHandle);
+
+                        if (sockid->m_Ssl!=NULL)
+                        {
+                            nlwarning( "tcp not setup ssl" );
+                            //SSL_free(sockid->m_Ssl);
+                            //sockid->m_Ssl = NULL;
+                        }
+  
                         delete sockid;
                     }
                     

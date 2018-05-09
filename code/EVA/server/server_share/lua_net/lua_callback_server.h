@@ -21,8 +21,14 @@ class CLuaCallbackServer
     DECLARE_SCRIPT_CLASS()
 public:
 
-    CLuaCallbackServer( std::string& name, std::string& protocal, uint16 port );
+    CLuaCallbackServer( std::string& name, std::string& protocal );
     ~CLuaCallbackServer();
+
+    void    Listen( uint16 port );
+
+    void    LoadSslCA( std::string ssl_ca )             { m_SslCA       = ssl_ca;   }
+    void    LoadSslCrt( std::string ssl_crt )           { m_SslCrt      = ssl_crt;  }
+    void    LoadSslPrivateKey( std::string ssl_pk )     { m_SslPrvKey   = ssl_pk;   }
 
     void    Update()
     {
@@ -109,6 +115,7 @@ public:
 private:
 
     std::string                                             m_NetName;
+    std::string                                             m_Protocal;
 
     typedef     std::map<DEF::UID, ClientData>              TClientMap;
     TClientMap                                              m_ClientMap;
@@ -120,6 +127,10 @@ private:
 
     std::string                                             m_StrBuffer;
     std::string                                             m_SaveEventStr;
+
+    std::string         m_SslCA;
+    std::string         m_SslCrt;
+    std::string         m_SslPrvKey;
 };
 
 #endif          // SERVER_SHARD_LUA_CALLBACK_SERVER_H

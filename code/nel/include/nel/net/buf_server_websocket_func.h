@@ -20,10 +20,9 @@
 #include "nel/misc/types_nl.h"
 #include "nel/misc/sstring.h"
 
-#include "libevent/event2/event.h"
-#include "libevent/event2/listener.h"
-#include "libevent/event2/bufferevent.h"
-
+#include "event2/event.h"
+#include "event2/listener.h"
+#include "event2/bufferevent.h"
 
 namespace NLNET {
 
@@ -66,16 +65,9 @@ namespace NLNET {
     {
         event_base*             pEventBase;
         CBufServerWebsocket*    pServer;
-        WSListenArgs( event_base* eventbase, CBufServerWebsocket* bufsvr ) : pEventBase(eventbase), pServer(bufsvr) {}
+        void*                   pSslCtx;
+        WSListenArgs( event_base* eventbase, CBufServerWebsocket* bufsvr ) : pEventBase(eventbase), pServer(bufsvr), pSslCtx(NULL) {}
     };
-
-    //struct SEventArgs
-    //{
-    //    CBufServerWebsocket*    pServer;
-    //    CServerBufSock*         pBufSock;
-    //    bool                    bHandshake;
-    //    SEventArgs( CServerBufSock* bufsock, CBufServerWebsocket* bufsvr ) : pBufSock(bufsock), pServer(bufsvr), bHandshake(false) {}
-    //};
 
     struct WebSocketFrame
     {
@@ -112,9 +104,7 @@ namespace NLNET {
     //一个新客户端连接上服务器了  
     //当此函数被调用时，libevent已经帮我们accept了这个客户端。该客户端的
     //文件描述符为fd
-    void ws_listener_cb( evconnlistener *listener, evutil_socket_t fd, sockaddr *sock, int socklen, void *args );  
-
-
+    void    ws_listener_cb( evconnlistener *listener, evutil_socket_t fd, sockaddr *sock, int socklen, void *args );  
 }
 
 

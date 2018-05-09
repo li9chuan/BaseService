@@ -204,22 +204,32 @@ namespace bin
             return 1;
         }
 
-        DEFINE_STATIC_FUNCTION(NewInstance, CLuaCallbackServer*, (CScriptTable& svr_info))
+        DEFINE_CLASS_FUNCTION( Listen, void, (lua_Integer port))
         {
-            if( svr_info.IsReferd() )
-            {
-                std::string     svr_name;
-                std::string     svr_protoc;
-                lua_Integer     svr_port;
+            obj->Listen(port);
+            return 1;
+        }
 
-                svr_info.Get(1, svr_name);
-                svr_info.Get(2, svr_protoc);
-                svr_info.Get(3, svr_port);
+        DEFINE_CLASS_FUNCTION( LoadSslCA, void, (std::string& ssl_ca))
+        {
+            obj->LoadSslCA(ssl_ca);
+            return 1;
+        }
+        DEFINE_CLASS_FUNCTION( LoadSslCrt, void, (std::string& ssl_crt))
+        {
+            obj->LoadSslCrt(ssl_crt);
+            return 1;
+        }
+        DEFINE_CLASS_FUNCTION( LoadSslPrivateKey, void, (std::string& ssl_pk))
+        {
+            obj->LoadSslPrivateKey(ssl_pk);
+            return 1;
+        }
 
-                r = new CLuaCallbackServer(svr_name, svr_protoc, svr_port);
-                r->GetScriptObject().SetDelByScr(true);
-            }
-
+        DEFINE_STATIC_FUNCTION(NewInstance, CLuaCallbackServer*, (std::string& svr_name, std::string& svr_protoc))
+        {
+            r = new CLuaCallbackServer(svr_name, svr_protoc);
+            r->GetScriptObject().SetDelByScr(true);
             return 1;
         }
 

@@ -80,6 +80,9 @@ public:
 	/// Listens on the specified port
 	void	init( uint16 port );
 
+    void    setupSsl( std::string& ssl_ca, std::string& ssl_crt, std::string& ssl_prvkey );
+    void*   getSslCtx() { return _SslCtx; }
+
 	/** Disconnect a connection
 	 * Set hostid to InvalidSockId to disconnect all connections.
 	 * If hostid is not InvalidSockId and the socket is not connected, the method does nothing.
@@ -270,6 +273,7 @@ private:
 	uint32							_NbConnections;
 
 
+    void*                           _SslCtx;
   /*
 	/// Number of bytes pushed into the receive queue (by the receive threads) since the beginning.
 	NLMISC::CSynchronized<uint32>	_BytesPushedIn;
