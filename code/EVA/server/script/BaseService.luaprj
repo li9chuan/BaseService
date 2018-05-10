@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="BaseService.luaprj" Cmd="E:\BaseService\build\bin\Debug\schedule_service.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="false" >
-    <Filter RelativePath=".\Framework" Toggle="false" >
+<Project Name="BaseService.luaprj" Cmd="E:\BaseService\build\bin\Debug\schedule_service.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="true" >
+    <Filter RelativePath=".\Framework" Toggle="true" >
         <LuaFile RelativePath=".\Class.lua" />
         <LuaFile RelativePath=".\functions.lua" />
         <LuaFile RelativePath=".\List.lua" />
@@ -15,7 +15,7 @@
             <LuaFile RelativePath=".\EventRegister.lua" />
             <LuaFile RelativePath=".\EventTrigger.lua" />
         </Filter>
-        <Filter RelativePath=".\Net" Toggle="false" >
+        <Filter RelativePath=".\Net" Toggle="true" >
             <LuaFile RelativePath=".\NetWorkHandler.lua" />
             <LuaFile RelativePath=".\BaseService.lua" />
             <LuaFile RelativePath=".\protobuf.lua" />
@@ -25,7 +25,7 @@
         <LuaFile RelativePath=".\Utils.lua" />
         <LuaFile RelativePath=".\TimerMgr.lua" />
         <LuaFile RelativePath=".\CJsonUtil.lua" />
-        <Filter RelativePath=".\Test" Toggle="true" >
+        <Filter RelativePath=".\Test" Toggle="false" >
             <LuaFile RelativePath=".\TestFSM.lua" />
             <LuaFile RelativePath=".\FSMClass.lua" />
             <LuaFile RelativePath=".\TimerTest.lua" />

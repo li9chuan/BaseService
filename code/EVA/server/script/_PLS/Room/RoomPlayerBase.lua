@@ -27,19 +27,6 @@ function RoomPlayerBase:ClearStateEnum( enum_type, enum_name )
     Misc.ClearBit(self._State, enum_val);
 end
 
-function RoomPlayerBase:GetStateEnum( enum_type, enum_name )
-    local enum_val = protobuf.enum_id( enum_type, enum_name );
-    return Misc.GetBit(self._State, enum_val);
-end
-
-function RoomPlayerBase:SetState( state_idx )
-    Misc.SetBit(self._State, state_idx);
-end
-
-function RoomPlayerBase:ClearState( state_idx )
-    Misc.ClearBit(self._State, state_idx);
-end
-
 function RoomPlayerBase:ClearAllState()
     self._State = 0;
 end

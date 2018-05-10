@@ -32,6 +32,7 @@ function RoomDdz:ctor()
     self:ResetGameData();
 end
 
+-- 每局清除数据
 function RoomDdz:ResetGameData()
     
     self._CardsPool             = {};
@@ -41,6 +42,7 @@ function RoomDdz:ResetGameData()
     self._Multiple              = 1;        -- 房间翻倍数
     self._QingDiZhuWik          = 0;        -- 抢地主权限
     self._QiangDiZhu            = true;     
+    self._DiZhuID               = 0;        -- 地主 uid
     
     self._LastOutCardData:ClearData();
     
@@ -54,7 +56,7 @@ function RoomDdz:ResetGameData()
         end
     end
     
-    -- 洗牌
+    -- 发牌洗牌
     for i,v in pairs(ConstCardsPool) do
         self._CardsPool[i] = v;
     end
@@ -89,9 +91,6 @@ function RoomDdz:JoinRoom( player )
     end
 end
 
-
-
-
 function RoomDdz:TickUpdate()
 
     --print("RoomDdz:TickUpdate");
@@ -100,7 +99,6 @@ function RoomDdz:TickUpdate()
     
     self._TimerHandle = TimerMgr:AddTimer(self._TimerTick, self, self.TickUpdate);
 end
-
 
 function RoomDdz:UserStartReady( uid )
     local room_player = self.RoomPlayerData:Find(uid);
@@ -149,7 +147,7 @@ function RoomDdz:SendQiangDiZhuWik()
             self:SetWikQiangDiZhu("DDZ_JF_JIAO_THREE");
         end
 
-        self:RefreshPlayerQiangDiZhuState(self._ActionID);
+        self:_RefreshPlayerQiangDiZhuState(self._ActionID);
         
         local msg_qdz = {
             playid = self._ActionID;
@@ -164,13 +162,13 @@ function RoomDdz:SendQiangDiZhuWik()
     end
 end
 
-function RoomDdz:RefreshPlayerQiangDiZhuState( uid )
+function RoomDdz:_RefreshPlayerQiangDiZhuState( uid )
 
     for k,v in pairs(self.RoomPlayerData:GetTable()) do
         if k==uid then
-            v:SetStateEnum("PB.TDDZPlayerState", "STATE_DDZ_QIANGDIZHU");
+            v:SetState("STATE_DDZ_QIANGDIZHU");
         else
-            v:ClearStateEnum("PB.TDDZPlayerState", "STATE_DDZ_QIANGDIZHU");
+            v:ClearState("STATE_DDZ_QIANGDIZHU");
         end
     end
 end
@@ -239,13 +237,26 @@ function RoomDdz:RefrshRoleQiangDiZhu( uid, msg_qdz )
     end
 end
 
-
-
+-- 设置地主和农民,抢地主完成
 function RoomDdz:SetDiZhuState( uid )
     
+    local room_player = self.RoomPlayerData:Find(uid);
+    
+    if room_player~=nil then
+    
+        room_player:SetState("STATE_DDZ_DIZHU");
+        room_player:AddHandCards( self._CardsBottom );
+        
+        
+        self._DiZhuID   = uid;
+        self._ActionID  = uid;
+    
+        self:_RefreshPlayerQiangDiZhuState(uid);
+        
+        
+    end
         
 end
-
 
 function RoomDdz:SendHandCard()
 
@@ -266,10 +277,9 @@ function RoomDdz:SendHandCard()
 
     -- 发底牌
     self._CardsBottom           = {};
-    local i=1;
+
     for idx=start_send, self.CFG_TOTAL_CARD do
-        self._CardsBottom[i] = self._CardsPool[idx];
-        i = i+1;
+        table.insert( self._CardsBottom, self._CardsPool[idx] );
     end
     
 end
