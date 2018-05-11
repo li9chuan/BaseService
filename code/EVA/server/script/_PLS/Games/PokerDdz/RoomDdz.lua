@@ -219,7 +219,7 @@ function RoomDdz:RefrshRoleQiangDiZhu( uid, msg_qdz )
             
             if self._QiangDiZhu then
                 
-                if msq_qdz.result==enum("PB.TDDZQiangDiZhu","DDZ_QDZ_QIANGDIZHU") then
+                if msg_qdz.result==enum("PB.TDDZQiangDiZhu","DDZ_QDZ_QIANGDIZHU") then
                 
                     self._Multiple = self._Multiple*3;
                 

@@ -31,7 +31,7 @@ function MsgRoomDdz:cbDouDiZhuAddTimes( fes_sid, msgin )
     local room      = RoomMgr:GetRoomFromPID(uid);
     
     if room~=nil then
-        local msg_jbr = msg_login:rpb("PB.MsgJiaBeiResult");
+        local msg_jbr = msgin:rpb("PB.MsgJiaBeiResult");
         room:RefreshSelectJiaBei(uid, msg_jbr);
     end
 end
