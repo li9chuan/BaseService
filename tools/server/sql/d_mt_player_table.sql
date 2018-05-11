@@ -27,7 +27,7 @@ drop table if exists t_playerinfo;
 create table t_playerinfo
 (
    f_uid                bigint(20) unsigned NOT NULL DEFAULT 0 comment '' ,
-   f_nickname           varchar(64) NOT NULL DEFAULT "" comment '昵称',
+   f_nickname           varchar(64) NOT NULL DEFAULT " " comment '昵称',
    f_portrait           int(10) unsigned NOT NULL DEFAULT 0 comment '头像',
    f_money              bigint(20) unsigned NOT NULL DEFAULT 0 comment '',
    f_rmb                bigint(20) unsigned NOT NULL DEFAULT 0 comment '',
