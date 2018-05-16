@@ -8,8 +8,8 @@
 using namespace bin;
 using namespace NLNET;
 
-CVariable<bool>	VAR_MSG_COUNT("fes", "MsgCount", "memo", false, 0, true);
-CVariable<bool>	VAR_SAVE_EVENT("fes", "SaveEvent", "memo", false, 0, true);
+NLMISC::CVariable<bool>	VAR_MSG_COUNT("fes", "MsgCount", "memo", false, 0, true);
+NLMISC::CVariable<bool>	VAR_SAVE_EVENT("fes", "SaveEvent", "memo", false, 0, true);
 
 static CLuaMessage* pLuaMsg = new CLuaMessage();
                               

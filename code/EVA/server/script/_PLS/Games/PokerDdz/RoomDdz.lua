@@ -79,10 +79,10 @@ function RoomDdz:JoinRoom( player )
         local ddz_player = self.RoomPlayerData:Find(player.UID);
 
         if ddz_player~=nil then
-            ddz_player:SetState( "PB.TDDZPlayerState", "STATE_DDZ_NEWROLE" );
+            ddz_player:SetState( "STATE_DDZ_NEWROLE" );
         else
             ddz_player = DdzPlayerInfo:new();
-            ddz_player:SetState( "PB.TDDZPlayerState", "STATE_DDZ_NEWROLE" );
+            ddz_player:SetState( "STATE_DDZ_NEWROLE" );
             self.RoomPlayerData:Insert(player.UID, ddz_player);
         end
 
@@ -182,10 +182,10 @@ function RoomDdz:RefreshSelectJiaBei( uid, msg_jbr )
         if room_player~=nil then
             --room_player:IsSelectJiaBei()
             
-            room_player:SetStateEnum("PB.TDDZPlayerState", "STATE_DDZ_SELECT_JIABEI");
+            room_player:SetState("STATE_DDZ_SELECT_JIABEI");
             
             if msg_jbr.result == enum("PB.TDDZAddTimes","DDZ_AT_JIABIE") then
-                room_player:SetStateEnum("PB.TDDZPlayerState", "STATE_DDZ_JIABEI");
+                room_player:SetState("STATE_DDZ_JIABEI");
             end
             
             msg_jbr.playid  = uid;
@@ -258,6 +258,7 @@ function RoomDdz:SetDiZhuState( uid )
         
 end
 
+-- 发牌
 function RoomDdz:SendHandCard()
 
     local start_send    = 1;

@@ -5,6 +5,7 @@
 #include "lua_engine.h"
 #include "script_mgr.h"
 #include <server_share/bin_luabind/Public.hpp>
+#include <server_share/lua/lua_thread.h>
 
 using namespace std;
 using namespace NLMISC;
@@ -73,6 +74,21 @@ namespace bin
         DEFINE_MODULE_FUNCTION(GetLocalTime, lua_Integer, ())
         {
             r = NLMISC::CTime::getLocalTime();
+            return 1;
+        }
+
+        DEFINE_MODULE_FUNCTION(PostMain, void, (sint32 threadHandle, CLuaMessage* pMsgIn))
+        {
+            CMessage* pMsg = new CMessage();
+            pMsg->swap(pMsgIn->m_Msg);
+
+            CLuaThread* pThread = LuaThreadMgr.GetLuaThread(threadHandle);
+
+            if (pThread != NULL)
+            {
+                pThread->PostMain(pMsg);
+            }
+
             return 1;
         }
 

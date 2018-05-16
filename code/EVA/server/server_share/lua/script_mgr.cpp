@@ -11,11 +11,11 @@
 using namespace std;
 using namespace DEF;
 using namespace NLMISC;
-using namespace NLNET;
 
 extern void forLuaMysqlConnForceLink();
 extern void forLuaBaseFunctionForceLink();
 extern void forLuaMessageForceLink();
+extern void forLuaThreadForceLink();
 
 void luaexportforcelink()
 {
@@ -24,6 +24,7 @@ void luaexportforcelink()
     forLuaMysqlConnForceLink(); 
     forLuaBaseFunctionForceLink(); 
     forLuaMessageForceLink();
+    forLuaThreadForceLink();
 }
 
 void CScriptMgr::init( LUA_OPEN pLuaOpen )
@@ -106,14 +107,12 @@ void CScriptMgr::Export()
 {
     m_LuaEngine.ExportModule("Misc");
     m_LuaEngine.ExportModule("Debug");
-    m_LuaEngine.ExportModule("LuaThread");
     m_LuaEngine.ExportModule("ServerNet");
 
     m_LuaEngine.ExportClass("LuaCallbackServer");
     m_LuaEngine.ExportClass("LuaMessage");
     m_LuaEngine.ExportClass("IDGenerate");
-
-
+    m_LuaEngine.ExportClass("LuaThread");
 
     m_LuaEngine.ExportClass("MysqlStmt");
     m_LuaEngine.ExportClass("MysqlConn");

@@ -2,22 +2,30 @@
 #include <nel/misc/thread.h>
 #include "script_mgr.h"
 #include <server_share/server_def.h>
+#include <server_share/lua_net/lua_message.h>
 
 using namespace NLMISC;
+using namespace NLNET;
 
-CLuaThread::CLuaThread( std::string name ) : m_ThreadHandle(NULL), m_ThreadName(name), m_RequireExit(false)
+void forLuaThreadForceLink()
 {
-    LuaThreadMgr.RegisterLuaThread(name, this);
+    nlwarning("forLuaThreadForceLink");
 }
 
+CLuaThread::CLuaThread( std::string name ) : 
+    m_ThreadHandle(NULL), m_ThreadName(name), m_AlreadyStarted(false),
+    m_RequireExit(false), m_LuaThreadHandle(-1)
+{
+    
+}
 
 CLuaThread::~CLuaThread( void )
 {
-    LuaThreadMgr.RemoveLuaThread(m_ThreadName);
     Close();
+    LuaThreadMgr.RemoveLuaThread(m_LuaThreadHandle);
 }
  
-bool CLuaThread::Start( std::string& lua_start, std::string& export_name )
+bool CLuaThread::Start( std::string& lua_start, std::string& params )
 {
     m_ThreadHandle = NLMISC::IThread::create( this );
 
@@ -36,13 +44,22 @@ bool CLuaThread::Start( std::string& lua_start, std::string& export_name )
         m_ToSubEvent.init(1024*1024);
         m_ToMainEvent.init(1024*1024);
 
-        m_ThreadHandle->start();
+        
 
 
         //GetScriptObject().SetDelByScr(false);
         //m_SubLuaEngine.GetScriptHandle()->Set( export_name.c_str(), this );
 
         m_SubLuaEngine.GetScriptHandle()->Exec(lua_start.c_str());
+
+        m_LuaThreadHandle = LuaThreadMgr.RegisterLuaThread(this);
+
+        LuaParams params(m_LuaThreadHandle, params);
+        m_SubLuaEngine.RunLuaFunction("ThreadInit", NULL, NULL, &params);
+
+        m_AlreadyStarted = true;
+
+        m_ThreadHandle->start();
     }
 
     return ( NULL != m_ThreadHandle );
@@ -52,6 +69,7 @@ void CLuaThread::Close( void )
 {
     if ( NULL != m_ThreadHandle )
     {
+        m_AlreadyStarted = false;
         m_RequireExit = true;
         m_ThreadHandle->wait();
         m_ThreadHandle = NULL;
@@ -60,25 +78,37 @@ void CLuaThread::Close( void )
 
 void CLuaThread::Update( void )
 {
-    CThreadEvent* pEvent = NULL;
-
-    while ( (pEvent=m_ToMainEvent.pop_front()) != NULL )
+    if (m_AlreadyStarted)
     {
-        LuaParams lua_params( pEvent->m_From, pEvent->m_EventType, pEvent->m_Data );  
-        ScriptMgr.run( "NetWorkHandler", "OnMessage", lua_params );
+        CMessage* pMsg = NULL;
+        bin::CScriptTable    functbl;
+        ScriptMgr.GetScriptHandle()->Get("NetWorkHandler", functbl);
+
+        while ((pMsg = m_ToMainEvent.pop_front()) != NULL)
+        {
+            int nRet = 0;
+            m_LuaMainMsg.m_Msg.swap(*pMsg);
+            functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)pMsg->session(), &m_LuaMainMsg, nRet);
+        }
+
+        m_SubLuaEngine.RunLuaFunction("ThreadUpdate");
     }
 }
 
 void CLuaThread::run( void )
 {
+    bin::CScriptTable    functbl;
+    ScriptMgr.GetScriptHandle()->Get("NetWorkHandler", functbl);
+
     while ( !m_RequireExit )
     {
-        CThreadEvent* pEvent = m_ToSubEvent.pop_front();
+        CMessage* pMsg = m_ToSubEvent.pop_front();
 
-        if ( pEvent != NULL )
+        if ( pMsg != NULL )
         {
-            LuaParams lua_params( pEvent->m_From, pEvent->m_EventType, pEvent->m_Data );
-            m_SubLuaEngine.RunLuaFunction( "OnMessage", "NetWorkHandler", NULL, &lua_params );
+            int nRet = 0;
+            m_LuaSubMsg.m_Msg.swap(*pMsg);
+            functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)pMsg->session(), &m_LuaMainMsg, nRet);
         }
         else
         {
@@ -116,60 +146,58 @@ void CLuaThreadMgr::Init()
     }
 }
 
-void CLuaThreadMgr::RegisterLuaThread( std::string& name, CLuaThread* pThread )
+sint32 CLuaThreadMgr::RegisterLuaThread( CLuaThread* pThread )
 {
-    CSynchronized<TThreadHandle>::CAccessor luathreadsync( &m_LuaThreadHandle );
-    TThreadHandle::iterator iter = luathreadsync.value().find(name);
+    sint32 lua_handle = -1;
 
-    if ( iter == luathreadsync.value().end() )
-    {
-        luathreadsync.value().insert( make_pair(name, pThread) ); 
-    }
-    else
-    {
-        nlstop;
-    }
+    m_LuaThreadMutex.enter();
+    m_LuaThreadHandles.push_back(pThread);
+    lua_handle = m_LuaThreadHandles.size();
+    m_LuaThreadMutex.leave();
+
+    return lua_handle;
 }
 
 void CLuaThreadMgr::Update()
 {
-    TThreadHandle::iterator ipb;
-    CSynchronized<TThreadHandle>::CAccessor luathreadsync( &m_LuaThreadHandle );
+    m_LuaThreadMutex.enter();
 
-    for ( ipb=luathreadsync.value().begin(); ipb!=luathreadsync.value().end(); ++ipb )
+    for (uint i=0; i< m_LuaThreadHandles.size(); ++i)
     {
-        ipb->second->Update();
+        m_LuaThreadHandles[i]->Update();
     }
+
+    m_LuaThreadMutex.leave();
 }
 
 void CLuaThreadMgr::Release()
 {
-    CSynchronized<TThreadHandle>::CAccessor luathreadsync( &m_LuaThreadHandle );
+    m_LuaThreadMutex.enter();
 
-    for ( TThreadHandle::iterator ipb=luathreadsync.value().begin(); ipb!=luathreadsync.value().end(); ++ipb )
+    for (uint i = 0; i< m_LuaThreadHandles.size(); ++i)
     {
-        delete ipb->second;
+        m_LuaThreadHandles[i]->Close();
+        delete m_LuaThreadHandles[i];
     }
 
-    luathreadsync.value().clear();
+    m_LuaThreadHandles.clear();
+    m_LuaThreadMutex.leave();
 }
 
-void CLuaThreadMgr::RemoveLuaThread( std::string& name )
+void CLuaThreadMgr::RemoveLuaThread( sint32 thread_handle )
 {
-    CSynchronized<TThreadHandle>::CAccessor luathreadsync( &m_LuaThreadHandle );
-    luathreadsync.value().erase(name);
+    m_LuaThreadMutex.enter();
+    m_LuaThreadHandles[thread_handle] = NULL;
+    m_LuaThreadMutex.leave();
 }
 
-CLuaThread* CLuaThreadMgr::GetLuaThread( std::string& name )
+CLuaThread* CLuaThreadMgr::GetLuaThread( sint32 thread_handle )
 {
     CLuaThread* pLuaThread = NULL;
-    CSynchronized<TThreadHandle>::CAccessor luathreadsync( &m_LuaThreadHandle );
-    TThreadHandle::iterator iter = luathreadsync.value().find(name);
 
-    if ( iter != luathreadsync.value().end() )
-    {
-        pLuaThread = iter->second;
-    }
+    m_LuaThreadMutex.enter();
+    pLuaThread = m_LuaThreadHandles[thread_handle];
+    m_LuaThreadMutex.leave();
 
     return pLuaThread;
 }
@@ -177,135 +205,34 @@ CLuaThread* CLuaThreadMgr::GetLuaThread( std::string& name )
 
 namespace bin
 {
-    //BEGIN_SCRIPT_CLASS( LuaThread, CLuaThread )
+    BEGIN_SCRIPT_CLASS( LuaThread, CLuaThread )
 
-    //DEFINE_CLASS_FUNCTION( PostSub, void, (const char* buff, CScriptTable& tb_msg))
-    //{
-    //    if( tb_msg.IsReferd() )
-    //    {
-    //        lua_Integer     from;
-    //        CThreadEvent*   pThreadEvent = new CThreadEvent();
-    //        lua_Integer     buf_len;
-
-    //        tb_msg.Get(1, from);
-    //        tb_msg.Get(2, pThreadEvent->m_EventType);
-    //        tb_msg.Get(3, buf_len);
-
-    //        pThreadEvent->m_From = from;
-    //        pThreadEvent->m_Data.assign( buff, buf_len );
-    //        obj->PostSub(pThreadEvent);
-    //    }
-
-    //    return 1;
-    //}
-
-    //DEFINE_CLASS_FUNCTION( PostMain, void, (const char* buff, CScriptTable& tb_msg))
-    //{
-    //    if( tb_msg.IsReferd() )
-    //    {
-    //        lua_Integer     from;
-    //        CThreadEvent*   pThreadEvent = new CThreadEvent();
-    //        lua_Integer     buf_len;
-
-    //        tb_msg.Get(1, from);
-    //        tb_msg.Get(2, pThreadEvent->m_EventType);
-    //        tb_msg.Get(3, buf_len);
-
-    //        pThreadEvent->m_From = from;
-    //        pThreadEvent->m_Data.assign( buff, buf_len );
-    //        obj->PostMain(pThreadEvent);
-    //    }
-
-    //    return 1;
-    //}
-
-    //DEFINE_STATIC_FUNCTION(NewInstance, CLuaThread*, (std::string name))
-    //{
-    //    r = new CLuaThread(name);
-    //    r->GetScriptObject().SetDelByScr(true);
-
-    //    return 1;
-    //}
-
-    //END_SCRIPT_CLASS()
-
-
-
-    BEGIN_SCRIPT_MODULE(LuaThread)
-
-    //DEFINE_MODULE_FUNCTION(GetMain, void, (std::string lua_name, std::string thread_name))
-    //{
-    //    _LuaThreadMutex.enter();
-    //    CLuaThread* pThread = LuaThreadMgr.GetLuaThread(thread_name);
-
-    //    if( pThread != NULL )
-    //    {
-    //        ScriptMgr.GetLuaEngine().GetScriptHandle()->Set( lua_name.c_str(), pThread );
-    //    }
-    //    _LuaThreadMutex.leave();
-
-    //    return 1;
-    //}
-
-    DEFINE_MODULE_FUNCTION( PostMain, void, (const char* buff, CScriptTable& tb_msg) )
+    DEFINE_CLASS_FUNCTION( Post, void, (CLuaMessage* pMsgIn))
     {
-        if( tb_msg.IsReferd() )
-        {
-            std::string     thread_name;
-            lua_Integer     from;
-            CThreadEvent*   pThreadEvent = new CThreadEvent();
-            lua_Integer     buf_len;
-
-            tb_msg.Get(1, thread_name);
-            tb_msg.Get(2, from);
-            tb_msg.Get(3, pThreadEvent->m_EventType);
-            tb_msg.Get(4, buf_len);
-
-            pThreadEvent->m_From = from;
-            pThreadEvent->m_Data.assign( buff, buf_len );
-
-            CLuaThread* pThread = LuaThreadMgr.GetLuaThread(thread_name);
-            
-            if( pThread != NULL )
-            {
-                pThread->PostMain(pThreadEvent);
-            }
-        }
+		CMessage* pMsg = new CMessage();
+		pMsg->swap(pMsgIn->m_Msg);
+		obj->PostSub(pMsg);
 
         return 1;
     }
 
-    DEFINE_MODULE_FUNCTION( PostSub, void, (const char* buff, CScriptTable& tb_msg))
+    DEFINE_CLASS_FUNCTION(Start, void, (CLuaMessage* pMsgIn))
     {
-        if( tb_msg.IsReferd() )
-        {
-            std::string     thread_name;
-            lua_Integer     from;
-            CThreadEvent*   pThreadEvent = new CThreadEvent();
-            lua_Integer     buf_len;
-
-            tb_msg.Get(1, thread_name);
-            tb_msg.Get(2, from);
-            tb_msg.Get(3, pThreadEvent->m_EventType);
-            tb_msg.Get(4, buf_len);
-
-            pThreadEvent->m_From = from;
-            pThreadEvent->m_Data.assign( buff, buf_len );
-
-            CLuaThread* pThread = LuaThreadMgr.GetLuaThread(thread_name);
-
-            if( pThread != NULL )
-            {
-                pThread->PostSub(pThreadEvent);
-            }
-        }
+        CMessage* pMsg = new CMessage();
+        pMsg->swap(pMsgIn->m_Msg);
+        obj->PostSub(pMsg);
 
         return 1;
     }
 
+    DEFINE_STATIC_FUNCTION(NewInstance, CLuaThread*, (std::string name))
+    {
+        r = new CLuaThread(name);
+        r->GetScriptObject().SetDelByScr(true);
 
-    END_SCRIPT_MODULE()
+        return 1;
+    }
 
-
+    END_SCRIPT_CLASS()
 }
 

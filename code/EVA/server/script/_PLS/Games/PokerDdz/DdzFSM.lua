@@ -135,7 +135,12 @@ function FSMDouDiZhu:DoSendCard( event )
 end
 
 function FSMDouDiZhu:DoQiangDiZhu( event )
-    print( "FSMClass:DoQiangDiZhu".. event.args[1] );
+
+
+    if event.args[1] then
+        self.RoomDdz:SendQiangDiZhuWik();
+    end
+    
 end
 
 function FSMDouDiZhu:DoSelectAddTimes( event )

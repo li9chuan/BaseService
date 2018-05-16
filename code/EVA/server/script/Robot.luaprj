@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<Project Name="Robot.luaprj" Cmd="" Arg="" Dir="" Toggle="false" >
+    <Filter RelativePath=".\__Robot" Toggle="false" >
+        <LuaFile RelativePath=".\_ClientRobotMain.lua" />
+        <Filter RelativePath=".\RobotSub" Toggle="true" >
+            <LuaFile RelativePath=".\DBProc.lua" />
+            <LuaFile RelativePath=".\DBSubProc.lua" />
+            <LuaFile RelativePath=".\DBSubStart.lua" />
+        </Filter>
+    </Filter>
+</Project>

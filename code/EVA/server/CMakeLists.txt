@@ -13,5 +13,6 @@ ADD_SUBDIRECTORY(frontend_service)
 ADD_SUBDIRECTORY(player_logic_service)
 ADD_SUBDIRECTORY(schedule_service)
 ADD_SUBDIRECTORY(admin_service)
+ADD_SUBDIRECTORY(client_robot)
 
 #INSTALL(FILES common.cfg DESTINATION ~/service COMPONENT services)

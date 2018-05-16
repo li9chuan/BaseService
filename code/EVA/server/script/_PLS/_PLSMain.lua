@@ -49,8 +49,6 @@ function ServiceInit()
     
     --PrintTable(msg_ddz);
 
-
-
     
 end
 

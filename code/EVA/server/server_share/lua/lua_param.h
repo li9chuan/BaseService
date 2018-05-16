@@ -85,6 +85,13 @@ public:
         m_Params[1].SetInt(param2);
     }
 
+    LuaParams( const lua_Number param1, const std::string& param2 ) :
+        m_Count(2)
+    {
+        m_Params[0].SetInt(param1);
+        m_Params[1].SetString(param2.c_str(), param2.size());
+    }
+
     LuaParams( const std::string& param1, const std::string& param2 ):
         m_Count(2)
     {

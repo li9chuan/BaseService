@@ -4,10 +4,6 @@
 #include <nel/net/message.h>
 #include "server_share/bin_luabind/Public.hpp"
 
-using namespace NLMISC;
-using namespace NLNET;
-
-
 class CLuaMessage
 {
     DECLARE_SCRIPT_CLASS();

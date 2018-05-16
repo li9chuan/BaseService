@@ -6,6 +6,8 @@
 #include <server_share/buf_fifo2.h>
 #include <server_share/bin_luabind/Public.hpp>
 #include <server_share/lua/lua_engine.h>
+#include <server_share/lua_net/lua_message.h>
+#include <nel/net/message.h>
 
 namespace bin{
     class CScriptHandle;
@@ -32,16 +34,24 @@ public:
     virtual ~CLuaThread(void);
 
 
-    // start;
-    bool Start( std::string& lua_start, std::string& export_name );
+    /**
+    *  启动线程
+    *  @param lua_start     子线程lua脚本加载路径。
+    *  @param params        传递参数。
+    */
+    ///@{
+    bool Start(std::string& lua_start, std::string& params);
+    ///@}
+
 
     // close;
     void Close( void );
 
+	// 主线程调用，读取 m_ToMainEvent
     void Update( void );
 
-    void PostSub( CThreadEvent* pThreadEvent )  { m_ToSubEvent.push_back(pThreadEvent); }
-    void PostMain( CThreadEvent* pThreadEvent ) { m_ToMainEvent.push_back(pThreadEvent); }
+    void PostSub(NLNET::CMessage* pMsg)     { pMsg->session(m_LuaThreadHandle);  m_ToSubEvent.push_back(pMsg);  }
+    void PostMain(NLNET::CMessage* pMsg )   { pMsg->session(m_LuaThreadHandle);  m_ToMainEvent.push_back(pMsg); }
 
     CLuaEngine&     GetLuaEngine() { return m_SubLuaEngine; }
 protected:
@@ -54,22 +64,28 @@ private:
     NLMISC::IThread*            m_ThreadHandle;
     CLuaEngine		            m_SubLuaEngine;
     std::string                 m_ThreadName;
+    sint32                      m_LuaThreadHandle;
+    bool                        m_AlreadyStarted;
 
     volatile bool               m_RequireExit;
 
-    NLMISC::CBufFIFO2< CThreadEvent > m_ToSubEvent;
-    NLMISC::CBufFIFO2< CThreadEvent > m_ToMainEvent;
+
+    NLMISC::CBufFIFO2< NLNET::CMessage >    m_ToSubEvent;
+    NLMISC::CBufFIFO2< NLNET::CMessage >    m_ToMainEvent;
+
+    CLuaMessage                 m_LuaMainMsg;
+    CLuaMessage                 m_LuaSubMsg;
 
 };
 
 class CLuaThreadMgr : public NLMISC::CSingleton<CLuaThreadMgr>
 {
 public:
-    CLuaThreadMgr() : m_LuaThreadHandle("CLuaThreadMgr:m_LuaThreadHandle") {}
+    CLuaThreadMgr() {}
 
-    void RegisterLuaThread( std::string& name, CLuaThread* pThread );
-    void RemoveLuaThread( std::string& name );
-    CLuaThread* GetLuaThread( std::string& name );
+    sint32 RegisterLuaThread( CLuaThread* pThread );
+    void RemoveLuaThread( sint32 lua_handle );
+    CLuaThread* GetLuaThread( sint32 lua_handle);
 
     void Init();
 
@@ -81,9 +97,9 @@ public:
 
 private:
 
-    typedef std::map<std::string, CLuaThread*>      TThreadHandle;
+    typedef std::vector<CLuaThread*>        TThreadHandles;
 
-    NLMISC::CSynchronized<TThreadHandle>            m_LuaThreadHandle;
+    TThreadHandles      m_LuaThreadHandles;
     NLMISC::CMutex      m_LuaThreadMutex;
 };
 
