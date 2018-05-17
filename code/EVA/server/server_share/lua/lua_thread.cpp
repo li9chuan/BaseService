@@ -37,6 +37,8 @@ bool CLuaThread::Start( std::string& lua_start, std::string& params )
         m_SubLuaEngine.ExportModule("Debug");
         m_SubLuaEngine.ExportModule("LuaThread");
 
+        m_SubLuaEngine.ExportClass("LuaMessage");
+
         m_SubLuaEngine.ExportClass("MysqlStmt");
         m_SubLuaEngine.ExportClass("MysqlConn");
         m_SubLuaEngine.ExportClass("MysqlResult");
@@ -88,17 +90,18 @@ void CLuaThread::Update( void )
         {
             int nRet = 0;
             m_LuaMainMsg.m_Msg.swap(*pMsg);
+            m_LuaMainMsg.m_Msg.invert();
             functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)pMsg->session(), &m_LuaMainMsg, nRet);
-        }
 
-        m_SubLuaEngine.RunLuaFunction("ThreadUpdate");
+            SAFE_DELETE(pMsg);
+        }
     }
 }
 
 void CLuaThread::run( void )
 {
     bin::CScriptTable    functbl;
-    ScriptMgr.GetScriptHandle()->Get("NetWorkHandler", functbl);
+    m_SubLuaEngine.GetScriptHandle()->Get("NetWorkHandler", functbl);
 
     while ( !m_RequireExit )
     {
@@ -108,7 +111,10 @@ void CLuaThread::run( void )
         {
             int nRet = 0;
             m_LuaSubMsg.m_Msg.swap(*pMsg);
-            functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)pMsg->session(), &m_LuaMainMsg, nRet);
+            m_LuaSubMsg.m_Msg.invert();
+            functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)pMsg->session(), &m_LuaSubMsg, nRet);
+
+            SAFE_DELETE(pMsg);
         }
         else
         {
@@ -119,31 +125,31 @@ void CLuaThread::run( void )
 
 void CLuaThreadMgr::Init()
 {
-    CConfigFile::CVar* pVar = Config.getVarPtr("LuaWorkThread");
+    //CConfigFile::CVar* pVar = Config.getVarPtr("LuaWorkThread");
 
-    if ( pVar != NULL )
-    {
-        for (uint i = 0; i < pVar->size(); ++i)
-        {
-            NLMISC::CSString start_file = pVar->asString(i);
-            CVectorSString  res;
-            start_file.splitBySeparator( ' ', res );
+    //if ( pVar != NULL )
+    //{
+    //    for (uint i = 0; i < pVar->size(); ++i)
+    //    {
+    //        NLMISC::CSString start_file = pVar->asString(i);
+    //        CVectorSString  res;
+    //        start_file.splitBySeparator( ' ', res );
 
-            if( res.size()!=2 ) { nlwarning( "%s, config format error.", start_file.c_str() ); continue; }
+    //        if( res.size()!=2 ) { nlwarning( "%s, config format error.", start_file.c_str() ); continue; }
 
-            NLMISC::CSString script_full_path = CPath::lookup( res[1] );
+    //        NLMISC::CSString script_full_path = CPath::lookup( res[1] );
 
-            if( !script_full_path.empty() )
-            {
-                CLuaThread* pLuaThread = new CLuaThread( res[0] );
-                pLuaThread->Start( script_full_path, res[0] );
-            }
-            else
-            {
-                nlwarning( "%s, not found.", script_full_path.c_str() );
-            }
-        }
-    }
+    //        if( !script_full_path.empty() )
+    //        {
+    //            CLuaThread* pLuaThread = new CLuaThread( res[0] );
+    //            pLuaThread->Start( script_full_path, res[0] );
+    //        }
+    //        else
+    //        {
+    //            nlwarning( "%s, not found.", script_full_path.c_str() );
+    //        }
+    //    }
+    //}
 }
 
 sint32 CLuaThreadMgr::RegisterLuaThread( CLuaThread* pThread )
@@ -152,7 +158,7 @@ sint32 CLuaThreadMgr::RegisterLuaThread( CLuaThread* pThread )
 
     m_LuaThreadMutex.enter();
     m_LuaThreadHandles.push_back(pThread);
-    lua_handle = m_LuaThreadHandles.size();
+    lua_handle = m_LuaThreadHandles.size()-1;
     m_LuaThreadMutex.leave();
 
     return lua_handle;
@@ -216,12 +222,9 @@ namespace bin
         return 1;
     }
 
-    DEFINE_CLASS_FUNCTION(Start, void, (CLuaMessage* pMsgIn))
+    DEFINE_CLASS_FUNCTION(Start, void, (std::string& lua_start, std::string& params))
     {
-        CMessage* pMsg = new CMessage();
-        pMsg->swap(pMsgIn->m_Msg);
-        obj->PostSub(pMsg);
-
+        obj->Start(lua_start, params);
         return 1;
     }
 

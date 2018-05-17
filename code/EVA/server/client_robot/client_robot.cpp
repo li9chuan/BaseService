@@ -6,6 +6,7 @@
 #include <server_share/server_def.h>
 #include <server_share/lua/lua_engine.h>
 #include <server_share/lua/script_mgr.h>
+#include <server_share/lua/lua_thread.h>
 #include <server_share/lua_net/lua_network.h>
 #include <server_share/i18n_def.h>
 #include <server_share/timer.h>
@@ -25,6 +26,7 @@ public:
         TimerManager->init();
         LuaNetworkMgr.Init();
         ScriptMgr.init();
+        LuaThreadMgr.Init();
     }
 
 
@@ -35,6 +37,7 @@ public:
         TimerManager->tickUpdate();
         ScriptMgr.update();
         LuaNetworkMgr.Update();
+        LuaThreadMgr.Update();
         return true;
     }
 
@@ -43,6 +46,7 @@ public:
 		TimerManager->release();
         ScriptMgr.release();
         LuaNetworkMgr.Release();
+        LuaThreadMgr.Release();
     }
 
 };

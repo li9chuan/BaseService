@@ -3,10 +3,10 @@
 <Project Name="Robot.luaprj" Cmd="" Arg="" Dir="" Toggle="false" >
     <Filter RelativePath=".\__Robot" Toggle="false" >
         <LuaFile RelativePath=".\_ClientRobotMain.lua" />
-        <Filter RelativePath=".\RobotSub" Toggle="true" >
-            <LuaFile RelativePath=".\DBProc.lua" />
-            <LuaFile RelativePath=".\DBSubProc.lua" />
-            <LuaFile RelativePath=".\DBSubStart.lua" />
+        <Filter RelativePath=".\RobotSub" Toggle="false" >
+            <LuaFile RelativePath=".\RobotTest.lua" />
+            <LuaFile RelativePath=".\RobotSubStart.lua" />
         </Filter>
+        <LuaFile RelativePath=".\RobotMgr.lua" />
     </Filter>
 </Project>
