@@ -4,20 +4,23 @@ PlayerMgr = {}
 function PlayerMgr:Init()
 	self.playerMap      = Map:new();
 
-    self.maxPlayer      = 3000;
 
 end
 
-function PlayerMgr:MaxPlayer()
-    return self.maxPlayer;
-end
 
 function PlayerMgr:Count()
     return self.playerMap:Count();
 end
 
 function PlayerMgr:GetPlayer( _uid )
-    return self.playerMap:Find(_uid);
+
+    local player = self.playerMap:Find(_uid);
+    
+    if player~=nil then
+        player.LastUpdateTime = TimerMgr:GetTime();
+    end
+    
+    return player
 end
 
 function PlayerMgr:LoadDBPlayer( _uid )

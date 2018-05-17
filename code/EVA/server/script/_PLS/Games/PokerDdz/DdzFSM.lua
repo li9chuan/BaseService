@@ -46,7 +46,7 @@ end
 
 
 function FSMDouDiZhu:__GetRunStateTime()
-    return Misc.GetLocalTime - self._StateEnterTime;
+    return TimerMgr:GetTime() - self._StateEnterTime;
 end
 
 function FSMDouDiZhu:TickUpdate()
@@ -55,12 +55,12 @@ end
 
 function FSMDouDiZhu:SwitchState( event, ... )
     self._CurrState = event;
-    self._StateEnterTime = Misc.GetLocalTime();
+    self._StateEnterTime = TimerMgr:GetTime();
     self._GameFSM:do_event( event, true, ... );
 end
 
 function FSMDouDiZhu:__ResetInStateTime()
-    self._StateEnterTime = Misc.GetLocalTime();
+    self._StateEnterTime = TimerMgr:GetTime();
 end
 
 function FSMDouDiZhu:GetState()

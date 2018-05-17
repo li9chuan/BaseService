@@ -19,7 +19,7 @@ end
 function PlayerLogicService:UpdatePLSInfo( service_id )
     
     local MsgServiceInfo = {};
-    MsgServiceInfo.MaxPlayer    = PlayerMgr:MaxPlayer();
+    MsgServiceInfo.MaxPlayer    = PlayerConfig.MaxPlayer;
     MsgServiceInfo.CurrPlayer   = PlayerMgr:Count();
     MsgServiceInfo.ServiceID    = ServerNet.GetServiceID();
     MsgServiceInfo.ServiceName  = ServerNet.GetServiceName();

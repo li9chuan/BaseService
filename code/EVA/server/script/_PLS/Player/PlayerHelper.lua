@@ -19,6 +19,7 @@ function PlayerHelper:ctor()
     self.LogoutTime             = nil;
     self.PlayerState            = nil;
         
+    self.LastUpdateTime         = TimerMgr:GetTime();
 end
 
 

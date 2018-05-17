@@ -18,6 +18,10 @@ function TimerMgr:Init(cycle)
     utils.tinsert_n(self._slots[4], {}, 1000)
 end
 
+function TimerMgr:GetTime()
+    return self._cycle;
+end
+
 function TimerMgr:Update(cycle)
 	local h1, m1, s1, ms1 = utils.ms2t(self._cycle)
 	self._cycle = cycle
