@@ -94,6 +94,10 @@ namespace bin
 
     END_SCRIPT_MODULE()
 
+    BEGIN_SCRIPT_MODULE(Net)
+
+
+    END_SCRIPT_MODULE()
 
     BEGIN_SCRIPT_MODULE(Debug)
 
