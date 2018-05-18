@@ -49,6 +49,11 @@ function ServiceRelease()
     print("Lua Release.");
 end
 
+function ServiceInfo()
+
+
+end
+
 --[[
 
 --bash_path = "E:\\BaseService\\code\\EVA\\server\\script\\";

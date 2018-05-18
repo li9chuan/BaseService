@@ -24,3 +24,9 @@ function ThreadInit( thread_handle, params )
 
 end
 
+
+
+function ThreadUpdate()
+
+end
+

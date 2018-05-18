@@ -30,7 +30,7 @@ class CLuaThread : public NLMISC::IRunnable
 
 public:
 
-    CLuaThread( std::string name );
+    CLuaThread( std::string name, sint32 update_tick);
     virtual ~CLuaThread(void);
 
 
@@ -38,9 +38,10 @@ public:
     *  启动线程
     *  @param lua_start     子线程lua脚本加载路径。
     *  @param params        传递参数。
+    *  @return   lua_thread_handle
     */
     ///@{
-    bool Start(std::string& lua_start, std::string& params);
+    sint32 Start(std::string& lua_start, std::string& params);
     ///@}
 
 
@@ -50,8 +51,8 @@ public:
 	// 主线程调用，读取 m_ToMainEvent
     void Update( void );
 
-    void PostSub(NLNET::CMessage* pMsg)     { pMsg->session(m_LuaThreadHandle);  m_ToSubEvent.push_back(pMsg);  }
-    void PostMain(NLNET::CMessage* pMsg )   { pMsg->session(m_LuaThreadHandle);  m_ToMainEvent.push_back(pMsg); }
+    void PostSub(NLNET::CMessage* pMsg)     { m_ToSubEvent.push_back(pMsg);  }
+    void PostMain(NLNET::CMessage* pMsg )   { m_ToMainEvent.push_back(pMsg); }
 
     CLuaEngine&     GetLuaEngine() { return m_SubLuaEngine; }
 protected:
@@ -66,6 +67,7 @@ private:
     std::string                 m_ThreadName;
     sint32                      m_LuaThreadHandle;
     bool                        m_AlreadyStarted;
+    sint32                      m_UpdateTick;
 
     volatile bool               m_RequireExit;
 

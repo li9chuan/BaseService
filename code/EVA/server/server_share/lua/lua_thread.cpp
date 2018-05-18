@@ -12,11 +12,14 @@ void forLuaThreadForceLink()
     nlwarning("forLuaThreadForceLink");
 }
 
-CLuaThread::CLuaThread( std::string name ) : 
+CLuaThread::CLuaThread( std::string name, sint32 update_tick ) : 
     m_ThreadHandle(NULL), m_ThreadName(name), m_AlreadyStarted(false),
-    m_RequireExit(false), m_LuaThreadHandle(-1)
+    m_RequireExit(false), m_LuaThreadHandle(-1), m_UpdateTick(0)
 {
-    
+    if ( update_tick>0 && update_tick<10*1000 )
+    {
+        m_UpdateTick = update_tick;
+    }
 }
 
 CLuaThread::~CLuaThread( void )
@@ -25,7 +28,7 @@ CLuaThread::~CLuaThread( void )
     LuaThreadMgr.RemoveLuaThread(m_LuaThreadHandle);
 }
  
-bool CLuaThread::Start( std::string& lua_start, std::string& params )
+sint32 CLuaThread::Start( std::string& lua_start, std::string& params )
 {
     m_ThreadHandle = NLMISC::IThread::create( this );
 
@@ -64,7 +67,7 @@ bool CLuaThread::Start( std::string& lua_start, std::string& params )
         m_ThreadHandle->start();
     }
 
-    return ( NULL != m_ThreadHandle );
+    return m_LuaThreadHandle;
 }
 
 void CLuaThread::Close( void )
@@ -91,7 +94,7 @@ void CLuaThread::Update( void )
             int nRet = 0;
             m_LuaMainMsg.m_Msg.swap(*pMsg);
             m_LuaMainMsg.m_Msg.invert();
-            functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)pMsg->session(), &m_LuaMainMsg, nRet);
+            functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)m_LuaThreadHandle, &m_LuaMainMsg, nRet);
 
             SAFE_DELETE(pMsg);
         }
@@ -102,6 +105,7 @@ void CLuaThread::run( void )
 {
     bin::CScriptTable    functbl;
     m_SubLuaEngine.GetScriptHandle()->Get("NetWorkHandler", functbl);
+    NLMISC::TTime last_time = CTime::getLocalTime();
 
     while ( !m_RequireExit )
     {
@@ -112,13 +116,23 @@ void CLuaThread::run( void )
             int nRet = 0;
             m_LuaSubMsg.m_Msg.swap(*pMsg);
             m_LuaSubMsg.m_Msg.invert();
-            functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)pMsg->session(), &m_LuaSubMsg, nRet);
+            functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)m_LuaThreadHandle, &m_LuaSubMsg, nRet);
 
             SAFE_DELETE(pMsg);
         }
         else
         {
             NLMISC::nlSleep( 3 );
+        }
+
+        if (m_UpdateTick > 0)
+        {
+            NLMISC::TTime curr_time = CTime::getLocalTime();
+            if (curr_time - last_time > m_UpdateTick)
+            {
+                m_SubLuaEngine.RunLuaFunction("ThreadUpdate");
+                last_time = curr_time;
+            }
         }
     }
 }
@@ -222,15 +236,15 @@ namespace bin
         return 1;
     }
 
-    DEFINE_CLASS_FUNCTION(Start, void, (std::string& lua_start, std::string& params))
+    DEFINE_CLASS_FUNCTION(Start, sint32, (std::string& lua_start, std::string& params))
     {
-        obj->Start(lua_start, params);
+        r = obj->Start(lua_start, params);
         return 1;
     }
 
-    DEFINE_STATIC_FUNCTION(NewInstance, CLuaThread*, (std::string name))
+    DEFINE_STATIC_FUNCTION(NewInstance, CLuaThread*, (std::string name, sint32 update_tick))
     {
-        r = new CLuaThread(name);
+        r = new CLuaThread(name, update_tick);
         r->GetScriptObject().SetDelByScr(true);
 
         return 1;

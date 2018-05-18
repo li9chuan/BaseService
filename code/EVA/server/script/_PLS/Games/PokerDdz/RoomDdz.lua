@@ -36,7 +36,7 @@ end
 function RoomDdz:ResetGameData()
     
     self._CardsPool             = {};
-	self._CardsBottom           = {}; 		-- 剩下的三张底牌
+	self._CardsBottom           = {};       -- 剩下的三张底牌
     self._ActionID              = 0;        -- 当前活动的玩家
     self._GameCount             = 1;        -- 当前是第几局
     self._Multiple              = 1;        -- 房间翻倍数

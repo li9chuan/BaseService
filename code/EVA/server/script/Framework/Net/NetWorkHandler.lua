@@ -7,8 +7,12 @@ function NetWorkHandler.OnNetEvent( event_from, event_type, event_val )
 end
 
 -- 收到网络消息
-function NetWorkHandler.OnMessage( msg_from, lua_msg )	
-    print("recv msg:"..lua_msg:name());
+function NetWorkHandler.OnMessage( msg_from, lua_msg )
+    
+    if lua_msg:name()~="SvrInfo" then
+        print("recv msg:"..lua_msg:name());
+    end
+    
     EventController.Instance():TriggerEvent( lua_msg:name(), msg_from, lua_msg );
 end
 
