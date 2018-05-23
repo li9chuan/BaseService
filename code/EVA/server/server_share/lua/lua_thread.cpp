@@ -38,9 +38,11 @@ sint32 CLuaThread::Start( std::string& lua_start, std::string& params )
 
         m_SubLuaEngine.ExportModule("Misc");
         m_SubLuaEngine.ExportModule("Debug");
-        m_SubLuaEngine.ExportModule("LuaThread");
+        m_SubLuaEngine.ExportModule("Net");
 
         m_SubLuaEngine.ExportClass("LuaMessage");
+        m_SubLuaEngine.ExportClass("LuaThread");
+        m_SubLuaEngine.ExportClass("LuaHttpRequest");
 
         m_SubLuaEngine.ExportClass("MysqlStmt");
         m_SubLuaEngine.ExportClass("MysqlConn");

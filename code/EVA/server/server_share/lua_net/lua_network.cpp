@@ -3,6 +3,7 @@
 #include "lua_callback_server.h"
 #include <server_share/lua/script_mgr.h>
 #include "server_share/bin_luabind/Public.hpp"
+#include "curl/curl.h"
 
 using namespace NLMISC;
 using namespace NLNET;
@@ -131,7 +132,8 @@ void cbLuaSvrConnect( TSockId from, void *arg )
     uint64          msg_from = (uint64)from;
     std::string     msg_buff;
 
-    LuaParams lua_params( msg_from, lua_event, msg_buff );  
+    LuaParams lua_params( msg_from, lua_event, msg_buff );
+
     ScriptMgr.run( "NetWorkHandler", "OnNetEvent", lua_params );
 }
 
@@ -164,6 +166,88 @@ void cbDisconnection( const std::string &serviceName, NLNET::TServiceId sid, voi
     lua_event.append("Dis");
     LuaParams lua_params( (uint64)sid.get(), lua_event, serviceName );  
     ScriptMgr.run( "NetWorkHandler", "OnNetEvent", lua_params );
+}
+
+static size_t WriteDataFromCurl(char* buffer, size_t size, size_t nmemb, NLMISC::CSString* pWriterData)
+{
+    if (pWriterData == NULL)
+        return 0;
+
+    pWriterData->append(buffer, size*nmemb);
+    return size * nmemb;
+}
+
+std::string HttpPost(std::string& url, std::string& params)
+{
+    std::string m_WriterData;
+
+    try
+    {
+        CURL* pCurl = curl_easy_init();
+
+        if (pCurl != NULL)
+        {
+            curl_easy_setopt(pCurl, CURLOPT_URL, url.c_str());
+            curl_easy_setopt(pCurl, CURLOPT_SSL_VERIFYPEER, 0L);
+
+            curl_easy_setopt(pCurl, CURLOPT_WRITEFUNCTION, WriteDataFromCurl);
+            curl_easy_setopt(pCurl, CURLOPT_WRITEDATA, &m_WriterData);
+
+            /* Now specify the POST data */
+            curl_easy_setopt(pCurl, CURLOPT_POSTFIELDS, params.c_str());
+
+            /* Perform the request, res will get the return code */
+            CURLcode res = curl_easy_perform(pCurl);
+
+            curl_easy_cleanup(pCurl);
+            /* Check for errors */
+            if (res != CURLE_OK)
+            {
+                nlwarning("CLuaHttpRequest Post() failed: %s\n", curl_easy_strerror(res));
+            }
+        }
+    }
+    catch (...)
+    {
+
+    }
+
+    return m_WriterData;
+}
+
+std::string HttpGet(std::string& url)
+{
+    std::string m_WriterData;
+
+    try
+    {
+        CURL* pCurl = curl_easy_init();
+
+        if (pCurl != NULL)
+        {
+            curl_easy_setopt(pCurl, CURLOPT_URL, url.c_str());
+            curl_easy_setopt(pCurl, CURLOPT_SSL_VERIFYPEER, 0L);
+
+            curl_easy_setopt(pCurl, CURLOPT_WRITEFUNCTION, WriteDataFromCurl);
+            curl_easy_setopt(pCurl, CURLOPT_WRITEDATA, &m_WriterData);
+
+            /* Perform the request, res will get the return code */
+            CURLcode res = curl_easy_perform(pCurl);
+
+            curl_easy_cleanup(pCurl);
+            /* Check for errors */
+            if (res != CURLE_OK)
+            {
+                nlwarning("CLuaHttpRequest Get() failed: %s\n", curl_easy_strerror(res));
+            }
+        }
+    }
+    catch (...)
+    {
+
+    }
+
+    return m_WriterData;
 }
 
 namespace bin
@@ -237,7 +321,7 @@ namespace bin
 
 
     ///   
-    BEGIN_SCRIPT_MODULE(ServerNet)
+    BEGIN_SCRIPT_MODULE(Net)
 
         DEFINE_MODULE_FUNCTION(Broadcast, void, (const char* service_name, CLuaMessage* pMsg))
         {
@@ -299,7 +383,17 @@ namespace bin
             return 1;
         }
 
+        DEFINE_MODULE_FUNCTION(HttpPost, std::string, (std::string& url, std::string& params))
+        {
+            r = HttpPost(url, params);
+            return 1;
+        }
 
+        DEFINE_MODULE_FUNCTION(HttpGet, std::string, (std::string& url))
+        {
+            r = HttpGet(url);
+            return 1;
+        }
 
 
     END_SCRIPT_MODULE()

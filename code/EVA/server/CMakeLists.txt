@@ -1,5 +1,4 @@
-#FIND_PACKAGE(MysqlConnector)
-#FIND_PACKAGE(CURL)
+FIND_PACKAGE(CURL)
 FIND_PACKAGE(MySQL)
 #FIND_PACKAGE(ToLua)
 # move to server_share/CMakeLists.txt
