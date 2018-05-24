@@ -94,11 +94,6 @@ namespace bin
 
     END_SCRIPT_MODULE()
 
-    BEGIN_SCRIPT_MODULE(Net)
-
-
-    END_SCRIPT_MODULE()
-
     BEGIN_SCRIPT_MODULE(Debug)
 
         DEFINE_MODULE_FUNCTION(Warning, void, (const char* str, int stack_level))

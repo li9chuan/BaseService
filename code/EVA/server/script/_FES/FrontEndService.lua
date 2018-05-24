@@ -9,11 +9,11 @@ function FrontEndService:Init()
 	self._EventRegister:RegisterEvent( "PLSDis",            self, self.DisConnection );
     
     -- 注册其它服务器启动的回调
-    ServerNet.SetConnectionCallback("FES");
-    ServerNet.SetDisConnectionCallback("FES");
+    Net.SetConnectionCallback("FES");
+    Net.SetDisConnectionCallback("FES");
     
-    ServerNet.SetConnectionCallback("PLS");
-    ServerNet.SetDisConnectionCallback("PLS");
+    Net.SetConnectionCallback("PLS");
+    Net.SetDisConnectionCallback("PLS");
     
 end
 

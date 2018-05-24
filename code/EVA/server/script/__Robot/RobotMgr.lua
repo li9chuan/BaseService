@@ -14,7 +14,7 @@ function RobotMgr:Strat()
     
     local RobotSubPath = Misc.GetBasePath() .. "/script/__Robot/RobotSub/RobotSubStart.lua";
 
-    for i=1003,1103 do
+    for i=1003,1053 do
         
         local sub_thread    = bin_types.LuaThread.NewInstance("robot", 1000);
         local thread_handle = sub_thread:Start( RobotSubPath, Table2Json({uid=i, b=2}) );

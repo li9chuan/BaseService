@@ -3,8 +3,8 @@ PlayerLogicService = {}
 function PlayerLogicService:Init()
 
     -- 注册其它服务器启动的回调
-    ServerNet.SetConnectionCallback("SCH");
-    ServerNet.SetDisConnectionCallback("SCH");
+    Net.SetConnectionCallback("SCH");
+    Net.SetDisConnectionCallback("SCH");
     
     
 	self._EventRegister = EventRegister.new();
@@ -21,8 +21,8 @@ function PlayerLogicService:UpdatePLSInfo( service_id )
     local MsgServiceInfo = {};
     MsgServiceInfo.MaxPlayer    = PlayerConfig.MaxPlayer;
     MsgServiceInfo.CurrPlayer   = PlayerMgr:Count();
-    MsgServiceInfo.ServiceID    = ServerNet.GetServiceID();
-    MsgServiceInfo.ServiceName  = ServerNet.GetServiceName();
+    MsgServiceInfo.ServiceID    = Net.GetServiceID();
+    MsgServiceInfo.ServiceName  = Net.GetServiceName();
     MsgServiceInfo.RoomList     = {};
     
     for k, v in pairs(PLSConfig.GameConfig) do  

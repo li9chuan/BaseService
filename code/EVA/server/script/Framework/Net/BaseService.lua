@@ -15,16 +15,16 @@ function BaseService:Send( service_id, cmsg_or_type, proto_type, proto_msg )
             local proto_code      = protobuf.encode(proto_type, proto_msg);
             lua_msg:wstring(proto_code);
         end
-        ServerNet.Send( service_id, lua_msg );
+        Net.Send( service_id, lua_msg );
         
     elseif param_type=="userdata" then              --  send cmessage
-        ServerNet.Send( service_id, cmsg_or_type );
+        Net.Send( service_id, cmsg_or_type );
     end
     
 end
 
 function BaseService:Broadcast( service_name, msg_out )
-    ServerNet.Broadcast( service_name, msg_out );
+    Net.Broadcast( service_name, msg_out );
 end
 
 function BaseService:SendToClient( player, cmsg_or_type, proto_type, proto_msg )
@@ -48,10 +48,10 @@ function BaseService:SendToClient( player, cmsg_or_type, proto_type, proto_msg )
             local proto_code      = protobuf.encode(proto_type, proto_msg);
             lua_msg:wstring(proto_code);
         end
-        ServerNet.SendToClient( lua_msg, send_info );
+        Net.SendToClient( lua_msg, send_info );
         
     elseif param_type=="userdata" then              --  send cmessage
-        ServerNet.SendToClient( cmsg_or_type, send_info );
+        Net.SendToClient( cmsg_or_type, send_info );
     end
 
 end

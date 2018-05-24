@@ -72,7 +72,7 @@ function SetBit( val, enum_type, enum_name )
 end
     
 function GetServiceID()
-	return ServerNet.GetServiceID();
+	return Net.GetServiceID();
 end
 
 function PostSub( thread_name, event_type, pb_name, pb_data, from )

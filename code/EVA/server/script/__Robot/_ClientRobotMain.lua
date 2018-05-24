@@ -19,8 +19,6 @@ function ServiceInit()
     
     RobotMgr:Strat();
     
-    
-    
 end
 
 -- 主循环
