@@ -49,7 +49,8 @@ message MsgCard
 
 message MsgCards
 {
-	repeated uint32                 cards               = 1;
+    optional uint32                 type                = 1;
+	repeated uint32                 cards               = 2;
 }
 
 message MsgInt
