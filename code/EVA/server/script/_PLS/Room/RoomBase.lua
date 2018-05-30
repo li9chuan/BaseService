@@ -220,8 +220,6 @@ function RoomBase:BroadcastViewer( msg_name, msg_stru, except_id )
     
 end   
 
-      
-
 function RoomBase:__GetViewPlayerNum()
     return #self.ViewPlayers;
 end

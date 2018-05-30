@@ -47,11 +47,6 @@ end
 
 print   = nlinfo;
 
-function enum(enum_type, enum_name)
-	return protobuf.enum_id(enum_type, enum_name);
-end
-
-
 function shuffle(tbl)
     
     local tbl_count = #tbl;
@@ -65,34 +60,8 @@ function shuffle(tbl)
     end
 end
 
-function SetBit( val, enum_type, enum_name )
-    local enum_val = protobuf.enum_id(enum_type, enum_name);
-    Misc.SetBit(val, enum_val);
-    return val;
-end
-    
 function GetServiceID()
 	return Net.GetServiceID();
-end
-
-function PostSub( thread_name, event_type, pb_name, pb_data, from )
-	
-	code = protobuf.encode(pb_name, pb_data)
-	len  = string.len(code);
-	
-	msg = { thread_name, from, event_type, len };
-	LuaThread.PostSub(code, msg);
-
-end
-
-function PostMain( thread_name, event_type, pb_name, pb_data, from )
-	
-	code = protobuf.encode(pb_name, pb_data)
-	len  = string.len(code);
-	
-	msg = { thread_name, from, event_type, len };
-	LuaThread.PostMain(code, msg);
-
 end
 
 function PrintTable( tbl, indent, depth )
@@ -218,19 +187,11 @@ function SplitStr(str, reps)
     return resultStrList
 end
 
--- 获取随机数
-function GetRandom(min, max)
-   math.randomseed(tostring(os.time()):reverse():sub(1, 7)) 
-   return math.random(min, max);
-end
-
--- 字符串加密
 function urlEncode(s)  
      s = string.gsub(s, "([^%w%.%- ])", function(c) return string.format("%%%02X", string.byte(c)) end)  
     return string.gsub(s, " ", "+")  
 end  
   
--- 解密
 function urlDecode(s)  
     s = string.gsub(s, '%%(%x%x)', function(h) return string.char(tonumber(h, 16)) end)  
     return s  

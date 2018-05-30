@@ -2,6 +2,8 @@ utils = require("Utils")
 
 TimerMgr = {}
 
+local tbinsert = table.insert
+
 function TimerMgr:Init(cycle)
     
     self.timerid    = 1;
@@ -58,13 +60,13 @@ function TimerMgr:__Insert__(delay, timerid, func)
                         id      = timerid,
 						time    = { h = h2, m = m2, s = s2, ms = ms2 } }
 		if h1 ~= 0 then
-			table.insert(self._slots[1][h2 == 0 and 24 or h2], tick)
+			tbinsert(self._slots[1][h2 == 0 and 24 or h2], tick)
 		elseif m1 ~= 0 then
-			table.insert(self._slots[2][m2 == 0 and 60 or m2], tick)
+			tbinsert(self._slots[2][m2 == 0 and 60 or m2], tick)
 		elseif s1 ~= 0 then
-			table.insert(self._slots[3][s2 == 0 and 60 or s2], tick)
+			tbinsert(self._slots[3][s2 == 0 and 60 or s2], tick)
 		elseif ms1 ~= 0 then
-			table.insert(self._slots[4][ms2 == 0 and 1000 or ms2], tick)
+			tbinsert(self._slots[4][ms2 == 0 and 1000 or ms2], tick)
 		end
 	end
 end

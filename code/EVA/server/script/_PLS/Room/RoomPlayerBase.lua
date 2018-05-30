@@ -12,34 +12,31 @@ function RoomPlayerBase:GetHandCount()
     return #self._HandCards;
 end
 
-function RoomPlayerBase:SetStateEnum( enum_type, enum_name )
-    local enum_val = protobuf.enum_id( enum_type, enum_name );
-    Misc.SetBit(self._State, enum_val);
-end
-
-function RoomPlayerBase:GetStateEnum( enum_type, enum_name )
-    local enum_val = protobuf.enum_id( enum_type, enum_name );
-    return Misc.GetBit(self._State, enum_val);
-end
-
-function RoomPlayerBase:ClearStateEnum( enum_type, enum_name )
-    local enum_val = protobuf.enum_id( enum_type, enum_name );
-    Misc.ClearBit(self._State, enum_val);
-end
-
 function RoomPlayerBase:ClearAllState()
     self._State = 0;
 end
 
-function RoomPlayerBase:GetState( state_idx )
+function RoomPlayerBase:GetState( enum_val )
     
-    if state_idx==nil then
+    if enum_val==nil then
         return self._State;
     end
     
-    return Misc.GetBit(self._State, state_idx);
+    return Misc.GetBit(self._State, enum_val);
 end
-        
+
+function RoomPlayerBase:SetState( enum_val )
+    if enum_val~=nil then
+        Misc.SetBit(self._State, enum_val);
+    end
+end
+
+function RoomPlayerBase:ClearState( enum_val )
+    if enum_val~=nil then
+        Misc.ClearBit(self._State, enum_val);
+    end
+end
+
 function RoomPlayerBase:AddHandCard( card )
     table.insert(self._HandCards, card);
 end       

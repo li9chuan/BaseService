@@ -21,6 +21,7 @@ function FSMClass:ctor()
 		}
     })
 end
+
 function FSMClass:SwitchState( event, ... )
 	if (self._GameFSM ~= nil) then
 		self._GameFSM:do_event( event, ... );

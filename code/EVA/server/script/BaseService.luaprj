@@ -29,11 +29,12 @@
             <LuaFile RelativePath=".\TestFSM.lua" />
             <LuaFile RelativePath=".\FSMClass.lua" />
             <LuaFile RelativePath=".\TimerTest.lua" />
+            <LuaFile RelativePath=".\CommonTest.lua" />
         </Filter>
         <LuaFile RelativePath=".\SimpleStateMachine.lua" />
         <LuaFile RelativePath=".\MapMap.lua" />
     </Filter>
-    <Filter RelativePath=".\SharedLib" Toggle="true" >
+    <Filter RelativePath=".\SharedLib" Toggle="false" >
         <LuaFile RelativePath=".\StaticTableMgr.lua" />
         <LuaFile RelativePath=".\InitSharedLib.lua" />
         <Filter RelativePath=".\Event" Toggle="true" >

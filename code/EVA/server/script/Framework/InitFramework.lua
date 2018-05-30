@@ -9,14 +9,6 @@ package.path = package.path .. BasePath .. "Framework/Net/?.lua;";
 
 
 protobuf    = require "protobuf"
-
-addr = io.open( BasePath.."DataTable/ProtoMsg.pb", "rb")
-buffer = addr:read "*a"  
-addr:close()  
-protobuf.register(buffer) 
-protobuf.decode("google.protobuf.FileDescriptorSet", buffer)
-
-
 Json        = require "cjson"
 JsonUtil    = require "CJsonUtil"
 
@@ -86,11 +78,32 @@ CallbackServer              = require("Net/CallbackServer");
 StateMachine                = require("SimpleStateMachine");
 
 
-
+enum = {}
 
 
 -- 初始化单例
 function OnInitFramework()
+
+    addr = io.open( BasePath.."DataTable/ProtoMsg.pb", "rb")
+    buffer = addr:read "*a"  
+    addr:close()  
+    protobuf.register(buffer) 
+    local decode = protobuf.decode("google.protobuf.FileDescriptorSet", buffer)
+
+    for _,v in ipairs(decode.file) do
+        if v.enum_type ~= nil then
+            for _,etp in ipairs(v.enum_type) do
+                local enum_val = etp.value;
+                for _,eval in ipairs(enum_val) do
+                    --nlinfo( "    " .. eval.name .. "  " .. eval.number );
+                    enum[eval.name] = eval.number;
+                end
+            end
+        end
+    end
+
+    math.randomseed(tostring(os.time()):reverse():sub(1, 7)) 
+
     EventController.Instance():Init()
     TimerMgr:Init(os.clock()*1000);
 end

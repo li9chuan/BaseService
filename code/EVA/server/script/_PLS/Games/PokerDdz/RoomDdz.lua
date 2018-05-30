@@ -4,7 +4,12 @@ DdzFSM              = require("Games/PokerDdz/DdzFSM")
 DdzPlayerInfo       = require("Games/PokerDdz/DdzPlayerInfo")
 DDZOutCardData      = require("Games/PokerDdz/DDZOutCardData")
 
--- 构造函数;
+--[[
+        斗地主房间内游戏逻辑。
+--]]
+
+local tbinsert = table.insert
+
 function RoomDdz:ctor()
 
     self.super:ctor();
@@ -57,18 +62,28 @@ function RoomDdz:ResetGameData()
     end
     
     -- 发牌洗牌
-    for i,v in pairs(ConstCardsPool) do
+    for i,v in pairs(ConstCardsPoker) do
         self._CardsPool[i] = v;
     end
 
     shuffle(self._CardsPool);
 end
 
+-- 判断游戏是否可以开始
 function RoomDdz:GameStartWait()
-    if self:GetRoomPlayerNum()>=self._RoomMin then
-        return true;
+    --  人数是否足够
+    if self.RoomPlayerData:Count()<self._RoomMin then
+        return false;
     end
-    return false;
+    
+    -- 是否都点了准备
+    for _,v in ipairs(self.RoomPlayerData:GetTable()) do
+        if not v:IsReady() then
+            return false;
+        end
+    end
+
+    return true;
 end
 
 -- 玩家加入房间
@@ -79,10 +94,10 @@ function RoomDdz:JoinRoom( player )
         local ddz_player = self.RoomPlayerData:Find(player.UID);
 
         if ddz_player~=nil then
-            ddz_player:SetState( "STATE_DDZ_NEWROLE" );
+            ddz_player:SetState( enum.STATE_DDZ_NEWROLE );
         else
             ddz_player = DdzPlayerInfo:new();
-            ddz_player:SetState( "STATE_DDZ_NEWROLE" );
+            ddz_player:SetState( enum.STATE_DDZ_NEWROLE );
             self.RoomPlayerData:Insert(player.UID, ddz_player);
         end
 
@@ -120,9 +135,8 @@ function RoomDdz:UserCancelReady( uid )
     end
 end
 
-function SetWikQiangDiZhu( wik )
-    local enum_val = protobuf.enum_id("PB.TDDZQiangDiZhu", wik);
-    Misc.SetBit(self._QingDiZhuWiki, enum_val);
+function SetWikQiangDiZhu( enum_wik )
+    Misc.SetBit(self._QingDiZhuWiki, enum_wik);
 end
 
 
@@ -138,13 +152,13 @@ function RoomDdz:SendQiangDiZhuWik()
         self._QingDiZhuWiki = 0;
         
         if _QiangDiZhu then
-            self:SetWikQiangDiZhu("DDZ_QDZ_BUJIAO");
-            self:SetWikQiangDiZhu("DDZ_QDZ_JIAODIZHU");
+            self:SetWikQiangDiZhu( enum.DDZ_QDZ_BUJIAO );
+            self:SetWikQiangDiZhu( enum.DDZ_QDZ_JIAODIZHU );
         else
-            self:SetWikQiangDiZhu("DDZ_QDZ_BUJIAO");
-            self:SetWikQiangDiZhu("DDZ_JF_JIAO_ONE");
-            self:SetWikQiangDiZhu("DDZ_JF_JIAO_TWO");
-            self:SetWikQiangDiZhu("DDZ_JF_JIAO_THREE");
+            self:SetWikQiangDiZhu( enum.DDZ_QDZ_BUJIAO );
+            self:SetWikQiangDiZhu( enum.DDZ_JF_JIAO_ONE );
+            self:SetWikQiangDiZhu( enum.DDZ_JF_JIAO_TWO );
+            self:SetWikQiangDiZhu( enum.DDZ_JF_JIAO_THREE );
         end
 
         self:_RefreshPlayerQiangDiZhuState(self._ActionID);
@@ -166,9 +180,9 @@ function RoomDdz:_RefreshPlayerQiangDiZhuState( uid )
 
     for k,v in pairs(self.RoomPlayerData:GetTable()) do
         if k==uid then
-            v:SetState("STATE_DDZ_QIANGDIZHU");
+            v:SetState( enum.STATE_DDZ_QIANGDIZHU );
         else
-            v:ClearState("STATE_DDZ_QIANGDIZHU");
+            v:ClearState( enum.STATE_DDZ_QIANGDIZHU );
         end
     end
 end
@@ -182,10 +196,10 @@ function RoomDdz:RefreshSelectJiaBei( uid, msg_jbr )
         if room_player~=nil then
             --room_player:IsSelectJiaBei()
             
-            room_player:SetState("STATE_DDZ_SELECT_JIABEI");
+            room_player:SetState( enum.STATE_DDZ_SELECT_JIABEI );
             
-            if msg_jbr.result == enum("PB.TDDZAddTimes","DDZ_AT_JIABIE") then
-                room_player:SetState("STATE_DDZ_JIABEI");
+            if msg_jbr.result == enum.DDZ_AT_JIABIE then
+                room_player:SetState( enum.STATE_DDZ_JIABEI );
             end
             
             msg_jbr.playid  = uid;
@@ -219,7 +233,7 @@ function RoomDdz:RefrshRoleQiangDiZhu( uid, msg_qdz )
             
             if self._QiangDiZhu then
                 
-                if msg_qdz.result==enum("PB.TDDZQiangDiZhu","DDZ_QDZ_QIANGDIZHU") then
+                if msg_qdz.result==enum.DDZ_QDZ_QIANGDIZHU then
                 
                     self._Multiple = self._Multiple*3;
                 
@@ -244,7 +258,7 @@ function RoomDdz:SetDiZhuState( uid )
     
     if room_player~=nil then
     
-        room_player:SetState("STATE_DDZ_DIZHU");
+        room_player:SetState( enum.STATE_DDZ_DIZHU );
         room_player:AddHandCards( self._CardsBottom );
         
         
@@ -280,7 +294,7 @@ function RoomDdz:SendHandCard()
     self._CardsBottom           = {};
 
     for idx=start_send, self.CFG_TOTAL_CARD do
-        table.insert( self._CardsBottom, self._CardsPool[idx] );
+        tbinsert( self._CardsBottom, self._CardsPool[idx] );
     end
     
 end
@@ -314,7 +328,7 @@ function RoomDdz:__FillRoomInfoMsg( msg_ddz_room, current_uid )
     
     msg_ddz_room.room_id        = self.PrvRoomID;
 
-	msg_ddz_room.room_state     = enum("PB.TDDZState", self.Fsm:GetState());
+	msg_ddz_room.room_state     = enum[self.Fsm:GetState()];
     msg_ddz_room.action_id      = self._ActionID;
     msg_ddz_room.game_count     = self._GameCount;
     msg_ddz_room.multiple       = self._Multiple;
@@ -370,7 +384,7 @@ function RoomDdz:__FillPlayerBaseInfoMsg( uid, msg_ddz_room, current_uid )
         msg_ddz_room.player_list = {};
     end
     
-    table.insert( msg_ddz_room.player_list, room_player );
+    tbinsert( msg_ddz_room.player_list, room_player );
   
 end
 

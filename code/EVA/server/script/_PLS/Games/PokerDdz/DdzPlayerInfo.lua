@@ -1,6 +1,9 @@
 local DdzPlayerInfo = class("DdzPlayerInfo", RoomPlayerBase)
 
--- 构造函数;
+--[[
+        房间内玩家数据
+--]]
+
 function DdzPlayerInfo:ctor()
 
     self.super:ctor();
@@ -22,8 +25,6 @@ function DdzPlayerInfo:AddHandCards( tbl, start_idx, end_idx )
     end
 end
 
-
-
 -- 清除每局临时数据
 function DdzPlayerInfo:ClearOneGameData()
     
@@ -31,40 +32,24 @@ function DdzPlayerInfo:ClearOneGameData()
     self:ClearAllState();
 end
 
-function DdzPlayerInfo:SetState( enum_name )
-    local enum_val = protobuf.enum_id( "PB.TDDZPlayerState", enum_name );
-    Misc.SetBit(self._State, enum_val);
-end
-
-function DdzPlayerInfo:GetState( enum_name )
-    local enum_val = protobuf.enum_id( "PB.TDDZPlayerState", enum_name );
-    return Misc.GetBit(self._State, enum_val);
-end
-
-function RoomPlayerBase:ClearState( enum_name )
-    local enum_val = protobuf.enum_id( "PB.TDDZPlayerState", enum_name );
-    Misc.ClearBit(self._State, enum_val);
-end
-
 function DdzPlayerInfo:IsSelectJiaBei()
-    return self:GetStateEnum("PB.TDDZPlayerState", "STATE_DDZ_SELECT_JIABEI");
+    return self:GetState( enum.STATE_DDZ_SELECT_JIABEI );
 end
-
 
 function DdzPlayerInfo:IsQiangDiZhu()
-    return self:GetStateEnum("PB.TDDZPlayerState", "STATE_DDZ_QIANGDIZHU");
+    return self:GetState( enum.STATE_DDZ_QIANGDIZHU );
 end
 
 function DdzPlayerInfo:IsReady()
-    return self:GetStateEnum("PB.TDDZPlayerState", "STATE_DDZ_READY");
+    return self:GetState( enum.STATE_DDZ_READY );
 end
 
 function DdzPlayerInfo:SetReady()
-    return self:SetStateEnum("PB.TDDZPlayerState", "STATE_DDZ_READY");
+    return self:SetState( enum.STATE_DDZ_READY );
 end
 
 function DdzPlayerInfo:CancleReady()
-    return self:ClearStateEnum("PB.TDDZPlayerState", "STATE_DDZ_READY");
+    return self:ClearState( enum.STATE_DDZ_READY );
 end
 
 return DdzPlayerInfo;

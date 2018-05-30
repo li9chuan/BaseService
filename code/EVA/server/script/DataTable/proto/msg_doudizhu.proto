@@ -121,7 +121,7 @@ message MsgQiangDiZhuResult                                          // 抢地�
 	optional uint64 playid                  = 1;                       // 玩家id
 	optional uint64 result                  = 2;                       // 玩家选择的结果
 	optional uint64 state                   = 3;                       // 状态
-	repeated MsgCards   dizhu_card          = 4;             	         // 刷新地主的手牌
+	optional MsgCards   dizhu_card          = 4;             	         // 刷新地主的手牌
 	optional uint64 CardCount               = 5;                       // 手牌数量
 	optional uint64 multiple                = 6;                       // 房间倍数
 }

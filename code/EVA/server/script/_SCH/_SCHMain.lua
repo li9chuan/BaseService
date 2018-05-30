@@ -40,7 +40,6 @@ function ServiceInit()
     PlayerInfoMgr:Init();
     ScheduleService:Init();
     
-
     PHPService:Init( "PHP", "tcp" );
     PHPService:Listen( 20458 );
 

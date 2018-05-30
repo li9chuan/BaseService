@@ -37,7 +37,7 @@
   <leaf name="DDZ_CG"           sendto="PLS"        format="UID s"             	                                description="斗地主继续下一局" />
   <leaf name="DDZ_RE"           sendto="PLS"        format="UID b"             	                                description="斗地主申请解散房间" />
   <leaf name="DDZ_PS"           sendto="PLS"        format="UID b"                                              description="玩家跳过出牌" />
-  <leaf name="DDZ_OC"           sendto="PLS"        format="UID PB.MsgCard"                                     description="斗地主出牌" />
+  <leaf name="DDZ_OC"           sendto="PLS"        format="UID PB.MsgCards"                                    description="斗地主出牌" />
   <leaf name="DDZ_RRM"          sendto="PLS"        format="UID"       			   		                        description="斗地主检查IP时离开房间" />
   <leaf name="DDZ_CLR"          sendto="PLS"        format="UID"             	   		                        description="斗地主取消限制开始游戏" />
   <leaf name="DDZ_BLC"          sendto="PLS"        format="UID"             	   		                        description="刷新斗地主房间信息, 断线重连" />

@@ -16,7 +16,7 @@ class CScriptMgr : public NLMISC::CSingleton<CScriptMgr>
 {
 public:
 
-	void            init( LUA_OPEN pToluaOpen=NULL );
+	bool            init( LUA_OPEN pToluaOpen=NULL );
     void            update();
     void		    release();
 
@@ -25,7 +25,7 @@ public:
     void            ExecString( std::string );
 
 
-    void                    LoadScrpit(const char* szName);
+    bool                    LoadScrpit(const char* szName);
     lua_State*              GetLuaState();
     CLuaEngine&             GetLuaEngine()      { return m_LuaEngine; }
     bin::CScriptHandle*     GetScriptHandle()   { return m_LuaEngine.GetScriptHandle(); }
@@ -38,6 +38,7 @@ private:
 
     void            Export();
     CLuaEngine      m_LuaEngine;
+    bool            m_IsInit;
 };
 
 #define  ScriptMgr  CScriptMgr::instance()

@@ -30,7 +30,6 @@ public:
 
     NLMISC::CStopWatch	ReceiveWatch;				// All Receive Sub
     NLMISC::CStopWatch  SendWatch;					// All Send Sub
-
 };
 
 #define  FrontEndService  CFrontEndService::instance()

@@ -27,8 +27,9 @@ void luaexportforcelink()
     forLuaThreadForceLink();
 }
 
-void CScriptMgr::init( LUA_OPEN pLuaOpen )
+bool CScriptMgr::init( LUA_OPEN pLuaOpen )
 {
+    m_IsInit = false;
 	//UpdateServiceBootCount();
 
     //string fn = IService::getInstance()->SaveFilesDirectory.toString();
@@ -53,8 +54,10 @@ void CScriptMgr::init( LUA_OPEN pLuaOpen )
     {
         string script_full_path = CPath::lookup( pVar->asString() );
         nlinfo("Loading %s.", script_full_path.c_str());
-        ScriptMgr.LoadScrpit(script_full_path.c_str());
+        m_IsInit = ScriptMgr.LoadScrpit(script_full_path.c_str());
     }
+
+    return m_IsInit;
 }
 
 LuaParams CScriptMgr::run( std::string script_scope, std::string script_name, LuaParams lua_in, uint outnum )
@@ -88,17 +91,22 @@ void CScriptMgr::release()
     m_LuaEngine.Release();
 }
 
-void CScriptMgr::LoadScrpit( const char* szName )
+bool CScriptMgr::LoadScrpit( const char* szName )
 {
     if( m_LuaEngine.LoadLuaFile(szName) )
     {
-        m_LuaEngine.RunLuaFunction( "ServiceInit" );
+        return m_LuaEngine.RunLuaFunction( "ServiceInit" );
     }
+
+    return false;
 }
 
 void CScriptMgr::update()
 {
-    m_LuaEngine.RunLuaFunction( "ServiceUpdate" );
+    if (m_IsInit)
+    {
+        m_LuaEngine.RunLuaFunction("ServiceUpdate");
+    }
 }
 
 

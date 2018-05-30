@@ -1,6 +1,9 @@
 local FSMDouDiZhu = class("FSMDouDiZhu")
 
--- 构造函数;
+--[[
+        斗地主房间逻辑状态机。
+--]]
+
 function FSMDouDiZhu:ctor()
     self._GameFSM 			= StateMachine:new();
     self._StateEnterTime    = 0;
@@ -82,24 +85,24 @@ function FSMDouDiZhu:DoWait( event )
         --print( "FSMClass:DoWait TickUpdate" );
     end
     
-    
+    -- 如果都点了普通开始，跳转检查距离等条件的状态。
     if self.RoomDdz:GameStartWait() then
         self:SwitchState("TDDZStateCheckStartGame");
     end
 end
 
-
-
-
+-- 检查是否可以开始,暂不检查，直接跳下一状态
 function FSMDouDiZhu:DoCheckStartGame( event )
-    -- 检查是否可以开始,暂不检查，直接跳下一状态
-    self:SwitchState("TDDZStateSelectMingCardStart");
+    self:SwitchState("TDDZStateStartGame");
 end
 
+-- 有玩家选择了明牌开始
 function FSMDouDiZhu:DoSelectMingCardStart( event )
-    
-    
-    
+    if event.args[1] then
+        self.RoomDdz:ResetGameData();
+        self.RoomDdz:BroadcastGameInfo();
+        self.RoomDdz:SendQiangDiZhuWik();
+    end
 end
 
 function FSMDouDiZhu:DoStartGame( event )
