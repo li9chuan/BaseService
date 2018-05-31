@@ -44,7 +44,7 @@ function ServiceInit()
     PlayerMgr:Init();
     PlayerLogicService:Init();
     
---    local room = RoomFactory:CreateRoom("RM_DDZ");
+    local room = RoomFactory:CreateRoom("RM_DDZ");
     
  --   local msg_ddz = {};
     

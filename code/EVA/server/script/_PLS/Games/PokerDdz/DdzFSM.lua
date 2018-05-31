@@ -116,6 +116,7 @@ function FSMDouDiZhu:DoStartGame( event )
             return;
         end
         
+        -- self:SwitchState("TDDZStateSelectMingCardStart");
         self:SwitchState("TDDZStateSendCard");
     end
 end

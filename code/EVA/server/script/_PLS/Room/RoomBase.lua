@@ -55,10 +55,12 @@ function RoomBase:BaseInit( room_type, update_tick )
 end
 
 function RoomBase:TickUpdate()
-
-
     print("RoomBase:TickUpdate");
+    self:BaseTickUpdate();
+end
 
+function RoomBase:BaseTickUpdate()
+    --print("RoomBase:BaseTickUpdate");
     self._TimerHandle = TimerMgr:AddTimer(self._TimerTick, self, self.TickUpdate);
 end
 
@@ -190,8 +192,12 @@ function RoomBase:IsFull()
 end
 
 
---释放函数
+function RoomBase:Release()
+    self:BaseRelease();
+end
+
 function RoomBase:BaseRelease()
+    self.Fsm = nil;
     TimerMgr:RemoveTimer(self._TimerHandle);
 end
 

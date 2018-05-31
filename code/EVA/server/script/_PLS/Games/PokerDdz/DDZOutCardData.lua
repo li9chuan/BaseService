@@ -1,17 +1,17 @@
-local DDZOutCardData = class("DDZOutCardData")
+local DdzOutCardData = class("DdzOutCardData")
 
 -- 构造函数;
-function DDZOutCardData:ctor()
+function DdzOutCardData:ctor()
     self:ClearData();
 end
 
-function DDZOutCardData:ClearData()
+function DdzOutCardData:ClearData()
     self.UID            = 0;
     self.Type           = 0;
     self.Cards          = {};
 end
 
-function DDZOutCardData:IsEmpty()
+function DdzOutCardData:IsEmpty()
     if self.UID==0 or self.Type==0 then
         return true;
     end
@@ -19,4 +19,4 @@ function DDZOutCardData:IsEmpty()
 end
 
 
-return DDZOutCardData;
+return DdzOutCardData;

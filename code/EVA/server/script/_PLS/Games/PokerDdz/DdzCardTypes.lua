@@ -130,13 +130,13 @@ function DdzCardtypes:CompareCards( curr_out, last_out )
         local curr_isbomb = curr_out.Type==enum.CT_DDZ_ZHADAN_SIZHANG;
         local last_isbomb = last_out.Type==enum.CT_DDZ_ZHADAN_SIZHANG;
 
-        if last_isbomb and ~curr_isbomb
+        if last_isbomb and ~curr_isbomb then
             -- 上家出的是炸弹，自己出的不是炸弹
             return false;
-        elseif ~last_isbomb and curr_isbomb
+        elseif ~last_isbomb and curr_isbomb then
             -- 上家出的不是炸弹，自己出的是炸弹
             return true;
-        elseif last_isbomb and curr_isbomb
+        elseif last_isbomb and curr_isbomb then
             -- 都是炸弹，比较炸弹大小
             return (GetPokerLogicValue(curr_out.Cards[0]) > GetPokerLogicValue(last_out.Cards[0]));
         end

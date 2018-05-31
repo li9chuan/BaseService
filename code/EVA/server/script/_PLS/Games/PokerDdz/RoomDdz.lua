@@ -2,7 +2,7 @@ local RoomDdz = class("RoomDdz",RoomBase)
 
 DdzFSM              = require("Games/PokerDdz/DdzFSM")
 DdzPlayerInfo       = require("Games/PokerDdz/DdzPlayerInfo")
-DdzOutCardData      = require("Games/PokerDdz/DDZOutCardData")
+DdzOutCardData      = require("Games/PokerDdz/DdzOutCardData")
 
 require("Games/PokerDdz/DdzCardTypes")
 
@@ -21,7 +21,7 @@ function RoomDdz:ctor()
     self.Fsm:Init(self);
     
     
-    self._LastOutCardData       = DDZOutCardData:new();
+    self._LastOutCardData       = DdzOutCardData:new();
 
 
     self.CFG_HAND_COUNT         = 17;       -- 每个玩家的初始手牌个数
@@ -113,8 +113,7 @@ function RoomDdz:TickUpdate()
     --print("RoomDdz:TickUpdate");
 
     self.Fsm:TickUpdate();
-    
-    self._TimerHandle = TimerMgr:AddTimer(self._TimerTick, self, self.TickUpdate);
+    self:BaseTickUpdate();
 end
 
 function RoomDdz:UserStartReady( uid )
