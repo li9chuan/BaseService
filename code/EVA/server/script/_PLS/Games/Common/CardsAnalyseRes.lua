@@ -2,6 +2,7 @@ local CardsAnalyseRes = class("CardsAnalyseRes")
 
 --[[
         牌型分析结构，表示每张相同牌的信息。
+        Analyse必须是排序后的。
 --]]
 
 function CardsAnalyseRes:ctor()
@@ -13,6 +14,39 @@ function CardsAnalyseRes:Reset()
     self.CardData       = { {}, {}, {}, {} };
 end
 
+function CardsAnalyseRes:GetCount( num )
+    if self.CardCount[num]~=nil then
+        return self.CardCount[num];
+    end
+    return 0;
+end
+
+function CardsAnalyseRes:GetDatas( num )
+    return self.CardData[num];
+end
+
+-- 牌的逻辑值是否是连续的
+function CardsAnalyseRes:IsLink( num )
+    local is_link   = false;
+    local cnt       = self:GetCount(num);
+
+    if cnt>0 then
+        local val_1     = GetPokerLogicValue(self.CardData[num][1]);
+        is_link         = true;
+
+        for i=2,cnt do
+            local val_next = GetPokerLogicValue(self.CardData[num][i])+i-1;
+            if val_1 ~= val_next then
+                is_link = false;
+                break;
+            end
+        end
+    end
+
+    return is_link;
+end
+
+-- 统计牌张数
 function CardsAnalyseRes:Analyse( hand_cards )
 
     local hand_cnt = #hand_cards;

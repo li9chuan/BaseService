@@ -7,12 +7,12 @@ end
 
 function DDZOutCardData:ClearData()
     self.UID            = 0;
-    self.Kind           = 0;
+    self.Type           = 0;
     self.Cards          = {};
 end
 
 function DDZOutCardData:IsEmpty()
-    if self.UID==0 or self.Kind==0 then
+    if self.UID==0 or self.Type==0 then
         return true;
     end
     return false;

@@ -2,7 +2,9 @@ local RoomDdz = class("RoomDdz",RoomBase)
 
 DdzFSM              = require("Games/PokerDdz/DdzFSM")
 DdzPlayerInfo       = require("Games/PokerDdz/DdzPlayerInfo")
-DDZOutCardData      = require("Games/PokerDdz/DDZOutCardData")
+DdzOutCardData      = require("Games/PokerDdz/DDZOutCardData")
+
+require("Games/PokerDdz/DdzCardTypes")
 
 --[[
         斗地主房间内游戏逻辑。
@@ -135,11 +137,6 @@ function RoomDdz:UserCancelReady( uid )
     end
 end
 
-function SetWikQiangDiZhu( enum_wik )
-    Misc.SetBit(self._QingDiZhuWiki, enum_wik);
-end
-
-
 function RoomDdz:SendQiangDiZhuWik()
     
     -- 随机一个玩家选择抢地主
@@ -152,13 +149,13 @@ function RoomDdz:SendQiangDiZhuWik()
         self._QingDiZhuWiki = 0;
         
         if _QiangDiZhu then
-            self:SetWikQiangDiZhu( enum.DDZ_QDZ_BUJIAO );
-            self:SetWikQiangDiZhu( enum.DDZ_QDZ_JIAODIZHU );
+            Misc.SetBit(self._QingDiZhuWiki, enum.DDZ_QDZ_BUJIAO );
+            Misc.SetBit(self._QingDiZhuWiki, enum.DDZ_QDZ_JIAODIZHU );
         else
-            self:SetWikQiangDiZhu( enum.DDZ_QDZ_BUJIAO );
-            self:SetWikQiangDiZhu( enum.DDZ_JF_JIAO_ONE );
-            self:SetWikQiangDiZhu( enum.DDZ_JF_JIAO_TWO );
-            self:SetWikQiangDiZhu( enum.DDZ_JF_JIAO_THREE );
+            Misc.SetBit(self._QingDiZhuWiki, enum.DDZ_QDZ_BUJIAO );
+            Misc.SetBit(self._QingDiZhuWiki, enum.DDZ_JF_JIAO_ONE );
+            Misc.SetBit(self._QingDiZhuWiki, enum.DDZ_JF_JIAO_TWO );
+            Misc.SetBit(self._QingDiZhuWiki, enum.DDZ_JF_JIAO_THREE );
         end
 
         self:_RefreshPlayerQiangDiZhuState(self._ActionID);
@@ -341,7 +338,7 @@ function RoomDdz:__FillRoomInfoMsg( msg_ddz_room, current_uid )
         
         msg_ddz_room.last_outcard = {
             old_actionid = self._LastOutCardData.UID,
-            out_type     = self._LastOutCardData.Kind,
+            out_type     = self._LastOutCardData.Type,
             out_card     = self._LastOutCardData.Cards
         };
         
