@@ -112,29 +112,34 @@ CBufServerTcp::~CBufServerTcp()
 void CBufServerTcp::disconnect( TSockId hostid, bool quick )
 {
 	nlnettrace( "CBufServerTcp::disconnect" );
-	//if ( hostid != InvalidSockId )
-	//{
-	//	if (_ConnectedClients.find(hostid) == _ConnectedClients.end())
-	//	{
-	//		// this host is not connected
-	//		return;
-	//	}
+    if (hostid != InvalidSockId)
+    {
+        if (_ConnectedClients.find(hostid) == _ConnectedClients.end())
+        {
+            // this host is not connected
+            return;
+        }
 
-	//	// Disconnect only if physically connected
-	//	if ( hostid->Sock->connected() )
-	//	{
-	//		if ( ! quick )
-	//		{
-	//			hostid->flush();
-	//		}
-	//		hostid->Sock->disconnect(); // the connection will be removed by the next call of update()
-	//	}
-	//}
-	//else
-	//{
-	//	// Disconnect all
+        if (hostid->connectedState())
+        {
+            hostid->advertiseDisconnection(this, hostid);
+        }
 
-	//}
+        //// Disconnect only if physically connected
+        //if ( hostid->Sock->connected() )
+        //{
+        //	if ( ! quick )
+        //	{
+        //		hostid->flush();
+        //	}
+        //	hostid->Sock->disconnect(); // the connection will be removed by the next call of update()
+        //}
+    }
+    else
+    {
+        // Disconnect all
+
+    }
 }
 
 
@@ -211,40 +216,43 @@ bool CBufServerTcp::dataAvailable()
 			// Process disconnection event
 			case CBufNetBase::Disconnection:
 				{
-					TSockId sockid = *((TSockId*)(&*buffer.begin()));
-					LNETL1_DEBUG( "LNETL1: Disconnection event for %p %s", sockid, sockid->asString().c_str());
+                    TSockId sockid = *((TSockId*)(&*buffer.begin()));
 
-					sockid->setConnectedState( false );
-
-					// Call callback if needed
-					if ( disconnectionCallback() != NULL )
-					{
-						disconnectionCallback()( sockid, argOfDisconnectionCallback() );
-					}
-
-					// remove from the list of valid client
-					nlverify(_ConnectedClients.erase(sockid) == 1);
-
-					// Add socket object into the synchronized remove list
-					LNETL1_DEBUG( "LNETL1: Adding the connection to the remove list" );
-					//nlassert( ((CServerBufSock*)sockid)->ownerTask() != NULL );
-					//((CServerBufSock*)sockid)->ownerTask()->addToRemoveSet( sockid );
-
-                    if( _ConnectedClients.count(sockid) > 0 )
+                    if (_ConnectedClients.count(sockid) > 0)
                     {
+                        LNETL1_DEBUG("LNETL1: Disconnection event for %p %s", sockid, sockid->asString().c_str());
+                        sockid->setConnectedState(false);
+
+                        // Call callback if needed
+                        if (disconnectionCallback() != NULL)
+                        {
+                            disconnectionCallback()(sockid, argOfDisconnectionCallback());
+                        }
+
+                        // Add socket object into the synchronized remove list
+                        //LNETL1_DEBUG( "LNETL1: Adding the connection to the remove list" );
+                        //nlassert( ((CServerBufSock*)sockid)->ownerTask() != NULL );
+                        //((CServerBufSock*)sockid)->ownerTask()->addToRemoveSet( sockid );
+
+
                         //  自动close套接字和free读写缓冲区 
                         bufferevent_free(sockid->m_BEVHandle);
 
-                        if (sockid->m_Ssl!=NULL)
+                        if (sockid->m_Ssl != NULL)
                         {
-                            nlwarning( "tcp not setup ssl" );
+                            nlwarning("tcp not setup ssl");
                             //SSL_free(sockid->m_Ssl);
                             //sockid->m_Ssl = NULL;
                         }
-  
+
+                        LNETL1_DEBUG("LNETL1: Remove the connection");
                         delete sockid;
+
+
+                        // remove from the list of valid client
+                        nlverify(_ConnectedClients.erase(sockid) == 1);
                     }
-                    
+
 					break;
 				}
 			// Process connection event

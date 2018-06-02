@@ -138,7 +138,6 @@ function RoomBase:GetRoomPlayerNum()
     return count;
 end
 
-
 function RoomBase:__NotifyOtherServiceLevel( uid )
 
     local msgout = CMessage("LURT");

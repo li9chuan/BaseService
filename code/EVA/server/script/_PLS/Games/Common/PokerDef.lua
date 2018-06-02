@@ -62,6 +62,8 @@ function SortPokerLogicValue( cards )
                 cards[i]    = cards[i+1];
                 cards[i+1]  = ccurr;
 
+                -- cards[i], cards[i+1]  = cards[i+1], cards[i]
+
                 is_sorted = false;
             end
         end

@@ -276,6 +276,12 @@ namespace bin
             return 1;
         }
 
+        DEFINE_CLASS_FUNCTION( DisConnect, void, (lua_Integer sock_id) )
+        {
+            obj->DisConnect((NLNET::TSockId)sock_id);
+            return 1;
+        }
+
         DEFINE_CLASS_FUNCTION( RemoveClientData, void, (lua_Integer uid))
         {
             obj->RemoveClientData( uid );

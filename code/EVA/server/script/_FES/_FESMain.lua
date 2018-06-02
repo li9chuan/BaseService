@@ -8,16 +8,13 @@ package.path = BasePath .. "_FES/?.lua;" .. BasePath .. "SharedLib/?.lua;";
 require("InitSharedLib")
 require("FrontEndService");
 require("Client/ClientMgr");
-
+require("Msg/MsgLogin");
 
 -- Class
 Client      = require("Client/Client");
-MsgLogin    = require("Msg/MsgLogin");
 
 
 ClientService   = CallbackServer:new();
-LoginModule     = MsgLogin:new();
-
 
 
 -- 主入口函数。从这里开始lua逻辑
@@ -37,6 +34,9 @@ function ServiceInit()
     --ClientService:LoadSslPrivateKey(BasePath.."DataTable/ssl/3_ssl.ranatune.com.key");
 
     ClientService:Listen( 9999 );
+
+    MsgLogin:Init();
+
 
 end
 

@@ -6,7 +6,7 @@ call _shard_stop.bat
 
 REM set MODE=Debug
 REM set MODE=.
-set MODE=.
+set MODE=..\..\..\build\bin\Release
 
 rem  ns
 start %MODE%\naming_service --nolog

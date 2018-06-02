@@ -1,7 +1,6 @@
-local MsgLogin = class("MsgLogin")
+MsgLogin = {}
 
--- 构造函数;
-function MsgLogin:ctor( Data )
+function MsgLogin:Init()
 
 	self._EventRegister = EventRegister.new();
 	
@@ -10,6 +9,7 @@ function MsgLogin:ctor( Data )
 	
     --  客户端消息
 	self._EventRegister:RegisterEvent( "LOGIN",     self, self.CBLogin );
+    self._EventRegister:RegisterEvent( "HB",        self, self.CBHeartBeat );
     
     --  服务器间消息
     self._EventRegister:RegisterEvent( "AuthOk",    self, self.CBAuthOk );          -- 有客户端在其它FES上登录成功。RemoveClient
@@ -31,8 +31,8 @@ function MsgLogin:CBLogin( sock_id, msg_login )
 	local sign     = string.upper( md5(sign_str) );
 
 
-	print("sign_str:"..sign_str);
-	print("sign:"..sign);
+	nlinfo("sign_str:"..sign_str);
+	nlinfo("sign:"..sign);
     
     
     
@@ -50,11 +50,7 @@ function MsgLogin:CBLogin( sock_id, msg_login )
     if( client ~= nil ) then
         client.SockID = sock_id;
     else
-        client              = Client:new();
-        client.SockID       = sock_id;
-        client.UID          = tbl_login.UID;
-        
-        ClientMgr:SetClient(tbl_login.UID, client);
+        ClientMgr:NewClient(tbl_login.UID, sock_id);
     end
 
 	--  通知客户端 账号认证通过.
@@ -62,19 +58,28 @@ function MsgLogin:CBLogin( sock_id, msg_login )
 
 end
 
+function MsgLogin:CBHeartBeat( sock_id, msgin )
+
+    local uid = msgin:rint64();
+	nlinfo("MsgLogin:CBHeartBeat"..uid);
+    ClientMgr:ResetHeartbeat(uid);
+    
+end
+
+
 -- 有客户端在其它FES上登录成功。RemoveClient
 function MsgLogin:CBAuthOk( sock_id, msg_authok )
 
     local uid = msg_authok:rint64();
-	print("MsgLogin:AuthOk"..uid);
+	nlinfo("MsgLogin:AuthOk"..uid);
     ClientMgr:RemoveClient(uid);
     
 end
 
 function MsgLogin:CBLoginPLS( pls_id, msg_sdata_2 )
     
-	local uid           = msg_sdata_2:rint64();
-    local client = ClientMgr:GetClient(uid);
+	local uid       = msg_sdata_2:rint64();
+    local client    = ClientMgr:GetClient(uid);
     
     if( client ~= nil ) then
         client.ConPLS = pls_id;
@@ -86,19 +91,13 @@ end
 
 
 function MsgLogin:Connect( sock_id )
-	print("CallbackClient:Connect"..sock_id);
+	nlinfo("CallbackClient:Connect"..sock_id);
 end
 
 function MsgLogin:DisConnect( sock_id )
-	print("CallbackClient:DisConnect"..sock_id);
+	nlinfo("CallbackClient:DisConnect"..sock_id);
     ClientMgr:RemoveSockID(sock_id);
 end
 
 
---释放函数
-function MsgLogin:Release()
-    self._EventRegister:UnRegisterAllEvent();
-end
 
-
-return MsgLogin;

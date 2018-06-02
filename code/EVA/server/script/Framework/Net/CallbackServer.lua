@@ -36,6 +36,10 @@ function CallbackServer:RemoveClientData( uid )
 	self.Service:RemoveClientData(uid);
 end
 
+function CallbackServer:DisConnect( sock_id )
+	self.Service:DisConnect(sock_id);
+end
+
 function CallbackServer:Send( sock_id, msg_or_type, proto_type, proto_msg )
     
     local param_type = type(msg_or_type)

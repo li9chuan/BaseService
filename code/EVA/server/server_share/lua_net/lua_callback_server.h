@@ -46,6 +46,11 @@ public:
     void    IncReceiveMsgCount( std::string msg_name );
     bool    ForwardingMsg( ClientData* pClient, NLNET::CMessage& msgin, MsgLeaf* pMsgLeaf );
 
+    void    DisConnect(NLNET::TSockId sock_id)
+    {
+        m_CallbackServerHandle->disconnect(sock_id);
+    }
+
     void    SetClientData( ClientData& client_data )
     {
         TClientMap::iterator iter = m_ClientMap.find( client_data.uid );

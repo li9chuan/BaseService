@@ -43,11 +43,6 @@ public:
     /// Init the service, load the universal time.
     void init ()
     {
-        ///////////////////////////////
-        CI18N::load( Config.getVar("Language").asString() );
-
-        ///////////////////////////////
-
         TimerManager->init();
         LuaNetworkMgr.Init();
         ScriptMgr.init();
