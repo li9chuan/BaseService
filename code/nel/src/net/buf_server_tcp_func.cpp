@@ -80,7 +80,7 @@ void NLNET::tcp_listener_cb( evconnlistener *listener, evutil_socket_t fd, struc
     pBufSock->advertiseConnection( pListenArgs->pServer );
 
     //为这个客户端分配一个bufferevent  
-    bufferevent *bev =  bufferevent_socket_new(pListenArgs->pEventBase, fd, BEV_OPT_CLOSE_ON_FREE|BEV_OPT_DEFER_CALLBACKS);
+    bufferevent *bev =  bufferevent_socket_new(pListenArgs->pEventBase, fd, BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE | BEV_OPT_DEFER_CALLBACKS);
 
     pBufSock->m_BufNetHandle    = pListenArgs->pServer;
     pBufSock->m_BEVHandle       = bev;

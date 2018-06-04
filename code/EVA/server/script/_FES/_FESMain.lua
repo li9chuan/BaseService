@@ -15,6 +15,7 @@ Client      = require("Client/Client");
 
 
 ClientService   = CallbackServer:new();
+RobotCallback   = CallbackServer:new();
 
 
 -- 主入口函数。从这里开始lua逻辑
@@ -37,6 +38,9 @@ function ServiceInit()
 
     MsgLogin:Init();
 
+
+    RobotCallback:Init( "RobotCallback", "tcp" );
+    RobotCallback:Listen( 10240 );
 
 end
 

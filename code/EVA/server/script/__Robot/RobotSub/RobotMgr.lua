@@ -1,12 +1,14 @@
-RobotTest = {}
+RobotMgr = {}
 
-function RobotTest:Init()
+function RobotMgr:Init()
 	
 	self._EventRegister = EventRegister.new();
 	self._EventRegister:RegisterEvent( "TestSubProc",  self, self.LuaTestCB );
+
+    self.robot          = Robot:new();
 end
 
-function RobotTest:LuaTestCB( from, msgin )
+function RobotMgr:LuaTestCB( from, msgin )
 
 	local msgint  = msgin:rint();
     local msgstr  = msgin:rstring();
@@ -21,10 +23,13 @@ function RobotTest:LuaTestCB( from, msgin )
 	Misc.PostMain( G_ThreadHandle, msgout );
 end
 
---释放函数
-function RobotTest:Release()
+function RobotMgr:Update()
+    self.robot:Update()
+end
+
+function RobotMgr:Release()
     self._EventRegister:UnRegisterAllEvent();
 end
 
 
-return RobotTest;
+return RobotMgr;

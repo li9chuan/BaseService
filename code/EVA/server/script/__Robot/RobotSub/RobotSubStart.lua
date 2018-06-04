@@ -3,8 +3,10 @@ package.path = BasePath .. "__Robot/RobotSub/?.lua;" .. BasePath .. "Framework/?
 
 
 require("InitFramework")
+require("RobotMgr")
 
-require("RobotTest")
+FSMRobot                = require("FSMRobot")
+Robot                   = require("Robot")
 
 print("-=======DBSubStart==========-");
 
@@ -19,14 +21,13 @@ function ThreadInit( thread_handle, params )
     
     G_ThreadHandle = thread_handle;
 
-
-    RobotTest:Init();
-
+    RobotMgr:Init();
 end
 
 
 
 function ThreadUpdate()
-
+    TimerMgr:Update( Misc.GetLocalTime() );
+    RobotMgr:Update();
 end
 

@@ -7,17 +7,16 @@ package.path = BasePath .. "__Robot/?.lua;" .. BasePath .. "SharedLib/?.lua;";
 
 
 require("InitSharedLib")
-
-require("RobotMgr");
+require("ThreadMgr");
 
 -- 主入口函数。从这里开始lua逻辑
 function ServiceInit()
 
     print("Lua Robot Init");
     
-    RobotMgr:Init();
+    ThreadMgr:Init();
     
-    RobotMgr:Strat();
+    ThreadMgr:Strat();
     
 end
 
@@ -29,7 +28,7 @@ end
 
 function ServiceRelease()
 
-    RobotMgr:Release();
+    ThreadMgr:Release();
     print("Lua Release.");
 end
 

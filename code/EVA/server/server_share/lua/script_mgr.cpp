@@ -121,7 +121,7 @@ void CScriptMgr::Export()
     m_LuaEngine.ExportClass("LuaMessage");
     m_LuaEngine.ExportClass("IDGenerate");
     m_LuaEngine.ExportClass("LuaThread");
-    m_LuaEngine.ExportClass("LuaHttpRequest");
+    m_LuaEngine.ExportClass("LuaCallbackClient");
     
 
     m_LuaEngine.ExportClass("MysqlStmt");

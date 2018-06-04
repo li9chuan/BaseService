@@ -237,6 +237,7 @@ bool CBufServerTcp::dataAvailable()
 
                         //  自动close套接字和free读写缓冲区 
                         bufferevent_free(sockid->m_BEVHandle);
+                        sockid->m_BEVHandle = NULL;
 
                         if (sockid->m_Ssl != NULL)
                         {

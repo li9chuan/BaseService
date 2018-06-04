@@ -11,6 +11,7 @@
 #include <server_share/i18n_def.h>
 #include <server_share/timer.h>
 #include <nel/net/naming_client.h>
+#include <server_share/lua_net/lua_callback_client.h>
 
 using namespace NLMISC;
 using namespace NLNET;
@@ -27,6 +28,7 @@ public:
         LuaNetworkMgr.Init();
         ScriptMgr.init();
         LuaThreadMgr.Init();
+        LuaClientMgr.Init();
     }
 
 
@@ -38,6 +40,7 @@ public:
         ScriptMgr.update();
         LuaNetworkMgr.Update();
         LuaThreadMgr.Update();
+        LuaClientMgr.Update();
         return true;
     }
 
@@ -47,6 +50,7 @@ public:
         ScriptMgr.release();
         LuaNetworkMgr.Release();
         LuaThreadMgr.Release();
+        LuaClientMgr.Release();
     }
 
 };

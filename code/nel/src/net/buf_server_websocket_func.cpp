@@ -237,12 +237,12 @@ void NLNET::ws_listener_cb( evconnlistener *listener, evutil_socket_t fd, struct
     if ( pListenArgs->pSslCtx!=NULL )
     {
         SSL* pSsl   = SSL_new((SSL_CTX *)pListenArgs->pSslCtx);
-        bev         = bufferevent_openssl_socket_new(pListenArgs->pEventBase, fd, pSsl, BUFFEREVENT_SSL_ACCEPTING, BEV_OPT_CLOSE_ON_FREE|BEV_OPT_DEFER_CALLBACKS);
+        bev         = bufferevent_openssl_socket_new(pListenArgs->pEventBase, fd, pSsl, BUFFEREVENT_SSL_ACCEPTING, BEV_OPT_CLOSE_ON_FREE|BEV_OPT_THREADSAFE|BEV_OPT_DEFER_CALLBACKS);
         pBufSock->m_Ssl = pSsl;
     }
     else
     {
-        bev = bufferevent_socket_new(pListenArgs->pEventBase, fd, BEV_OPT_CLOSE_ON_FREE|BEV_OPT_DEFER_CALLBACKS);
+        bev = bufferevent_socket_new(pListenArgs->pEventBase, fd, BEV_OPT_CLOSE_ON_FREE | BEV_OPT_THREADSAFE | BEV_OPT_DEFER_CALLBACKS);
     }
 
     pBufSock->m_BufNetHandle    = pListenArgs->pServer;

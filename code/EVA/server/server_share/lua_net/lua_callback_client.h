@@ -16,7 +16,7 @@ class CLuaCallbackClient
     DECLARE_SCRIPT_CLASS()
 public:
 
-    CLuaCallbackClient( std::string& name, std::string& protocal, sint32 thd_handle=-1 );
+    CLuaCallbackClient( std::string& protocal, sint32 thd_handle=-1 );
     ~CLuaCallbackClient();
 
     void    Connect( std::string& url );
@@ -30,17 +30,22 @@ public:
         }
     }
 
-    void    Send( NLNET::TSockId sock_id, const NLNET::CMessage &buffer )
+    void    Send( const NLNET::CMessage &buffer )
     {
-        m_CallbackClientHandle->send( buffer, sock_id );
+        if (m_CallbackClientHandle->connected())
+        {
+            m_CallbackClientHandle->send(buffer);
+        }
     }
 
-    
-    std::string         GetName()   { return m_NetName; }
+
+
+    uint32              GetHandle() { return m_MyHandle; }
+
+    uint32              m_MyHandle;
 
 private:
 
-    std::string                                             m_NetName;
     std::string                                             m_Protocal;
 
     NLNET::CCallbackNetBase*                                m_CallbackClientHandle;
@@ -50,6 +55,29 @@ private:
 };
 
 
+class CLuaClientMgr : public NLMISC::CSingleton<CLuaClientMgr>
+{
+public:
 
+    void    Init() { m_ClientHandle = 0; }
+
+    uint32  RegisterClient(CLuaCallbackClient* pNet);
+    void    RemoveClient(uint32 client_handle);
+
+    void    Update();
+
+    void    Release();
+
+
+
+private:
+
+    typedef std::map<int, CLuaCallbackClient*>    TNetHandle;
+    TNetHandle          m_LuaClientNetworkHandle;
+
+    int                 m_ClientHandle;
+};
+
+#define  LuaClientMgr  CLuaClientMgr::instance()
 
 #endif          // SERVER_SHARD_LUA_CALLBACK_CLIENT_H

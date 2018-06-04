@@ -1,6 +1,6 @@
-RobotMgr = {}
+ThreadMgr = {}
 
-function RobotMgr:Init()
+function ThreadMgr:Init()
 	
 	self._EventRegister = EventRegister.new();
 	self._EventRegister:RegisterEvent( "TestMainProc",  self, self.LuaTestCB );
@@ -9,12 +9,12 @@ function RobotMgr:Init()
 
 end
 
-function RobotMgr:Strat()
+function ThreadMgr:Strat()
 	
     
     local RobotSubPath = Misc.GetBasePath() .. "/script/__Robot/RobotSub/RobotSubStart.lua";
 
-    for i=1003,1053 do
+    for i=1003,1003 do
         
         local sub_thread    = bin_types.LuaThread.NewInstance("robot", 1000);
         local thread_handle = sub_thread:Start( RobotSubPath, Table2Json({uid=i, b=2}) );
@@ -37,7 +37,7 @@ end
 
 
 
-function RobotMgr:LuaTestCB( from, msgin )
+function ThreadMgr:LuaTestCB( from, msgin )
 
     local msgstr  = msgin:rstring();
 	
@@ -46,7 +46,7 @@ function RobotMgr:LuaTestCB( from, msgin )
 end
 
 
-function RobotMgr:LuaTestCB( from, msgin )
+function ThreadMgr:LuaTestCB( from, msgin )
 
     local msgstr  = msgin:rstring();
 	
@@ -55,9 +55,9 @@ function RobotMgr:LuaTestCB( from, msgin )
 end
 
 --释放函数
-function RobotMgr:Release()
+function ThreadMgr:Release()
     self._EventRegister:UnRegisterAllEvent();
 end
 
 
-return RobotMgr;
+return ThreadMgr;

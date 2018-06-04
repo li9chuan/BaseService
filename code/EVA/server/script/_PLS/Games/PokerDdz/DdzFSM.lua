@@ -62,10 +62,6 @@ function FSMDouDiZhu:SwitchState( event, ... )
     self._GameFSM:do_event( event, true, ... );
 end
 
-function FSMDouDiZhu:__ResetInStateTime()
-    self._StateEnterTime = TimerMgr:GetTime();
-end
-
 function FSMDouDiZhu:GetState()
 	return self._CurrState;
 end
