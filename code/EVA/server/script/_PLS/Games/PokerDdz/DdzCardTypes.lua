@@ -130,10 +130,10 @@ function DdzCardtypes:CompareCards( curr_out, last_out )
         local curr_isbomb = curr_out.Type==enum.CT_DDZ_ZHADAN_SIZHANG;
         local last_isbomb = last_out.Type==enum.CT_DDZ_ZHADAN_SIZHANG;
 
-        if last_isbomb and ~curr_isbomb then
+        if last_isbomb and not curr_isbomb then
             -- 上家出的是炸弹，自己出的不是炸弹
             return false;
-        elseif ~last_isbomb and curr_isbomb then
+        elseif not last_isbomb and curr_isbomb then
             -- 上家出的不是炸弹，自己出的是炸弹
             return true;
         elseif last_isbomb and curr_isbomb then

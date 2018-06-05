@@ -24,7 +24,19 @@ function Client:CheckTimeout()
     end
 end
 
+-- 通知逻辑服务器，客户端网络断开。
+function Client:_NotifyClientOffline()
+    if  self.ConPLS ~= nil  then
+        local msg = CMessage("ClientOffline");
+        msg:wint(self.UID)
+        BaseService:Send( self.ConPLS, msg )
+    end
+end
+
 function Client:Release()
+
+    nlinfo("Client:Release  UID:" .. self.UID);
+    self:_NotifyClientOffline();
     TimerMgr:RemoveTimer(self._TimerHandle);
 end
 

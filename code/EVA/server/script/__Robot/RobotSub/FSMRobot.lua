@@ -8,31 +8,24 @@ function FSMRobot:ctor()
     self._GameFSM 			= StateMachine:new();
     self._StateEnterTime    = 0;
     self._CurrState         = "TIdle";
-    self.RobotData          = nil;
+    self.Robot              = nil;
 end
 
-function FSMRobot:Init( robot_data )
+function FSMRobot:Init( robot )
     self._GameFSM:setup_state({
         events = 
 		{
             {name = "TIdle" 			        },
             {name = "TLogin" 			        },
-			{name = "TCreatePrvRoom"		        },
-			{name = "TJoinPrvRoom" 	            },
-
         },
         callbacks =
 		{
             onTIdle   		        = handler(self, self.DoIdle),
 			onTLogin   		        = handler(self, self.DoLogin),
-			onTCreatePrvRoom  	    = handler(self, self.DoCreatePrvRoom),
-            onTJoinPrvRoom          = handler(self, self.DoJoinPrvRoom),
-            
-
 		}
     })
     
-    self.RobotData = robot_data;
+    self.Robot  = robot;
     self:SwitchState( self._CurrState );
 end
 
@@ -63,29 +56,32 @@ function FSMRobot:IsState( state )
 end
 
 function FSMRobot:DoIdle( event )
-    nlinfo("DoIdle");
+    -- 不是第一帧，下一帧执行。
+    if not event.args[1] then
+        if not self.Robot:Connected() then
+            nlinfo("====================  DoIdle");
+            self:SwitchState("TLogin");
+        end
+    end
 end
 
 function FSMRobot:DoLogin( event )
     
-    nlinfo("DoLogin");
-    if event.args[1] then
+    --if event.args[1] then
         --print( "FSMClass:DoLogin SwitchState" );
-    else
+    --else
         --print( "FSMClass:DoLogin TickUpdate" );
+    --end
+    if not event.args[1] then
+        if self.Robot:Login() then
+            nlinfo("====================  DoLogin");
+            self:SwitchState("TIdle");
+
+            
+        end
     end
-    
 end
 
-function FSMRobot:DoCreatePrvRoom( event )
-    nlinfo("DoCreatePrvRoom");
-    --self:SwitchState("TDDZStateStartGame");
-end
-
-function FSMRobot:DoJoinPrvRoom( event )
-    nlinfo("DoJoinPrvRoom");
-    --self:SwitchState("TDDZStateStartGame");
-end
 
 
 return FSMRobot;

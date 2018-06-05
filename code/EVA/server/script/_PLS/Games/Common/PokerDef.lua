@@ -45,7 +45,7 @@ function SortPokerLogicValue( cards )
     local is_sorted = false;
     local last_n    = cnt - 1;
 
-    while ( ~is_sorted ) do
+    while ( not is_sorted ) do
         
         is_sorted = true;
 

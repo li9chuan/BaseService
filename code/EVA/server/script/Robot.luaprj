@@ -1,12 +1,21 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="Robot.luaprj" Cmd="" Arg="" Dir="" Toggle="true" >
+<Project Name="Robot.luaprj" Cmd="E:\BaseService\build\bin\Debug\client_robot.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="false" >
     <Filter RelativePath=".\__Robot" Toggle="false" >
         <LuaFile RelativePath=".\_ClientRobotMain.lua" />
         <Filter RelativePath=".\RobotSub" Toggle="false" >
-            <LuaFile RelativePath=".\RobotTest.lua" />
             <LuaFile RelativePath=".\RobotSubStart.lua" />
+            <LuaFile RelativePath=".\FSMRobot.lua" />
+            <LuaFile RelativePath=".\PublicRoomInfoMgr.lua" />
+            <LuaFile RelativePath=".\Robot.lua" />
+            <LuaFile RelativePath=".\RobotData.lua" />
+            <LuaFile RelativePath=".\RobotGameBase.lua" />
+            <LuaFile RelativePath=".\RobotMgr.lua" />
+            <Filter RelativePath=".\GameDdz" Toggle="false" >
+                <LuaFile RelativePath=".\FSMDdz.lua" />
+                <LuaFile RelativePath=".\RobotGameDdz.lua" />
+            </Filter>
         </Filter>
-        <LuaFile RelativePath=".\RobotMgr.lua" />
+        <LuaFile RelativePath=".\ThreadMgr.lua" />
     </Filter>
 </Project>

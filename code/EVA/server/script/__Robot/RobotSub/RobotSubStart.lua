@@ -6,7 +6,12 @@ require("InitFramework")
 require("RobotMgr")
 
 FSMRobot                = require("FSMRobot")
+RobotGameDdz            = require("GameDdz/RobotGameDdz")
+FSMDdz                  = require("GameDdz/FSMDdz")
+RobotGameBase           = require("RobotGameBase")
+RobotData               = require("RobotData")
 Robot                   = require("Robot")
+
 
 print("-=======DBSubStart==========-");
 
@@ -22,6 +27,8 @@ function ThreadInit( thread_handle, params )
     G_ThreadHandle = thread_handle;
 
     RobotMgr:Init();
+
+    RobotMgr:StartLogic(1, 1);
 end
 
 

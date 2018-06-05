@@ -45,13 +45,7 @@ function MsgLogin:CBLogin( sock_id, msg_login )
     BaseService:Broadcast( "SCH", msg_authok )      -- 玩家认证通过，请求发送数据。
     
     -- 保存客户端连接
-    local client = ClientMgr:GetClient(tbl_login.UID);
-    
-    if( client ~= nil ) then
-        client.SockID = sock_id;
-    else
-        ClientMgr:NewClient(tbl_login.UID, sock_id);
-    end
+    ClientMgr:SetClient(tbl_login.UID, sock_id);
 
 	--  通知客户端 账号认证通过.
     ClientService:Send( sock_id, "AuthOk" );

@@ -10,7 +10,7 @@ function ClientMgr:GetClient( _uid )
     return self.ClientMap[_uid];
 end
 
-function ClientMgr:NewClient( _uid, _sock_id )
+function ClientMgr:SetClient( _uid, _sock_id )
     if self.ClientMap[_uid] == nil then
         local client    = Client:new();
         client.SockID   = _sock_id;
@@ -19,7 +19,15 @@ function ClientMgr:NewClient( _uid, _sock_id )
         self.ClientMap[_uid] = client;
         self.SocketMap[_sock_id] = client;
     else
-        assert();
+        local client    = self.ClientMap[_uid];
+
+        self.SocketMap[client.SockID] = nil;
+        ClientService:RemoveClientData(_uid);
+        ClientService:DisConnect(client.SockID);
+        
+        client.ConPLS   = nil;
+        client.SockID   = _sock_id;
+        self.SocketMap[_sock_id] = client;
     end
 end
 

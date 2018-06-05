@@ -6,9 +6,9 @@ function PlayerInfo:ctor()
 	self.ConPLS         = -1;
     self.ConFES         = nil;
 	self.UID            = nil;
-    self.IsOffline      = false;
+    --self.IsOffline      = false;
     self.LogoutTime     = nil;
-    self.TimerID        = nil;
+    --self.TimerID        = nil;
     self.RoomType       = "";
     self.PrvRoomID      = 0;
 end

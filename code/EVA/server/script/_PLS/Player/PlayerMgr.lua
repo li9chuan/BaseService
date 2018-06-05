@@ -46,8 +46,14 @@ function PlayerMgr:LoadDBPlayer( _uid )
     return nil;
 end
 
+-- 从缓存中移除玩家
 function PlayerMgr:RemovePlayer( _uid )
-    self.playerMap:Remove(_uid);
+    local player = self.playerMap:Find(_uid);
+    
+    if player~=nil then
+        player:Release();
+        self.playerMap:Remove(_uid);
+    end
 end
 
 return PlayerMgr

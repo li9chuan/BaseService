@@ -8,7 +8,10 @@ function MsgLogin:Init()
 	self._EventRegister = EventRegister.new();
 	
     --  服务器间消息
-    self._EventRegister:RegisterEvent( "AuthOk",  self, self.DispatchPLS );
+    self._EventRegister:RegisterEvent( "AuthOk",            self, self.DispatchPLS );
+
+    -- PLS 删除缓存中的玩家
+    self._EventRegister:RegisterEvent( "RemovePlayer",      self, self.cbRemovePlayer );
 end
 
 -- 分配PLS
@@ -56,9 +59,9 @@ function MsgLogin:DispatchPLS( fes_id, msg_authok )
     end
 end
 
---释放函数
-function MsgLogin:Release()
-    self._EventRegister:UnRegisterAllEvent();
+function MsgLogin:cbRemovePlayer( fesid, msgin )
+    local uid       = msgin:rint();
+
 end
 
 

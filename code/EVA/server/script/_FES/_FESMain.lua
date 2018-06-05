@@ -26,7 +26,7 @@ function ServiceInit()
     ClientMgr:Init();
     FrontEndService:Init();
     
-    ClientService:Init( "ClientService", "ws" );
+    ClientService:Init( "ClientService", "tcp" );
     
     --ClientService:Init( "ClientService", "wss" );
     
@@ -38,9 +38,6 @@ function ServiceInit()
 
     MsgLogin:Init();
 
-
-    RobotCallback:Init( "RobotCallback", "tcp" );
-    RobotCallback:Listen( 10240 );
 
 end
 

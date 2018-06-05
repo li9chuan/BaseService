@@ -2,20 +2,21 @@ MsgLogin = {}
 
 function MsgLogin:Init()
 	self._EventRegister = EventRegister.new();
-    self._EventRegister:RegisterEvent( "SyncData",          self, self.CBSyncData );
-    self._EventRegister:RegisterEvent( "RemovePlayer",      self, self.CBRemovePlayer );
+    self._EventRegister:RegisterEvent( "SyncData",          self, self.cbSyncData );
+    self._EventRegister:RegisterEvent( "ClientOffline",     self, self.cbClientOffline );
+    
 end
 
-function MsgLogin:CBSyncData( sch_sid, msg_sdata_1 )
+function MsgLogin:cbSyncData( schid, msg_sdata_1 )
 
     local uid           = msg_sdata_1:rint64();
-    local fes_sid       = msg_sdata_1:rint32();
+    local fesid         = msg_sdata_1:rint32();
     
     local player_helper = PlayerMgr:LoadDBPlayer(uid);
     
     if player_helper~=nil then
         
-        player_helper.ConFES = fes_sid;
+        player_helper.ConFES = fesid;
         PrintTable(player_helper);
         
         -- 通知FES保存玩家在哪个PLS
@@ -29,11 +30,15 @@ function MsgLogin:CBSyncData( sch_sid, msg_sdata_1 )
 	
 end
 
-function MsgLogin:CBRemovePlayer( sid, proto_buf )
+function MsgLogin:cbClientOffline( fesid, msgin )
 
+    local uid       = msgin:rint();
+    local player    = PlayerMgr:GetPlayer(uid);
 
-
-	
+    if player~=nil then
+        player:Offline();
+	    nlinfo("MsgLogin:cbClientOffline UID:"..uid);
+    end
 end
 
 --释放函数

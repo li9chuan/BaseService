@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Framework",
+    "\\Framework\\Net",
+    "\\SharedLib",
+    "\\_FES",
+    "\\_FES\\Msg",
+    "\\_PLS\\Games",
+    "\\_PLS\\Games\\PokerDdz",
+    "\\__Robot",
+    "\\__Robot\\RobotSub"
+  ],
+  "SelectedNode": "\\_FES\\_FESMain.lua",
+  "PreviewInSolutionExplorer": false
+}

@@ -20,7 +20,40 @@ function PlayerHelper:ctor()
     self.PlayerState            = nil;
         
     self.LastUpdateTime         = TimerMgr:GetTime();
+    self._TimerHandle           = TimerMgr:AddTimer( 30000, self, self.TickUpdate );;
 end
+
+function PlayerHelper:TickUpdate()
+
+    local curr_time     = TimerMgr:GetTime();
+
+    if curr_time - self.LastUpdateTime > 1*60*60*1000 then
+        self._TimerHandle = nil;    -- Release 时不再删除定时器
+        PlayerMgr:RemovePlayer(self.UID);
+    else
+        self._TimerHandle = TimerMgr:AddTimer( 10*60*1000, self, self.TickUpdate );
+    end
+end
+
+-- 从缓存中移除玩家,由PlayerMgr调用。
+function PlayerHelper:Release()
+
+    local msg = CMessage("RemovePlayer");
+    msg:wint(self.UID);
+    BaseService:Broadcast("SCH", msg);
+
+    if self._TimerHandle ~= nil then
+        TimerMgr:RemoveTimer(self._TimerHandle);
+    end
+end
+
+function PlayerHelper:Offline()
+    self.OfflineTime            = TimerMgr:GetTime();
+end
+function PlayerHelper:Online()
+    self.OfflineTime            = 0;
+end
+
 
 
 return PlayerHelper;
