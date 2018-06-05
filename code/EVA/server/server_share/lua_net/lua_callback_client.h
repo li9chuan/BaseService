@@ -38,9 +38,9 @@ public:
         }
     }
 
-
-
+    bool                Connected() { return m_CallbackClientHandle->connected(); }
     uint32              GetHandle() { return m_MyHandle; }
+    void                SetHandle(uint32 handle) { m_MyHandle = handle; }
 
     uint32              m_MyHandle;
 
@@ -53,31 +53,5 @@ private:
     std::string                                             m_StrBuffer;
     std::string                                             m_SaveEventStr;
 };
-
-
-class CLuaClientMgr : public NLMISC::CSingleton<CLuaClientMgr>
-{
-public:
-
-    void    Init() { m_ClientHandle = 0; }
-
-    uint32  RegisterClient(CLuaCallbackClient* pNet);
-    void    RemoveClient(uint32 client_handle);
-
-    void    Update();
-
-    void    Release();
-
-
-
-private:
-
-    typedef std::map<int, CLuaCallbackClient*>    TNetHandle;
-    TNetHandle          m_LuaClientNetworkHandle;
-
-    int                 m_ClientHandle;
-};
-
-#define  LuaClientMgr  CLuaClientMgr::instance()
 
 #endif          // SERVER_SHARD_LUA_CALLBACK_CLIENT_H

@@ -331,17 +331,43 @@ namespace bin
 
         DEFINE_MODULE_FUNCTION(Broadcast, void, (const char* service_name, CLuaMessage* pMsg))
         {
-            NLNET::CMessage msgout("_LS");
-            msgout.serialMessage(pMsg->m_Msg);
-            Network->send( service_name, msgout, false );
+            if( pMsg != NULL )
+            {
+                NLNET::CMessage msgout("_LS");
+                msgout.serialMessage(pMsg->m_Msg);
+                Network->send(service_name, msgout, false);
+            }
+            else
+            {
+                lua_Debug ar;
+                lua_getstack(lua.GetHandle(), 2, &ar);
+                lua_getinfo(lua.GetHandle(), "Sln", &ar);
+
+                NLMISC::createDebug();
+                NLMISC::INelContext::getInstance().getWarningLog()->setPosition(ar.currentline, ar.short_src, ar.name);
+                NLMISC::INelContext::getInstance().getWarningLog()->displayNL("Broadcast %s  msg is NULL.", service_name);
+            }
             return 1;
         }
 
         DEFINE_MODULE_FUNCTION(Send, void, (lua_Integer service_id, CLuaMessage* pMsg))
         {
-            NLNET::CMessage msgout("_LS");
-            msgout.serialMessage(pMsg->m_Msg);
-            Network->send( (NLNET::TServiceId)service_id, msgout );
+            if (pMsg != NULL)
+            {
+                NLNET::CMessage msgout("_LS");
+                msgout.serialMessage(pMsg->m_Msg);
+                Network->send( (NLNET::TServiceId)service_id, msgout );
+            }
+            else
+            {
+                lua_Debug ar;
+                lua_getstack(lua.GetHandle(), 2, &ar);
+                lua_getinfo(lua.GetHandle(), "Sln", &ar);
+
+                NLMISC::createDebug();
+                NLMISC::INelContext::getInstance().getWarningLog()->setPosition(ar.currentline, ar.short_src, ar.name);
+                NLMISC::INelContext::getInstance().getWarningLog()->displayNL("Send msg is NULL.");
+            }
             return 1;
         }
 
@@ -349,17 +375,30 @@ namespace bin
         {
             if( tb_msg.IsReferd() )
             {
-                int             sid;
-                lua_Integer     client_uid;
+                if (pMsg != NULL)
+                {
+                    int             sid;
+                    lua_Integer     client_uid;
 
-                tb_msg.Get(1, sid);
-                tb_msg.Get(2, client_uid);
+                    tb_msg.Get(1, sid);
+                    tb_msg.Get(2, client_uid);
 
-                CMessage msg_out("_LSC");
-                msg_out.serial(client_uid);
-                msg_out.serialMessage(pMsg->m_Msg);
+                    CMessage msg_out("_LSC");
+                    msg_out.serial(client_uid);
+                    msg_out.serialMessage(pMsg->m_Msg);
 
-                Network->send( (NLNET::TServiceId)sid, msg_out );
+                    Network->send((NLNET::TServiceId)sid, msg_out);
+                }
+                else
+                {
+                    lua_Debug ar;
+                    lua_getstack(lua.GetHandle(), 2, &ar);
+                    lua_getinfo(lua.GetHandle(), "Sln", &ar);
+
+                    NLMISC::createDebug();
+                    NLMISC::INelContext::getInstance().getWarningLog()->setPosition(ar.currentline, ar.short_src, ar.name);
+                    NLMISC::INelContext::getInstance().getWarningLog()->displayNL("SendToClient msg is NULL.");
+                }
             }
 
             return 1;

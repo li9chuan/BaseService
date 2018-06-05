@@ -28,7 +28,7 @@ public:
         LuaNetworkMgr.Init();
         ScriptMgr.init();
         LuaThreadMgr.Init();
-        LuaClientMgr.Init();
+        
     }
 
 
@@ -40,7 +40,6 @@ public:
         ScriptMgr.update();
         LuaNetworkMgr.Update();
         LuaThreadMgr.Update();
-        LuaClientMgr.Update();
         return true;
     }
 
@@ -50,7 +49,6 @@ public:
         ScriptMgr.release();
         LuaNetworkMgr.Release();
         LuaThreadMgr.Release();
-        LuaClientMgr.Release();
     }
 
 };

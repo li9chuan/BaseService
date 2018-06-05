@@ -16,6 +16,7 @@ extern void forLuaMysqlConnForceLink();
 extern void forLuaBaseFunctionForceLink();
 extern void forLuaMessageForceLink();
 extern void forLuaThreadForceLink();
+extern void forLuaCallbackClientForceLink();
 
 void luaexportforcelink()
 {
@@ -25,6 +26,7 @@ void luaexportforcelink()
     forLuaBaseFunctionForceLink(); 
     forLuaMessageForceLink();
     forLuaThreadForceLink();
+    forLuaCallbackClientForceLink();
 }
 
 bool CScriptMgr::init( LUA_OPEN pLuaOpen )

@@ -7,6 +7,11 @@
 using namespace bin;
 using namespace NLNET;
 
+void forLuaCallbackClientForceLink()
+{
+    nlwarning("forLuaCallbackClientForceLink");
+}
+
 static CLuaMessage* pLuaMsg = new CLuaMessage();
     
 void cbLuaClientMsg(CMessage &msgin, TSockId from, CCallbackNetBase &netbase)
@@ -19,7 +24,7 @@ void cbLuaClientMsg(CMessage &msgin, TSockId from, CCallbackNetBase &netbase)
     int nRet = 0;
     pLuaMsg->m_Msg.swap(msgin);
 
-    functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)from, pLuaMsg, nRet);
+    functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)pClient->GetHandle(), pLuaMsg, nRet);
 }
 
 CLuaCallbackClient::CLuaCallbackClient( std::string& protocal, sint32 thd_handle/*=-1*/)
@@ -36,15 +41,11 @@ CLuaCallbackClient::CLuaCallbackClient( std::string& protocal, sint32 thd_handle
     }
 
     m_CallbackClientHandle->setUserData(this);
-
     nlassert(m_CallbackClientHandle !=NULL);
-
-    m_MyHandle = LuaClientMgr.RegisterClient(this);
 }
 
 CLuaCallbackClient::~CLuaCallbackClient()
 {
-    LuaClientMgr.RemoveClient(m_MyHandle);
     delete m_CallbackClientHandle;
 }
 
@@ -52,39 +53,7 @@ void CLuaCallbackClient::Connect(std::string & url)
 {
     CInetAddress addr(url);
     CCallbackClient* pClient = (CCallbackClient*)m_CallbackClientHandle;
-
     pClient->connect(addr);
-
-}
-
-//////////
-
-uint32 CLuaClientMgr::RegisterClient(CLuaCallbackClient * pNet)
-{
-    ++m_ClientHandle;
-    pNet->m_MyHandle = m_ClientHandle;
-    m_LuaClientNetworkHandle[m_ClientHandle] = pNet;
-    return m_ClientHandle;
-}
-
-void CLuaClientMgr::RemoveClient(uint32 client_handle)
-{
-    m_LuaClientNetworkHandle.erase(client_handle);
-}
-
-void CLuaClientMgr::Update()
-{
-    TNetHandle::iterator iter = m_LuaClientNetworkHandle.begin();
-
-    while (iter != m_LuaClientNetworkHandle.end())
-    {
-        iter->second->Update();
-        iter++;
-    }
-}
-
-void CLuaClientMgr::Release()
-{
 }
 
 ///////////////////
@@ -109,11 +78,30 @@ namespace bin
         return 1;
     }
 
+    DEFINE_CLASS_FUNCTION(SetHandle, void, (lua_Integer client_handle))
+    {
+        obj->SetHandle(client_handle);
+        return 1;
+    }
+
     DEFINE_CLASS_FUNCTION(GetHandle, lua_Integer, ())
     {
         r = obj->GetHandle();
         return 1;
     }
+
+    DEFINE_CLASS_FUNCTION(Connected, bool, ())
+    {
+        r = obj->Connected();
+        return 1;
+    }
+
+    DEFINE_CLASS_FUNCTION(Update, void, ())
+    {
+        obj->Update();
+        return 1;
+    }
+    
 
     DEFINE_STATIC_FUNCTION(NewInstance, CLuaCallbackClient*, (std::string& protoc))
     {
