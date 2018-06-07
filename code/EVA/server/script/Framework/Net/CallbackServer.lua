@@ -47,8 +47,9 @@ function CallbackServer:Send( sock_id, msg_or_type, proto_type, proto_msg )
     if param_type=="string" then
         local lua_msg   = CMessage(msg_or_type);
         if proto_type~=nil then
-            local code      = protobuf.encode(proto_type, proto_msg);
-            lua_msg:wstring(code);
+            local proto_code    = protobuf.encode(proto_type, proto_msg);
+            lua_msg:wbuffer(proto_code, #proto_code);
+            nlinfo("Send Buffer Len : "..#proto_code);
         end
         self.Service:Send( sock_id, lua_msg );
     else

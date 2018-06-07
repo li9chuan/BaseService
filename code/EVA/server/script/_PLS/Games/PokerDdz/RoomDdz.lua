@@ -316,6 +316,16 @@ function RoomDdz:SendGameInfo( uid, msg_name, msg_ddz_room )
     
     
     PrintTable(msg_ddz_room);
+
+    local proto_code      = protobuf.encode("PB.MsgDDZRoom", msg_ddz_room);
+
+    nlinfo("pb length:"..#proto_code);
+    nlinfo("pb length:"..string.len(proto_code));
+
+
+    local pb_sinfo          = protobuf.decode("PB.MsgDDZRoom" , proto_code)
+    PrintTable(pb_sinfo);
+
     BaseService:SendToClient( player, msg_name, "PB.MsgDDZRoom", msg_ddz_room )
 end
 

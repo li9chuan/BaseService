@@ -3,14 +3,13 @@
     "",
     "\\Framework",
     "\\Framework\\Net",
-    "\\SharedLib",
-    "\\_FES",
-    "\\_FES\\Msg",
+    "\\_PLS",
     "\\_PLS\\Games",
     "\\_PLS\\Games\\PokerDdz",
-    "\\__Robot",
-    "\\__Robot\\RobotSub"
+    "\\_PLS\\Msg",
+    "\\_PLS\\Player",
+    "\\_PLS\\Room"
   ],
-  "SelectedNode": "\\_FES\\_FESMain.lua",
+  "SelectedNode": "\\Framework\\functions.lua",
   "PreviewInSolutionExplorer": false
 }

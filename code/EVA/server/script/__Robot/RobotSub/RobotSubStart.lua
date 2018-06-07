@@ -4,14 +4,16 @@ package.path = BasePath .. "__Robot/RobotSub/?.lua;" .. BasePath .. "Framework/?
 
 require("InitFramework")
 require("RobotMgr")
+require("PublicRoomInfoMgr")
 
 FSMRobot                = require("FSMRobot")
-RobotGameDdz            = require("GameDdz/RobotGameDdz")
-FSMDdz                  = require("GameDdz/FSMDdz")
 RobotGameBase           = require("RobotGameBase")
 RobotData               = require("RobotData")
 Robot                   = require("Robot")
+PublicRoomInfo          = require("PublicRoomInfo")
 
+FSMDdz                  = require("GameDdz/FSMDdz")
+RobotGameDdz            = require("GameDdz/RobotGameDdz")
 
 print("-=======DBSubStart==========-");
 
@@ -26,6 +28,7 @@ function ThreadInit( thread_handle, params )
     
     G_ThreadHandle = thread_handle;
 
+    PublicRoomInfoMgr:Init();
     RobotMgr:Init();
 
     RobotMgr:StartLogic(1, 1);

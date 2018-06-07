@@ -2,7 +2,7 @@ local Robot = class("Robot")
 
 function Robot:ctor()
 	
-    self.DataCommon         = RobotData:new();
+    self.Data               = RobotData:new();
     self.Fsm                = FSMRobot:new();
     self.Fsm:Init(self);
     
@@ -11,14 +11,7 @@ function Robot:ctor()
 end
 
 function Robot:Init( net_handle )
-
     self.Net:SetHandle(net_handle);
-
-    if self.DataCommon.Game == "RM_DDZ"	then
-        --self.Game                   = RobotGameDdz:new();
-        self.GameFsm                = FSMDdz:new();
-        self.GameFsm:Init(self);
-    end
 end
 
 function Robot:Update()
@@ -28,6 +21,8 @@ function Robot:Update()
 
     if self.GameFsm~=nil then
         self.GameFsm:TickUpdate();
+        self.Game:Update();
+
     end
 end
 
@@ -39,14 +34,28 @@ function Robot:Connected()
     return self.Net:Connected();
 end
 
+-- ¿ªÊ¼ÓÎÏ·Âß¼­²âÊÔ
+function Robot:StartGameTest()
+    if self.Data.Game == "RM_DDZ"	then
+        self.Game                   = RobotGameDdz:new();
+        self.Game.Robot             = self;
+        self.GameFsm                = FSMDdz:new();
+        self.GameFsm:Init(self);
+    end
+end
+
 function Robot:Login()
     
-    local login_params = "Channel=REG&GameType="..self.DataCommon.Game.."&User="..self.DataCommon.User.."&AppName=WX_5E8A"
-
-    local http_res  = Net.HttpPost("http://127.0.0.1/www/login/login_test.php", login_params);
-
-
-    local http_tb = Json2Table(http_res);
+    local login_url     = "http://127.0.0.1/www/login/login_test.php";
+    local login_params  = "?Channel=REG&GameType="..self.Data.Game.."&User="..self.Data.User.."&AppName=WX_5E8A";
+    local http_res      = Net.HttpGet(login_url..login_params);
+    
+    if http_res==nil or #http_res<20 then
+        nlwarning("http login error")
+        return
+    end
+    
+    local http_tb       = Json2Table(http_res);
 
     PrintTable(http_tb)
 
@@ -59,7 +68,7 @@ function Robot:Login()
             Channel     = "REG",
             RoomType    = "RM_DDZ",
             AppName     = "WX_5E8A",
-            User        = self.DataCommon.User,
+            User        = self.Data.User,
             NonceStr    = http_tb.NonceStr,
             Timestamp   = http_tb.Timestamp,
             Token       = http_tb.Token,
@@ -67,10 +76,10 @@ function Robot:Login()
 
         self:Send( "LOGIN", "PB.MsgLogin", proto_msg )
 
-        nlinfo("Login :"..self.DataCommon.User);
+        nlinfo("Login :"..self.Data.User);
         return true;
     else
-        nlwarning("Connect Error :"..self.DataCommon.User);
+        nlwarning("Connect Error :"..self.Data.User);
     end
 
     return false;
@@ -81,6 +90,13 @@ function Robot:Send( msgname, proto_type, proto_msg )
     local msg   = CMessage(msgname);
     msg:wstring(code);
     self.Net:Send( msg );
+end
+
+function Robot:cbSyncPlayerInfo( msgin )
+    local player_info = msgin:rpb("PB.MsgPlayerInfo");
+
+    nlinfo("Robot:cbSyncPlayerInfo");
+    PrintTable(player_info);
 end
 
 

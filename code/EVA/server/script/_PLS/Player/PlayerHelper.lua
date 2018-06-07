@@ -8,7 +8,7 @@ function PlayerHelper:ctor()
 
     self.UID                    = 0;
     self.ConFES                 = nil;
-    
+     
     
     self.IsRobot                = false;
     
@@ -27,7 +27,7 @@ function PlayerHelper:TickUpdate()
 
     local curr_time     = TimerMgr:GetTime();
 
-    if curr_time - self.LastUpdateTime > 1*60*60*1000 then
+    if curr_time - self.LastUpdateTime > 7*24*60*60*1000 then
         self._TimerHandle = nil;    -- Release 时不再删除定时器
         PlayerMgr:RemovePlayer(self.UID);
     else
@@ -49,6 +49,9 @@ end
 
 function PlayerHelper:Offline()
     self.OfflineTime            = TimerMgr:GetTime();
+    self.ConFES                 = nil;
+
+    nlwarning("Offline================");
 end
 function PlayerHelper:Online()
     self.OfflineTime            = 0;

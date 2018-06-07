@@ -169,15 +169,22 @@ void NLNET::ws_socket_read_cb( bufferevent *bev, void *args )
 
                         if( msg_type_len>9 && msg_type_len<65535 )
                         {
-                            CMemStream  mem_msg;
-                            mem_msg.fill( (const uint8*)msg_buff.data()+sizeof(uint32), msg_type_len );
+                            NLMISC::CMemStream& msg = pBufSock->CompleteMsg;
+
+                            if (msg.isReading())
+                            {
+                                msg.invert();
+                            }
+
+                            msg.fill( (const uint8*)msg_buff.data()+sizeof(uint32), msg_type_len );
 
                             uint8 event_type    = CBufNetBase::User;
                             uint64 sockid       = (uint64)pBufSock;
-                            mem_msg.serial( sockid );
-                            mem_msg.serial( event_type );
+                            msg.serial( sockid );
+                            msg.serial( event_type );
+                            msg.invert();
 
-                            pBufSock->m_BufNetHandle->pushMessageIntoReceiveQueue( mem_msg.buffer(), mem_msg.length() );
+                            pBufSock->m_BufNetHandle->pushMessageIntoReceiveQueue(msg.buffer(), msg.size() );
                         }
                     }
                 }

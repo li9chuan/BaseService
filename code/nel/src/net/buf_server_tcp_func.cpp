@@ -27,15 +27,20 @@ void NLNET::tcp_socket_read_cb( bufferevent *bev, void *args )
         {
             NLMISC::CMemStream& msg=pBufSock->CompleteMsg;
 
+            if (msg.isReading())
+            {
+                msg.invert();
+            }
+
             msg.fill( buff+sizeof(TBlockSize), data_len );
+
             uint8 event_type    = CBufNetBase::User;
             uint64 sockid       = (uint64)pBufSock;
             msg.serial( sockid );
             msg.serial( event_type );
-
             msg.invert();
 
-            pBufSock->m_BufNetHandle->pushMessageIntoReceiveQueue( msg.buffer(), msg.length() );
+            pBufSock->m_BufNetHandle->pushMessageIntoReceiveQueue( msg.buffer(), msg.size() );
             buff_len = pBufSock->leftShiftBuffer(data_len+sizeof(TBlockSize));
         }
         else

@@ -103,10 +103,6 @@ function Json2Table( str )
     return Json.decode(str);
 end
 
-function PB2Table( pb_stru, pb_data )
-    return protobuf.decode(pb_stru, pb_data);
-end
-
 -- start --
 
 --------------------------------

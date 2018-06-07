@@ -8,7 +8,11 @@ function RobotMgr:Init()
 
 
     -- 网络消息
-    self._EventRegister:RegisterEvent( "AuthOk",  self, self.cbAuthOk );
+    self._EventRegister:RegisterEvent( "AuthOk",            self, self.cbAuthOk );
+    self._EventRegister:RegisterEvent( "SyncPlayerInfo",    self, self.cbSyncPlayerInfo );
+
+    -- 斗地主消息
+    self._EventRegister:RegisterEvent( "DDZ_GI",            self, self.cbDdzGameInfo );
 
     self.TotalRobot     = nil;
     self.RobotList      = {};
@@ -20,8 +24,8 @@ function RobotMgr:StartLogic( start_num, total_num )
 
     for i=1,total_num do
         local robot                         = Robot:new();
-        robot.DataCommon.User               = "test_" .. start_num+i-1;
-        robot.DataCommon.Game               = "RM_DDZ";
+        robot.Data.User                     = "test_" .. start_num+i-1;
+        robot.Data.Game                     = "RM_DDZ";
 
         robot:Init(i);
         self.RobotList[robot:GetHandle()]   = robot;
@@ -62,7 +66,23 @@ function RobotMgr:cbAuthOk( from, msgin )
     end
 end
 
+function RobotMgr:cbSyncPlayerInfo( from, msgin )
 
+    local robot = self.RobotList[from];
+
+    if robot~=nil then
+        robot:cbSyncPlayerInfo(msgin);
+    end
+end
+
+function RobotMgr:cbDdzGameInfo( from, msgin )
+
+    local robot = self.RobotList[from];
+
+    if robot~=nil then
+        robot.Game:cbDdzGameInfo(msgin);
+    end
+end
 
 
 return RobotMgr;

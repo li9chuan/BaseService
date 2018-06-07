@@ -28,12 +28,12 @@
         </Filter>
         <Filter RelativePath=".\Games" Toggle="false" >
             <Filter RelativePath=".\PokerDdz" Toggle="false" >
-                <LuaFile RelativePath=".\DdzCardTypeHelper.lua" />
                 <LuaFile RelativePath=".\DdzFSM.lua" />
                 <LuaFile RelativePath=".\DdzPlayerInfo.lua" />
                 <LuaFile RelativePath=".\RoomDdz.lua" />
                 <LuaFile RelativePath=".\DdzRoomMsg.lua" />
                 <LuaFile RelativePath=".\DDZOutCardData.lua" />
+                <LuaFile RelativePath=".\DdzCardTypes.lua" />
             </Filter>
             <Filter RelativePath=".\Common" Toggle="false" >
                 <LuaFile RelativePath=".\PokerDef.lua" />

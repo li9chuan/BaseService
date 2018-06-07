@@ -75,7 +75,7 @@ function ServiceInfo()
     
     nlinfo("PlayerNum:"..PlayerMgr:Count());
     
-    PrintTable(PlayerMgr.playerMap)
+    PrintTable(PlayerMgr.playerMap:GetTable())
     RoomMgr:PrintInfo();
 
     

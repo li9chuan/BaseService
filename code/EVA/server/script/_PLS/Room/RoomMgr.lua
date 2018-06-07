@@ -48,7 +48,11 @@ function RoomMgr:EnterPrivateRoom( uid, prv_room_id, room_type )
     if ROOM_CFG~=nil and player~=nil then
         
         if player.RoomID >0 then
-            nlwarning("已经在房间了");
+            -- 已经在房间，自动返回
+            local room = self.GameRooms:Find(player.RoomID);
+            if room~=nil then
+                room:JoinRoom(player);
+            end
         else
             local room = self.PrvRoomTypes:Find(room_type, prv_room_id);
 

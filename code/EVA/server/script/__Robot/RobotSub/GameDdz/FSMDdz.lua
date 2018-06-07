@@ -28,8 +28,11 @@ function FSMDdz:Init( robot )
 		}
     })
     
+    self._OldCreateRoomTime     = TimerMgr:GetTime();
+    self._OldJoinRoomTime       = TimerMgr:GetTime();
+    
     self.Robot      = robot;
-    self.GameDdz    = robot.GameLoigc;
+    self.GameDdz    = robot.Game;
     self:SwitchState( self._CurrState );
 
 
@@ -62,17 +65,57 @@ function FSMDdz:IsState( state )
 end
 
 function FSMDdz:DoIdle( event )
-    nlinfo("FSMDdz DoIdle");
+    -- 不是第一帧，下一帧执行。
+    if not event.args[1] then
+
+        if self.Robot.Data.PrvID < 0 then
+            local open_room = PublicRoomInfoMgr:GetOpenRoom();
+
+            if open_room ~= nil  then
+                -- 如果有其它robot创建的房间，加入。
+                
+                if TimerMgr:GetTime() - self._OldJoinRoomTime > 5000 then
+                    self:SwitchState("TJoinPrvRoom", open_room);
+                    self._OldJoinRoomTime = TimerMgr:GetTime();
+                end
+            else
+                -- 没有公共的房间，创建一个。
+
+                local create_time = math.random(10000,20000);
+                if TimerMgr:GetTime() - self._OldCreateRoomTime > create_time then
+                    self:SwitchState("TCreatePrvRoom");
+                    self._OldCreateRoomTime = TimerMgr:GetTime();
+                end
+            end
+        end
+    end
 end
 
 function FSMDdz:DoCreatePrvRoom( event )
+    
     nlinfo("DoCreatePrvRoom");
     --self:SwitchState("TDDZStateStartGame");
+    
+    if not event.args[1] then
+        self.GameDdz:DoCreatePrvRoom()
+        self:SwitchState("TIdle");
+    end
+   
 end
 
 function FSMDdz:DoJoinPrvRoom( event )
-    nlinfo("DoJoinPrvRoom");
-    --self:SwitchState("TDDZStateStartGame");
+    
+    
+    -- 调用的这帧执行
+    if event.args[1] then
+
+        nlinfo("DoJoinPrvRoom");
+        local open_room = event.args[2];
+
+        PrintTable(open_room);
+
+        self:SwitchState("TIdle");
+    end
 end
 
 

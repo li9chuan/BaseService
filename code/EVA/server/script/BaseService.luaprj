@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <Project Name="BaseService.luaprj" Cmd="E:\BaseService\build\bin\Debug\client_robot.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="false" >
-    <Filter RelativePath=".\Framework" Toggle="true" >
+    <Filter RelativePath=".\Framework" Toggle="false" >
         <LuaFile RelativePath=".\Class.lua" />
         <LuaFile RelativePath=".\functions.lua" />
         <LuaFile RelativePath=".\List.lua" />
@@ -15,7 +15,7 @@
             <LuaFile RelativePath=".\EventRegister.lua" />
             <LuaFile RelativePath=".\EventTrigger.lua" />
         </Filter>
-        <Filter RelativePath=".\Net" Toggle="false" >
+        <Filter RelativePath=".\Net" Toggle="true" >
             <LuaFile RelativePath=".\NetWorkHandler.lua" />
             <LuaFile RelativePath=".\BaseService.lua" />
             <LuaFile RelativePath=".\protobuf.lua" />
@@ -25,11 +25,10 @@
         <LuaFile RelativePath=".\Utils.lua" />
         <LuaFile RelativePath=".\TimerMgr.lua" />
         <LuaFile RelativePath=".\CJsonUtil.lua" />
-        <Filter RelativePath=".\Test" Toggle="false" >
+        <Filter RelativePath=".\Test" Toggle="true" >
             <LuaFile RelativePath=".\TestFSM.lua" />
             <LuaFile RelativePath=".\FSMClass.lua" />
             <LuaFile RelativePath=".\TimerTest.lua" />
-            <LuaFile RelativePath=".\CommonTest.lua" />
         </Filter>
         <LuaFile RelativePath=".\SimpleStateMachine.lua" />
         <LuaFile RelativePath=".\MapMap.lua" />

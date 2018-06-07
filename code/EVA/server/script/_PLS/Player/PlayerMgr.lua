@@ -51,8 +51,10 @@ function PlayerMgr:RemovePlayer( _uid )
     local player = self.playerMap:Find(_uid);
     
     if player~=nil then
-        player:Release();
-        self.playerMap:Remove(_uid);
+        if player.RoomID > 0 then
+            player:Release();
+            self.playerMap:Remove(_uid);
+        end
     end
 end
 

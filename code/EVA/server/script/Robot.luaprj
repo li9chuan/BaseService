@@ -15,6 +15,7 @@
                 <LuaFile RelativePath=".\FSMDdz.lua" />
                 <LuaFile RelativePath=".\RobotGameDdz.lua" />
             </Filter>
+            <LuaFile RelativePath=".\PublicRoomInfo.lua" />
         </Filter>
         <LuaFile RelativePath=".\ThreadMgr.lua" />
     </Filter>

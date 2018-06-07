@@ -12,20 +12,24 @@ function MsgLogin:cbSyncData( schid, msg_sdata_1 )
     local uid           = msg_sdata_1:rint64();
     local fesid         = msg_sdata_1:rint32();
     
-    local player_helper = PlayerMgr:LoadDBPlayer(uid);
+    local player    = PlayerMgr:GetPlayer(uid);
     
-    if player_helper~=nil then
+    if player == nil then
+        player = PlayerMgr:LoadDBPlayer(uid);
+    end
+    
+    if player~=nil then
         
-        player_helper.ConFES = fesid;
-        PrintTable(player_helper);
+        player.ConFES = fesid;
+        PrintTable(player);
         
         -- 通知FES保存玩家在哪个PLS
         msg_sdata_1:invert();
-        BaseService:Send( player_helper.ConFES, msg_sdata_1);
+        BaseService:Send( fesid, msg_sdata_1);
         
         -- 发送玩家数据给客户端
-        BaseService:SendToClient( player_helper, "SyncPlayerInfo",
-                                  "PB.MsgPlayerInfo", player_helper.PlayerDataHelper:ToMsg() )
+        BaseService:SendToClient( player, "SyncPlayerInfo",
+                                  "PB.MsgPlayerInfo", player.PlayerDataHelper:ToMsg() )
     end
 	
 end

@@ -59,7 +59,6 @@ function FSMRobot:DoIdle( event )
     -- 不是第一帧，下一帧执行。
     if not event.args[1] then
         if not self.Robot:Connected() then
-            nlinfo("====================  DoIdle");
             self:SwitchState("TLogin");
         end
     end
@@ -74,10 +73,8 @@ function FSMRobot:DoLogin( event )
     --end
     if not event.args[1] then
         if self.Robot:Login() then
-            nlinfo("====================  DoLogin");
+            self.Robot:StartGameTest();
             self:SwitchState("TIdle");
-
-            
         end
     end
 end

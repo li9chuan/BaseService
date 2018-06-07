@@ -17,7 +17,7 @@ end
 function MsgRoom:cbEnterPrivateRoom( sid, msgin )
     local uid       = msgin:rint64();
     local msg_epr   = msgin:rpb("PB.MsgEnterPrivateRoom");
-    RoomMgr:EnterPrivateRoom(uid, msg_cpr.room_type, msg_cpr.room_id);
+    RoomMgr:EnterPrivateRoom(uid, msg_epr.room_type, msg_epr.room_id);
 end
 
 

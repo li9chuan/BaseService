@@ -4,7 +4,7 @@ local RoomIDAlloter = class("RoomIDAlloter")
 function RoomIDAlloter:ctor()
 	self.IDPool         = {};
     self.RoomType       = "";
-    self.IDMax          = 99999; --999999;
+    self.IDMax          = 999999; --999999;
     self.__AllocIdx     = 1;
 
     self:Init();

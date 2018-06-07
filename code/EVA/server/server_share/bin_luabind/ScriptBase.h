@@ -177,7 +177,7 @@ namespace bin
 	{
 		static int Make(const std::string& a, lua_State* pL)
 		{
-			lua_pushstring(pL, a.c_str());
+            lua_pushlstring(pL, a.c_str(), a.size());
 
 			return 1;
 		}

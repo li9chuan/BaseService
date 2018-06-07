@@ -245,7 +245,10 @@ namespace bin
             std::string pb_data;
             obj->m_Msg.serial(pb_data);
             obj->GetScriptHandle().NewTable(r);
-            obj->GetScriptHandle().CallFunc<std::string&, std::string&, CScriptTable>( "PB2Table", pbstru, pb_data, r );
+
+            CScriptTable    functbl;
+            obj->GetScriptHandle().Get("protobuf", functbl);
+            functbl.CallFunc<std::string&, std::string&, CScriptTable>("decode", pbstru, pb_data, r);
         }
         catch (const NLMISC::EStream&)
         {

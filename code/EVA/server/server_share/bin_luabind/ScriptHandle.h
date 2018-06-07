@@ -399,6 +399,27 @@ OPERATION_FAIL:
 			FUNC_POSWORK();
 		}
 
+        //! Three args version, see One args version.
+        template <typename A0, typename A1, typename A2, typename R>
+        int CallFunc(const char* pszName, ARGUMENT_TYPE(A0) a0, ARGUMENT_TYPE(A1) a1, ARGUMENT_TYPE(A2) a2, R& r)
+        {
+            FUNC_PREWORK();
+
+            MAKE_ARG(A0, a0);
+            MAKE_ARG(A1, a1);
+            MAKE_ARG(A2, a2);
+
+            if (lua_pcall(m_pLua, 3, 1, NULL) != LUA_OK)	// Error msg here
+            {
+                LOG_MESSAGE("[ERROR] Call Func[%s] : %s", pszName, lua_tostring(m_pLua, -1));
+
+                return 0;
+            }
+
+            MAKE_RET();
+
+            FUNC_POSWORK();
+        }
 #undef ARGUMENT_TYPE
 #undef VALUE_TYPE
 #undef FUNC_PREWORK
