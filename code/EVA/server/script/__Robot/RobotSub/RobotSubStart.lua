@@ -31,7 +31,7 @@ function ThreadInit( thread_handle, params )
     PublicRoomInfoMgr:Init();
     RobotMgr:Init();
 
-    RobotMgr:StartLogic(1, 1);
+    RobotMgr:StartLogic(1, 3);
 end
 
 

@@ -29,7 +29,7 @@ function FSMDdz:Init( robot )
     })
     
     self._OldCreateRoomTime     = TimerMgr:GetTime();
-    self._OldJoinRoomTime       = TimerMgr:GetTime();
+
     
     self.Robot      = robot;
     self.GameDdz    = robot.Game;
@@ -68,43 +68,36 @@ function FSMDdz:DoIdle( event )
     -- 不是第一帧，下一帧执行。
     if not event.args[1] then
 
-        if self.Robot.Data.PrvID < 0 then
-            local open_room = PublicRoomInfoMgr:GetOpenRoom();
+        if self.Robot.Game.RoomInfo == nil then
+            local open_room = PublicRoomInfoMgr:GetOpenRoom("RM_DDZ");
 
             if open_room ~= nil  then
                 -- 如果有其它robot创建的房间，加入。
-                
-                if TimerMgr:GetTime() - self._OldJoinRoomTime > 5000 then
-                    self:SwitchState("TJoinPrvRoom", open_room);
-                    self._OldJoinRoomTime = TimerMgr:GetTime();
-                end
+                self:SwitchState("TJoinPrvRoom", open_room);
             else
                 -- 没有公共的房间，创建一个。
-
-                local create_time = math.random(10000,20000);
+                local create_time = math.random(5000,20000);
                 if TimerMgr:GetTime() - self._OldCreateRoomTime > create_time then
-                    self:SwitchState("TCreatePrvRoom");
                     self._OldCreateRoomTime = TimerMgr:GetTime();
+                    self:SwitchState("TCreatePrvRoom");
                 end
             end
         end
     end
 end
 
-function FSMDdz:DoCreatePrvRoom( event )
+function FSMDdz:DoCreatePrvRoom( event, open_room )
     
-    nlinfo("DoCreatePrvRoom");
-    --self:SwitchState("TDDZStateStartGame");
-    
-    if not event.args[1] then
+    if event.args[1] then
         self.GameDdz:DoCreatePrvRoom()
-        self:SwitchState("TIdle");
+    else
+        if self:__GetRunStateTime() > 15*1000 then
+            self:SwitchState("TIdle");
+        end
     end
-   
 end
 
 function FSMDdz:DoJoinPrvRoom( event )
-    
     
     -- 调用的这帧执行
     if event.args[1] then
@@ -113,8 +106,12 @@ function FSMDdz:DoJoinPrvRoom( event )
         local open_room = event.args[2];
 
         PrintTable(open_room);
+        self.GameDdz:DoJoinPrvRoom(open_room)
 
-        self:SwitchState("TIdle");
+    else
+        if self:__GetRunStateTime() > 15*1000 then
+            self:SwitchState("TIdle");
+        end
     end
 end
 

@@ -3,7 +3,6 @@ local RobotData = class("RobotData")
 function RobotData:ctor()
 	
     self.User           = "";
-    self.PrvID          = -1;
     self._RoomState     = 0;
     
 
