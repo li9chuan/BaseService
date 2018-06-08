@@ -39,7 +39,7 @@ message MsgEnterPrivateRoom
 	optional uint64					room_id				= 1;
     optional string                 room_type           = 2;
 	optional string 				app_name			= 3;
-	optional uint32					game_versione		= 4;
+	optional uint32					game_version		= 4;
 }
 
 message MsgCard
