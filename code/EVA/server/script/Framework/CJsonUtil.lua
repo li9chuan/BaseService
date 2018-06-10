@@ -190,7 +190,7 @@ local function run_test(testname, func, input, should_work, output)
         if status ~= nil then
             name = name .. statusmap[status]
         end
-        print(("[%s] %s"):format(name, serialise_value(value, false)))
+        nlinfo(("[%s] %s"):format(name, serialise_value(value, false)))
     end
 
     local result = {}
@@ -208,7 +208,7 @@ local function run_test(testname, func, input, should_work, output)
     test_count_total = test_count_total + 1
 
     local teststatus = { [true] = "PASS", [false] = "FAIL" }
-    print(("==> Test [%d] %s: %s"):format(test_count_total, testname,
+    nlinfo(("==> Test [%d] %s: %s"):format(test_count_total, testname,
                                           teststatus[correct]))
 
     status_line("Input", nil, input)
@@ -216,7 +216,7 @@ local function run_test(testname, func, input, should_work, output)
         status_line("Expected", should_work, output)
     end
     status_line("Received", success, result)
-    print()
+    nlinfo()
 
     return correct, result
 end
@@ -224,11 +224,11 @@ end
 local function run_test_group(tests)
     local function run_helper(name, func, input)
         if type(name) == "string" and #name > 0 then
-            print("==> " .. name)
+            nlinfo("==> " .. name)
         end
         -- Not a protected call, these functions should never generate errors.
         func(unpack(input or {}))
-        print()
+        nlinfo()
     end
 
     for _, v in ipairs(tests) do

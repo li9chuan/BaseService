@@ -47,9 +47,9 @@ function RobotMgr:LuaTestCB( from, msgin )
 	local msgint  = msgin:rint();
     local msgstr  = msgin:rstring();
 	
-	print(from);
-	print(msgint);
-	print(msgstr);
+	nlinfo(from);
+	nlinfo(msgint);
+	nlinfo(msgstr);
     
     
     local msgout = CMessage("TestMainProc");

@@ -82,8 +82,8 @@ return Map;
 --characters:Insert("name1"," this Name:123")
 --characters:Replace("name1"," this Name:2" )
 --local name2 = characters:Find("name1")
---print(name2)
---print(characters._count)
+--nlinfo(name2)
+--nlinfo(characters._count)
 --for k,v in pairs(characters) do
---print(k,v)
+--nlinfo(k,v)
 --end

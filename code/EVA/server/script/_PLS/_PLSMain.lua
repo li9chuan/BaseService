@@ -32,7 +32,7 @@ CardsAnalyseRes     = require("Games/Common/CardsAnalyseRes")
 -- 主入口函数。从这里开始lua逻辑
 function ServiceInit()
 
-    print("Lua PLSConfig:");
+    nlinfo("Lua PLSConfig:");
     PrintTable(PLSConfig)
 
     MsgLogin:Init();
@@ -68,14 +68,15 @@ function ServiceRelease()
     DBMgr:Release();
     PlayerLogicService:Release();
 
-    print("Lua Release.");
+    nlinfo("Lua Release.");
 end
 
 function ServiceInfo()
     
     nlinfo("PlayerNum:"..PlayerMgr:Count());
     
-    PrintTable(PlayerMgr.playerMap:GetTable())
+    nlinfo("=========  Players =============");
+    PrintTable(PlayerMgr.playerMap.map)
     RoomMgr:PrintInfo();
 
     
@@ -89,7 +90,7 @@ end
 --bash_path = "E:\\BaseService\\code\\EVA\\server\\script\\";
 --package.path = bash_path .. "Framework\\?.lua;" .. bash_path .. "Framework\\Net\\?.lua;";
 
-print(package.path);
+nlinfo(package.path);
 
 local protobuf = require "protobuf"
 
@@ -115,11 +116,11 @@ player_info = {
 code = protobuf.encode("MsgPlayerInfo", player_info)
 decode = protobuf.decode("MsgPlayerInfo" , code)
 
-print(decode.name)
-print(decode.pid)
+nlinfo(decode.name)
+nlinfo(decode.pid)
 
 for _,v in ipairs(decode.view_player_list) do
-	print("\t"..v.pid, v.head_portrait)
+	nlinfo("\t"..v.pid, v.head_portrait)
 end
 
 ]]

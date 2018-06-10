@@ -15,7 +15,7 @@ local tbinsert = table.insert
 function RoomDdz:ctor()
 
     self.super:ctor();
-    print("RoomDdz:ctor");
+    nlinfo("RoomDdz:ctor");
 
     self.Fsm                    = DdzFSM:new();
     self.Fsm:Init(self);
@@ -79,7 +79,7 @@ function RoomDdz:GameStartWait()
     end
     
     -- 是否都点了准备
-    for _,v in ipairs(self.RoomPlayerData:GetTable()) do
+    for _,v in ipairs(self.RoomPlayerData.map) do
         if not v:IsReady() then
             return false;
         end
@@ -105,12 +105,15 @@ function RoomDdz:JoinRoom( player )
 
         self:BaseJoinRoom(player);
         self:BroadcastGameInfo();
+        return true;
     end
+    
+    return false;
 end
 
 function RoomDdz:TickUpdate()
 
-    --print("RoomDdz:TickUpdate");
+    --nlinfo("RoomDdz:TickUpdate");
 
     self.Fsm:TickUpdate();
     self:BaseTickUpdate();
@@ -173,14 +176,13 @@ function RoomDdz:SendQiangDiZhuWik()
 end
 
 function RoomDdz:_RefreshPlayerQiangDiZhuState( uid )
-
-    for k,v in pairs(self.RoomPlayerData:GetTable()) do
+    self.RoomPlayerData:ForEach( function(k,v)
         if k==uid then
             v:SetState( enum.STATE_DDZ_QIANGDIZHU );
         else
             v:ClearState( enum.STATE_DDZ_QIANGDIZHU );
         end
-    end
+    end )
 end
 
 -- 刷新加倍的选择
@@ -204,7 +206,7 @@ function RoomDdz:RefreshSelectJiaBei( uid, msg_jbr )
             self:BroadcastMsg("DDZ_JB", "PB.MsgJiaBeiResult", msg_jbr);
             
             
-            for k,v in pairs(self.RoomPlayerData:GetTable()) do
+            for _,v in pairs(self.RoomPlayerData.map) do
                 if v:IsSelectJiaBei()==false then
                     return;
                 end

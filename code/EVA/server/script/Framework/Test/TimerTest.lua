@@ -15,7 +15,7 @@ function TimerTest:CallBack()
     local timerid = TimerMgr:AddTimer(1000, self, self.CallBack);
     
     self.val = self.val+1;
-    print("======"..self.val.."   id:"..timerid);
+    nlinfo("======"..self.val.."   id:"..timerid);
 
 end
 

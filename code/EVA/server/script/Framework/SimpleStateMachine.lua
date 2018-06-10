@@ -290,8 +290,8 @@ function simple_state_machine:_enter_state(event)
 end
 
 function simple_state_machine:_on_error(event, error, message)
-    print("%s [simple_state_machine] ERROR: error %s, event %s, from %s to %s", tostring(self._target), tostring(error), event.name, event.from, event.to)
-    print(message)
+    nlinfo("%s [simple_state_machine] ERROR: error %s, event %s, from %s to %s", tostring(self._target), tostring(error), event.name, event.from, event.to)
+    nlinfo(message)
 end
 
 return simple_state_machine

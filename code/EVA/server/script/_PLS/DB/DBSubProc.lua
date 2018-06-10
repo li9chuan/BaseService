@@ -9,10 +9,10 @@ function DBSubProc:LuaTestCB( from, proto_buf )
 
 	local msg_session = protobuf.decode("MsgSession" , proto_buf)
 	
-	print("Sub Thread DBSubProc Callback " .. from);
-	print(msg_session.check);
-	print(msg_session.session);
-	print(msg_session.index);
+	nlinfo("Sub Thread DBSubProc Callback " .. from);
+	nlinfo(msg_session.check);
+	nlinfo(msg_session.session);
+	nlinfo(msg_session.index);
 	
 	PostMain( "thd_player", "EVT_DB_MAIN", "MsgSession", msg_session, from );
 	

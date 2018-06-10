@@ -5,7 +5,7 @@ package.path = BasePath .. "_PLS/?.lua;" .. BasePath .. "Framework/?.lua;";
 require("InitFramework")
 
 
-print("-=======DBSubStart==========-");
+nlinfo("-=======DBSubStart==========-");
 
 
 DBSubProc = require("DBSubProc");

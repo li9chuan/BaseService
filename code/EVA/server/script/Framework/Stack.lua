@@ -46,7 +46,7 @@ function stack:create()
 
     function t:list()
         for i, v in pairs(self._et) do
-            print(i, v)
+            nlinfo(i, v)
         end
     end
 

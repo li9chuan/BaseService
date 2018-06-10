@@ -41,7 +41,7 @@ end
 
 
 function PlayerLogicService:SCHConnection( service_id, service_name )
-	print("PlayerLogicService:SCHConnection:"..service_name.." sid:"..service_id);
+	nlinfo("PlayerLogicService:SCHConnection:"..service_name.." sid:"..service_id);
     
     self.sch_sid = service_id;
     self:UpdatePLSInfo(service_id);
@@ -49,7 +49,7 @@ function PlayerLogicService:SCHConnection( service_id, service_name )
 end
 
 function PlayerLogicService:SCHDisConnection( service_id, service_name )
-	print("PlayerLogicService:SCHDisConnection"..service_name.." sid:"..service_id);
+	nlinfo("PlayerLogicService:SCHDisConnection"..service_name.." sid:"..service_id);
     
     self.sch_sid = nil;
     TimerMgr:RemoveTimer(self.TimerID);

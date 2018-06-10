@@ -19,7 +19,7 @@
 -- end
 
 -- local lemon = Lemon:new()   or Lemon()
--- print(lemon:isSweet()) -- false
+-- nlinfo(lemon:isSweet()) -- false
 -- 
 local middleclass = {}
 

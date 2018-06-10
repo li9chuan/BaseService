@@ -1,6 +1,6 @@
 @echo off
 
-REM This script will kill all the services launched by shard_start.bat
+REM This script will kill all the services launched by _shard_start.bat
 
 rem  ns
 taskkill /IM naming_service.exe /F

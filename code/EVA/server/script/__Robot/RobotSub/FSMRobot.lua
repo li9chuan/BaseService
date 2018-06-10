@@ -67,9 +67,9 @@ end
 function FSMRobot:DoLogin( event )
     
     --if event.args[1] then
-        --print( "FSMClass:DoLogin SwitchState" );
+        --nlinfo( "FSMClass:DoLogin SwitchState" );
     --else
-        --print( "FSMClass:DoLogin TickUpdate" );
+        --nlinfo( "FSMClass:DoLogin TickUpdate" );
     --end
     if not event.args[1] then
         if self.Robot:Login() then

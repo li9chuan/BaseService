@@ -8,7 +8,7 @@ end
 
 function DBProc:LuaTest()
 
-	print("DBProc LuaTest ");
+	nlinfo("DBProc LuaTest ");
 	
 	msg_session = {  
 		check = 13,  
@@ -24,10 +24,10 @@ function DBProc:LuaTestCB( from, proto_buf )
 
 	local msg_session = protobuf.decode("MsgSession" , proto_buf)
 	
-	print("Main Thread DBProc Callback " .. from);
-	print(msg_session.check);
-	print(msg_session.session);
-	print(msg_session.index);
+	nlinfo("Main Thread DBProc Callback " .. from);
+	nlinfo(msg_session.check);
+	nlinfo(msg_session.session);
+	nlinfo(msg_session.index);
 	
 	code = protobuf.encode("MsgSession", msg_session)
 	len  = string.len(code);

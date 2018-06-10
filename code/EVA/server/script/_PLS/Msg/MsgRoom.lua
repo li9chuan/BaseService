@@ -14,7 +14,7 @@ end
 function MsgRoom:cbEnterRoom( fes_sid, msg_enter_room )
 
 
-    print("MsgRoom:cbEnterRoom");
+    nlinfo("MsgRoom:cbEnterRoom");
 	
 end
 
@@ -30,7 +30,7 @@ function MsgRoom:cbLeaveRoom( fes_sid, msgin )
             room:LeaveRoom(uid);
         end
     end
-    print("MsgRoom:cbLeaveRoom");
+    nlinfo("MsgRoom:cbLeaveRoom");
 	
 end
 
@@ -40,12 +40,12 @@ function MsgRoom:cbCreatePrivateRoom( sch_sid, msgin )
     local pls_sid       = msgin:rint();
     local room_type     = msgin:rstring();
 
-    print("MsgRoom:cbCreatePrivateRoom");
+    nlinfo("MsgRoom:cbCreatePrivateRoom");
     
-    print(uid);
-    print(prv_room_id);
-    print(pls_sid);
-    print(room_type);
+    nlinfo(uid);
+    nlinfo(prv_room_id);
+    nlinfo(pls_sid);
+    nlinfo(room_type);
 	
     RoomMgr:CreatePrivateRoom(uid, prv_room_id, room_type);
 end
@@ -56,12 +56,12 @@ function MsgRoom:cbEnterPrivateRoom( sch_sid, msgin )
     local prv_room_id   = msgin:rint();
     local room_type     = msgin:rstring();
     
-    print("MsgRoom:cbEnterPrivateRoom");
+    nlinfo("MsgRoom:cbEnterPrivateRoom");
     
-    print(uid);
-    print(prv_room_id);
-    print(pls_sid);
-    print(room_type);
+    nlinfo(uid);
+    nlinfo(prv_room_id);
+    nlinfo(pls_sid);
+    nlinfo(room_type);
     
     if GetServiceID()~=pls_sid then
         nlwarning("GetServiceID()~=pls_sid");

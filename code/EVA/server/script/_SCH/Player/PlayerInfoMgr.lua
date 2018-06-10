@@ -4,7 +4,7 @@ PlayerInfoMgr = {}
 function PlayerInfoMgr:Init()
 	self.PlayerInfoMap      = Map:new();
     
-    print("PlayerInfoMgr:Init");
+    nlinfo("PlayerInfoMgr:Init");
 end
 
 function PlayerInfoMgr:GetPlayerInfo( _uid )
@@ -37,15 +37,11 @@ end
 
 function PlayerInfoMgr:RemovePLS( pls_sid )
     self.PlayerInfoMap:ForEachRemove("ConPLS", pls_sid);
-    print("PlayerInfoMgr.RemovePLS:"..pls_sid);
+    nlinfo("PlayerInfoMgr.RemovePLS:"..pls_sid);
 end
 
 function PlayerInfoMgr:Release()
-    
-	for _,v in pairs(self.PlayerInfoMap:GetTable()) do
-        v:Release();
-    end 
-    
+    self.PlayerInfoMap:ForEach( function(_,v) v:Release(); end );
     self.PlayerInfoMap = nil;
 end
 

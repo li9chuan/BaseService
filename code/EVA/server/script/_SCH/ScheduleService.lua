@@ -15,15 +15,15 @@ function ScheduleService:Init()
     Net.SetConnectionCallback("PLS");
     Net.SetDisConnectionCallback("PLS");
     
-    print("ScheduleService:Init");
+    nlinfo("ScheduleService:Init");
 end
 
 function ScheduleService:CbConnection( service_id, service_name )
-	print("ScheduleService:CbConnection:"..service_name.." sid:"..service_id);
+	nlinfo("ScheduleService:CbConnection:"..service_name.." sid:"..service_id);
 end
 
 function ScheduleService:CbFESDisConnection( service_id, service_name )
-	print("ScheduleService:CbFESDisConnection"..service_name.." sid:"..service_id);
+	nlinfo("ScheduleService:CbFESDisConnection"..service_name.." sid:"..service_id);
 end
 
 function ScheduleService:CbPLSDisConnection( service_id, service_name )

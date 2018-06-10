@@ -21,7 +21,7 @@ function ThreadMgr:Strat()
     
         self._ThreadMap[thread_handle] = sub_thread;
         
-        print(thread_handle);
+        nlinfo(thread_handle);
     end
     
     
@@ -41,8 +41,8 @@ function ThreadMgr:LuaTestCB( from, msgin )
 
     local msgstr  = msgin:rstring();
 	
-	print(from);
-	print(msgstr);
+	nlinfo(from);
+	nlinfo(msgstr);
 end
 
 
@@ -50,8 +50,8 @@ function ThreadMgr:LuaTestCB( from, msgin )
 
     local msgstr  = msgin:rstring();
 	
-	print(from);
-	print(msgstr);
+	nlinfo(from);
+	nlinfo(msgstr);
 end
 
 --释放函数

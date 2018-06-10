@@ -45,8 +45,6 @@ function nlstop( str )
 	Debug.Stop(str,2);
 end
 
-print   = nlinfo;
-
 function shuffle(tbl)
     
     local tbl_count = #tbl;
@@ -79,18 +77,18 @@ function PrintTable( tbl, indent, depth )
         indent_str = indent_str.."    "
     end
 
-    print(indent_str .. "{")
+    nlinfo(indent_str .. "{")
     for k,v in pairs(tbl) do
         if k ~= "class" then
             local item_str = string.format("%s%s = %s", indent_str .. " ",tostring(k), tostring(v))
-            print(item_str)
+            nlinfo(item_str)
             
             if type(v) == "table" then
                 PrintTable(v, depth + 1)
             end
         end
     end
-    print(indent_str .. "}")
+    nlinfo(indent_str .. "}")
     
     --]]
 end
@@ -120,7 +118,7 @@ end
 ~~~ lua
 
 local array = {"a", "b", "c", "c"}
-print(table.removebyvalue(array, "c", true)) -- 输出 2
+nlinfo(table.removebyvalue(array, "c", true)) -- 输出 2
 
 ~~~
 

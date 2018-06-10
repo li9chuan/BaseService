@@ -21,7 +21,7 @@ RobotCallback   = CallbackServer:new();
 -- 主入口函数。从这里开始lua逻辑
 function ServiceInit()
 	
-    print(" =========FES Main Start============ ");
+    nlinfo(" =========FES Main Start============ ");
     
     ClientMgr:Init();
     FrontEndService:Init();
@@ -48,7 +48,7 @@ function ServiceUpdate()
 end
 
 function ServiceRelease()
-    print("Lua Release.");
+    nlinfo("Lua Release.");
 end
 
 function ServiceInfo()
@@ -61,7 +61,7 @@ end
 --bash_path = "E:\\BaseService\\code\\EVA\\server\\script\\";
 --package.path = bash_path .. "Framework\\?.lua;" .. bash_path .. "Framework\\Net\\?.lua;";
 
-print(package.path);
+nlinfo(package.path);
 
 local protobuf = require "protobuf"
 
@@ -87,11 +87,11 @@ player_info = {
 code = protobuf.encode("MsgPlayerInfo", player_info)
 decode = protobuf.decode("MsgPlayerInfo" , code)
 
-print(decode.name)
-print(decode.pid)
+nlinfo(decode.name)
+nlinfo(decode.pid)
 
 for _,v in ipairs(decode.view_player_list) do
-	print("\t"..v.pid, v.head_portrait)
+	nlinfo("\t"..v.pid, v.head_portrait)
 end
 
 ]]

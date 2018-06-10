@@ -15,16 +15,16 @@ PublicRoomInfo          = require("PublicRoomInfo")
 FSMDdz                  = require("GameDdz/FSMDdz")
 RobotGameDdz            = require("GameDdz/RobotGameDdz")
 
-print("-=======DBSubStart==========-");
+nlinfo("-=======DBSubStart==========-");
 
 
 G_ThreadHandle = 999;
 
 function ThreadInit( thread_handle, params )
 
-    print("Lua ThreadInit:".. thread_handle);
+    nlinfo("Lua ThreadInit:".. thread_handle);
 
-    print(params);
+    nlinfo(params);
     
     G_ThreadHandle = thread_handle;
 

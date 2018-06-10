@@ -29,11 +29,11 @@ function FSMClass:SwitchState( event, ... )
 end
 
 function FSMClass:DoGameFSMWait( event )
-    print( "FSMClass:DoGameFSMWait" .. event.args[1] );
+    nlinfo( "FSMClass:DoGameFSMWait" .. event.args[1] );
 end
 
 function FSMClass:DoGameFSMStartGame( event )
-    print( "FSMClass:DoGameFSMStartGame".. event.args[1] );
+    nlinfo( "FSMClass:DoGameFSMStartGame".. event.args[1] );
 end
 
 return FSMClass;

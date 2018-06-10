@@ -12,11 +12,13 @@ require("ThreadMgr");
 -- 主入口函数。从这里开始lua逻辑
 function ServiceInit()
 
-    print("Lua Robot Init");
+    nlinfo("Lua Robot Init");
     
     ThreadMgr:Init();
     
     ThreadMgr:Strat();
+
+
     
 end
 
@@ -29,7 +31,7 @@ end
 function ServiceRelease()
 
     ThreadMgr:Release();
-    print("Lua Release.");
+    nlinfo("Lua Release.");
 end
 
 function ServiceInfo()

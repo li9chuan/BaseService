@@ -5,7 +5,7 @@ function List:ctor()
 	-- body
 	-- 元素列表
     self._list = {};
---    print(self._list);
+--    nlinfo(self._list);
 end
 
 

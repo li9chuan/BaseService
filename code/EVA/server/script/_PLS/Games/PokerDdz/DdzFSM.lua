@@ -76,9 +76,9 @@ end
 function FSMDouDiZhu:DoWait( event )
     
     if event.args[1] then
-        --print( "FSMClass:DoWait SwitchState" );
+        --nlinfo( "FSMClass:DoWait SwitchState" );
     else
-        --print( "FSMClass:DoWait TickUpdate" );
+        --nlinfo( "FSMClass:DoWait TickUpdate" );
     end
     
     -- 如果都点了普通开始，跳转检查距离等条件的状态。
@@ -144,23 +144,23 @@ function FSMDouDiZhu:DoQiangDiZhu( event )
 end
 
 function FSMDouDiZhu:DoSelectAddTimes( event )
-    print( "FSMClass:DoSelectAddTimes".. event.args[1] );
+    nlinfo( "FSMClass:DoSelectAddTimes".. event.args[1] );
 end
 
 function FSMDouDiZhu:DoAction( event )
-    print( "FSMClass:DoAction".. event.args[1] );
+    nlinfo( "FSMClass:DoAction".. event.args[1] );
 end
 
 function FSMDouDiZhu:DoOutCard( event )
-    print( "FSMClass:DoOutCard".. event.args[1] );
+    nlinfo( "FSMClass:DoOutCard".. event.args[1] );
 end
 
 function FSMDouDiZhu:DoShowDown( event )
-    print( "FSMClass:DoShowDown".. event.args[1] );
+    nlinfo( "FSMClass:DoShowDown".. event.args[1] );
 end
 
 function FSMDouDiZhu:DoRelieveRoom( event )
-    print( "FSMClass:DoRelieveRoom".. event.args[1] );
+    nlinfo( "FSMClass:DoRelieveRoom".. event.args[1] );
 end
 
 return FSMDouDiZhu;

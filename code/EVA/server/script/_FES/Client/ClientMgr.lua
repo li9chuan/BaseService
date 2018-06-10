@@ -55,7 +55,7 @@ function ClientMgr:RemoveSockID( _sockid )
 	if self.SocketMap[_sockid] ~= nil then
         local old_client = self.SocketMap[_sockid];
         
-        print("ClientMgr:RemoveSockID:".._sockid.."   UID:"..old_client.UID);
+        nlinfo("ClientMgr:RemoveSockID:".._sockid.."   UID:"..old_client.UID);
 
         ClientService:RemoveClientData(old_client.UID);
         self.ClientMap[old_client.UID] = nil;

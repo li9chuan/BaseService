@@ -4,12 +4,9 @@
     "\\Framework",
     "\\Framework\\Net",
     "\\_PLS",
-    "\\_PLS\\Games",
     "\\_PLS\\Games\\PokerDdz",
-    "\\_PLS\\Msg",
     "\\_PLS\\Player",
     "\\_PLS\\Room"
   ],
-  "SelectedNode": "\\Framework\\functions.lua",
   "PreviewInSolutionExplorer": false
 }

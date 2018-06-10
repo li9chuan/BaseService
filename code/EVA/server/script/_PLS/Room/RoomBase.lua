@@ -7,23 +7,25 @@ function RoomBase:ctor()
     self.PrvRoomID              = 0;
     self.RoomType               = "";
     self._RoomMin               = 9999;
-    
+
+    self.Creator                = 0;
     self.RoomPlayerData         = Map:new();
     self.SeatPlayers            = {};
     self.ViewPlayers            = {};
 
     self._TimerHandle           = 0;
     self._TimerTick             = 1000;
-    print("RoomBase:ctor");
+    nlinfo("RoomBase:ctor");
     
 
 end
 
 function RoomBase:PrintInfo()
-    nlinfo(self.RoomID);
-    nlinfo(self.PrvRoomID);
+    nlinfo("============== RoomID:"..self.RoomID .. "  PrvID:"..self.PrvRoomID.."  Creator:"..self.Creator);
+    nlinfo("==>SeatPlayers:")
     PrintTable(self.SeatPlayers);
-    PrintTable(self.RoomPlayerData:GetTable());
+    nlinfo("==>RoomPlayers:")
+    PrintTable(self.RoomPlayerData.map);
 end
 
 function RoomBase:Init( room_type, update_tick )
@@ -55,12 +57,12 @@ function RoomBase:BaseInit( room_type, update_tick )
 end
 
 function RoomBase:TickUpdate()
-    print("RoomBase:TickUpdate");
+    nlinfo("RoomBase:TickUpdate");
     self:BaseTickUpdate();
 end
 
 function RoomBase:BaseTickUpdate()
-    --print("RoomBase:BaseTickUpdate");
+    --nlinfo("RoomBase:BaseTickUpdate");
     self._TimerHandle = TimerMgr:AddTimer(self._TimerTick, self, self.TickUpdate);
 end
 
@@ -69,6 +71,8 @@ end
 function RoomBase:BaseJoinRoom( player )
 
     player.RoomID   = self.RoomID;
+    self.Creator    = player.UID;
+    
     self:__AddRoomPlayer(player.UID);
     
 end

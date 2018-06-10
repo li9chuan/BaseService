@@ -19,11 +19,11 @@ end
 
 
 function FrontEndService:Connection( service_id, service_name )
-	print("FrontEndService:Connection:"..service_name.." sid:"..service_id);
+	nlinfo("FrontEndService:Connection:"..service_name.." sid:"..service_id);
 end
 
 function FrontEndService:DisConnection( service_id, service_name )
-	print("FrontEndService:DisConnection"..service_name.." sid:"..service_id);
+	nlinfo("FrontEndService:DisConnection"..service_name.." sid:"..service_id);
 end
 
 --	释放函数

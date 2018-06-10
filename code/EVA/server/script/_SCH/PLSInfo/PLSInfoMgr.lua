@@ -7,7 +7,7 @@ function PLSInfoMgr:Init()
     
     self._EventRegister:RegisterEvent( "SvrInfo",  self, self.SvrUpdateInfoCB );
     
-    print("PLSInfoMgr:Init");
+    nlinfo("PLSInfoMgr:Init");
 end
 
 function PLSInfoMgr:SvrUpdateInfoCB( msg_from, msg_svrinfo )
@@ -25,7 +25,7 @@ end
 
 function PLSInfoMgr:AllocPLS( room_type )
 
-    for _,v in pairs(self.PLSMap:GetTable()) do
+    for _,v in pairs(self.PLSMap.map) do
         
         if v.RoomList[room_type] ~= nil then
             

@@ -11,9 +11,8 @@ function RoomMgr:Init()
 end
 
 function RoomMgr:PrintInfo()
-    for _,v in ipairs(self.GameRooms:GetTable()) do
-        v:PrintInfo();
-    end
+    nlinfo("==============  Rooms =============");
+    self.GameRooms:ForEach( function(_,v) v:PrintInfo(); end );
 end
 
 function RoomMgr:CreatePrivateRoom( uid, prv_room_id, room_type )
@@ -24,15 +23,24 @@ function RoomMgr:CreatePrivateRoom( uid, prv_room_id, room_type )
     if ROOM_CFG~=nil and player~=nil then
         
         if player.RoomID >0 then    -- 已经创建过房间了
-            nlwarning("已经创建过房间了");
+            nlwarning("already create room.  PlayerID:".. player.UID.."  RoomInfo:");
+            
+            local room = self.GameRooms:Find(player.RoomID);
+            if room~=nil then
+                PrintTable(room);
+            end
         else
             local room_base = RoomFactory:CreateRoom(room_type);
             
             if room_base~=nil then
                 room_base.PrvRoomID = prv_room_id;
-                self.GameRooms:Insert(room_base.RoomID, room_base);
-                self.PrvRoomTypes:Insert(room_type, prv_room_id, room_base);
-                room_base:JoinRoom(player);
+
+                if room_base:JoinRoom(player) then
+                    self.GameRooms:Insert(room_base.RoomID, room_base);
+                    self.PrvRoomTypes:Insert(room_type, prv_room_id, room_base);
+                else
+                    nlwarning("player join room fail.  uid:"..player.UID)
+                end
             end
         end
     end

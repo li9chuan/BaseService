@@ -30,7 +30,7 @@ PHPService          = CallbackServer:new();
 -- 主入口函数。从这里开始lua逻辑
 function ServiceInit()
 	
-    print("Lua Start.");
+    nlinfo("Lua Start.");
     
     MsgLogin:Init();
     MsgRoom:Init();
@@ -55,7 +55,7 @@ function ServiceRelease()
     PLSInfoMgr:Release();
     PlayerInfoMgr:Release();
     ScheduleService:Release();
-    print("Lua Release.");
+    nlinfo("Lua Release.");
 end
 
 
