@@ -100,6 +100,12 @@ function RoomDdz:JoinRoom( player )
         else
             ddz_player = DdzPlayerInfo:new();
             ddz_player:SetState( enum.STATE_DDZ_NEWROLE );
+
+            if player.UID == self.OwenrID then
+                --  设置是房主
+                ddz_player:SetState( enum.STATE_DDZ_ROOM_OWNER );
+            end
+
             self.RoomPlayerData:Insert(player.UID, ddz_player);
         end
 
@@ -318,16 +324,6 @@ function RoomDdz:SendGameInfo( uid, msg_name, msg_ddz_room )
     
     
     PrintTable(msg_ddz_room);
-
-    local proto_code      = protobuf.encode("PB.MsgDDZRoom", msg_ddz_room);
-
-    nlinfo("pb length:"..#proto_code);
-    nlinfo("pb length:"..string.len(proto_code));
-
-
-    local pb_sinfo          = protobuf.decode("PB.MsgDDZRoom" , proto_code)
-    PrintTable(pb_sinfo);
-
     BaseService:SendToClient( player, msg_name, "PB.MsgDDZRoom", msg_ddz_room )
 end
 
@@ -337,20 +333,22 @@ function RoomDdz:__FillRoomInfoMsg( msg_ddz_room, current_uid )
     msg_ddz_room.room_id        = self.PrvRoomID;
 
 	msg_ddz_room.room_state     = enum[self.Fsm:GetState()];
+    msg_ddz_room.state_time     = 0;                    -- 当前房间状态的运行时间
     msg_ddz_room.action_id      = self._ActionID;
     msg_ddz_room.game_count     = self._GameCount;
-    msg_ddz_room.multiple       = self._Multiple;
+    msg_ddz_room.multiple       = self._Multiple;       -- 房间的翻倍数
 
 
-    msg_ddz_room.bottom_card    = self._CardsBottom;
+    msg_ddz_room.bottom_cards   = self._CardsBottom;    -- 底牌
 
 
+    -- 上把牌信息
     if self._LastOutCardData:IsEmpty()==false then
         
         msg_ddz_room.last_outcard = {
-            old_actionid = self._LastOutCardData.UID,
-            out_type     = self._LastOutCardData.Type,
-            out_card     = self._LastOutCardData.Cards
+            old_actionid    = self._LastOutCardData.UID,
+            out_type        = self._LastOutCardData.Type,
+            out_cards       = self._LastOutCardData.Cards
         };
         
         
@@ -381,7 +379,6 @@ function RoomDdz:__FillPlayerBaseInfoMsg( uid, msg_ddz_room, current_uid )
             Nickname    = player.PlayerDataHelper.f_nickname;
             Portrait    = player.PlayerDataHelper.f_portrait;
         }
-        
     end
     
     

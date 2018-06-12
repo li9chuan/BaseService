@@ -23,6 +23,7 @@ function ServiceInit()
 	
     nlinfo(" =========FES Main Start============ ");
     
+    TimerMgr:Init( Misc.GetLocalTime() );
     ClientMgr:Init();
     FrontEndService:Init();
     
@@ -44,7 +45,8 @@ end
 
 -- 游戏循环
 function ServiceUpdate()
-    TimerMgr:Update(math.floor(os.clock() * 1000))
+    TimerMgr:Update( Misc.GetLocalTime() );
+    --TimerMgr:Update(math.floor(os.clock() * 1000))
 end
 
 function ServiceRelease()

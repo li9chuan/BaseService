@@ -23,7 +23,7 @@ function RoomMgr:CreatePrivateRoom( uid, prv_room_id, room_type )
     if ROOM_CFG~=nil and player~=nil then
         
         if player.RoomID >0 then    -- 已经创建过房间了
-            nlwarning("already create room.  PlayerID:".. player.UID.."  RoomInfo:");
+            nlwarning("already create room.  PlayerID:".. uid.."  RoomInfo:");
             
             local room = self.GameRooms:Find(player.RoomID);
             if room~=nil then
@@ -36,10 +36,11 @@ function RoomMgr:CreatePrivateRoom( uid, prv_room_id, room_type )
                 room_base.PrvRoomID = prv_room_id;
 
                 if room_base:JoinRoom(player) then
+                    room_base.OwenrID   = uid;
                     self.GameRooms:Insert(room_base.RoomID, room_base);
                     self.PrvRoomTypes:Insert(room_type, prv_room_id, room_base);
                 else
-                    nlwarning("player join room fail.  uid:"..player.UID)
+                    nlwarning("player join room fail.  uid:"..uid)
                 end
             end
         end

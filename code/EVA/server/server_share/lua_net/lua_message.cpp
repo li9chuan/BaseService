@@ -27,11 +27,11 @@ namespace bin
         return 1;
     }
 
-    DEFINE_CLASS_FUNCTION( wbuffer, void, (const std::string& buff, int len))
+    DEFINE_CLASS_FUNCTION( wbuffer, void, (const char* buff, int len))
     {
         sint32  serial_val=len;
         obj->m_Msg.serial(serial_val);
-        obj->m_Msg.serialBuffer((uint8*)buff.c_str(), len);
+        obj->m_Msg.serialBuffer((uint8*)buff, len);
         return 1;
     }
 

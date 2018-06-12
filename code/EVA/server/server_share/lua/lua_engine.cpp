@@ -87,6 +87,21 @@ extern int  luaopen_cjson(lua_State *l);
 //	return 0;
 //}
 
+void PrintLuaCallstack(lua_State *L, int stack_level = 0)
+{
+    lua_Debug debug_msg;
+    NLMISC::createDebug();
+
+    while (lua_getstack(L, stack_level, &debug_msg) == 1)
+    {
+        if (lua_getinfo(L, "Slnu", &debug_msg))
+        {
+            NLMISC::INelContext::getInstance().getWarningLog()->setPosition(debug_msg.currentline, debug_msg.short_src, debug_msg.name);
+            NLMISC::INelContext::getInstance().getWarningLog()->displayNL("");
+        }
+        ++stack_level;
+    }
+}
 
 CLuaEngine::CLuaEngine(void)
 {
@@ -115,6 +130,12 @@ bool CLuaEngine::Init( std::string logpath )
 
 
     luaL_openlibs(m_pLuaState);                     /// 加载Lua的基本库
+
+    //if( !lua_checkstack(m_pLuaState, LUA_MINSTACK) )     ///  扩充Lua的堆栈大小
+    //{
+    //	nlerror( "set LuaState size fail(stacksize=1024)." );
+    //	return false;
+    //}
 
 
     //luaopen_protobuf_c(m_pLuaState);
@@ -185,6 +206,7 @@ bool CLuaEngine::RunMemoryLua(const char* pLuaData, int nDataLen)
 	}
 
 	nlwarning("exec memory lua error, cause %s", GetLastError());
+    PrintLuaCallstack(m_pLuaState, 1);
 	lua_settop(m_pLuaState, top);	
 	return false;
 }
@@ -221,6 +243,7 @@ bool CLuaEngine::RunLuaFunction(const char* szFunName, const char* szTableName, 
 	if(!lua_isfunction(m_pLuaState, -1))
 	{
         nlwarning("call function(%s) fail, cause %s", szFunName, GetLastError());
+        PrintLuaCallstack(m_pLuaState, 1);
 		lua_settop(m_pLuaState, top);
 		return false;
 	}
@@ -242,6 +265,7 @@ bool CLuaEngine::RunLuaFunction(const char* szFunName, const char* szTableName, 
 				break;
 			default:
 				nlwarning("call function(%s) fail, in param type error", szFunName);
+                PrintLuaCallstack(m_pLuaState, 1);
 				lua_settop(m_pLuaState, top);
 				return false;
 		}
@@ -273,6 +297,7 @@ bool CLuaEngine::RunLuaFunction(const char* szFunName, const char* szTableName, 
 					break;
 				default:
 					nlwarning("call function(%s) fail, out param type error = %s ", szFunName , lua_typename( m_pLuaState , -1 ) );
+                    PrintLuaCallstack(m_pLuaState, 1);
 					lua_settop(m_pLuaState, top);
 					return false;					
 			}
@@ -283,6 +308,7 @@ bool CLuaEngine::RunLuaFunction(const char* szFunName, const char* szTableName, 
 	}	
 	
 	nlwarning("call function(%s) fail, cause %s", szFunName, GetLastError());
+    PrintLuaCallstack(m_pLuaState, 1);
 	lua_settop(m_pLuaState, top);
 	return false;
 }

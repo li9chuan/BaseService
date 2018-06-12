@@ -84,19 +84,21 @@ function TimerMgr:__UpdateT__(cycle, index, first, last, func)
 end
 
 function TimerMgr:__UpdateH__(v)
-	self:__Insert__(utils.t2ms(0, v.time.m, v.time.s, v.time.ms), v.id, v.func)
+    local delay = v.time.m * 60000 + v.time.s * 1000 + v.time.ms;
+	self:__Insert__(delay, v.id, v.func)
 end
 
 function TimerMgr:__UpdateM__(v)
-	self:__Insert__(utils.t2ms(0, 0, v.time.s, v.time.ms), v.id, v.func)
+    local delay = v.time.s * 1000 + v.time.ms;
+	self:__Insert__(delay, v.id, v.func)
 end
 
 function TimerMgr:__UpdateS__(v)
-	self:__Insert__(utils.t2ms(0, 0, 0, v.time.ms), v.id, v.func)
+	self:__Insert__(v.time.ms, v.id, v.func)
 end
 
 function TimerMgr:__UpdateMS__(v)
-	self:__Insert__(utils.t2ms(0, 0, 0, 0), v.id, v.func)
+	self:__Insert__(0, v.id, v.func)
 end
 
 return TimerMgr

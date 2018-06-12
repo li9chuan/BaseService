@@ -32,6 +32,7 @@ function ServiceInit()
 	
     nlinfo("Lua Start.");
     
+    TimerMgr:Init( Misc.GetLocalTime() );
     MsgLogin:Init();
     MsgRoom:Init();
     
@@ -47,7 +48,7 @@ end
 
 -- 游戏循环
 function ServiceUpdate()
-    TimerMgr:Update(math.floor(os.clock() * 1000));
+    TimerMgr:Update( Misc.GetLocalTime() );
 end
 
 function ServiceRelease()

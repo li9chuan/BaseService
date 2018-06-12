@@ -121,7 +121,7 @@ message MsgQiangDiZhuResult                                          // 抢地�
 	optional uint64 playid                  = 1;                       // 玩家id
 	optional uint64 result                  = 2;                       // 玩家选择的结果
 	optional uint64 state                   = 3;                       // 状态
-	optional MsgCards   dizhu_card          = 4;             	         // 刷新地主的手牌
+	repeated uint32 dizhu_cards             = 4;             	         // 刷新地主的手牌
 	optional uint64 CardCount               = 5;                       // 手牌数量
 	optional uint64 multiple                = 6;                       // 房间倍数
 }
@@ -141,11 +141,11 @@ message MsgDiPaiMutiple                                             // 底牌翻
 
 message MsgMingPaiResult                                             // 选择明牌结果(客户端发给服务器的，服务器广播的)
 {
-	optional uint64 playid                      = 1;                       // 玩家id
-	optional uint64 result                      = 2;                       // 玩家选择的结果
-	optional uint64 state                       = 3;                       // 状态
-	optional MsgCards   dizhu_card              = 4;             	         // 地主明牌时刷新手牌
-	optional uint64 multiple                    = 5;                       // 房间倍数
+	optional uint64 playid                      = 1;                        // 玩家id
+	optional uint64 result                      = 2;                        // 玩家选择的结果
+	optional uint64 state                       = 3;                        // 状态
+	repeated uint32 dizhu_cards                 = 4;             	        // 地主明牌时刷新手牌
+	optional uint64 multiple                    = 5;                        // 房间倍数
 }
 
 message MsgJiaBeiResult                                              // 选择加倍结果(客户端发给服务器的，服务器广播的)
@@ -160,7 +160,7 @@ message MsgDDZPlayer                                                // 玩家信
 	optional MsgPlayerInfo      player_base          = 1;			// 玩家信息(房间信息填充)
 	optional uint32 			state				 = 2;	        // 玩家状态
 	optional uint32 			hand_count			 = 3;           // 手牌数量
-	optional MsgCards           card_list            = 4;          	// 手牌列表(房间信息、showdown填充)
+	repeated uint32             card_list            = 4;          	// 手牌列表(房间信息、showdown填充)
 	optional uint32 			seats				 = 5;	        // 座位(房间信息填充)
 	optional int64              score                = 6;           // 玩家当前的积分
 	optional int64      		show_down_score      = 7;           // 玩家该局游戏的加减分
@@ -168,18 +168,18 @@ message MsgDDZPlayer                                                // 玩家信
 	optional uint32             qingdizhu_value      = 9;           // 玩家抢地主的结果
 	optional uint32             multiple             = 10;          // 玩家倍数,(结算时使用)
 	optional uint32      		integral_num         = 11;          // 加券数
-	optional MsgCards           out_card     		 = 12;          // 上把玩家出的牌信息
+	repeated uint32             out_cards     		 = 12;          // 上把玩家出的牌信息
 	optional uint32  	        out_type			 = 13;          // 上把玩家的出牌种类
 }
 
 message MsgDDZActon
 {
-	optional uint64  	         new_actionid       = 1; 			    // 当前活动玩家
-	optional uint64  	         old_actionid		= 2; 			    // 上把的活动玩家
-	optional MsgCards            last_out_card      = 3;             	// 上把玩家出的牌信息
-	optional uint32  	         last_out_type		= 4;                // 上把玩家的出牌种类
-	optional TDDZPlayerWik       wik                = 5;                // 当前活动玩家的权限
-	repeated MsgDDZPlayer        player_list        = 6;                // 玩家信息
+	optional uint64  	        new_actionid        = 1; 			    // 当前活动玩家
+	optional uint64  	        old_actionid		= 2; 			    // 上把的活动玩家
+	repeated uint32             last_out_cards      = 3;             	// 上把玩家出的牌信息
+	optional uint32  	        last_out_type		= 4;                // 上把玩家的出牌种类
+	optional TDDZPlayerWik      wik                 = 5;                // 当前活动玩家的权限
+	repeated MsgDDZPlayer       player_list         = 6;                // 玩家信息
 }
 
 
@@ -188,9 +188,9 @@ message MsgDDZUserOutCard
 	optional uint64 	            old_actionid	    = 1;              // 旧玩家ID
 	optional uint32  	            out_type		    = 2;              // 出牌种类
 	optional uint32  	            hand_count          = 3;              // 玩家手牌数量
-	optional MsgCards               out_card            = 4;              // 出牌列表
+	repeated uint32                 out_cards           = 4;              // 出牌列表
 	optional uint64                 multiple            = 5;              // 房间倍数
-	optional MsgCards               hand_card           = 6;              // 明牌玩家剩余的手牌，客户端刷新使用
+	repeated uint32                 hand_cards          = 6;              // 明牌玩家剩余的手牌，客户端刷新使用
 }
 
 message MsgDDZRoom                                                      // 房间信息
@@ -204,7 +204,7 @@ message MsgDDZRoom                                                      // 房�
 	optional MsgCreatePrivateRoom		    private_room 	        = 7;	    // 私房信息;
 	optional MsgDDZUserOutCard              last_outcard            = 8;     // 房间上家牌的信息
 	optional TDDZPlayerWik                  wik                     = 9;     // 当前活动玩家的权限
-	optional MsgCards                       bottom_card             = 10;    // 底牌列表
+	optional uint32                         bottom_cards            = 10;    // 底牌列表
 	optional uint64                         multiple                = 11;    // 房间倍数
 	repeated MsgDiPaiMutiple 			    dipai_multi_list        = 12;    // 底牌翻倍列表
 	optional uint32						    room_pay_type           = 13;    // 付费类型

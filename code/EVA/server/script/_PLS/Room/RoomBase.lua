@@ -6,6 +6,7 @@ function RoomBase:ctor()
     self.RoomID                 = RoomMgr:GenerateRoomID();
     self.PrvRoomID              = 0;
     self.RoomType               = "";
+    self.OwenrID                = 0;        -- 房间归属
     self._RoomMin               = 9999;
 
     self.Creator                = 0;

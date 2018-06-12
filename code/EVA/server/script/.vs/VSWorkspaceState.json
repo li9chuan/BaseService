@@ -2,11 +2,7 @@
   "ExpandedNodes": [
     "",
     "\\Framework",
-    "\\Framework\\Net",
-    "\\_PLS",
-    "\\_PLS\\Games\\PokerDdz",
-    "\\_PLS\\Player",
-    "\\_PLS\\Room"
+    "\\Framework\\Net"
   ],
   "PreviewInSolutionExplorer": false
 }

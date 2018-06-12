@@ -35,6 +35,7 @@ function ServiceInit()
     nlinfo("Lua PLSConfig:");
     PrintTable(PLSConfig)
 
+    TimerMgr:Init( Misc.GetLocalTime() );
     MsgLogin:Init();
     MsgRoom:Init();
     

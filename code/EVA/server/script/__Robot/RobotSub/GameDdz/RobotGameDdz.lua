@@ -30,7 +30,15 @@ function RobotGameDdz:cbDdzGameInfo( msgin )
     self.RoomInfo = ddz_gi;
     
     nlinfo("RobotGameDdz:cbDdzGameInfo");
-    PrintTable(ddz_gi);
+    
+    if self.RoomInfo~=nil then
+        PrintTable(ddz_gi);
+    else
+        nlwarning("ddz_gi==nil !!!!!!!!!!!!");
+        msgin:invert()
+        msgin.rpb("PB.MsgDDZRoom");
+    end
+    
     
     if self:GetFsmState()=="TCreatePrvRoom" then
         -- 房间是自己创建的，返回的是创建成功
@@ -65,7 +73,7 @@ function RobotGameDdz:cbDdzGameInfo( msgin )
     "room_type" : "RM_DDZ"
   },
   "game_count" : 1,
-  "bottom_card" : {
+  "bottom_cards" : {
     
   },
   "multiple" : 1,
