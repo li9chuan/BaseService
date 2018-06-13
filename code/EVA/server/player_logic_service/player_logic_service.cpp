@@ -47,6 +47,13 @@ public:
         LuaNetworkMgr.Init();
         ScriptMgr.init();
         LuaThreadMgr.Init();
+
+
+        string findfilename = "RoomDdz";
+        findfilename += ".lua";
+        string script_full_path = CPath::lookup(findfilename, false);
+
+        uint32 timmmm = CFile::getFileModificationDate(script_full_path);
     }
 
 
@@ -74,21 +81,6 @@ public:
 // Service instantiation
 NLNET_SERVICE_MAIN (CPlayerLogicService, LogicService.c_str(), "player_logic_service", 0, EmptyCallbackArray, "", "");
 
-//
-// Commands
-//
 
-NLMISC_COMMAND (info, "service information.", "")
-{
-    if(args.size() != 0) return false;
-    log.displayNL ("service information.");
 
-    log.displayNL ("ClientNumber:%u", VAR_PLAYER_NUM.get());
-    log.displayNL ("class count.");
-    log.displayNL ("PlayerBarUpdateTimerEvent:%d", NL_GET_LOCAL_INSTANCE_COUNTER(CTimerEvent));
-    //log.displayNL ("PlayerBarUpdateTimerEvent:%d", NL_GET_INSTANCE_COUNTER(CTimerEvent));
-
-	ScriptMgr.ExecString("ServiceInfo()");
-    return true;
-}
 

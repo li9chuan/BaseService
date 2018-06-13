@@ -37,7 +37,8 @@ end
 
 function PlayerInfoMgr:RemovePLS( pls_sid )
     self.PlayerInfoMap:ForEachRemove("ConPLS", pls_sid);
-    nlinfo("PlayerInfoMgr.RemovePLS:"..pls_sid);
+    
+    nlwarning("PlayerInfoMgr.RemovePLS:"..pls_sid);
 end
 
 function PlayerInfoMgr:Release()

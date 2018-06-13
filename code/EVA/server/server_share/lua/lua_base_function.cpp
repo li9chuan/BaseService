@@ -92,6 +92,28 @@ namespace bin
             return 1;
         }
 
+        //DEFINE_MODULE_FUNCTION(GetPath, string, (string& moudule_name))
+        //{
+        //    moudule_name.append(".lua");
+        //    string fullpath = CPath::lookup(moudule_name, false);
+
+        //    if (fullpath.size()>0)
+        //    {
+        //        r = NLMISC::CPath::getCurrentPath();
+        //        r.append("/");
+        //        r.append(fullpath);
+        //    }
+        //    return 1;
+        //}
+
+        DEFINE_MODULE_FUNCTION(GetFileModificationDate, lua_Integer, (string& script_full_path))
+        {
+            r = CFile::getFileModificationDate(script_full_path);
+            return 1;
+        }
+        
+
+
     END_SCRIPT_MODULE()
 
     BEGIN_SCRIPT_MODULE(Debug)

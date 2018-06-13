@@ -76,7 +76,7 @@ EventController             = require("Event/EventController")
 EventRegister               = require("Event/EventRegister")
 CallbackServer              = require("Net/CallbackServer");
 StateMachine                = require("SimpleStateMachine");
-
+HotfixHelper                = require("Hotfix/HotfixHelper");
 
 enum = {}
 
@@ -105,7 +105,10 @@ function OnInitFramework()
     math.randomseed(tostring(os.time()):reverse():sub(1, 7)) 
 
     EventController.Instance():Init()
-    TimerMgr:Init(os.clock()*1000);
+    TimerMgr:Init( Misc.GetLocalTime() );
+    
+    Hotfix = HotfixHelper:new();
+    Hotfix:Init();
 end
 
 

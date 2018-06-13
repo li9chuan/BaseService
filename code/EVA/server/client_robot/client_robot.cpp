@@ -56,15 +56,5 @@ public:
 // Service instantiation
 NLNET_SERVICE_MAIN (CClientRobot, "ROBOT", "client_robot", 0, EmptyCallbackArray, "", "");
 
-//
-// Commands
-//
 
-NLMISC_COMMAND (info, "service information.", "")
-{
-    if(args.size() != 0) return false;
-    log.displayNL ("service information.");
-	ScriptMgr.ExecString("ServiceInfo()");
-    return true;
-}
 

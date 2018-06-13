@@ -2,7 +2,8 @@ utils = require("Utils")
 
 TimerMgr = {}
 
-local tbinsert = table.insert
+local tbinsert  = table.insert
+local ums2t     = utils.ms2t
 
 function TimerMgr:Init(cycle)
     
@@ -25,9 +26,9 @@ function TimerMgr:GetTime()
 end
 
 function TimerMgr:Update(cycle)
-	local h1, m1, s1, ms1 = utils.ms2t(self._cycle)
+	local h1, m1, s1, ms1 = ums2t(self._cycle)
 	self._cycle = cycle
-	local h2, m2, s2, ms2 = utils.ms2t(self._cycle)
+	local h2, m2, s2, ms2 = ums2t(self._cycle)
 	self:__UpdateT__(24, 1, h1, h2, utils.bind(self.__UpdateH__, self))
 	self:__UpdateT__(60, 2, m1, m2, utils.bind(self.__UpdateM__, self))
 	self:__UpdateT__(60, 3, s1, s2, utils.bind(self.__UpdateS__, self))
@@ -54,8 +55,8 @@ function TimerMgr:__Insert__(delay, timerid, func)
             self._removemap[timerid] = nil;
         end
 	else
-		local h1, m1, s1, ms1 = utils.ms2t(delay)
-		local h2, m2, s2, ms2 = utils.ms2t(delay + self._cycle)
+		local h1, m1, s1, ms1 = ums2t(delay)
+		local h2, m2, s2, ms2 = ums2t(delay + self._cycle)
 		local tick = {	func    = func, 
                         id      = timerid,
 						time    = { h = h2, m = m2, s = s2, ms = ms2 } }

@@ -180,4 +180,17 @@ NLMISC_COMMAND (lua, "run lua string.", "lua")
     return true;
 }
 
+NLMISC_COMMAND(hotfix, "lua module hotfix.", "")
+{
+    if (args.size() != 0) return false;
+    ScriptMgr.ExecString("Hotfix:Update()");
+    return true;
+}
+
+NLMISC_COMMAND(info, "service information.", "")
+{
+    if (args.size() != 0) return false;
+    ScriptMgr.ExecString("ServiceInfo()");
+    return true;
+}
 

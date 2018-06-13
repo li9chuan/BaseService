@@ -32,6 +32,14 @@
         </Filter>
         <LuaFile RelativePath=".\SimpleStateMachine.lua" />
         <LuaFile RelativePath=".\MapMap.lua" />
+        <Filter RelativePath=".\Hotfix" Toggle="false" >
+            <LuaFile RelativePath=".\hotfix.lua" />
+            <LuaFile RelativePath=".\HotfixHelper.lua" />
+            <Filter RelativePath=".\internal" Toggle="true" >
+                <LuaFile RelativePath=".\functions_replacer.lua" />
+                <LuaFile RelativePath=".\module_updater.lua" />
+            </Filter>
+        </Filter>
     </Filter>
     <Filter RelativePath=".\SharedLib" Toggle="true" >
         <LuaFile RelativePath=".\StaticTableMgr.lua" />

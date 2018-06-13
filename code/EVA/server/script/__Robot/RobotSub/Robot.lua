@@ -95,8 +95,17 @@ end
 function Robot:cbSyncPlayerInfo( msgin )
     local player_info = msgin:rpb("PB.MsgPlayerInfo");
 
+    if player_info==nil then
+        nlwarning("player_info==nil !!!!!!!!!");
+        return;
+    end
+    
     nlinfo("Robot:cbSyncPlayerInfo");
     PrintTable(player_info);
+    
+    self.Data.UID   = player_info.UID;
+    
+    
 end
 
 

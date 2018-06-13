@@ -25,24 +25,31 @@ end
 
 
 function RobotGameDdz:cbDdzGameInfo( msgin )
+    
     local ddz_gi = msgin:rpb("PB.MsgDDZRoom");
+    
+    if ddz_gi==nil then
+        nlwarning("ddz_gi==nil !!!!!!!!!!!!");
+        return
+    end
 
     self.RoomInfo = ddz_gi;
     
-    nlinfo("RobotGameDdz:cbDdzGameInfo");
-    
-    if self.RoomInfo~=nil then
-        PrintTable(ddz_gi);
-    else
-        nlwarning("ddz_gi==nil !!!!!!!!!!!!");
-        msgin:invert()
-        msgin.rpb("PB.MsgDDZRoom");
-    end
+    nlinfo("=======>  RobotGameDdz:cbDdzGameInfo");
+    PrintTable(ddz_gi);
     
     
     if self:GetFsmState()=="TCreatePrvRoom" then
-        -- 房间是自己创建的，返回的是创建成功
-        self.IsCreate = true;
+
+        
+        for _,v in ipairs(ddz_gi.player_list) do
+            if v.player_base.UID == self.Robot.Data.UID then
+                if Misc.GetBit(v.state, enum.STATE_DDZ_ROOM_OWNER) then
+                    -- 房间是自己创建的，返回的是创建成功
+                    self.IsCreate = true;
+                end
+            end
+        end
         
         -- 把room_id加入到开放列表中，供其它机器人加入。
         
@@ -56,31 +63,8 @@ function RobotGameDdz:cbDdzGameInfo( msgin )
         self.Robot.GameFsm:SwitchState("TIdle");
     else
         
-        nlinfo("收到房间内数据--非创建");
+        nlinfo("Join private room.");
     end
-
-    --[[
-  "player_list" : {
-    {
-      "seats" : 1,
-      "player_base" : {
-        "UID" : 1005,
-        "Nickname" : " "
-      }
-    }
-  },
-  "private_room" : {
-    "room_type" : "RM_DDZ"
-  },
-  "game_count" : 1,
-  "bottom_cards" : {
-    
-  },
-  "multiple" : 1,
-  "room_id" : 963620
-}
-
---]]
 end
 
 

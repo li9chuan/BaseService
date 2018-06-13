@@ -35,7 +35,6 @@ function ServiceInit()
     nlinfo("Lua PLSConfig:");
     PrintTable(PLSConfig)
 
-    TimerMgr:Init( Misc.GetLocalTime() );
     MsgLogin:Init();
     MsgRoom:Init();
     
@@ -44,6 +43,8 @@ function ServiceInit()
     DBMgr:Init();
     PlayerMgr:Init();
     PlayerLogicService:Init();
+    
+    
     
     local room = RoomFactory:CreateRoom("RM_DDZ");
     
@@ -58,7 +59,8 @@ end
 
 -- 游戏循环
 function ServiceUpdate()
-    TimerMgr:Update( Misc.GetLocalTime() );
+    local curr_tick = Misc.GetLocalTime();
+    TimerMgr:Update( curr_tick );
 end
 
 function ServiceRelease()

@@ -2,7 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\Framework",
-    "\\Framework\\Net"
+    "\\Framework\\Hotfix",
+    "\\Framework\\Hotfix\\internal",
+    "\\Framework\\Net",
+    "\\_PLS\\Games",
+    "\\_PLS\\Games\\PokerDdz",
+    "\\_PLS\\Room",
+    "\\_SCH",
+    "\\_SCH\\Player"
   ],
+  "SelectedNode": "\\_SCH\\Player\\PlayerInfoMgr.lua",
   "PreviewInSolutionExplorer": false
 }
