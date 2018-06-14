@@ -27,14 +27,13 @@ function FSMDdz:Init( robot )
             onTJoinPrvRoom          = handler(self, self.DoJoinPrvRoom),
 		}
     })
-    
-    self._OldCreateRoomTime     = TimerMgr:GetTime();
 
-    
+
     self.Robot      = robot;
     self.GameDdz    = robot.Game;
     self:SwitchState( self._CurrState );
 
+    self.CreateRoomWait     = nil;
 
 end
 
@@ -67,6 +66,10 @@ end
 function FSMDdz:DoIdle( event )
     -- 不是第一帧，下一帧执行。
     if not event.args[1] then
+        
+        if not (self.Robot.Data.UID > 0) then
+            return;
+        end
 
         if self.Robot.Game.RoomInfo == nil then
             local open_room = PublicRoomInfoMgr:GetOpenRoom("RM_DDZ");
@@ -76,9 +79,14 @@ function FSMDdz:DoIdle( event )
                 self:SwitchState("TJoinPrvRoom", open_room);
             else
                 -- 没有公共的房间，创建一个。
-                local create_time = math.random(5000,20000);
-                if TimerMgr:GetTime() - self._OldCreateRoomTime > create_time then
-                    self._OldCreateRoomTime = TimerMgr:GetTime();
+             
+                if self.CreateRoomWait == nil then
+                    self.CreateRoomWait = math.random(5000,60000);
+                end
+                
+                if self:__GetRunStateTime() > self.CreateRoomWait then
+                    nlinfo("request create room.   UID:"..self.Robot.Data.UID .. "  wait:"..self.CreateRoomWait);
+                    self.CreateRoomWait = math.random(5000,60000);
                     self:SwitchState("TCreatePrvRoom");
                 end
             end
@@ -92,6 +100,7 @@ function FSMDdz:DoCreatePrvRoom( event, open_room )
         self.GameDdz:DoCreatePrvRoom()
     else
         if self:__GetRunStateTime() > 15*1000 then
+            -- 创建房间超时
             self:SwitchState("TIdle");
         end
     end

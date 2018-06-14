@@ -27,13 +27,13 @@ end
 
 function RoomPlayerBase:SetState( enum_val )
     if enum_val~=nil then
-        Misc.SetBit(self._State, enum_val);
+        self._State = Misc.SetBit(self._State, enum_val);
     end
 end
 
 function RoomPlayerBase:ClearState( enum_val )
     if enum_val~=nil then
-        Misc.ClearBit(self._State, enum_val);
+        self._State = Misc.ClearBit(self._State, enum_val);
     end
 end
 

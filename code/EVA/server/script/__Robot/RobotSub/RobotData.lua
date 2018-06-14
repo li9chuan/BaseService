@@ -12,7 +12,13 @@ function RobotData:ctor()
     self.Game           = "";
 end
 
-function RobotData:ClearRoomState()
+function RobotData:ClearRoomState( enum_val )
+    if enum_val~=nil then
+        self._RoomState = Misc.ClearBit(self._RoomState, enum_val);
+    end
+end
+
+function RobotData:ClearRoomAllState()
     self._RoomState = 0;
 end
 
@@ -27,7 +33,7 @@ end
 
 function RobotData:SetRoomState( enum_val )
     if enum_val~=nil then
-        Misc.SetBit(self._RoomState, enum_val);
+        self._RoomState = Misc.SetBit(self._RoomState, enum_val);
     end
 end
 

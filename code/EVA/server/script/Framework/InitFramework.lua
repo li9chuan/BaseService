@@ -102,7 +102,10 @@ function OnInitFramework()
         end
     end
 
-    math.randomseed(tostring(os.time()):reverse():sub(1, 7)) 
+    --math.randomseed(tostring(os.time()):reverse():sub(1, 7)) 
+    
+    local seed = os.time() + (Misc.GetLocalTime()*100000);
+    math.randomseed(seed) 
 
     EventController.Instance():Init()
     TimerMgr:Init( Misc.GetLocalTime() );

@@ -23,7 +23,7 @@ end
 function PublicRoomInfoMgr:GetOpenRoom( room_type )
     local rooms = self.Rooms[room_type];
     
-    if room~=nil then
+    if rooms~=nil then
         for _,v in pairs(rooms) do
             return v;
         end    

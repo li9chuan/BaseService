@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <Project Name="BaseService.luaprj" Cmd="E:\BaseService\build\bin\Debug\client_robot.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="true" >
-    <Filter RelativePath=".\Framework" Toggle="false" >
+    <Filter RelativePath=".\Framework" Toggle="true" >
         <LuaFile RelativePath=".\Class.lua" />
         <LuaFile RelativePath=".\functions.lua" />
         <LuaFile RelativePath=".\List.lua" />
@@ -32,7 +32,7 @@
         </Filter>
         <LuaFile RelativePath=".\SimpleStateMachine.lua" />
         <LuaFile RelativePath=".\MapMap.lua" />
-        <Filter RelativePath=".\Hotfix" Toggle="false" >
+        <Filter RelativePath=".\Hotfix" Toggle="true" >
             <LuaFile RelativePath=".\hotfix.lua" />
             <LuaFile RelativePath=".\HotfixHelper.lua" />
             <Filter RelativePath=".\internal" Toggle="true" >

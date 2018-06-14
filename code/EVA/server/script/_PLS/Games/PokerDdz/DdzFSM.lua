@@ -74,16 +74,11 @@ function FSMDouDiZhu:IsState( state )
 end
 
 function FSMDouDiZhu:DoWait( event )
-    
-    if event.args[1] then
-        --nlinfo( "FSMClass:DoWait SwitchState" );
-    else
-        --nlinfo( "FSMClass:DoWait TickUpdate" );
-    end
-    
-    -- 如果都点了普通开始，跳转检查距离等条件的状态。
-    if self.RoomDdz:GameStartWait() then
-        self:SwitchState("TDDZStateCheckStartGame");
+    if not event.args[1] then
+        -- 如果都点了普通开始，跳转检查距离等条件的状态。
+        if self.RoomDdz:GameStartWait() then
+            self:SwitchState("TDDZStateCheckStartGame");
+        end
     end
 end
 

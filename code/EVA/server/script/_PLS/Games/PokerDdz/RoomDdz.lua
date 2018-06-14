@@ -79,42 +79,44 @@ function RoomDdz:GameStartWait()
     end
     
     -- 是否都点了准备
-    for _,v in ipairs(self.RoomPlayerData.map) do
+    for _,v in pairs(self.RoomPlayerData.map) do
         if not v:IsReady() then
             return false;
         end
     end
-
+    
     return true;
 end
 
 -- 玩家加入房间
 function RoomDdz:JoinRoom( player )
+    local ddz_player = self.RoomPlayerData:Find(player.UID);
 
-    if self.RoomPlayerData:Count() < self._RoomMin then
-    
-        local ddz_player = self.RoomPlayerData:Find(player.UID);
+    if ddz_player~=nil then
+        -- 返回房间
+        ddz_player:SetState( enum.STATE_DDZ_NEWROLE );
+    else
+        
+        -- 如果房间已满，跳出。
+        if self.RoomPlayerData:Count() == self._RoomMin then
+            return false
+        end
+        
+        -- 第一次进入房间
+        ddz_player = DdzPlayerInfo:new();
+        ddz_player:SetState( enum.STATE_DDZ_NEWROLE );
 
-        if ddz_player~=nil then
-            ddz_player:SetState( enum.STATE_DDZ_NEWROLE );
-        else
-            ddz_player = DdzPlayerInfo:new();
-            ddz_player:SetState( enum.STATE_DDZ_NEWROLE );
-
-            if player.UID == self.OwenrID then
-                --  设置是房主
-                ddz_player:SetState( enum.STATE_DDZ_ROOM_OWNER );
-            end
-
-            self.RoomPlayerData:Insert(player.UID, ddz_player);
+        if player.UID == self.OwenrID then
+            --  设置是房主
+            ddz_player:SetState( enum.STATE_DDZ_ROOM_OWNER );
         end
 
-        self:BaseJoinRoom(player);
-        self:BroadcastGameInfo();
-        return true;
+        self.RoomPlayerData:Insert(player.UID, ddz_player);
     end
-    
-    return false;
+
+    self:BaseJoinRoom(player);
+    self:BroadcastGameInfo();
+    return true;
 end
 
 function RoomDdz:TickUpdate()
@@ -145,6 +147,10 @@ function RoomDdz:UserCancelReady( uid )
     end
 end
 
+function RoomDdz:__SetQDZWiki( enum_idx )
+    self._QiangDiZhuWiki = Misc.SetBit(self._QiangDiZhuWiki, enum_idx );
+end
+
 function RoomDdz:SendQiangDiZhuWik()
     
     -- 随机一个玩家选择抢地主
@@ -154,23 +160,23 @@ function RoomDdz:SendQiangDiZhuWik()
     
     if player~=nil then
     
-        self._QingDiZhuWiki = 0;
+        self._QiangDiZhuWiki = 0;
         
         if _QiangDiZhu then
-            Misc.SetBit(self._QingDiZhuWiki, enum.DDZ_QDZ_BUJIAO );
-            Misc.SetBit(self._QingDiZhuWiki, enum.DDZ_QDZ_JIAODIZHU );
+            self:__SetQDZWiki( enum.DDZ_QDZ_BUJIAO );
+            self:__SetQDZWiki( enum.DDZ_QDZ_JIAODIZHU );
         else
-            Misc.SetBit(self._QingDiZhuWiki, enum.DDZ_QDZ_BUJIAO );
-            Misc.SetBit(self._QingDiZhuWiki, enum.DDZ_JF_JIAO_ONE );
-            Misc.SetBit(self._QingDiZhuWiki, enum.DDZ_JF_JIAO_TWO );
-            Misc.SetBit(self._QingDiZhuWiki, enum.DDZ_JF_JIAO_THREE );
+            self:__SetQDZWiki( enum.DDZ_QDZ_BUJIAO );
+            self:__SetQDZWiki( enum.DDZ_JF_JIAO_ONE );
+            self:__SetQDZWiki( enum.DDZ_JF_JIAO_TWO );
+            self:__SetQDZWiki( enum.DDZ_JF_JIAO_THREE );
         end
 
         self:_RefreshPlayerQiangDiZhuState(self._ActionID);
         
         local msg_qdz = {
             playid = self._ActionID;
-            qingdizhu_wiki = self._QingDiZhuWiki;
+            qingdizhu_wiki = self._QiangDiZhuWiki;
         }
         
         BaseService:SendToClient( player, "DDZ_QDZ_QX", "PB.MsgQiangDiZhu", msg_qdz );

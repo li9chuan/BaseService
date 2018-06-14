@@ -35,9 +35,9 @@ function RobotGameDdz:cbDdzGameInfo( msgin )
 
     self.RoomInfo = ddz_gi;
     
-    nlinfo("=======>  RobotGameDdz:cbDdzGameInfo");
-    PrintTable(ddz_gi);
     
+    PrintTable(ddz_gi);
+    nlinfo("=======>  RobotGameDdz:cbDdzGameInfo  UID:"..self.Robot.Data.UID);
     
     if self:GetFsmState()=="TCreatePrvRoom" then
 
@@ -51,6 +51,7 @@ function RobotGameDdz:cbDdzGameInfo( msgin )
             end
         end
         
+        nlinfo("=========>Create private room.   UID:"..self.Robot.Data.UID);
         -- 把room_id加入到开放列表中，供其它机器人加入。
         
         local pb_room_info = PublicRoomInfo:new();
@@ -63,7 +64,7 @@ function RobotGameDdz:cbDdzGameInfo( msgin )
         self.Robot.GameFsm:SwitchState("TIdle");
     else
         
-        nlinfo("Join private room.");
+        nlinfo("=========>Refresh private room.   UID:"..self.Robot.Data.UID);
     end
 end
 

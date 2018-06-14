@@ -34,9 +34,9 @@ function RoomMgr:CreatePrivateRoom( uid, prv_room_id, room_type )
             
             if room_base~=nil then
                 room_base.PrvRoomID = prv_room_id;
+                room_base.OwenrID   = uid;
 
                 if room_base:JoinRoom(player) then
-                    room_base.OwenrID   = uid;
                     self.GameRooms:Insert(room_base.RoomID, room_base);
                     self.PrvRoomTypes:Insert(room_type, prv_room_id, room_base);
                 else

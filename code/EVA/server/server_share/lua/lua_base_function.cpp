@@ -47,11 +47,11 @@ namespace bin
             return 1;
         }
 
-        DEFINE_MODULE_FUNCTION(SetBit, void, (lua_Integer& flag_bit, int flag_idx))
+        DEFINE_MODULE_FUNCTION(SetBit, lua_Integer, (lua_Integer flag_bit, int flag_idx))
         {
             uint64  shl = 1;
             shl <<= flag_idx;
-            flag_bit |= shl;
+            r = (flag_bit | shl);
             return 1;
         }
 
@@ -63,11 +63,11 @@ namespace bin
             return 1;
         }
 
-        DEFINE_MODULE_FUNCTION(ClearBit, void, (lua_Integer& flag_bit, int flag_idx))
+        DEFINE_MODULE_FUNCTION(ClearBit, lua_Integer, (lua_Integer flag_bit, int flag_idx))
         {
             uint64  shl = 1;
             shl <<= flag_idx;
-            flag_bit ^= shl;
+            r = (flag_bit ^ shl);
             return 1;
         }
 

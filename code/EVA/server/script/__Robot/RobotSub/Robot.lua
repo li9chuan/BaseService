@@ -85,6 +85,11 @@ function Robot:Login()
     return false;
 end
 
+function Robot:HeartBeat()
+    local msgout    = CMessage("HB");
+    self.Net:Send( msgout );
+end
+
 function Robot:Send( msgname, proto_type, proto_msg )
     local code  = protobuf.encode(proto_type, proto_msg);
     local msg   = CMessage(msgname);
