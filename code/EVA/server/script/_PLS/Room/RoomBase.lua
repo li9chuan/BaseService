@@ -143,6 +143,34 @@ function RoomBase:GetRoomPlayerNum()
     return count;
 end
 
+function RoomBase:GetNextUID( curr_id )
+
+    local curr_seat = self:GetPlayerSeatIdx(curr_id);
+    
+    if curr_seat>0 then
+
+        -- 当前位置向后找
+        for i=curr_seat+1, ROOM_CFG.room_max do
+            local next_uid = self.SeatPlayers[i];
+            if next_uid>0 then
+                return next_uid;
+            end
+        end
+
+        -- 后面没有了，从头开始找
+        for i=1, ROOM_CFG.room_max do
+            local next_uid = self.SeatPlayers[i];
+            if next_uid>0 then
+                return next_uid;
+            end
+        end
+    end
+    
+    return 0;
+end
+
+
+
 function RoomBase:__NotifyOtherServiceLevel( uid )
 
     local msgout = CMessage("LURT");

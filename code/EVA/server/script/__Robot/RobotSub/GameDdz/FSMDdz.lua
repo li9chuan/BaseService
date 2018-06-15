@@ -18,6 +18,7 @@ function FSMDdz:Init( robot )
             {name = "TIdle" 			        },
 			{name = "TCreatePrvRoom"		    },
 			{name = "TJoinPrvRoom" 	            },
+            {name = "TInRoomIdlem" 	            },
 
         },
         callbacks =
@@ -25,6 +26,7 @@ function FSMDdz:Init( robot )
             onTIdle   		        = handler(self, self.DoIdle),
 			onTCreatePrvRoom  	    = handler(self, self.DoCreatePrvRoom),
             onTJoinPrvRoom          = handler(self, self.DoJoinPrvRoom),
+            onTInRoomIdlem          = handler(self, self.DoInRoomIdlem),
 		}
     })
 
@@ -85,7 +87,7 @@ function FSMDdz:DoIdle( event )
                 end
                 
                 if self:__GetRunStateTime() > self.CreateRoomWait then
-                    nlinfo("request create room.   UID:"..self.Robot.Data.UID .. "  wait:"..self.CreateRoomWait);
+                    self.Robot:Print("request create room.   UID:"..self.Robot.Data.UID .. "  wait:"..self.CreateRoomWait);
                     self.CreateRoomWait = math.random(5000,60000);
                     self:SwitchState("TCreatePrvRoom");
                 end
@@ -107,14 +109,13 @@ function FSMDdz:DoCreatePrvRoom( event, open_room )
 end
 
 function FSMDdz:DoJoinPrvRoom( event )
-    
     -- 调用的这帧执行
     if event.args[1] then
 
-        nlinfo("DoJoinPrvRoom");
+        self.Robot:Print("DoJoinPrvRoom");
         local open_room = event.args[2];
 
-        PrintTable(open_room);
+        self.Robot:PrintTable(open_room);
         self.GameDdz:DoJoinPrvRoom(open_room)
 
     else
@@ -123,6 +124,16 @@ function FSMDdz:DoJoinPrvRoom( event )
         end
     end
 end
+
+function FSMDdz:DoInRoomIdlem( event )
+    
+    if not event.args[1] then
+        if not self.GameDdz:GetRobotState(enum.STATE_DDZ_READY) then
+            self.GameDdz:DoReady();
+        end
+    end
+end
+
 
 
 return FSMDdz;

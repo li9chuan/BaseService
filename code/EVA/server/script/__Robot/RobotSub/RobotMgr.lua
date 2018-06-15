@@ -13,9 +13,15 @@ function RobotMgr:Init()
 
     -- 斗地主消息
     self._EventRegister:RegisterEvent( "DDZ_GI",            self, self.cbDdzGameInfo );
+    self._EventRegister:RegisterEvent( "DDZ_SR",            self, self.cbDdzUserStartReady );
+    
+    
 
-    self.TotalRobot     = nil;
-    self.RobotList      = {};
+    self.TotalRobot         = nil;
+    self.RobotList          = {};
+    self.PrintFilterWhite   = nil;
+    
+    self.MsgNames           = {};
 end
 
 function RobotMgr:StartLogic( start_num, total_num )
@@ -32,9 +38,45 @@ function RobotMgr:StartLogic( start_num, total_num )
     end
 end
 
+function RobotMgr:RegisterMsg( msgname, callbackname )
+    if self.MsgNames[msgname]==nil then
+        self._EventRegister:RegisterEvent( msgname,            self, self.DispatchMsg );
+        self.MsgNames[msgname] = callbackname;
+    end
+end
+
+function RobotMgr:DispatchMsg( from, msgin )
+    
+    local robot = self.RobotList[from];
+    if robot~=nil then
+        --robot.Game:cbXXX(msgin);
+    end
+end
+
+
 function RobotMgr:Update()
     for _,v in pairs(self.RobotList) do
         v:Update();
+    end
+end
+
+function RobotMgr:Print( str, id )
+    if self.PrintFilterWhite==nil then
+        nlinfo(str);
+    else
+        if self.PrintFilterWhite[id]~=nil then
+            nlinfo(str);
+        end
+    end
+end
+
+function RobotMgr:PrintTable( tbl, id )
+    if self.PrintFilterWhite==nil then
+        PrintTable(tbl);
+    else
+        if self.PrintFilterWhite[id]~=nil then
+            PrintTable(tbl);
+        end
     end
 end
 
@@ -58,31 +100,34 @@ function RobotMgr:LuaTestCB( from, msgin )
 end
 
 function RobotMgr:cbAuthOk( from, msgin )
-
     local robot = self.RobotList[from];
-
     if robot~=nil then
         nlinfo("RobotMgr:cbAuthOk");
     end
 end
 
 function RobotMgr:cbSyncPlayerInfo( from, msgin )
-
     local robot = self.RobotList[from];
-
     if robot~=nil then
         robot:cbSyncPlayerInfo(msgin);
     end
 end
 
 function RobotMgr:cbDdzGameInfo( from, msgin )
-
     local robot = self.RobotList[from];
-
     if robot~=nil then
         robot.Game:cbDdzGameInfo(msgin);
     end
 end
+
+function RobotMgr:cbDdzUserStartReady( from, msgin )
+    local robot = self.RobotList[from];
+    if robot~=nil then
+        robot.Game:cbDdzUserStartReady(msgin);
+    end
+end
+
+
 
 
 return RobotMgr;

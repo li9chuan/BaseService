@@ -7,25 +7,27 @@ package.path = BasePath .. "_PLS/?.lua;" .. BasePath .. "SharedLib/?.lua;";
 
 
 require("InitSharedLib")
+require("_PLSConfig")
 require("PlayerLogicService")
 require("Player/PlayerMgr")
 require("DB/DBMgr")
 require("Room/RoomMgr")
+require("Room/RoomFactory")
 
-PlayerDataHelper    = require("Player/PlayerDataHelper");
-PlayerHelper        = require("Player/PlayerHelper");
-MsgLogin            = require("Msg/MsgLogin")
-MsgRoom             = require("Msg/MsgRoom")
 
-PLSConfig           = require("_PLSConfig")
-
-RoomPlayerBase      = require("Room/RoomPlayerBase")
-RoomBase            = require("Room/RoomBase")
-RoomFactory         = require("Room/RoomFactory")
-
+require("Msg/MsgLogin")
+require("Msg/MsgRoom")
+require("Games/PokerDdz/MsgRoomDdz")
 
 require("Games/Common/PokerDef");
 require("Games/Common/CommonDef");
+
+
+
+PlayerDataHelper    = require("Player/PlayerDataHelper");
+PlayerHelper        = require("Player/PlayerHelper");
+RoomPlayerBase      = require("Room/RoomPlayerBase")
+RoomBase            = require("Room/RoomBase")
 CardsAnalyseRes     = require("Games/Common/CardsAnalyseRes")
 
 
@@ -37,6 +39,8 @@ function ServiceInit()
 
     MsgLogin:Init();
     MsgRoom:Init();
+    
+    MsgRoomDdz:Init();
     
     RoomFactory:Init();
     RoomMgr:Init();

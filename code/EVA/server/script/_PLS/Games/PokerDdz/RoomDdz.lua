@@ -1,4 +1,4 @@
-local RoomDdz = class("RoomDdz",RoomBase)
+local RoomDdz = class("RoomDdz", RoomBase)
 
 DdzFSM              = require("Games/PokerDdz/DdzFSM")
 DdzPlayerInfo       = require("Games/PokerDdz/DdzPlayerInfo")
@@ -257,6 +257,8 @@ function RoomDdz:RefrshRoleQiangDiZhu( uid, msg_qdz )
             self:BroadcastMsg("DDZ_QDZ", "PB.MsgQiangDiZhuResult", msg_qdz)
             
             
+            
+            --  设置下一个玩家抢地主的操作
         end
     end
 end
@@ -284,6 +286,8 @@ end
 
 -- 发牌
 function RoomDdz:SendHandCard()
+    
+    nlwarning("======================>   SendHandCard");
 
     local start_send    = 1;
     local end_send      = self.CFG_HAND_COUNT;
@@ -411,6 +415,11 @@ function RoomDdz:__FillPlayerRoomInfoMsg( uid, msg_room_player, current_uid )
         msg_room_player.score       = room_player:GetScore();
         
     
+        --TDDZStateQiangDiZhu
+        
+        if uid==current_uid or room_player:GetState(enum.STATE_DDZ_MINGPAI) then
+            msg_room_player.card_list   = room_player.HandCards;
+        end
     end
   
 end

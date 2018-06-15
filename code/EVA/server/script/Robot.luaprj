@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="Robot.luaprj" Cmd="E:\BaseService\build\bin\Debug\client_robot.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="true" >
+<Project Name="Robot.luaprj" Cmd="E:\BaseService\build\bin\Debug\client_robot.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="false" >
     <Filter RelativePath=".\__Robot" Toggle="false" >
         <LuaFile RelativePath=".\_ClientRobotMain.lua" />
         <Filter RelativePath=".\RobotSub" Toggle="false" >

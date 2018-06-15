@@ -44,6 +44,14 @@ function Robot:StartGameTest()
     end
 end
 
+function Robot:PrintTable( tbl )
+    RobotMgr:PrintTable(tbl, self.Data.UID);
+end
+    
+function Robot:Print( str )
+    RobotMgr:Print(str, self.Data.UID);
+end
+
 function Robot:Login()
     
     local login_url     = "http://127.0.0.1/www/login/login_test.php";
@@ -57,7 +65,7 @@ function Robot:Login()
     
     local http_tb       = Json2Table(http_res);
 
-    PrintTable(http_tb)
+    self:PrintTable(http_tb)
 
     self.Net:Connect("127.0.0.1:9999");
 
@@ -76,7 +84,7 @@ function Robot:Login()
 
         self:Send( "LOGIN", "PB.MsgLogin", proto_msg )
 
-        nlinfo("Login :"..self.Data.User);
+        self:Print("Login :"..self.Data.User);
         return true;
     else
         nlwarning("Connect Error :"..self.Data.User);
@@ -91,11 +99,15 @@ function Robot:HeartBeat()
 end
 
 function Robot:Send( msgname, proto_type, proto_msg )
-    local code  = protobuf.encode(proto_type, proto_msg);
     local msg   = CMessage(msgname);
-    msg:wstring(code);
+    if proto_type~=nil then
+        local code  = protobuf.encode(proto_type, proto_msg);
+        msg:wstring(code);
+    end
     self.Net:Send( msg );
 end
+
+
 
 function Robot:cbSyncPlayerInfo( msgin )
     local player_info = msgin:rpb("PB.MsgPlayerInfo");
@@ -105,8 +117,8 @@ function Robot:cbSyncPlayerInfo( msgin )
         return;
     end
     
-    nlinfo("Robot:cbSyncPlayerInfo");
-    PrintTable(player_info);
+    self:Print("Robot:cbSyncPlayerInfo");
+    self:PrintTable(player_info);
     
     self.Data.UID   = player_info.UID;
     

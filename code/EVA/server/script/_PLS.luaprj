@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="_PLS.luaprj" Cmd="E:\BaseService\build\bin\Debug\player_logic_service.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="false" >
+<Project Name="_PLS.luaprj" Cmd="E:\BaseService\build\bin\Debug\player_logic_service.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="true" >
     <Filter RelativePath=".\_PLS" Toggle="false" >
         <LuaFile RelativePath=".\_PLSMain.lua" />
         <LuaFile RelativePath=".\PlayerLogicService.lua" />
@@ -31,7 +31,7 @@
                 <LuaFile RelativePath=".\DdzFSM.lua" />
                 <LuaFile RelativePath=".\DdzPlayerInfo.lua" />
                 <LuaFile RelativePath=".\RoomDdz.lua" />
-                <LuaFile RelativePath=".\DdzRoomMsg.lua" />
+                <LuaFile RelativePath=".\MsgRoomDdz.lua" />
                 <LuaFile RelativePath=".\DDZOutCardData.lua" />
                 <LuaFile RelativePath=".\DdzCardTypes.lua" />
             </Filter>

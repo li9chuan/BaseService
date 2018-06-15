@@ -18,4 +18,3 @@ function RoomFactory:CreateRoom( room_type )
 end
 
 
-return RoomFactory;

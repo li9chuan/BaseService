@@ -45,11 +45,11 @@ function DdzPlayerInfo:IsReady()
 end
 
 function DdzPlayerInfo:SetReady()
-    return self:SetState( enum.STATE_DDZ_READY );
+    self:SetState( enum.STATE_DDZ_READY );
 end
 
 function DdzPlayerInfo:CancleReady()
-    return self:ClearState( enum.STATE_DDZ_READY );
+    self:ClearState( enum.STATE_DDZ_READY );
 end
 
 return DdzPlayerInfo;

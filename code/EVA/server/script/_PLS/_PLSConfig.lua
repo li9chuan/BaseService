@@ -18,5 +18,4 @@ PlayerConfig = {
 }
 
 
-return PLSConfig
 
