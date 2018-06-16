@@ -29,15 +29,25 @@ function TimerMgr:Update(cycle)
 	local h1, m1, s1, ms1 = ums2t(self._cycle)
 	self._cycle = cycle
 	local h2, m2, s2, ms2 = ums2t(self._cycle)
+
+
+	self:__UpdateT__(24, 1, h1, h2, handler(self, self.__UpdateH__))
+	self:__UpdateT__(60, 2, m1, m2, handler(self, self.__UpdateM__))
+	self:__UpdateT__(60, 3, s1, s2, handler(self, self.__UpdateS__))
+	self:__UpdateT__(1000, 4, ms1, ms2, handler(self, self.__UpdateMS__))
+    
+    --[[
 	self:__UpdateT__(24, 1, h1, h2, utils.bind(self.__UpdateH__, self))
 	self:__UpdateT__(60, 2, m1, m2, utils.bind(self.__UpdateM__, self))
 	self:__UpdateT__(60, 3, s1, s2, utils.bind(self.__UpdateS__, self))
 	self:__UpdateT__(1000, 4, ms1, ms2, utils.bind(self.__UpdateMS__, self))
+    ]]
 end
 
 function TimerMgr:AddTimer(delay, obj, func)
     self.timerid = self.timerid + 1;
-	self:__Insert__(delay + 1, self.timerid, utils.bind(func, obj) )
+    local Handler = handler(obj, func);
+	self:__Insert__(delay + 1, self.timerid, Handler )
     return self.timerid;
 end
 

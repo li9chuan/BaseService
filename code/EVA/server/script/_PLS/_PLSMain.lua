@@ -50,7 +50,7 @@ function ServiceInit()
     
     
     
-    local room = RoomFactory:CreateRoom("RM_DDZ");
+    --local room = RoomFactory:CreateRoom("RM_DDZ");
     
  --   local msg_ddz = {};
     

@@ -30,7 +30,7 @@ function RoomBase:PrintInfo()
 end
 
 function RoomBase:Init( room_type, update_tick )
-    self:BaseInit(room_type, update_tick);
+    
 end
 
 function RoomBase:BaseInit( room_type, update_tick )
@@ -53,18 +53,22 @@ function RoomBase:BaseInit( room_type, update_tick )
             table.insert(self.SeatPlayers, 0);
         end
         
-        self._TimerHandle = TimerMgr:AddTimer(self._TimerTick, self, self.TickUpdate);
+        self._TimerHandle = TimerMgr:AddTimer(self._TimerTick, self, self.BaseTickUpdate);
+        
+        self:Init();
     end
 end
 
 function RoomBase:TickUpdate()
-    nlinfo("RoomBase:TickUpdate");
-    self:BaseTickUpdate();
+    nlinfo("RoomBase:TickUpdate  "..self._TimerHandle);
 end
 
 function RoomBase:BaseTickUpdate()
-    --nlinfo("RoomBase:BaseTickUpdate");
-    self._TimerHandle = TimerMgr:AddTimer(self._TimerTick, self, self.TickUpdate);
+    if self._TimerHandle > 0 then
+        -- BaseInit 之后才继续timer
+        self._TimerHandle = TimerMgr:AddTimer(self._TimerTick, self, self.BaseTickUpdate);
+    end
+    self:TickUpdate();
 end
 
 

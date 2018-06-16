@@ -17,8 +17,8 @@ function PLSInfoMgr:SvrUpdateInfoCB( msg_from, msg_svrinfo )
     local pls_info  = PLSInfo:new();
     pls_info:LoadData(pb_sinfo);
     
-    if pls_info.ServiceName=="PLS" then
-        self.PLSMap:Insert(pls_info.ServiceID, pls_info);
+    if pb_sinfo.ServiceName=="PLS" then
+        self.PLSMap:Replace(pls_info.ServiceID, pls_info);
     end
 
 end

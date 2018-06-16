@@ -81,15 +81,21 @@ function FSMDdz:DoIdle( event )
                 self:SwitchState("TJoinPrvRoom", open_room);
             else
                 -- 没有公共的房间，创建一个。
-             
-                if self.CreateRoomWait == nil then
-                    self.CreateRoomWait = math.random(5000,60000);
-                end
                 
-                if self:__GetRunStateTime() > self.CreateRoomWait then
-                    self.Robot:Print("request create room.   UID:"..self.Robot.Data.UID .. "  wait:"..self.CreateRoomWait);
-                    self.CreateRoomWait = math.random(5000,60000);
-                    self:SwitchState("TCreatePrvRoom");
+                if self.Robot.Data.UID==1007 then
+                
+                
+             
+                    if self.CreateRoomWait == nil then
+                        self.CreateRoomWait = math.random(5000,10000);
+                    end
+                    
+                    if self:__GetRunStateTime() > self.CreateRoomWait then
+                        self.Robot:Print("request create room.   UID:"..self.Robot.Data.UID .. "  wait:"..self.CreateRoomWait);
+                        self.CreateRoomWait = math.random(5000,60000);
+                        self:SwitchState("TCreatePrvRoom");
+                    end
+                
                 end
             end
         end

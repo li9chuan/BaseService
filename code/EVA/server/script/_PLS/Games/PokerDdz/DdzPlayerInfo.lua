@@ -10,7 +10,7 @@ function DdzPlayerInfo:ctor()
     
     self.HandCards = {};
     
-    self.QiangDiZhu = 0;    -- 抢地主权限     TDDZQiangDiZhu  TDDZJiaoFen
+    self.QiangDiZhu = 0;    -- 玩家抢地主选择     TDDZQiangDiZhu  TDDZJiaoFen
 end
 
 function DdzPlayerInfo:AddHandCards( tbl, start_idx, end_idx )

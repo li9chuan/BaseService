@@ -5,9 +5,11 @@
     "\\Framework\\Hotfix",
     "\\Framework\\Hotfix\\internal",
     "\\Framework\\Net",
-    "\\_SCH",
+    "\\_PLS",
+    "\\_PLS\\Games",
+    "\\_PLS\\Games\\PokerDdz",
     "\\_SCH\\Player"
   ],
-  "SelectedNode": "\\_SCH\\Player\\PlayerInfoMgr.lua",
+  "SelectedNode": "\\_PLS\\Games\\PokerDdz\\DdzFSM.lua",
   "PreviewInSolutionExplorer": false
 }

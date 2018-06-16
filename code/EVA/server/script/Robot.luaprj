@@ -18,5 +18,9 @@
             <LuaFile RelativePath=".\PublicRoomInfo.lua" />
         </Filter>
         <LuaFile RelativePath=".\ThreadMgr.lua" />
+        <Filter RelativePath=".\Test" Toggle="false" >
+            <LuaFile RelativePath=".\CppTimerTest.lua" />
+            <LuaFile RelativePath=".\CppTimerBase.lua" />
+        </Filter>
     </Filter>
 </Project>

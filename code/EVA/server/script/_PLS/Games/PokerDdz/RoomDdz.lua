@@ -34,8 +34,6 @@ function RoomDdz:ctor()
     self.CFG_FENGDING_32        = 32;       -- 32封顶
     self.CFG_FENGDING_64        = 64;       -- 64封顶
     
-
-
     self:ResetGameData();
 end
 
@@ -48,7 +46,7 @@ function RoomDdz:ResetGameData()
     self._GameCount             = 1;        -- 当前是第几局
     self._Multiple              = 1;        -- 房间翻倍数
     self._QingDiZhuWik          = 0;        -- 抢地主权限
-    self._QiangDiZhu            = true;     
+    self._QiangDiZhu            = true;     -- 是否是叫地主抢地主模式
     self._DiZhuID               = 0;        -- 地主 uid
     
     self._LastOutCardData:ClearData();
@@ -120,11 +118,7 @@ function RoomDdz:JoinRoom( player )
 end
 
 function RoomDdz:TickUpdate()
-
-    --nlinfo("RoomDdz:TickUpdate");
-
     self.Fsm:TickUpdate();
-    self:BaseTickUpdate();
 end
 
 function RoomDdz:UserStartReady( uid )
@@ -172,7 +166,7 @@ function RoomDdz:SendQiangDiZhuWik()
             self:__SetQDZWiki( enum.DDZ_JF_JIAO_THREE );
         end
 
-        self:_RefreshPlayerQiangDiZhuState(self._ActionID);
+        self:__RefreshPlayerQDZState(self._ActionID);
         
         local msg_qdz = {
             playid = self._ActionID;
@@ -187,7 +181,7 @@ function RoomDdz:SendQiangDiZhuWik()
     end
 end
 
-function RoomDdz:_RefreshPlayerQiangDiZhuState( uid )
+function RoomDdz:__RefreshPlayerQDZState( uid )
     self.RoomPlayerData:ForEach( function(k,v)
         if k==uid then
             v:SetState( enum.STATE_DDZ_QIANGDIZHU );
@@ -239,11 +233,12 @@ function RoomDdz:RefrshRoleQiangDiZhu( uid, msg_qdz )
         if room_player~=nil then
             --room_player:IsSelectJiaBei()
             
-            room_player.QiangDiZhu = msg_qdz.result;
+            local qdz_select = msg_qdz.result;
+            room_player.QiangDiZhu = qdz_select;
             
             if self._QiangDiZhu then
                 
-                if msg_qdz.result==enum.DDZ_QDZ_QIANGDIZHU then
+                if qdz_select==enum.DDZ_QDZ_QIANGDIZHU then
                 
                     self._Multiple = self._Multiple*3;
                 
@@ -259,8 +254,120 @@ function RoomDdz:RefrshRoleQiangDiZhu( uid, msg_qdz )
             
             
             --  设置下一个玩家抢地主的操作
+            local next_uid = self:GetNextUID( uid );
+            
+            -- 如果都不叫，并且默认的地主叫了
+            if self._QiangDiZhu and qdz_select~=enum.DDZ_QDZ_BUJIAO then
+                while true do
+                    local next_player = self:GetRoomPlayer(next_uid);
+                    if next_player==nil then    return;  end
+                    
+                    if next_uid==uid then
+                        self._ActionID = uid;
+                        self:SetDiZhuState(uid)
+                        return;
+                    end
+                    
+                    if next_player.QiangDiZhu == enum.DDZ_QDZ_BUJIAO then
+                        next_uid = self:GetNextUID( next_uid );
+                    else
+                        break;
+                    end
+                end
+            end
+            
+            local WIK   = 0;
+            
+            if self._QiangDiZhu then
+                if qdz_select==enum.DDZ_QDZ_BUJIAO then
+                    
+                    if next_uid == self._ActionID then
+                        -- 没有人叫地主则系统随机的第一个人作为地主
+                        self:SetDiZhuState(next_uid);
+                        return;
+                    end
+                    
+                    -- 设置客户端可选择权限
+                    WIK = Misc.SetBit(WIK, enum.DDZ_QDZ_JIAODIZHU);
+                    WIK = Misc.SetBit(WIK, enum.DDZ_QDZ_BUJIAO);
+                else
+                    if qdz_select == enum.DDZ_QDZ_JIAODIZHU then
+                        self._ActionID = uid;
+                    elseif qdz_select == enum.DDZ_QDZ_QIANGDIZHU then
+                        -- 叫地主的玩家选择抢地主则完成抢地主
+                        -- AddShowDownEvent(EVENT_QIANGDIZHU, 1);
+                        
+                        if uid==self._ActionID then
+                            self:SetDiZhuState(next_uid);
+                            return;
+                        end
+                    elseif qdz_select == enum.DDZ_QDZ_BUQIANG then
+                        
+                        if next_uid==self._ActionID then
+                            
+                            
+                            if not self:__CheckQiangDiDiZhu( next_uid ) then
+                                -- 如果下家叫地主，且都不抢，设置next_uid地主
+                                self:SetDiZhuState(next_uid);
+                                return;
+                            elseif uid==self._ActionID then
+                                -- 叫地主的玩家选择不抢地主后，选择最后一次抢地主的玩家做地主
+                                self._ActionID = self:__SelectDZ(next_uid);
+                                self:SetDiZhuState(self._ActionID);
+                                return;
+                            end
+                        end
+                    end
+                    
+                    -- 设置客户端可选择权限
+                    WIK = Misc.SetBit(WIK, enum.DDZ_QDZ_QIANGDIZHU);
+                    WIK = Misc.SetBit(WIK, enum.DDZ_QDZ_BUQIANG);
+                end
+            end
+            
+            self._QingDiZhuWik = WIK;
+            self:__RefreshPlayerQDZState(next_uid);
+            
+            local msg_qdz = {
+                playid          = next_uid,
+            };
+            self:BroadcastMsg("DDZ_QDZ_QX", "PB.MsgQiangDiZhu", msg_qdz, next_uid)
+            
+            msg_qdz.qiangdizhu_wiki = WIK;
+            local player = PlayerMgr:GetPlayer(uid);
+            BaseService:SendToClient( player, "DDZ_QDZ_QX", "PB.MsgQiangDiZhu", msg_qdz );
         end
     end
+end
+
+-- 检查除了uid外，有没有玩家抢过地主
+function RoomDdz:__CheckQiangDiDiZhu(uid)
+    for k,v in pairs(self.RoomPlayerData.map) do
+        if k~=uid and v.QiangDiZhu==enum.DDZ_QDZ_QIANGDIZHU then
+            return true;
+        end
+    end
+    return false;
+end
+
+-- 叫地主的玩家选择不抢地主后，选择最后一次抢地主的玩家做地主
+function RoomDdz:__SelectDZ(uid)
+    for i=1,i<4 do
+        local next_uid = self:GetNextUID(uid);
+        
+        if next_uid~=self._ActionID then
+            local room_player = self:GetRoomPlayer(next_uid);
+            if room_player==nil then  return 0;  end
+            
+            if room_player.QiangDiZhu == enum.DDZ_QDZ_QIANGDIZHU then
+                return next_uid;
+            end
+        end
+        
+        uid = next_uid;
+    end
+    
+    return 0;
 end
 
 -- 设置地主和农民,抢地主完成
@@ -276,10 +383,15 @@ function RoomDdz:SetDiZhuState( uid )
         
         self._DiZhuID   = uid;
         self._ActionID  = uid;
+        
+        
+        --- 底牌需要翻倍
+        
     
-        self:_RefreshPlayerQiangDiZhuState(uid);
+        -- 抢完地主清除玩家身上的抢地主状态
+        self:__RefreshPlayerQDZState(0);
         
-        
+        --jjjj
     end
         
 end

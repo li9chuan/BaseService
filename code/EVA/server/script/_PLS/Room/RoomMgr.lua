@@ -40,6 +40,7 @@ function RoomMgr:CreatePrivateRoom( uid, prv_room_id, room_type )
                     self.GameRooms:Insert(room_base.RoomID, room_base);
                     self.PrvRoomTypes:Insert(room_type, prv_room_id, room_base);
                 else
+                    room_base:Release();
                     nlwarning("player join room fail.  uid:"..uid)
                 end
             end
