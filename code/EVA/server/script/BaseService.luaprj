@@ -10,7 +10,7 @@
         <LuaFile RelativePath=".\Queue.lua" />
         <LuaFile RelativePath=".\Stack.lua" />
         <LuaFile RelativePath=".\StateFul.lua" />
-        <Filter RelativePath=".\Event" Toggle="false" >
+        <Filter RelativePath=".\Event" Toggle="true" >
             <LuaFile RelativePath=".\EventController.lua" />
             <LuaFile RelativePath=".\EventRegister.lua" />
             <LuaFile RelativePath=".\EventTrigger.lua" />
@@ -40,6 +40,7 @@
                 <LuaFile RelativePath=".\module_updater.lua" />
             </Filter>
         </Filter>
+        <LuaFile RelativePath=".\MemoryReferenceInfo.lua" />
     </Filter>
     <Filter RelativePath=".\SharedLib" Toggle="true" >
         <LuaFile RelativePath=".\StaticTableMgr.lua" />

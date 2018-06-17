@@ -41,7 +41,6 @@ function CallbackServer:DisConnect( sock_id )
 end
 
 function CallbackServer:Send( sock_id, msg_or_type, proto_type, proto_msg )
-    
     local param_type = type(msg_or_type)
     
     if param_type=="string" then
@@ -49,13 +48,11 @@ function CallbackServer:Send( sock_id, msg_or_type, proto_type, proto_msg )
         if proto_type~=nil then
             local proto_code    = protobuf.encode(proto_type, proto_msg);
             lua_msg:wbuffer(proto_code, #proto_code);
-            nlinfo("Send Buffer Len : "..#proto_code);
         end
         self.Service:Send( sock_id, lua_msg );
     else
         self.Service:Send( sock_id, msg_or_type );
     end
-
 end
 
 return CallbackServer

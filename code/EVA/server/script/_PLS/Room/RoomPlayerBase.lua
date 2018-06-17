@@ -27,8 +27,6 @@ end
 
 function RoomPlayerBase:SetState( enum_val )
     if enum_val~=nil then
-        
-        nlwarning("=======>           State:"..self._State.."   EnumIdx:"..enum_val);
         self._State = Misc.SetBit(self._State, enum_val);
     end
 end

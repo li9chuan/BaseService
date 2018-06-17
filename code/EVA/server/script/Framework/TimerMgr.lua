@@ -35,13 +35,13 @@ function TimerMgr:Update(cycle)
 	self:__UpdateT__(60, 2, m1, m2, handler(self, self.__UpdateM__))
 	self:__UpdateT__(60, 3, s1, s2, handler(self, self.__UpdateS__))
 	self:__UpdateT__(1000, 4, ms1, ms2, handler(self, self.__UpdateMS__))
-    
+
     --[[
 	self:__UpdateT__(24, 1, h1, h2, utils.bind(self.__UpdateH__, self))
 	self:__UpdateT__(60, 2, m1, m2, utils.bind(self.__UpdateM__, self))
 	self:__UpdateT__(60, 3, s1, s2, utils.bind(self.__UpdateS__, self))
 	self:__UpdateT__(1000, 4, ms1, ms2, utils.bind(self.__UpdateMS__, self))
-    ]]
+    --]]
 end
 
 function TimerMgr:AddTimer(delay, obj, func)
@@ -86,10 +86,15 @@ function TimerMgr:__UpdateT__(cycle, index, first, last, func)
 	local slots = self._slots[index]
 	while first ~= last do
 		first = first + 1
-		for i = 1, #slots[first] do
-			func(slots[first][i])
-		end
-		slots[first] = {}
+        
+        local func_cnt = #slots[first];
+        if func_cnt>0 then
+            for i = 1, func_cnt do
+                func(slots[first][i])
+            end
+            slots[first] = {}
+        end
+
 		first = first % cycle
 	end
 end

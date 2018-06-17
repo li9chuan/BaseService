@@ -83,9 +83,6 @@ function FSMDdz:DoIdle( event )
                 -- 没有公共的房间，创建一个。
                 
                 if self.Robot.Data.UID==1007 then
-                
-                
-             
                     if self.CreateRoomWait == nil then
                         self.CreateRoomWait = math.random(5000,10000);
                     end

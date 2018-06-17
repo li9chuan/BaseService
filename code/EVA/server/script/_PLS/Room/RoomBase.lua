@@ -154,7 +154,7 @@ function RoomBase:GetNextUID( curr_id )
     if curr_seat>0 then
 
         -- 当前位置向后找
-        for i=curr_seat+1, ROOM_CFG.room_max do
+        for i=curr_seat+1, #self.SeatPlayers do
             local next_uid = self.SeatPlayers[i];
             if next_uid>0 then
                 return next_uid;
@@ -162,7 +162,7 @@ function RoomBase:GetNextUID( curr_id )
         end
 
         -- 后面没有了，从头开始找
-        for i=1, ROOM_CFG.room_max do
+        for i=1, #self.SeatPlayers do
             local next_uid = self.SeatPlayers[i];
             if next_uid>0 then
                 return next_uid;

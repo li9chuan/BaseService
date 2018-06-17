@@ -92,4 +92,30 @@ function RobotGameDdz:cbDdzUserStartReady( msgin )
     end
 end
 
+function RobotGameDdz:cbDDZ_QDZ_QX( msgin )
+    local msg_qdz = msgin:rpb("PB.MsgQiangDiZhu");
+    
+    
+    self.Robot:Print("cbDDZ_QDZ_QX  UID:"..msg_qdz.playid.."  WIK:"..msg_qdz.qingdizhu_wiki);
+    
+    if self.Robot.Data.UID==msg_qdz.playid then
+        
+        if msg_qdz.qingdizhu_wiki > 0 then
+            
+            local select_wki    = enum.DDZ_QDZ_JIAODIZHU;
+            local rnd           = math.random(2);
+            
+            if rnd==1 then
+                --select_wki  = enum.DDZ_QDZ_BUJIAO;
+            end
+            
+            local MsgQiangDiZhuResult = { result=select_wki };
+            self.Robot:Send( "DDZ_QDZ", "PB.MsgQiangDiZhuResult", MsgQiangDiZhuResult );
+        end
+
+    
+    end
+end
+
+
 return RobotGameDdz;

@@ -70,7 +70,7 @@ LuaManager					= LuaHelper.GetLuaManger();
 --LSModule					= require("SDK/LService/LSModule")
 --WebModule					= require("SDK/Web/WebModule")
 --HttpClient					= require("Common/Net/HttpClient")
-
+MemoryRefInfo               = require("MemoryReferenceInfo")
 EventController             = require("Event/EventController")
 --ServerManager             = require("Net/ServerManager")
 EventRegister               = require("Event/EventRegister")

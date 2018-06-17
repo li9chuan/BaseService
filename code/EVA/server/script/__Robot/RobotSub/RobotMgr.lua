@@ -14,18 +14,23 @@ function RobotMgr:Init()
     -- 斗地主消息
     self._EventRegister:RegisterEvent( "DDZ_GI",            self, self.cbDdzGameInfo );
     self._EventRegister:RegisterEvent( "DDZ_SR",            self, self.cbDdzUserStartReady );
+    self._EventRegister:RegisterEvent( "DDZ_QDZ_QX",        self, self.cbDDZ_QDZ_QX );
+    
+    
     
     
 
     self.TotalRobot         = nil;
     self.RobotList          = {};
-    self.PrintFilterWhite   = nil;
+    self.PrintFilterWhite   = {};
     
     self.MsgNames           = {};
 end
 
 function RobotMgr:StartLogic( start_num, total_num )
 	
+    self.PrintFilterWhite[1007] = true;
+    
     self.TotalRobot = total_num;
 
     for i=1,total_num do
@@ -71,7 +76,7 @@ function RobotMgr:Print( str, id )
 end
 
 function RobotMgr:PrintTable( tbl, id )
-    if self.PrintFilterWhite==nil then
+    if (#self.PrintFilterWhite)==0  then
         PrintTable(tbl);
     else
         if self.PrintFilterWhite[id]~=nil then
@@ -127,7 +132,12 @@ function RobotMgr:cbDdzUserStartReady( from, msgin )
     end
 end
 
-
+function RobotMgr:cbDDZ_QDZ_QX( from, msgin )
+    local robot = self.RobotList[from];
+    if robot~=nil then
+        robot.Game:cbDDZ_QDZ_QX(msgin);
+    end
+end
 
 
 return RobotMgr;

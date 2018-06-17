@@ -211,3 +211,13 @@ function ReverseTable(tab)
   
     return tmp  
 end
+
+function DumpMemorySnapshot()
+    collectgarbage("collect")
+    MemoryRefInfo.m_cMethods.DumpMemorySnapshot("./", "All", -1)
+end
+
+function DumpMemorySnapshotComparedFile( file_1, file_2 )
+    MemoryRefInfo.m_cMethods.DumpMemorySnapshotComparedFile("./", "Compared", -1, file_1, file_2)
+end
+

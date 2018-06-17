@@ -52,4 +52,9 @@ function DdzPlayerInfo:CancleReady()
     self:ClearState( enum.STATE_DDZ_READY );
 end
 
+function DdzPlayerInfo:GetCardCount()
+    return #self.HandCards;
+end
+
+
 return DdzPlayerInfo;

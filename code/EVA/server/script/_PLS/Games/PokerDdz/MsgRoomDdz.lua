@@ -49,7 +49,7 @@ function MsgRoomDdz:cbDouDiZhuQiangDiZhu( fes_sid, msgin )
     local room      = RoomMgr:GetRoomFromPID(uid);
     
     if room~=nil then
-        local msg_qdz = msg_login:rpb("PB.MsgQiangDiZhuResult");
+        local msg_qdz = msgin:rpb("PB.MsgQiangDiZhuResult");
         room:RefrshRoleQiangDiZhu(uid, msg_qdz);
     end
 end

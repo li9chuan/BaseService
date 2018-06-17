@@ -23,7 +23,7 @@ RoomMgr             = require("Room/RoomMgr")
 RoomIDAlloter       = require("Room/RoomIDAlloter")
 
 
-PHPService          = CallbackServer:new();
+--PHPService          = CallbackServer:new();
 
 
 
@@ -31,8 +31,7 @@ PHPService          = CallbackServer:new();
 function ServiceInit()
 	
     nlinfo("Lua Start.");
-    
-    TimerMgr:Init( Misc.GetLocalTime() );
+
     MsgLogin:Init();
     MsgRoom:Init();
     
@@ -41,8 +40,8 @@ function ServiceInit()
     PlayerInfoMgr:Init();
     ScheduleService:Init();
     
-    PHPService:Init( "PHP", "tcp" );
-    PHPService:Listen( 20458 );
+    --PHPService:Init( "PHP", "tcp" );
+    --PHPService:Listen( 20458 );
 
 end
 
@@ -64,5 +63,8 @@ function ServiceInfo()
     
     PrintTable(PlayerInfoMgr.PlayerInfoMap);
 end
+
+
+
 
 

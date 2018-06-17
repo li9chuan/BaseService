@@ -2,14 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\Framework",
-    "\\Framework\\Hotfix",
     "\\Framework\\Hotfix\\internal",
     "\\Framework\\Net",
     "\\_PLS",
     "\\_PLS\\Games",
-    "\\_PLS\\Games\\PokerDdz",
-    "\\_SCH\\Player"
+    "\\_PLS\\Games\\PokerDdz"
   ],
-  "SelectedNode": "\\_PLS\\Games\\PokerDdz\\DdzFSM.lua",
+  "SelectedNode": "\\Framework\\Hotfix",
   "PreviewInSolutionExplorer": false
 }
