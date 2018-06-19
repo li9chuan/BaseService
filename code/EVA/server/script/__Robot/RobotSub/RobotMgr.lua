@@ -15,6 +15,7 @@ function RobotMgr:Init()
     self._EventRegister:RegisterEvent( "DDZ_GI",            self, self.cbDdzGameInfo );
     self._EventRegister:RegisterEvent( "DDZ_SR",            self, self.cbDdzUserStartReady );
     self._EventRegister:RegisterEvent( "DDZ_QDZ_QX",        self, self.cbDDZ_QDZ_QX );
+    self._EventRegister:RegisterEvent( "DDZ_QDZ_F",         self, self.cbDDZ_QDZ_F );
     
     
     
@@ -29,7 +30,7 @@ end
 
 function RobotMgr:StartLogic( start_num, total_num )
 	
-    self.PrintFilterWhite[1007] = true;
+    --self.PrintFilterWhite[1007] = true;
     
     self.TotalRobot = total_num;
 
@@ -66,7 +67,7 @@ function RobotMgr:Update()
 end
 
 function RobotMgr:Print( str, id )
-    if self.PrintFilterWhite==nil then
+    if (#self.PrintFilterWhite)==0  then
         nlinfo(str);
     else
         if self.PrintFilterWhite[id]~=nil then
@@ -135,9 +136,19 @@ end
 function RobotMgr:cbDDZ_QDZ_QX( from, msgin )
     local robot = self.RobotList[from];
     if robot~=nil then
-        robot.Game:cbDDZ_QDZ_QX(msgin);
+        local msg_qdz = msgin:rpb("PB.MsgQiangDiZhu");
+        robot.Game:cbDDZ_QDZ_QX(msg_qdz);
     end
 end
+
+function RobotMgr:cbDDZ_QDZ_F( from, msgin )
+    local robot = self.RobotList[from];
+    if robot~=nil then
+        local msg_qdz_res = msgin:rpb("PB.MsgBRQiangDiZhuResult");
+        robot.Game:cbDDZ_QDZ_F(msg_qdz_res);
+    end
+end
+
 
 
 return RobotMgr;

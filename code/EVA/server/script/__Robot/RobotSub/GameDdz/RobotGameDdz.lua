@@ -92,30 +92,42 @@ function RobotGameDdz:cbDdzUserStartReady( msgin )
     end
 end
 
-function RobotGameDdz:cbDDZ_QDZ_QX( msgin )
-    local msg_qdz = msgin:rpb("PB.MsgQiangDiZhu");
-    
-    
-    self.Robot:Print("cbDDZ_QDZ_QX  UID:"..msg_qdz.playid.."  WIK:"..msg_qdz.qingdizhu_wiki);
+function RobotGameDdz:cbDDZ_QDZ_QX( msg_qdz )
+    self.Robot:Print("SELF:"..self.Robot.Data.UID.."    cbDDZ_QDZ_QX  UID:"..msg_qdz.playid.."  WIK:"..msg_qdz.qingdizhu_wiki);
     
     if self.Robot.Data.UID==msg_qdz.playid then
         
         if msg_qdz.qingdizhu_wiki > 0 then
             
-            local select_wki    = enum.DDZ_QDZ_JIAODIZHU;
-            local rnd           = math.random(2);
+            local select_wki_list = {};
             
-            if rnd==1 then
-                --select_wki  = enum.DDZ_QDZ_BUJIAO;
+            for i=1,10 do
+                if Misc.GetBit( msg_qdz.qingdizhu_wiki, i ) then
+                    table.insert(select_wki_list, i);
+                end
             end
             
+            if #select_wki_list==0 then
+                nlwarning("#select_wki_list==0");
+                return;
+            end
+            
+            local rnd           = math.random(#select_wki_list);
+            local select_wki    = select_wki_list[rnd];
+            
+            self.Robot:Print("Select WKI:"..select_wki);
             local MsgQiangDiZhuResult = { result=select_wki };
             self.Robot:Send( "DDZ_QDZ", "PB.MsgQiangDiZhuResult", MsgQiangDiZhuResult );
         end
-
-    
     end
 end
+
+function RobotGameDdz:cbDDZ_QDZ_F( msg_qdz_res )
+
+    self.Robot:PrintTable(msg_qdz_res);
+end
+
+
 
 
 return RobotGameDdz;

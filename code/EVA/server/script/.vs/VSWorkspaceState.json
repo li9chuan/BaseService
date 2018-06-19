@@ -2,12 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\Framework",
-    "\\Framework\\Hotfix\\internal",
     "\\Framework\\Net",
     "\\_PLS",
     "\\_PLS\\Games",
-    "\\_PLS\\Games\\PokerDdz"
+    "\\_PLS\\Room"
   ],
-  "SelectedNode": "\\Framework\\Hotfix",
   "PreviewInSolutionExplorer": false
 }

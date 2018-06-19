@@ -333,7 +333,7 @@ function RoomDdz:RefrshRoleQiangDiZhu( uid, msg_qdz )
         self:BroadcastMsg("DDZ_QDZ_QX", "PB.MsgQiangDiZhu", msg_qdz, next_uid)
             
         msg_qdz.qingdizhu_wiki = WIK;
-        local player = PlayerMgr:GetPlayer(uid);
+        local player = PlayerMgr:GetPlayer(next_uid);
         BaseService:SendToClient( player, "DDZ_QDZ_QX", "PB.MsgQiangDiZhu", msg_qdz );
     end
 end
@@ -421,7 +421,7 @@ function RoomDdz:SetDiZhuState( uid )
         -- 填充地主手牌，发给地主。
         for _,v in pairs(MsgBRQiangDiZhuResult.player_list) do
             if v.playid==self._DiZhuID then
-                if v.dizhu_cards~=nil then
+                if v.dizhu_cards==nil then
                     v.dizhu_cards = ply_dz.HandCards;
                 end
                 break;
