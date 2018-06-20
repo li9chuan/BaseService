@@ -104,7 +104,7 @@ function RoomDdz:JoinRoom( player )
         ddz_player = DdzPlayerInfo:new();
         ddz_player:SetState( enum.STATE_DDZ_NEWROLE );
 
-        if player.UID == self.OwenrID then
+        if player.UID == self.CreatorID then
             --  设置是房主
             ddz_player:SetState( enum.STATE_DDZ_ROOM_OWNER );
         end
@@ -249,9 +249,8 @@ function RoomDdz:RefrshRoleQiangDiZhu( uid, msg_qdz )
         msg_qdz.multiple    = self._Multiple;
             
         self:BroadcastMsg("DDZ_QDZ", "PB.MsgQiangDiZhuResult", msg_qdz)
-            
-            
-            
+
+
         --  设置下一个玩家抢地主的操作
         local next_uid = self:GetNextUID( uid );
             
@@ -433,6 +432,11 @@ function RoomDdz:SetDiZhuState( uid )
         
         -- 抢地主结束，切状态。
         
+        if self:CheckRoomSpecialKind(enum.TSK_DDZ_JIABEI) then
+            self.Fsm:SwitchState("TDDZStateSelectAddTimes");
+        else
+            self.Fsm:SwitchState("TDDZStateSelectAddTimes");
+        end
     end
         
 end

@@ -12,7 +12,7 @@
             <LuaFile RelativePath=".\MsgLogin.lua" />
             <LuaFile RelativePath=".\MsgRoom.lua" />
         </Filter>
-        <Filter RelativePath=".\PLSInfo" Toggle="false" >
+        <Filter RelativePath=".\PLSInfo" Toggle="true" >
             <LuaFile RelativePath=".\PLSGameInfo.lua" />
             <LuaFile RelativePath=".\PLSInfo.lua" />
             <LuaFile RelativePath=".\PLSInfoMgr.lua" />

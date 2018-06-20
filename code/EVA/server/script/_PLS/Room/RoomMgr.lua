@@ -15,8 +15,9 @@ function RoomMgr:PrintInfo()
     self.GameRooms:ForEach( function(_,v) v:PrintInfo(); end );
 end
 
-function RoomMgr:CreatePrivateRoom( uid, prv_room_id, room_type )
+function RoomMgr:CreatePrivateRoom( uid, prv_room_id, msg_cpr )
 
+    local room_type = msg_cpr.room_type;
     local player    = PlayerMgr:GetPlayer(uid);
     local ROOM_CFG  = StaticTableMgr:GetRoomConfigXml(room_type);
     
@@ -33,8 +34,9 @@ function RoomMgr:CreatePrivateRoom( uid, prv_room_id, room_type )
             local room_base = RoomFactory:CreateRoom(room_type);
             
             if room_base~=nil then
-                room_base.PrvRoomID = prv_room_id;
-                room_base.OwenrID   = uid;
+                room_base.PrvRoomID     = prv_room_id;
+                room_base.CreatorID     = uid;
+                room_base.CreateInfo    = msg_cpr;
 
                 if room_base:JoinRoom(player) then
                     self.GameRooms:Insert(room_base.RoomID, room_base);

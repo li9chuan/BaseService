@@ -31,7 +31,15 @@ message MsgPlayerInfo
 
 message MsgCreatePrivateRoom
 {
-	optional string 				room_type	        = 1;
+	optional uint32 				consume_id          = 1;
+	optional TGameConsumePay 		consume_kind	 	= 2;
+	optional string 				room_type	        = 3;
+	optional uint32 		    	special_kind        = 4;
+	optional uint32 			 	score   	        = 5;
+	optional uint32 				game_versione		= 6;
+	optional TPaymentMechanism		pay_ment		    = 7;
+	optional uint32					player_number		= 8;
+	optional uint64					tissue_id			= 9;
 }
 
 message MsgEnterPrivateRoom

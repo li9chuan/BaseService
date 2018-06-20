@@ -110,6 +110,20 @@ enum TDDZMingPaiType                           			       // 明牌选择
 	DDZ_MP_MINGPAISTART			       = 2;				       // 明牌开始
 };
 
+enum TGameSpecialKindDouDiZhu               // 斗地主房间玩法
+{
+	TSK_DDZ_NULL	   	= 0;
+	TSK_DDZ_QDZ	   		= 1;	    // 抢地主
+	TSK_DDZ_JF	   		= 2;	    // 叫分
+	TSK_DDZ_BFD	   		= 3;        // 不封顶
+	TSK_DDZ_16	   		= 4;        // 16封顶
+	TSK_DDZ_32        	= 5;        // 32封顶
+	TSK_DDZ_64   		= 6;        // 64封顶
+	TSK_DDZ_DIPAI     	= 7;        // 底牌翻倍
+	TSK_DDZ_JIABEI  	= 8;        // 加倍
+	TSK_DDZ_MINGPAI  	= 9;        // 明牌
+}
+
 message MsgQiangDiZhu                                               // 抢地主信息(服务器发给客户端的)
 {
 	optional uint64 playid                = 1;                      // 玩家id

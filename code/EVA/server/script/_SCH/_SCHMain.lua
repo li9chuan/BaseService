@@ -61,7 +61,7 @@ end
 
 function ServiceInfo()
     
-    PrintTable(PlayerInfoMgr.PlayerInfoMap);
+    PrintTable(PlayerInfoMgr.PlayerInfoMap.map);
 end
 
 

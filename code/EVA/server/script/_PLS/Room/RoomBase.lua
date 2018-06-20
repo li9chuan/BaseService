@@ -6,13 +6,15 @@ function RoomBase:ctor()
     self.RoomID                 = RoomMgr:GenerateRoomID();
     self.PrvRoomID              = 0;
     self.RoomType               = "";
-    self.OwenrID                = 0;        -- 房间归属
     self._RoomMin               = 9999;
 
-    self.Creator                = 0;
+    self.IsGameStart            = false;
+    self.CreatorID              = 0;                -- 房间归属
+    self.CreateInfo             = nil;
     self.RoomPlayerData         = Map:new();
     self.SeatPlayers            = {};
     self.ViewPlayers            = {};
+    
 
     self._TimerHandle           = 0;
     self._TimerTick             = 1000;
@@ -22,7 +24,7 @@ function RoomBase:ctor()
 end
 
 function RoomBase:PrintInfo()
-    nlinfo("============== RoomID:"..self.RoomID .. "  PrvID:"..self.PrvRoomID.."  Creator:"..self.Creator);
+    nlinfo("============== RoomID:"..self.RoomID .. "  PrvID:"..self.PrvRoomID.."  Creator:"..self.CreatorID);
     nlinfo("==>SeatPlayers:")
     PrintTable(self.SeatPlayers);
     nlinfo("==>RoomPlayers:")
@@ -74,21 +76,21 @@ end
 
 -- 玩家加入房间
 function RoomBase:BaseJoinRoom( player )
-
     player.RoomID   = self.RoomID;
-    self.Creator    = player.UID;
-    
     self:__AddRoomPlayer(player.UID);
-    
 end
 
 -- 玩家离开房间，子类可重写
 function RoomBase:LeaveRoom( uid )
-    self:BaseLeaveRoom(uid);
-    self:ReleaseRoomPlayer(uid);
+    self:BrLeaveRoom(uid);
+    
+    if not self.IsGameStart then
+        self:ReleaseRoomPlayer(uid);
+    end
 end
 
-function RoomBase:BaseLeaveRoom( uid )
+-- 广播玩家离开房间
+function RoomBase:BrLeaveRoom( uid )
     local msg_int = { value = uid };
     self:BroadcastMsg( "LR", "PB.MsgInt", msg_int );
 end
@@ -96,7 +98,7 @@ end
 function RoomBase:ReleaseRoomPlayer( uid )
     
     -- 通知其它服务器离开房间
-    self:__NotifyOtherServiceLevel(uid);
+    self:__NotifyOtherServiceLeave(uid);
     
     self:__RemoveRoomPlayer(uid);
 
@@ -107,7 +109,6 @@ function RoomBase:ReleaseRoomPlayer( uid )
     end
     
     self.RoomPlayerData:Remove(uid);
-
 end
 
 function RoomBase:IsRoomPlayer( uid )
@@ -173,11 +174,16 @@ function RoomBase:GetNextUID( curr_id )
     return 0;
 end
 
+function RoomBase:CheckRoomSpecialKind( special_kind )
+    if self.CreateInfo~=nil and self.CreateInfo.special_kind~=nil then
+        return Misc.GetBit(self.CreateInfo.special_kind, special_kind);
+    end
+    return false;
+end
 
+function RoomBase:__NotifyOtherServiceLeave( uid )
 
-function RoomBase:__NotifyOtherServiceLevel( uid )
-
-    local msgout = CMessage("LURT");
+    local msgout = CMessage("PLS=>LURT");
     msgout:wint(uid);
     msgout:wstring(self.RoomType);
     msgout:wint(self.PrvRoomID);

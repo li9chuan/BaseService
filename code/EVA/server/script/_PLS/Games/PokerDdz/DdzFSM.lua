@@ -99,6 +99,7 @@ end
 function FSMDouDiZhu:DoStartGame( event )
     
     if event.args[1] then
+        self.RoomDdz.IsGameStart    = true;
         self.RoomDdz:ResetGameData();
         self.RoomDdz:BroadcastGameInfo();
     else
@@ -130,32 +131,32 @@ function FSMDouDiZhu:DoSendCard( event )
 end
 
 function FSMDouDiZhu:DoQiangDiZhu( event )
-
-
     if event.args[1] then
         self.RoomDdz:SendQiangDiZhuWik();
     end
-    
 end
 
 function FSMDouDiZhu:DoSelectAddTimes( event )
-    nlinfo( "FSMClass:DoSelectAddTimes".. event.args[1] );
+    --if self:__GetRunStateTime()<10000 then
+    --    return;
+    --end
+    
 end
 
 function FSMDouDiZhu:DoAction( event )
-    nlinfo( "FSMClass:DoAction".. event.args[1] );
+    nlinfo( "FSMClass:DoAction" );
 end
 
 function FSMDouDiZhu:DoOutCard( event )
-    nlinfo( "FSMClass:DoOutCard".. event.args[1] );
+    nlinfo( "FSMClass:DoOutCard" );
 end
 
 function FSMDouDiZhu:DoShowDown( event )
-    nlinfo( "FSMClass:DoShowDown".. event.args[1] );
+    nlinfo( "FSMClass:DoShowDown" );
 end
 
 function FSMDouDiZhu:DoRelieveRoom( event )
-    nlinfo( "FSMClass:DoRelieveRoom".. event.args[1] );
+    nlinfo( "FSMClass:DoRelieveRoom" );
 end
 
 return FSMDouDiZhu;

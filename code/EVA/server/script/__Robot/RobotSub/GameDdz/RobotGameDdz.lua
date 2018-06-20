@@ -125,6 +125,12 @@ end
 function RobotGameDdz:cbDDZ_QDZ_F( msg_qdz_res )
 
     self.Robot:PrintTable(msg_qdz_res);
+    
+    local MsgJiaBeiResult = {
+        result = math.random(2)
+    };
+
+    self.Robot:Send( "DDZ_JB", "PB.MsgJiaBeiResult", MsgJiaBeiResult );
 end
 
 

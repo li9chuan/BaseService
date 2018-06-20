@@ -41,6 +41,28 @@ namespace bin
         return 1;
     }
 
+    DEFINE_CLASS_FUNCTION(wtable, void, (CScriptTable& tbl))
+    {
+        try
+        {
+            std::string json_str = "";
+            obj->GetScriptHandle().CallFunc<CScriptTable&, std::string>("Table2Json", tbl, json_str);
+            obj->m_Msg.serial(json_str);
+        }
+        catch (const NLMISC::EStream&)
+        {
+            lua_Debug ar;
+            lua_getstack(obj->GetScriptHandle().GetHandle(), 1, &ar);
+            lua_getinfo(obj->GetScriptHandle().GetHandle(), "Sln", &ar);
+
+            NLMISC::createDebug();
+            NLMISC::INelContext::getInstance().getWarningLog()->setPosition(ar.currentline, ar.short_src, ar.name);
+            NLMISC::INelContext::getInstance().getWarningLog()->displayNL("wtable exception");
+        }
+        return 1;
+    }
+
+
     DEFINE_CLASS_FUNCTION( wbool, void, (bool in_val))
     {
         obj->m_Msg.serial(in_val);
