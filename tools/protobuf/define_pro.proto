@@ -48,15 +48,21 @@ enum TGender
 };
 
 
-enum TCardsType
+// 房间付费方式
+enum TGameConsumePay
 {
-    CardsNone                              = 0;         //  无色
-    CardsSpade                             = 1; 		//	黑桃
-	CardsHearts                            = 2; 		//	红桃
-	CardsPlumBlossom                       = 3; 		//	梅花
-    CardsDiamond                           = 4; 		//	方片
-};
+	TGC_GOLD 	= 0;
+	TGC_SILVER	= 1;
+}
 
+//房间付费机制
+enum TPaymentMechanism
+{
+    ROOM_OWNER_OPTION   = 0; // 房主;
+    AA_SYSTEM_OPTION    = 1; // AA制;
+    BIG_OWNER_OPTION    = 2; // 大赢家;
+	VIP_TISSUE_OPTION   = 3; // 消耗高级牌友圈房卡;
+}
 
 
 
