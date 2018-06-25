@@ -52,23 +52,25 @@ function CardsAnalyseRes:Analyse( hand_cards )
     local hand_cnt = #hand_cards;
     if hand_cnt==0 then return; end
     
-    for i=1,hand_cnt do
+    local i=1;
+    while i<=hand_cnt do
 
         local card = hand_cards[i];
         local same_cnt  = 1;
-        local card_val  = 0;
         local logic_val = GetPokerLogicValue(card);
         
         -- 向后遍历同牌
-        for j=i,hand_cnt do
+        for j=i+1,hand_cnt do
             if( GetPokerLogicValue(hand_cards[j]) == logic_val ) then
                 same_cnt = same_cnt + 1;
+            else
+                break;
             end
         end
 
         -- 保存结果
         self.CardCount[same_cnt] = self.CardCount[same_cnt] + 1;
-        table.insert( self.CardData[same_cnt], card );
+        table.insert( self.CardData[same_cnt], logic_val );
         
         i = i+same_cnt;
     end

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="BaseService.luaprj" Cmd="E:\BaseService\build\bin\Debug\client_robot.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="true" >
+<Project Name="BaseService.luaprj" Cmd="E:\BaseService\build\bin\Debug\client_robot.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="false" >
     <Filter RelativePath=".\Framework" Toggle="false" >
         <LuaFile RelativePath=".\Class.lua" />
         <LuaFile RelativePath=".\functions.lua" />
@@ -25,7 +25,7 @@
         <LuaFile RelativePath=".\Utils.lua" />
         <LuaFile RelativePath=".\TimerMgr.lua" />
         <LuaFile RelativePath=".\CJsonUtil.lua" />
-        <Filter RelativePath=".\Test" Toggle="false" >
+        <Filter RelativePath=".\Test" Toggle="true" >
             <LuaFile RelativePath=".\MainTest.lua" />
             <LuaFile RelativePath=".\FSMClass.lua" />
             <LuaFile RelativePath=".\TimerTest.lua" />
@@ -42,7 +42,7 @@
         </Filter>
         <LuaFile RelativePath=".\MemoryReferenceInfo.lua" />
     </Filter>
-    <Filter RelativePath=".\SharedLib" Toggle="true" >
+    <Filter RelativePath=".\SharedLib" Toggle="false" >
         <LuaFile RelativePath=".\StaticTableMgr.lua" />
         <LuaFile RelativePath=".\InitSharedLib.lua" />
         <Filter RelativePath=".\Event" Toggle="true" >

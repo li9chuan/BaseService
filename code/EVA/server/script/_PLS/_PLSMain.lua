@@ -18,6 +18,7 @@ require("Room/RoomFactory")
 require("Msg/MsgLogin")
 require("Msg/MsgRoom")
 require("Games/PokerDdz/MsgRoomDdz")
+require("Games/PokerDdz/DdzCardTypes")
 
 require("Games/Common/PokerDef");
 require("Games/Common/CommonDef");
@@ -39,8 +40,9 @@ function ServiceInit()
 
     MsgLogin:Init();
     MsgRoom:Init();
-    
+
     MsgRoomDdz:Init();
+
     
     RoomFactory:Init();
     RoomMgr:Init();
@@ -49,6 +51,7 @@ function ServiceInit()
     PlayerLogicService:Init();
     
     
+    DdzCardtypes:Init();
     
     --local room = RoomFactory:CreateRoom("RM_DDZ");
     

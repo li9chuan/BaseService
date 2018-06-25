@@ -4,8 +4,6 @@ DdzFSM              = require("Games/PokerDdz/DdzFSM")
 DdzPlayerInfo       = require("Games/PokerDdz/DdzPlayerInfo")
 DdzOutCardData      = require("Games/PokerDdz/DdzOutCardData")
 
-require("Games/PokerDdz/DdzCardTypes")
-
 --[[
         斗地主房间内游戏逻辑。
 --]]
@@ -15,15 +13,7 @@ local tbinsert = table.insert
 function RoomDdz:ctor()
 
     self.super:ctor();
-    nlinfo("RoomDdz:ctor");
-
-    self.Fsm                    = DdzFSM:new();
-    self.Fsm:Init(self);
     
-    
-    self._LastOutCardData       = DdzOutCardData:new();
-
-
     self.CFG_HAND_COUNT         = 17;       -- 每个玩家的初始手牌个数
     self.CFG_TOTAL_CARD         = 54;       -- 牌池
     self.CFG_BASE_SCORE         = 1;        -- 底分
@@ -34,6 +24,19 @@ function RoomDdz:ctor()
     self.CFG_FENGDING_32        = 32;       -- 32封顶
     self.CFG_FENGDING_64        = 64;       -- 64封顶
     
+    
+
+    self.Fsm                    = DdzFSM:new();
+    self.Fsm:Init(self);
+
+    self._LastOutCardData       = DdzOutCardData:new();
+    self._TempOutCardData       = DdzOutCardData:new();
+    
+    
+    -- 战绩回放
+    self._RecordNodeList        = {};       -- 战绩回放的节点
+    self._RecordGames           = {};       -- 记录房间中的每局战绩  list[_RecordNodeList]
+    
     self:ResetGameData();
 end
 
@@ -43,13 +46,18 @@ function RoomDdz:ResetGameData()
     self._CardsPool             = {};
 	self._CardsBottom           = {};       -- 剩下的三张底牌
     self._ActionID              = 0;        -- 当前活动的玩家
+    self._ActionUserWik         = 0;        -- 当前活动玩家权限
     self._GameCount             = 1;        -- 当前是第几局
     self._Multiple              = 1;        -- 房间翻倍数
+    
     self._QingDiZhuWik          = 0;        -- 抢地主权限
     self._QiangDiZhu            = true;     -- 是否是叫地主抢地主模式
     self._DiZhuID               = 0;        -- 地主 uid
+    self._CanOutCard            = {};       -- 当前可以出的牌，托管时使用
+    self._ShowDownEvent         = {};       -- 结算事件
     
     self._LastOutCardData:ClearData();
+    self._TempOutCardData:ClearData();
     
     -- 清空玩家临时数据
     for _,v in ipairs(self.SeatPlayers) do
@@ -92,7 +100,10 @@ function RoomDdz:JoinRoom( player )
 
     if ddz_player~=nil then
         -- 返回房间
-        ddz_player:SetState( enum.STATE_DDZ_NEWROLE );
+        --ddz_player:SetState( enum.STATE_DDZ_NEWROLE );
+        self:BaseJoinRoom(player);
+        self:RefreshRoomInfo(player.UID);
+        return true;
     else
         
         -- 如果房间已满，跳出。
@@ -110,11 +121,11 @@ function RoomDdz:JoinRoom( player )
         end
 
         self.RoomPlayerData:Insert(player.UID, ddz_player);
+        
+        self:BaseJoinRoom(player);
+        self:BroadcastGameInfo();
+        return true;
     end
-
-    self:BaseJoinRoom(player);
-    self:BroadcastGameInfo();
-    return true;
 end
 
 function RoomDdz:TickUpdate()
@@ -146,7 +157,6 @@ function RoomDdz:__SetQDZWiki( enum_idx )
 end
 
 function RoomDdz:SendQiangDiZhuWik()
-    
     -- 随机一个玩家选择抢地主
     local seat_idx  = math.random(1, #self.SeatPlayers);
     self._ActionID  = self.SeatPlayers[seat_idx];
@@ -177,16 +187,6 @@ function RoomDdz:SendQiangDiZhuWik()
     self:BroadcastMsg( "DDZ_QDZ_QX", "PB.MsgQiangDiZhu", msg_qdz, self._ActionID );
 end
 
-function RoomDdz:__RefreshPlayerQDZState( uid )
-    self.RoomPlayerData:ForEach( function(k,v)
-        if k==uid then
-            v:SetState( enum.STATE_DDZ_QIANGDIZHU );
-        else
-            v:ClearState( enum.STATE_DDZ_QIANGDIZHU );
-        end
-    end )
-end
-
 -- 刷新加倍的选择
 function RoomDdz:RefreshSelectJiaBei( uid, msg_jbr )
 
@@ -213,7 +213,10 @@ function RoomDdz:RefreshSelectJiaBei( uid, msg_jbr )
                     return;
                 end
             end
-               
+
+            -- 回放开始记录
+            self:__RecordGameStart();
+            
             -- 如果所有玩家都选择过了，进入下一状态
             self.Fsm:SwitchState("TDDZStateAction");
         end
@@ -293,7 +296,7 @@ function RoomDdz:RefrshRoleQiangDiZhu( uid, msg_qdz )
                     self._ActionID = uid;
                 elseif qdz_select == enum.DDZ_QDZ_QIANGDIZHU then
                     -- 叫地主的玩家选择抢地主则完成抢地主
-                    -- AddShowDownEvent(EVENT_QIANGDIZHU, 1);
+                    self:__AddShowDownEvent(enum.EVENT_QIANGDIZHU, 1);
                         
                     if uid==self._ActionID then
                         self:SetDiZhuState(next_uid);
@@ -337,36 +340,6 @@ function RoomDdz:RefrshRoleQiangDiZhu( uid, msg_qdz )
     end
 end
 
--- 检查除了uid外，有没有玩家抢过地主
-function RoomDdz:__CheckQiangDiDiZhu(uid)
-    for k,v in pairs(self.RoomPlayerData.map) do
-        if k~=uid and v.QiangDiZhu==enum.DDZ_QDZ_QIANGDIZHU then
-            return true;
-        end
-    end
-    return false;
-end
-
--- 叫地主的玩家选择不抢地主后，选择最后一次抢地主的玩家做地主
-function RoomDdz:__SelectDZ(uid)
-    for i=1,i<4 do
-        local next_uid = self:GetNextUID(uid);
-        
-        if next_uid~=self._ActionID then
-            local room_player = self:GetRoomPlayer(next_uid);
-            if room_player==nil then  return 0;  end
-            
-            if room_player.QiangDiZhu == enum.DDZ_QDZ_QIANGDIZHU then
-                return next_uid;
-            end
-        end
-        
-        uid = next_uid;
-    end
-    
-    return 0;
-end
-
 -- 设置地主和农民,抢地主完成
 function RoomDdz:SetDiZhuState( uid )
     
@@ -376,7 +349,7 @@ function RoomDdz:SetDiZhuState( uid )
     
         ply_dz:SetState( enum.STATE_DDZ_DIZHU );
         ply_dz:AddHandCards( self._CardsBottom );
-        
+        SortPokerLogicValue( self.HandCards );
         
         self._DiZhuID   = uid;
         self._ActionID  = uid;
@@ -412,7 +385,7 @@ function RoomDdz:SetDiZhuState( uid )
                 MsgQiangDiZhuResult["dizhu_cards"] = ply_dz.HandCards;
             end
             
-            table.insert(MsgBRQiangDiZhuResult.player_list, MsgQiangDiZhuResult);
+            tbinsert(MsgBRQiangDiZhuResult.player_list, MsgQiangDiZhuResult);
         end
         
         self:BroadcastMsg( "DDZ_QDZ_F", "PB.MsgBRQiangDiZhuResult", MsgBRQiangDiZhuResult, self._DiZhuID );
@@ -431,21 +404,16 @@ function RoomDdz:SetDiZhuState( uid )
         BaseService:SendToClient(player, "DDZ_QDZ_F", "PB.MsgBRQiangDiZhuResult", MsgBRQiangDiZhuResult);
         
         -- 抢地主结束，切状态。
-        
         if self:CheckRoomSpecialKind(enum.TSK_DDZ_JIABEI) then
             self.Fsm:SwitchState("TDDZStateSelectAddTimes");
         else
             self.Fsm:SwitchState("TDDZStateSelectAddTimes");
         end
     end
-        
 end
 
 -- 发牌
 function RoomDdz:SendHandCard()
-    
-    nlwarning("======================>   SendHandCard");
-
     local start_send    = 1;
     local end_send      = self.CFG_HAND_COUNT;
     
@@ -467,39 +435,117 @@ function RoomDdz:SendHandCard()
     for idx=start_send, self.CFG_TOTAL_CARD do
         tbinsert( self._CardsBottom, self._CardsPool[idx] );
     end
+end
+
+--  广播房间活动玩家
+function RoomDdz:BroadGameActionPlayer( )
+    self._ActionUserWik = self:__GetActionWik();
     
+    local MsgDDZActon = {
+        new_actionid    = self._ActionID,
+        old_actionid    = self._LastOutCardData.UID,
+        last_out_type   = self._LastOutCardData.Type,
+        last_out_cards  = self._LastOutCardData.Cards,
+        wik             = self._ActionUserWik,
+        player_list     = {}
+    }
+    
+    for _,uid in ipairs(self.SeatPlayers) do
+        local ddz_player = self.RoomPlayerData:Find(uid);
+        if ddz_player~=nil then
+            local MsgDDZPlayer = {
+                state       = ddz_player:GetState(),
+                hand_count  = ddz_player:GetCardCount(),
+                score       = ddz_player.Score,
+                player_base = { pid = uid }
+            }
+            
+            tbinsert( MsgDDZActon.player_list, MsgDDZPlayer );
+        end
+    end
+    
+    local player = PlayerMgr:GetPlayer(self._ActionID);
+    
+    if player~=nil then
+        BaseService:SendToClient(player, "DDZ_RA", "PB.MsgDDZActon", MsgDDZActon);
+    end
+    
+    MsgDDZActon.wik     = enum.ASK_DDZ_NULL;
+    self:BroadcastMsg( "DDZ_RA", "PB.MsgDDZActon", MsgDDZActon, self._ActionID );
 end
 
 
-function RoomDdz:BroadcastGameInfo( )
+function RoomDdz:UserOutCard( uid, msg_oc )
 
+    if uid~=self._ActionID or not self:__GetFsmState(enum.TDDZStateAction) then
+        return false;
+    end
+
+    local room_player = self.RoomPlayerData:Find(uid);
+    
+    if room_player==nil then
+        return false;
+    end
+    
+    
+    -- 检查用户是否可以出牌
+    if not self:__UserOutCardLimit( room_player, msg_oc.out_cards ) then
+        return false;
+    end
+    
+    self._ActionUserWik = enum.ASK_DDZ_NULL;
+    
+    -- 检查手中是否还有牌。
+    if room_player:GetHandCount()>0 then
+        self.Fsm:SwitchState("TDDZStateOutCard");
+        return true;
+    end
+    
+    -- 手牌数为零，已出完牌。
+    self._ActionID = uid;
+    self:__CheckIsChunTian();       -- 检查春天
+    
+    self.Fsm:SwitchState("TDDZStateShowDown");  -- 跳结算
+end
+
+function RoomDdz:BroadcastGameInfo( )
     for k,v in ipairs(self.SeatPlayers) do
         if v~=0 then
             local msg_gameinfo = {};
             self:SendGameInfo( v, "DDZ_GI", msg_gameinfo );
         end
     end
+end
 
+function RoomDdz:RefreshRoomInfo( uid )
+    local msg_gameinfo = {};
+    self:SendGameInfo( uid, "DDZ_BLC", msg_gameinfo );
 end
 
 function RoomDdz:SendGameInfo( uid, msg_name, msg_ddz_room )
-
     msg_ddz_room.room_id = self.PrvRoomID;
     self:__FillRoomInfoMsg(msg_ddz_room, uid);
+    
+    local cur_state = self:__GetFsmState();
+    if  uid==self._ActionID and 
+        ( cur_state==enum.TDDZStateAction or 
+          cur_state==enum.TDDZStateOutCard or 
+          cur_state==enum.TDDZStateRelieveRoom ) 
+    then
+        msg_ddz_room.wik = self._ActionUserWik;
+    else
+        msg_ddz_room.wik = enum.ASK_DDZ_NULL;
+    end
 
 	local player = PlayerMgr:GetPlayer(uid);
-    
-    
-    PrintTable(msg_ddz_room);
     BaseService:SendToClient( player, msg_name, "PB.MsgDDZRoom", msg_ddz_room )
 end
 
 function RoomDdz:__FillRoomInfoMsg( msg_ddz_room, current_uid )
-    
-    
+
     msg_ddz_room.room_id        = self.PrvRoomID;
 
-	msg_ddz_room.room_state     = enum[self.Fsm:GetState()];
+	msg_ddz_room.room_state     = self:__GetFsmState();
     msg_ddz_room.state_time     = 0;                    -- 当前房间状态的运行时间
     msg_ddz_room.action_id      = self._ActionID;
     msg_ddz_room.game_count     = self._GameCount;
@@ -510,19 +556,17 @@ function RoomDdz:__FillRoomInfoMsg( msg_ddz_room, current_uid )
 
 
     -- 上把牌信息
-    if self._LastOutCardData:IsEmpty()==false then
+    if self._LastOutCardData.UID>0 then
         
         msg_ddz_room.last_outcard = {
             old_actionid    = self._LastOutCardData.UID,
             out_type        = self._LastOutCardData.Type,
             out_cards       = self._LastOutCardData.Cards
         };
-        
-        
     end
     
-    msg_ddz_room.private_room = { room_type=self.RoomType };
-
+    -- 创建房间的信息
+    msg_ddz_room.private_room = self.CreateInfo;
 
     for _,v in ipairs(self.SeatPlayers) do
         if v>0 then
@@ -533,8 +577,7 @@ end
 
 
 function RoomDdz:__FillPlayerBaseInfoMsg( uid, msg_ddz_room, current_uid )
-    
-    
+
     local room_player = {};
     
     local player = PlayerMgr:GetPlayer(uid);
@@ -578,10 +621,276 @@ function RoomDdz:__FillPlayerRoomInfoMsg( uid, msg_room_player, current_uid )
             msg_room_player.card_list   = room_player.HandCards;
         end
     end
-  
+end
+
+function RoomDdz:__CheckCanOutCards( room_player )
+    --self._CanOutCard    = {};
+
+    -- 上次出牌的玩家也是自己，或刚开局。
+    if  self._ActionID==self._LastOutCardData.UID or self._LastOutCardData:GetCardCount()==0  then
+        return true;
+    end
+
+    return DdzCardtypes:CheckCanOutCards( self._LastOutCardData, room_player._HandCards );
+end
+
+-- 检查除了uid外，有没有玩家抢过地主
+function RoomDdz:__CheckQiangDiDiZhu(uid)
+    for k,v in pairs(self.RoomPlayerData.map) do
+        if k~=uid and v.QiangDiZhu==enum.DDZ_QDZ_QIANGDIZHU then
+            return true;
+        end
+    end
+    return false;
+end
+
+function RoomDdz:__RefreshPlayerQDZState( uid )
+    self.RoomPlayerData:ForEach( function(k,v)
+        if k==uid then
+            v:SetState( enum.STATE_DDZ_QIANGDIZHU );
+        else
+            v:ClearState( enum.STATE_DDZ_QIANGDIZHU );
+        end
+    end )
+end
+
+-- 叫地主的玩家选择不抢地主后，选择最后一次抢地主的玩家做地主
+function RoomDdz:__SelectDZ(uid)
+    for i=1,i<4 do
+        local next_uid = self:GetNextUID(uid);
+        
+        if next_uid~=self._ActionID then
+            local room_player = self:GetRoomPlayer(next_uid);
+            if room_player==nil then  return 0;  end
+            
+            if room_player.QiangDiZhu == enum.DDZ_QDZ_QIANGDIZHU then
+                return next_uid;
+            end
+        end
+        
+        uid = next_uid;
+    end
+    
+    return 0;
+end
+
+-- 获取当前活动玩家操作权限
+function RoomDdz:__GetActionWik()
+    self._CanOutCard        = {};
+    
+    local WIK               = enum.ASK_DDZ_NULL;
+    local room_player       = self.RoomPlayerData:Find(self._ActionID);
+    
+    if room_player==nil then
+        return WIK;
+    end
+    
+    -- 地主第一次出牌，没有选择明牌时可以有选择明牌的选项
+    if  self:CheckRoomSpecialKind(enum.TSK_DDZ_MINGPAI) and
+        self._ActionID==self._DiZhuID and
+        room_player:GetState(enum.STATE_DDZ_MINGPAI) and
+        room_player:GetHandCount()==self.CFG_HANDCOUNT_MAX
+    then
+        WIK = Misc.SetBit( WIK, enum.ASK_DDZ_DIZHU_MINGPAI );
+    end
+    
+    local is_can_out = self:__CheckCanOutCards(room_player);
+    
+    if is_can_out then
+        if self._ActionID==self._LastOutCardData.UID or self._LastOutCardData:GetCardCount()==0 then
+            WIK = Misc.SetBit( WIK, enum.ASK_DDZ_TISHI );
+            WIK = Misc.SetBit( WIK, enum.ASK_DDZ_CHUPAI );
+        else
+            WIK = Misc.SetBit( WIK, enum.ASK_DDZ_TISHI );
+            WIK = Misc.SetBit( WIK, enum.ASK_DDZ_CHUPAI );
+            WIK = Misc.SetBit( WIK, enum.ASK_DDZ_BUCHU );
+        end
+    else
+        WIK = Misc.SetBit( WIK, enum.ASK_DDZ_BUCHU );
+    end
+    
+    return WIK;
+end
+
+-- 检查用户可否出牌
+function RoomDdz:__UserOutCardLimit( room_player, out_cards )
+    
+    if room_player.UID ~= self._ActionID or not self:__GetFsmState(enum.TGuanDanStateAction) then
+        return false;
+    end
+    
+    -- 排序要出的牌,分析用。
+    SortPokerLogicValue(out_cards);
+
+    -- 获取牌型
+    local card_type, comp_val = DdzCardtypes:GetCardType( out_cards, self._LastOutCardData.Type );
+    if card_type == enum.CT_DDZ_ERROR then
+        return false;
+    end
+    
+    -- 
+    local temp_data     = self._TempOutCardData;
+    temp_data:SetCards(out_cards);
+    temp_data.Type      = card_type;
+    temp_data.UID       = self._ActionID;
+    temp_data.CompVal   = comp_val;
+    
+    -- 比较大小
+    if not DdzCardtypes:CompareCards( temp_data, self._LastOutCardData ) then
+        return false;
+    end
+
+    -- 可以出牌，从手牌中删除玩家需要出的牌
+    if not room_player:RemoveCards(temp_data.Cards) then
+        self:RefreshRoomInfo(self._ActionID);
+        return false;
+    end
+    
+    self._ActionID  = self:GetNextUID( self._ActionID );
+    self._LastOutCardData:Copy( temp_data );
+    
+    local MsgDDZUserOutCard = {
+        old_actionid    = temp_data.UID,
+        out_type        = card_type,
+        hand_count      = room_player:GetCardCount(),
+        hand_card       = room_player.HandCards
+    }
+    
+    -- 出炸弹时需要瞬间翻倍，同步到客户端
+    if card_type==enum.CT_DDZ_ZHADAN_SIZHANG or card_type==enum.CT_DDZ_HUOJIAN then
+        local multi_boom = self:__GetSpecialCfg("multi_boom");
+        if multi_boom~=nil then
+            self._Multiple = self._Multiple * multi_boom;
+            self:__AddShowDownEvent( enum.EVENT_ZHADAN, 1 );
+            MsgDDZUserOutCard.multiple = self._Multiple;
+        end
+    end
+    
+    -- 广播出牌信息
+    self:BroadcastMsg( "DDZ_OC", "PB.MsgDDZUserOutCard", MsgDDZUserOutCard );
+    
+    -- 添加玩家出牌次数，地主被春天时使用
+    room_player:AddOutCount();
+    
+    -- 记录出的牌
+    self:__RecordGameOutCard( MsgDDZUserOutCard );
+    
+    -- 清除上把的过牌状态
+    self:__ClearPlayerState(enum.STATE_DDZ_GUOPAI);
+    return true;
+end
+
+function RoomDdz:__AddShowDownEvent( sd_event, count )
+    local event_cnt = self._ShowDownEvent[sd_event];
+    
+    if event_cnt==nil then
+        self._ShowDownEvent[sd_event] = count;
+    else
+        event_cnt = event_cnt + count;
+    end
+end
+
+-- 添加玩家状态
+function RoomDdz:__AddPlayerState( state, uid )
+    for id,v in pairs(self.RoomPlayerData.map) do
+        if not (uid~=nil and id~=uid) then
+            v:SetState( state );
+        end
+    end
+end
+
+-- DelRoleState
+function RoomDdz:__ClearPlayerState( state, uid )
+    for id,v in pairs(self.RoomPlayerData.map) do
+        if not (uid~=nil and id~=uid) then
+            v:ClearState( state );
+        end
+    end
+end
+
+function RoomDdz:__RecordGameOutCard( out_msg )
+    
+    
+    
 end
 
 
+function RoomDdz:__GetFsmState( state )
+    if state~=nil then
+        if enum[self.Fsm:GetState()]==state then
+            return true;
+        end
+        return false;
+    else
+        return enum[self.Fsm:GetState()];
+    end
+end
+
+function RoomDdz:__CheckIsChunTian()
+    local is_ct = false;
+    
+    for uid,v in pairs(self.RoomPlayerData.map) do
+    
+        -- 检查地主有没有被春天
+        if uid==self._DiZhuID and self._DiZhuID~=self._ActionID and v:GetOutCount()==1 then
+            is_ct = true;
+            break;
+        end
+        
+        -- 地主获胜需要检查两个农民有没有被春天
+        if self._ActionID==self._DiZhuID and uid~=self._ActionID then
+        
+            if v:GetCardCount()==self.CFG_HAND_COUNT then
+                is_ct = true;
+            else
+                is_ct = false;
+                break;
+            end
+        end
+    end
+    
+    if is_ct then
+        local multi_ct = self:__GetSpecialCfg("multi_ct");
+        if multi_ct~=nil then
+            self._Multiple = self._Multiple * multi_ct;
+            self:__AddShowDownEvent(enum.EVENT_CHUNTIAN, 1);
+        end
+    end
+end
+
+
+-- --------------------------  战绩回放  Start
+-- 记录游戏开始
+function RoomDdz:__RecordGameStart()
+    
+    self._RecordNodeList    = {};
+    
+    
+
+end
+
+function RoomDdz:__RecordGameOutCard()
+
+end
+
+function RoomDdz:__RecordGameActionState()
+
+end
+
+function RoomDdz:__RecordGameShowCardPass()
+
+
+end
+
+function RoomDdz:__RecordGameShowDown()
+
+end
+
+function RoomDdz:__RecordGameShowDownEvent()
+
+end
+
+-- --------------------------  战绩回放  End
 
 --释放函数
 function RoomDdz:Release()

@@ -7,14 +7,20 @@ function StaticTableMgr:Init()
     local json_text     = JsonUtil.file_load(ConfigPath.."RoomConfig.json")
     self._RoomConfig    = Json.decode(json_text)
     
+    json_text           = JsonUtil.file_load(ConfigPath.."SpecialConfig.json")
+    self._SpecialCfg    = Json.decode(json_text)
+    
     
 end
 
 
-function StaticTableMgr:GetRoomConfigXml( room_type )
+function StaticTableMgr:GetRoomConfig( room_type )
     return self._RoomConfig[tostring(room_type)];
 end
 
+function StaticTableMgr:GetSpecialCfg( room_type )
+    return self._SpecialCfg[tostring(room_type)];
+end
 
 return StaticTableMgr;
 

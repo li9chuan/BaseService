@@ -19,6 +19,8 @@ function TimerMgr:Init(cycle)
     utils.tinsert_n(self._slots[2], {}, 60)
     utils.tinsert_n(self._slots[3], {}, 60)
     utils.tinsert_n(self._slots[4], {}, 1000)
+    
+    --setmetatable(results,{__mode = "v"})
 end
 
 function TimerMgr:GetTime()

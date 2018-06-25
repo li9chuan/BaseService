@@ -18,9 +18,6 @@ function RoomBase:ctor()
 
     self._TimerHandle           = 0;
     self._TimerTick             = 1000;
-    nlinfo("RoomBase:ctor");
-    
-
 end
 
 function RoomBase:PrintInfo()
@@ -36,21 +33,18 @@ function RoomBase:Init( room_type, update_tick )
 end
 
 function RoomBase:BaseInit( room_type, update_tick )
-    
-    self.RoomType               = room_type;
-    
-    local CFG = StaticTableMgr:GetRoomConfigXml(room_type);
-    
-    PrintTable(CFG);
-    self._RoomMin               = CFG.room_min;
-    
+
     if update_tick~=nil then
         self._TimerTick = update_tick;
     end
     
-    local ROOM_CFG = StaticTableMgr:GetRoomConfigXml(room_type);
+    local ROOM_CFG = StaticTableMgr:GetRoomConfig(room_type);
     
     if ROOM_CFG~=nil then
+        
+        self.RoomType               = room_type;
+        self._RoomMin               = CFG.room_min;
+        
         for i=1,ROOM_CFG.room_max do
             table.insert(self.SeatPlayers, 0);
         end
@@ -174,11 +168,26 @@ function RoomBase:GetNextUID( curr_id )
     return 0;
 end
 
+-- 新房间特殊玩法都用此方法判断
 function RoomBase:CheckRoomSpecialKind( special_kind )
     if self.CreateInfo~=nil and self.CreateInfo.special_kind~=nil then
         return Misc.GetBit(self.CreateInfo.special_kind, special_kind);
     end
     return false;
+end
+
+
+function RoomBase:__GetSpecialCfg( field )
+    local ROOM_CFG  = StaticTableMgr:GetSpecialCfg(self.RoomType);
+    
+    if ROOM_CFG~=nil then
+        if field~=nil then
+            return ROOM_CFG[field];
+        end
+        return ROOM_CFG;
+    end
+    
+    return nil;
 end
 
 function RoomBase:__NotifyOtherServiceLeave( uid )
@@ -221,7 +230,7 @@ end
 
 function RoomBase:IsFull()
     
-    local ROOM_CFG = StaticTableMgr:GetRoomConfigXml(self.RoomType);
+    local ROOM_CFG = StaticTableMgr:GetRoomConfig(self.RoomType);
     
     if ROOM_CFG~=nil then
 

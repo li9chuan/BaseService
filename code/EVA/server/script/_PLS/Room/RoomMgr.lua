@@ -19,7 +19,7 @@ function RoomMgr:CreatePrivateRoom( uid, prv_room_id, msg_cpr )
 
     local room_type = msg_cpr.room_type;
     local player    = PlayerMgr:GetPlayer(uid);
-    local ROOM_CFG  = StaticTableMgr:GetRoomConfigXml(room_type);
+    local ROOM_CFG  = StaticTableMgr:GetRoomConfig(room_type);
     
     if ROOM_CFG~=nil and player~=nil then
         
@@ -55,7 +55,7 @@ end
 function RoomMgr:EnterPrivateRoom( uid, prv_room_id, room_type )
 
     local player    = PlayerMgr:GetPlayer(uid);
-    local ROOM_CFG  = StaticTableMgr:GetRoomConfigXml(room_type);
+    local ROOM_CFG  = StaticTableMgr:GetRoomConfig(room_type);
     
     if ROOM_CFG~=nil and player~=nil then
         

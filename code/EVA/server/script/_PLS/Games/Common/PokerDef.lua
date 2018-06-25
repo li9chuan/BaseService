@@ -29,12 +29,25 @@ function GetPokerLogicValue( card )
     end
 end
 
+function GetPokerCount( card_list, card )
+    local value = GetPokerLogicValue(card);
+    local count = 0;
+    
+    for _,v in ipairs(card_list) do
+        if value==GetPokerLogicValue(v) then
+            count = count + 1;
+        end
+    end
+    
+    return count;
+end
 
--- 按牌的逻辑值大小排序
+
+-- 按牌的逻辑值从大到小排序
 function SortPokerLogicValue( cards )
     
     local cnt = #cards;
-    if cnt>=1 then  return; end
+    if cnt<=1 then  return; end
 
     local logic_cards = {};
 
@@ -46,7 +59,6 @@ function SortPokerLogicValue( cards )
     local last_n    = cnt - 1;
 
     while ( not is_sorted ) do
-        
         is_sorted = true;
 
         for i=1,last_n do
@@ -54,16 +66,9 @@ function SortPokerLogicValue( cards )
             local cnext = logic_cards[i+1];
 
 	        if ( ccurr<cnext ) or ( ccurr==cnext and cards[i]<cards[i+1] ) then
-
-                logic_cards[i]      = cnext;
-                logic_cards[i+1]    = ccurr;
-                
-                ccurr       = cards[i];
-                cards[i]    = cards[i+1];
-                cards[i+1]  = ccurr;
-
-                -- cards[i], cards[i+1]  = cards[i+1], cards[i]
-
+                logic_cards[i]          = cnext;
+                logic_cards[i+1]        = ccurr;
+                cards[i], cards[i+1]    = cards[i+1], cards[i]
                 is_sorted = false;
             end
         end

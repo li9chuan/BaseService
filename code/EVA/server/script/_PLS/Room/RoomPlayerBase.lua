@@ -5,16 +5,50 @@ function RoomPlayerBase:ctor()
     self._State         = 0;
     self._HandCards     = {};
     self._Score         = 0;            -- »ý·Ö
-
+    
 end
 
 function RoomPlayerBase:GetHandCount()
     return #self._HandCards;
 end
 
+
+
 function RoomPlayerBase:ClearAllState()
     self._State = 0;
+    
+    --[[
+    self.__ClearPlayerState( enum.STATE_DDZ_NEWROLE );
+    self.__ClearPlayerState( enum.STATE_DDZ_RELIEVE );
+    self.__ClearPlayerState( enum.STATE_DDZ_GUOPAI );
+    self.__ClearPlayerState( enum.STATE_DDZ_NONGMING );
+    self.__ClearPlayerState( enum.STATE_DDZ_DIZHU );
+    self.__ClearPlayerState( enum.STATE_DDZ_JIABEI );
+    self.__ClearPlayerState( enum.STATE_DDZ_SELECT_JIABEI );
+    self.__ClearPlayerState( enum.STATE_DDZ_MINGPAI );
+    self.__ClearPlayerState( enum.STATE_DDZ_SELECT_MINGPAISTART );
+    self.__ClearPlayerState( enum.STATE_DDZ_CONTINUE_GAME );
+    ]]
 end
+
+function RoomPlayerBase:ClearOneGameState()
+    local state = self._State;
+    state = Misc.ClearBit( state, enum.STATE_DDZ_NEWROLE );
+    state = Misc.ClearBit( state, enum.STATE_DDZ_RELIEVE );
+    state = Misc.ClearBit( state, enum.STATE_DDZ_GUOPAI );
+    state = Misc.ClearBit( state, enum.STATE_DDZ_NONGMING );
+    state = Misc.ClearBit( state, enum.STATE_DDZ_DIZHU );
+    state = Misc.ClearBit( state, enum.STATE_DDZ_JIABEI );
+    state = Misc.ClearBit( state, enum.STATE_DDZ_SELECT_JIABEI );
+    state = Misc.ClearBit( state, enum.STATE_DDZ_MINGPAI );
+    state = Misc.ClearBit( state, enum.STATE_DDZ_SELECT_MINGPAISTART );
+    state = Misc.ClearBit( state, enum.STATE_DDZ_CONTINUE_GAME );
+    
+    self._State     = state;
+    self._Score     = 0;
+    self._HandCards = {};
+end
+
 
 function RoomPlayerBase:GetState( enum_val )
     

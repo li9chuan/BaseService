@@ -79,8 +79,8 @@ function MsgRoomDdz:cbDouDiZhuOutCard( fes_sid, msgin )
     local room      = RoomMgr:GetRoomFromPID(uid);
     
     if room~=nil then
-        
-        
+        local msg_oc = msgin:rpb("PB.MsgDDZUserOutCard");
+        room:UserOutCard( uid, msg_oc );
     end
 end
 

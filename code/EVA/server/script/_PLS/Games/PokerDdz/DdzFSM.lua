@@ -97,7 +97,6 @@ function FSMDouDiZhu:DoSelectMingCardStart( event )
 end
 
 function FSMDouDiZhu:DoStartGame( event )
-    
     if event.args[1] then
         self.RoomDdz.IsGameStart    = true;
         self.RoomDdz:ResetGameData();
@@ -114,20 +113,16 @@ function FSMDouDiZhu:DoStartGame( event )
 end
 
 function FSMDouDiZhu:DoSendCard( event )
-
-    
     if event.args[1] then
         self.RoomDdz:SendHandCard();
         self.RoomDdz:BroadcastGameInfo();
     else
-        
         if self:__GetRunStateTime()<3000 then
             return;
         end
         
         self:SwitchState("TDDZStateQiangDiZhu");
     end
-    
 end
 
 function FSMDouDiZhu:DoQiangDiZhu( event )
@@ -140,15 +135,18 @@ function FSMDouDiZhu:DoSelectAddTimes( event )
     --if self:__GetRunStateTime()<10000 then
     --    return;
     --end
-    
 end
 
 function FSMDouDiZhu:DoAction( event )
-    nlinfo( "FSMClass:DoAction" );
+    if event.args[1] then
+        --self.RoomDdz:SendQiangDiZhuWik();
+    end
 end
 
 function FSMDouDiZhu:DoOutCard( event )
-    nlinfo( "FSMClass:DoOutCard" );
+    if self:__GetRunStateTime()>3000 then
+        self:SwitchState("TDDZStateAction");
+    end
 end
 
 function FSMDouDiZhu:DoShowDown( event )
