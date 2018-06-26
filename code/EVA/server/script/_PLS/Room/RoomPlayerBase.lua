@@ -45,7 +45,6 @@ function RoomPlayerBase:ClearOneGameState()
     state = Misc.ClearBit( state, enum.STATE_DDZ_CONTINUE_GAME );
     
     self._State     = state;
-    self._Score     = 0;
     self._HandCards = {};
 end
 
@@ -95,6 +94,15 @@ function RoomPlayerBase:SetScore( score )
 end
 
 function RoomPlayerBase:GetScore()
+    return self._Score;
+end
+
+function RoomPlayerBase:ChangeScore( score, is_add )
+    if is_add then
+        self._Score = self._Score + score;
+    else
+        self._Score = self._Score - score;
+    end
     return self._Score;
 end
 

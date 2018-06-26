@@ -50,6 +50,11 @@ end
 function PlayerHelper:Offline()
     self.OfflineTime            = TimerMgr:GetTime();
     self.ConFES                 = nil;
+    
+    if self.RoomID>0 then
+        local room = RoomMgr:GetRoom(self.RoomID);
+        room:PlayerOffline( self.UID );
+    end
 
     nlwarning("Offline================");
 end

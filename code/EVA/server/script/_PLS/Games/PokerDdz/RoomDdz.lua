@@ -24,7 +24,6 @@ function RoomDdz:ctor()
     self.CFG_FENGDING_32        = 32;       -- 32封顶
     self.CFG_FENGDING_64        = 64;       -- 64封顶
     
-    
 
     self.Fsm                    = DdzFSM:new();
     self.Fsm:Init(self);
@@ -50,11 +49,11 @@ function RoomDdz:ResetGameData()
     self._GameCount             = 1;        -- 当前是第几局
     self._Multiple              = 1;        -- 房间翻倍数
     
-    self._QingDiZhuWik          = 0;        -- 抢地主权限
+    self._QiangDiZhuWiki        = 0;        -- 抢地主权限
     self._QiangDiZhu            = true;     -- 是否是叫地主抢地主模式
     self._DiZhuID               = 0;        -- 地主 uid
     self._CanOutCard            = {};       -- 当前可以出的牌，托管时使用
-    self._ShowDownEvent         = {};       -- 结算事件
+    self.ShowDownEvent          = {};       -- 结算事件
     
     self._LastOutCardData:ClearData();
     self._TempOutCardData:ClearData();
@@ -80,7 +79,7 @@ end
 -- 判断游戏是否可以开始
 function RoomDdz:GameStartWait()
     --  人数是否足够
-    if self.RoomPlayerData:Count()<self._RoomMin then
+    if self.RoomPlayerData:Count()<self.CFG_RM_MIN then
         return false;
     end
     
@@ -107,7 +106,7 @@ function RoomDdz:JoinRoom( player )
     else
         
         -- 如果房间已满，跳出。
-        if self.RoomPlayerData:Count() == self._RoomMin then
+        if self.RoomPlayerData:Count() == self.CFG_RM_MIN then
             return false
         end
         
@@ -326,7 +325,7 @@ function RoomDdz:RefrshRoleQiangDiZhu( uid, msg_qdz )
             end
         end
             
-        self._QingDiZhuWik = WIK;
+        self._QiangDiZhuWiki = WIK;
         self:__RefreshPlayerQDZState(next_uid);
             
         local msg_qdz = {
@@ -541,6 +540,203 @@ function RoomDdz:SendGameInfo( uid, msg_name, msg_ddz_room )
     BaseService:SendToClient( player, msg_name, "PB.MsgDDZRoom", msg_ddz_room )
 end
 
+-- 游戏结算
+function RoomDdz:GameShowDown()
+    self._GameCount     = self._GameCount + 1;
+    self:__AddShowDownEvent(enum.EVENT_DDZDIFEN, 1);
+    
+    local room_player = self.RoomPlayerData:Find( self._DiZhuID );
+    if room_player==nil then
+        return;
+    end
+
+    -- 计算玩家的翻倍数,设置地主翻倍数.
+    local dizhu_jb = room_player:GetState( enum.STATE_DDZ_JIABEI );
+    local total_multi, jiabei_cnt = self:__CalcJiaBei( dizhu_jb );
+    room_player.Mulit = total_multi;
+    
+    -- 封顶加减分
+    if self:CheckRoomSpecialKind(enum.TSK_DDZ_BFD) then
+        self:__NormalCalcScore(total_multi);
+    elseif self:CheckRoomSpecialKind(enum.TSK_DDZ_16) then
+        self:__CalcScore( total_multi, 16, jiabei_cnt );
+    elseif self:CheckRoomSpecialKind(enum.TSK_DDZ_32) then
+        self:__CalcScore( total_multi, 32, jiabei_cnt );
+    elseif self:CheckRoomSpecialKind(enum.TSK_DDZ_64) then
+        self:__CalcScore( total_multi, 64, jiabei_cnt );
+    else
+        self:__NormalCalcScore(total_multi);
+    end
+end
+
+function RoomDdz:AfterShowDown()
+    local COST_CFG = StaticTableMgr:GetCreateCost( self.CreateInfo.consume_id );
+    
+    if COST_CFG~=nil then
+        if self._GameCount >= COST_CFG.game_cnt then
+        
+            self:__GameOverRecordLog();
+            for uid,room_player in pairs(self.RoomPlayerData.map) do
+                self:ReleaseRoomPlayer(uid);
+            end
+            
+            self.RoomPlayerData:Clear();
+        end
+    end
+end
+
+function RoomDdz:BroadcastShowDownInfo()
+    local COST_CFG = StaticTableMgr:GetCreateCost( self.CreateInfo.consume_id );
+    if COST_CFG==nil then   return;     end
+
+    local MsgDDZRoomShowDown = {
+        room_id     = self.PrvRoomID,
+        room_state  = self:__GetFsmState(),
+        state_time  = 0,
+        game_count  = self._GameCount,
+        time        = os.time(),
+        game_over   = self._GameCount>=COST_CFG.game_cnt,
+        event_count = {},
+        player_list = {}
+    };
+    
+    for eid,cnt in pairs(self.ShowDownEvent) do
+        local MsgDDZShowDownEvent = { event_id=eid, count=cnt };
+        tbinsert( MsgDDZRoomShowDown, MsgDDZShowDownEvent );
+    end
+    
+    for uid,room_player in pairs(self.RoomPlayerData.map) do
+    
+        local MsgDDZPlayer = {
+            player_base     = { UID = uid },
+            
+        };
+        
+        self:__FillPlayerRoomInfoMsg( uid, MsgDDZPlayer, uid );
+        tbinsert( MsgDDZRoomShowDown.player_list, MsgDDZPlayer );
+    end
+    
+    if MsgDDZRoomShowDown.game_over then
+        -- self:__AddPlayerIntegral
+    end
+    
+    self:BroadcastMsg( "DDZ_SD", "PB.MsgDDZRoomShowDown", MsgDDZRoomShowDown );
+    self:__RecordGameShowDown( MsgDDZRoomShowDown );
+end
+
+
+function RoomDdz:RelieveRequestRoom( uid, is_relieve )
+    
+end
+
+function RoomDdz:RelieveAutoRoom( )
+    self._GameCount = 9999;
+    --self.Fsm:SwitchState("TDDZStateShowDown");  -- 跳结算
+    self:BroadcastShowDownInfo();
+    self:AfterShowDown();
+end
+
+function RoomDdz:RelieveForceRoom( uid )
+end
+
+-- 普通算分
+function RoomDdz:__NormalCalcScore( total_multi )
+    for uid,room_player in pairs(self.RoomPlayerData.map) do
+        if uid==self._DiZhuID then
+            room_player:ChangeScore( total_multi, self._ActionID==self._DiZhuID )
+        else
+            room_player:ChangeScore( room_player.Mulit, self._ActionID~=self._DiZhuID )
+        end
+    end
+end
+
+-- 计算玩家的积分
+function RoomDdz:__CalcScore( total_multi, limit_score, jiabei_cnt )
+
+    if total_multi>limit_score then
+        for uid,room_player in pairs(self.RoomPlayerData.map) do
+        
+            --  两个都没有加倍或者两个都加倍，在封顶时输赢的分相同
+            if jiabei_cnt==0 or jiabei_cnt==2 then
+                if uid==self._DiZhuID then
+                    room_player:ChangeScore( limit_score, self._ActionID==self._DiZhuID );
+                else
+                    room_player:ChangeScore( limit_score/2, self._ActionID~=self._DiZhuID );
+                end
+            else
+                -- 农民中一个加倍一个不加倍，封顶时要按照比例进行加减分
+                if uid~=self._DiZhuID then
+                    if room_player:GetState(enum.STATE_DDZ_JIABEI) then
+                        if limit_score==16 then
+                            room_player:ChangeScore( 11, self._ActionID~=self._DiZhuID );
+                        elseif limit_score==32 then
+                            room_player:ChangeScore( 22, self._ActionID~=self._DiZhuID );
+                        elseif limit_score==64 then
+                            room_player:ChangeScore( 43, self._ActionID~=self._DiZhuID );
+                        end
+                    else
+                        if limit_score==16 then
+                            room_player:ChangeScore( 5, self._ActionID~=self._DiZhuID );
+                        elseif limit_score==32 then
+                            room_player:ChangeScore( 10, self._ActionID~=self._DiZhuID );
+                        elseif limit_score==64 then
+                            room_player:ChangeScore( 21, self._ActionID~=self._DiZhuID );
+                        end
+                    end
+                else
+                    room_player:ChangeScore( limit_score, self._ActionID==self._DiZhuID );
+                end
+            end
+        end
+    else
+        self:__NormalCalcScore( total_multi );
+    end
+end
+
+-- 计算玩家加倍
+function RoomDdz:__CalcJiaBei( is_dizhu )
+    local total_multi   = 0;
+    local jiabei_cnt    = 0;
+    local add_times     = self:__GetSpecialCfg("add_times");
+    
+    for uid,room_player in pairs(self.RoomPlayerData.map) do
+        
+        if uid~=self._DiZhuID then
+        
+            -- 如果没有加倍玩法，直接设置房间的加倍数
+            if not self:CheckRoomSpecialKind(enum.TSK_DDZ_JIABEI) then
+                room_player.Mulit = self._Multiple;
+                total_multi = total_multi + room_player.Mulit;
+            else
+                if room_player:GetState(enum.STATE_DDZ_JIABEI) then
+                    if is_dizhu then
+                        room_player.Mulit = self._Multiple * add_times * 2;
+                    else
+                        room_player.Mulit = self._Multiple * add_times;
+                    end
+                    
+                    jiabei_cnt = jiabei_cnt + 1;
+                else
+                    if is_dizhu then
+                        room_player.Mulit = self._Multiple * add_times;
+                    else
+                        room_player.Mulit = self._Multiple;
+                    end
+                end
+                
+                total_multi = total_multi + room_player.Mulit;
+            end
+        end
+    end
+    
+    return total_multi, jiabei_cnt;
+end
+
+-- 战绩保存
+function RoomDdz:__GameOverRecordLog()
+    
+end
+
 function RoomDdz:__FillRoomInfoMsg( msg_ddz_room, current_uid )
 
     msg_ddz_room.room_id        = self.PrvRoomID;
@@ -609,13 +805,16 @@ function RoomDdz:__FillPlayerRoomInfoMsg( uid, msg_room_player, current_uid )
     
     if room_player~=nil then
     
-        msg_room_player.state       = room_player:GetState();
-        msg_room_player.hand_count  = room_player:GetHandCount();
-        msg_room_player.seats       = self:GetPlayerSeatIdx(uid);
-        msg_room_player.score       = room_player:GetScore();
-        
-    
-        --TDDZStateQiangDiZhu
+        msg_room_player.state           = room_player:GetState();           -- 玩家的当前状态
+        msg_room_player.hand_count      = room_player:GetHandCount();       -- 玩家手中的牌数
+        msg_room_player.seats           = self:GetPlayerSeatIdx(uid);       -- 玩家的座位
+        msg_room_player.score           = room_player:GetScore();           -- 玩家当前的积分
+        msg_room_player.show_down_score = room_player:GetScore() - room_player.StartScore;  -- 填充玩家的输赢积分
+        msg_room_player.qingdizhu_value = room_player.QiangDiZhu;
+
+        if self:__GetFsmState(enum.TDDZStateQiangDiZhu) and room_player:GetState(enum.STATE_DDZ_QIANGDIZHU) then
+            msg_room_player.qingdizhu_wiki = self._QiangDiZhuWiki;
+        end
         
         if uid==current_uid or room_player:GetState(enum.STATE_DDZ_MINGPAI) then
             msg_room_player.card_list   = room_player.HandCards;
@@ -780,16 +979,6 @@ function RoomDdz:__UserOutCardLimit( room_player, out_cards )
     return true;
 end
 
-function RoomDdz:__AddShowDownEvent( sd_event, count )
-    local event_cnt = self._ShowDownEvent[sd_event];
-    
-    if event_cnt==nil then
-        self._ShowDownEvent[sd_event] = count;
-    else
-        event_cnt = event_cnt + count;
-    end
-end
-
 -- 添加玩家状态
 function RoomDdz:__AddPlayerState( state, uid )
     for id,v in pairs(self.RoomPlayerData.map) do
@@ -882,7 +1071,7 @@ function RoomDdz:__RecordGameShowCardPass()
 
 end
 
-function RoomDdz:__RecordGameShowDown()
+function RoomDdz:__RecordGameShowDown( MsgDDZRoomShowDown )
 
 end
 

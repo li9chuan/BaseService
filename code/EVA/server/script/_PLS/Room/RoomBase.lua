@@ -2,11 +2,9 @@ local RoomBase = class("RoomBase")
 
 -- 构造函数;
 function RoomBase:ctor()
-
     self.RoomID                 = RoomMgr:GenerateRoomID();
     self.PrvRoomID              = 0;
     self.RoomType               = "";
-    self._RoomMin               = 9999;
 
     self.IsGameStart            = false;
     self.CreatorID              = 0;                -- 房间归属
@@ -14,11 +12,16 @@ function RoomBase:ctor()
     self.RoomPlayerData         = Map:new();
     self.SeatPlayers            = {};
     self.ViewPlayers            = {};
+    self.ShowDownEvent          = {};
     
-
     self._TimerHandle           = 0;
     self._TimerTick             = 1000;
+    self._CreateTime            = os.time();
+    
+    self.CFG_RM_MIN             = 9999;
+    self.CFG_LIMIT_TIME         = 28800;
 end
+
 
 function RoomBase:PrintInfo()
     nlinfo("============== RoomID:"..self.RoomID .. "  PrvID:"..self.PrvRoomID.."  Creator:"..self.CreatorID);
@@ -43,7 +46,8 @@ function RoomBase:BaseInit( room_type, update_tick )
     if ROOM_CFG~=nil then
         
         self.RoomType               = room_type;
-        self._RoomMin               = CFG.room_min;
+        self.CFG_RM_MIN             = CFG.room_min;
+        self.CFG_LIMIT_TIME         = CFG.room_time;
         
         for i=1,ROOM_CFG.room_max do
             table.insert(self.SeatPlayers, 0);
@@ -59,11 +63,25 @@ function RoomBase:TickUpdate()
     nlinfo("RoomBase:TickUpdate  "..self._TimerHandle);
 end
 
+
+function RoomBase:PlayerOffline(uid)
+    if not self.IsGameStart then
+        self:LeaveRoom(uid);
+    end
+end
+
 function RoomBase:BaseTickUpdate()
+    
+    if os.time()-self._CreateTime > self.CFG_LIMIT_TIME then
+        RoomMgr.ReleaseRoom( self.RoomID );
+        return;
+    end
+    
     if self._TimerHandle > 0 then
         -- BaseInit 之后才继续timer
         self._TimerHandle = TimerMgr:AddTimer(self._TimerTick, self, self.BaseTickUpdate);
     end
+    
     self:TickUpdate();
 end
 
@@ -94,7 +112,7 @@ function RoomBase:ReleaseRoomPlayer( uid )
     -- 通知其它服务器离开房间
     self:__NotifyOtherServiceLeave(uid);
     
-    self:__RemoveRoomPlayer(uid);
+    self:__RemoveSeatPlayer(uid);
 
     local player = PlayerMgr:GetPlayer(uid);
     
@@ -168,6 +186,15 @@ function RoomBase:GetNextUID( curr_id )
     return 0;
 end
 
+function RoomBase:RelieveRequestRoom( uid, is_relieve )
+end
+
+function RoomBase:RelieveAutoRoom()
+end
+
+function RoomBase:RelieveForceRoom()
+end
+
 -- 新房间特殊玩法都用此方法判断
 function RoomBase:CheckRoomSpecialKind( special_kind )
     if self.CreateInfo~=nil and self.CreateInfo.special_kind~=nil then
@@ -176,60 +203,7 @@ function RoomBase:CheckRoomSpecialKind( special_kind )
     return false;
 end
 
-
-function RoomBase:__GetSpecialCfg( field )
-    local ROOM_CFG  = StaticTableMgr:GetSpecialCfg(self.RoomType);
-    
-    if ROOM_CFG~=nil then
-        if field~=nil then
-            return ROOM_CFG[field];
-        end
-        return ROOM_CFG;
-    end
-    
-    return nil;
-end
-
-function RoomBase:__NotifyOtherServiceLeave( uid )
-
-    local msgout = CMessage("PLS=>LURT");
-    msgout:wint(uid);
-    msgout:wstring(self.RoomType);
-    msgout:wint(self.PrvRoomID);
-
-    BaseService:Broadcast( "SCH", msgout );
-end
-
-function RoomBase:__AddRoomPlayer( uid )
-
-    local seat_idx = self:GetPlayerSeatIdx(uid);
-    
-    if seat_idx==0 then
-        
-        for k,v in ipairs(self.SeatPlayers) do
-            if v==0 then
-                self.SeatPlayers[k] = uid;
-                seat_idx = k;
-                break;
-            end
-        end
-    end
-    
-    return seat_idx;
-end
-
-function RoomBase:__RemoveRoomPlayer( uid )
-    
-    for k,v in ipairs(self.SeatPlayers) do
-        if v==uid then
-            self.SeatPlayers[k] = 0;
-        end
-    end
-
-end
-
 function RoomBase:IsFull()
-    
     local ROOM_CFG = StaticTableMgr:GetRoomConfig(self.RoomType);
     
     if ROOM_CFG~=nil then
@@ -242,12 +216,22 @@ function RoomBase:IsFull()
     return true;
 end
 
-
 function RoomBase:Release()
     self:BaseRelease();
 end
 
 function RoomBase:BaseRelease()
+    
+    if self.IsGameStart then
+        self:RelieveAutoRoom();
+    end
+
+    for _,uid in ipairs(self.SeatPlayers) do
+        if uid~=0 then
+            self:ReleaseRoomPlayer(uid);
+        end
+    end
+    
     self.Fsm = nil;
     TimerMgr:RemoveTimer(self._TimerHandle);
 end
@@ -276,6 +260,65 @@ function RoomBase:BroadcastViewer( msg_name, msg_stru, except_id )
     
     
 end   
+
+-- 添加结算事件
+function RoomBase:__AddShowDownEvent( TShowDownEvent, count )
+    local event_cnt = self.ShowDownEvent[TShowDownEvent];
+    
+    if event_cnt==nil then
+        self.ShowDownEvent[TShowDownEvent] = count;
+    else
+        event_cnt = event_cnt + count;
+    end
+end
+
+function RoomBase:__GetSpecialCfg( field )
+    local ROOM_CFG  = StaticTableMgr:GetSpecialCfg(self.RoomType);
+    
+    if ROOM_CFG~=nil then
+        if field~=nil then
+            return ROOM_CFG[field];
+        end
+        return ROOM_CFG;
+    end
+    
+    return nil;
+end
+
+function RoomBase:__NotifyOtherServiceLeave( uid )
+
+    local msgout = CMessage("PLS=>LURT");
+    msgout:wint(uid);
+    msgout:wstring(self.RoomType);
+    msgout:wint(self.PrvRoomID);
+
+    BaseService:Broadcast( "SCH", msgout );
+end
+
+function RoomBase:__AddRoomPlayer( uid )
+    local seat_idx = self:GetPlayerSeatIdx(uid);
+    
+    if seat_idx==0 then
+        
+        for k,v in ipairs(self.SeatPlayers) do
+            if v==0 then
+                self.SeatPlayers[k] = uid;
+                seat_idx = k;
+                break;
+            end
+        end
+    end
+    
+    return seat_idx;
+end
+
+function RoomBase:__RemoveSeatPlayer( uid )
+    for k,v in ipairs(self.SeatPlayers) do
+        if v==uid then
+            self.SeatPlayers[k] = 0;
+        end
+    end
+end
 
 function RoomBase:__GetViewPlayerNum()
     return #self.ViewPlayers;

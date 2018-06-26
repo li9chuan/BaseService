@@ -52,11 +52,7 @@ function this:Find(k)
 end
 
 function this:Clear()
-    for k,_ in pairs(self.map) do
-        if nil ~= self.map[k] then
-            self.map[k] = nil
-        end
-    end
+    self.map = {};
     self.count = 0
 end
 

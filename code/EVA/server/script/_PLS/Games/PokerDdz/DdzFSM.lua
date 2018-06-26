@@ -150,7 +150,15 @@ function FSMDouDiZhu:DoOutCard( event )
 end
 
 function FSMDouDiZhu:DoShowDown( event )
-    nlinfo( "FSMClass:DoShowDown" );
+    if event.args[1] then
+        self.RoomDdz:GameShowDown();
+        self.RoomDdz:BroadcastShowDownInfo();
+        self.RoomDdz:AfterShowDown();
+    else
+        if self:__GetRunStateTime() > 5000 then
+            self:SwitchState("TDDZStateWait");
+        end
+    end
 end
 
 function FSMDouDiZhu:DoRelieveRoom( event )

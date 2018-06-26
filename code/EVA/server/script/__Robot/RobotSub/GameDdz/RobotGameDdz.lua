@@ -16,7 +16,7 @@ function RobotGameDdz:GetRobotState( enum_idx )
 end
 
 function RobotGameDdz:DoCreatePrvRoom()
-    local create_prvroom = { room_type="RM_DDZ" };
+    local create_prvroom = { room_type="RM_DDZ", consume_id=1001, special_kind=0x1c5 };
     self.Robot:Send( "CPRM", "PB.MsgCreatePrivateRoom", create_prvroom );
 end
 

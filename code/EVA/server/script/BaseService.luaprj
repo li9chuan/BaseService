@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<Project Name="BaseService.luaprj" Cmd="E:\BaseService\build\bin\Debug\client_robot.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="false" >
+<Project Name="BaseService.luaprj" Cmd="E:\BaseService\build\bin\Debug\client_robot.exe" Arg="" Dir="E:\BaseService\code\EVA\server" Toggle="true" >
     <Filter RelativePath=".\Framework" Toggle="false" >
         <LuaFile RelativePath=".\Class.lua" />
         <LuaFile RelativePath=".\functions.lua" />

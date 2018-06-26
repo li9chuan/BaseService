@@ -13,6 +13,8 @@ function DdzPlayerInfo:ctor()
     self._TempCards     = {};
 
     self._OutCount      = 0;    -- 玩家出牌次数，地主被春天时使用
+    self.Multi          = 1;
+    self.StartScore     = 0;    -- 每局开始时玩家的身上分数
     
 end
 
@@ -67,6 +69,8 @@ end
 -- 清除每局临时数据
 function DdzPlayerInfo:ClearOneGameData()
     self:ClearOneGameState();
+    
+    self.StartScore = self._Score;
 end
 
 function DdzPlayerInfo:IsSelectJiaBei()

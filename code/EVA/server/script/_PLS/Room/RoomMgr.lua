@@ -91,6 +91,8 @@ function RoomMgr:ReleaseRoom( room_id )
         end
         
         self.GameRooms:Remove(room_id);
+        
+        room:BaseRelease();
     end
 end
 
