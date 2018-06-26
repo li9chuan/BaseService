@@ -46,8 +46,8 @@ function RoomBase:BaseInit( room_type, update_tick )
     if ROOM_CFG~=nil then
         
         self.RoomType               = room_type;
-        self.CFG_RM_MIN             = CFG.room_min;
-        self.CFG_LIMIT_TIME         = CFG.room_time;
+        self.CFG_RM_MIN             = ROOM_CFG.room_min;
+        self.CFG_LIMIT_TIME         = ROOM_CFG.room_time;
         
         for i=1,ROOM_CFG.room_max do
             table.insert(self.SeatPlayers, 0);
