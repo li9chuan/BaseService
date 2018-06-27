@@ -3,13 +3,13 @@ local RoomPlayerBase = class("RoomPlayerBase")
 function RoomPlayerBase:ctor()
 
     self._State         = 0;
-    self._HandCards     = {};
     self._Score         = 0;            -- »ý·Ö
     
+    self.HandCards      = {};
 end
 
 function RoomPlayerBase:GetHandCount()
-    return #self._HandCards;
+    return #self.HandCards;
 end
 
 
@@ -45,7 +45,7 @@ function RoomPlayerBase:ClearOneGameState()
     state = Misc.ClearBit( state, enum.STATE_DDZ_CONTINUE_GAME );
     
     self._State     = state;
-    self._HandCards = {};
+    self.HandCards = {};
 end
 
 
@@ -71,20 +71,20 @@ function RoomPlayerBase:ClearState( enum_val )
 end
 
 function RoomPlayerBase:AddHandCard( card )
-    table.insert(self._HandCards, card);
+    table.insert(self.HandCards, card);
 end       
         
 function RoomPlayerBase:RemoveHandCard( card )
-    for i,v in ipairs(self._HandCards) do
+    for i,v in ipairs(self.HandCards) do
         if v==card then
-            table.remove(self._HandCards, i);
+            table.remove(self.HandCards, i);
             return;
         end
     end
 end 
 
 function RoomPlayerBase:GetHandCardMsgList( msg_cards )
-    for i,v in ipairs(self._HandCards) do
+    for i,v in ipairs(self.HandCards) do
         table.insert(msg_cards, v);
     end
 end

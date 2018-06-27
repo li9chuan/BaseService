@@ -508,7 +508,7 @@ function RoomDdz:UserOutCard( uid, msg_oc )
 end
 
 function RoomDdz:BroadcastGameInfo( )
-    for k,v in ipairs(self.SeatPlayers) do
+    for _,v in ipairs(self.SeatPlayers) do
         if v~=0 then
             local msg_gameinfo = {};
             self:SendGameInfo( v, "DDZ_GI", msg_gameinfo );
@@ -830,7 +830,7 @@ function RoomDdz:__CheckCanOutCards( room_player )
         return true;
     end
 
-    return DdzCardtypes:CheckCanOutCards( self._LastOutCardData, room_player._HandCards );
+    return DdzCardtypes:CheckCanOutCards( self._LastOutCardData, room_player.HandCards );
 end
 
 -- 检查除了uid外，有没有玩家抢过地主
