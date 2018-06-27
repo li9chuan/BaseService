@@ -67,7 +67,16 @@ namespace bin
         {
             uint64  shl = 1;
             shl <<= flag_idx;
-            r = (flag_bit ^ shl);
+
+            if (flag_bit&shl > 0)
+            {
+                r = (flag_bit ^ shl);
+            }
+            else
+            {
+                r = flag_bit;
+            }
+            
             return 1;
         }
 
