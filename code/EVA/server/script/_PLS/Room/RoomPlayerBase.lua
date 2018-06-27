@@ -12,25 +12,6 @@ function RoomPlayerBase:GetHandCount()
     return #self.HandCards;
 end
 
-
-
-function RoomPlayerBase:ClearAllState()
-    self._State = 0;
-    
-    --[[
-    self.__ClearPlayerState( enum.STATE_DDZ_NEWROLE );
-    self.__ClearPlayerState( enum.STATE_DDZ_RELIEVE );
-    self.__ClearPlayerState( enum.STATE_DDZ_GUOPAI );
-    self.__ClearPlayerState( enum.STATE_DDZ_NONGMING );
-    self.__ClearPlayerState( enum.STATE_DDZ_DIZHU );
-    self.__ClearPlayerState( enum.STATE_DDZ_JIABEI );
-    self.__ClearPlayerState( enum.STATE_DDZ_SELECT_JIABEI );
-    self.__ClearPlayerState( enum.STATE_DDZ_MINGPAI );
-    self.__ClearPlayerState( enum.STATE_DDZ_SELECT_MINGPAISTART );
-    self.__ClearPlayerState( enum.STATE_DDZ_CONTINUE_GAME );
-    ]]
-end
-
 function RoomPlayerBase:ClearOneGameState()
     local state = self._State;
     state = Misc.ClearBit( state, enum.STATE_DDZ_NEWROLE );
@@ -48,7 +29,6 @@ function RoomPlayerBase:ClearOneGameState()
     self.HandCards = {};
 end
 
-
 function RoomPlayerBase:GetState( enum_val )
     
     if enum_val==nil then
@@ -60,6 +40,7 @@ end
 
 function RoomPlayerBase:SetState( enum_val )
     if enum_val~=nil then
+        local tmp = self._State;
         self._State = Misc.SetBit(self._State, enum_val);
     end
 end

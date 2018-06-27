@@ -73,26 +73,6 @@ function DdzPlayerInfo:ClearOneGameData()
     self.StartScore = self._Score;
 end
 
-function DdzPlayerInfo:IsSelectJiaBei()
-    return self:GetState( enum.STATE_DDZ_SELECT_JIABEI );
-end
-
-function DdzPlayerInfo:IsQiangDiZhu()
-    return self:GetState( enum.STATE_DDZ_QIANGDIZHU );
-end
-
-function DdzPlayerInfo:IsReady()
-    return self:GetState( enum.STATE_DDZ_READY );
-end
-
-function DdzPlayerInfo:SetReady()
-    self:SetState( enum.STATE_DDZ_READY );
-end
-
-function DdzPlayerInfo:CancleReady()
-    self:ClearState( enum.STATE_DDZ_READY );
-end
-
 function DdzPlayerInfo:GetCardCount()
     return #self.HandCards;
 end

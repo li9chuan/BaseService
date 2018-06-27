@@ -28,14 +28,12 @@ function PLSInfoMgr:AllocPLS( room_type )
     for _,v in pairs(self.PLSMap.map) do
         
         if v.RoomList[room_type] ~= nil then
-            
             local game_info = v.RoomList[room_type];
             
-            if game_info:IsFull()==false then
+            if not game_info:IsFull() then
                 game_info.Curr = game_info.Curr + 1;
                 return v.ServiceID;
             end;
-            
         end;
     end;
     

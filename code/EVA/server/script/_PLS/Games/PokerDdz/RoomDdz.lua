@@ -85,7 +85,7 @@ function RoomDdz:GameStartWait()
     
     -- 是否都点了准备
     for _,v in pairs(self.RoomPlayerData.map) do
-        if not v:IsReady() then
+        if not v:GetState( enum.STATE_DDZ_READY ) then
             return false;
         end
     end
@@ -135,7 +135,7 @@ function RoomDdz:UserStartReady( uid )
     local room_player = self.RoomPlayerData:Find(uid);
     
     if room_player~=nil then
-        room_player:SetReady();
+        room_player:SetState(enum.STATE_DDZ_READY);
         local msg_int = { value=uid };
         self:BroadcastMsg( "DDZ_SR", "PB.MsgInt", msg_int );
     end
@@ -145,7 +145,7 @@ function RoomDdz:UserCancelReady( uid )
     local room_player = self.RoomPlayerData:Find(uid);
     
     if room_player~=nil then
-        room_player:CancleReady();
+        room_player:ClearState( enum.STATE_DDZ_READY );
         local msg_int = { value=uid };
         self:BroadcastMsg( "DDZ_CR", "PB.MsgInt", msg_int );
     end
@@ -188,15 +188,12 @@ end
 
 -- 刷新加倍的选择
 function RoomDdz:RefreshSelectJiaBei( uid, msg_jbr )
-
     if self.Fsm:IsState("TDDZStateSelectAddTimes") then
         local room_player = self.RoomPlayerData:Find(uid);
-        
+
         if room_player~=nil then
-            --room_player:IsSelectJiaBei()
-            
             room_player:SetState( enum.STATE_DDZ_SELECT_JIABEI );
-            
+
             if msg_jbr.result == enum.DDZ_AT_JIABIE then
                 room_player:SetState( enum.STATE_DDZ_JIABEI );
             end
@@ -205,10 +202,9 @@ function RoomDdz:RefreshSelectJiaBei( uid, msg_jbr )
             msg_jbr.state   = room_player:GetState();
             
             self:BroadcastMsg("DDZ_JB", "PB.MsgJiaBeiResult", msg_jbr);
-            
-            
+
             for _,v in pairs(self.RoomPlayerData.map) do
-                if v:IsSelectJiaBei()==false then
+                if not v:GetState(enum.STATE_DDZ_SELECT_JIABEI) then
                     return;
                 end
             end
@@ -348,7 +344,7 @@ function RoomDdz:SetDiZhuState( uid )
     
         ply_dz:SetState( enum.STATE_DDZ_DIZHU );
         ply_dz:AddHandCards( self._CardsBottom );
-        SortPokerLogicValue( self.HandCards );
+        SortPokerLogicValue( ply_dz.HandCards );
         
         self._DiZhuID   = uid;
         self._ActionID  = uid;

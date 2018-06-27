@@ -20,7 +20,7 @@ function PlayerHelper:ctor()
     self.PlayerState            = nil;
         
     self.LastUpdateTime         = TimerMgr:GetTime();
-    self._TimerHandle           = TimerMgr:AddTimer( 30000, self, self.TickUpdate );;
+    self._TimerHandle           = TimerMgr:AddTimer( 30000, self, self.TickUpdate );
 end
 
 function PlayerHelper:TickUpdate()
@@ -53,7 +53,12 @@ function PlayerHelper:Offline()
     
     if self.RoomID>0 then
         local room = RoomMgr:GetRoom(self.RoomID);
-        room:PlayerOffline( self.UID );
+        
+		if room~=nil then
+			room:PlayerOffline( self.UID );
+		else
+			nlwarning("room==nil");
+		end
     end
 
     nlwarning("Offline================");

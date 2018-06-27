@@ -26,8 +26,8 @@ function ServiceInit()
     ClientMgr:Init();
     FrontEndService:Init();
     
-    --ClientService:Init( "ClientService", "tcp" );
-    ClientService:Init( "ClientService", "ws" );
+    ClientService:Init( "ClientService", "tcp" );
+    --ClientService:Init( "ClientService", "ws" );
     
     --ClientService:Init( "ClientService", "wss" );
     

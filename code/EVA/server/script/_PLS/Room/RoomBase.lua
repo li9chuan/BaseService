@@ -96,7 +96,7 @@ end
 function RoomBase:LeaveRoom( uid )
     self:BrLeaveRoom(uid);
     
-    if not self.IsGameStart then
+    if not self.IsGameStart and uid~=self.CreatorID then
         self:ReleaseRoomPlayer(uid);
     end
 end

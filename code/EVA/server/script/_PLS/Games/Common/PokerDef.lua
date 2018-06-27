@@ -27,6 +27,8 @@ function GetPokerLogicValue( card )
     if value==2 then
         return 15;
     end
+    
+    return value
 end
 
 function GetPokerCount( card_list, card )
