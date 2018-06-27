@@ -192,7 +192,7 @@ message MsgDDZActon
 	optional uint64  	        old_actionid		= 2; 			    // 上把的活动玩家
 	repeated uint32             last_out_cards      = 3;             	// 上把玩家出的牌信息
 	optional uint32  	        last_out_type		= 4;                // 上把玩家的出牌种类
-	optional TDDZPlayerWik      wik                 = 5;                // 当前活动玩家的权限
+	optional uint32             wik                 = 5;                // 当前活动玩家的权限  TDDZPlayerWik
 	repeated MsgDDZPlayer       player_list         = 6;                // 玩家信息
 }
 
@@ -217,7 +217,7 @@ message MsgDDZRoom                                                      // 房�
 	optional uint32                         game_count              = 6;     // 当前是该房间的第几局
 	optional MsgCreatePrivateRoom		    private_room 	        = 7;	    // 私房信息;
 	optional MsgDDZUserOutCard              last_outcard            = 8;     // 房间上家牌的信息
-	optional TDDZPlayerWik                  wik                     = 9;     // 当前活动玩家的权限
+	optional uint32                         wik                     = 9;     // 当前活动玩家的权限  TDDZPlayerWik
 	optional uint32                         bottom_cards            = 10;    // 底牌列表
 	optional uint64                         multiple                = 11;    // 房间倍数
 	repeated MsgDiPaiMutiple 			    dipai_multi_list        = 12;    // 底牌翻倍列表

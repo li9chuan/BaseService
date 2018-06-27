@@ -119,7 +119,7 @@ message MsgRecordWeaveCard
  	optional uint32 		card       		= 1;
 	optional uint32			wik		   		= 2;
 	optional uint32			barkind			= 3;
-	repeated uint32		    mix_card		= 4; // 组合牌;
+	repeated uint32		    mix_card		= 4;    // 组合牌;
 }
 
 message MsgRecordShowDown							
@@ -172,6 +172,8 @@ message MsgRecordNodeList
 	repeated MsgGDShowDownRole 		lost_role		= 13;
 	optional MsgGDRankInfo			room_ranking	= 14;
 }
+
+
 
 ////////////////////////////////   Record End    ////////////////////////////
 
