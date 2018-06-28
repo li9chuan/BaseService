@@ -139,7 +139,7 @@ end
 
 function FSMDouDiZhu:DoAction( event )
     if event.args[1] then
-        --self.RoomDdz:SendQiangDiZhuWik();
+        self.RoomDdz:BroadGameActionPlayer();
     end
 end
 

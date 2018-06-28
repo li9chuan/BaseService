@@ -16,6 +16,7 @@ function RobotMgr:Init()
     self._EventRegister:RegisterEvent( "DDZ_SR",            self, self.cbDdzUserStartReady );
     self._EventRegister:RegisterEvent( "DDZ_QDZ_QX",        self, self.cbDDZ_QDZ_QX );
     self._EventRegister:RegisterEvent( "DDZ_QDZ_F",         self, self.cbDDZ_QDZ_F );
+    self._EventRegister:RegisterEvent( "DDZ_RA",            self, self.cbDDZ_RA );
     
     
     
@@ -68,20 +69,22 @@ end
 
 function RobotMgr:Print( str, id )
     if (#self.PrintFilterWhite)==0  then
-        nlinfo(str);
+        nlinfo("UID:"..id .. "  "..str);
     else
         if self.PrintFilterWhite[id]~=nil then
-            nlinfo(str);
+            nlinfo("UID:"..id .. "  "..str);
         end
     end
 end
 
 function RobotMgr:PrintTable( tbl, id )
     if (#self.PrintFilterWhite)==0  then
-        PrintTable(tbl);
+        local str = JsonUtil.serialise_value(tbl, indent, depth);
+        nlinfo("UID:"..id .. "  "..str);
     else
         if self.PrintFilterWhite[id]~=nil then
-            PrintTable(tbl);
+            local str = JsonUtil.serialise_value(tbl, indent, depth);
+            nlinfo("UID:"..id .. "  "..str);
         end
     end
 end
@@ -146,6 +149,14 @@ function RobotMgr:cbDDZ_QDZ_F( from, msgin )
     if robot~=nil then
         local msg_qdz_res = msgin:rpb("PB.MsgBRQiangDiZhuResult");
         robot.Game:cbDDZ_QDZ_F(msg_qdz_res);
+    end
+end
+
+function RobotMgr:cbDDZ_RA( from, msgin )
+    local robot = self.RobotList[from];
+    if robot~=nil then
+        local msg_ddz_act = msgin:rpb("PB.MsgDDZActon");
+        robot.Game:cbDDZ_RA(msg_ddz_act);
     end
 end
 

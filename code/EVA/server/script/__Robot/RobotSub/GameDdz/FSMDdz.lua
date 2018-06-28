@@ -19,6 +19,7 @@ function FSMDdz:Init( robot )
 			{name = "TCreatePrvRoom"		    },
 			{name = "TJoinPrvRoom" 	            },
             {name = "TInRoomIdlem" 	            },
+            {name = "TAction" 	                },
 
         },
         callbacks =
@@ -27,6 +28,7 @@ function FSMDdz:Init( robot )
 			onTCreatePrvRoom  	    = handler(self, self.DoCreatePrvRoom),
             onTJoinPrvRoom          = handler(self, self.DoJoinPrvRoom),
             onTInRoomIdlem          = handler(self, self.DoInRoomIdlem),
+            onTAction               = handler(self, self.DoAction),
 		}
     })
 
@@ -137,7 +139,11 @@ function FSMDdz:DoInRoomIdlem( event )
     end
 end
 
-
+function FSMDdz:DoAction( event )
+    if not event.args[1] then
+        self.GameDdz:DoAction();
+    end
+end
 
 return FSMDdz;
 

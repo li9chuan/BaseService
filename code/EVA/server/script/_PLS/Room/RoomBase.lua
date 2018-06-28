@@ -73,7 +73,7 @@ end
 function RoomBase:BaseTickUpdate()
     
     if os.time()-self._CreateTime > self.CFG_LIMIT_TIME then
-        RoomMgr.ReleaseRoom( self.RoomID );
+        RoomMgr:ReleaseRoom( self.RoomID );
         return;
     end
     

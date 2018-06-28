@@ -452,7 +452,7 @@ function RoomDdz:BroadGameActionPlayer( )
                 state       = ddz_player:GetState(),
                 hand_count  = ddz_player:GetCardCount(),
                 score       = ddz_player.Score,
-                player_base = { pid = uid }
+                player_base = { UID = uid }
             }
             
             tbinsert( MsgDDZActon.player_list, MsgDDZPlayer );
@@ -469,7 +469,6 @@ function RoomDdz:BroadGameActionPlayer( )
     self:BroadcastMsg( "DDZ_RA", "PB.MsgDDZActon", MsgDDZActon, self._ActionID );
 end
 
-
 function RoomDdz:UserOutCard( uid, msg_oc )
 
     if uid~=self._ActionID or not self:__GetFsmState(enum.TDDZStateAction) then
@@ -481,8 +480,7 @@ function RoomDdz:UserOutCard( uid, msg_oc )
     if room_player==nil then
         return false;
     end
-    
-    
+
     -- 检查用户是否可以出牌
     if not self:__UserOutCardLimit( room_player, msg_oc.out_cards ) then
         return false;
@@ -501,6 +499,44 @@ function RoomDdz:UserOutCard( uid, msg_oc )
     self:__CheckIsChunTian();       -- 检查春天
     
     self.Fsm:SwitchState("TDDZStateShowDown");  -- 跳结算
+end
+
+
+function RoomDdz:UserPassOutCard( uid, is_auto )
+    if self._ActionID~=uid or (not self:__GetFsmState(enum.TDDZStateAction)) or 
+        (not Misc.GetBit(self._ActionUserWik, enum.ASK_DDZ_CHUPAI)) then
+        return;
+    end
+    
+    local room_player = self.RoomPlayerData:Find(uid);
+    
+    if room_player==nil then
+        return false;
+    end
+    
+    -- 客户端自动过牌时，检查下玩家手里有没有大于上家的牌
+    --if is_auto~=nil and is_auto then
+    --    if self:__CheckCanOutCards(room_player) then
+    --        return;
+    --    end
+    --end
+    
+    -- 查找下个玩家出牌
+    self._ActionID  = self:GetNextUID(self._ActionID);
+    
+    if self._ActionID > 0 then
+        -- 刷新过牌的玩家
+        self:__ClearPlayerState(enum.STATE_DDZ_GUOPAI);
+        room_player:SetState( enum.STATE_DDZ_GUOPAI );
+        self._ActionUserWik = enum.ASK_DDZ_NULL;
+        
+        local MsgDDZActon = {  old_actionid = uid  };
+        self:BroadcastMsg( "DDZ_PS", "PB.MsgDDZActon", MsgDDZActon );
+        self:__RecordGameShowCardPass( uid );
+        self.Fsm:SwitchState("TDDZStateOutCard");
+    else
+        nlwarning("self._ActionID==0");
+    end
 end
 
 function RoomDdz:BroadcastGameInfo( )
@@ -657,7 +693,7 @@ function RoomDdz:__CalcScore( total_multi, limit_score, jiabei_cnt )
                 if uid==self._DiZhuID then
                     room_player:ChangeScore( limit_score, self._ActionID==self._DiZhuID );
                 else
-                    room_player:ChangeScore( limit_score/2, self._ActionID~=self._DiZhuID );
+                    room_player:ChangeScore( limit_score//2, self._ActionID~=self._DiZhuID );
                 end
             else
                 -- 农民中一个加倍一个不加倍，封顶时要按照比例进行加减分
@@ -910,7 +946,7 @@ end
 -- 检查用户可否出牌
 function RoomDdz:__UserOutCardLimit( room_player, out_cards )
     
-    if room_player.UID ~= self._ActionID or not self:__GetFsmState(enum.TGuanDanStateAction) then
+    if not self:__GetFsmState(enum.TGuanDanStateAction) then
         return false;
     end
     
@@ -948,7 +984,7 @@ function RoomDdz:__UserOutCardLimit( room_player, out_cards )
         old_actionid    = temp_data.UID,
         out_type        = card_type,
         hand_count      = room_player:GetCardCount(),
-        hand_card       = room_player.HandCards
+        hand_cards      = room_player.HandCards
     }
     
     -- 出炸弹时需要瞬间翻倍，同步到客户端
@@ -1062,7 +1098,7 @@ function RoomDdz:__RecordGameActionState()
 
 end
 
-function RoomDdz:__RecordGameShowCardPass()
+function RoomDdz:__RecordGameShowCardPass( uid )
 
 
 end

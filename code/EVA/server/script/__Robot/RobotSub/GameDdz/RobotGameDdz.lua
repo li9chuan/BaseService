@@ -5,6 +5,8 @@ function RobotGameDdz:ctor()
     self.Robot = nil;
     self.RoomInfo   = nil;
     self.SelfData   = nil;          -- 服务器上 player_list中自己的房间内数据
+    self.HandCards  = {};
+    self.WIK        = 0;
 end
 
 function RobotGameDdz:GetFsmState()
@@ -13,6 +15,10 @@ end
 
 function RobotGameDdz:GetRobotState( enum_idx )
     return Misc.GetBit( self.SelfData.state, enum_idx );
+end
+
+function RobotGameDdz:__UID()
+    return self.Robot.Data.UID;
 end
 
 function RobotGameDdz:DoCreatePrvRoom()
@@ -27,6 +33,26 @@ end
 
 function RobotGameDdz:DoReady()
     self.Robot:Send( "DDZ_SR" );
+end
+
+-- 轮到玩家出牌
+function RobotGameDdz:DoAction()
+
+    if self.WIK ~= enum.ASK_DDZ_NULL then
+        local flg_chupai    = 1 << enum.ASK_DDZ_CHUPAI;
+        local flg_buchu     = 1 << enum.ASK_DDZ_BUCHU;
+        local select_rnd    = math.random( 1, 15 );
+        
+        if (self.WIK&flg_buchu and select_rnd==1) or #self.HandCards==0 then
+            self.Robot:Send( "DDZ_PS" );
+        else
+            local MsgDDZUserOutCard = {  out_cards = {}  };
+            local rnd_oc = math.random( 1, #self.HandCards );
+            table.insert( MsgDDZUserOutCard.out_cards, self.HandCards[rnd_oc] );
+            self.Robot:Send( "DDZ_OC", "PB.MsgDDZUserOutCard", MsgDDZUserOutCard );
+            self.Robot:Print( "out card:" .. self.HandCards[rnd_oc] );
+        end
+    end
 end
 
 function RobotGameDdz:cbDdzGameInfo( msgin )
@@ -44,7 +70,8 @@ function RobotGameDdz:cbDdzGameInfo( msgin )
     -- 刷新自己的数据
     for _,v in ipairs(ddz_gi.player_list) do
         if v.player_base.UID == self.Robot.Data.UID then
-            self.SelfData = v;
+            self.SelfData   = v;
+            self.HandCards  = v.card_list;
         end
     end
     
@@ -124,7 +151,14 @@ end
 
 function RobotGameDdz:cbDDZ_QDZ_F( msg_qdz_res )
 
-    self.Robot:PrintTable(msg_qdz_res);
+    -- 如果是地主，刷新手牌
+    for _,v in ipairs(msg_qdz_res.player_list) do
+        if v.playid==self.Robot.Data.UID and #v.dizhu_cards>0 then
+            self.HandCards = v.dizhu_cards;
+            self.Robot:Print("Refresh DiZhu HandCards");
+            break;
+        end
+    end
     
     local MsgJiaBeiResult = {
         result = math.random(2)
@@ -133,6 +167,30 @@ function RobotGameDdz:cbDDZ_QDZ_F( msg_qdz_res )
     self.Robot:Send( "DDZ_JB", "PB.MsgJiaBeiResult", MsgJiaBeiResult );
 end
 
+-- 轮到玩家出牌
+function RobotGameDdz:cbDDZ_RA( msg_ddz_act )
+    
+    self.Robot:PrintTable( msg_ddz_act );
+    
+    if msg_ddz_act.new_actionid == self:__UID() then
+        self.WIK      = msg_ddz_act.wik;
+    elseif msg_ddz_act.old_actionid == self:__UID() then
+
+        
+        
+        -- 清除已出的牌
+        for i,v in ipairs(self.HandCards) do
+            if v==msg_ddz_act.last_out_cards[1] then
+                table.remove( self.HandCards, i );
+                break;
+            end
+        end
+    end
+    
+    if self:GetFsmState()~="TAction" then
+        self.Robot.GameFsm:SwitchState("TAction");
+    end
+end
 
 
 

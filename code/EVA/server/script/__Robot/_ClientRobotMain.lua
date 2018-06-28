@@ -19,9 +19,8 @@ function ServiceInit()
     nlinfo("Lua Robot Init");
     
     ThreadMgr:Init();
-    
+
     ThreadMgr:Strat();
-    
 
     
 end

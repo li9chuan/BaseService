@@ -89,8 +89,7 @@ function MsgRoomDdz:cbDouDiZhuPassCards( fes_sid, msgin )
     local room      = RoomMgr:GetRoomFromPID(uid);
     
     if room~=nil then
-        
-        
+        room:UserPassOutCard( uid );
     end
 end
 

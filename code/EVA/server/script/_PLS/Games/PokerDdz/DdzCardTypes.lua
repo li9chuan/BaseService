@@ -149,7 +149,7 @@ function DdzCardtypes:CompareCards( curr_out, last_out )
     end
     
     -- 基本规则判断:  1.牌型不相同时直接返回错误  2.牌的数量必须相同
-    if curr_out.Type ~= last_out.Type  or  #curr_out.Cards ~= curr_out.Cards then
+    if curr_out.Type ~= last_out.Type  or  #curr_out.Cards ~= #curr_out.Cards then
         return false;
     end
 
