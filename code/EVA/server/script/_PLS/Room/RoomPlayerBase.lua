@@ -13,19 +13,11 @@ function RoomPlayerBase:GetHandCount()
 end
 
 function RoomPlayerBase:ClearOneGameState()
-    local state = self._State;
-    state = Misc.ClearBit( state, enum.STATE_DDZ_NEWROLE );
-    state = Misc.ClearBit( state, enum.STATE_DDZ_RELIEVE );
-    state = Misc.ClearBit( state, enum.STATE_DDZ_GUOPAI );
-    state = Misc.ClearBit( state, enum.STATE_DDZ_NONGMING );
-    state = Misc.ClearBit( state, enum.STATE_DDZ_DIZHU );
-    state = Misc.ClearBit( state, enum.STATE_DDZ_JIABEI );
-    state = Misc.ClearBit( state, enum.STATE_DDZ_SELECT_JIABEI );
-    state = Misc.ClearBit( state, enum.STATE_DDZ_MINGPAI );
-    state = Misc.ClearBit( state, enum.STATE_DDZ_SELECT_MINGPAISTART );
-    state = Misc.ClearBit( state, enum.STATE_DDZ_CONTINUE_GAME );
+
+    local clear_states = { enum.STATE_DDZ_NEWROLE, enum.STATE_DDZ_RELIEVE, enum.STATE_DDZ_GUOPAI, enum.STATE_DDZ_NONGMING, enum.STATE_DDZ_DIZHU,
+    enum.STATE_DDZ_JIABEI, enum.STATE_DDZ_SELECT_JIABEI, enum.STATE_DDZ_MINGPAI,enum.STATE_DDZ_SELECT_MINGPAISTART, enum.STATE_DDZ_CONTINUE_GAME };
+    self._State = ClearBits( self._State, clear_states );
     
-    self._State     = state;
     self.HandCards = {};
 end
 
@@ -35,20 +27,15 @@ function RoomPlayerBase:GetState( enum_val )
         return self._State;
     end
     
-    return Misc.GetBit(self._State, enum_val);
+    return GetBit(self._State, enum_val);
 end
 
 function RoomPlayerBase:SetState( enum_val )
-    if enum_val~=nil then
-        local tmp = self._State;
-        self._State = Misc.SetBit(self._State, enum_val);
-    end
+    self._State = SetBit( self._State, enum_val );
 end
 
 function RoomPlayerBase:ClearState( enum_val )
-    if enum_val~=nil then
-        self._State = Misc.ClearBit(self._State, enum_val);
-    end
+    self._State = ClearBit(self._State, enum_val);
 end
 
 function RoomPlayerBase:AddHandCard( card )

@@ -24,6 +24,7 @@ function RoomDdz:ctor()
     self.CFG_FENGDING_32        = 32;       -- 32封顶
     self.CFG_FENGDING_64        = 64;       -- 64封顶
     
+    self._GameCount             = 1;        -- 当前是第几局
 
     self.Fsm                    = DdzFSM:new();
     self.Fsm:Init(self);
@@ -46,7 +47,6 @@ function RoomDdz:ResetGameData()
 	self._CardsBottom           = {};       -- 剩下的三张底牌
     self._ActionID              = 0;        -- 当前活动的玩家
     self._ActionUserWik         = 0;        -- 当前活动玩家权限
-    self._GameCount             = 1;        -- 当前是第几局
     self._Multiple              = 1;        -- 房间翻倍数
     
     self._QiangDiZhuWiki        = 0;        -- 抢地主权限
@@ -151,10 +151,6 @@ function RoomDdz:UserCancelReady( uid )
     end
 end
 
-function RoomDdz:__SetQDZWiki( enum_idx )
-    self._QiangDiZhuWiki = Misc.SetBit(self._QiangDiZhuWiki, enum_idx );
-end
-
 function RoomDdz:SendQiangDiZhuWik()
     -- 随机一个玩家选择抢地主
     local seat_idx  = math.random(1, #self.SeatPlayers);
@@ -163,13 +159,10 @@ function RoomDdz:SendQiangDiZhuWik()
     self._QiangDiZhuWiki = 0;
         
     if _QiangDiZhu then
-        self:__SetQDZWiki( enum.DDZ_QDZ_BUJIAO );
-        self:__SetQDZWiki( enum.DDZ_QDZ_JIAODIZHU );
+        self._QiangDiZhuWiki = SetBits( self._QiangDiZhuWiki, {enum.DDZ_QDZ_BUJIAO, enum.DDZ_QDZ_JIAODIZHU} );
     else
-        self:__SetQDZWiki( enum.DDZ_QDZ_BUJIAO );
-        self:__SetQDZWiki( enum.DDZ_JF_JIAO_ONE );
-        self:__SetQDZWiki( enum.DDZ_JF_JIAO_TWO );
-        self:__SetQDZWiki( enum.DDZ_JF_JIAO_THREE );
+        local qdz_wiks = { enum.DDZ_QDZ_BUJIAO, enum.DDZ_JF_JIAO_ONE, enum.DDZ_JF_JIAO_TWO, enum.DDZ_JF_JIAO_THREE };
+        self._QiangDiZhuWiki = SetBits( self._QiangDiZhuWiki, qdz_wiks );
     end
 
     self:__RefreshPlayerQDZState(self._ActionID);
@@ -284,8 +277,7 @@ function RoomDdz:RefrshRoleQiangDiZhu( uid, msg_qdz )
                 end
                     
                 -- 设置客户端可选择权限
-                WIK = Misc.SetBit(WIK, enum.DDZ_QDZ_JIAODIZHU);
-                WIK = Misc.SetBit(WIK, enum.DDZ_QDZ_BUJIAO);
+                WIK = SetBits( WIK, { enum.DDZ_QDZ_JIAODIZHU, enum.DDZ_QDZ_BUJIAO } );
             else
                 if qdz_select == enum.DDZ_QDZ_JIAODIZHU then
                     self._ActionID = uid;
@@ -316,8 +308,7 @@ function RoomDdz:RefrshRoleQiangDiZhu( uid, msg_qdz )
                 end
                     
                 -- 设置客户端可选择权限
-                WIK = Misc.SetBit(WIK, enum.DDZ_QDZ_QIANGDIZHU);
-                WIK = Misc.SetBit(WIK, enum.DDZ_QDZ_BUQIANG);
+                WIK = SetBits( WIK, { enum.DDZ_QDZ_QIANGDIZHU, enum.DDZ_QDZ_BUQIANG } );
             end
         end
             
@@ -504,7 +495,7 @@ end
 
 function RoomDdz:UserPassOutCard( uid, is_auto )
     if self._ActionID~=uid or (not self:__GetFsmState(enum.TDDZStateAction)) or 
-        (not Misc.GetBit(self._ActionUserWik, enum.ASK_DDZ_CHUPAI)) then
+        (not GetBit(self._ActionUserWik, enum.ASK_DDZ_CHUPAI)) then
         return;
     end
     
@@ -623,7 +614,7 @@ function RoomDdz:BroadcastShowDownInfo()
 
     local MsgDDZRoomShowDown = {
         room_id     = self.PrvRoomID,
-        room_state  = self:__GetFsmState(),
+        room_state  = enum[self:__GetFsmState()],
         state_time  = 0,
         game_count  = self._GameCount,
         time        = os.time(),
@@ -634,7 +625,7 @@ function RoomDdz:BroadcastShowDownInfo()
     
     for eid,cnt in pairs(self.ShowDownEvent) do
         local MsgDDZShowDownEvent = { event_id=eid, count=cnt };
-        tbinsert( MsgDDZRoomShowDown, MsgDDZShowDownEvent );
+        tbinsert( MsgDDZRoomShowDown.event_count, MsgDDZShowDownEvent );
     end
     
     for uid,room_player in pairs(self.RoomPlayerData.map) do
@@ -659,6 +650,29 @@ end
 
 function RoomDdz:RelieveRequestRoom( uid, is_relieve )
     
+    if is_relieve then
+        self:__AddPlayerState( enum.STATE_DDZ_RELIEVE, uid );
+    else
+        self:__ClearPlayerState( enum.STATE_DDZ_RELIEVE );
+    end
+    
+    --local relv_cnt = self:__GetPlayerState( enum.STATE_DDZ_RELIEVE );
+    
+    
+    -- 用户取消解散房间
+    --local MsgInt = { value = uid };
+    --self:__ClearPlayerState( enum.STATE_DDZ_RELIEVE );
+    --self:BroadcastMsg( "DDZ_NRE", "PB.MsgInt", MsgInt );
+    
+    if true then
+        self:RelieveAutoRoom()
+        return;
+    end
+    
+    local MsgRoleStateCount = {};
+    self:__RefreshPlayerState( MsgRoleStateCount );
+    self:BroadcastMsg( "DDZ_ORE", "PB.MsgRoleStateCount", MsgRoleStateCount );
+    
 end
 
 function RoomDdz:RelieveAutoRoom( )
@@ -666,9 +680,6 @@ function RoomDdz:RelieveAutoRoom( )
     --self.Fsm:SwitchState("TDDZStateShowDown");  -- 跳结算
     self:BroadcastShowDownInfo();
     self:AfterShowDown();
-end
-
-function RoomDdz:RelieveForceRoom( uid )
 end
 
 -- 普通算分
@@ -885,6 +896,14 @@ function RoomDdz:__RefreshPlayerQDZState( uid )
     end )
 end
 
+-- 玩家状态数据
+function RoomDdz:__RefreshPlayerState( MsgRoleStateCount )
+    self.RoomPlayerData:ForEach( function(k,v)
+        local MsgRoleState = { role_id=k, state=v:GetState() };
+        tbinsert( MsgRoleStateCount, MsgRoleState );
+    end )
+end
+
 -- 叫地主的玩家选择不抢地主后，选择最后一次抢地主的玩家做地主
 function RoomDdz:__SelectDZ(uid)
     for i=1,i<4 do
@@ -922,22 +941,19 @@ function RoomDdz:__GetActionWik()
         room_player:GetState(enum.STATE_DDZ_MINGPAI) and
         room_player:GetHandCount()==self.CFG_HANDCOUNT_MAX
     then
-        WIK = Misc.SetBit( WIK, enum.ASK_DDZ_DIZHU_MINGPAI );
+        WIK = SetBit( WIK, enum.ASK_DDZ_DIZHU_MINGPAI );
     end
     
     local is_can_out = self:__CheckCanOutCards(room_player);
     
     if is_can_out then
         if self._ActionID==self._LastOutCardData.UID or self._LastOutCardData:GetCardCount()==0 then
-            WIK = Misc.SetBit( WIK, enum.ASK_DDZ_TISHI );
-            WIK = Misc.SetBit( WIK, enum.ASK_DDZ_CHUPAI );
+            WIK = SetBits( WIK, { enum.ASK_DDZ_TISHI, enum.ASK_DDZ_CHUPAI } );
         else
-            WIK = Misc.SetBit( WIK, enum.ASK_DDZ_TISHI );
-            WIK = Misc.SetBit( WIK, enum.ASK_DDZ_CHUPAI );
-            WIK = Misc.SetBit( WIK, enum.ASK_DDZ_BUCHU );
+            WIK = SetBits( WIK, { enum.ASK_DDZ_TISHI, enum.ASK_DDZ_CHUPAI, enum.ASK_DDZ_BUCHU } );
         end
     else
-        WIK = Misc.SetBit( WIK, enum.ASK_DDZ_BUCHU );
+        WIK = SetBit( WIK, enum.ASK_DDZ_BUCHU );
     end
     
     return WIK;

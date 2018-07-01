@@ -47,39 +47,6 @@ namespace bin
             return 1;
         }
 
-        DEFINE_MODULE_FUNCTION(SetBit, lua_Integer, (lua_Integer flag_bit, int flag_idx))
-        {
-            uint64  shl = 1;
-            shl <<= flag_idx;
-            r = (flag_bit | shl);
-            return 1;
-        }
-
-        DEFINE_MODULE_FUNCTION(GetBit, bool, (lua_Integer flag_bit, int flag_idx))
-        {
-            uint64  shl = 1;
-            shl <<= flag_idx;
-            r = (flag_bit&shl)>0;
-            return 1;
-        }
-
-        DEFINE_MODULE_FUNCTION(ClearBit, lua_Integer, (lua_Integer flag_bit, int flag_idx))
-        {
-            uint64  shl = 1;
-            shl <<= flag_idx;
-
-            if (flag_bit&shl > 0)
-            {
-                r = (flag_bit ^ shl);
-            }
-            else
-            {
-                r = flag_bit;
-            }
-            
-            return 1;
-        }
-
         DEFINE_MODULE_FUNCTION(GetLocalTime, lua_Integer, ())
         {
             r = NLMISC::CTime::getLocalTime();

@@ -51,7 +51,7 @@ function BaseService:SendToClient( player, cmsg_or_type, proto_type, proto_msg )
         elseif type(proto_type)=="string" then      --  send proto msg
             local proto_code      = protobuf.encode(proto_type, proto_msg);
             lua_msg:wbuffer(proto_code, #proto_code);
-            nlinfo("Msg:"..cmsg_or_type.." Buffer Len : "..#proto_code);
+--            nlinfo("Msg:"..cmsg_or_type.." Buffer Len : "..#proto_code);
         end
 
         Net.SendToClient( lua_msg, send_info );

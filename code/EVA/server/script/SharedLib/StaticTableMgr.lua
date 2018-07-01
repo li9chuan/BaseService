@@ -22,7 +22,7 @@ function StaticTableMgr:GetRoomConfig( room_type )
 end
 
 function StaticTableMgr:GetCreateCost( cost_id )
-    return self._CreateCost[cost_id];
+    return self._CreateCost[tostring(cost_id)];
 end
 
 function StaticTableMgr:GetSpecialCfg( room_type )

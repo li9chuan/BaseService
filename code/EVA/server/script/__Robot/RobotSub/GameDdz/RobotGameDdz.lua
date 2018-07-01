@@ -14,7 +14,7 @@ function RobotGameDdz:GetFsmState()
 end
 
 function RobotGameDdz:GetRobotState( enum_idx )
-    return Misc.GetBit( self.SelfData.state, enum_idx );
+    return GetBit( self.SelfData.state, enum_idx );
 end
 
 function RobotGameDdz:__UID()
@@ -113,8 +113,7 @@ function RobotGameDdz:cbDdzUserStartReady( msgin )
     local ready_uid = msgin:rpb("PB.MsgInt");
     
     if self.Robot.Data.UID==ready_uid then
-        
-        self.SelfData.state = Misc.SetBit( self.SelfData.state, enum.STATE_DDZ_READY );
+        self.SelfData.state = SetBit( self.SelfData.state, enum.STATE_DDZ_READY );
         self.Robot:Print("cbDdzUserStartReady");
     end
 end
@@ -129,7 +128,7 @@ function RobotGameDdz:cbDDZ_QDZ_QX( msg_qdz )
             local select_wki_list = {};
             
             for i=1,10 do
-                if Misc.GetBit( msg_qdz.qingdizhu_wiki, i ) then
+                if GetBit( msg_qdz.qingdizhu_wiki, i ) then
                     table.insert(select_wki_list, i);
                 end
             end
@@ -192,6 +191,9 @@ function RobotGameDdz:cbDDZ_RA( msg_ddz_act )
     end
 end
 
+function RobotGameDdz:cbDDZ_SD( msg_ddz_sd )
+    self.Robot:PrintTable( msg_ddz_sd );
+end
 
 
 return RobotGameDdz;

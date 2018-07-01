@@ -212,6 +212,41 @@ function ReverseTable(tab)
     return tmp  
 end
 
+
+-- 位标识符操作  Start
+function GetBit( curr, enum_val )
+    return (curr & (1<<enum_val)) > 0;
+end
+
+function SetBit( curr, enum_val )
+    return curr | (1<<enum_val)
+end
+
+function ClearBit( curr, enum_val )
+    if (curr & (1<<enum_val)) > 0 then
+        curr = curr ~ (1<<enum_val);
+    end
+    return curr;
+end
+
+function SetBits( curr, enum_tb )
+    for _,v in ipairs(enum_tb) do
+        curr = curr | (1<<v);
+    end
+    return curr
+end
+
+function ClearBits( curr, enum_tb )
+    for _,enum_val in ipairs(enum_tb) do
+        if (curr & (1<<enum_val)) > 0 then
+            curr = curr ~ (1<<enum_val);
+        end
+    end
+    return curr;
+end
+
+-- 位标识符操作  End
+
 function DumpMemorySnapshot()
     collectgarbage("collect")
     MemoryRefInfo.m_cMethods.DumpMemorySnapshot("./", "All", -1)

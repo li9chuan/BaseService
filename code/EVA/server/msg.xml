@@ -29,13 +29,14 @@
     <leaf name="CPRM"           sendto="SCH"        format="UID PB.MsgCreatePrivateRoom"                        description="Create Private RoomGame" />
     <leaf name="EPRM"           sendto="SCH"        format="UID PB.MsgEnterPrivateRoom"                         description="Enter Private RoomGame" />
     <leaf name="RRM"            sendto="PLS"        format="UID"       			   	                            description="Release Private RoomGame" />
+
     
 
     <!-- DouDiZhu --> 
     <leaf name="DDZ_SR"           sendto="PLS"        format="UID"             		   	                        description="斗地主开始准备" />
     <leaf name="DDZ_CR"           sendto="PLS"        format="UID"             		   	                        description="斗地主取消准备" />
-    <leaf name="DDZ_CG"           sendto="PLS"        format="UID s"             	                                description="斗地主继续下一局" />
-    <leaf name="DDZ_RE"           sendto="PLS"        format="UID b"             	                                description="斗地主申请解散房间" />
+    <leaf name="DDZ_CG"           sendto="PLS"        format="UID"             	                                description="斗地主继续下一局" />
+    <leaf name="DDZ_RE"           sendto="PLS"        format="UID PB.MsgBool" 	                                description="斗地主申请解散房间" />
     <leaf name="DDZ_PS"           sendto="PLS"        format="UID"                                              description="玩家跳过出牌" />
     <leaf name="DDZ_OC"           sendto="PLS"        format="UID PB.MsgCards"                                    description="斗地主出牌" />
     <leaf name="DDZ_RRM"          sendto="PLS"        format="UID"       			   		                        description="斗地主检查IP时离开房间" />

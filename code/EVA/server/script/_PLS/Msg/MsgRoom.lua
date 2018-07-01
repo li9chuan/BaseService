@@ -7,6 +7,8 @@ function MsgRoom:Init()
     self._EventRegister:RegisterEvent( "ER",                self, self.cbEnterRoom );
     self._EventRegister:RegisterEvent( "LR",                self, self.cbLeaveRoom );
     self._EventRegister:RegisterEvent( "RRM",               self, self.cbReleasePrvRoom );
+    self._EventRegister:RegisterEvent( "DDZ_RE",            self, self.cbDDZReliveRoom );
+    
     
     self._EventRegister:RegisterEvent( "CPRM=>PLS",         self, self.cbCreatePrivateRoom );
     self._EventRegister:RegisterEvent( "EPRM=>PLS",         self, self.cbEnterPrivateRoom );
@@ -76,7 +78,32 @@ end
 
 function MsgRoom:cbReleasePrvRoom( fes_sid, msgin )
 
+    local uid       = msgin:rint64();
+    local player    = PlayerMgr:GetPlayer(uid);
+    
+    if player~=nil then
+        local room = RoomMgr:GetRoom(player.RoomID);
+        
+        if room~=nil then
+            room:RelieveForceRoom(uid);
+        end
+    end
+end
 
+function MsgRoom:cbDDZReliveRoom( fes_sid, msgin )
+
+    local uid       = msgin:rint64();
+    local player    = PlayerMgr:GetPlayer(uid);
+    
+    if player~=nil then
+        local room = RoomMgr:GetRoom(player.RoomID);
+        
+        if room~=nil then
+            
+            local msg_bool = msgin:rpb("PB.MsgBool");
+            room:RelieveRequestRoom(uid, msg_bool.value);
+        end
+    end
 end
 
 

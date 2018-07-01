@@ -187,18 +187,23 @@ function RoomBase:GetNextUID( curr_id )
 end
 
 function RoomBase:RelieveRequestRoom( uid, is_relieve )
+    
 end
 
 function RoomBase:RelieveAutoRoom()
+    
 end
 
-function RoomBase:RelieveForceRoom()
+function RoomBase:RelieveForceRoom( uid )
+    if self.CreatorID == uid then
+        RoomMgr:ReleaseRoom( self.RoomID )
+    end
 end
 
 -- 新房间特殊玩法都用此方法判断
 function RoomBase:CheckRoomSpecialKind( special_kind )
     if self.CreateInfo~=nil and self.CreateInfo.special_kind~=nil then
-        return Misc.GetBit(self.CreateInfo.special_kind, special_kind);
+        return GetBit(self.CreateInfo.special_kind, special_kind);
     end
     return false;
 end

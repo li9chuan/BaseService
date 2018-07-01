@@ -17,6 +17,9 @@ function RobotMgr:Init()
     self._EventRegister:RegisterEvent( "DDZ_QDZ_QX",        self, self.cbDDZ_QDZ_QX );
     self._EventRegister:RegisterEvent( "DDZ_QDZ_F",         self, self.cbDDZ_QDZ_F );
     self._EventRegister:RegisterEvent( "DDZ_RA",            self, self.cbDDZ_RA );
+    self._EventRegister:RegisterEvent( "DDZ_SD",            self, self.cbDDZ_SD );
+    
+    
     
     
     
@@ -159,6 +162,15 @@ function RobotMgr:cbDDZ_RA( from, msgin )
         robot.Game:cbDDZ_RA(msg_ddz_act);
     end
 end
+
+function RobotMgr:cbDDZ_SD( from, msgin )
+    local robot = self.RobotList[from];
+    if robot~=nil then
+        local msg_ddz_sd = msgin:rpb("PB.MsgDDZRoomShowDown");
+        robot.Game:cbDDZ_SD(msg_ddz_sd);
+    end
+end
+
 
 
 
