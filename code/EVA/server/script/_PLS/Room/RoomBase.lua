@@ -121,6 +121,10 @@ function RoomBase:ReleaseRoomPlayer( uid )
     end
     
     self.RoomPlayerData:Remove(uid);
+    
+    if self:GetRoomPlayerNum()==0 then
+        RoomMgr:ReleaseRoom( self.RoomID );
+    end
 end
 
 function RoomBase:IsRoomPlayer( uid )
@@ -232,7 +236,7 @@ function RoomBase:BaseRelease()
     end
 
     for _,uid in ipairs(self.SeatPlayers) do
-        if uid~=0 then
+        if uid>0 then
             self:ReleaseRoomPlayer(uid);
         end
     end

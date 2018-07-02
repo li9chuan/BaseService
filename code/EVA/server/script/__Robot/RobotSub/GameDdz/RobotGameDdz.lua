@@ -38,14 +38,14 @@ end
 -- 轮到玩家出牌
 function RobotGameDdz:DoAction()
 
-    if self.WIK ~= enum.ASK_DDZ_NULL then
+    if #self.HandCards>0 and self.WIK ~= enum.ASK_DDZ_NULL then
         local flg_chupai    = 1 << enum.ASK_DDZ_CHUPAI;
         local flg_buchu     = 1 << enum.ASK_DDZ_BUCHU;
         local select_rnd    = math.random( 1, 15 );
         
-        if (self.WIK&flg_buchu and select_rnd==1) or #self.HandCards==0 then
+        if self.WIK&flg_buchu and select_rnd==1 then
             self.Robot:Send( "DDZ_PS" );
-        else
+        elseif self.WIK&flg_chupai then
             local MsgDDZUserOutCard = {  out_cards = {}  };
             local rnd_oc = math.random( 1, #self.HandCards );
             table.insert( MsgDDZUserOutCard.out_cards, self.HandCards[rnd_oc] );
@@ -175,7 +175,7 @@ function RobotGameDdz:cbDDZ_RA( msg_ddz_act )
         self.WIK      = msg_ddz_act.wik;
     elseif msg_ddz_act.old_actionid == self:__UID() then
 
-        
+        self.WIK      = msg_ddz_act.wik;
         
         -- 清除已出的牌
         for i,v in ipairs(self.HandCards) do
@@ -193,6 +193,7 @@ end
 
 function RobotGameDdz:cbDDZ_SD( msg_ddz_sd )
     self.Robot:PrintTable( msg_ddz_sd );
+    self.Robot.GameFsm:SwitchState("TShowDown");
 end
 
 

@@ -20,6 +20,7 @@ function FSMDdz:Init( robot )
 			{name = "TJoinPrvRoom" 	            },
             {name = "TInRoomIdlem" 	            },
             {name = "TAction" 	                },
+            {name = "TShowDown"                 },
 
         },
         callbacks =
@@ -29,6 +30,7 @@ function FSMDdz:Init( robot )
             onTJoinPrvRoom          = handler(self, self.DoJoinPrvRoom),
             onTInRoomIdlem          = handler(self, self.DoInRoomIdlem),
             onTAction               = handler(self, self.DoAction),
+            TShowDown               = handler(self, self.DoShowDown),
 		}
     })
 
@@ -144,6 +146,12 @@ function FSMDdz:DoAction( event )
         self.GameDdz:DoAction();
     end
 end
+
+function FSMDdz:DoShowDown( event )
+
+
+end
+
 
 return FSMDdz;
 

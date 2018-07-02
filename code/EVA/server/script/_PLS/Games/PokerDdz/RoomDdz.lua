@@ -597,13 +597,9 @@ function RoomDdz:AfterShowDown()
     
     if COST_CFG~=nil then
         if self._GameCount >= COST_CFG.game_cnt then
-        
+            self.IsGameStart = false;
             self:__GameOverRecordLog();
-            for uid,room_player in pairs(self.RoomPlayerData.map) do
-                self:ReleaseRoomPlayer(uid);
-            end
-            
-            self.RoomPlayerData:Clear();
+            self:Release();
         end
     end
 end
@@ -640,7 +636,8 @@ function RoomDdz:BroadcastShowDownInfo()
     end
     
     if MsgDDZRoomShowDown.game_over then
-        -- self:__AddPlayerIntegral
+        -- 游戏结算积分
+        --self:__AddPlayerIntegral(  );
     end
     
     self:BroadcastMsg( "DDZ_SD", "PB.MsgDDZRoomShowDown", MsgDDZRoomShowDown );
