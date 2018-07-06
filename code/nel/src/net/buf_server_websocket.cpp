@@ -250,7 +250,7 @@ bool CBufServerWebsocket::dataAvailable()
 
                         if (sockid->m_Ssl != NULL)
                         {
-                            SSL_free((SSL*)sockid->m_Ssl);
+                            //SSL_free((SSL*)sockid->m_Ssl);
                             sockid->m_Ssl = NULL;
                         }
 
@@ -543,7 +543,7 @@ void CWebSocketReceiveTask::init( CBufServerWebsocket *server, uint16 port )
     pListenArgs->pSslCtx        = server->getSslCtx();
 
     pEvListener = evconnlistener_new_bind(  pEventBase, ws_listener_cb, (void*)pListenArgs, 
-        LEV_OPT_REUSEABLE|LEV_OPT_CLOSE_ON_FREE, 10, 
+        LEV_OPT_REUSEABLE | LEV_OPT_CLOSE_ON_FREE | LEV_OPT_THREADSAFE, 10,
         (struct sockaddr*)&sin, sizeof(struct sockaddr_in));
 }
 
