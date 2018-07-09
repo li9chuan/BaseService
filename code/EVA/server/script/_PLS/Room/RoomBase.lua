@@ -54,7 +54,6 @@ function RoomBase:BaseInit( room_type, update_tick )
         end
         
         self._TimerHandle = TimerMgr:AddTimer(self._TimerTick, self, self.BaseTickUpdate);
-        
         self:Init();
     end
 end
