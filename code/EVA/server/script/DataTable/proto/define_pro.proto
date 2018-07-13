@@ -64,6 +64,29 @@ enum TPaymentMechanism
 	VIP_TISSUE_OPTION   = 3; // 消耗高级牌友圈房卡;
 }
 
+enum TRoomCmdRecord
+{
+	RC_ACTION_NULL 					= 0;        // 用户过牌;
+	RC_ACTION_START_GAME			= 1;		// 游戏开始;      ( MsgRecordNodeList 中的 card_value[0] 为 会儿皮 )
+	RC_ACTION_OPERATE_RESULT 		= 2;		// 用户选择权限结果;
+	RC_ACTION_SEND_CARD				= 3;		// 用户发牌;
+	RC_ACTION_OUT_CARD				= 4;		// 用户出牌;
+	RC_ACTION_SHOWDOWN_DIANPAO		= 5;		// 用户点炮胡牌;   有梦的情况( MsgRecordNodeList 中的 card_index 为 other_count、 card_value 为 other_card ) 
+	RC_ACTION_SHOWDOWN_ZIMO			= 6;		// 用户自摸胡牌;   有梦的情况( MsgRecordNodeList 中的 card_index 为 other_count、 card_value 为 other_card )
+	RC_ACTION_SHOWDOWN_QIANGGANGHU	= 7;		// 用户抢杠胡牌;   有梦的情况( MsgRecordNodeList 中的 card_index 为 other_count、 card_value 为 other_card )
+	RC_ACTION_SHOWDOWN_LIUJU		= 8; 		// 用户流局胡牌;   有梦的情况( MsgRecordNodeList 中的 card_index 为 other_count、 card_value 为 other_card )
+	RC_ACTION_SHOWDOWN				= 9; 		// 进入结算
+	RC_ACTION_CONTRACT				= 10; 		// 户承包关系;  ( MsgRecordNodeList 中的 TarGetID 为承包id 、 ActionID为被承包id )
+	RC_ACTION_SEND_FLOWER_CARD		= 11; 		// 用户抓牌花牌;  ( MsgRecordNodeList 中的 card_index 为 flower_num )
+	RC_ACTION_START_FLOWER_CARD		= 12; 		// 用户手牌补花;  ( MsgRecordNodeList 中的 card_index 为 flower_num )
+	RC_ACTION_OPERATE_CHOICE		= 13; 		// 用户选择权限;
+	RC_ACTION_MINGLOU				= 14; 		// 用户明楼;
+	RC_ACTION_SEND_HAND_CARD		= 15; 		// 用户发送手牌;
+	RC_ACTION_CATHECTIC				= 16; 		// 用户下注;
+	RC_ACTION_HUNYOU			    = 17; 		// 用户混悠;
+	RC_ACTION_TRUST_STATE			= 18; 		// 用户托管状态;
+}
+
 
 enum TShowDownEvent
 {

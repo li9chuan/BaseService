@@ -4,6 +4,7 @@ local PlayerDataHelper = class("PlayerDataHelper")
 function PlayerDataHelper:ctor()
 
     self.f_uid          = nil;
+    self.f_username     = nil;
     self.f_nickname     = nil;
     self.f_portrait     = nil;
     self.f_money        = nil;

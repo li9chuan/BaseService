@@ -8,7 +8,7 @@ function RoomBase:ctor()
 
     self.IsGameStart            = false;
     self.CreatorID              = 0;                -- 房间归属
-    self.CreateInfo             = nil;
+    self.CreateInfo             = nil;              -- 创建房间选项信息。
     self.RoomPlayerData         = Map:new();
     self.SeatPlayers            = {};
     self.ViewPlayers            = {};

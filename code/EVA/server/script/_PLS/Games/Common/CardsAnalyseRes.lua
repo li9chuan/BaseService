@@ -30,15 +30,19 @@ function CardsAnalyseRes:IsLink( num )
     local is_link   = false;
     local cnt       = self:GetCount(num);
 
-    if cnt>0 then
+    if cnt>=2 then
         local val_1     = GetPokerLogicValue(self.CardData[num][1]);
-        is_link         = true;
-
-        for i=2,cnt do
-            local val_next = GetPokerLogicValue(self.CardData[num][i])+i-1;
-            if val_1 ~= val_next then
-                is_link = false;
-                break;
+        
+        --  如果第一张牌不是2或王，继续判断。
+        if val_1<15 then
+            is_link = true;
+            
+            for i=2,cnt do
+                local val_next = GetPokerLogicValue(self.CardData[num][i])+i-1;
+                if val_1 ~= val_next then
+                    is_link = false;
+                    break;
+                end
             end
         end
     end

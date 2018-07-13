@@ -395,6 +395,8 @@ function RoomDdz:SetDiZhuState( uid )
         else
             self.Fsm:SwitchState("TDDZStateSelectAddTimes");
         end
+        
+        -- 如果这里要切 TDDZStateAction  ，需要  self:__RecordGameStart();
     end
 end
 
@@ -409,6 +411,7 @@ function RoomDdz:SendHandCard()
         if room_player~=nil then
             
             room_player:AddHandCards( self._CardsPool, start_send, end_send );
+            SortPokerLogicValue( room_player.HandCards );
             
             start_send  = start_send + self.CFG_HAND_COUNT;
             end_send    = end_send + self.CFG_HAND_COUNT;
@@ -436,10 +439,11 @@ function RoomDdz:BroadGameActionPlayer( )
         player_list     = {}
     }
     
-    for _,uid in ipairs(self.SeatPlayers) do
+    for i,uid in ipairs(self.SeatPlayers) do
         local ddz_player = self.RoomPlayerData:Find(uid);
         if ddz_player~=nil then
             local MsgDDZPlayer = {
+                seats       = i,
                 state       = ddz_player:GetState(),
                 hand_count  = ddz_player:GetCardCount(),
                 score       = ddz_player.Score,
@@ -455,6 +459,8 @@ function RoomDdz:BroadGameActionPlayer( )
     if player~=nil then
         BaseService:SendToClient(player, "DDZ_RA", "PB.MsgDDZActon", MsgDDZActon);
     end
+    
+    self:__RecordGameActionState( MsgDDZActon );
     
     MsgDDZActon.wik     = enum.ASK_DDZ_NULL;
     self:BroadcastMsg( "DDZ_RA", "PB.MsgDDZActon", MsgDDZActon, self._ActionID );
@@ -965,7 +971,7 @@ function RoomDdz:__UserOutCardLimit( room_player, out_cards )
     
     -- 排序要出的牌,分析用。
     SortPokerLogicValue(out_cards);
-
+    
     -- 获取牌型
     local card_type, comp_val = DdzCardtypes:GetCardType( out_cards, self._LastOutCardData.Type );
     if card_type == enum.CT_DDZ_ERROR then
@@ -984,7 +990,7 @@ function RoomDdz:__UserOutCardLimit( room_player, out_cards )
         return false;
     end
 
-    -- 可以出牌，从手牌中删除玩家需要出的牌
+    -- 检查手牌中是否有这些要出的牌，如果可以出牌，从手牌中删除玩家需要出的牌。
     if not room_player:RemoveCards(temp_data.Cards) then
         self:RefreshRoomInfo(self._ActionID);
         return false;
@@ -997,7 +1003,8 @@ function RoomDdz:__UserOutCardLimit( room_player, out_cards )
         old_actionid    = temp_data.UID,
         out_type        = card_type,
         hand_count      = room_player:GetCardCount(),
-        hand_cards      = room_player.HandCards
+        hand_cards      = room_player.HandCards,
+        out_cards       = out_cards
     }
     
     -- 出炸弹时需要瞬间翻倍，同步到客户端
@@ -1041,13 +1048,6 @@ function RoomDdz:__ClearPlayerState( state, uid )
         end
     end
 end
-
-function RoomDdz:__RecordGameOutCard( out_msg )
-    
-    
-    
-end
-
 
 function RoomDdz:__GetFsmState( state )
     if state~=nil then
@@ -1096,31 +1096,107 @@ end
 -- --------------------------  战绩回放  Start
 -- 记录游戏开始
 function RoomDdz:__RecordGameStart()
-    
-    self._RecordNodeList    = {};
-    
-    
 
+    self._RecordNodeList = {
+        cmd_id      = enum.RC_ACTION_START_GAME,
+        
+        -- 房间数据
+        room_data   = { special_kind = self.CreateInfo.special_kind,
+                        banker       = self.CreateInfo.consume_id,
+                        bottom_cards = self._CardsBottom,
+                        game_count   = self._GameCount,
+                        score        = self._Multiple },
+                        
+        -- 玩家信息
+        role_data   = {}
+    };
+    
+    for i,uid in ipairs(self.SeatPlayers) do
+        local MsgRecordRoleInfo = { id = uid,  seat = i };
+        
+        local player = PlayerMgr:GetPlayer(uid);
+        if player~=nil then
+            MsgRecordRoleInfo.usename = player.PlayerDataHelper.f_username;
+            MsgRecordRoleInfo.nick_name = player.PlayerDataHelper.f_nickname;
+        end
+        
+        local room_player = self.RoomPlayerData:Find(uid);
+        if room_player~=nil then
+            MsgRecordRoleInfo.score = room_player:GetScore();
+            MsgRecordRoleInfo.team_type = room_player:GetState();
+            MsgRecordRoleInfo.hand_card = room_player.HandCards;
+        end
+        
+        tbinsert( self._RecordNodeList.role_data, MsgRecordRoleInfo );
+    end
 end
 
-function RoomDdz:__RecordGameOutCard()
+function RoomDdz:__RecordGameOutCard( out_msg )
+    local MsgRecordNodeList = {
+        cmd_id      = enum.RC_ACTION_OUT_CARD,
+        target_id   = out_msg.old_actionid,
+        card_index  = out_msg.out_type,         -- 玩家出牌类型
+        action_id   = out_msg.hand_count,
+        card_value  = out_msg.out_cards,        -- 出牌列表
+        node_size   = out_msg.multiple          -- 房间倍数
+    };
 
+    tbinsert( self._RecordNodeList.next_node, MsgRecordNodeList );
 end
 
-function RoomDdz:__RecordGameActionState()
+function RoomDdz:__RecordGameActionState( MsgDDZActon )
+    local MsgRecordNodeList = {
+        cmd_id      = enum.RC_ACTION_OPERATE_RESULT,
+        action_id   = MsgDDZActon.new_actionid,
+        showdown_list = {}
+    };
 
+    for _,MsgDDZPlayer in pairs(MsgDDZActon.player_list) do
+        
+        local MsgRecordShowDown = {
+            id      = MsgDDZPlayer.seats,
+            score   = MsgDDZPlayer.score,
+            param1  = MsgDDZPlayer.hand_count,
+            param2  = MsgDDZPlayer.state
+        };
+        tbinsert( MsgRecordNodeList.showdown_list, MsgRecordShowDown );
+    end
+
+    tbinsert( self._RecordNodeList.next_node, MsgRecordNodeList );
 end
 
 function RoomDdz:__RecordGameShowCardPass( uid )
-
-
+    local MsgRecordNodeList = {
+        cmd_id      = enum.RC_ACTION_OPERATE_CHOICE,
+        action_id   = uid
+    };
+    tbinsert( self._RecordNodeList.next_node, MsgRecordNodeList );
 end
 
 function RoomDdz:__RecordGameShowDown( MsgDDZRoomShowDown )
+    
+    local MsgRecordNodeList = {
+        cmd_id      = enum.RC_ACTION_SHOWDOWN,
+        showdown_list = {}
+    };
 
+--[[
+    for _,MsgDDZPlayer in pairs(MsgDDZActon.player_list) do
+        
+        local MsgRecordShowDown = {
+            id      = MsgDDZPlayer.seats,
+            score   = MsgDDZPlayer.score,
+            param1  = MsgDDZPlayer.hand_count,
+            param2  = MsgDDZPlayer.state
+        };
+        tbinsert( MsgRecordNodeList.showdown_list, MsgRecordShowDown );
+    end
+]]
+
+    tbinsert( self._RecordNodeList.next_node, MsgRecordNodeList );
 end
 
-function RoomDdz:__RecordGameShowDownEvent()
+function RoomDdz:__RecordGameShowDownEvent( MsgRecordShowDown, MsgDDZRoomShowDown )
 
 end
 

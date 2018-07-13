@@ -103,7 +103,7 @@ message MsgRecordRoomInfo
 	optional uint64 		banker			  = 2;
 	optional uint32         score			  = 3;
 	optional uint32			game_count		  = 4;
-	repeated uint32         bottom_card 	  = 5;
+	repeated uint32         bottom_cards 	  = 5;
 }
 
 message MsgRecordEvent
