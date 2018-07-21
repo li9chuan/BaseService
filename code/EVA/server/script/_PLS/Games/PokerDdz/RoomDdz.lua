@@ -780,7 +780,7 @@ end
 
 -- 战绩保存
 function RoomDdz:__GameOverRecordLog()
-    
+    nlinfo("=====     GameOverRecordLog ");
 end
 
 function RoomDdz:__FillRoomInfoMsg( msg_ddz_room, current_uid )
@@ -855,6 +855,7 @@ function RoomDdz:__FillPlayerRoomInfoMsg( uid, msg_room_player, current_uid )
         msg_room_player.hand_count      = room_player:GetHandCount();       -- 玩家手中的牌数
         msg_room_player.seats           = self:GetPlayerSeatIdx(uid);       -- 玩家的座位
         msg_room_player.score           = room_player:GetScore();           -- 玩家当前的积分
+        msg_room_player.multiple        = room_player.Multi;
         msg_room_player.show_down_score = room_player:GetScore() - room_player.StartScore;  -- 填充玩家的输赢积分
         msg_room_player.qingdizhu_value = room_player.QiangDiZhu;
 
@@ -1108,7 +1109,8 @@ function RoomDdz:__RecordGameStart()
                         score        = self._Multiple },
                         
         -- 玩家信息
-        role_data   = {}
+        role_data   = {},
+        next_node   = {}
     };
     
     for i,uid in ipairs(self.SeatPlayers) do
@@ -1138,7 +1140,8 @@ function RoomDdz:__RecordGameOutCard( out_msg )
         card_index  = out_msg.out_type,         -- 玩家出牌类型
         action_id   = out_msg.hand_count,
         card_value  = out_msg.out_cards,        -- 出牌列表
-        node_size   = out_msg.multiple          -- 房间倍数
+        node_size   = out_msg.multiple,         -- 房间倍数
+        next_node   = {}
     };
 
     tbinsert( self._RecordNodeList.next_node, MsgRecordNodeList );
@@ -1148,7 +1151,8 @@ function RoomDdz:__RecordGameActionState( MsgDDZActon )
     local MsgRecordNodeList = {
         cmd_id      = enum.RC_ACTION_OPERATE_RESULT,
         action_id   = MsgDDZActon.new_actionid,
-        showdown_list = {}
+        showdown_list = {},
+        next_node   = {}
     };
 
     for _,MsgDDZPlayer in pairs(MsgDDZActon.player_list) do
@@ -1168,7 +1172,8 @@ end
 function RoomDdz:__RecordGameShowCardPass( uid )
     local MsgRecordNodeList = {
         cmd_id      = enum.RC_ACTION_OPERATE_CHOICE,
-        action_id   = uid
+        action_id   = uid,
+        next_node   = {}
     };
     tbinsert( self._RecordNodeList.next_node, MsgRecordNodeList );
 end
@@ -1177,27 +1182,37 @@ function RoomDdz:__RecordGameShowDown( MsgDDZRoomShowDown )
     
     local MsgRecordNodeList = {
         cmd_id      = enum.RC_ACTION_SHOWDOWN,
-        showdown_list = {}
+        showdown_list = {},
+        next_node   = {}
     };
+    
+    local MsgRecordShowDown = { event = MsgDDZRoomShowDown.event_count };
+    tbinsert( MsgRecordNodeList.showdown_list, MsgRecordShowDown );
 
---[[
-    for _,MsgDDZPlayer in pairs(MsgDDZActon.player_list) do
+
+    for _,MsgDDZPlayer in pairs(MsgDDZRoomShowDown.player_list) do
         
         local MsgRecordShowDown = {
             id      = MsgDDZPlayer.seats,
+            play_id = MsgDDZPlayer.player_base.UID,
+            money   = MsgDDZPlayer.show_down_score,
             score   = MsgDDZPlayer.score,
+            hucard  = MsgDDZPlayer.multiple,
             param1  = MsgDDZPlayer.hand_count,
             param2  = MsgDDZPlayer.state
         };
         tbinsert( MsgRecordNodeList.showdown_list, MsgRecordShowDown );
     end
-]]
 
     tbinsert( self._RecordNodeList.next_node, MsgRecordNodeList );
 end
 
 function RoomDdz:__RecordGameShowDownEvent( MsgRecordShowDown, MsgDDZRoomShowDown )
-
+    for _,evt in pairs(MsgDDZRoomShowDown.event_count) do
+        local MsgRecordEvent = { event_id = evt.event_id, count = evt.count };
+        tbinsert( MsgRecordShowDown.event, MsgRecordEvent );
+    end
+    -- MsgRecordShowDown.event = MsgDDZRoomShowDown.event_count;
 end
 
 -- --------------------------  战绩回放  End

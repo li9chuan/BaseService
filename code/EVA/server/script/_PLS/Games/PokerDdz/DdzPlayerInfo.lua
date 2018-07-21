@@ -78,4 +78,15 @@ function DdzPlayerInfo:GetCardCount()
 end
 
 
+
+
+---------
+
+
+function DdzPlayerInfo:Auto()
+    
+end
+
+
+
 return DdzPlayerInfo;
