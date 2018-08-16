@@ -41,7 +41,7 @@ public:
     *  @return   lua_thread_handle
     */
     ///@{
-    sint32 Start(std::string& lua_start, std::string& params);
+    sint32 Start(std::string lua_start, std::string params);
     ///@}
 
 

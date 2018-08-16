@@ -591,6 +591,10 @@ namespace bin
 
                 r = obj->connect( myhost.c_str(), myuser.c_str(), mypwd.c_str(), mydb.c_str(), myport );
             }
+            else
+            {
+                r = false;
+            }
 
             return 1;
         }

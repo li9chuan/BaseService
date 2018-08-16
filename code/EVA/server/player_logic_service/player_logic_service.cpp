@@ -47,13 +47,6 @@ public:
         LuaNetworkMgr.Init();
         ScriptMgr.init();
         LuaThreadMgr.Init();
-
-
-        string findfilename = "RoomDdz";
-        findfilename += ".lua";
-        string script_full_path = CPath::lookup(findfilename, false);
-
-        uint32 timmmm = CFile::getFileModificationDate(script_full_path);
     }
 
 
@@ -74,6 +67,8 @@ public:
         ScriptMgr.release();
         LuaNetworkMgr.Release();
         LuaThreadMgr.Release();
+
+        google::protobuf::ShutdownProtobufLibrary();
     }
 
 };

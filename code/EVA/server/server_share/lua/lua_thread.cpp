@@ -28,7 +28,7 @@ CLuaThread::~CLuaThread( void )
     LuaThreadMgr.RemoveLuaThread(m_LuaThreadHandle);
 }
  
-sint32 CLuaThread::Start( std::string& lua_start, std::string& params )
+sint32 CLuaThread::Start( std::string lua_start, std::string params )
 {
     m_ThreadHandle = NLMISC::IThread::create( this );
 

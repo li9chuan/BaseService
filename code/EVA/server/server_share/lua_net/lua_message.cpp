@@ -236,6 +236,26 @@ namespace bin
         return 1;
     }
 
+    DEFINE_CLASS_FUNCTION(rbuffer, std::string, ())
+    {
+        nlassert(obj->m_Msg.isReading());
+        try
+        {
+            obj->m_Msg.serial(r);
+        }
+        catch (const NLMISC::EStream&)
+        {
+            lua_Debug ar;
+            lua_getstack(obj->GetScriptHandle().GetHandle(), 1, &ar);
+            lua_getinfo(obj->GetScriptHandle().GetHandle(), "Sln", &ar);
+
+            NLMISC::createDebug();
+            NLMISC::INelContext::getInstance().getWarningLog()->setPosition(ar.currentline, ar.short_src, ar.name);
+            NLMISC::INelContext::getInstance().getWarningLog()->displayNL("rbuffer is nil");
+        }
+        return 1;
+    }
+
     DEFINE_CLASS_FUNCTION( rtable, CScriptTable, ())
     {
         nlassert(obj->m_Msg.isReading());
