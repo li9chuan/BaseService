@@ -42,6 +42,7 @@ bool CLuaMysqlResult::next( void )
 
     if ( m_CurrRow+1 < m_RowCount )
     {
+        m_Idx = 0;
         ++m_CurrRow;
         _ret = true;
     }
@@ -962,12 +963,12 @@ namespace bin
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetBlob, CScriptTable, () )
+        DEFINE_CLASS_FUNCTION( GetBlob, std::string, () )
         {
             std::pair<size_t, void const*> pair = obj->get_blob();
-
-            r.Set(1, (const char*)pair.second);
-            r.Set(2, (int)pair.first);
+            r.assign((const char*)pair.second, pair.first);
+            //r.Set(1, (const char*)pair.second);
+            //r.Set(2, (int)pair.first);
             return 1;
         }
 
