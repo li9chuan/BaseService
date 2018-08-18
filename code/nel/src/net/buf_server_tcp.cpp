@@ -123,6 +123,7 @@ void CBufServerTcp::disconnect( TSockId hostid, bool quick )
         if (hostid->connectedState())
         {
             hostid->advertiseDisconnection(this, hostid);
+            //bufferevent_trigger_event(hostid->m_BEVHandle, BEV_EVENT_READING | BEV_EVENT_ERROR, 0);
         }
 
         //// Disconnect only if physically connected
@@ -229,12 +230,6 @@ bool CBufServerTcp::dataAvailable()
                             disconnectionCallback()(sockid, argOfDisconnectionCallback());
                         }
 
-                        // Add socket object into the synchronized remove list
-                        //LNETL1_DEBUG( "LNETL1: Adding the connection to the remove list" );
-                        //nlassert( ((CServerBufSock*)sockid)->ownerTask() != NULL );
-                        //((CServerBufSock*)sockid)->ownerTask()->addToRemoveSet( sockid );
-
-
                         //  自动close套接字和free读写缓冲区 
                         bufferevent_free(sockid->m_BEVHandle);
                         sockid->m_BEVHandle = NULL;
@@ -246,12 +241,12 @@ bool CBufServerTcp::dataAvailable()
                             //sockid->m_Ssl = NULL;
                         }
 
-                        LNETL1_DEBUG("LNETL1: Remove the connection");
-                        delete sockid;
-
-
                         // remove from the list of valid client
                         nlverify(_ConnectedClients.erase(sockid) == 1);
+
+                        // Add socket object into the remove list
+                        LNETL1_DEBUG( "LNETL1: Adding the connection to the remove list" );
+                        _RmDisConnectSockids.push_back(sockid);
                     }
 
 					break;
@@ -293,6 +288,19 @@ bool CBufServerTcp::dataAvailable()
 				setDataAvailableFlag( ! recvfifo.value().empty() );
 			}
 		}
+
+        // Remove closed connections
+        LNETL1_DEBUG("LNETL1: Removing disconnection");
+        if (!_RmDisConnectSockids.empty())
+        {
+            for (uint i = 0; i < _RmDisConnectSockids.size(); ++i)
+            {
+                delete _RmDisConnectSockids[i];
+            }
+
+            _RmDisConnectSockids.clear();
+        }
+
 		// _DataAvailable is false here
 		return false;
 	}

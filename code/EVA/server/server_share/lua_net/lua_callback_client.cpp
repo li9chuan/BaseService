@@ -12,8 +12,6 @@ void forLuaCallbackClientForceLink()
     nlwarning("forLuaCallbackClientForceLink");
 }
 
-static CLuaMessage* pLuaMsg = new CLuaMessage();
-    
 void cbLuaClientMsg(CMessage &msgin, TSockId from, CCallbackNetBase &netbase)
 {
     CLuaCallbackClient* pClient = (CLuaCallbackClient*)netbase.getUserData();
@@ -22,9 +20,9 @@ void cbLuaClientMsg(CMessage &msgin, TSockId from, CCallbackNetBase &netbase)
     pClient->GetScriptHandle().Get("NetWorkHandler", functbl);
 
     int nRet = 0;
-    pLuaMsg->m_Msg.swap(msgin);
+    pClient->m_LuaTmpMsg->m_Msg.swap(msgin);
 
-    functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)pClient->GetHandle(), pLuaMsg, nRet);
+    functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)pClient->GetHandle(), pClient->m_LuaTmpMsg, nRet);
 }
 
 CLuaCallbackClient::CLuaCallbackClient( std::string& protocal, sint32 thd_handle/*=-1*/)
@@ -40,6 +38,7 @@ CLuaCallbackClient::CLuaCallbackClient( std::string& protocal, sint32 thd_handle
         m_CallbackClientHandle = pClient;
     }
 
+    m_LuaTmpMsg = new CLuaMessage();
     m_CallbackClientHandle->setUserData(this);
     nlassert(m_CallbackClientHandle !=NULL);
 }
@@ -47,6 +46,7 @@ CLuaCallbackClient::CLuaCallbackClient( std::string& protocal, sint32 thd_handle
 CLuaCallbackClient::~CLuaCallbackClient()
 {
     delete m_CallbackClientHandle;
+    delete m_LuaTmpMsg;
 }
 
 void CLuaCallbackClient::Connect(std::string & url)

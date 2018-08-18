@@ -14,7 +14,8 @@ struct  ClientData
     NLNET::TServiceId   pls_sid;
 };
 
-struct MsgLeaf;
+struct  MsgLeaf;
+class   CLuaMessage;
 
 class CLuaCallbackServer
 {
@@ -116,6 +117,8 @@ public:
 
     TMsgCount                                               m_ReceiveMsgCount;
     TMsgCount                                               m_SendMsgCount;
+
+    CLuaMessage*        m_LuaTmpMsg;
 
 private:
 

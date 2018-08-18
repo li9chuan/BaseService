@@ -238,6 +238,7 @@ private:
 	/// List of currently connected client
 	TClientSet						_ConnectedClients;
 
+    std::vector<TSockId>            _RmDisConnectSockids;
 
 	/// Thread socket-handling strategy
 	TThreadStategy					_ThreadStrategy;

@@ -11,8 +11,6 @@ using namespace NLNET;
 NLMISC::CVariable<bool>	VAR_MSG_COUNT("fes", "MsgCount", "memo", false, 0, true);
 NLMISC::CVariable<bool>	VAR_SAVE_EVENT("fes", "SaveEvent", "memo", false, 0, true);
 
-static CLuaMessage* pLuaMsg = new CLuaMessage();
-                              
 void cbLuaServiceMsg ( CMessage &msgin, TSockId from, CCallbackNetBase &netbase )
 {
     CLuaCallbackServer* pServer = (CLuaCallbackServer*)netbase.getUserData();
@@ -35,9 +33,9 @@ void cbLuaServiceMsg ( CMessage &msgin, TSockId from, CCallbackNetBase &netbase 
         ScriptMgr.GetScriptHandle()->Get("NetWorkHandler", functbl);
 
         int nRet = 0;
-        pLuaMsg->m_Msg.swap(msgin);
+        pServer->m_LuaTmpMsg->m_Msg.swap(msgin);
 
-        functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)from, pLuaMsg, nRet);
+        functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)from, pServer->m_LuaTmpMsg, nRet);
     }
 }
 
@@ -62,6 +60,7 @@ CLuaCallbackServer::CLuaCallbackServer( std::string& name, std::string& protocal
         m_CallbackServerHandle = pServer;
     }
 
+    m_LuaTmpMsg = new CLuaMessage();
     m_CallbackServerHandle->setUserData(this);
 
     nlassert(m_CallbackServerHandle!=NULL);
@@ -72,6 +71,7 @@ CLuaCallbackServer::~CLuaCallbackServer()
 {
     LuaNetworkMgr.RemoveNetModule(m_NetName);
     delete m_CallbackServerHandle; 
+    delete m_LuaTmpMsg;
 }
 
 void CLuaCallbackServer::Listen( uint16 port )

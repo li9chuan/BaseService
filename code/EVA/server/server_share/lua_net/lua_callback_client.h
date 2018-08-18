@@ -11,6 +11,8 @@ namespace bin {
     class CScriptHandle;
 }
 
+class CLuaMessage;
+
 class CLuaCallbackClient
 {
     DECLARE_SCRIPT_CLASS()
@@ -43,6 +45,7 @@ public:
     void                SetHandle(uint32 handle) { m_MyHandle = handle; }
 
     uint32              m_MyHandle;
+    CLuaMessage*        m_LuaTmpMsg;
 
 private:
 

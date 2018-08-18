@@ -132,6 +132,7 @@ void CBufServerWebsocket::disconnect( TSockId hostid, bool quick )
         if ( hostid->connectedState() )
         {
             hostid->advertiseDisconnection(this, hostid);
+            //bufferevent_trigger_event(hostid->m_BEVHandle, BEV_EVENT_EOF, BEV_OPT_THREADSAFE | BEV_OPT_DEFER_CALLBACKS);
         }
         
 		//// Disconnect only if physically connected
@@ -254,12 +255,13 @@ bool CBufServerWebsocket::dataAvailable()
                             sockid->m_Ssl = NULL;
                         }
 
-                        LNETL1_DEBUG("LNETL1: Remove the connection");
-                        delete sockid;
-
-
                         // remove from the list of valid client
                         nlverify(_ConnectedClients.erase(sockid) == 1);
+
+
+                        // Add socket object into the remove list
+                        LNETL1_DEBUG("LNETL1: Adding the connection to the remove list");
+                        _RmDisConnectSockids.push_back(sockid);
                     }
 					break;
 				}
@@ -300,6 +302,19 @@ bool CBufServerWebsocket::dataAvailable()
 				setDataAvailableFlag( ! recvfifo.value().empty() );
 			}
 		}
+
+        // Remove closed connections
+        LNETL1_DEBUG("LNETL1: Removing disconnection");
+        if (!_RmDisConnectSockids.empty())
+        {
+            for (uint i = 0; i < _RmDisConnectSockids.size(); ++i)
+            {
+                delete _RmDisConnectSockids[i];
+            }
+
+            _RmDisConnectSockids.clear();
+        }
+
 		// _DataAvailable is false here
 		return false;
 	}
@@ -493,26 +508,26 @@ void CBufServerWebsocket::setupSsl( std::string& ssl_ca, std::string& ssl_crt, s
     const SSL_METHOD* pMethod   = SSLv23_server_method();
     _SslCtx                     = SSL_CTX_new(pMethod);
 
-    // 是否要求校验对方证书 此处不验证客户端身份所以为： SSL_VERIFY_NONE
+    //  是否要求校验对方证书 此处不验证客户端身份所以为： SSL_VERIFY_NONE
     SSL_CTX_set_verify((SSL_CTX *)_SslCtx, SSL_VERIFY_NONE, NULL);
 
-    // 加载CA的证书  
+    //  加载CA的证书  
     if(!SSL_CTX_load_verify_locations((SSL_CTX *)_SslCtx, ssl_ca.c_str(), NULL))
     {
         nlwarning("SSL_CTX_load_verify_locations error!");
         return;
     }
 
-    // 加载自己的证书  
+    //  加载自己的证书  
     if(SSL_CTX_use_certificate_file((SSL_CTX *)_SslCtx, ssl_crt.c_str(), SSL_FILETYPE_PEM) <= 0)
     {
         nlwarning("SSL_CTX_use_certificate_file error!");
         return;
     }
 
-    // 加载自己的私钥  私钥的作用是，ssl握手过程中，对客户端发送过来的随机
-    //消息进行加密，然后客户端再使用服务器的公钥进行解密，若解密后的原始消息跟
-    //客户端发送的消息一直，则认为此服务器是客户端想要链接的服务器
+    //  加载自己的私钥  私钥的作用是，ssl握手过程中，对客户端发送过来的随机
+    //  消息进行加密，然后客户端再使用服务器的公钥进行解密，若解密后的原始消息跟
+    //  客户端发送的消息一直，则认为此服务器是客户端想要链接的服务器
     if(SSL_CTX_use_PrivateKey_file((SSL_CTX *)_SslCtx, ssl_prvkey.c_str(), SSL_FILETYPE_PEM) <= 0)
     {
         nlwarning("SSL_CTX_use_PrivateKey_file error!");
@@ -531,10 +546,10 @@ void CWebSocketReceiveTask::init( CBufServerWebsocket *server, uint16 port )
 {
 	_Server = server;
 
-    struct sockaddr_in sin;  
-    memset(&sin, 0, sizeof(struct sockaddr_in));  
-    sin.sin_family = AF_INET;  
-    sin.sin_port = htons(port); 
+    struct sockaddr_in sin;
+    memset(&sin, 0, sizeof(struct sockaddr_in));
+    sin.sin_family = AF_INET;
+    sin.sin_port = htons(port);
 
     evthread_use_windows_threads();
 
