@@ -47,7 +47,7 @@ namespace bin
             return 1;
         }
 
-        DEFINE_MODULE_FUNCTION(GetLocalTime, lua_Integer, ())
+        DEFINE_MODULE_FUNCTION(GetLocalTime, sint64, ())
         {
             r = NLMISC::CTime::getLocalTime();
             return 1;
@@ -82,7 +82,7 @@ namespace bin
         //    return 1;
         //}
 
-        DEFINE_MODULE_FUNCTION(GetFileModificationDate, lua_Integer, (string& script_full_path))
+        DEFINE_MODULE_FUNCTION(GetFileModificationDate, sint64, (string& script_full_path))
         {
             r = CFile::getFileModificationDate(script_full_path);
             return 1;

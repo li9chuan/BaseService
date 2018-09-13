@@ -28,26 +28,15 @@
 find_path(LUA_INCLUDE_DIR lua.h
   PATH_SUFFIXES lua53
   PATHS
+  /usr/local/include
   ~/Library/Frameworks
-  /Library/Frameworks
-  /sw # Fink
-  /opt/local # DarwinPorts
-  /opt/csw # Blastwave
-  /opt
 )
 
 find_library(LUA_LIBRARY
-  NAMES lua53 lua5.3 lua-5.3 lua
+  NAMES lua53 lua5.3 lua
   PATH_SUFFIXES lib
   PATHS
-  ~/Library/Frameworks
-  /Library/Frameworks
-  /sw
-  /opt/local
-  /opt/csw
-  /opt
-  /usr/lib/x86_64-linux-gnu
-  /usr/lib/arm-linux-gnueabihf
+  /usr/local/lib
 )
 
 if(LUA_LIBRARY)

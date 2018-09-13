@@ -31,13 +31,13 @@ namespace bin
 {
     BEGIN_SCRIPT_CLASS( IDGenerate, CIDGenerate )
 
-    DEFINE_CLASS_FUNCTION( Generate, lua_Integer, ())
+    DEFINE_CLASS_FUNCTION( Generate, sint64, ())
     {
         r = obj->Generate();
         return 1;
     }
 
-    DEFINE_STATIC_FUNCTION(NewInstance, CIDGenerate*, (lua_Integer curr_id))
+    DEFINE_STATIC_FUNCTION(NewInstance, CIDGenerate*, (sint64 curr_id))
     {
         r = new CIDGenerate();
 

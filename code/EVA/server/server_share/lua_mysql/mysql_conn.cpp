@@ -581,7 +581,7 @@ namespace bin
                 std::string     myuser;
                 std::string     mypwd;
                 std::string     mydb;
-                lua_Integer     myport;
+                sint32          myport;
 
                 tb_msg.Get(1, myhost);
                 tb_msg.Get(2, myuser);

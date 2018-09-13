@@ -9,6 +9,9 @@ using namespace std;
 using namespace NLMISC;
 using namespace NLNET;
 
+#ifdef NL_OS_UNIX
+#	define INVALID_SOCKET -1
+#endif
 
 void NLNET::tcp_socket_read_cb( bufferevent *bev, void *args )
 {  

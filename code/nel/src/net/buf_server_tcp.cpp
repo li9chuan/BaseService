@@ -58,7 +58,13 @@ namespace NLNET {
 /*
  * Constructor
  */
-CBufServerTcp::CBufServerTcp() : _ConnectionCallback(NULL)
+CBufServerTcp::CBufServerTcp() :
+#ifdef NL_OS_UNIX
+    CBufNetBase(false),
+#else
+    CBufNetBase(),
+#endif
+    _ConnectionCallback(NULL)
 {
 	nlnettrace( "CBufServerTcp::CBufServerTcp" );
 
@@ -497,7 +503,11 @@ void CTcpReceiveTask::init( CBufServerTcp *server, uint16 port )
     sin.sin_family = AF_INET;  
     sin.sin_port = htons(port); 
 
+#ifdef NL_OS_UNIX
+    evthread_use_pthreads();
+#else
     evthread_use_windows_threads();
+#endif
 
     pEventBase = event_base_new();
     TcpListenArgs* pListenArgs = new struct TcpListenArgs(pEventBase,_Server);

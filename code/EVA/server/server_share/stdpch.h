@@ -67,4 +67,5 @@
 #ifndef _CLIENT_
 //#include <nel/georges/load_form.h>
 #endif
-#include "utils.h"
+
+#include <server_share/utils.h>

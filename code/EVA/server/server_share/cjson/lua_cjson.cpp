@@ -45,6 +45,8 @@
 #include "strbuf.h"
 #include "fpconv.h"
 
+#include <nel/misc/common.h>
+
 #ifndef CJSON_MODNAME
 #define CJSON_MODNAME   "cjson"
 #endif
@@ -53,23 +55,18 @@
 #define CJSON_VERSION   "2.1devel"
 #endif
 
-/* Workaround for Solaris platforms missing isinf() */
-#if !defined(isinf) //&& (defined(USE_INTERNAL_ISINF) || defined(MISSING_ISINF))
-#define isinf(x) (!isnan(x) && isnan((x) - (x)))
-#endif
-
-#if !defined(isnan) //&& (defined(USE_INTERNAL_ISINF) || defined(MISSING_ISINF))
-#define isnan _isnan
-#endif
-
-#if !defined(isnan) //&& (defined(USE_INTERNAL_ISINF) || defined(MISSING_ISINF))
-#define isnan _isnan
-#endif
-
 #ifdef NL_OS_WINDOWS
+     /* Workaround for Solaris platforms missing isinf() */
+    #if !defined(isinf) //&& (defined(USE_INTERNAL_ISINF) || defined(MISSING_ISINF))
+    #define isinf(x) (!isnan(x) && isnan((x) - (x)))
+    #endif
+
+    #if !defined(isnan) //&& (defined(USE_INTERNAL_ISINF) || defined(MISSING_ISINF))
+    #define isnan _isnan
+    #endif
+
 #	define strtoll _strtoi64
 #endif // NL_OS_WINDOWS
-
 
 
 #define DEFAULT_SPARSE_CONVERT 0
@@ -1014,9 +1011,9 @@ static int json_is_invalid_number(json_parse_t *json)
     }
 
     /* Reject inf/nan */
-    if (!strnicmp(p, "inf", 3))
+    if (!NLMISC::nlstricmp(p, "inf"))
         return 1;
-    if (!strnicmp(p, "nan", 3))
+    if (!NLMISC::nlstricmp(p, "nan"))
         return 1;
 
     /* Pass all other numbers which may still be invalid, but

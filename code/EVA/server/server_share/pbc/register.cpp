@@ -314,13 +314,15 @@ pbc_register(struct pbc_env * p, struct pbc_slice *slice) {
 	int i;
 	if (n == 0) {
 		p->lasterror = "register empty";
-		goto _error;
+        pbc_rmessage_delete(message);
+        return 1;
 	}
 	for (i=0;i<n;i++) {
 		files[i] = pbc_rmessage_message(message, "file", i);
 		if (files[i] == NULL) {
 			p->lasterror = "register open fail";
-			goto _error;
+            pbc_rmessage_delete(message);
+            return 1;
 		}
 	}
 
@@ -329,14 +331,12 @@ pbc_register(struct pbc_env * p, struct pbc_slice *slice) {
 		int rr = _register_no_dependency(p,files , n);
 		if (rr == r) {
 			p->lasterror = "register dependency error";
-			goto _error;
+            pbc_rmessage_delete(message);
+            return 1;
 		}
 		r = rr;
 	} while (r>0);
 
 	pbc_rmessage_delete(message);
 	return 0;
-_error:
-	pbc_rmessage_delete(message);
-	return 1;
 }

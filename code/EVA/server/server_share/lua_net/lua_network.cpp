@@ -25,8 +25,9 @@ void cbLuaUnifiedServiceMsg ( NLNET::CMessage& msgin, const std::string &service
     bin::CScriptTable    functbl;
     ScriptMgr.GetScriptHandle()->Get("NetWorkHandler", functbl);
 
-    int nRet = 0;
-    functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)serviceId.get(), pUnifiedServiceMsg, nRet);
+    sint32 nRet = 0;
+    sint32 _sid = serviceId.get();
+    functbl.CallFunc<sint32, CLuaMessage*, sint32>("OnMessage", _sid, pUnifiedServiceMsg, nRet);
 }
 
 
@@ -254,7 +255,7 @@ namespace bin
 {
     BEGIN_SCRIPT_CLASS( LuaCallbackServer, CLuaCallbackServer )
 
-        DEFINE_CLASS_FUNCTION( Send, void, (lua_Integer sock_id, CLuaMessage* lua_msg))
+        DEFINE_CLASS_FUNCTION( Send, void, (sint64 sock_id, CLuaMessage* lua_msg))
         {
             obj->Send( (TSockId)sock_id, lua_msg->m_Msg );
             return 1;
@@ -265,7 +266,7 @@ namespace bin
             if( uid_data.IsReferd() )
             {
                 ClientData      cdata;
-                lua_Integer     int64_val;
+                sint64          int64_val;
 
                 uid_data.Get(1, int64_val);         cdata.uid   = int64_val;
                 uid_data.Get(2, int64_val);         cdata.sid   = (NLNET::TSockId)int64_val;
@@ -276,13 +277,13 @@ namespace bin
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( DisConnect, void, (lua_Integer sock_id) )
+        DEFINE_CLASS_FUNCTION( DisConnect, void, (sint64 sock_id) )
         {
             obj->DisConnect((NLNET::TSockId)sock_id);
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( RemoveClientData, void, (lua_Integer uid))
+        DEFINE_CLASS_FUNCTION( RemoveClientData, void, (sint64 uid))
         {
             obj->RemoveClientData( uid );
             return 1;
@@ -294,7 +295,7 @@ namespace bin
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( Listen, void, (lua_Integer port))
+        DEFINE_CLASS_FUNCTION( Listen, void, (sint32 port))
         {
             obj->Listen(port);
             return 1;
@@ -350,7 +351,7 @@ namespace bin
             return 1;
         }
 
-        DEFINE_MODULE_FUNCTION(Send, void, (lua_Integer service_id, CLuaMessage* pMsg))
+        DEFINE_MODULE_FUNCTION(Send, void, (sint32 service_id, CLuaMessage* pMsg))
         {
             if (pMsg != NULL)
             {
@@ -378,7 +379,7 @@ namespace bin
                 if (pMsg != NULL)
                 {
                     int             sid;
-                    lua_Integer     client_uid;
+                    sint64          client_uid;
 
                     tb_msg.Get(1, sid);
                     tb_msg.Get(2, client_uid);

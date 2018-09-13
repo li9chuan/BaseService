@@ -117,16 +117,16 @@ namespace bin
 		}
 	};
 
-	template <>
-	struct TToLua<int>
-	{
-		static int Make(int a, lua_State* pL)
-		{
-			lua_pushinteger(pL, (LUA_INTEGER)a);
+	//template <>
+	//struct TToLua<int>
+	//{
+	//	static int Make(int a, lua_State* pL)
+	//	{
+	//		lua_pushinteger(pL, (LUA_INTEGER)a);
 
-			return 1;
-		}
-	};
+	//		return 1;
+	//	}
+	//};
 
 	template <>
 	struct TToLua<double>
@@ -140,15 +140,26 @@ namespace bin
 	};
 
 	template <>
-	struct TToLua<long long>
+	struct TToLua<sint64>
 	{
-		static int Make(long long a, lua_State* pL)
+		static int Make(sint64 a, lua_State* pL)
 		{
 			lua_pushinteger(pL, (LUA_INTEGER)a);
 
 			return 1;
 		}
 	};
+
+    template <>
+    struct TToLua<sint32>
+    {
+        static int Make(sint32 a, lua_State* pL)
+        {
+            lua_pushinteger(pL, (LUA_INTEGER)a);
+
+            return 1;
+        }
+    };
 
 	template <>
 	struct TToLua<char*>
@@ -186,7 +197,8 @@ namespace bin
 	template <typename O>	// If a object, must be a proxy
 	struct TToLua<O*>	
 	{
-		static int Make(O* o, lua_State* pL)
+#ifdef NL_OS_WINDOWS
+        static int Make(O* o, lua_State* pL)
 		{
 			int nRet = 0;
 			if(o)
@@ -210,6 +222,9 @@ namespace bin
 
 			return nRet;
 		}
+#else
+        static int Make(O* o, lua_State* pL);
+#endif
 	};
 
 	template <typename A>
@@ -241,32 +256,32 @@ namespace bin
 	};
 	
 	template <>
-	struct TFmLua<int>	
+	struct TFmLua<sint32>
 	{
-		static int Make(lua_State* pL, int nIdx, int& a)
+		static int Make(lua_State* pL, int nIdx, sint32& a)
 		{
 			if(!lua_isnumber(pL, nIdx))
 			{
 				return 0;
 			}
 
-			a = (int)lua_tointeger(pL, nIdx);
+			a = (sint32)lua_tointeger(pL, nIdx);
 			
 			return 1;
 		}
 	};
 
 	template <>
-	struct TFmLua<long long>	
+	struct TFmLua<sint64>	
 	{
-		static int Make(lua_State* pL, int nIdx, long long& a)
+		static int Make(lua_State* pL, int nIdx, sint64& a)
 		{
 			if(!lua_isnumber(pL, nIdx))
 			{
 				return 0;
 			}
 
-			a = (long long)lua_tointeger(pL, nIdx);
+			a = (sint64)lua_tointeger(pL, nIdx);
 
 			return 1;
 		}
@@ -324,6 +339,7 @@ namespace bin
 	template <typename O>	// If a object, must be a proxy
 	struct TFmLua<O*>	
 	{
+#ifdef NL_OS_WINDOWS
 		static int Make(lua_State* pL, int nIdx, O*& o)
 		{
 			o = NULL;
@@ -355,6 +371,9 @@ namespace bin
 
 			return 1;
 		}
+#else
+        static int Make(lua_State* pL, int nIdx, O*& o);
+#endif
 	};
 
 	template <typename T>
@@ -602,13 +621,13 @@ namespace __module_ ## modName\
 		typedef TRetType< ret >::return_type return_type;\
 		return_type	 r;\
 		bin::CScriptHandle lua;\
-		int Exec ##  args;\
+		int Exec args;\
 	};\
 	static int __mf_lua_ ## name(lua_State* pL)\
 	{\
 		__mf_Impl_##name __mf_impl;\
 		__mf_impl.lua.Init(pL);\
-		TLuaFuncCaller<__mf_Impl_##name, ret##args> caller(pL, &__mf_impl);\
+		TLuaFuncCaller<__mf_Impl_##name, ret args> caller(pL, &__mf_impl);\
 		if(!caller.MakeArgs() || !caller.Call() || !caller.MakeRet())\
 		{\
 			return 0;\
@@ -616,7 +635,7 @@ namespace __module_ ## modName\
 		return 1;\
 	}\
 	static __mf_LinkNode __mf_node_ ## name(#name, &__mf_lua_ ## name);\
-	int __mf_Impl_##name::Exec ## args
+	int __mf_Impl_##name::Exec args
 
 //! End the definition of a module.
 #define END_SCRIPT_MODULE()\
@@ -669,12 +688,12 @@ namespace __class_ ## clsName\
 	typedef __class::class_type			 class_type;\
 	class_type*  obj;\
 	return_type	 r;\
-	int Exec ## args;\
+	int Exec args;\
 	};\
 	static int __cf_lua_ ## name(lua_State* pL)\
 	{\
 		__cf_Impl_##name __cf_impl;\
-		TLuaFuncCaller<__cf_Impl_##name, ret##args> caller(pL, &__cf_impl);\
+		TLuaFuncCaller<__cf_Impl_##name, ret args> caller(pL, &__cf_impl);\
 		if(!caller.MakeCArgs() || !caller.Call() || !caller.MakeRet())\
 		{\
 			return 0;\
@@ -682,7 +701,7 @@ namespace __class_ ## clsName\
 		return 1;\
 	}\
     static __cf_LinkNode __cf_node_ ## name(#name, &__cf_lua_ ## name);\
-	int __cf_Impl_##name::Exec ## args
+	int __cf_Impl_##name::Exec args
 
 #define DEFINE_STATIC_FUNCTION(name, ret, args)\
 	struct __cf_Impl_##name\
@@ -690,12 +709,12 @@ namespace __class_ ## clsName\
 	typedef TRetType< ret >::return_type return_type;\
 	typedef __class::class_type			 class_type;\
 	return_type	 r;\
-	int Exec ## args;\
+	int Exec args;\
 	};\
 	static int __cf_lua_ ## name(lua_State* pL)\
 	{\
 		__cf_Impl_##name __cf_impl;\
-		TLuaFuncCaller<__cf_Impl_##name, ret##args> caller(pL, &__cf_impl);\
+		TLuaFuncCaller<__cf_Impl_##name, ret args> caller(pL, &__cf_impl);\
 		if(!caller.MakeArgs() || !caller.Call() || !caller.MakeRet())\
 		{\
 			return 0;\
@@ -703,7 +722,7 @@ namespace __class_ ## clsName\
 		return 1;\
 	}\
     static __cf_LinkNode __cf_node_ ## name(#name, &__cf_lua_ ## name);\
-	int __cf_Impl_##name::Exec ## args
+	int __cf_Impl_##name::Exec args
 
 //! End the definition of a class.
 #define END_SCRIPT_CLASS()\

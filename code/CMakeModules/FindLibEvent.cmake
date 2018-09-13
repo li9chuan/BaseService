@@ -14,7 +14,6 @@ FIND_PATH(LIBEVENT_INCLUDE_DIR evutil.h
   PATH_SUFFIXES libevent
   $ENV{LIBEVENT_DIR}/include
   /usr/local/include
-  /usr/include
   /sw/include
   /opt/local/include
   /opt/csw/include
@@ -23,8 +22,8 @@ FIND_PATH(LIBEVENT_INCLUDE_DIR evutil.h
   /mingw/include
 )
 
-SET(LIBRARY_NAME_RELEASE libevent)
-SET(LIBRARY_NAME_DEBUG libevent)
+SET(LIBRARY_NAME_RELEASE libevent libevent.a)
+SET(LIBRARY_NAME_DEBUG libevent libevent.a)
 
 FIND_LIBRARY(LIBEVENT_LIBRARY_RELEASE
   NAMES ${LIBRARY_NAME_RELEASE}
@@ -34,14 +33,7 @@ FIND_LIBRARY(LIBEVENT_LIBRARY_RELEASE
   /usr/lib
   /usr/lib64
   /usr/local/X11R6/lib
-  /usr/X11R6/lib
-  /sw/lib
-  /opt/local/lib
-  /opt/csw/lib
-  /opt/lib
-  /usr/freeware/lib64
   /usr/local/lib/libevent
-  /mingw/lib
 )
 
 FIND_LIBRARY(LIBEVENT_LIBRARY_DEBUG
@@ -50,15 +42,7 @@ FIND_LIBRARY(LIBEVENT_LIBRARY_DEBUG
   $ENV{LIBEVENT_DIR}/lib
   /usr/local/lib
   /usr/lib
-  /usr/local/X11R6/lib
-  /usr/X11R6/lib
-  /sw/lib
-  /opt/local/lib
-  /opt/csw/lib
-  /opt/lib
-  /usr/freeware/lib64
   /usr/local/lib/libevent
-  /mingw/lib
 )
 
 IF(LIBEVENT_INCLUDE_DIR)
@@ -92,21 +76,13 @@ MARK_AS_ADVANCED(LIBEVENT_LIBRARY_RELEASE LIBEVENT_LIBRARY_DEBUG)
 
 #   libevent_openssl
 FIND_LIBRARY(LIBEVENT_OPENSSL_LIBRARY
-  NAMES libevent_openssl
+  NAMES libevent_openssl libevent_openssl.a
   PATHS
   $ENV{LIBEVENT_DIR}/lib
   /usr/local/lib
   /usr/lib
   /usr/lib64
-  /usr/local/X11R6/lib
-  /usr/X11R6/lib
-  /sw/lib
-  /opt/local/lib
-  /opt/csw/lib
-  /opt/lib
-  /usr/freeware/lib64
   /usr/local/lib/libevent
-  /mingw/lib
 )
 
 ADD_DEFINITIONS(-DEVENT__HAVE_OPENSSL)

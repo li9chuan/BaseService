@@ -251,7 +251,7 @@ OPERATION_FAIL:
 
 			lua_getglobal(m_pLua, pszName);
 
-			return TFmLua<TArgumentType<T>::value_type>::Make(m_pLua, -1, v);
+			return TFmLua<typename TArgumentType<T>::value_type>::Make(m_pLua, -1, v);
 		}
 
 		//! Set anything in global table.
@@ -268,7 +268,7 @@ OPERATION_FAIL:
 
 			CHECK_LUA_STACK(m_pLua);
 
-			if(!TToLua<TArgumentType<T>::value_type>::Make(v, m_pLua))
+			if(!TToLua<typename TArgumentType<T>::value_type>::Make(v, m_pLua))
 			{
 				return 0;
 			}
@@ -533,7 +533,7 @@ OPERATION_FAIL:
 
 			lua_getfield(pLua, -1, pszName);				// __bin_refs this_table value
 
-			return TFmLua<TArgumentType<T>::value_type>::Make(pLua, -1, v);
+			return TFmLua<typename TArgumentType<T>::value_type>::Make(pLua, -1, v);
 		}
 
 		template <typename T>
@@ -553,7 +553,7 @@ OPERATION_FAIL:
 				return 0;
 			}
 
-			if(!TToLua<TArgumentType<T>::value_type>::Make(v, pLua))
+			if(!TToLua<typename TArgumentType<T>::value_type>::Make(v, pLua))
 			{
 				return 0;
 			}
@@ -599,7 +599,7 @@ OPERATION_FAIL:
 
 			lua_rawgeti(pLua, -1, nIdx);
 
-			return TFmLua<TArgumentType<T>::value_type>::Make(pLua, -1, v);
+			return TFmLua<typename TArgumentType<T>::value_type>::Make(pLua, -1, v);
 		}
 
 		//! Set a array value.
@@ -620,7 +620,7 @@ OPERATION_FAIL:
 				return 0;
 			}
 
-			if(!TToLua<TArgumentType<T>::value_type>::Make(v, pLua))
+			if(!TToLua<typename TArgumentType<T>::value_type>::Make(v, pLua))
 			{
 				return 0;
 			}

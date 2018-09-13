@@ -305,12 +305,13 @@ MACRO(NL_SETUP_NEL_DEFAULT_OPTIONS)
   #OPTION(WITH_LUA51               "Build EVA using Lua 5.1"                        ON )
   #OPTION(WITH_LUA52               "Build EVA using Lua 5.2"                        OFF)
   
-  OPTION(WITH_SSE2                "With SSE2"                                     ON )
+  OPTION(WITH_SSE2                "With SSE2"                                     OFF )
   OPTION(WITH_SSE3                "With SSE3"                                     ON )
   
   
   IF(NOT MSVC)
     OPTION(WITH_GCC_FPMATH_BOTH   "With GCC -mfpmath=both"                        OFF)
+    OPTION(WITH_GCC_FPERMISSIVE   "With GCC -fpermissive"                         ON)
   ENDIF(NOT MSVC)
 ENDMACRO(NL_SETUP_NEL_DEFAULT_OPTIONS)
 
@@ -628,6 +629,11 @@ MACRO(NL_SETUP_BUILD)
     IF(WITH_GCC_FPMATH_BOTH)
       ADD_PLATFORM_FLAGS("-mfpmath=both")
     ENDIF()
+    
+    IF(WITH_GCC_FPERMISSIVE)
+      ADD_PLATFORM_FLAGS("-fpermissive")
+    ENDIF()
+    
 
     IF(APPLE)
       SET(OBJC_FLAGS -fobjc-abi-version=2 -fobjc-legacy-dispatch -fobjc-weak)

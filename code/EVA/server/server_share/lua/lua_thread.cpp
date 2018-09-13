@@ -61,8 +61,8 @@ sint32 CLuaThread::Start( std::string lua_start, std::string params )
 
         m_LuaThreadHandle = LuaThreadMgr.RegisterLuaThread(this);
 
-        LuaParams params(m_LuaThreadHandle, params);
-        m_SubLuaEngine.RunLuaFunction("ThreadInit", NULL, NULL, &params);
+        LuaParams _params(m_LuaThreadHandle, params);
+        m_SubLuaEngine.RunLuaFunction("ThreadInit", NULL, NULL, &_params);
 
         m_AlreadyStarted = true;
 
@@ -93,10 +93,10 @@ void CLuaThread::Update( void )
 
         while ((pMsg = m_ToMainEvent.pop_front()) != NULL)
         {
-            int nRet = 0;
+            sint32 nRet = 0;
             m_LuaMainMsg.m_Msg.swap(*pMsg);
             m_LuaMainMsg.m_Msg.invert();
-            functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)m_LuaThreadHandle, &m_LuaMainMsg, nRet);
+            functbl.CallFunc<sint32, CLuaMessage*, sint32>("OnMessage", m_LuaThreadHandle, &m_LuaMainMsg, nRet);
 
             SAFE_DELETE(pMsg);
         }
@@ -115,10 +115,10 @@ void CLuaThread::run( void )
 
         if ( pMsg != NULL )
         {
-            int nRet = 0;
+            sint32 nRet = 0;
             m_LuaSubMsg.m_Msg.swap(*pMsg);
             m_LuaSubMsg.m_Msg.invert();
-            functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)m_LuaThreadHandle, &m_LuaSubMsg, nRet);
+            functbl.CallFunc<sint32, CLuaMessage*, sint32>("OnMessage", m_LuaThreadHandle, &m_LuaSubMsg, nRet);
 
             SAFE_DELETE(pMsg);
         }

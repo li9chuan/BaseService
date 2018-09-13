@@ -60,7 +60,14 @@ namespace NLNET {
 /*
  * Constructor
  */
-CBufServerWebsocket::CBufServerWebsocket() : _ConnectionCallback(NULL), _SslCtx(NULL)
+CBufServerWebsocket::CBufServerWebsocket() :
+#ifdef NL_OS_UNIX
+    CBufNetBase(false),
+#else
+    CBufNetBase(),
+#endif
+    _ConnectionCallback(NULL),
+    _SslCtx(NULL)
 {
 	nlnettrace( "CBufServerWebsocket::CBufServerWebsocket" );
 
@@ -551,7 +558,11 @@ void CWebSocketReceiveTask::init( CBufServerWebsocket *server, uint16 port )
     sin.sin_family = AF_INET;
     sin.sin_port = htons(port);
 
+#ifdef NL_OS_UNIX
+    evthread_use_pthreads();
+#else
     evthread_use_windows_threads();
+#endif
 
     pEventBase = event_base_new();
     WSListenArgs* pListenArgs   = new struct WSListenArgs(pEventBase,_Server);

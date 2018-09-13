@@ -87,7 +87,7 @@ namespace bin
         return 1;
     }
 
-    DEFINE_CLASS_FUNCTION( wuint32, void, (lua_Integer in_val))
+    DEFINE_CLASS_FUNCTION( wuint32, void, (sint64 in_val))
     {
         uint32  serial_val=in_val;
         obj->m_Msg.serial(serial_val);
@@ -134,7 +134,7 @@ namespace bin
         return 1;
     }
 
-    DEFINE_CLASS_FUNCTION( ruint32, lua_Integer, ())
+    DEFINE_CLASS_FUNCTION( ruint32, sint64, ())
     {
         nlassert(obj->m_Msg.isReading());
         try

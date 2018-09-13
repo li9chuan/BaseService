@@ -19,10 +19,11 @@ void cbLuaClientMsg(CMessage &msgin, TSockId from, CCallbackNetBase &netbase)
     CScriptTable    functbl;
     pClient->GetScriptHandle().Get("NetWorkHandler", functbl);
 
-    int nRet = 0;
     pClient->m_LuaTmpMsg->m_Msg.swap(msgin);
+    sint32 nRet = 0;
+    sint32 _hdl = pClient->GetHandle();
 
-    functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)pClient->GetHandle(), pClient->m_LuaTmpMsg, nRet);
+    functbl.CallFunc<sint32, CLuaMessage*, sint32>("OnMessage", _hdl, pClient->m_LuaTmpMsg, nRet);
 }
 
 CLuaCallbackClient::CLuaCallbackClient( std::string& protocal, sint32 thd_handle/*=-1*/)
@@ -78,13 +79,13 @@ namespace bin
         return 1;
     }
 
-    DEFINE_CLASS_FUNCTION(SetHandle, void, (lua_Integer client_handle))
+    DEFINE_CLASS_FUNCTION(SetHandle, void, (sint32 client_handle))
     {
         obj->SetHandle(client_handle);
         return 1;
     }
 
-    DEFINE_CLASS_FUNCTION(GetHandle, lua_Integer, ())
+    DEFINE_CLASS_FUNCTION(GetHandle, sint32, ())
     {
         r = obj->GetHandle();
         return 1;

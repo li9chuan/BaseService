@@ -250,49 +250,49 @@ namespace bin
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( SetInt8, void, (lua_Integer lua_val))
+        DEFINE_CLASS_FUNCTION( SetInt8, void, (sint32 lua_val))
         {
             obj->set_int8(lua_val);
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( SetUint8, void, (lua_Integer lua_val))
+        DEFINE_CLASS_FUNCTION( SetUint8, void, (sint32 lua_val))
         {
             obj->set_uint8(lua_val);
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( SetInt16, void, (lua_Integer lua_val))
+        DEFINE_CLASS_FUNCTION( SetInt16, void, (sint32 lua_val))
         {
             obj->set_int16(lua_val);
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( SetUint16, void, (lua_Integer lua_val))
+        DEFINE_CLASS_FUNCTION( SetUint16, void, (sint32 lua_val))
         {
             obj->set_uint16(lua_val);
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( SetInt32, void, (lua_Integer lua_val))
+        DEFINE_CLASS_FUNCTION( SetInt32, void, (sint32 lua_val))
         {
             obj->set_int32(lua_val);
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( SetUint32, void, (lua_Integer lua_val))
+        DEFINE_CLASS_FUNCTION( SetUint32, void, (sint32 lua_val))
         {
             obj->set_uint32(lua_val);
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( SetInt64, void, (lua_Integer lua_val))
+        DEFINE_CLASS_FUNCTION( SetInt64, void, (sint64 lua_val))
         {
             obj->set_int64(lua_val);
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( SetUint64, void, (lua_Integer lua_int))
+        DEFINE_CLASS_FUNCTION( SetUint64, void, (sint64 lua_int))
         {
             obj->set_uint64(lua_int);
             return 1;

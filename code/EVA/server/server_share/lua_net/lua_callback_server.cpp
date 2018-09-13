@@ -32,10 +32,11 @@ void cbLuaServiceMsg ( CMessage &msgin, TSockId from, CCallbackNetBase &netbase 
         CScriptTable    functbl;
         ScriptMgr.GetScriptHandle()->Get("NetWorkHandler", functbl);
 
-        int nRet = 0;
         pServer->m_LuaTmpMsg->m_Msg.swap(msgin);
+        sint32 nRet = 0;
+        sint64 _from = (sint64)from;
 
-        functbl.CallFunc<lua_Integer, CLuaMessage*, int>("OnMessage", (lua_Integer)from, pServer->m_LuaTmpMsg, nRet);
+        functbl.CallFunc<sint64, CLuaMessage*, sint32>("OnMessage", _from, pServer->m_LuaTmpMsg, nRet);
     }
 }
 

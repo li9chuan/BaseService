@@ -4,7 +4,20 @@ PlayerMgr = {}
 function PlayerMgr:Init()
 	self.playerMap      = Map:new();
 
-
+    self.RobotPool      = {};
+    self.RobotIdx       = 1;
+    self.RobotMax       = 500;
+    self.RobotIDStart   = 1002;
+    self.RobotIDEnd     = 1003;
+    
+    for id=self.RobotIDStart,id<=self.RobotIDEnd do
+    
+        local player_helper = self:LoadDBPlayer( id );
+        
+        
+    end
+    
+    
 end
 
 
@@ -56,6 +69,13 @@ function PlayerMgr:RemovePlayer( _uid )
             self.playerMap:Remove(_uid);
         end
     end
+end
+
+function PlayerMgr:MakeRobot()
+    
+    
+    
+    return nil;
 end
 
 return PlayerMgr

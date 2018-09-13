@@ -890,7 +890,7 @@ namespace bin
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( Count, lua_Integer, () )
+        DEFINE_CLASS_FUNCTION( Count, sint64, () )
         {
             r = obj->count();
             return 1;
@@ -908,37 +908,37 @@ namespace bin
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetInt8, lua_Integer, () )
+        DEFINE_CLASS_FUNCTION( GetInt8, sint64, () )
         {
             r = obj->get_int8();
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetUint8, lua_Integer, () )
+        DEFINE_CLASS_FUNCTION( GetUint8, sint64, () )
         {
             r = obj->get_uint8();
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetInt32, lua_Integer, () )
+        DEFINE_CLASS_FUNCTION( GetInt32, sint64, () )
         {
             r = obj->get_int32();
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetUint32, lua_Integer, () )
+        DEFINE_CLASS_FUNCTION( GetUint32, sint64, () )
         {
             r = obj->get_uint32();
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetInt64, lua_Integer, () )
+        DEFINE_CLASS_FUNCTION( GetInt64, sint64, () )
         {
             r = obj->get_int64();
             return 1;
         }
 
-        DEFINE_CLASS_FUNCTION( GetUint64, lua_Integer, () )
+        DEFINE_CLASS_FUNCTION( GetUint64, sint64, () )
         {
             r = obj->get_uint64();
             return 1;

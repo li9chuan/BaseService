@@ -602,7 +602,7 @@ function RoomDdz:AfterShowDown()
     local COST_CFG = StaticTableMgr:GetCreateCost( self.CreateInfo.consume_id );
     
     if COST_CFG~=nil then
-        if self._GameCount >= COST_CFG.game_cnt then
+        if self._GameCount > COST_CFG.game_cnt then
             self.IsGameStart = false;
             self:__GameOverRecordLog();
             self:Release();
@@ -966,7 +966,7 @@ end
 -- 检查用户可否出牌
 function RoomDdz:__UserOutCardLimit( room_player, out_cards )
     
-    if not self:__GetFsmState(enum.TGuanDanStateAction) then
+    if not self:__GetFsmState(enum.TDDZStateAction) then
         return false;
     end
     
