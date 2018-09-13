@@ -77,8 +77,8 @@ void NLNET::ws_socket_read_cb( bufferevent *bev, void *args )
 
                 if ( split_key.size() == 2 && split_key[0] == "Sec-WebSocket-Key"  )
                 {
-                    // CSString res_key = generate_websocket_response( split_key[1].strip() );
-                    CSString res_key = generate_websocket_response( split_key[1] );
+                    CSString res_val = split_key[1].strip();
+                    CSString res_key = generate_websocket_response(res_val);
                     bufferevent_write(bev, res_key.c_str(), res_key.size() );
                     pBufSock->m_Handshake = true;
                 }
