@@ -255,8 +255,9 @@ bool CLuaEngine::RunLuaFunction(const char* szFunName, const char* szTableName, 
 		switch(pInParams->at(i).Type())
 		{
 			case LUA_TNUMBER:				
-				lua_pushnumber(m_pLuaState, pInParams->at(i).GetInt());						
-				break;			
+				//lua_pushnumber(m_pLuaState, pInParams->at(i).GetInt());
+                lua_pushinteger(m_pLuaState, pInParams->at(i).GetInt());
+				break;
 			case LUA_TSTRING:
 				lua_pushlstring(m_pLuaState, (char*)pInParams->at(i).Data(), pInParams->at(i).GetStringLen());
 				break;
@@ -322,6 +323,15 @@ void CLuaEngine::ExportClass( const char* pszName )
 {
     bin::ScriptExporterManager().ExportClass( pszName, *m_ScriptHandle );
 }
+
+void CLuaEngine::GcStep()
+{
+    H_AUTO(CLuaEngineGcStep);
+    lua_gc(m_pLuaState, LUA_GCSTEP, 0);
+}
+
+
+
 
 
 

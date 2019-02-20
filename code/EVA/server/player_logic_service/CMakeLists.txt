@@ -5,8 +5,9 @@ ADD_EXECUTABLE(player_logic_service WIN32 ${SRC})
 INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
 
 TARGET_LINK_LIBRARIES(  player_logic_service
+                        #eva_adminmodules
 						servershare
-						eva_adminmodules)
+						)
 
 NL_DEFAULT_PROPS(player_logic_service "Base, Services: Player Logic Service (PLS)")
 NL_ADD_RUNTIME_FLAGS(player_logic_service)

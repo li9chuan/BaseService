@@ -6,6 +6,7 @@
 #include "script_mgr.h"
 #include <server_share/bin_luabind/Public.hpp>
 #include <server_share/lua/lua_thread.h>
+#include <zlib.h>
 
 using namespace std;
 using namespace NLMISC;
@@ -88,7 +89,22 @@ namespace bin
             return 1;
         }
         
+        DEFINE_MODULE_FUNCTION(ZipCompress, std::string, (const char* buff, int len))
+        {
+            uLongf dest_len = compressBound(len);
+            r.resize(dest_len);
 
+            sint32 z_res = compress((Bytef *)&r[0], &dest_len, (Bytef *)buff, len);
+            if (z_res == Z_OK) {
+                r.resize(dest_len);
+            }
+            else {
+                r.resize(0);
+                nlwarning("ZipCompress Error:%d", z_res);
+            }
+
+            return 1;
+        }
 
     END_SCRIPT_MODULE()
 

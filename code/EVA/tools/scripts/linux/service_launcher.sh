@@ -61,10 +61,10 @@ do
 		  echo $START_COUNTER > $START_COUNTER_FILE
 
 		  # big nasty hack to deal with the special cases of ryzom_naming_service and ryzom_admin_service who have badly names cfg files
-		  for f in ryzom_*cfg
-		    do
-		    cp $f $(echo $f | sed "s/ryzom_//")
-		  done
+		  #for f in ryzom_*cfg
+		  #  do
+		  #  cp $f $(echo $f | sed "s/ryzom_//")
+		  #done
 
 		  # we have a launch command so prepare, launch, wait for exit and do the housekeeping
 		  echo -----------------------------------------------------------------------

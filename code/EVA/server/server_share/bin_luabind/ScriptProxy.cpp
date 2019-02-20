@@ -3,6 +3,7 @@
 
 //
 #include "ScriptProxy.h"
+#include "ScriptObject.h"
 
 //
 #include "ScriptBase.h"
@@ -12,6 +13,10 @@
 
 namespace bin
 {
+    void* SScriptObjectRef::GetScriptObj()
+    {
+        return pObject->m_pThis;
+    }
 
     void SScriptObjectRef::Unlink()
     {

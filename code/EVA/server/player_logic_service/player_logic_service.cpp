@@ -21,21 +21,17 @@ using namespace std;
 CFileDisplayer *Fd = NULL;
 CStdDisplayer Sd;
 
-NLMISC::CVariable<uint32>	VAR_PLAYER_NUM("pls", "NbPlayers"  , "memo", 0);
-NLMISC::CVariable<uint32>	VAR_PLAYER_MAX("pls", "MaxPlayer"  , "memo", 100000, 0, true );
-
-extern void admin_modules_forceLink();
-void foo()
-{
-    admin_modules_forceLink();
-}
+//extern void admin_modules_forceLink();
+//void foo()
+//{
+//    admin_modules_forceLink();
+//}
 
 void displayInfo ()
 {
     ICommand::execute ("info", *NLMISC::InfoLog);
 }
 
-#include <server_share/id_generate.h>
 class CPlayerLogicService : public NLNET::IService
 {
 public:

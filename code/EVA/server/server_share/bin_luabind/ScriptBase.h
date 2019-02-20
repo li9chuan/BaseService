@@ -2,6 +2,7 @@
 #define SERVER_SHARD_SCRIPT_BASE_H
 
 #include "Public.h"
+#include "ScriptProxy.h"
 
 namespace bin
 {
@@ -197,7 +198,7 @@ namespace bin
 	template <typename O>	// If a object, must be a proxy
 	struct TToLua<O*>	
 	{
-#ifdef NL_OS_WINDOWS
+//#ifdef NL_OS_WINDOWS
         static int Make(O* o, lua_State* pL)
 		{
 			int nRet = 0;
@@ -209,7 +210,7 @@ namespace bin
 				}
 				else
 				{
-					nRet = ScriptExporterManager().AddScriptObject(o, pL);
+					nRet = o->AddScriptObject(pL); //ScriptExporterManager().AddScriptObject(o, pL);
 				}
 			}
 
@@ -222,9 +223,9 @@ namespace bin
 
 			return nRet;
 		}
-#else
-        static int Make(O* o, lua_State* pL);
-#endif
+//#else
+//        static int Make(O* o, lua_State* pL);
+//#endif
 	};
 
 	template <typename A>
@@ -339,7 +340,7 @@ namespace bin
 	template <typename O>	// If a object, must be a proxy
 	struct TFmLua<O*>	
 	{
-#ifdef NL_OS_WINDOWS
+//#ifdef NL_OS_WINDOWS
 		static int Make(lua_State* pL, int nIdx, O*& o)
 		{
 			o = NULL;
@@ -367,13 +368,14 @@ namespace bin
                 return 0;
             }
 
-			o = reinterpret_cast<O*>(pProxy->objRef.pObject->m_pThis);
+			//o = reinterpret_cast<O*>(pProxy->objRef.pObject->m_pThis);
+            o = reinterpret_cast<O*>(pProxy->objRef.GetScriptObj());
 
 			return 1;
 		}
-#else
-        static int Make(lua_State* pL, int nIdx, O*& o);
-#endif
+//#else
+//        static int Make(lua_State* pL, int nIdx, O*& o);
+//#endif
 	};
 
 	template <typename T>
@@ -748,6 +750,10 @@ public:\
 	bin::SScriptObject& GetScriptObject()\
 	{\
 		return __m_scrObj;\
+	}\
+    int AddScriptObject( lua_State* pL )\
+	{\
+        return bin::ScriptExporterManager().AddScriptObject(this, pL);\
 	}\
 	bin::CScriptHandle& GetScriptHandle()\
 	{\

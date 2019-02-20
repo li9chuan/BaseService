@@ -24,18 +24,13 @@ public:
 
     void            ExecString( std::string );
 
-
     bool                    LoadScrpit(const char* szName);
     lua_State*              GetLuaState();
     CLuaEngine&             GetLuaEngine()      { return m_LuaEngine; }
     bin::CScriptHandle*     GetScriptHandle()   { return m_LuaEngine.GetScriptHandle(); }
 
-    
-
 private:
-
     void            UpdateServiceBootCount();
-
     void            Export();
     CLuaEngine      m_LuaEngine;
     bool            m_IsInit;

@@ -20,6 +20,7 @@ public:
 	lua_State *		            GetLuaState();
     bin::CScriptHandle*         GetScriptHandle()   { return m_ScriptHandle; }
 	const char*		            GetLastError();
+    void                        GcStep();
 
 	bool			            LoadLuaFile(const char* szName);
 	bool			            RunMemoryLua(const char* pLuaData, int nDataLen);

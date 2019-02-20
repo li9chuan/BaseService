@@ -44,7 +44,6 @@ public:
         m_CallbackServerHandle->send( buffer, sock_id );
     }
 
-    void    IncReceiveMsgCount( std::string msg_name );
     bool    ForwardingMsg( ClientData* pClient, NLNET::CMessage& msgin, MsgLeaf* pMsgLeaf );
 
     void    DisConnect(NLNET::TSockId sock_id)
@@ -112,11 +111,6 @@ public:
     }
 
     std::string         GetName()   { return m_NetName; }
-
-    typedef std::map<std::string, uint64>                   TMsgCount;
-
-    TMsgCount                                               m_ReceiveMsgCount;
-    TMsgCount                                               m_SendMsgCount;
 
     CLuaMessage*        m_LuaTmpMsg;
 

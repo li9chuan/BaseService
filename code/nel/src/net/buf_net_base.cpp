@@ -138,7 +138,7 @@ void	CBufNetBase::pushMessageIntoReceiveQueue( const uint8 *buffer, uint32 size 
 		{
 			nlwarning( "LNETL1: Write pipe failed in pushMessageIntoReceiveQueue" );
 		}
-		nldebug( "Pipe: 1 byte written" );
+		// nldebug( "Pipe: 1 byte written" );  2018-11-30
 #endif
 	}
 	//nldebug( "BNB: Released." );

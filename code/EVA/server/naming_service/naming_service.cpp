@@ -90,11 +90,11 @@ CInetAddress getHostAddress( TServiceId  sid );
 // Asks a service to stop and tell every one
 void doUnregisterService (TServiceId sid);
 
-extern void admin_modules_forceLink();
-void foo()
-{
-	admin_modules_forceLink();
-}
+//extern void admin_modules_forceLink();
+//void foo()
+//{
+//	admin_modules_forceLink();
+//}
 
 /**
  * Manager for services instances

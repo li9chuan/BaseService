@@ -467,7 +467,6 @@ void CBufServerTcp::displaySendQueueStat (NLMISC::CLog *log, TSockId destid)
 
 }
 
-
 /*
  * Returns the number of bytes received since the previous call to this method
  */
@@ -492,8 +491,6 @@ uint64 CBufServerTcp::newBytesSent()
 	return nbsent;
 }
 
-
-
 void CTcpReceiveTask::init( CBufServerTcp *server, uint16 port )
 {
 	_Server = server;
@@ -503,10 +500,10 @@ void CTcpReceiveTask::init( CBufServerTcp *server, uint16 port )
     sin.sin_family = AF_INET;  
     sin.sin_port = htons(port); 
 
-#ifdef NL_OS_UNIX
-    evthread_use_pthreads();
-#else
+#ifdef NL_OS_WINDOWS
     evthread_use_windows_threads();
+#else
+    evthread_use_pthreads();
 #endif
 
     pEventBase = event_base_new();

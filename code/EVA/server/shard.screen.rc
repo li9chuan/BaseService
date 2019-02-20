@@ -2,6 +2,44 @@
 # SCREEN KEYBINDINGS
 # ------------------------------------------------------------------------------
 
+# Set default encoding using utf8
+defutf8 on
+
+## 解决中文乱码,这个要按需配置
+defencoding utf8
+encoding utf8 utf8
+
+# 屏幕缓冲区行数
+defscrollback 10000
+ 
+# 下标签设置
+hardstatus on
+caption always '%{gk}[%{G}%H%{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}]%{=b C}[%m/%d/%y %C %A]%{W}'
+ 
+#关闭闪屏
+vbell off
+ 
+#Keboard binding
+# bind Alt+z to move to previous window
+bindkey ^[z prev
+# bind Alt+x to move to next window
+bindkey ^[x next
+
+# bind Alt`~= to screen0~12
+bindkey "^[`" select 0
+bindkey "^[1" select 1
+bindkey "^[2" select 2
+bindkey "^[3" select 3
+bindkey "^[4" select 4
+bindkey "^[5" select 5
+bindkey "^[6" select 6
+bindkey "^[7" select 7
+bindkey "^[8" select 8
+bindkey "^[9" select 9
+bindkey "^[0" select 10
+bindkey "^[-" select 11
+bindkey "^[=" select 12
+
 # Remove some stupid / dangerous key bindings
 bind ^k
 #bind L
@@ -16,7 +54,7 @@ chdir $MT_PATH/server
 
 # aes
 #screen -t aes /bin/sh $MT_PATH/tools/scripts/linux/service_launcher.sh aes valgrind --leak-check=full admin_service -A. -C. --fulladminname=admin_executor_service --shortadminname=AES --nobreak --writepid
-screen -t aes /bin/sh $MT_PATH/tools/scripts/linux/service_launcher.sh aes admin_service -A. -C. --fulladminname=admin_executor_service --shortadminname=AES --nobreak --nolog
+#screen -t aes /bin/sh $MT_PATH/tools/scripts/linux/service_launcher.sh aes admin_service -A. -C. --fulladminname=admin_executor_service --shortadminname=AES --nobreak --nolog
 
 # rns
 screen -t rns /bin/sh $MT_PATH/tools/scripts/linux/service_launcher.sh rns naming_service -A. -C. -W. --nobreak --nolog
@@ -27,17 +65,17 @@ screen -t rns /bin/sh $MT_PATH/tools/scripts/linux/service_launcher.sh rns namin
 # fes_0
 screen -t fes_0 /bin/sh $MT_PATH/tools/scripts/linux/service_launcher.sh fes_0 frontend_service -A. -C. --nobreak --nolog
 
-# egs
-screen -t egs /bin/sh $MT_PATH/tools/scripts/linux/service_launcher.sh egs entities_game_service -A. -C. --nobreak --nolog
+# sch
+screen -t sch /bin/sh $MT_PATH/tools/scripts/linux/service_launcher.sh sch schedule_service -A. -C. --nobreak --nolog
 
 # pds
-screen -t pds /bin/sh $MT_PATH/tools/scripts/linux/service_launcher.sh pds persistant_data_service -A. -C. --nobreak --nolog
+#screen -t pds /bin/sh $MT_PATH/tools/scripts/linux/service_launcher.sh pds persistant_data_service -A. -C. --nobreak --nolog
 
 # lgc_0
 screen -t lgc_0 /bin/sh $MT_PATH/tools/scripts/linux/service_launcher.sh lgc_0 player_logic_service -A. -C. --nobreak --nolog
 
 # mail
-screen -t mail /bin/sh $MT_PATH/tools/scripts/linux/service_launcher.sh mail mail_service -A. -C. --nobreak --nolog
+#screen -t mail /bin/sh $MT_PATH/tools/scripts/linux/service_launcher.sh mail mail_service -A. -C. --nobreak --nolog
 
 # ras
 #screen -t ras /bin/sh $MT_PATH/tools/scripts/linux/service_launcher.sh ras admin_service -A. -C. --fulladminname=admin_service --shortadminname=AS --nobreak --nolog

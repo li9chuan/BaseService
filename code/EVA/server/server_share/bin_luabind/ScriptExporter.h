@@ -3,6 +3,7 @@
 
 #include "ScriptBase.h"
 #include "ScriptProxy.h"
+#include "ScriptObject.h"
 
 namespace bin
 {

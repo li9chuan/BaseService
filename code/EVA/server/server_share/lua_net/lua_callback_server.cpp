@@ -14,7 +14,7 @@ NLMISC::CVariable<bool>	VAR_SAVE_EVENT("fes", "SaveEvent", "memo", false, 0, tru
 void cbLuaServiceMsg ( CMessage &msgin, TSockId from, CCallbackNetBase &netbase )
 {
     CLuaCallbackServer* pServer = (CLuaCallbackServer*)netbase.getUserData();
-    pServer->IncReceiveMsgCount(msgin.getName());
+    LuaNetworkMgr.IncReceiveMsgCount(msgin.getName());
 
     MsgLeaf* pMsgLeaf = MsgDesc.GetMsgLeaf( msgin.getName() );
 
@@ -90,23 +90,6 @@ void CLuaCallbackServer::Listen( uint16 port )
     else if( m_Protocal=="tcp" )
     {
         ((CCallbackServerTcp*)m_CallbackServerHandle)->init(port);
-    }
-}
-
-void CLuaCallbackServer::IncReceiveMsgCount( std::string msg_name )
-{
-    if( VAR_MSG_COUNT )
-    {
-        TMsgCount::iterator iter = m_ReceiveMsgCount.find(msg_name);
-
-        if ( iter!=m_ReceiveMsgCount.end() )
-        {
-            iter->second += 1;
-        }
-        else
-        {
-            m_ReceiveMsgCount.insert( make_pair(msg_name, 1) );
-        }
     }
 }
 
@@ -301,30 +284,28 @@ NLMISC_COMMAND (topmsg, "", "")
 {
     if(args.size() != 0) return false;
 
-    //CFrontEndService::TReceiveMsgCount::iterator iter,it_end;
-    //iter    = FrontEndService->m_ReceiveMsgCount.begin();
-    //it_end  = FrontEndService->m_ReceiveMsgCount.end();
+    CLuaNetworkMgr::TMsgCount::iterator iter,it_end;
+    iter    = LuaNetworkMgr.m_ReceiveMsgCount.begin();
+    it_end  = LuaNetworkMgr.m_ReceiveMsgCount.end();
 
 
+    std::multimap<uint64, std::string>  sortmap;
 
+    while ( iter!=it_end )
+    {
+        sortmap.insert( make_pair( iter->second, iter->first ) );
+        ++iter;
+    }
 
-    //std::multimap<uint64, std::string>  sortmap;
+    std::multimap<uint64, std::string>::reverse_iterator riter,rit_end;
+    riter    = sortmap.rbegin();
+    rit_end  = sortmap.rend();
 
-    //while ( iter!=it_end )
-    //{
-    //    sortmap.insert( make_pair( iter->second, iter->first ) );
-    //    ++iter;
-    //}
-
-    //std::multimap<uint64, std::string>::reverse_iterator riter,rit_end;
-    //riter    = sortmap.rbegin();
-    //rit_end  = sortmap.rend();
-
-    //while ( riter!=rit_end )
-    //{
-    //    log.displayNL("Count: %" NL_I64 "u       Msg: %s", riter->first, riter->second.c_str() );
-    //    ++riter;
-    //}
+    while ( riter!=rit_end )
+    {
+        log.displayNL("Count: %" NL_I64 "u       Msg: %s", riter->first, riter->second.c_str() );
+        ++riter;
+    }
 
     return true;
 }

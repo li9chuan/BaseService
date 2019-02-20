@@ -5,7 +5,7 @@ ADD_EXECUTABLE(naming_service WIN32 ${SRC})
 INCLUDE_DIRECTORIES(${LIBXML2_INCLUDE_DIR})
 
 TARGET_LINK_LIBRARIES(	naming_service
-						eva_adminmodules
+						#eva_adminmodules
 						${LIBXML2_LIBRARIES}
 						nelmisc
 						nelnet)

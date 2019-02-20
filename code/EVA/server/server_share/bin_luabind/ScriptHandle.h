@@ -344,10 +344,9 @@ OPERATION_FAIL:
 		{
 			FUNC_PREWORK();
 
-			if(lua_pcall(m_pLua, 0, 1, NULL) != LUA_OK)	// Error msg here
+			if(lua_pcall(m_pLua, 0, 1, 0) != LUA_OK)	// Error msg here
 			{
 				LOG_MESSAGE("[ERROR] Call Func[%s] : %s", pszName, lua_tostring(m_pLua, -1));
-
 				return 0;
 			}
 
@@ -367,10 +366,9 @@ OPERATION_FAIL:
 
 			MAKE_ARG(A0, a0);
 
-			if(lua_pcall(m_pLua, 1, 1, NULL) != LUA_OK)	// Error msg here
+			if(lua_pcall(m_pLua, 1, 1, 0) != LUA_OK)	// Error msg here
 			{
 				LOG_MESSAGE("[ERROR] Call Func[%s] : %s", pszName, lua_tostring(m_pLua, -1));
-
 				return 0;
 			}
 
@@ -387,10 +385,9 @@ OPERATION_FAIL:
 			MAKE_ARG(A0, a0);
 			MAKE_ARG(A1, a1);
 
-			if(lua_pcall(m_pLua, 2, 1, NULL) != LUA_OK)	// Error msg here
+			if(lua_pcall(m_pLua, 2, 1, 0) != LUA_OK)	// Error msg here
 			{
 				LOG_MESSAGE("[ERROR] Call Func[%s] : %s", pszName, lua_tostring(m_pLua, -1));
-
 				return 0;
 			}
 
@@ -409,10 +406,9 @@ OPERATION_FAIL:
             MAKE_ARG(A1, a1);
             MAKE_ARG(A2, a2);
 
-            if (lua_pcall(m_pLua, 3, 1, NULL) != LUA_OK)	// Error msg here
+            if (lua_pcall(m_pLua, 3, 1, 0) != LUA_OK)	// Error msg here
             {
                 LOG_MESSAGE("[ERROR] Call Func[%s] : %s", pszName, lua_tostring(m_pLua, -1));
-
                 return 0;
             }
 
@@ -700,10 +696,9 @@ OPERATION_FAIL:
 
 			MAKE_THIS();
 
-			if(lua_pcall(pLua, 1, 1, NULL) != LUA_OK)	// Error msg here
+			if(lua_pcall(pLua, 1, 1, 0) != LUA_OK)	// Error msg here
 			{
 				LOG_MESSAGE("[ERROR] Call MemFunc[%s] : %s", pszName, lua_tostring(pLua, -1));
-
 				return 0;
 			}
 
@@ -721,10 +716,9 @@ OPERATION_FAIL:
 			MAKE_THIS();
 			MAKE_ARG(A0, a0);
 
-			if(lua_pcall(pLua, 2, 1, NULL) != LUA_OK)	// Error msg here
+			if(lua_pcall(pLua, 2, 1, 0) != LUA_OK)	// Error msg here
 			{
 				LOG_MESSAGE("[ERROR] Call Func[%s] : %s", pszName, lua_tostring(pLua, -1));
-
 				return 0;
 			}
 
@@ -743,10 +737,9 @@ OPERATION_FAIL:
 			MAKE_ARG(A0, a0);
 			MAKE_ARG(A1, a1);
 
-			if(lua_pcall(pLua, 3, 1, NULL) != LUA_OK)	// Error msg here
+			if(lua_pcall(pLua, 3, 1, 0) != LUA_OK)	// Error msg here
 			{
 				LOG_MESSAGE("[ERROR] Call MemFunc[%s] : %s", pszName, lua_tostring(pLua, -1));
-
 				return 0;
 			}
 
@@ -849,10 +842,9 @@ OPERATION_FAIL:
 		{
 			FUNC_PREWORK();
 
-			if(lua_pcall(pLua, 0, 1, NULL) != LUA_OK)	// Error msg here
+			if(lua_pcall(pLua, 0, 1, 0) != LUA_OK)	// Error msg here
 			{
 				LOG_MESSAGE("[ERROR] Call Func[%s] : %s", pszName, lua_tostring(pLua, -1));
-
 				return 0;
 			}
 
@@ -868,10 +860,9 @@ OPERATION_FAIL:
 
 			MAKE_ARG(A0, a0);
 
-			if(lua_pcall(pLua, 1, 1, NULL) != LUA_OK)	// Error msg here
+			if(lua_pcall(pLua, 1, 1, 0) != LUA_OK)	// Error msg here
 			{
 				LOG_MESSAGE("[ERROR] Call Func[%s] : %s", pszName, lua_tostring(pLua, -1));
-
 				return 0;
 			}
 
@@ -887,10 +878,9 @@ OPERATION_FAIL:
 			MAKE_ARG(A0, a0);
 			MAKE_ARG(A1, a1);
 
-			if(lua_pcall(pLua, 2, 1, NULL) != LUA_OK)	// Error msg here
+			if(lua_pcall(pLua, 2, 1, 0) != LUA_OK)	// Error msg here
 			{
 				LOG_MESSAGE("[ERROR] Call Func[%s] : %s", pszName, lua_tostring(pLua, -1));
-
 				return 0;
 			}
 

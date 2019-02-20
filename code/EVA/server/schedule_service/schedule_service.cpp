@@ -22,8 +22,8 @@ using namespace NLMISC;
 using namespace NLNET;
 using namespace DEF;
 
-extern void admin_modules_forceLink();
-void foo()  {   admin_modules_forceLink();  }
+//extern void admin_modules_forceLink();
+//void foo()  {   admin_modules_forceLink();  }
 
 class CScheduleService : public NLNET::IService
 {

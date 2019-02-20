@@ -5,7 +5,7 @@ ADD_EXECUTABLE(frontend_service WIN32 ${SRC})
 INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR} ${LIBEVENT_INCLUDE_DIR} ${OPENSSL_INCLUDE_DIR})
 
 TARGET_LINK_LIBRARIES(	frontend_service
-						eva_adminmodules
+						#eva_adminmodules
 						servershare)
 
 NL_DEFAULT_PROPS(frontend_service "Base, Services: Frontend Service (FES)")

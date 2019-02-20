@@ -16,7 +16,7 @@ CLuaThread::CLuaThread( std::string name, sint32 update_tick ) :
     m_ThreadHandle(NULL), m_ThreadName(name), m_AlreadyStarted(false),
     m_RequireExit(false), m_LuaThreadHandle(-1), m_UpdateTick(0)
 {
-    if ( update_tick>0 && update_tick<10*1000 )
+    if ( update_tick>0 && update_tick<0x7FFFFFFF )
     {
         m_UpdateTick = update_tick;
     }
@@ -182,6 +182,7 @@ sint32 CLuaThreadMgr::RegisterLuaThread( CLuaThread* pThread )
 
 void CLuaThreadMgr::Update()
 {
+    H_AUTO(CLuaThreadMgrUpdate);
     m_LuaThreadMutex.enter();
 
     for (uint i=0; i< m_LuaThreadHandles.size(); ++i)

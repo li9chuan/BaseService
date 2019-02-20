@@ -5,6 +5,7 @@
 
 namespace bin
 {
+    /*
     template <typename O>	// If a object, must be a proxy
     int TToLua<O*>::Make(O* o, lua_State* pL)
     {
@@ -30,6 +31,7 @@ namespace bin
 
         return nRet;
     }
+    
 
     template <typename O>	// If a object, must be a proxy
     int TFmLua<O*>::Make(lua_State* pL, int nIdx, O*& o)
@@ -63,6 +65,7 @@ namespace bin
 
         return 1;
     }
+    */
 };
 
 

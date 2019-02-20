@@ -5,7 +5,7 @@ ADD_EXECUTABLE(schedule_service WIN32 ${SRC})
 INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
 
 TARGET_LINK_LIBRARIES(	schedule_service
-						eva_adminmodules
+						#eva_adminmodules
 						servershare)
 
 NL_DEFAULT_PROPS(schedule_service "Base, Services: Schedule Service (SCH)")

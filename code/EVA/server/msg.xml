@@ -24,28 +24,54 @@
 
     
     <!-- Common  -->                                                                                               
-    <leaf name="ER"             sendto="PLS"        format="UID s"                                              description="Enter Room" />
+    <leaf name="JF"             sendto="PLS"        format="UID PB.MsgJoinFreedom"                              description="Join Freedom" />
     <leaf name="LR"             sendto="PLS"        format="UID"                                                description="Leave Room" />
+    <leaf name="LR_TEST"        sendto="PLS"        format="UID"                                                description="Leave Room" />
     <leaf name="CPRM"           sendto="SCH"        format="UID PB.MsgCreatePrivateRoom"                        description="Create Private RoomGame" />
     <leaf name="EPRM"           sendto="SCH"        format="UID PB.MsgEnterPrivateRoom"                         description="Enter Private RoomGame" />
     <leaf name="RRM"            sendto="PLS"        format="UID"       			   	                            description="Release Private RoomGame" />
+    <leaf name="RNM"            sendto="PLS"        format="UID PB.MsgString"                                   description="改名" />
+    <leaf name="RHP"            sendto="PLS"        format="UID PB.MsgString"                                   description="改头像" />
+    <leaf name="INVF"           sendto="PLS"        format="UID PB.MsgInt"                                      description="被邀请加入游戏" />
+    <leaf name="MSG_OK"         sendto="PLS"        format="UID PB.MsgInt"                                      description="领取并删除Msg" />
+    <leaf name="GIFT_TIME"      sendto="PLS"        format="UID"             		   	                        description="" />
+    <leaf name="GIFT_GET"       sendto="PLS"        format="UID"             		   	                        description="玩家请求领取奖励" />
+    <leaf name="FST_HELP"       sendto="PLS"        format="UID"             		   	                        description="第一次打开过了help" />
+    <leaf name="REWARD_GET"     sendto="PLS"        format="UID"                                                description="玩家请求视频播放后的奖励" />
+    <leaf name="SEND_GIFT"      sendto="PLS"        format="UID PB.MsgParams"                                   description="牌桌内发礼物特效" />
 
+    <leaf name="GLL"            sendto="PLS"        format="UID"                                                description="Game Log List" />
+    <leaf name="GLF"            sendto="PLS"        format="UID"                                                description="Game Log Favorite" />
+    <leaf name="ULF"            sendto="PLS"        format="UID"                                                description="获取收藏夹目录 仅数据" />
+    <leaf name="GL"             sendto="PLS"        format="UID PB.MsgInt"                                      description="Game Log" />
+    <leaf name="RGL"            sendto="PLS"        format="UID PB.MsgInt"                                      description="Remove Game Log List" />
+    <leaf name="RGF"            sendto="PLS"        format="UID PB.MsgInt"                                      description="Remove Game Log Favorite" />
+    <leaf name="AGF"            sendto="PLS"        format="UID PB.MsgInt"                                      description="Add Game Log To Favorite" />
     
 
-    <!-- DouDiZhu --> 
-    <leaf name="DDZ_SR"           sendto="PLS"        format="UID"             		   	                        description="斗地主开始准备" />
-    <leaf name="DDZ_CR"           sendto="PLS"        format="UID"             		   	                        description="斗地主取消准备" />
-    <leaf name="DDZ_CG"           sendto="PLS"        format="UID"             	                                description="斗地主继续下一局" />
-    <leaf name="DDZ_RE"           sendto="PLS"        format="UID PB.MsgBool" 	                                description="斗地主申请解散房间" />
-    <leaf name="DDZ_PS"           sendto="PLS"        format="UID"                                              description="玩家跳过出牌" />
-    <leaf name="DDZ_OC"           sendto="PLS"        format="UID PB.MsgCards"                                    description="斗地主出牌" />
-    <leaf name="DDZ_RRM"          sendto="PLS"        format="UID"       			   		                        description="斗地主检查IP时离开房间" />
-    <leaf name="DDZ_CLR"          sendto="PLS"        format="UID"             	   		                        description="斗地主取消限制开始游戏" />
-    <leaf name="DDZ_BLC"          sendto="PLS"        format="UID"             	   		                        description="刷新斗地主房间信息, 断线重连" />
-    <leaf name="DDZ_SMPS"         sendto="PLS"        format="UID PB.MsgMingPaiResult"                            description="游戏开始前选择是否明牌" />
-    <leaf name="DDZ_DZMP"         sendto="PLS"        format="UID PB.MsgMingPaiResult"                            description="出牌前地主选择是否明牌" />
-    <leaf name="DDZ_JB"           sendto="PLS"        format="UID PB.MsgJiaBeiResult"                             description="加倍选择" />
-    <leaf name="DDZ_QDZ"          sendto="PLS"        format="UID PB.MsgQiangDiZhuResult"                         description="抢地主选择" />
+    <!-- 斗地主 --> 
+    <leaf name="DDZ_SR"         sendto="PLS"        format="UID"             		   	                        description="斗地主开始准备" />
+    <leaf name="DDZ_CR"         sendto="PLS"        format="UID"             		   	                        description="斗地主取消准备" />
+    <leaf name="DDZ_CG"         sendto="PLS"        format="UID"             	                                description="斗地主继续下一局" />
+    <leaf name="DDZ_RE"         sendto="PLS"        format="UID PB.MsgBool" 	                                description="斗地主申请解散房间" />
+    <leaf name="DDZ_PS"         sendto="PLS"        format="UID"                                                description="玩家跳过出牌" />
+    <leaf name="DDZ_OC"         sendto="PLS"        format="UID PB.MsgCards"                                    description="斗地主出牌" />
+    <leaf name="DDZ_RRM"        sendto="PLS"        format="UID"                                                description="斗地主检查IP时离开房间" />
+    <leaf name="DDZ_CLR"        sendto="PLS"        format="UID"             	   		                        description="斗地主取消限制开始游戏" />
+    <leaf name="DDZ_BLC"        sendto="PLS"        format="UID"             	   		                        description="刷新斗地主房间信息, 断线重连" />
+    <leaf name="DDZ_SMPS"       sendto="PLS"        format="UID PB.MsgMingPaiResult"                            description="游戏开始前选择是否明牌" />
+    <leaf name="DDZ_DZMP"       sendto="PLS"        format="UID PB.MsgMingPaiResult"                            description="出牌前地主选择是否明牌" />
+    <leaf name="DDZ_JB"         sendto="PLS"        format="UID PB.MsgJiaBeiResult"                             description="加倍选择" />
+    <leaf name="DDZ_QDZ"        sendto="PLS"        format="UID PB.MsgQiangDiZhuResult"                         description="抢地主选择" />
+    
+    <leaf name="HTS_INFO"       sendto="PLS"        format="UID"             		   	                        description="玩家请求自己的战绩" />
+    <leaf name="HTS_SR"         sendto="PLS"        format="UID"             		   	                        description="红心大战开始准备" />
+    <leaf name="HTS_CR"         sendto="PLS"        format="UID"             		   	                        description="红心大战取消准备" />
+    <leaf name="HTS_TR"         sendto="PLS"        format="UID PB.MsgCards"                                    description="传牌" />
+    <leaf name="HTS_PS"         sendto="PLS"        format="UID"                                                description="玩家跳过出牌" />
+    <leaf name="HTS_OC"         sendto="PLS"        format="UID PB.MsgCard"                                     description="红心大战出牌" />
+    
+    
     
 </client_messages_description>
 

@@ -22,13 +22,17 @@ public:
     void RemoveNetModule( std::string name );
 
     void SendToClient( uint64 uid, NLNET::CMessage& msgin );
+    void IncReceiveMsgCount(std::string msg_name);
 
     void Update();
 
 
     void Release();
 
+    typedef std::map<std::string, uint64>                   TMsgCount;
 
+    TMsgCount                                               m_ReceiveMsgCount;
+    TMsgCount                                               m_SendMsgCount;
 
 private:
 

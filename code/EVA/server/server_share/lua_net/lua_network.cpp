@@ -82,6 +82,7 @@ void CLuaNetworkMgr::RemoveNetModule( std::string name )
 
 void CLuaNetworkMgr::Update()
 {
+    H_AUTO(CLuaNetworkMgrUpdate);
     TNetHandle::iterator iter = m_LuaClientNetworkHandle.begin();
 
     while (iter!=m_LuaClientNetworkHandle.end())
@@ -120,6 +121,20 @@ void CLuaNetworkMgr::SendToClient( uint64 uid, NLNET::CMessage& msgin )
         }
 
         ++iter;
+    }
+}
+
+void CLuaNetworkMgr::IncReceiveMsgCount(std::string msg_name)
+{
+    TMsgCount::iterator iter = m_ReceiveMsgCount.find(msg_name);
+
+    if (iter != m_ReceiveMsgCount.end())
+    {
+        iter->second += 1;
+    }
+    else
+    {
+        m_ReceiveMsgCount.insert(make_pair(msg_name, 1));
     }
 }
 

@@ -105,13 +105,14 @@ bool CScriptMgr::LoadScrpit( const char* szName )
 
 void CScriptMgr::update()
 {
+    H_AUTO(CScriptMgrUpdate);
+
     if (m_IsInit)
     {
         m_LuaEngine.RunLuaFunction("ServiceUpdate");
+        m_LuaEngine.GcStep();
     }
 }
-
-
 
 void CScriptMgr::Export()
 {
@@ -129,8 +130,6 @@ void CScriptMgr::Export()
     m_LuaEngine.ExportClass("MysqlStmt");
     m_LuaEngine.ExportClass("MysqlConn");
     m_LuaEngine.ExportClass("MysqlResult");
-
-    
 }
 
 void CScriptMgr::ExecString( std::string exec_str )
@@ -170,8 +169,6 @@ void CScriptMgr::UpdateServiceBootCount()
 
     cf.save();
 }
-
-
 
 NLMISC_COMMAND (lua, "run lua string.", "lua")
 {

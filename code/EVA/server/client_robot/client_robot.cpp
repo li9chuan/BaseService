@@ -24,6 +24,8 @@ public:
     /// Init the service, load the universal time.
     void init ()
     {
+        
+
         TimerManager->init();
         LuaNetworkMgr.Init();
         ScriptMgr.init();

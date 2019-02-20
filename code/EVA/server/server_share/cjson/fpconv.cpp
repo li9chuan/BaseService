@@ -172,7 +172,7 @@ static void set_number_format(char *fmt, int precision)
     fmt[i] = 0;
 }
 
-/* Assumes there is always at least 32 characters available in the target buffer */
+/* Assumes there is always at least 32 characters available in the target buffer 
 int fpconv_g_fmt(char *str, double num, int precision)
 {
     char buf[FPCONV_G_FMT_BUFSIZE];
@@ -182,14 +182,14 @@ int fpconv_g_fmt(char *str, double num, int precision)
 
     set_number_format(fmt, precision);
 
-    /* Pass through when decimal point character is dot. */
+    // Pass through when decimal point character is dot.
     if (locale_decimal_point == '.')
         return NLMISC::smprintf(str, FPCONV_G_FMT_BUFSIZE, fmt, num);
 
-    /* snprintf() to a buffer then translate for other decimal point characters */
+    // snprintf() to a buffer then translate for other decimal point characters
     len = NLMISC::smprintf(buf, FPCONV_G_FMT_BUFSIZE, fmt, num);
 
-    /* Copy into target location. Translate decimal point if required */
+    // Copy into target location. Translate decimal point if required
     b = buf;
     do {
         *str++ = (*b == locale_decimal_point ? '.' : *b);
@@ -197,6 +197,7 @@ int fpconv_g_fmt(char *str, double num, int precision)
 
     return len;
 }
+*/
 
 void fpconv_init()
 {

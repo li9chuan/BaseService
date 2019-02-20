@@ -116,7 +116,7 @@ void NLNET::ws_socket_read_cb( bufferevent *bev, void *args )
                     //0x8 denotes a connection close
                     buff_len = pBufSock->leftShiftBuffer( offset + frame.payload_len );
 
-                    nlinfo( "WebSocket Connection Close 0x8." );
+                    LNETL1_DEBUG("WebSocket Connection Close 0x8.");
                     continue;
                 }
                 else if( frame.fin == 1 && frame.opcode == WEBSOCK_FRAME_PING )
@@ -128,7 +128,7 @@ void NLNET::ws_socket_read_cb( bufferevent *bev, void *args )
                 }
                 else if( frame.opcode == WEBSOCK_FRAME_HAVE_NEXT )
                 {
-                    nlwarning("frame.opcode == 0x0");
+                    LNETL1_DEBUG("frame.opcode == 0x0");
                     if( frame.mask == 1 )  {  offset += 4;  }
                     buff_len = pBufSock->leftShiftBuffer( offset + frame.payload_len );
                 }
@@ -138,7 +138,7 @@ void NLNET::ws_socket_read_cb( bufferevent *bev, void *args )
                 }
                 else
                 {
-                    nlwarning( "frame.opcode = %d", frame.opcode );
+                    LNETL1_DEBUG( "frame.opcode = %d", frame.opcode );
                     if( frame.mask == 1 )  {  offset += 4;  }
                     buff_len = pBufSock->leftShiftBuffer( offset + frame.payload_len );
                     continue;

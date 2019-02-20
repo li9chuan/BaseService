@@ -33,7 +33,7 @@ find_path(LUA_INCLUDE_DIR lua.h
 )
 
 find_library(LUA_LIBRARY
-  NAMES lua53 lua5.3 lua
+  NAMES lua53 liblua.a
   PATH_SUFFIXES lib
   PATHS
   /usr/local/lib
