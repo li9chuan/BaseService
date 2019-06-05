@@ -3,6 +3,10 @@
 
 使用lua编写游戏逻辑，不需要编写C++代码。函数支持不停机热更新。
 
+# 依赖库
+
+https://gitee.com/li9chuan/ExternalLib
+
 # Wiki
 
 https://gitee.com/li9chuan/EQipaiServer/wikis
