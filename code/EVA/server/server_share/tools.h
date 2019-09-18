@@ -6,6 +6,7 @@
 #include <nel/misc/mutex.h>
 #include <vector>
 #include "game_def.h"
+#include "utils.h"
 
 /// 基础小工具命名空间
 //namespace SWG

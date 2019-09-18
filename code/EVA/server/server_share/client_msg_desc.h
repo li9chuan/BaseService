@@ -3,6 +3,7 @@
 
 #include <nel/misc/singleton.h>
 #include <nel/misc/sstring.h>
+#include <nel/misc/i_xml.h>
 #include "game_def.h"
 #include "msg_leaf.h"
 

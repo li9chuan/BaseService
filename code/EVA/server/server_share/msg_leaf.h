@@ -2,6 +2,8 @@
 #define SERVER_SHARED_MSG_LEAF_H
 
 #include "nel/misc/types_nl.h"
+#include <vector>
+#include <string>
 
 namespace MSG_FORMAT
 {
