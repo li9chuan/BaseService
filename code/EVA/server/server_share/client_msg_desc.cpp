@@ -1,5 +1,6 @@
 ﻿#include "client_msg_desc.h"
 #include <nel/misc/file.h>
+#include <nel/misc/i_xml.h>
 #include <nel/net/callback_net_base.h>
 
 #include <google/protobuf/descriptor.h>  

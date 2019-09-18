@@ -19,6 +19,7 @@
 
 #include "nel/misc/types_nl.h"
 #include "nel/misc/sstring.h"
+#include "nel/misc/object_vector.h"
 
 #include "event2/event.h"
 #include "event2/listener.h"
