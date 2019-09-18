@@ -2,7 +2,7 @@ local RoomDdz = class("RoomDdz", RoomBase)
 
 DdzFSM              = require("Games/PokerDdz/DdzFSM")
 DdzPlayerInfo       = require("Games/PokerDdz/DdzPlayerInfo")
-DdzOutCardData      = require("Games/PokerDdz/DdzOutCardData")
+DdzOutCardData      = require("Games/PokerDdz/DDZOutCardData")
 
 --[[
         斗地主房间内游戏逻辑。
