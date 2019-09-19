@@ -10,7 +10,7 @@ function PlayerMgr:Init()
     self.RobotIDStart   = 1002;
     self.RobotIDEnd     = 1003;
     
-    for id=self.RobotIDStart,id<=self.RobotIDEnd do
+    for id=self.RobotIDStart,self.RobotIDEnd do
     
         local player_helper = self:LoadDBPlayer( id );
         
