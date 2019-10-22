@@ -44,7 +44,7 @@ end
 
 -- 游戏循环
 function ServiceUpdate()
-    --TimerMgr:Update( Misc.GetLocalTime() );
+    -- TimerMgr:Update( Misc.GetLocalTime() );
     TimerMgr:Update(math.floor(os.clock() * 1000))
 end
 
