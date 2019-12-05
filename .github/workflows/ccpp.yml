@@ -1,0 +1,15 @@
+name: C/C++ CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - path: ./BaseService/build
+      run: ./cmake ../code
+    - name: make
+      run: make
+
